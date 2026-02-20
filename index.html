@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · Pusher · живой чат</title>
+    <title>RealReel · рабочий поиск · живой чат</title>
     <!-- Подключаем шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1446,22 +1446,39 @@
             }
         }
 
-        // ===== ПОИСК ПОЛЬЗОВАТЕЛЕЙ =====
+        // ===== ИСПРАВЛЕННЫЙ ПОИСК ПОЛЬЗОВАТЕЛЕЙ =====
         async function searchUsers(searchText) {
             try {
+                const currentUser = getCurrentUser();
+                if (!currentUser) return [];
+                
                 const query = new Parse.Query('_User');
-                query.notEqualTo('objectId', getCurrentUser().id);
+                query.notEqualTo('objectId', currentUser.id);
                 
-                if (searchText) {
-                    query.matches('firstName', searchText, 'i');
-                    query.matches('lastName', searchText, 'i');
-                    query.matches('email', searchText, 'i');
+                if (searchText && searchText.trim() !== '') {
+                    // Правильный способ: ищем по всем полям через OR
+                    const nameQuery = new Parse.Query('_User');
+                    nameQuery.matches('firstName', searchText, 'i');
+                    
+                    const lastNameQuery = new Parse.Query('_User');
+                    lastNameQuery.matches('lastName', searchText, 'i');
+                    
+                    const emailQuery = new Parse.Query('_User');
+                    emailQuery.matches('email', searchText, 'i');
+                    
+                    // Объединяем все условия через OR
+                    const mainQuery = Parse.Query.or(nameQuery, lastNameQuery, emailQuery);
+                    mainQuery.notEqualTo('objectId', currentUser.id);
+                    
+                    mainQuery.limit(20);
+                    const users = await mainQuery.find();
+                    return users;
+                } else {
+                    // Если поиск пустой, возвращаем последних 20 пользователей
+                    query.limit(20);
+                    const users = await query.find();
+                    return users;
                 }
-                
-                query.limit(20);
-                
-                const users = await query.find();
-                return users;
             } catch (error) {
                 console.error('Ошибка поиска:', error);
                 return [];
@@ -1822,7 +1839,7 @@
             }
         });
 
-        // Поиск пользователей в чате
+        // ИСПРАВЛЕННЫЙ ПОИСК ПОЛЬЗОВАТЕЛЕЙ В ЧАТЕ
         chatSearchBtn.addEventListener('click', async () => {
             const text = chatSearchInput.value.trim();
             const users = await searchUsers(text);
