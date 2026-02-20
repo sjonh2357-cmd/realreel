@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · закруглённые сторизы · Inter</title>
+    <title>RealReel · Pusher · живой чат</title>
     <!-- Подключаем шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,7 @@
             background: #f5f7fa;
         }
 
-        /* переключатель версий (теперь в профиле) - стили остаются, но кнопка перенесена в HTML */
+        /* переключатель версий */
         .version-btn {
             width: 44px;
             height: 44px;
@@ -49,6 +49,25 @@
             stroke-linejoin: round;
         }
         .version-btn:hover {
+            transform: scale(1.1);
+            background: rgba(106, 169, 255, 0.2);
+        }
+
+        /* кнопка языка */
+        .lang-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(106, 169, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .lang-btn:hover {
             transform: scale(1.1);
             background: rgba(106, 169, 255, 0.2);
         }
@@ -155,7 +174,7 @@
             color: #1a1e2a;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             animation: bounce 2s infinite;
-            border-radius: 0; /* Прямые углы */
+            border-radius: 0;
         }
         .small-white-btn:hover {
             transform: scale(1.1) rotate(90deg);
@@ -339,7 +358,7 @@
             color: white;
             font-weight: 600;
             overflow: hidden;
-            border-radius: 36px; /* ЗАКРУГЛЁННОЕ ФОТО ПРОФИЛЯ */
+            border-radius: 36px;
         }
         .profile-avatar img {
             width: 100%;
@@ -458,7 +477,7 @@
             background-position: center;
             flex-shrink: 0;
             background-color: #6aa9ff;
-            border-radius: 18px; /* ЗАКРУГЛЁННЫЕ АВАТАРКИ В ПОСТАХ */
+            border-radius: 18px;
         }
         .post-content {
             flex: 1;
@@ -484,7 +503,7 @@
             color: #1a1e2a;
         }
 
-        /* ===== ЧАТ ===== */
+        /* ===== ЧАТ С ЖИВЫМИ СООБЩЕНИЯМИ ===== */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -556,7 +575,7 @@
             background-size: cover;
             background-position: center;
             border: 2px solid rgba(106, 169, 255, 0.3);
-            border-radius: 20px; /* ЗАКРУГЛЁННЫЕ АВАТАРКИ В ПОИСКЕ */
+            border-radius: 20px;
         }
         .user-search-info {
             flex: 1;
@@ -611,7 +630,7 @@
             border: 2px solid rgba(106, 169, 255, 0.3);
             flex-shrink: 0;
             transition: all 0.3s;
-            border-radius: 28px; /* ЗАКРУГЛЁННЫЕ АВАТАРКИ В ЧАТЕ */
+            border-radius: 28px;
         }
         .chat-avatar:hover {
             transform: scale(1.05);
@@ -775,7 +794,7 @@
             100% { box-shadow: 0 4px 12px rgba(106, 169, 255, 0.3); }
         }
 
-        /* ===== НАСТРОЙКИ И ВЫХОД ВНИЗУ ===== */
+        /* ===== НАСТРОЙКИ, ЯЗЫК, ПК-ВЕРСИЯ И ВЫХОД ВНИЗУ ===== */
         .settings-row {
             display: flex;
             align-items: center;
@@ -783,6 +802,47 @@
             padding: 16px 0;
             margin-top: 8px;
             border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .version-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(106, 169, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+        }
+        .version-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: #4a5b8a;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .version-btn:hover {
+            transform: scale(1.1);
+            background: rgba(106, 169, 255, 0.2);
+        }
+        .lang-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(106, 169, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .lang-btn:hover {
+            transform: scale(1.1);
+            background: rgba(106, 169, 255, 0.2);
         }
         .settings-icon {
             width: 44px;
@@ -946,7 +1006,7 @@
             background-size: cover;
             background-position: center;
             animation: avatarPulse 3s infinite;
-            border-radius: 32px; /* ЗАКРУГЛЁННЫЕ СТОРИЗ */
+            border-radius: 32px;
         }
         .story-avatar:hover {
             transform: scale(1.1) rotate(5deg);
@@ -977,7 +1037,7 @@
             flex-shrink: 0;
             border: 2px solid rgba(106, 169, 255, 0.3);
             transition: all 0.3s;
-            border-radius: 22px; /* ЗАКРУГЛЁННЫЕ АВАТАРКИ В ПОСТАХ */
+            border-radius: 22px;
         }
         .post-avatar:hover {
             transform: scale(1.1) rotate(5deg);
@@ -1108,7 +1168,7 @@
                 <div id="homePosts"></div>
             </div>
 
-            <!-- Чат -->
+            <!-- Чат (с живыми сообщениями) -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
                     <div class="search-in-chat">
@@ -1120,7 +1180,7 @@
                     </div>
 
                     <div id="chatList" style="display: flex; flex-direction: column; height: 100%;">
-                        <h3 style="margin-bottom: 16px; color: #1a1e2a;">Чаты</h3>
+                        <h3 style="margin-bottom: 16px; color: #1a1e2a;" id="chatsTitle">Чаты</h3>
                         <div class="chat-list" id="chatListContainer"></div>
                     </div>
 
@@ -1180,31 +1240,32 @@
                     <div class="stats-row">
                         <div class="stat-item">
                             <div class="stat-value" id="profilePostsCount">0</div>
-                            <div class="stat-label">посты</div>
+                            <div class="stat-label" id="postsLabel">посты</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">подписчики</div>
+                            <div class="stat-value" id="followersCount">0</div>
+                            <div class="stat-label" id="followersLabel">подписчики</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">подписки</div>
+                            <div class="stat-value" id="followingCount">0</div>
+                            <div class="stat-label" id="followingLabel">подписки</div>
                         </div>
                     </div>
 
                     <!-- Посты пользователя -->
                     <div class="posts-list" id="userPosts"></div>
 
-                    <!-- НАСТРОЙКИ, ПК-ВЕРСИЯ И ВЫХОД ВНИЗУ -->
+                    <!-- НАСТРОЙКИ, ЯЗЫК, ПК-ВЕРСИЯ И ВЫХОД ВНИЗУ -->
                     <div class="settings-row">
-                        <button class="version-btn" id="versionToggle">
+                        <div class="lang-btn" id="langToggle" title="Сменить язык">🇷🇺</div>
+                        <div class="version-btn" id="versionToggle">
                             <svg viewBox="0 0 24 24">
                                 <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" fill="none"/>
                                 <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor"/>
                                 <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor"/>
                                 <line x1="2" y1="10" x2="22" y2="10" stroke="currentColor"/>
                             </svg>
-                        </button>
+                        </div>
                         <div class="settings-icon" id="editProfileBtn">
                             <svg viewBox="0 0 24 24">
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke="currentColor" fill="none"/>
@@ -1222,7 +1283,7 @@
                     <!-- Скрытые формы -->
                     <div class="profile-info hidden" id="profileInfo">
                         <div class="info-row">
-                            <span class="profile-label">Почта</span>
+                            <span class="profile-label" id="emailLabel">Почта</span>
                             <span class="profile-value" id="profileEmail">—</span>
                         </div>
                     </div>
@@ -1240,6 +1301,8 @@
 
     <!-- ===== BACK4APP ===== -->
     <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <!-- Подключаем Pusher -->
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
         // ТВОИ КЛЮЧИ
         const APP_ID = 'CM3xa4Y0qWL6FdoMdzONdCQ5k3Tx5saPZ5tyDOwA';
@@ -1250,6 +1313,15 @@
         Parse.serverURL = SERVER_URL;
         
         console.log('✅ Back4app подключен!');
+
+        // ===== PUSHER =====
+        const pusher = new Pusher('55cad6db51c45c8a66db', {
+            cluster: 'eu'
+        });
+        console.log('✅ Pusher подключен!');
+
+        let currentChannel = null;
+        let currentConversationId = null;
 
         // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
         function formatDate(date) {
@@ -1397,27 +1469,95 @@
         }
 
         // ===== ЧАТЫ =====
-        async function createOrGetConversation(userId) {
-            try {
-                const currentUser = getCurrentUser();
-                
-                // Ищем существующий чат
-                const query = new Parse.Query('Conversation');
-                query.containsAll('participants', [currentUser, { __type: 'Pointer', className: '_User', objectId: userId }]);
-                let conversation = await query.first();
-                
-                if (!conversation) {
-                    // Создаём новый
-                    const Conversation = Parse.Object.extend('Conversation');
-                    conversation = new Conversation();
-                    conversation.set('participants', [currentUser, { __type: 'Pointer', className: '_User', objectId: userId }]);
-                    await conversation.save();
-                }
-                
-                return conversation;
-            } catch (error) {
-                return null;
+        async function getOrCreateConversation(otherUserId) {
+            const currentUser = Parse.User.current();
+            
+            // Ищем существующий диалог
+            const query = new Parse.Query('Conversation');
+            query.containsAll('participants', [currentUser, {
+                __type: 'Pointer',
+                className: '_User',
+                objectId: otherUserId
+            }]);
+            
+            let conversation = await query.first();
+            
+            // Если нет — создаём новый
+            if (!conversation) {
+                const Conversation = Parse.Object.extend('Conversation');
+                conversation = new Conversation();
+                conversation.set('participants', [currentUser, {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: otherUserId
+                }]);
+                await conversation.save();
             }
+            
+            return conversation;
+        }
+
+        function subscribeToChat(conversationId, userName) {
+            // Отписываемся от предыдущего канала
+            if (currentChannel) {
+                currentChannel.unbind_all();
+                currentChannel.unsubscribe();
+            }
+            
+            // Создаём уникальное имя канала для этого чата
+            const channelName = `chat-${conversationId}`;
+            
+            // Подписываемся на канал
+            currentChannel = pusher.subscribe(channelName);
+            
+            // Слушаем новые сообщения
+            currentChannel.bind('client-new-message', function(data) {
+                console.log('Новое сообщение через Pusher:', data);
+                
+                // Добавляем сообщение в интерфейс
+                const isOwn = data.senderId === currentUser.id;
+                addMessageToChat(data.text, isOwn, data.timestamp);
+            });
+            
+            console.log(`📡 Подписались на канал ${channelName}`);
+        }
+
+        function addMessageToChat(text, isOwn, timestamp) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-bubble ${isOwn ? 'own' : ''}`;
+            
+            if (!isOwn) {
+                const avatarUrl = document.getElementById('conversationAvatar').style.backgroundImage.slice(5, -2);
+                messageDiv.innerHTML = `
+                    <div class="chat-avatar" style="background-image: url('${avatarUrl}'); width: 32px; height: 32px;"></div>
+                    <div class="bubble">${text}</div>
+                `;
+            } else {
+                messageDiv.innerHTML = `<div class="bubble me">${text}</div>`;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        async function loadMessageHistory(conversationId) {
+            const query = new Parse.Query('Message');
+            query.equalTo('conversation', {
+                __type: 'Pointer',
+                className: 'Conversation',
+                objectId: conversationId
+            });
+            query.include('sender');
+            query.ascending('createdAt');
+            
+            const messages = await query.find();
+            
+            messages.forEach(msg => {
+                const sender = msg.get('sender');
+                const isOwn = sender.id === currentUser.id;
+                addMessageToChat(msg.get('text'), isOwn, msg.createdAt);
+            });
         }
 
         // ===== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА =====
@@ -1535,12 +1675,19 @@
         const chatSearchInput = document.getElementById('chatSearchInput');
         const chatSearchBtn = document.getElementById('chatSearchBtn');
         const chatSearchResults = document.getElementById('chatSearchResults');
+        const langToggle = document.getElementById('langToggle');
 
         let isLoginMode = false;
 
-        // Переключатель версий (теперь внутри профиля)
+        // Переключатель версий
         versionToggle.addEventListener('click', () => {
             document.body.classList.toggle('pc-mode');
+        });
+
+        // Язык (заглушка)
+        langToggle.addEventListener('click', () => {
+            // Просто меняем флаг для демо
+            langToggle.textContent = langToggle.textContent === '🇷🇺' ? '🇺🇸' : '🇷🇺';
         });
 
         authSwitch.addEventListener('click', () => {
@@ -1703,7 +1850,9 @@
 
         // Начать чат с пользователем
         window.startChat = async function(userId, name, avatarUrl) {
-            const conversation = await createOrGetConversation(userId);
+            // Создаём или получаем беседу
+            const conversation = await getOrCreateConversation(userId);
+            
             if (conversation) {
                 // Переключаемся на экран чата
                 document.querySelectorAll('.nav-icon').forEach(nav => nav.classList.remove('active'));
@@ -1720,9 +1869,94 @@
                 screens.chat.classList.add('active');
                 
                 // Открываем переписку
-                openConversation(name, avatarUrl);
+                openConversation(name, avatarUrl, conversation.id);
             }
         };
+
+        function openConversation(name, avatarUrl, conversationId) {
+            document.getElementById('chatList').style.display = 'none';
+            document.getElementById('conversationView').style.display = 'flex';
+            document.getElementById('conversationName').textContent = name;
+            document.getElementById('conversationAvatar').style.backgroundImage = `url('${avatarUrl}')`;
+            document.getElementById('conversationAvatarMsg').style.backgroundImage = `url('${avatarUrl}')`;
+            
+            // Сохраняем ID текущей беседы
+            currentConversationId = conversationId;
+            
+            // Подписываемся на канал Pusher
+            subscribeToChat(conversationId, name);
+            
+            // Очищаем старые сообщения
+            document.getElementById('chatMessages').innerHTML = '';
+            
+            // Загружаем историю сообщений из Parse
+            loadMessageHistory(conversationId);
+        }
+
+        function backToChatList() {
+            document.getElementById('chatList').style.display = 'flex';
+            document.getElementById('conversationView').style.display = 'none';
+            
+            // Отписываемся от канала
+            if (currentChannel) {
+                currentChannel.unbind_all();
+                currentChannel.unsubscribe();
+                currentChannel = null;
+            }
+        }
+
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        sendBtn.addEventListener('click', async () => {
+            const text = chatInput.value.trim();
+            if (!text || !currentConversationId) return;
+            
+            const currentUser = getCurrentUser();
+            
+            // Создаём объект сообщения
+            const messageData = {
+                text: text,
+                senderId: currentUser.id,
+                senderName: currentUser.get('firstName') + ' ' + currentUser.get('lastName'),
+                timestamp: new Date().toISOString(),
+                conversationId: currentConversationId
+            };
+            
+            // Отправляем через Pusher (client event)
+            if (currentChannel) {
+                currentChannel.trigger('client-new-message', messageData);
+            }
+            
+            // Добавляем сообщение сразу в свой чат (оптимистично)
+            addMessageToChat(text, true, messageData.timestamp);
+            
+            // Очищаем поле ввода
+            chatInput.value = '';
+            
+            // Сохраняем в Parse (для истории)
+            try {
+                const Message = Parse.Object.extend('Message');
+                const message = new Message();
+                message.set('text', text);
+                message.set('sender', currentUser);
+                message.set('conversation', {
+                    __type: 'Pointer',
+                    className: 'Conversation',
+                    objectId: currentConversationId
+                });
+                await message.save();
+            } catch (error) {
+                console.error('Ошибка сохранения в Parse:', error);
+            }
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
 
         // Проверка при загрузке
         if (getCurrentUser()) {
@@ -1806,60 +2040,6 @@
                 });
             });
         }
-
-        // Функции чата
-        function openConversation(name, avatarUrl) {
-            document.getElementById('chatList').style.display = 'none';
-            document.getElementById('conversationView').style.display = 'flex';
-            document.getElementById('conversationName').textContent = name;
-            document.getElementById('conversationAvatar').style.backgroundImage = `url('${avatarUrl}')`;
-            document.getElementById('conversationAvatarMsg').style.backgroundImage = `url('${avatarUrl}')`;
-        }
-
-        function backToChatList() {
-            document.getElementById('chatList').style.display = 'flex';
-            document.getElementById('conversationView').style.display = 'none';
-        }
-
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('sendBtn');
-
-        function addMessage(text, isOwn = true) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `chat-bubble ${isOwn ? 'own' : ''}`;
-            
-            if (!isOwn) {
-                const avatarUrl = document.getElementById('conversationAvatar').style.backgroundImage.slice(5, -2);
-                messageDiv.innerHTML = `
-                    <div class="chat-avatar" style="background-image: url('${avatarUrl}'); width: 32px; height: 32px;"></div>
-                    <div class="bubble">${text}</div>
-                `;
-            } else {
-                messageDiv.innerHTML = `
-                    <div class="bubble me">${text}</div>
-                `;
-            }
-            
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function sendMessage() {
-            const text = chatInput.value.trim();
-            if (text) {
-                addMessage(text, true);
-                chatInput.value = '';
-                setTimeout(() => {
-                    addMessage('ок!', false);
-                }, 500);
-            }
-        }
-
-        sendBtn.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
 
         const videos = document.querySelectorAll('video');
         window.addEventListener('click', () => {
