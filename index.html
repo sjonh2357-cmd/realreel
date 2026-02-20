@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал · поиск + подписки</title>
+    <title>RealReel · финальная версия</title>
     <!-- Подключаем шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,49 +27,6 @@
             background: #f5f7fa;
         }
 
-        .version-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(106, 169, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            border: none;
-        }
-        .version-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: none;
-            stroke: #4a5b8a;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .version-btn:hover {
-            transform: scale(1.1);
-            background: rgba(106, 169, 255, 0.2);
-        }
-
-        .lang-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(106, 169, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            border: none;
-            font-weight: 600;
-            font-size: 18px;
-        }
-        .lang-btn:hover {
-            transform: scale(1.1);
-            background: rgba(106, 169, 255, 0.2);
-        }
-
         .phone-frame {
             width: 380px;
             height: 720px;
@@ -83,20 +40,6 @@
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.08);
             box-shadow: 0 30px 60px -15px rgba(0,0,0,0.1);
-        }
-
-        body.pc-mode .phone-frame {
-            width: 1000px;
-            height: 800px;
-            flex-direction: row;
-        }
-
-        body.pc-mode .content {
-            flex: 1;
-        }
-
-        body.pc-mode .nav-icons {
-            flex-direction: column;
         }
 
         .top-nav {
@@ -151,36 +94,6 @@
             box-shadow: 0 0 15px #6aa9ff;
         }
 
-        .small-white-btn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-            font-weight: 500;
-            z-index: 100;
-            border: none;
-            background: #ffffff;
-            color: #1a1e2a;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            animation: bounce 2s infinite;
-            border-radius: 0;
-        }
-        .small-white-btn:hover {
-            transform: scale(1.1) rotate(90deg);
-            animation: none;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
         .content {
             flex: 1;
             overflow-y: auto;
@@ -190,6 +103,7 @@
             position: relative;
         }
 
+        /* ===== АВТОРИЗАЦИЯ ===== */
         .auth-screen {
             display: flex;
             flex-direction: column;
@@ -227,10 +141,6 @@
         @keyframes slowZoom {
             from { transform: scale(1); }
             to { transform: scale(1.05); }
-        }
-
-        .auth-screen:hover .auth-bg {
-            transform: scale(1.02);
         }
 
         .auth-form {
@@ -323,6 +233,7 @@
             75% { transform: translateX(5px); }
         }
 
+        /* ===== ПРОФИЛЬ (ОСНОВНОЙ) ===== */
         .profile-screen {
             display: flex;
             flex-direction: column;
@@ -335,6 +246,7 @@
             gap: 16px;
             margin-bottom: 16px;
             position: relative;
+            cursor: pointer;
         }
         .profile-avatar-container {
             position: relative;
@@ -405,6 +317,7 @@
         .stat-item {
             text-align: center;
             flex: 1;
+            cursor: pointer;
         }
         .stat-value {
             font-weight: 600;
@@ -426,21 +339,6 @@
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-        }
-        .info-row {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .profile-label {
-            font-size: 13px;
-            opacity: 0.7;
-            color: #64748b;
-        }
-        .profile-value {
-            font-size: 16px;
-            font-weight: 500;
-            color: #1a1e2a;
         }
 
         .hidden {
@@ -471,6 +369,7 @@
             flex-shrink: 0;
             background-color: #6aa9ff;
             border-radius: 18px;
+            cursor: pointer;
         }
         .post-content {
             flex: 1;
@@ -484,6 +383,10 @@
             font-weight: 600;
             font-size: 14px;
             color: #1a1e2a;
+            cursor: pointer;
+        }
+        .post-author:hover {
+            color: #6aa9ff;
         }
         .post-date {
             font-size: 11px;
@@ -496,6 +399,32 @@
             color: #1a1e2a;
         }
 
+        /* ===== ПРОФИЛЬ ДРУГОГО ПОЛЬЗОВАТЕЛЯ ===== */
+        .user-profile-screen {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: 100%;
+        }
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(106, 169, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            color: #1a1e2a;
+            margin-bottom: 8px;
+        }
+        .back-btn:hover {
+            transform: scale(1.1) rotate(-10deg);
+            background: rgba(106, 169, 255, 0.2);
+        }
+
+        /* ===== ЧАТ ===== */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -558,11 +487,34 @@
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
+        .user-search-avatar {
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(106, 169, 255, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .user-search-info {
+            flex: 1;
+            cursor: pointer;
+        }
+        .user-search-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #1a1e2a;
+        }
+        .user-search-email {
+            font-size: 12px;
+            opacity: 0.7;
+            color: #64748b;
+        }
         .user-search-actions {
             display: flex;
             gap: 8px;
         }
-        .start-chat-btn, .subscribe-btn {
+        .action-btn {
             width: 36px;
             height: 36px;
             border-radius: 18px;
@@ -573,12 +525,12 @@
             border: none;
             transition: 0.2s;
         }
-        .start-chat-btn {
+        .chat-btn {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             color: white;
             font-size: 16px;
         }
-        .start-chat-btn:hover {
+        .chat-btn:hover {
             transform: scale(1.1);
         }
         .subscribe-btn {
@@ -593,28 +545,6 @@
         }
         .subscribe-btn:hover {
             transform: scale(1.1);
-        }
-
-        .user-search-avatar {
-            width: 40px;
-            height: 40px;
-            background-size: cover;
-            background-position: center;
-            border: 2px solid rgba(106, 169, 255, 0.3);
-            border-radius: 20px;
-        }
-        .user-search-info {
-            flex: 1;
-        }
-        .user-search-name {
-            font-weight: 600;
-            font-size: 15px;
-            color: #1a1e2a;
-        }
-        .user-search-email {
-            font-size: 12px;
-            opacity: 0.7;
-            color: #64748b;
         }
 
         .chat-list {
@@ -645,6 +575,7 @@
             flex-shrink: 0;
             transition: all 0.3s;
             border-radius: 28px;
+            cursor: pointer;
         }
         .chat-avatar:hover {
             transform: scale(1.05);
@@ -659,10 +590,10 @@
             margin-bottom: 4px;
             transition: all 0.3s;
             color: #1a1e2a;
+            cursor: pointer;
         }
         .chat-name:hover {
             color: #6aa9ff;
-            transform: translateX(2px);
         }
         .chat-preview {
             font-size: 14px;
@@ -675,10 +606,6 @@
             margin-left: auto;
             transition: all 0.3s;
             color: #8899bb;
-        }
-        .chat-time:hover {
-            opacity: 1;
-            transform: scale(1.05);
         }
 
         .conversation-view {
@@ -694,27 +621,21 @@
             margin-bottom: 16px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
-        .back-btn {
-            width: 36px;
-            height: 36px;
-            background: rgba(106, 169, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .conversation-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
             cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s;
-            color: #1a1e2a;
-        }
-        .back-btn:hover {
-            transform: scale(1.1) rotate(-10deg);
-            background: rgba(106, 169, 255, 0.2);
         }
         .conversation-name {
             font-weight: 600;
             font-size: 16px;
             transition: all 0.3s;
             color: #1a1e2a;
+            cursor: pointer;
+            flex: 1;
         }
         .conversation-name:hover {
             color: #6aa9ff;
@@ -816,47 +737,6 @@
             margin-top: 8px;
             border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
-        .version-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(106, 169, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            border: none;
-        }
-        .version-btn svg {
-            width: 22px;
-            height: 22px;
-            fill: none;
-            stroke: #4a5b8a;
-            stroke-width: 1.8;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .version-btn:hover {
-            transform: scale(1.1);
-            background: rgba(106, 169, 255, 0.2);
-        }
-        .lang-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(106, 169, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.2s;
-            border: none;
-            font-weight: 600;
-            font-size: 18px;
-        }
-        .lang-btn:hover {
-            transform: scale(1.1);
-            background: rgba(106, 169, 255, 0.2);
-        }
         .settings-icon {
             width: 44px;
             height: 44px;
@@ -952,10 +832,6 @@
             z-index: 1;
             transition: all 0.3s;
         }
-        .reel-views:hover {
-            background: rgba(106, 169, 255, 0.5);
-            transform: scale(1.05);
-        }
         .reel-play {
             width: 48px;
             height: 48px;
@@ -1049,6 +925,7 @@
             border: 2px solid rgba(106, 169, 255, 0.3);
             transition: all 0.3s;
             border-radius: 22px;
+            cursor: pointer;
         }
         .post-avatar:hover {
             transform: scale(1.1) rotate(5deg);
@@ -1091,9 +968,16 @@
             cursor: pointer;
             color: #1a1e2a;
         }
+        .post-name:hover {
+            color: #6aa9ff;
+        }
         .post-handle {
             opacity: 0.5;
             color: #64748b;
+            cursor: pointer;
+        }
+        .post-handle:hover {
+            color: #6aa9ff;
         }
         .post-text {
             font-size: 15px;
@@ -1101,10 +985,6 @@
             margin-bottom: 12px;
             transition: all 0.3s;
             color: #1a1e2a;
-        }
-        .post-text:hover {
-            transform: scale(1.01);
-            opacity: 0.9;
         }
         .post-meta {
             display: flex;
@@ -1123,10 +1003,8 @@
         }
     </style>
 </head>
-<body class="">
+<body>
     <div class="phone-frame" id="phoneFrame">
-        <button class="small-white-btn" id="smallWhiteBtn" onclick="alert('white button')" style="display: none;">+</button>
-
         <div class="top-nav">
             <div class="nav-logo" id="themeToggle">RealReel</div>
             <div class="nav-icons" id="navIcons"></div>
@@ -1198,8 +1076,8 @@
                     <div id="conversationView" style="display: none; flex-direction: column; height: 100%;">
                         <div class="conversation-header">
                             <span class="back-btn" onclick="backToChatList()">←</span>
-                            <div class="chat-avatar" id="conversationAvatar" style="background-image: url('');"></div>
-                            <span class="conversation-name" id="conversationName"></span>
+                            <div class="conversation-avatar" id="conversationAvatar" style="background-image: url('');" onclick="openUserProfile(currentOtherUserId)"></div>
+                            <span class="conversation-name" id="conversationName" onclick="openUserProfile(currentOtherUserId)"></span>
                         </div>
                         <div class="chat-messages" id="chatMessages"></div>
                         <div class="chat-input-container">
@@ -1207,6 +1085,47 @@
                             <button class="send-btn" id="sendBtn">➤</button>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Профиль другого пользователя -->
+            <div class="screen" id="userProfileScreen">
+                <div class="user-profile-screen">
+                    <span class="back-btn" onclick="goBack()">←</span>
+                    <div class="profile-header">
+                        <div class="profile-avatar-container">
+                            <div class="profile-avatar" id="userProfileAvatar">
+                                <img id="userProfileAvatarImg" src="" style="display: none;">
+                                <span id="userProfileAvatarInitials">RR</span>
+                            </div>
+                        </div>
+                        <div class="profile-info-text">
+                            <span class="profile-fullname" id="userProfileFullName">Имя Фамилия</span>
+                            <span class="profile-username" id="userProfileUsername">@username</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-value" id="userProfilePostsCount">0</div>
+                            <div class="stat-label">посты</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="userProfileFollowersCount">0</div>
+                            <div class="stat-label">подписчики</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="userProfileFollowingCount">0</div>
+                            <div class="stat-label">подписки</div>
+                        </div>
+                    </div>
+
+                    <div class="user-search-actions" style="justify-content: center; margin: 10px 0;">
+                        <button class="action-btn chat-btn" id="userProfileChatBtn">💬 Написать</button>
+                        <button class="action-btn subscribe-btn" id="userProfileSubscribeBtn">+ Подписаться</button>
+                    </div>
+
+                    <div class="posts-list" id="userProfilePosts"></div>
                 </div>
             </div>
 
@@ -1230,7 +1149,7 @@
                 </div>
             </div>
 
-            <!-- Профиль -->
+            <!-- Мой профиль -->
             <div class="screen" id="profileScreen">
                 <div class="profile-screen">
                     <div class="profile-header">
@@ -1251,32 +1170,23 @@
                     <div class="stats-row">
                         <div class="stat-item">
                             <div class="stat-value" id="profilePostsCount">0</div>
-                            <div class="stat-label" id="postsLabel">посты</div>
+                            <div class="stat-label">посты</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value" id="followersCount">0</div>
-                            <div class="stat-label" id="followersLabel">подписчики</div>
+                            <div class="stat-value" id="profileFollowersCount">0</div>
+                            <div class="stat-label">подписчики</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value" id="followingCount">0</div>
-                            <div class="stat-label" id="followingLabel">подписки</div>
+                            <div class="stat-value" id="profileFollowingCount">0</div>
+                            <div class="stat-label">подписки</div>
                         </div>
                     </div>
 
                     <!-- Посты пользователя -->
                     <div class="posts-list" id="userPosts"></div>
 
-                    <!-- НАСТРОЙКИ, ЯЗЫК, ПК-ВЕРСИЯ И ВЫХОД ВНИЗУ -->
+                    <!-- НАСТРОЙКИ И ВЫХОД -->
                     <div class="settings-row">
-                        <div class="lang-btn" id="langToggle" title="Сменить язык">🇷🇺</div>
-                        <div class="version-btn" id="versionToggle">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" fill="none"/>
-                                <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor"/>
-                                <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor"/>
-                                <line x1="2" y1="10" x2="22" y2="10" stroke="currentColor"/>
-                            </svg>
-                        </div>
                         <div class="settings-icon" id="editProfileBtn">
                             <svg viewBox="0 0 24 24">
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke="currentColor" fill="none"/>
@@ -1291,10 +1201,9 @@
                         </div>
                     </div>
 
-                    <!-- Скрытые формы -->
                     <div class="profile-info hidden" id="profileInfo">
                         <div class="info-row">
-                            <span class="profile-label" id="emailLabel">Почта</span>
+                            <span class="profile-label">Почта</span>
                             <span class="profile-value" id="profileEmail">—</span>
                         </div>
                     </div>
@@ -1327,12 +1236,15 @@
 
         // ===== PUSHER =====
         const pusher = new Pusher('55cad6db51c45c8a66db', {
-            cluster: 'eu'
+            cluster: 'eu',
+            enabledTransports: ['ws', 'wss']
         });
         console.log('✅ Pusher подключен!');
 
         let currentChannel = null;
         let currentConversationId = null;
+        let currentOtherUserId = null;
+        let previousScreen = null;
 
         // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
         function formatDate(date) {
@@ -1431,11 +1343,19 @@
             }
         }
 
-        async function getUserPosts() {
+        async function getUserPosts(userId = null) {
             try {
                 const Post = Parse.Object.extend('Post');
                 const query = new Parse.Query(Post);
-                query.equalTo('author', getCurrentUser());
+                if (userId) {
+                    query.equalTo('author', {
+                        __type: 'Pointer',
+                        className: '_User',
+                        objectId: userId
+                    });
+                } else {
+                    query.equalTo('author', getCurrentUser());
+                }
                 query.descending('createdAt');
                 const posts = await query.find();
                 return posts;
@@ -1460,7 +1380,7 @@
         // ===== ПОДПИСКИ =====
         async function toggleSubscribe(targetUserId) {
             const currentUser = getCurrentUser();
-            if (!currentUser || targetUserId === currentUser.id) return;
+            if (!currentUser || targetUserId === currentUser.id) return null;
             
             try {
                 const Subscription = Parse.Object.extend('Subscription');
@@ -1510,6 +1430,36 @@
                 return !!sub;
             } catch (error) {
                 return false;
+            }
+        }
+
+        async function getFollowersCount(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                const count = await query.count();
+                return count;
+            } catch (error) {
+                return 0;
+            }
+        }
+
+        async function getFollowingCount(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('follower', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                const count = await query.count();
+                return count;
+            } catch (error) {
+                return 0;
             }
         }
 
@@ -1594,7 +1544,46 @@
             return conversation;
         }
 
-        function subscribeToChat(conversationId, userName) {
+        async function getUserConversations() {
+            const currentUser = getCurrentUser();
+            if (!currentUser) return [];
+            
+            try {
+                const query = new Parse.Query('Conversation');
+                query.equalTo('participants', currentUser);
+                query.descending('updatedAt');
+                query.include('participants');
+                const conversations = await query.find();
+                
+                const conversationsWithDetails = await Promise.all(conversations.map(async (conv) => {
+                    const participants = conv.get('participants');
+                    const otherUser = participants.find(p => p.id !== currentUser.id);
+                    if (!otherUser) return null;
+                    
+                    await otherUser.fetch();
+                    
+                    const lastMessageQuery = new Parse.Query('Message');
+                    lastMessageQuery.equalTo('conversation', conv);
+                    lastMessageQuery.descending('createdAt');
+                    lastMessageQuery.limit(1);
+                    const lastMessage = await lastMessageQuery.first();
+                    
+                    return {
+                        conversation: conv,
+                        otherUser: otherUser,
+                        lastMessage: lastMessage ? lastMessage.get('text') : '',
+                        lastMessageTime: lastMessage ? lastMessage.createdAt : null
+                    };
+                }));
+                
+                return conversationsWithDetails.filter(c => c !== null);
+            } catch (error) {
+                console.error('Ошибка загрузки чатов:', error);
+                return [];
+            }
+        }
+
+        function subscribeToChat(conversationId, otherUserId) {
             if (currentChannel) {
                 currentChannel.unbind_all();
                 currentChannel.unsubscribe();
@@ -1603,10 +1592,16 @@
             const channelName = `chat-${conversationId}`;
             currentChannel = pusher.subscribe(channelName);
             
-            currentChannel.bind('client-new-message', function(data) {
+            currentChannel.bind('client-new-message', async function(data) {
                 console.log('Новое сообщение через Pusher:', data);
-                const isOwn = data.senderId === currentUser.id;
+                const isOwn = data.senderId === getCurrentUser().id;
                 addMessageToChat(data.text, isOwn, data.timestamp);
+                
+                // Обновляем список чатов
+                if (!isOwn && !document.getElementById('conversationView').style.display === 'flex') {
+                    // Если чат не открыт, можно показать уведомление
+                    console.log('Новое сообщение от', data.senderName);
+                }
             });
             
             console.log(`📡 Подписались на канал ${channelName}`);
@@ -1645,9 +1640,36 @@
             
             messages.forEach(msg => {
                 const sender = msg.get('sender');
-                const isOwn = sender.id === currentUser.id;
+                const isOwn = sender.id === getCurrentUser().id;
                 addMessageToChat(msg.get('text'), isOwn, msg.createdAt);
             });
+        }
+
+        async function sendMessageToServer(text, conversationId) {
+            const currentUser = getCurrentUser();
+            
+            try {
+                const Message = Parse.Object.extend('Message');
+                const message = new Message();
+                message.set('text', text);
+                message.set('sender', currentUser);
+                message.set('conversation', {
+                    __type: 'Pointer',
+                    className: 'Conversation',
+                    objectId: conversationId
+                });
+                await message.save();
+                
+                // Обновляем время последнего сообщения в беседе
+                const conversation = new Parse.Object('Conversation');
+                conversation.id = conversationId;
+                await conversation.save(null, { useMasterKey: true });
+                
+                return true;
+            } catch (error) {
+                console.error('Ошибка сохранения в Parse:', error);
+                return false;
+            }
         }
 
         // ===== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА =====
@@ -1680,6 +1702,11 @@
             const posts = await getUserPosts();
             document.getElementById('profilePostsCount').textContent = posts.length;
             
+            const followersCount = await getFollowersCount(user.id);
+            const followingCount = await getFollowingCount(user.id);
+            document.getElementById('profileFollowersCount').textContent = followersCount;
+            document.getElementById('profileFollowingCount').textContent = followingCount;
+            
             const postsHtml = posts.map(post => `
                 <div class="post-item">
                     <div class="post-avatar-small" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;"></div>
@@ -1694,6 +1721,79 @@
             `).join('');
             
             document.getElementById('userPosts').innerHTML = postsHtml || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
+        }
+
+        async function updateUserProfileUI(userId) {
+            try {
+                const userQuery = new Parse.Query('_User');
+                const user = await userQuery.get(userId);
+                
+                const firstName = user.get('firstName') || '';
+                const lastName = user.get('lastName') || '';
+                const email = user.get('email') || '';
+                const avatar = user.get('avatar');
+                const fullName = `${firstName} ${lastName}`.trim() || 'Пользователь';
+                
+                document.getElementById('userProfileFullName').textContent = fullName;
+                document.getElementById('userProfileUsername').textContent = `@${email.split('@')[0]}`;
+                
+                const initials = (firstName?.[0] || 'U') + (lastName?.[0] || 'R');
+                document.getElementById('userProfileAvatarInitials').textContent = initials.toUpperCase();
+                
+                if (avatar) {
+                    document.getElementById('userProfileAvatarImg').src = avatar.url();
+                    document.getElementById('userProfileAvatarImg').style.display = 'block';
+                    document.getElementById('userProfileAvatarInitials').style.display = 'none';
+                } else {
+                    document.getElementById('userProfileAvatarImg').style.display = 'none';
+                    document.getElementById('userProfileAvatarInitials').style.display = 'block';
+                }
+                
+                const posts = await getUserPosts(userId);
+                document.getElementById('userProfilePostsCount').textContent = posts.length;
+                
+                const followersCount = await getFollowersCount(userId);
+                const followingCount = await getFollowingCount(userId);
+                document.getElementById('userProfileFollowersCount').textContent = followersCount;
+                document.getElementById('userProfileFollowingCount').textContent = followingCount;
+                
+                const isSubscribed = await checkIfSubscribed(userId);
+                const subscribeBtn = document.getElementById('userProfileSubscribeBtn');
+                if (isSubscribed) {
+                    subscribeBtn.textContent = '✓ Подписан';
+                    subscribeBtn.classList.add('subscribed');
+                } else {
+                    subscribeBtn.textContent = '+ Подписаться';
+                    subscribeBtn.classList.remove('subscribed');
+                }
+                
+                const postsHtml = posts.map(post => `
+                    <div class="post-item">
+                        <div class="post-avatar-small" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;"></div>
+                        <div class="post-content">
+                            <div class="post-header">
+                                <span class="post-author">${firstName} ${lastName}</span>
+                                <span class="post-date">${formatDate(post.createdAt)}</span>
+                            </div>
+                            <div class="post-body">${post.get('text')}</div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('userProfilePosts').innerHTML = postsHtml || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
+                
+                // Сохраняем ID пользователя для кнопок
+                document.getElementById('userProfileChatBtn').onclick = () => startChat(userId, fullName, avatar ? avatar.url() : '');
+                document.getElementById('userProfileSubscribeBtn').onclick = async () => {
+                    const result = await toggleSubscribe(userId);
+                    if (result !== null) {
+                        await updateUserProfileUI(userId);
+                        await updateProfileUI();
+                    }
+                };
+            } catch (error) {
+                console.error('Ошибка загрузки профиля:', error);
+            }
         }
 
         async function updateHomeFeed() {
@@ -1711,11 +1811,12 @@
                 
                 return `
                     <div class="post" data-author-id="${freshAuthor.id}">
-                        <div class="post-avatar" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;"></div>
+                        <div class="post-avatar" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;" onclick="openUserProfile('${freshAuthor.id}')"></div>
                         <div class="post-content">
                             <div class="post-header">
-                                <span class="post-name">${firstName} ${lastName}</span>
-                                <span class="post-handle">@${freshAuthor.get('email').split('@')[0]} · ${formatDate(post.createdAt)}</span>
+                                <span class="post-name" onclick="openUserProfile('${freshAuthor.id}')">${firstName} ${lastName}</span>
+                                <span class="post-handle" onclick="openUserProfile('${freshAuthor.id}')">@${freshAuthor.get('email').split('@')[0]}</span>
+                                <span class="post-date">${formatDate(post.createdAt)}</span>
                             </div>
                             <div class="post-text">${post.get('text')}</div>
                             <div class="post-meta">
@@ -1729,6 +1830,47 @@
             }));
             
             document.getElementById('homePosts').innerHTML = postsHtml.join('') || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
+        }
+
+        async function updateChatList() {
+            const conversations = await getUserConversations();
+            
+            const chatsHtml = conversations.map(c => {
+                const otherUser = c.otherUser;
+                const firstName = otherUser.get('firstName') || '';
+                const lastName = otherUser.get('lastName') || '';
+                const avatar = otherUser.get('avatar');
+                
+                return `
+                    <div class="chat-item" onclick="openConversation('${firstName} ${lastName}', '${avatar ? avatar.url() : ''}', '${c.conversation.id}', '${otherUser.id}')">
+                        <div class="chat-avatar" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;" onclick="event.stopPropagation(); openUserProfile('${otherUser.id}')"></div>
+                        <div class="chat-info">
+                            <div class="chat-name" onclick="event.stopPropagation(); openUserProfile('${otherUser.id}')">${firstName} ${lastName}</div>
+                            <div class="chat-preview">${c.lastMessage || 'Начните общение'}</div>
+                        </div>
+                        <div class="chat-time">${c.lastMessageTime ? formatDate(c.lastMessageTime) : ''}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('chatListContainer').innerHTML = chatsHtml || '<p style="opacity:0.7; text-align:center;">Нет чатов</p>';
+        }
+
+        // ===== НАВИГАЦИЯ =====
+        function openUserProfile(userId) {
+            previousScreen = document.querySelector('.screen.active').id;
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('userProfileScreen').classList.add('active');
+            updateUserProfileUI(userId);
+        }
+
+        function goBack() {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            if (previousScreen) {
+                document.getElementById(previousScreen).classList.add('active');
+            } else {
+                document.getElementById('homeScreen').classList.add('active');
+            }
         }
 
         // ===== ЛОГИКА ИНТЕРФЕЙСА =====
@@ -1747,7 +1889,6 @@
         const authSwitch = document.getElementById('authSwitch');
         const forgotPassword = document.getElementById('forgotPassword');
         const navIcons = document.getElementById('navIcons');
-        const smallWhiteBtn = document.getElementById('smallWhiteBtn');
         
         const editProfileBtn = document.getElementById('editProfileBtn');
         const editProfileForm = document.getElementById('editProfileForm');
@@ -1763,17 +1904,8 @@
         const chatSearchInput = document.getElementById('chatSearchInput');
         const chatSearchBtn = document.getElementById('chatSearchBtn');
         const chatSearchResults = document.getElementById('chatSearchResults');
-        const langToggle = document.getElementById('langToggle');
 
         let isLoginMode = false;
-
-        versionToggle.addEventListener('click', () => {
-            document.body.classList.toggle('pc-mode');
-        });
-
-        langToggle.addEventListener('click', () => {
-            langToggle.textContent = langToggle.textContent === '🇷🇺' ? '🇺🇸' : '🇷🇺';
-        });
 
         authSwitch.addEventListener('click', () => {
             isLoginMode = !isLoginMode;
@@ -1844,7 +1976,6 @@
                 authScreen.classList.remove('active');
                 homeScreen.classList.add('active');
                 showNavIcons();
-                smallWhiteBtn.style.display = 'flex';
             } else {
                 authError.textContent = result.message;
             }
@@ -1916,15 +2047,15 @@
                 const isSubscribed = user.isSubscribed;
                 
                 return `
-                    <div class="user-search-item" data-user-id="${user.objectId}">
-                        <div class="user-search-avatar" style="background-image: url('${avatar ? avatar.url : ''}'); background-color: #6aa9ff;"></div>
-                        <div class="user-search-info">
+                    <div class="user-search-item">
+                        <div class="user-search-avatar" style="background-image: url('${avatar ? avatar.url : ''}'); background-color: #6aa9ff;" onclick="openUserProfile('${user.objectId}')"></div>
+                        <div class="user-search-info" onclick="openUserProfile('${user.objectId}')">
                             <div class="user-search-name">${firstName} ${lastName}</div>
                             <div class="user-search-email">${email}</div>
                         </div>
                         <div class="user-search-actions">
-                            <button class="start-chat-btn" onclick="startChat('${user.objectId}', '${firstName} ${lastName}', '${avatar ? avatar.url : ''}')">💬</button>
-                            <button class="subscribe-btn ${isSubscribed ? 'subscribed' : ''}" onclick="handleSubscribe('${user.objectId}', this)">
+                            <button class="action-btn chat-btn" onclick="startChat('${user.objectId}', '${firstName} ${lastName}', '${avatar ? avatar.url : ''}')">💬</button>
+                            <button class="action-btn subscribe-btn ${isSubscribed ? 'subscribed' : ''}" onclick="handleSubscribe('${user.objectId}', this)">
                                 ${isSubscribed ? '✓' : '+'}
                             </button>
                         </div>
@@ -1945,6 +2076,7 @@
                     btnElement.textContent = '+';
                     btnElement.classList.remove('subscribed');
                 }
+                await updateProfileUI();
             }
         };
 
@@ -1959,30 +2091,31 @@
                     home: document.getElementById('homeScreen'),
                     chat: document.getElementById('chatScreen'),
                     reels: document.getElementById('reelsScreen'),
-                    profile: document.getElementById('profileScreen')
+                    profile: document.getElementById('profileScreen'),
+                    userProfile: document.getElementById('userProfileScreen')
                 };
                 
                 Object.values(screens).forEach(screen => screen.classList.remove('active'));
                 screens.chat.classList.add('active');
                 
-                openConversation(name, avatarUrl, conversation.id);
+                await openConversation(name, avatarUrl, conversation.id, userId);
             }
         };
 
-        function openConversation(name, avatarUrl, conversationId) {
+        async function openConversation(name, avatarUrl, conversationId, otherUserId) {
             document.getElementById('chatList').style.display = 'none';
             document.getElementById('conversationView').style.display = 'flex';
             document.getElementById('conversationName').textContent = name;
             document.getElementById('conversationAvatar').style.backgroundImage = `url('${avatarUrl}')`;
-            document.getElementById('conversationAvatarMsg').style.backgroundImage = `url('${avatarUrl}')`;
             
             currentConversationId = conversationId;
+            currentOtherUserId = otherUserId;
             
-            subscribeToChat(conversationId, name);
+            subscribeToChat(conversationId, otherUserId);
             
             document.getElementById('chatMessages').innerHTML = '';
             
-            loadMessageHistory(conversationId);
+            await loadMessageHistory(conversationId);
         }
 
         function backToChatList() {
@@ -1994,6 +2127,8 @@
                 currentChannel.unsubscribe();
                 currentChannel = null;
             }
+            
+            updateChatList();
         }
 
         const chatMessages = document.getElementById('chatMessages');
@@ -2022,20 +2157,7 @@
             
             chatInput.value = '';
             
-            try {
-                const Message = Parse.Object.extend('Message');
-                const message = new Message();
-                message.set('text', text);
-                message.set('sender', currentUser);
-                message.set('conversation', {
-                    __type: 'Pointer',
-                    className: 'Conversation',
-                    objectId: currentConversationId
-                });
-                await message.save();
-            } catch (error) {
-                console.error('Ошибка сохранения в Parse:', error);
-            }
+            await sendMessageToServer(text, currentConversationId);
         });
 
         chatInput.addEventListener('keypress', (e) => {
@@ -2048,10 +2170,10 @@
             (async () => {
                 await updateProfileUI();
                 await updateHomeFeed();
+                await updateChatList();
                 authScreen.classList.remove('active');
                 homeScreen.classList.add('active');
                 showNavIcons();
-                smallWhiteBtn.style.display = 'flex';
             })();
         }
 
@@ -2094,7 +2216,8 @@
                         home: document.getElementById('homeScreen'),
                         chat: document.getElementById('chatScreen'),
                         reels: document.getElementById('reelsScreen'),
-                        profile: document.getElementById('profileScreen')
+                        profile: document.getElementById('profileScreen'),
+                        userProfile: document.getElementById('userProfileScreen')
                     };
 
                     Object.values(screens).forEach(screen => screen.classList.remove('active'));
@@ -2102,25 +2225,20 @@
                     const screenName = icon.dataset.screen;
                     if (screenName === 'home') {
                         screens.home.classList.add('active');
-                        smallWhiteBtn.style.display = 'flex';
                         await updateHomeFeed();
                     }
                     if (screenName === 'chat') {
                         screens.chat.classList.add('active');
                         document.getElementById('chatList').style.display = 'flex';
                         document.getElementById('conversationView').style.display = 'none';
-                        smallWhiteBtn.style.display = 'none';
-                        
-                        document.getElementById('chatListContainer').innerHTML = '<p>Загрузка...</p>';
+                        await updateChatList();
                     }
                     if (screenName === 'reels') {
                         screens.reels.classList.add('active');
-                        smallWhiteBtn.style.display = 'none';
                     }
                     if (screenName === 'profile') {
                         screens.profile.classList.add('active');
                         await updateProfileUI();
-                        smallWhiteBtn.style.display = 'none';
                     }
                 });
             });
@@ -2130,8 +2248,6 @@
         window.addEventListener('click', () => {
             videos.forEach(v => v.pause());
         });
-
-        smallWhiteBtn.style.display = 'none';
     </script>
 </body>
 </html>
