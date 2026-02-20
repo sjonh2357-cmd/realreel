@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · рабочий поиск · живой чат</title>
+    <title>RealReel · финал · поиск + подписки</title>
     <!-- Подключаем шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,6 @@
             background: #f5f7fa;
         }
 
-        /* переключатель версий */
         .version-btn {
             width: 44px;
             height: 44px;
@@ -53,7 +52,6 @@
             background: rgba(106, 169, 255, 0.2);
         }
 
-        /* кнопка языка */
         .lang-btn {
             width: 44px;
             height: 44px;
@@ -72,7 +70,6 @@
             background: rgba(106, 169, 255, 0.2);
         }
 
-        /* мобильная версия (по умолчанию) */
         .phone-frame {
             width: 380px;
             height: 720px;
@@ -88,7 +85,6 @@
             box-shadow: 0 30px 60px -15px rgba(0,0,0,0.1);
         }
 
-        /* ПК версия */
         body.pc-mode .phone-frame {
             width: 1000px;
             height: 800px;
@@ -103,7 +99,6 @@
             flex-direction: column;
         }
 
-        /* ===== СВЕТЛАЯ ТЕМА ===== */
         .top-nav {
             padding: 16px 20px;
             display: flex;
@@ -195,7 +190,6 @@
             position: relative;
         }
 
-        /* ===== АВТОРИЗАЦИЯ ===== */
         .auth-screen {
             display: flex;
             flex-direction: column;
@@ -329,7 +323,6 @@
             75% { transform: translateX(5px); }
         }
 
-        /* ===== ПРОФИЛЬ ===== */
         .profile-screen {
             display: flex;
             flex-direction: column;
@@ -503,7 +496,6 @@
             color: #1a1e2a;
         }
 
-        /* ===== ЧАТ С ЖИВЫМИ СООБЩЕНИЯМИ ===== */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -566,9 +558,43 @@
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
-        .user-search-item:hover {
-            transform: translateX(4px);
+        .user-search-actions {
+            display: flex;
+            gap: 8px;
         }
+        .start-chat-btn, .subscribe-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: 0.2s;
+        }
+        .start-chat-btn {
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            color: white;
+            font-size: 16px;
+        }
+        .start-chat-btn:hover {
+            transform: scale(1.1);
+        }
+        .subscribe-btn {
+            background: #e8ecf2;
+            color: #1a1e2a;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .subscribe-btn.subscribed {
+            background: #4CAF50;
+            color: white;
+        }
+        .subscribe-btn:hover {
+            transform: scale(1.1);
+        }
+
         .user-search-avatar {
             width: 40px;
             height: 40px;
@@ -589,18 +615,6 @@
             font-size: 12px;
             opacity: 0.7;
             color: #64748b;
-        }
-        .start-chat-btn {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-            border: none;
         }
 
         .chat-list {
@@ -794,7 +808,6 @@
             100% { box-shadow: 0 4px 12px rgba(106, 169, 255, 0.3); }
         }
 
-        /* ===== НАСТРОЙКИ, ЯЗЫК, ПК-ВЕРСИЯ И ВЫХОД ВНИЗУ ===== */
         .settings-row {
             display: flex;
             align-items: center;
@@ -891,7 +904,6 @@
             background: rgba(255, 107, 107, 0.2);
         }
 
-        /* ===== REELS ===== */
         .reels-grid {
             display: flex;
             flex-direction: column;
@@ -975,7 +987,6 @@
             flex-direction: column;
         }
 
-        /* ===== ГЛАВНАЯ ===== */
         .stories-row {
             display: flex;
             gap: 16px;
@@ -1168,7 +1179,7 @@
                 <div id="homePosts"></div>
             </div>
 
-            <!-- Чат (с живыми сообщениями) -->
+            <!-- Чат -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
                     <div class="search-in-chat">
@@ -1446,7 +1457,63 @@
             }
         }
 
-        // ===== ИСПРАВЛЕННЫЙ ПОИСК ПОЛЬЗОВАТЕЛЕЙ =====
+        // ===== ПОДПИСКИ =====
+        async function toggleSubscribe(targetUserId) {
+            const currentUser = getCurrentUser();
+            if (!currentUser || targetUserId === currentUser.id) return;
+            
+            try {
+                const Subscription = Parse.Object.extend('Subscription');
+                const query = new Parse.Query(Subscription);
+                query.equalTo('follower', currentUser);
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: targetUserId
+                });
+                
+                const existing = await query.first();
+                
+                if (existing) {
+                    await existing.destroy();
+                    return { subscribed: false };
+                } else {
+                    const subscription = new Subscription();
+                    subscription.set('follower', currentUser);
+                    subscription.set('following', {
+                        __type: 'Pointer',
+                        className: '_User',
+                        objectId: targetUserId
+                    });
+                    await subscription.save();
+                    return { subscribed: true };
+                }
+            } catch (error) {
+                console.error('Ошибка подписки:', error);
+                return null;
+            }
+        }
+
+        async function checkIfSubscribed(targetUserId) {
+            const currentUser = getCurrentUser();
+            if (!currentUser) return false;
+            
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('follower', currentUser);
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: targetUserId
+                });
+                const sub = await query.first();
+                return !!sub;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // ===== ПОИСК ПОЛЬЗОВАТЕЛЕЙ =====
         async function searchUsers(searchText) {
             try {
                 const currentUser = getCurrentUser();
@@ -1456,7 +1523,6 @@
                 query.notEqualTo('objectId', currentUser.id);
                 
                 if (searchText && searchText.trim() !== '') {
-                    // Правильный способ: ищем по всем полям через OR
                     const nameQuery = new Parse.Query('_User');
                     nameQuery.matches('firstName', searchText, 'i');
                     
@@ -1466,18 +1532,34 @@
                     const emailQuery = new Parse.Query('_User');
                     emailQuery.matches('email', searchText, 'i');
                     
-                    // Объединяем все условия через OR
                     const mainQuery = Parse.Query.or(nameQuery, lastNameQuery, emailQuery);
                     mainQuery.notEqualTo('objectId', currentUser.id);
-                    
                     mainQuery.limit(20);
+                    
                     const users = await mainQuery.find();
-                    return users;
+                    
+                    const usersWithSubStatus = await Promise.all(users.map(async (user) => {
+                        const isSubscribed = await checkIfSubscribed(user.id);
+                        return {
+                            ...user.toJSON(),
+                            isSubscribed
+                        };
+                    }));
+                    
+                    return usersWithSubStatus;
                 } else {
-                    // Если поиск пустой, возвращаем последних 20 пользователей
                     query.limit(20);
                     const users = await query.find();
-                    return users;
+                    
+                    const usersWithSubStatus = await Promise.all(users.map(async (user) => {
+                        const isSubscribed = await checkIfSubscribed(user.id);
+                        return {
+                            ...user.toJSON(),
+                            isSubscribed
+                        };
+                    }));
+                    
+                    return usersWithSubStatus;
                 }
             } catch (error) {
                 console.error('Ошибка поиска:', error);
@@ -1489,7 +1571,6 @@
         async function getOrCreateConversation(otherUserId) {
             const currentUser = Parse.User.current();
             
-            // Ищем существующий диалог
             const query = new Parse.Query('Conversation');
             query.containsAll('participants', [currentUser, {
                 __type: 'Pointer',
@@ -1499,7 +1580,6 @@
             
             let conversation = await query.first();
             
-            // Если нет — создаём новый
             if (!conversation) {
                 const Conversation = Parse.Object.extend('Conversation');
                 conversation = new Conversation();
@@ -1515,23 +1595,16 @@
         }
 
         function subscribeToChat(conversationId, userName) {
-            // Отписываемся от предыдущего канала
             if (currentChannel) {
                 currentChannel.unbind_all();
                 currentChannel.unsubscribe();
             }
             
-            // Создаём уникальное имя канала для этого чата
             const channelName = `chat-${conversationId}`;
-            
-            // Подписываемся на канал
             currentChannel = pusher.subscribe(channelName);
             
-            // Слушаем новые сообщения
             currentChannel.bind('client-new-message', function(data) {
                 console.log('Новое сообщение через Pusher:', data);
-                
-                // Добавляем сообщение в интерфейс
                 const isOwn = data.senderId === currentUser.id;
                 addMessageToChat(data.text, isOwn, data.timestamp);
             });
@@ -1676,7 +1749,6 @@
         const navIcons = document.getElementById('navIcons');
         const smallWhiteBtn = document.getElementById('smallWhiteBtn');
         
-        // Элементы профиля
         const editProfileBtn = document.getElementById('editProfileBtn');
         const editProfileForm = document.getElementById('editProfileForm');
         const profileInfo = document.getElementById('profileInfo');
@@ -1688,7 +1760,6 @@
         const avatarUpload = document.getElementById('avatarUpload');
         const avatarFileInput = document.getElementById('avatarFileInput');
         
-        // Элементы поиска в чате
         const chatSearchInput = document.getElementById('chatSearchInput');
         const chatSearchBtn = document.getElementById('chatSearchBtn');
         const chatSearchResults = document.getElementById('chatSearchResults');
@@ -1696,14 +1767,11 @@
 
         let isLoginMode = false;
 
-        // Переключатель версий
         versionToggle.addEventListener('click', () => {
             document.body.classList.toggle('pc-mode');
         });
 
-        // Язык (заглушка)
         langToggle.addEventListener('click', () => {
-            // Просто меняем флаг для демо
             langToggle.textContent = langToggle.textContent === '🇷🇺' ? '🇺🇸' : '🇷🇺';
         });
 
@@ -1782,7 +1850,6 @@
             }
         });
 
-        // Редактирование профиля
         editProfileBtn.addEventListener('click', () => {
             const user = getCurrentUser();
             editFirstName.value = user.get('firstName') || '';
@@ -1815,13 +1882,11 @@
             }
         });
 
-        // Выход
         logoutBtn.addEventListener('click', async () => {
             await Parse.User.logOut();
             location.reload();
         });
 
-        // Загрузка аватара
         avatarUpload.addEventListener('click', () => {
             avatarFileInput.click();
         });
@@ -1839,25 +1904,30 @@
             }
         });
 
-        // ИСПРАВЛЕННЫЙ ПОИСК ПОЛЬЗОВАТЕЛЕЙ В ЧАТЕ
         chatSearchBtn.addEventListener('click', async () => {
             const text = chatSearchInput.value.trim();
             const users = await searchUsers(text);
             
             const resultsHtml = users.map(user => {
-                const firstName = user.get('firstName') || '';
-                const lastName = user.get('lastName') || '';
-                const email = user.get('email') || '';
-                const avatar = user.get('avatar');
+                const firstName = user.firstName || '';
+                const lastName = user.lastName || '';
+                const email = user.email || '';
+                const avatar = user.avatar;
+                const isSubscribed = user.isSubscribed;
                 
                 return `
-                    <div class="user-search-item" onclick="startChat('${user.id}', '${firstName} ${lastName}', '${avatar ? avatar.url() : ''}')">
-                        <div class="user-search-avatar" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;"></div>
+                    <div class="user-search-item" data-user-id="${user.objectId}">
+                        <div class="user-search-avatar" style="background-image: url('${avatar ? avatar.url : ''}'); background-color: #6aa9ff;"></div>
                         <div class="user-search-info">
                             <div class="user-search-name">${firstName} ${lastName}</div>
                             <div class="user-search-email">${email}</div>
                         </div>
-                        <button class="start-chat-btn">💬</button>
+                        <div class="user-search-actions">
+                            <button class="start-chat-btn" onclick="startChat('${user.objectId}', '${firstName} ${lastName}', '${avatar ? avatar.url : ''}')">💬</button>
+                            <button class="subscribe-btn ${isSubscribed ? 'subscribed' : ''}" onclick="handleSubscribe('${user.objectId}', this)">
+                                ${isSubscribed ? '✓' : '+'}
+                            </button>
+                        </div>
                     </div>
                 `;
             }).join('');
@@ -1865,13 +1935,23 @@
             chatSearchResults.innerHTML = resultsHtml || '<p style="opacity:0.7; text-align:center;">Никого не найдено</p>';
         });
 
-        // Начать чат с пользователем
+        window.handleSubscribe = async function(userId, btnElement) {
+            const result = await toggleSubscribe(userId);
+            if (result !== null) {
+                if (result.subscribed) {
+                    btnElement.textContent = '✓';
+                    btnElement.classList.add('subscribed');
+                } else {
+                    btnElement.textContent = '+';
+                    btnElement.classList.remove('subscribed');
+                }
+            }
+        };
+
         window.startChat = async function(userId, name, avatarUrl) {
-            // Создаём или получаем беседу
             const conversation = await getOrCreateConversation(userId);
             
             if (conversation) {
-                // Переключаемся на экран чата
                 document.querySelectorAll('.nav-icon').forEach(nav => nav.classList.remove('active'));
                 document.querySelector('[data-screen="chat"]').classList.add('active');
                 
@@ -1885,7 +1965,6 @@
                 Object.values(screens).forEach(screen => screen.classList.remove('active'));
                 screens.chat.classList.add('active');
                 
-                // Открываем переписку
                 openConversation(name, avatarUrl, conversation.id);
             }
         };
@@ -1897,16 +1976,12 @@
             document.getElementById('conversationAvatar').style.backgroundImage = `url('${avatarUrl}')`;
             document.getElementById('conversationAvatarMsg').style.backgroundImage = `url('${avatarUrl}')`;
             
-            // Сохраняем ID текущей беседы
             currentConversationId = conversationId;
             
-            // Подписываемся на канал Pusher
             subscribeToChat(conversationId, name);
             
-            // Очищаем старые сообщения
             document.getElementById('chatMessages').innerHTML = '';
             
-            // Загружаем историю сообщений из Parse
             loadMessageHistory(conversationId);
         }
 
@@ -1914,7 +1989,6 @@
             document.getElementById('chatList').style.display = 'flex';
             document.getElementById('conversationView').style.display = 'none';
             
-            // Отписываемся от канала
             if (currentChannel) {
                 currentChannel.unbind_all();
                 currentChannel.unsubscribe();
@@ -1932,7 +2006,6 @@
             
             const currentUser = getCurrentUser();
             
-            // Создаём объект сообщения
             const messageData = {
                 text: text,
                 senderId: currentUser.id,
@@ -1941,18 +2014,14 @@
                 conversationId: currentConversationId
             };
             
-            // Отправляем через Pusher (client event)
             if (currentChannel) {
                 currentChannel.trigger('client-new-message', messageData);
             }
             
-            // Добавляем сообщение сразу в свой чат (оптимистично)
             addMessageToChat(text, true, messageData.timestamp);
             
-            // Очищаем поле ввода
             chatInput.value = '';
             
-            // Сохраняем в Parse (для истории)
             try {
                 const Message = Parse.Object.extend('Message');
                 const message = new Message();
@@ -1975,7 +2044,6 @@
             }
         });
 
-        // Проверка при загрузке
         if (getCurrentUser()) {
             (async () => {
                 await updateProfileUI();
