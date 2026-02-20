@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · светлая · поиск в чате</title>
+    <title>RealReel · закруглённые сторизы · Inter</title>
+    <!-- Подключаем шрифт Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, 'Inter', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -23,20 +27,30 @@
             background: #f5f7fa;
         }
 
-        /* переключатель версий */
-        .version-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            color: white;
-            border: none;
-            padding: 8px 16px;
+        /* переключатель версий (теперь в профиле) - стили остаются, но кнопка перенесена в HTML */
+        .version-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(106, 169, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(106, 169, 255, 0.3);
+            transition: 0.2s;
+            border: none;
+        }
+        .version-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: #4a5b8a;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .version-btn:hover {
+            transform: scale(1.1);
+            background: rgba(106, 169, 255, 0.2);
         }
 
         /* мобильная версия (по умолчанию) */
@@ -70,7 +84,7 @@
             flex-direction: column;
         }
 
-        /* ===== СВЕТЛАЯ ТЕМА (ТОЛЬКО ОНА) ===== */
+        /* ===== СВЕТЛАЯ ТЕМА ===== */
         .top-nav {
             padding: 16px 20px;
             display: flex;
@@ -141,6 +155,7 @@
             color: #1a1e2a;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             animation: bounce 2s infinite;
+            border-radius: 0; /* Прямые углы */
         }
         .small-white-btn:hover {
             transform: scale(1.1) rotate(90deg);
@@ -324,6 +339,7 @@
             color: white;
             font-weight: 600;
             overflow: hidden;
+            border-radius: 36px; /* ЗАКРУГЛЁННОЕ ФОТО ПРОФИЛЯ */
         }
         .profile-avatar img {
             width: 100%;
@@ -344,6 +360,7 @@
             transition: 0.2s;
             color: white;
             font-size: 12px;
+            border-radius: 36px;
         }
         .profile-avatar-container:hover .avatar-overlay {
             opacity: 1;
@@ -441,6 +458,7 @@
             background-position: center;
             flex-shrink: 0;
             background-color: #6aa9ff;
+            border-radius: 18px; /* ЗАКРУГЛЁННЫЕ АВАТАРКИ В ПОСТАХ */
         }
         .post-content {
             flex: 1;
@@ -466,7 +484,7 @@
             color: #1a1e2a;
         }
 
-        /* ===== ЧАТ С ПОИСКОМ ===== */
+        /* ===== ЧАТ ===== */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -538,6 +556,7 @@
             background-size: cover;
             background-position: center;
             border: 2px solid rgba(106, 169, 255, 0.3);
+            border-radius: 20px; /* ЗАКРУГЛЁННЫЕ АВАТАРКИ В ПОИСКЕ */
         }
         .user-search-info {
             flex: 1;
@@ -592,6 +611,7 @@
             border: 2px solid rgba(106, 169, 255, 0.3);
             flex-shrink: 0;
             transition: all 0.3s;
+            border-radius: 28px; /* ЗАКРУГЛЁННЫЕ АВАТАРКИ В ЧАТЕ */
         }
         .chat-avatar:hover {
             transform: scale(1.05);
@@ -926,6 +946,7 @@
             background-size: cover;
             background-position: center;
             animation: avatarPulse 3s infinite;
+            border-radius: 32px; /* ЗАКРУГЛЁННЫЕ СТОРИЗ */
         }
         .story-avatar:hover {
             transform: scale(1.1) rotate(5deg);
@@ -956,6 +977,7 @@
             flex-shrink: 0;
             border: 2px solid rgba(106, 169, 255, 0.3);
             transition: all 0.3s;
+            border-radius: 22px; /* ЗАКРУГЛЁННЫЕ АВАТАРКИ В ПОСТАХ */
         }
         .post-avatar:hover {
             transform: scale(1.1) rotate(5deg);
@@ -1031,8 +1053,6 @@
     </style>
 </head>
 <body class="">
-    <button class="version-toggle" id="versionToggle">📱 Мобильная / 💻 ПК</button>
-
     <div class="phone-frame" id="phoneFrame">
         <button class="small-white-btn" id="smallWhiteBtn" onclick="alert('white button')" style="display: none;">+</button>
 
@@ -1088,7 +1108,7 @@
                 <div id="homePosts"></div>
             </div>
 
-            <!-- Чат (с поиском) -->
+            <!-- Чат -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
                     <div class="search-in-chat">
@@ -1175,8 +1195,16 @@
                     <!-- Посты пользователя -->
                     <div class="posts-list" id="userPosts"></div>
 
-                    <!-- НАСТРОЙКИ И ВЫХОД ВНИЗУ -->
+                    <!-- НАСТРОЙКИ, ПК-ВЕРСИЯ И ВЫХОД ВНИЗУ -->
                     <div class="settings-row">
+                        <button class="version-btn" id="versionToggle">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" fill="none"/>
+                                <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor"/>
+                                <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor"/>
+                                <line x1="2" y1="10" x2="22" y2="10" stroke="currentColor"/>
+                            </svg>
+                        </button>
                         <div class="settings-icon" id="editProfileBtn">
                             <svg viewBox="0 0 24 24">
                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke="currentColor" fill="none"/>
@@ -1353,12 +1381,17 @@
                 query.notEqualTo('objectId', getCurrentUser().id);
                 
                 if (searchText) {
+                    query.matches('firstName', searchText, 'i');
+                    query.matches('lastName', searchText, 'i');
                     query.matches('email', searchText, 'i');
                 }
+                
+                query.limit(20);
                 
                 const users = await query.find();
                 return users;
             } catch (error) {
+                console.error('Ошибка поиска:', error);
                 return [];
             }
         }
@@ -1505,7 +1538,7 @@
 
         let isLoginMode = false;
 
-        // Переключатель версий
+        // Переключатель версий (теперь внутри профиля)
         versionToggle.addEventListener('click', () => {
             document.body.classList.toggle('pc-mode');
         });
