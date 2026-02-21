@@ -107,6 +107,57 @@
             padding: 16px;
         }
 
+        /* ===== УВЕДОМЛЕНИЯ ===== */
+        .notifications-panel {
+            position: fixed;
+            top: 60px;
+            right: 16px;
+            width: 300px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideDown 0.3s;
+        }
+        .notifications-panel.active {
+            display: flex;
+        }
+        .notifications-header {
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+        }
+        .notifications-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .notification-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            animation: fadeIn 0.3s;
+        }
+        .notification-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        .notification-content {
+            flex: 1;
+            font-size: 13px;
+        }
+        .notification-time {
+            font-size: 10px;
+            color: #999;
+        }
+
         /* ===== ПРОСМОТР ФОТО ===== */
         .photo-viewer {
             position: fixed;
@@ -370,39 +421,31 @@
             background: rgba(255,255,255,0.2);
             border: none;
             color: white;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .story-action-btn:hover {
             transform: scale(1.2);
             background: rgba(255,255,255,0.3);
         }
-        .story-emoji-panel {
+        .story-reply-input {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             padding: 16px;
-            justify-content: center;
             background: rgba(255,255,255,0.1);
             border-radius: 40px;
             margin: 16px;
-            animation: slideUp 0.3s;
         }
-        .story-emoji {
-            width: 44px;
-            height: 44px;
-            border-radius: 22px;
-            background: rgba(255,255,255,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .story-emoji:hover {
-            transform: scale(1.2);
-            background: rgba(255,255,255,0.3);
+        .story-reply-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 30px;
+            outline: none;
         }
 
         /* ===== МОДАЛКА ПОДПИСОК ===== */
@@ -464,6 +507,24 @@
         .modal-tab.active {
             color: #6aa9ff;
             border-bottom-color: #6aa9ff;
+        }
+        .modal-search {
+            padding: 12px 16px;
+        }
+        .modal-search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f5f5f5;
+            padding: 8px 16px;
+            border-radius: 30px;
+        }
+        .modal-search-box input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 14px;
         }
         .modal-list {
             flex: 1;
@@ -530,33 +591,7 @@
             transform: scale(1.1);
         }
 
-        /* ===== КАТЕГОРИИ ЧАТОВ ===== */
-        .chat-categories {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            overflow-x: auto;
-            padding: 4px 0;
-        }
-        .chat-category {
-            padding: 8px 16px;
-            background: #f0f0f0;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-        .chat-category:hover {
-            background: #e0e0e0;
-        }
-        .chat-category.active {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            color: white;
-        }
-
-        /* ===== АВТОРИЗАЦИЯ ===== */
+        /* ===== АВТОРИЗАЦИЯ (ВХОД ПЕРВЫЙ) ===== */
         .auth-screen {
             height: 100%;
             display: flex;
@@ -1085,6 +1120,30 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+        }
+        .chat-categories {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding: 4px 0;
+        }
+        .chat-category {
+            padding: 8px 16px;
+            background: #f0f0f0;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .chat-category:hover {
+            background: #e0e0e0;
+        }
+        .chat-category.active {
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            color: white;
         }
         .chat-list {
             display: flex;
@@ -1635,6 +1694,12 @@
 
         <div class="add-post-btn hidden" id="addPostBtn">+</div>
 
+        <!-- Уведомления -->
+        <div class="notifications-panel" id="notificationsPanel">
+            <div class="notifications-header">Уведомления</div>
+            <div class="notifications-list" id="notificationsList"></div>
+        </div>
+
         <div class="add-post-modal" id="addPostModal">
             <div class="modal-title">Новый пост</div>
             <textarea class="modal-input" id="postText" placeholder="Что у вас нового?" rows="3"></textarea>
@@ -1685,14 +1750,11 @@
             <div class="story-image" id="storyImage"></div>
             <div class="story-actions">
                 <button class="story-action-btn" onclick="likeStory()">❤️</button>
-                <button class="story-action-btn" onclick="showStoryEmojis()">😊</button>
+                <button class="story-action-btn" onclick="showReplyInput()">💬</button>
             </div>
-            <div class="story-emoji-panel" id="storyEmojiPanel" style="display: none;">
-                <div class="story-emoji" onclick="sendStoryEmoji('👍')">👍</div>
-                <div class="story-emoji" onclick="sendStoryEmoji('😂')">😂</div>
-                <div class="story-emoji" onclick="sendStoryEmoji('😮')">😮</div>
-                <div class="story-emoji" onclick="sendStoryEmoji('😢')">😢</div>
-                <div class="story-emoji" onclick="sendStoryEmoji('😡')">😡</div>
+            <div class="story-reply-input" id="storyReplyInput" style="display: none;">
+                <input type="text" id="storyReplyText" placeholder="Ответить...">
+                <button class="story-action-btn" onclick="sendStoryReply()">➤</button>
             </div>
             <div class="story-progress">
                 <div class="progress-bar">
@@ -1711,24 +1773,27 @@
                 <div class="modal-tab active" onclick="switchSubTab('followers')">Подписчики</div>
                 <div class="modal-tab" onclick="switchSubTab('following')">Подписки</div>
             </div>
+            <div class="modal-search">
+                <div class="modal-search-box">
+                    <input type="text" id="subscriptionSearchInput" placeholder="Поиск...">
+                    <button id="subscriptionSearchBtn">🔍</button>
+                </div>
+            </div>
             <div class="modal-list" id="subscriptionsList"></div>
         </div>
 
         <div class="content" id="content">
-            <!-- Авторизация -->
+            <!-- Авторизация (ВХОД первый) -->
             <div class="screen active" id="authScreen">
                 <div class="auth-screen">
                     <div class="auth-bg"></div>
                     <div class="auth-form">
-                        <div class="auth-title" id="authTitle">Регистрация</div>
-                        <input type="text" class="auth-input" id="authFirstName" placeholder="Имя">
-                        <input type="text" class="auth-input" id="authLastName" placeholder="Фамилия">
-                        <input type="text" class="auth-input" id="authNickname" placeholder="Никнейм">
-                        <input type="email" class="auth-input" id="authEmail" placeholder="Почта">
-                        <input type="password" class="auth-input" id="authPassword" placeholder="Пароль">
+                        <div class="auth-title" id="authTitle">Вход</div>
+                        <input type="email" class="auth-input" id="authEmail" placeholder="Почта" autocomplete="off">
+                        <input type="password" class="auth-input" id="authPassword" placeholder="Пароль" autocomplete="off">
                         <div class="auth-error" id="authError"></div>
-                        <button class="auth-btn" id="authActionBtn">Зарегистрироваться</button>
-                        <div class="auth-switch" id="authSwitch">Уже есть аккаунт? Войти</div>
+                        <button class="auth-btn" id="authActionBtn">Войти</button>
+                        <div class="auth-switch" id="authSwitch">Нет аккаунта? Зарегистрироваться</div>
                     </div>
                 </div>
             </div>
@@ -1755,10 +1820,6 @@
                 <div class="chat-screen">
                     <div class="chat-categories" id="chatCategories">
                         <div class="chat-category active" onclick="filterChats('all')">Все</div>
-                        <div class="chat-category" onclick="filterChats('work')">Работа</div>
-                        <div class="chat-category" onclick="filterChats('friends')">Друзья</div>
-                        <div class="chat-category" onclick="filterChats('family')">Семья</div>
-                        <div class="chat-category" onclick="createCategory()">+ Создать</div>
                     </div>
                     <div class="chat-list" id="chatList"></div>
 
@@ -1809,7 +1870,7 @@
                     </div>
 
                     <div class="stats-row">
-                        <div class="stat-item" onclick="showSubscriptions('followers')">
+                        <div class="stat-item" onclick="showPosts()">
                             <div class="stat-value" id="profilePostsCount">0</div>
                             <div class="stat-label">посты</div>
                         </div>
@@ -1863,8 +1924,7 @@
         let currentStoryUser = null;
         let storyTimer = null;
         let currentReactionMessage = null;
-        let chatCategories = ['Все', 'Работа', 'Друзья', 'Семья'];
-        let currentCategory = 'Все';
+        let notifications = [];
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -1974,6 +2034,10 @@
                     post.set('image', parseFile);
                 }
                 await post.save();
+                
+                // Уведомление о новом посте
+                addNotification('📝 Новый пост', 'Вы опубликовали пост');
+                
                 return { success: true, post };
             } catch (error) {
                 return { success: false };
@@ -2047,10 +2111,44 @@
                 const post = await query.get(postId);
                 post.increment('likes');
                 await post.save();
+                
+                // Уведомление о лайке
+                addNotification('❤️ Новый лайк', `${getCurrentUser().get('firstName')} лайкнул ваш пост`);
+                
                 return true;
             } catch (error) {
                 return false;
             }
+        }
+
+        function addNotification(title, message) {
+            notifications.unshift({
+                title,
+                message,
+                time: new Date()
+            });
+            updateNotifications();
+            
+            // Показываем панель уведомлений
+            document.getElementById('notificationsPanel').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('notificationsPanel').classList.remove('active');
+            }, 5000);
+        }
+
+        function updateNotifications() {
+            const list = document.getElementById('notificationsList');
+            const html = notifications.map(n => `
+                <div class="notification-item">
+                    <div class="notification-avatar avatar-default"></div>
+                    <div class="notification-content">
+                        <strong>${n.title}</strong><br>
+                        ${n.message}
+                        <div class="notification-time">${formatTime(n.time)}</div>
+                    </div>
+                </div>
+            `).join('');
+            list.innerHTML = html;
         }
 
         async function addComment(postId, text) {
@@ -2547,9 +2645,8 @@
 
         async function updateChatList() {
             const conversations = await getUserConversations();
-            const filtered = conversations.filter(c => currentCategory === 'Все' || c.otherUser.get('category') === currentCategory);
             
-            const html = await Promise.all(filtered.map(async c => {
+            const html = await Promise.all(conversations.map(async c => {
                 const user = c.otherUser;
                 await user.fetch();
                 const avatarClass = getAvatarClass(user);
@@ -2683,53 +2780,35 @@
             document.getElementById('reactionPanel').classList.remove('active');
         };
 
-        window.showStoryEmojis = function() {
-            const panel = document.getElementById('storyEmojiPanel');
-            panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
-        };
-
         window.likeStory = function() {
+            addNotification('❤️ Лайк на историю', `Вы лайкнули историю ${currentStoryUser.user.get('firstName')}`);
             alert('❤️ Лайк на историю');
         };
 
-        window.sendStoryEmoji = function(emoji) {
-            alert(`Отправлен эмодзи: ${emoji}`);
-            document.getElementById('storyEmojiPanel').style.display = 'none';
+        window.showReplyInput = function() {
+            document.getElementById('storyReplyInput').style.display = 'flex';
+        };
+
+        window.sendStoryReply = function() {
+            const text = document.getElementById('storyReplyText').value;
+            if (text) {
+                addNotification('💬 Ответ на историю', `Вы ответили: "${text}"`);
+                alert(`Ответ отправлен: ${text}`);
+                document.getElementById('storyReplyInput').style.display = 'none';
+                document.getElementById('storyReplyText').value = '';
+            }
         };
 
         window.filterChats = function(category) {
-            currentCategory = category;
             document.querySelectorAll('.chat-category').forEach(el => el.classList.remove('active'));
             event.target.classList.add('active');
             updateChatList();
-        };
-
-        window.createCategory = function() {
-            const name = prompt('Название категории:');
-            if (name) {
-                chatCategories.push(name);
-                const cat = document.createElement('div');
-                cat.className = 'chat-category';
-                cat.textContent = name;
-                cat.onclick = () => filterChats(name);
-                document.getElementById('chatCategories').insertBefore(cat, document.getElementById('chatCategories').lastElementChild);
-            }
         };
 
         window.switchSubTab = function(tab) {
             document.querySelectorAll('.modal-tab').forEach(el => el.classList.remove('active'));
             event.target.classList.add('active');
             showSubscriptions(tab);
-        };
-
-        window.openPhoto = function(url, author) {
-            document.getElementById('photoImage').style.backgroundImage = `url('${url}')`;
-            document.getElementById('photoInfo').textContent = `Фото · ${author}`;
-            document.getElementById('photoViewer').classList.add('active');
-        };
-
-        window.closePhoto = function() {
-            document.getElementById('photoViewer').classList.remove('active');
         };
 
         window.togglePostMenu = function(postId, event) {
@@ -2851,7 +2930,51 @@
             }
             
             document.getElementById('subscriptionsModal').classList.add('active');
+            
+            // Поиск в подписчиках
+            document.getElementById('subscriptionSearchBtn').onclick = () => filterSubscriptions(type);
+            document.getElementById('subscriptionSearchInput').onkeypress = (e) => {
+                if (e.key === 'Enter') filterSubscriptions(type);
+            };
         };
+
+        async function filterSubscriptions(type) {
+            const searchText = document.getElementById('subscriptionSearchInput').value.toLowerCase();
+            const userId = currentProfileUserId || getCurrentUser().id;
+            const list = document.getElementById('subscriptionsList');
+            
+            let users = type === 'followers' ? await getFollowers(userId) : await getFollowing(userId);
+            
+            if (searchText) {
+                users = users.filter(user => 
+                    user.get('firstName').toLowerCase().includes(searchText) ||
+                    user.get('lastName').toLowerCase().includes(searchText) ||
+                    user.get('nickname').toLowerCase().includes(searchText)
+                );
+            }
+            
+            const html = users.map(user => {
+                const firstName = user.get('firstName') || '';
+                const lastName = user.get('lastName') || '';
+                const nickname = user.get('nickname') || '';
+                const avatarClass = getAvatarClass(user);
+                const avatarStyle = getAvatarStyle(user);
+                const status = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
+                
+                return `
+                    <div class="modal-user-item" onclick="openUserProfile('${user.id}')">
+                        <div class="modal-user-avatar ${avatarClass}" style="${avatarStyle}"></div>
+                        <div class="modal-user-info">
+                            <div class="modal-user-name">${firstName} ${lastName}</div>
+                            <div class="modal-user-nick">${nickname}</div>
+                            <div class="modal-user-status">${status}</div>
+                        </div>
+                        <button class="modal-user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
+                    </div>
+                `;
+            }).join('');
+            list.innerHTML = html || '<p style="text-align:center; opacity:0.7;">Ничего не найдено</p>';
+        }
 
         window.closeSubscriptions = function() {
             document.getElementById('subscriptionsModal').classList.remove('active');
@@ -3024,20 +3147,21 @@
         authSwitch.addEventListener('click', () => {
             isLoginMode = !isLoginMode;
             if (isLoginMode) {
-                authTitle.textContent = 'Вход';
-                authActionBtn.textContent = 'Войти';
-                authSwitch.textContent = 'Нет аккаунта? Зарегистрироваться';
-                authFirstName.style.display = 'none';
-                authLastName.style.display = 'none';
-                authNickname.style.display = 'none';
-            } else {
                 authTitle.textContent = 'Регистрация';
                 authActionBtn.textContent = 'Зарегистрироваться';
                 authSwitch.textContent = 'Уже есть аккаунт? Войти';
                 authFirstName.style.display = 'block';
                 authLastName.style.display = 'block';
                 authNickname.style.display = 'block';
+            } else {
+                authTitle.textContent = 'Вход';
+                authActionBtn.textContent = 'Войти';
+                authSwitch.textContent = 'Нет аккаунта? Зарегистрироваться';
+                authFirstName.style.display = 'none';
+                authLastName.style.display = 'none';
+                authNickname.style.display = 'none';
             }
+            authError.textContent = '';
         });
 
         authActionBtn.addEventListener('click', async () => {
@@ -3049,8 +3173,6 @@
             }
             let result;
             if (isLoginMode) {
-                result = await signIn(email, password);
-            } else {
                 const firstName = authFirstName.value.trim();
                 const lastName = authLastName.value.trim();
                 const nickname = authNickname.value.trim();
@@ -3063,6 +3185,8 @@
                     return;
                 }
                 result = await signUp(firstName, lastName, nickname, email, password);
+            } else {
+                result = await signIn(email, password);
             }
             if (result.success) {
                 await updateProfileUI();
