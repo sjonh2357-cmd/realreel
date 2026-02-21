@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · социальная сеть</title>
+    <title>RealReel · Чаты и запросы</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -647,7 +647,7 @@
             color: white;
         }
 
-        /* Чат */
+        /* ===== ЧАТЫ ===== */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -698,10 +698,13 @@
             border-radius: 12px;
         }
 
+        /* Список чатов */
         .chat-list {
             display: flex;
             flex-direction: column;
             gap: 8px;
+            overflow-y: auto;
+            flex: 1;
         }
 
         .chat-item {
@@ -726,21 +729,25 @@
             border-radius: 24px;
             background-size: cover;
             background-position: center;
+            position: relative;
         }
 
         .chat-info {
             flex: 1;
+            min-width: 0;
         }
 
         .chat-name-row {
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 4px;
         }
 
         .chat-name {
             font-weight: 600;
             color: #333;
+            font-size: 14px;
         }
 
         .unread-badge {
@@ -763,6 +770,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            margin-bottom: 2px;
         }
 
         .chat-time {
@@ -770,19 +778,28 @@
             color: #999;
         }
 
-        .chat-header {
+        /* Комната чата (отдельный экран) */
+        .chat-room {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: white;
+        }
+
+        .chat-room-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 0;
+            padding: 12px 16px;
             border-bottom: 1px solid #eee;
+            background: white;
         }
 
-        .back-btn {
-            width: 32px;
-            height: 32px;
+        .chat-room-back {
+            width: 36px;
+            height: 36px;
             background: #f0f0f0;
-            border-radius: 16px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -791,58 +808,82 @@
             transition: 0.2s;
         }
 
-        .back-btn:hover {
+        .chat-room-back:hover {
             background: #6aa9ff;
             color: white;
         }
 
-        .chat-avatar-large {
-            width: 48px;
-            height: 48px;
-            border-radius: 24px;
+        .chat-room-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
             background-size: cover;
             background-position: center;
             cursor: pointer;
             position: relative;
         }
 
-        .online-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            border: 2px solid white;
+        .chat-room-info {
+            flex: 1;
+            cursor: pointer;
         }
 
-        .online { background: #4CAF50; }
-        .offline { background: #f44336; }
+        .chat-room-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
 
-        .chat-messages {
+        .chat-room-status {
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .online-dot.online { background: #4CAF50; }
+        .online-dot.offline { background: #f44336; }
+
+        .chat-room-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 16px 0;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             gap: 12px;
+            background: #fafafa;
         }
 
         .message {
             display: flex;
             max-width: 80%;
+            position: relative;
         }
 
         .message.own {
             align-self: flex-end;
         }
 
+        .message-content {
+            position: relative;
+        }
+
         .message-bubble {
             padding: 10px 14px;
-            background: #f0f0f0;
+            background: white;
             border-radius: 20px 20px 20px 8px;
             font-size: 14px;
             word-wrap: break-word;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .message.own .message-bubble {
@@ -854,8 +895,9 @@
         .message-time {
             font-size: 10px;
             color: #999;
-            margin-top: 2px;
+            margin-top: 4px;
             text-align: right;
+            padding: 0 4px;
         }
 
         .message.own .message-time {
@@ -864,8 +906,8 @@
 
         .message-delete {
             position: absolute;
-            top: -10px;
-            right: -10px;
+            top: -8px;
+            right: -8px;
             width: 20px;
             height: 20px;
             background: #ff4444;
@@ -878,6 +920,7 @@
             cursor: pointer;
             opacity: 0;
             transition: 0.2s;
+            z-index: 5;
         }
 
         .message:hover .message-delete {
@@ -895,6 +938,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: none;
             border: 1px solid #eee;
+            z-index: 5;
         }
 
         .message.reacted .message-reaction {
@@ -935,26 +979,28 @@
             background: #e0e0e0;
         }
 
-        .chat-input-area {
+        .chat-room-input {
             display: flex;
             gap: 8px;
-            padding-top: 16px;
+            padding: 16px;
             border-top: 1px solid #eee;
+            background: white;
         }
 
-        .chat-input {
+        .chat-room-input-field {
             flex: 1;
             padding: 12px 16px;
             border: 1px solid #ddd;
-            border-radius: 20px;
+            border-radius: 24px;
             outline: none;
+            font-size: 14px;
         }
 
-        .chat-input:focus {
+        .chat-room-input-field:focus {
             border-color: #6aa9ff;
         }
 
-        .send-btn {
+        .chat-room-send {
             width: 48px;
             height: 48px;
             background: #f0f0f0;
@@ -963,11 +1009,96 @@
             color: #555;
             cursor: pointer;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .send-btn:hover {
+        .chat-room-send:hover {
             background: #6aa9ff;
             color: white;
+        }
+
+        /* Запросы */
+        .requests-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .request-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #eee;
+        }
+
+        .request-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .request-info {
+            flex: 1;
+        }
+
+        .request-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .request-message {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .request-time {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .request-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .request-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .request-btn.accept {
+            background: #6aa9ff;
+            color: white;
+        }
+
+        .request-btn.accept:hover {
+            background: #5a99ee;
+        }
+
+        .request-btn.decline {
+            background: #ff4444;
+            color: white;
+        }
+
+        .request-btn.decline:hover {
+            background: #ff3333;
         }
 
         /* Профиль */
@@ -975,6 +1106,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            height: 100%;
+            overflow-y: auto;
         }
 
         .profile-header {
@@ -1001,6 +1134,7 @@
             font-weight: 600;
             font-size: 18px;
             color: #333;
+            margin-bottom: 4px;
         }
 
         .profile-nick {
@@ -1771,45 +1905,35 @@
                 </div>
             </div>
 
-            <!-- Чаты -->
+            <!-- Чаты (основной экран со списком) -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
                     <div class="chat-tabs">
-                        <div class="chat-tab active" onclick="filterChats('all', this)">Все</div>
-                        <div class="chat-tab" onclick="filterChats('requests', this)" id="requestsTab">
+                        <div class="chat-tab active" onclick="switchChatTab('all', this)">Все</div>
+                        <div class="chat-tab" onclick="switchChatTab('requests', this)" id="requestsTab">
                             Запросы
                             <span class="requests-badge" id="requestsBadge" style="display: none;">0</span>
                         </div>
                     </div>
                     <div class="chat-list" id="chatList"></div>
+                </div>
+            </div>
 
-                    <div class="chat-header" id="chatHeader" style="display: none;">
-                        <div class="back-btn" onclick="backToChatList()">←</div>
-                        <div class="chat-avatar-container">
-                            <div class="chat-avatar-large" id="chatAvatar" onclick="openChatUserProfile()"></div>
-                            <div class="online-dot" id="chatOnlineDot"></div>
-                        </div>
-                        <div class="chat-info-header">
-                            <div class="chat-name" id="chatName" onclick="openChatUserProfile()"></div>
-                            <div class="chat-status" id="chatStatus"></div>
+            <!-- Комната чата (отдельный экран) -->
+            <div class="screen" id="chatRoomScreen">
+                <div class="chat-room">
+                    <div class="chat-room-header">
+                        <div class="chat-room-back" onclick="closeChatRoom()">←</div>
+                        <div class="chat-room-avatar" id="chatRoomAvatar" onclick="openChatUserProfile()"></div>
+                        <div class="chat-room-info" onclick="openChatUserProfile()">
+                            <div class="chat-room-name" id="chatRoomName"></div>
+                            <div class="chat-room-status" id="chatRoomStatus"></div>
                         </div>
                     </div>
-                    <div class="chat-messages" id="chatMessages" style="display: none;"></div>
-                    
-                    <!-- Панель реакций -->
-                    <div class="reaction-panel" id="reactionPanel">
-                        <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
-                        <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
-                        <div class="reaction-emoji" onclick="addReaction('😂')">😂</div>
-                        <div class="reaction-emoji" onclick="addReaction('😮')">😮</div>
-                        <div class="reaction-emoji" onclick="addReaction('😢')">😢</div>
-                        <div class="reaction-emoji" onclick="addReaction('🔥')">🔥</div>
-                        <div class="reaction-emoji" onclick="addReaction('🎉')">🎉</div>
-                    </div>
-                    
-                    <div class="chat-input-area" id="chatInputArea" style="display: none;">
-                        <input type="text" class="chat-input" id="chatInput" placeholder="Написать...">
-                        <button class="send-btn" id="sendBtn">➤</button>
+                    <div class="chat-room-messages" id="chatRoomMessages"></div>
+                    <div class="chat-room-input">
+                        <input type="text" class="chat-room-input-field" id="chatRoomInput" placeholder="Написать...">
+                        <button class="chat-room-send" id="chatRoomSendBtn">➤</button>
                     </div>
                 </div>
             </div>
@@ -1909,6 +2033,17 @@
         </div>
     </div>
 
+    <!-- Панель реакций (глобальная) -->
+    <div class="reaction-panel" id="reactionPanel">
+        <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
+        <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
+        <div class="reaction-emoji" onclick="addReaction('😂')">😂</div>
+        <div class="reaction-emoji" onclick="addReaction('😮')">😮</div>
+        <div class="reaction-emoji" onclick="addReaction('😢')">😢</div>
+        <div class="reaction-emoji" onclick="addReaction('🔥')">🔥</div>
+        <div class="reaction-emoji" onclick="addReaction('🎉')">🎉</div>
+    </div>
+
     <!-- Back4App -->
     <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -1935,7 +2070,7 @@
         let notifications = [];
         let unreadMessages = {};
         let messageRequests = [];
-        let currentChatFilter = 'all';
+        let currentChatTab = 'all';
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -2017,7 +2152,7 @@
             }
         };
 
-        // ========== ОБНОВЛЕНИЕ БЕЙДЖЕЙ ЧАТОВ ==========
+        // ========== ОБНОВЛЕНИЕ БЕЙДЖЕЙ ==========
         function updateChatBadges() {
             const chatNavBadge = document.getElementById('chatNavBadge');
             const requestsBadge = document.getElementById('requestsBadge');
@@ -2053,7 +2188,6 @@
             } else if (screenId === 'searchScreen') {
                 updateSearchResults();
             } else if (screenId === 'chatScreen') {
-                resetChatView();
                 updateChatList();
             } else if (screenId === 'profileScreen') {
                 updateProfileUI();
@@ -2061,14 +2195,6 @@
             
             updateHeaderName();
         };
-
-        function resetChatView() {
-            document.getElementById('chatList').style.display = 'flex';
-            document.getElementById('chatCategories')?.style.display = 'flex';
-            document.getElementById('chatHeader').style.display = 'none';
-            document.getElementById('chatMessages').style.display = 'none';
-            document.getElementById('chatInputArea').style.display = 'none';
-        }
 
         function updateHeaderName() {
             const user = getCurrentUser();
@@ -2448,7 +2574,7 @@
                     return await Parse.Query.or(nameQuery, lastNameQuery, nickQuery).find();
                 }
                 
-                return await query.find();
+                return await query.limit(20).find();
             } catch (error) {
                 return [];
             }
@@ -2612,7 +2738,7 @@
                 query.ascending('createdAt');
                 
                 const messages = await query.find();
-                const container = document.getElementById('chatMessages');
+                const container = document.getElementById('chatRoomMessages');
                 container.innerHTML = '';
                 
                 messages.forEach(msg => {
@@ -2622,6 +2748,8 @@
                         addMessageToChat(msg.get('text'), isOwn, msg.createdAt, msg.id);
                     }
                 });
+                
+                container.scrollTop = container.scrollHeight;
             } catch (error) {
                 console.error('Ошибка загрузки сообщений:', error);
             }
@@ -2643,7 +2771,7 @@
         }
 
         function addMessageToChat(text, isOwn, timestamp, messageId) {
-            const container = document.getElementById('chatMessages');
+            const container = document.getElementById('chatRoomMessages');
             const div = document.createElement('div');
             div.className = `message ${isOwn ? 'own' : ''}`;
             div.setAttribute('data-message-id', messageId || '');
@@ -2719,6 +2847,156 @@
                 }
             } catch (error) {
                 console.error('Ошибка удаления:', error);
+            }
+        };
+
+        // ========== УПРАВЛЕНИЕ ЧАТАМИ ==========
+        window.switchChatTab = function(tab, element) {
+            document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+            currentChatTab = tab;
+            updateChatList();
+        };
+
+        async function updateChatList() {
+            const conversations = await getUserConversations();
+            
+            if (currentChatTab === 'all') {
+                // Показываем все чаты
+                const html = await Promise.all(conversations.map(async c => {
+                    const user = c.otherUser;
+                    await user.fetch();
+                    
+                    return `
+                        <div class="chat-item" onclick="openChatRoom('${user.id}')">
+                            <div class="chat-avatar ${getAvatarClass(user)}" 
+                                 style="${getAvatarStyle(user)}"></div>
+                            <div class="chat-info">
+                                <div class="chat-name-row">
+                                    <span class="chat-name">${user.get('firstName')} ${user.get('lastName')}</span>
+                                    ${c.unreadCount > 0 ? 
+                                        `<span class="unread-badge">${c.unreadCount}</span>` : ''}
+                                </div>
+                                <div class="chat-preview">${c.lastMessage}</div>
+                                <div class="chat-time">${formatTime(c.lastMessageTime)}</div>
+                            </div>
+                        </div>
+                    `;
+                })).then(html => html.join(''));
+                
+                document.getElementById('chatList').innerHTML = html || 
+                    '<p style="opacity:0.5; text-align:center; padding:20px;">Нет чатов</p>';
+            } else {
+                // Показываем запросы
+                if (messageRequests.length > 0) {
+                    const html = messageRequests.map(req => `
+                        <div class="request-item">
+                            <div class="request-avatar ${getAvatarClass(req.fromUser)}" 
+                                 style="${getAvatarStyle(req.fromUser)}"></div>
+                            <div class="request-info">
+                                <div class="request-name">
+                                    ${req.fromUser.get('firstName')} ${req.fromUser.get('lastName')}
+                                </div>
+                                <div class="request-message">${req.message || 'Хочет написать вам'}</div>
+                                <div class="request-time">${formatTime(req.time)}</div>
+                            </div>
+                            <div class="request-actions">
+                                <button class="request-btn accept" onclick="acceptRequest('${req.fromUser.id}')">✓</button>
+                                <button class="request-btn decline" onclick="declineRequest('${req.fromUser.id}')">✕</button>
+                            </div>
+                        </div>
+                    `).join('');
+                    
+                    document.getElementById('chatList').innerHTML = html;
+                } else {
+                    document.getElementById('chatList').innerHTML = 
+                        '<p style="opacity:0.5; text-align:center; padding:20px;">Нет запросов</p>';
+                }
+            }
+        }
+
+        window.acceptRequest = async function(userId) {
+            // Создаем чат и открываем его
+            await openChatRoom(userId);
+            
+            // Удаляем из запросов
+            messageRequests = messageRequests.filter(r => r.fromUser.id !== userId);
+            updateChatBadges();
+            updateChatList();
+        };
+
+        window.declineRequest = function(userId) {
+            if (confirm('Отклонить запрос?')) {
+                messageRequests = messageRequests.filter(r => r.fromUser.id !== userId);
+                updateChatBadges();
+                updateChatList();
+            }
+        };
+
+        // ========== КОМНАТА ЧАТА ==========
+        window.openChatRoom = async function(otherUserId) {
+            try {
+                console.log('Открываем комнату чата с пользователем:', otherUserId);
+                
+                const conversation = await getOrCreateConversation(otherUserId);
+                if (!conversation) {
+                    alert('Не удалось создать чат');
+                    return;
+                }
+                
+                currentConversationId = conversation.id;
+                currentOtherUserId = otherUserId;
+                
+                const otherUser = await new Parse.Query('_User').get(otherUserId);
+                
+                // Обновляем UI комнаты чата
+                document.getElementById('chatRoomAvatar').className = 
+                    `chat-room-avatar ${getAvatarClass(otherUser)}`;
+                const avatarStyle = getAvatarStyle(otherUser);
+                if (avatarStyle) {
+                    document.getElementById('chatRoomAvatar').style.cssText = avatarStyle;
+                }
+                
+                document.getElementById('chatRoomName').textContent = 
+                    `${otherUser.get('firstName')} ${otherUser.get('lastName')}`;
+                
+                const status = otherUser.get('isOnline') ? 'Онлайн' : 'Офлайн';
+                const statusDot = otherUser.get('isOnline') ? 'online' : 'offline';
+                document.getElementById('chatRoomStatus').innerHTML = 
+                    `<span class="online-dot ${statusDot}"></span> ${status}`;
+                
+                // Загружаем сообщения
+                document.getElementById('chatRoomMessages').innerHTML = 
+                    '<p style="opacity:0.5; text-align:center;">Загрузка...</p>';
+                await loadMessageHistory(currentConversationId);
+                subscribeToChat(currentConversationId);
+                
+                // Переключаемся на экран комнаты чата
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById('chatRoomScreen').classList.add('active');
+                
+            } catch (error) {
+                console.error('Ошибка открытия чата:', error);
+                alert('Ошибка при открытии чата');
+            }
+        };
+
+        window.closeChatRoom = function() {
+            // Возвращаемся к списку чатов
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('chatScreen').classList.add('active');
+            
+            if (currentChannel) {
+                currentChannel.unbind_all();
+                currentChannel.unsubscribe();
+            }
+            
+            updateChatList();
+        };
+
+        window.openChatUserProfile = function() {
+            if (currentOtherUserId) {
+                openUserProfile(currentOtherUserId);
             }
         };
 
@@ -2838,7 +3116,8 @@
                 `;
             })).then(html => html.join(''));
             
-            document.getElementById('posts').innerHTML = postsHtml;
+            document.getElementById('posts').innerHTML = postsHtml || 
+                '<p style="opacity:0.5; text-align:center;">Нет постов</p>';
         }
 
         async function updateProfileUI(userId = null) {
@@ -2874,7 +3153,7 @@
                 messageBtn.style.display = 'block';
                 subscribeBtn.style.display = 'block';
                 
-                messageBtn.onclick = () => openConversation(user.id);
+                messageBtn.onclick = () => openChatRoom(user.id);
                 
                 const isSubscribed = await checkIfSubscribed(getCurrentUser().id, user.id);
                 subscribeBtn.textContent = isSubscribed ? '✓ Подписан' : 'Подписаться';
@@ -2923,50 +3202,15 @@
                         <div class="user-nick">@${user.get('nickname') || ''}</div>
                         <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                     </div>
-                    <div class="user-actions">
-                        <button class="user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">
-                            <svg viewBox="0 0 24 24" width="18" height="18">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                            </svg>
-                        </button>
-                    </div>
+                    <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
                 </div>
             `).join('');
             
             document.getElementById('searchResults').innerHTML = html;
-        }
-
-        async function updateChatList() {
-            const conversations = await getUserConversations();
-            
-            let filtered = conversations;
-            if (currentChatFilter === 'requests') {
-                filtered = [];
-            }
-            
-            const html = await Promise.all(filtered.map(async c => {
-                const user = c.otherUser;
-                await user.fetch();
-                
-                return `
-                    <div class="chat-item" onclick="openConversation('${user.id}')">
-                        <div class="chat-avatar ${getAvatarClass(user)}" 
-                             style="${getAvatarStyle(user)}"></div>
-                        <div class="chat-info">
-                            <div class="chat-name-row">
-                                <span class="chat-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                                ${c.unreadCount > 0 ? 
-                                    `<span class="unread-badge">${c.unreadCount}</span>` : ''}
-                            </div>
-                            <div class="chat-preview">${c.lastMessage}</div>
-                            <div class="chat-time">${formatTime(c.lastMessageTime)}</div>
-                        </div>
-                    </div>
-                `;
-            })).then(html => html.join(''));
-            
-            document.getElementById('chatList').innerHTML = html || 
-                '<p style="opacity:0.5; text-align:center;">Нет чатов</p>';
         }
 
         // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
@@ -2977,92 +3221,6 @@
         window.openUserProfile = async function(userId) {
             await updateProfileUI(userId);
             navigateTo('profileScreen', document.querySelectorAll('.nav-item')[4]);
-        };
-
-        window.openConversation = async function(otherUserId) {
-            try {
-                // Проверяем подписку
-                const isSubscribed = await checkIfSubscribed(otherUserId, getCurrentUser().id);
-                
-                if (!isSubscribed) {
-                    const otherUser = await new Parse.Query('_User').get(otherUserId);
-                    await addMessageToRequests('', otherUser, getCurrentUser().id);
-                    alert('Этот пользователь не подписан на вас. Сообщение будет отправлено в запросы.');
-                    return;
-                }
-                
-                const conversation = await getOrCreateConversation(otherUserId);
-                if (!conversation) {
-                    alert('Не удалось создать чат');
-                    return;
-                }
-                
-                currentConversationId = conversation.id;
-                currentOtherUserId = otherUserId;
-                
-                const otherUser = await new Parse.Query('_User').get(otherUserId);
-                
-                // Обновляем UI
-                document.getElementById('chatAvatar').className = 
-                    `chat-avatar-large ${getAvatarClass(otherUser)}`;
-                const avatarStyle = getAvatarStyle(otherUser);
-                if (avatarStyle) {
-                    document.getElementById('chatAvatar').style.cssText = avatarStyle;
-                }
-                
-                document.getElementById('chatName').textContent = 
-                    `${otherUser.get('firstName')} ${otherUser.get('lastName')}`;
-                document.getElementById('chatStatus').textContent = 
-                    otherUser.get('isOnline') ? 'Онлайн' : 'Офлайн';
-                document.getElementById('chatOnlineDot').className = 
-                    `online-dot ${otherUser.get('isOnline') ? 'online' : 'offline'}`;
-                
-                // Показываем чат
-                document.getElementById('chatList').style.display = 'none';
-                document.getElementById('chatCategories').style.display = 'none';
-                document.getElementById('chatHeader').style.display = 'flex';
-                document.getElementById('chatMessages').style.display = 'flex';
-                document.getElementById('chatInputArea').style.display = 'flex';
-                
-                // Загружаем сообщения
-                document.getElementById('chatMessages').innerHTML = 
-                    '<p style="opacity:0.5; text-align:center;">Загрузка...</p>';
-                await loadMessageHistory(currentConversationId);
-                subscribeToChat(currentConversationId);
-                
-                navigateTo('chatScreen', document.querySelectorAll('.nav-item')[3]);
-            } catch (error) {
-                console.error('Ошибка открытия чата:', error);
-                alert('Ошибка при открытии чата');
-            }
-        };
-
-        window.backToChatList = function() {
-            document.getElementById('chatList').style.display = 'flex';
-            document.getElementById('chatCategories').style.display = 'flex';
-            document.getElementById('chatHeader').style.display = 'none';
-            document.getElementById('chatMessages').style.display = 'none';
-            document.getElementById('chatInputArea').style.display = 'none';
-            
-            if (currentChannel) {
-                currentChannel.unbind_all();
-                currentChannel.unsubscribe();
-            }
-            
-            updateChatList();
-        };
-
-        window.openChatUserProfile = function() {
-            if (currentOtherUserId) {
-                openUserProfile(currentOtherUserId);
-            }
-        };
-
-        window.filterChats = function(filter, element) {
-            document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
-            element.classList.add('active');
-            currentChatFilter = filter;
-            updateChatList();
         };
 
         window.showPosts = function() {
@@ -3086,7 +3244,7 @@
                         <div class="subscription-nick">@${user.get('nickname') || ''}</div>
                         <div class="subscription-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                     </div>
-                    <button class="subscription-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">
+                    <button class="subscription-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
                         <svg viewBox="0 0 24 24" width="18" height="18">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                         </svg>
@@ -3388,7 +3546,7 @@
                         <div class="user-nick">@${user.get('nickname') || ''}</div>
                         <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                     </div>
-                    <button class="user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">
+                    <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
                         <svg viewBox="0 0 24 24" width="18" height="18">
                             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                         </svg>
@@ -3399,8 +3557,9 @@
             document.getElementById('searchResults').innerHTML = html;
         });
 
-        document.getElementById('sendBtn').addEventListener('click', async function() {
-            const input = document.getElementById('chatInput');
+        // Обработчик отправки сообщения в комнате чата
+        document.getElementById('chatRoomSendBtn').addEventListener('click', async function() {
+            const input = document.getElementById('chatRoomInput');
             const text = input.value.trim();
             
             if (!text || !currentConversationId || !currentOtherUserId) return;
@@ -3413,6 +3572,7 @@
                 await addMessageToRequests(text, getCurrentUser(), currentOtherUserId);
                 alert('Пользователь не подписан на вас. Сообщение отправлено в запросы.');
                 input.value = '';
+                closeChatRoom();
                 return;
             }
             
@@ -3435,9 +3595,9 @@
             }
         });
 
-        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+        document.getElementById('chatRoomInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                document.getElementById('sendBtn').click();
+                document.getElementById('chatRoomSendBtn').click();
             }
         });
 
