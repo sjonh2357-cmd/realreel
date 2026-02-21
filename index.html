@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал · всё работает</title>
+    <title>RealReel · финал · чат как в Instagram</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -429,7 +429,7 @@
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             border: none;
             border-radius: 30px;
-            padding: 8px 16px;
+            padding: 8px 20px;
             color: white;
             font-weight: 500;
             font-size: 14px;
@@ -495,6 +495,10 @@
             border: none;
             background: #f0f0f0;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
         }
         .user-btn.chat {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
@@ -505,7 +509,7 @@
             color: white;
         }
 
-        /* ===== ЧАТ ===== */
+        /* ===== ЧАТ КАК В INSTAGRAM ===== */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -526,6 +530,9 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             cursor: pointer;
         }
+        .chat-item:hover {
+            background: #f5f5f5;
+        }
         .chat-avatar {
             width: 48px;
             height: 48px;
@@ -540,6 +547,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            margin-bottom: 4px;
         }
         .chat-name {
             font-weight: 600;
@@ -552,8 +560,21 @@
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             display: inline-block;
         }
-        .chat-preview {
+        .chat-preview-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-size: 13px;
+            color: #999;
+        }
+        .chat-preview {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .chat-time {
+            font-size: 11px;
             color: #999;
         }
 
@@ -619,9 +640,13 @@
         .message {
             display: flex;
             max-width: 80%;
+            position: relative;
         }
         .message.own {
             align-self: flex-end;
+        }
+        .message-content {
+            position: relative;
         }
         .message-bubble {
             padding: 10px 14px;
@@ -634,6 +659,36 @@
             color: white;
             border-radius: 20px 20px 8px 20px;
         }
+        .message-time {
+            font-size: 10px;
+            color: #999;
+            margin-top: 2px;
+            text-align: right;
+        }
+        .message.own .message-time {
+            color: #ccc;
+        }
+        .message-delete {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background: #ff4444;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .message:hover .message-delete {
+            opacity: 1;
+        }
+
         .chat-input-area {
             display: flex;
             gap: 8px;
@@ -696,7 +751,7 @@
             height: 18px;
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            display: ${user => user.get('emailVerified') ? 'inline-block' : 'none'};
+            display: inline-block;
         }
         .profile-nick {
             color: #6aa9ff;
@@ -764,9 +819,9 @@
             margin-top: auto;
         }
         .settings-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
             background: #f0f0f0;
             display: flex;
             align-items: center;
@@ -774,15 +829,15 @@
             cursor: pointer;
         }
         .settings-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             stroke: #555;
             fill: none;
         }
         .logout-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
             background: #ffeeee;
             display: flex;
             align-items: center;
@@ -790,10 +845,58 @@
             cursor: pointer;
         }
         .logout-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             stroke: #ff4444;
             fill: none;
+        }
+
+        .edit-profile-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 200;
+            display: none;
+        }
+        .edit-profile-modal.active {
+            display: block;
+        }
+        .edit-profile-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .edit-profile-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+        .edit-profile-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .edit-profile-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .edit-profile-btn.save {
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            color: white;
+        }
+        .edit-profile-btn.cancel {
+            background: #f0f0f0;
         }
 
         .hidden {
@@ -841,6 +944,18 @@
             <div class="modal-actions">
                 <button class="modal-btn publish" id="publishPostBtn">Опубликовать</button>
                 <button class="modal-btn cancel" id="cancelPostBtn">Отмена</button>
+            </div>
+        </div>
+
+        <!-- Модалка редактирования профиля -->
+        <div class="edit-profile-modal" id="editProfileModal">
+            <div class="edit-profile-title">Редактировать профиль</div>
+            <input type="text" class="edit-profile-input" id="editFirstName" placeholder="Имя">
+            <input type="text" class="edit-profile-input" id="editLastName" placeholder="Фамилия">
+            <input type="text" class="edit-profile-input" id="editNickname" placeholder="Никнейм">
+            <div class="edit-profile-actions">
+                <button class="edit-profile-btn save" id="saveProfileBtn">Сохранить</button>
+                <button class="edit-profile-btn cancel" id="cancelEditBtn">Отмена</button>
             </div>
         </div>
 
@@ -982,10 +1097,20 @@
         }
 
         function getAvatarClass(user) {
+            if (user.get('avatarUrl')) {
+                return '';
+            }
             if (user.get('avatarClass')) {
                 return user.get('avatarClass');
             }
             return 'avatar-default';
+        }
+
+        function getAvatarStyle(user) {
+            if (user.get('avatarUrl')) {
+                return `background-image: url('${user.get('avatarUrl')}');`;
+            }
+            return '';
         }
 
         async function signUp(firstName, lastName, nickname, email, password) {
@@ -1030,6 +1155,33 @@
             user.set('isOnline', isOnline);
             user.set('lastSeen', new Date());
             await user.save();
+        }
+
+        async function uploadAvatar(file) {
+            try {
+                const parseFile = new Parse.File('avatar.jpg', file);
+                await parseFile.save();
+                const user = getCurrentUser();
+                user.set('avatarUrl', parseFile.url());
+                user.set('avatarClass', '');
+                await user.save();
+                return { success: true, url: parseFile.url() };
+            } catch (error) {
+                return { success: false, message: 'Ошибка загрузки' };
+            }
+        }
+
+        async function updateProfile(firstName, lastName, nickname) {
+            try {
+                const user = getCurrentUser();
+                user.set('firstName', firstName);
+                user.set('lastName', lastName);
+                user.set('nickname', nickname);
+                await user.save();
+                return { success: true };
+            } catch (error) {
+                return { success: false };
+            }
         }
 
         async function createPost(text, imageFile = null) {
@@ -1144,11 +1296,29 @@
             query.descending('updatedAt');
             query.include('participants');
             const conversations = await query.find();
-            return conversations.map(conv => {
+            
+            const conversationsWithLastMessage = await Promise.all(conversations.map(async conv => {
                 const participants = conv.get('participants');
                 const otherUser = participants.find(p => p.id !== currentUser.id);
-                return { conversation: conv, otherUser };
-            }).filter(c => c.otherUser);
+                if (!otherUser) return null;
+                await otherUser.fetch();
+                
+                const lastMessageQuery = new Parse.Query('Message');
+                lastMessageQuery.equalTo('conversation', conv);
+                lastMessageQuery.descending('createdAt');
+                lastMessageQuery.limit(1);
+                const lastMessage = await lastMessageQuery.first();
+                
+                return {
+                    conversation: conv,
+                    otherUser: otherUser,
+                    lastMessage: lastMessage ? lastMessage.get('text') : 'Начните общение',
+                    lastMessageTime: lastMessage ? lastMessage.createdAt : null,
+                    lastMessageId: lastMessage ? lastMessage.id : null
+                };
+            }));
+            
+            return conversationsWithLastMessage.filter(c => c !== null);
         }
 
         function subscribeToChat(conversationId) {
@@ -1160,15 +1330,25 @@
             currentChannel = pusher.subscribe(channelName);
             currentChannel.bind('client-new-message', (data) => {
                 const isOwn = data.senderId === getCurrentUser().id;
-                addMessageToChat(data.text, isOwn);
+                addMessageToChat(data.text, isOwn, data.timestamp, data.messageId);
             });
         }
 
-        function addMessageToChat(text, isOwn) {
+        function addMessageToChat(text, isOwn, timestamp, messageId) {
             const messages = document.getElementById('chatMessages');
             const div = document.createElement('div');
             div.className = `message ${isOwn ? 'own' : ''}`;
-            div.innerHTML = `<div class="message-bubble">${text}</div>`;
+            div.setAttribute('data-message-id', messageId || '');
+            
+            const time = timestamp ? new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'сейчас';
+            
+            div.innerHTML = `
+                <div class="message-content">
+                    <div class="message-bubble">${text}</div>
+                    <div class="message-time">${time}</div>
+                    ${isOwn ? `<div class="message-delete" onclick="deleteMessage('${messageId}')">✕</div>` : ''}
+                </div>
+            `;
             messages.appendChild(div);
             messages.scrollTop = messages.scrollHeight;
         }
@@ -1182,7 +1362,7 @@
             messages.forEach(msg => {
                 const sender = msg.get('sender');
                 const isOwn = sender.id === getCurrentUser().id;
-                addMessageToChat(msg.get('text'), isOwn);
+                addMessageToChat(msg.get('text'), isOwn, msg.createdAt, msg.id);
             });
         }
 
@@ -1194,9 +1374,31 @@
                 message.set('sender', getCurrentUser());
                 message.set('conversation', { __type: 'Pointer', className: 'Conversation', objectId: conversationId });
                 await message.save();
-                return true;
+                
+                const conversation = new Parse.Object('Conversation');
+                conversation.id = conversationId;
+                await conversation.save(null, { useMasterKey: true });
+                
+                return { success: true, messageId: message.id };
             } catch (error) {
-                return false;
+                return { success: false };
+            }
+        }
+
+        async function deleteMessage(messageId) {
+            if (!messageId || !confirm('Удалить сообщение?')) return;
+            try {
+                const Message = Parse.Object.extend('Message');
+                const query = new Parse.Query(Message);
+                const message = await query.get(messageId);
+                const sender = message.get('sender');
+                if (sender.id === getCurrentUser().id) {
+                    await message.destroy();
+                    const msgElement = document.querySelector(`[data-message-id="${messageId}"]`);
+                    if (msgElement) msgElement.remove();
+                }
+            } catch (error) {
+                console.error('Ошибка удаления:', error);
             }
         }
 
@@ -1309,11 +1511,12 @@
                 const comments = post.get('comments') || [];
                 const isAuthor = currentUser && author.id === currentUser.id;
                 const avatarClass = getAvatarClass(author);
+                const avatarStyle = getAvatarStyle(author);
                 
                 return `
                     <div class="post-item" data-post-id="${post.id}">
                         <div class="post-header">
-                            <div class="post-avatar ${avatarClass}" onclick="openUserProfile('${author.id}')"></div>
+                            <div class="post-avatar ${avatarClass}" style="${avatarStyle}" onclick="openUserProfile('${author.id}')"></div>
                             <div class="post-author-info">
                                 <div class="post-author-row">
                                     <span class="post-author" onclick="openUserProfile('${author.id}')">${author.get('firstName')} ${author.get('lastName')}</span>
@@ -1372,9 +1575,14 @@
             
             document.getElementById('profileFullName').textContent = `${user.get('firstName')} ${user.get('lastName')}`;
             document.getElementById('profileNick').textContent = `@${user.get('nickname')}`;
-            document.getElementById('profileAvatar').className = `profile-avatar ${getAvatarClass(user)}`;
             
-            // Показываем звезду только верифицированным
+            const avatarClass = getAvatarClass(user);
+            const avatarStyle = getAvatarStyle(user);
+            document.getElementById('profileAvatar').className = `profile-avatar ${avatarClass}`;
+            if (avatarStyle) {
+                document.getElementById('profileAvatar').style.cssText = avatarStyle;
+            }
+            
             const starElement = document.getElementById('profileStar');
             if (user.get('emailVerified')) {
                 starElement.style.display = 'inline-block';
@@ -1387,16 +1595,13 @@
             document.getElementById('profileFollowersCount').textContent = await getFollowersCount(user.id);
             document.getElementById('profileFollowingCount').textContent = await getFollowingCount(user.id);
             
-            // Настройка кнопок в профиле
             const messageBtn = document.getElementById('profileMessageBtn');
             const subscribeBtn = document.getElementById('profileSubscribeBtn');
             
             if (user.id === getCurrentUser().id) {
-                // Это мой профиль
                 messageBtn.style.display = 'none';
                 subscribeBtn.style.display = 'none';
             } else {
-                // Чужой профиль
                 messageBtn.style.display = 'block';
                 subscribeBtn.style.display = 'block';
                 
@@ -1431,23 +1636,27 @@
 
         async function updateSearchResults() {
             const users = await searchUsers('');
-            const html = users.map(user => `
-                <div class="user-card" onclick="openUserProfile('${user.id}')">
-                    <div class="user-avatar ${getAvatarClass(user)}"></div>
-                    <div class="user-info">
-                        <div class="user-name-row">
-                            <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                            ${user.get('emailVerified') ? '<span class="user-star"></span>' : ''}
+            const html = users.map(user => {
+                const avatarClass = getAvatarClass(user);
+                const avatarStyle = getAvatarStyle(user);
+                return `
+                    <div class="user-card" onclick="openUserProfile('${user.id}')">
+                        <div class="user-avatar ${avatarClass}" style="${avatarStyle}"></div>
+                        <div class="user-info">
+                            <div class="user-name-row">
+                                <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
+                                ${user.get('emailVerified') ? '<span class="user-star"></span>' : ''}
+                            </div>
+                            <div class="user-nick">@${user.get('nickname')}</div>
+                            <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                         </div>
-                        <div class="user-nick">@${user.get('nickname')}</div>
-                        <div class="user-status">${user.get('isOnline') ? '🟢 Онлайн' : '🔴 Офлайн'}</div>
+                        <div class="user-actions">
+                            <button class="user-btn chat" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
+                            <button class="user-btn subscribe" onclick="event.stopPropagation(); subscribeToUser('${user.id}', this)">+</button>
+                        </div>
                     </div>
-                    <div class="user-actions">
-                        <button class="user-btn chat" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
-                        <button class="user-btn subscribe" onclick="event.stopPropagation(); subscribeToUser('${user.id}', this)">+</button>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
             document.getElementById('searchResults').innerHTML = html;
         }
 
@@ -1456,15 +1665,22 @@
             const html = await Promise.all(conversations.map(async c => {
                 const user = c.otherUser;
                 await user.fetch();
+                const avatarClass = getAvatarClass(user);
+                const avatarStyle = getAvatarStyle(user);
+                const time = c.lastMessageTime ? formatTime(c.lastMessageTime) : '';
+                
                 return `
                     <div class="chat-item" onclick="openConversation('${user.id}')">
-                        <div class="chat-avatar ${getAvatarClass(user)}"></div>
+                        <div class="chat-avatar ${avatarClass}" style="${avatarStyle}"></div>
                         <div class="chat-info">
                             <div class="chat-name-row">
                                 <span class="chat-name">${user.get('firstName')} ${user.get('lastName')}</span>
                                 ${user.get('emailVerified') ? '<span class="chat-star"></span>' : ''}
                             </div>
-                            <div class="chat-preview">Нажмите чтобы открыть чат</div>
+                            <div class="chat-preview-row">
+                                <span class="chat-preview">${c.lastMessage}</span>
+                                <span class="chat-time">${time}</span>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -1539,7 +1755,14 @@
             document.getElementById('chatInputArea').style.display = 'flex';
             
             document.getElementById('chatName').textContent = `${user.get('firstName')} ${user.get('lastName')}`;
-            document.getElementById('chatAvatar').className = `chat-avatar-large ${getAvatarClass(user)}`;
+            
+            const avatarClass = getAvatarClass(user);
+            const avatarStyle = getAvatarStyle(user);
+            document.getElementById('chatAvatar').className = `chat-avatar-large ${avatarClass}`;
+            if (avatarStyle) {
+                document.getElementById('chatAvatar').style.cssText = avatarStyle;
+            }
+            
             document.getElementById('chatOnlineDot').className = `online-dot ${user.get('isOnline') ? 'online' : 'offline'}`;
             document.getElementById('chatStatus').textContent = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
             
@@ -1560,6 +1783,7 @@
                 currentChannel.unsubscribe();
                 currentChannel = null;
             }
+            updateChatList();
         };
 
         window.showPosts = function() {
@@ -1588,6 +1812,10 @@
             }
         };
 
+        window.deleteMessage = async function(messageId) {
+            await deleteMessage(messageId);
+        };
+
         function formatDate(date) {
             const d = new Date(date);
             const diff = Math.floor((new Date() - d) / 1000);
@@ -1595,6 +1823,16 @@
             if (diff < 3600) return `${Math.floor(diff / 60)} мин назад`;
             if (diff < 86400) return `${Math.floor(diff / 3600)} ч назад`;
             return `${Math.floor(diff / 86400)} дн назад`;
+        }
+
+        function formatTime(date) {
+            const d = new Date(date);
+            const now = new Date();
+            const diff = Math.floor((now - d) / 1000);
+            if (diff < 60) return 'сейчас';
+            if (diff < 3600) return `${Math.floor(diff / 60)} мин`;
+            if (diff < 86400) return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            return d.toLocaleDateString();
         }
 
         const authScreen = document.getElementById('authScreen');
@@ -1621,8 +1859,16 @@
         const sendBtn = document.getElementById('sendBtn');
         const chatInput = document.getElementById('chatInput');
         const editProfileBtn = document.getElementById('editProfileBtn');
+        const editProfileModal = document.getElementById('editProfileModal');
+        const editFirstName = document.getElementById('editFirstName');
+        const editLastName = document.getElementById('editLastName');
+        const editNickname = document.getElementById('editNickname');
+        const saveProfileBtn = document.getElementById('saveProfileBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
+        const avatarUpload = document.getElementById('avatarUpload');
+        const avatarFileInput = document.getElementById('avatarFileInput');
 
         let isLoginMode = false;
 
@@ -1715,25 +1961,77 @@
             addPostModal.classList.remove('active');
         });
 
+        editProfileBtn.addEventListener('click', () => {
+            const user = getCurrentUser();
+            editFirstName.value = user.get('firstName') || '';
+            editLastName.value = user.get('lastName') || '';
+            editNickname.value = user.get('nickname') || '';
+            editProfileModal.classList.add('active');
+        });
+
+        cancelEditBtn.addEventListener('click', () => {
+            editProfileModal.classList.remove('active');
+        });
+
+        saveProfileBtn.addEventListener('click', async () => {
+            const firstName = editFirstName.value.trim();
+            const lastName = editLastName.value.trim();
+            const nickname = editNickname.value.trim();
+            if (!firstName || !lastName || !nickname) {
+                alert('Заполните все поля');
+                return;
+            }
+            const result = await updateProfile(firstName, lastName, nickname);
+            if (result.success) {
+                editProfileModal.classList.remove('active');
+                await updateProfileUI();
+                await updateHomeFeed();
+                await updateChatList();
+            } else {
+                alert('Ошибка сохранения');
+            }
+        });
+
+        avatarUpload?.addEventListener('click', () => {
+            avatarFileInput?.click();
+        });
+
+        avatarFileInput?.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const result = await uploadAvatar(file);
+            if (result.success) {
+                await updateProfileUI();
+                await updateHomeFeed();
+                await updateChatList();
+            } else {
+                alert(result.message);
+            }
+        });
+
         searchBtn.addEventListener('click', async () => {
             const users = await searchUsers(searchInput.value);
-            const html = users.map(user => `
-                <div class="user-card" onclick="openUserProfile('${user.id}')">
-                    <div class="user-avatar ${getAvatarClass(user)}"></div>
-                    <div class="user-info">
-                        <div class="user-name-row">
-                            <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                            ${user.get('emailVerified') ? '<span class="user-star"></span>' : ''}
+            const html = users.map(user => {
+                const avatarClass = getAvatarClass(user);
+                const avatarStyle = getAvatarStyle(user);
+                return `
+                    <div class="user-card" onclick="openUserProfile('${user.id}')">
+                        <div class="user-avatar ${avatarClass}" style="${avatarStyle}"></div>
+                        <div class="user-info">
+                            <div class="user-name-row">
+                                <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
+                                ${user.get('emailVerified') ? '<span class="user-star"></span>' : ''}
+                            </div>
+                            <div class="user-nick">@${user.get('nickname')}</div>
+                            <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                         </div>
-                        <div class="user-nick">@${user.get('nickname')}</div>
-                        <div class="user-status">${user.get('isOnline') ? '🟢 Онлайн' : '🔴 Офлайн'}</div>
+                        <div class="user-actions">
+                            <button class="user-btn chat" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
+                            <button class="user-btn subscribe" onclick="event.stopPropagation(); subscribeToUser('${user.id}', this)">+</button>
+                        </div>
                     </div>
-                    <div class="user-actions">
-                        <button class="user-btn chat" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
-                        <button class="user-btn subscribe" onclick="event.stopPropagation(); subscribeToUser('${user.id}', this)">+</button>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
             document.getElementById('searchResults').innerHTML = html;
         });
 
@@ -1747,25 +2045,25 @@
             const text = chatInput.value.trim();
             if (!text || !currentConversationId) return;
             const currentUser = getCurrentUser();
-            const messageData = {
-                text: text,
-                senderId: currentUser.id,
-                timestamp: new Date().toISOString()
-            };
-            if (currentChannel) {
-                currentChannel.trigger('client-new-message', messageData);
+            const result = await sendMessageToServer(text, currentConversationId);
+            if (result.success) {
+                const messageData = {
+                    text: text,
+                    senderId: currentUser.id,
+                    timestamp: new Date().toISOString(),
+                    messageId: result.messageId
+                };
+                if (currentChannel) {
+                    currentChannel.trigger('client-new-message', messageData);
+                }
+                addMessageToChat(text, true, messageData.timestamp, result.messageId);
+                chatInput.value = '';
+                await updateChatList();
             }
-            addMessageToChat(text, true);
-            chatInput.value = '';
-            await sendMessageToServer(text, currentConversationId);
         });
 
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendBtn.click();
-        });
-
-        editProfileBtn.addEventListener('click', () => {
-            alert('Редактирование профиля');
         });
 
         if (getCurrentUser()) {
