@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал · сториз · сетка</title>
+    <title>RealReel · сториз · подписки</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -113,7 +113,11 @@
             border-radius: 32px;
             background-size: cover;
             background-position: center;
-            border: 2px solid #6aa9ff;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .story-avatar.has-story {
+            border-color: #6aa9ff;
         }
         .story-add {
             position: absolute;
@@ -135,6 +139,160 @@
             font-size: 12px;
             font-weight: 500;
             color: #333;
+        }
+
+        /* ===== ПРОСМОТР СТОРИС ===== */
+        .story-viewer {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+        .story-viewer.active {
+            display: flex;
+        }
+        .story-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+        .story-header-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        .story-header-name {
+            font-weight: 600;
+        }
+        .story-close {
+            margin-left: auto;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .story-image {
+            flex: 1;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 16px;
+        }
+        .story-progress {
+            padding: 16px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #6aa9ff;
+            width: 0%;
+            transition: width 5s linear;
+        }
+
+        /* ===== МОДАЛКА ПОДПИСОК ===== */
+        .subscriptions-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            max-height: 500px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 200;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .subscriptions-modal.active {
+            display: flex;
+        }
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .modal-close {
+            cursor: pointer;
+            font-size: 20px;
+        }
+        .modal-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .modal-user-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .modal-user-item:hover {
+            background: #f5f5f5;
+        }
+        .modal-user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background-size: cover;
+            background-position: center;
+        }
+        .modal-user-info {
+            flex: 1;
+        }
+        .modal-user-name {
+            font-weight: 600;
+            color: #333;
+        }
+        .modal-user-nick {
+            font-size: 12px;
+            color: #6aa9ff;
+        }
+        .modal-user-status {
+            font-size: 11px;
+            color: #999;
+        }
+        .modal-user-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* ===== АВТОРИЗАЦИЯ ===== */
@@ -859,7 +1017,6 @@
             color: #333;
         }
 
-        /* ===== СЕТКА ПОСТОВ В ПРОФИЛЕ (КАК В INSTAGRAM) ===== */
         .profile-posts-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1036,6 +1193,30 @@
             </div>
         </div>
 
+        <!-- Просмотр сториз -->
+        <div class="story-viewer" id="storyViewer">
+            <div class="story-header">
+                <div class="story-header-avatar" id="storyAvatar"></div>
+                <div class="story-header-name" id="storyName"></div>
+                <div class="story-close" onclick="closeStory()">✕</div>
+            </div>
+            <div class="story-image" id="storyImage"></div>
+            <div class="story-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="storyProgress"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модалка подписок -->
+        <div class="subscriptions-modal" id="subscriptionsModal">
+            <div class="modal-header">
+                <h3 id="subscriptionsTitle">Подписчики</h3>
+                <span class="modal-close" onclick="closeSubscriptions()">✕</span>
+            </div>
+            <div class="modal-list" id="subscriptionsList"></div>
+        </div>
+
         <div class="content" id="content">
             <!-- Авторизация -->
             <div class="screen active" id="authScreen">
@@ -1121,11 +1302,11 @@
                             <div class="stat-value" id="profilePostsCount">0</div>
                             <div class="stat-label">посты</div>
                         </div>
-                        <div class="stat-item" onclick="showFollowers()">
+                        <div class="stat-item" onclick="showSubscriptions('followers')">
                             <div class="stat-value" id="profileFollowersCount">0</div>
                             <div class="stat-label">подписчики</div>
                         </div>
-                        <div class="stat-item" onclick="showFollowing()">
+                        <div class="stat-item" onclick="showSubscriptions('following')">
                             <div class="stat-value" id="profileFollowingCount">0</div>
                             <div class="stat-label">подписки</div>
                         </div>
@@ -1136,7 +1317,6 @@
                         <button class="profile-action-btn secondary" id="profileSubscribeBtn">Подписаться</button>
                     </div>
 
-                    <!-- Сетка постов в профиле -->
                     <div class="profile-posts-grid" id="userPostsGrid"></div>
 
                     <div class="settings-row">
@@ -1169,7 +1349,8 @@
         let currentConversationId = null;
         let currentOtherUserId = null;
         let currentProfileUserId = null;
-        let stories = [];
+        let currentStoryUser = null;
+        let storyTimer = null;
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -1328,6 +1509,18 @@
                     uniqueUsers.add(author.id);
                     return true;
                 });
+            } catch {
+                return [];
+            }
+        }
+
+        async function getUserStories(userId) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                query.equalTo('author', { __type: 'Pointer', className: '_User', objectId: userId });
+                query.descending('createdAt');
+                return await query.find();
             } catch {
                 return [];
             }
@@ -1625,27 +1818,31 @@
             const stories = await getStories();
             
             // Сториз
+            const userStories = await getUserStories(currentUser.id);
+            const hasStory = userStories.length > 0;
+            
             const currentUserStory = `
                 <div class="story-item" onclick="addStory()">
-                    <div class="story-avatar ${getAvatarClass(currentUser)}" style="${getAvatarStyle(currentUser)}"></div>
+                    <div class="story-avatar ${getAvatarClass(currentUser)} ${hasStory ? 'has-story' : ''}" style="${getAvatarStyle(currentUser)}"></div>
                     <div class="story-add">+</div>
                     <span class="story-name">Ваша история</span>
                 </div>
             `;
             
-            const storiesHtml = stories.map(s => {
+            const storiesHtml = await Promise.all(stories.map(async s => {
                 const author = s.get('author');
                 const avatarClass = getAvatarClass(author);
                 const avatarStyle = getAvatarStyle(author);
+                const userStories = await getUserStories(author.id);
                 return `
                     <div class="story-item" onclick="viewStory('${author.id}')">
-                        <div class="story-avatar ${avatarClass}" style="${avatarStyle}"></div>
+                        <div class="story-avatar ${avatarClass} ${userStories.length > 0 ? 'has-story' : ''}" style="${avatarStyle}"></div>
                         <span class="story-name">${author.get('firstName')}</span>
                     </div>
                 `;
-            }).join('');
+            }));
             
-            document.getElementById('storiesRow').innerHTML = currentUserStory + storiesHtml;
+            document.getElementById('storiesRow').innerHTML = currentUserStory + storiesHtml.join('');
 
             // Посты
             const postsHtml = await Promise.all(posts.map(async (post) => {
@@ -1664,11 +1861,10 @@
                             <div class="post-avatar ${avatarClass}" style="${avatarStyle}" onclick="openUserProfile('${author.id}')"></div>
                             <div class="post-author-info">
                                 <span class="post-author" onclick="openUserProfile('${author.id}')">${author.get('firstName')} ${author.get('lastName')}</span>
-                                <span class="post-nick">@${nickname}</span>
+                                <span class="post-nick">${nickname}</span>
                             </div>
                             ${isAuthor ? `
                                 <div class="post-menu-area" onclick="togglePostMenu('${post.id}', event)">
-                                    <span class="post-date">${dateStr}</span>
                                     <button class="post-menu-btn">•••</button>
                                 </div>
                                 <div class="post-menu" id="menu-${post.id}">
@@ -1681,9 +1877,7 @@
                                         Удалить
                                     </div>
                                 </div>
-                            ` : `
-                                <span class="post-date">${dateStr}</span>
-                            `}
+                            ` : ''}
                         </div>
                         <div class="post-text">${post.get('text')}</div>
                         ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
@@ -1775,7 +1969,6 @@
                 };
             }
             
-            // Сетка постов
             const postsHtml = posts.map(post => {
                 if (post.get('image')) {
                     return `
@@ -1814,7 +2007,7 @@
                         <div class="user-info">
                             <div class="user-name-row">
                                 <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                                <span class="user-nick">@${nickname}</span>
+                                <span class="user-nick">${nickname}</span>
                             </div>
                             <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                         </div>
@@ -1876,8 +2069,109 @@
             input.click();
         };
 
-        window.viewStory = function(userId) {
-            alert(`История пользователя ${userId}`);
+        window.viewStory = async function(userId) {
+            const stories = await getUserStories(userId);
+            if (stories.length === 0) return;
+            
+            const user = await new Parse.Query('_User').get(userId);
+            currentStoryUser = { user, stories, index: 0 };
+            
+            showStory(0);
+        };
+
+        function showStory(index) {
+            if (!currentStoryUser) return;
+            
+            const story = currentStoryUser.stories[index];
+            const user = currentStoryUser.user;
+            
+            document.getElementById('storyAvatar').style.backgroundImage = getAvatarStyle(user) || `url('${getAvatarClass(user)}')`;
+            document.getElementById('storyName').textContent = `${user.get('firstName')} ${user.get('lastName')}`;
+            document.getElementById('storyImage').style.backgroundImage = `url('${story.get('image').url()}')`;
+            document.getElementById('storyViewer').classList.add('active');
+            
+            const progress = document.getElementById('storyProgress');
+            progress.style.width = '0%';
+            
+            setTimeout(() => {
+                progress.style.width = '100%';
+            }, 100);
+            
+            if (storyTimer) clearTimeout(storyTimer);
+            storyTimer = setTimeout(() => {
+                if (index + 1 < currentStoryUser.stories.length) {
+                    showStory(index + 1);
+                } else {
+                    closeStory();
+                }
+            }, 5000);
+        }
+
+        window.closeStory = function() {
+            document.getElementById('storyViewer').classList.remove('active');
+            if (storyTimer) clearTimeout(storyTimer);
+            currentStoryUser = null;
+        };
+
+        window.showSubscriptions = async function(type) {
+            const userId = currentProfileUserId || getCurrentUser().id;
+            document.getElementById('subscriptionsTitle').textContent = type === 'followers' ? 'Подписчики' : 'Подписки';
+            
+            const list = document.getElementById('subscriptionsList');
+            
+            if (type === 'followers') {
+                const followers = await getFollowers(userId);
+                const html = followers.map(user => {
+                    const firstName = user.get('firstName') || '';
+                    const lastName = user.get('lastName') || '';
+                    const nickname = user.get('nickname') || '';
+                    const avatarClass = getAvatarClass(user);
+                    const avatarStyle = getAvatarStyle(user);
+                    const status = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
+                    
+                    return `
+                        <div class="modal-user-item" onclick="openUserProfile('${user.id}')">
+                            <div class="modal-user-avatar ${avatarClass}" style="${avatarStyle}"></div>
+                            <div class="modal-user-info">
+                                <div class="modal-user-name">${firstName} ${lastName}</div>
+                                <div class="modal-user-nick">${nickname}</div>
+                                <div class="modal-user-status">${status}</div>
+                            </div>
+                            <button class="modal-user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
+                        </div>
+                    `;
+                }).join('');
+                list.innerHTML = html || '<p style="text-align:center; opacity:0.7;">Нет подписчиков</p>';
+            } else {
+                const following = await getFollowing(userId);
+                const html = following.map(user => {
+                    const firstName = user.get('firstName') || '';
+                    const lastName = user.get('lastName') || '';
+                    const nickname = user.get('nickname') || '';
+                    const avatarClass = getAvatarClass(user);
+                    const avatarStyle = getAvatarStyle(user);
+                    const status = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
+                    
+                    return `
+                        <div class="modal-user-item" onclick="openUserProfile('${user.id}')">
+                            <div class="modal-user-avatar ${avatarClass}" style="${avatarStyle}"></div>
+                            <div class="modal-user-info">
+                                <div class="modal-user-name">${firstName} ${lastName}</div>
+                                <div class="modal-user-nick">${nickname}</div>
+                                <div class="modal-user-status">${status}</div>
+                            </div>
+                            <button class="modal-user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
+                        </div>
+                    `;
+                }).join('');
+                list.innerHTML = html || '<p style="text-align:center; opacity:0.7;">Нет подписок</p>';
+            }
+            
+            document.getElementById('subscriptionsModal').classList.add('active');
+        };
+
+        window.closeSubscriptions = function() {
+            document.getElementById('subscriptionsModal').classList.remove('active');
         };
 
         window.likePostHandler = async function(postId, el) {
@@ -1918,6 +2212,7 @@
         };
 
         window.openUserProfile = async function(userId) {
+            closeSubscriptions();
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('profileScreen').classList.add('active');
             await updateProfileUI(userId);
@@ -1930,6 +2225,7 @@
         };
 
         window.openConversation = async function(userId) {
+            closeSubscriptions();
             const conversation = await getOrCreateConversation(userId);
             const user = await new Parse.Query('_User').get(userId);
             
@@ -1974,28 +2270,6 @@
 
         window.showPosts = function() {
             alert('Все посты пользователя');
-        };
-
-        window.showFollowers = async function() {
-            const userId = currentProfileUserId || getCurrentUser().id;
-            const followers = await getFollowers(userId);
-            if (followers.length === 0) {
-                alert('Нет подписчиков');
-            } else {
-                const names = followers.map(f => `${f.get('firstName')} ${f.get('lastName')}`).join('\n');
-                alert(`Подписчики:\n${names}`);
-            }
-        };
-
-        window.showFollowing = async function() {
-            const userId = currentProfileUserId || getCurrentUser().id;
-            const following = await getFollowing(userId);
-            if (following.length === 0) {
-                alert('Нет подписок');
-            } else {
-                const names = following.map(f => `${f.get('firstName')} ${f.get('lastName')}`).join('\n');
-                alert(`Подписки:\n${names}`);
-            }
         };
 
         window.deleteMessage = async function(messageId) {
@@ -2202,7 +2476,7 @@
                         <div class="user-info">
                             <div class="user-name-row">
                                 <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                                <span class="user-nick">@${nickname}</span>
+                                <span class="user-nick">${nickname}</span>
                             </div>
                             <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                         </div>
