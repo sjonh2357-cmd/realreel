@@ -93,9 +93,8 @@
             stroke: #6aa9ff;
         }
         
-        /* Кнопка + рядом с уведомлениями */
+        /* Кнопка + в стиле других иконок */
         .add-post-nav {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             width: 28px;
             height: 28px;
             border-radius: 14px;
@@ -104,22 +103,24 @@
             justify-content: center;
             cursor: pointer;
             transition: 0.3s;
+            background: transparent;
         }
         .add-post-nav svg {
-            width: 16px;
-            height: 16px;
-            stroke: white;
-            fill: white;
+            width: 20px;
+            height: 20px;
+            stroke: #555;
+            stroke-width: 1.8;
+            fill: none;
         }
-        .add-post-nav:hover {
-            transform: scale(1.1);
+        .add-post-nav:hover svg {
+            stroke: #6aa9ff;
         }
 
-        .notification-badge {
+        .notification-badge, .chat-badge {
             position: absolute;
             top: -2px;
             right: -2px;
-            width: 16px;
+            min-width: 16px;
             height: 16px;
             background: #ff4444;
             border-radius: 8px;
@@ -129,6 +130,11 @@
             align-items: center;
             justify-content: center;
             border: 2px solid white;
+            padding: 0 3px;
+        }
+
+        .chat-badge {
+            background: #ff4444;
         }
 
         .content {
@@ -157,6 +163,7 @@
             padding: 4px 0;
             flex: 1;
             transition: 0.3s;
+            position: relative;
         }
 
         .bottom-nav-item svg {
@@ -185,6 +192,25 @@
             font-size: 10px;
             margin-top: 2px;
             color: #777;
+        }
+
+        /* Бейдж для чатов в нижней навигации */
+        .nav-badge {
+            position: absolute;
+            top: 0;
+            right: 15px;
+            min-width: 18px;
+            height: 18px;
+            background: #ff4444;
+            border-radius: 9px;
+            color: white;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            padding: 0 4px;
+            font-weight: 600;
         }
 
         /* ===== УВЕДОМЛЕНИЯ ===== */
@@ -593,13 +619,17 @@
             width: 36px;
             height: 36px;
             border-radius: 18px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: #f0f0f0;
             border: none;
-            color: white;
+            color: #555;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .modal-user-btn:hover {
+            background: #6aa9ff;
+            color: white;
         }
 
         /* ===== АВТОРИЗАЦИЯ ===== */
@@ -882,11 +912,15 @@
         .comment-btn {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: #f0f0f0;
             border: none;
             border-radius: 20px;
-            color: white;
+            color: #555;
             cursor: pointer;
+        }
+        .comment-btn:hover {
+            background: #6aa9ff;
+            color: white;
         }
         .comments-list {
             display: flex;
@@ -937,14 +971,18 @@
             font-size: 14px;
         }
         .search-box button {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: #f0f0f0;
             border: none;
             border-radius: 20px;
             padding: 8px 20px;
-            color: white;
+            color: #555;
             font-weight: 500;
             font-size: 14px;
             cursor: pointer;
+        }
+        .search-box button:hover {
+            background: #6aa9ff;
+            color: white;
         }
         .search-results {
             display: flex;
@@ -1002,18 +1040,22 @@
             height: 36px;
             border-radius: 18px;
             border: none;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            color: white;
+            background: #f0f0f0;
+            color: #555;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+        .user-btn:hover {
+            background: #6aa9ff;
+            color: white;
+        }
         .user-btn svg {
             width: 18px;
             height: 18px;
             fill: none;
-            stroke: white;
+            stroke: currentColor;
         }
 
         /* ===== ЧАТ ===== */
@@ -1037,11 +1079,28 @@
             font-weight: 500;
             cursor: pointer;
             white-space: nowrap;
+            color: #555;
+        }
+        .chat-category:hover {
+            background: #e0e0e0;
         }
         .chat-category.active {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: #6aa9ff;
             color: white;
         }
+        
+        /* Бейдж для запросов */
+        .requests-badge {
+            display: inline-block;
+            background: #ff4444;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 12px;
+            margin-left: 6px;
+        }
+
         .chat-list {
             display: flex;
             flex-direction: column;
@@ -1066,6 +1125,7 @@
             border-radius: 24px;
             background-size: cover;
             background-position: center;
+            position: relative;
         }
         .chat-info {
             flex: 1;
@@ -1096,6 +1156,22 @@
             font-size: 11px;
             color: #999;
         }
+        
+        /* Индикатор непрочитанных сообщений */
+        .unread-badge {
+            background: #ff4444;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            margin-left: 8px;
+        }
 
         .chat-header {
             display: flex;
@@ -1113,6 +1189,10 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+        }
+        .back-btn:hover {
+            background: #6aa9ff;
+            color: white;
         }
         .chat-avatar-container {
             position: relative;
@@ -1176,7 +1256,7 @@
             max-width: 100%;
         }
         .message.own .message-bubble {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: #6aa9ff;
             color: white;
             border-radius: 20px 20px 8px 20px;
         }
@@ -1280,12 +1360,16 @@
         .send-btn {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: #f0f0f0;
             border: none;
             border-radius: 24px;
-            color: white;
+            color: #555;
             cursor: pointer;
             flex-shrink: 0;
+        }
+        .send-btn:hover {
+            background: #6aa9ff;
+            color: white;
         }
 
         /* ===== ПРОФИЛЬ ===== */
@@ -1369,12 +1453,18 @@
             cursor: pointer;
         }
         .profile-action-btn.primary {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: #6aa9ff;
             color: white;
+        }
+        .profile-action-btn.primary:hover {
+            background: #5a99ee;
         }
         .profile-action-btn.secondary {
             background: #f0f0f0;
             color: #333;
+        }
+        .profile-action-btn.secondary:hover {
+            background: #e0e0e0;
         }
 
         .profile-posts-grid {
@@ -1401,7 +1491,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #6aa9ff22, #9f6eff22);
+            background: #f0f0f0;
             color: #333;
             font-size: 20px;
         }
@@ -1423,6 +1513,12 @@
             justify-content: center;
             cursor: pointer;
         }
+        .settings-icon:hover {
+            background: #6aa9ff;
+        }
+        .settings-icon:hover svg {
+            stroke: white;
+        }
         .settings-icon svg {
             width: 22px;
             height: 22px;
@@ -1438,6 +1534,9 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+        }
+        .logout-icon:hover {
+            background: #ffdddd;
         }
         .logout-icon svg {
             width: 22px;
@@ -1487,7 +1586,7 @@
             cursor: pointer;
         }
         .edit-profile-btn.save {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: #6aa9ff;
             color: white;
         }
         .edit-profile-btn.cancel {
@@ -1528,11 +1627,11 @@
         <div class="top-nav">
             <div class="nav-logo">RealReel</div>
             
-            <!-- Имя пользователя ТОЛЬКО в профиле (будет показываться через JS) -->
+            <!-- Имя пользователя только в профиле -->
             <div class="profile-name-nav" id="headerProfileName" style="display: none;"></div>
             
             <div class="nav-icons" id="navIcons">
-                <!-- Кнопка + теперь здесь, рядом с уведомлениями -->
+                <!-- Кнопка + в стиле других иконок -->
                 <div class="add-post-nav" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 </div>
@@ -1682,7 +1781,11 @@
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
                     <div class="chat-categories" id="chatCategories">
-                        <div class="chat-category active" onclick="filterChats('all')">Все</div>
+                        <div class="chat-category active" onclick="filterChats('all', this)">Все</div>
+                        <div class="chat-category" onclick="filterChats('requests', this)" id="requestsTab">
+                            Запросы
+                            <span class="requests-badge" id="requestsBadge" style="display: none;">0</span>
+                        </div>
                     </div>
                     <div class="chat-list" id="chatList"></div>
 
@@ -1699,7 +1802,7 @@
                     </div>
                     <div class="chat-messages" id="chatMessages" style="display: none;"></div>
                     
-                    <!-- Панель реакций (фиксированная позиция) -->
+                    <!-- Панель реакций -->
                     <div class="reaction-panel" id="reactionPanel">
                         <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
                         <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
@@ -1780,9 +1883,10 @@
                 <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="8" y1="2" x2="8" y2="22"/><line x1="16" y1="2" x2="16" y2="22"/><line x1="2" y1="8" x2="22" y2="8"/><line x1="2" y1="16" x2="22" y2="16"/></svg>
                 <span class="nav-label">Reels</span>
             </div>
-            <div class="bottom-nav-item" onclick="navigateTo('chatScreen', this)">
+            <div class="bottom-nav-item" onclick="navigateTo('chatScreen', this)" id="chatNavItem">
                 <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 <span class="nav-label">Чаты</span>
+                <span class="nav-badge" id="chatNavBadge" style="display: none;">0</span>
             </div>
             <div class="bottom-nav-item" onclick="navigateTo('profileScreen', this)">
                 <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -1813,6 +1917,13 @@
         let storyTimer = null;
         let notifications = [];
         let currentReactionMessage = null;
+        
+        // Данные для чатов
+        let conversations = [];
+        let unreadMessages = {}; // { conversationId: count }
+        let totalUnread = 0;
+        let messageRequests = []; // Сообщения от неподписанных пользователей
+        let currentChatFilter = 'all';
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -1837,6 +1948,47 @@
             return '';
         }
 
+        // Функция для обновления бейджей чатов
+        function updateChatBadges() {
+            const chatNavBadge = document.getElementById('chatNavBadge');
+            const requestsBadge = document.getElementById('requestsBadge');
+            
+            totalUnread = Object.values(unreadMessages).reduce((a, b) => a + b, 0);
+            
+            if (totalUnread > 0) {
+                chatNavBadge.textContent = totalUnread > 9 ? '9+' : totalUnread;
+                chatNavBadge.style.display = 'flex';
+            } else {
+                chatNavBadge.style.display = 'none';
+            }
+            
+            if (messageRequests.length > 0) {
+                requestsBadge.textContent = messageRequests.length;
+                requestsBadge.style.display = 'inline-block';
+            } else {
+                requestsBadge.style.display = 'none';
+            }
+        }
+
+        // Функция для отметки сообщений как прочитанных
+        function markConversationAsRead(conversationId) {
+            if (unreadMessages[conversationId]) {
+                delete unreadMessages[conversationId];
+                updateChatBadges();
+                updateChatList(); // Обновляем список чатов
+            }
+        }
+
+        // Функция для добавления сообщения в запросы
+        function addToRequests(message, fromUser) {
+            messageRequests.unshift({
+                message: message,
+                fromUser: fromUser,
+                time: new Date()
+            });
+            updateChatBadges();
+        }
+
         // Функция для обновления имени в верхней панели (только в профиле)
         function updateHeaderName() {
             const user = getCurrentUser();
@@ -1848,7 +2000,6 @@
                 const lastName = user.get('lastName') || '';
                 const fullName = `${firstName} ${lastName}`.trim();
                 
-                // Показываем имя только на экране профиля
                 if (currentScreen === 'profileScreen') {
                     headerName.textContent = fullName;
                     headerName.style.display = 'block';
@@ -1888,8 +2039,17 @@
                 updateProfileUI();
             }
             
-            // Обновляем имя в шапке
             updateHeaderName();
+        };
+
+        // Фильтрация чатов
+        window.filterChats = function(filter, element) {
+            document.querySelectorAll('.chat-category').forEach(el => {
+                el.classList.remove('active');
+            });
+            element.classList.add('active');
+            currentChatFilter = filter;
+            updateChatList();
         };
 
         window.openAddPostModal = function() {
@@ -2177,24 +2337,25 @@
             if (!currentUser) return null;
             
             try {
-                // Правильный способ создать Pointer в Parse
-                const otherUserPointer = {
+                const query = new Parse.Query('Conversation');
+                query.equalTo('participants', currentUser);
+                query.equalTo('participants', {
                     __type: 'Pointer',
                     className: '_User',
                     objectId: otherUserId
-                };
-                
-                // Ищем существующий чат
-                const query = new Parse.Query('Conversation');
-                query.equalTo('participants', currentUser);
-                query.equalTo('participants', otherUserPointer);
+                });
                 
                 let conversation = await query.first();
                 
                 if (!conversation) {
                     const Conversation = Parse.Object.extend('Conversation');
                     conversation = new Conversation();
-                    conversation.set('participants', [currentUser, otherUserPointer]);
+                    conversation.set('participants', [currentUser, {
+                        __type: 'Pointer',
+                        className: '_User',
+                        objectId: otherUserId
+                    }]);
+                    conversation.set('createdAt', new Date());
                     await conversation.save();
                 }
                 
@@ -2202,6 +2363,27 @@
             } catch (error) {
                 console.error('Ошибка при создании чата:', error);
                 return null;
+            }
+        }
+
+        // Проверка подписки на пользователя
+        async function checkIfSubscribed(userId) {
+            const currentUser = getCurrentUser();
+            if (!currentUser || userId === currentUser.id) return true;
+            
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('follower', currentUser);
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                const sub = await query.first();
+                return !!sub;
+            } catch (error) {
+                console.error('Ошибка проверки подписки:', error);
+                return false;
             }
         }
 
@@ -2213,38 +2395,63 @@
                 const query = new Parse.Query('Conversation');
                 query.equalTo('participants', currentUser);
                 query.descending('updatedAt');
-                query.include('participants');
+                query.limit(100);
                 const conversations = await query.find();
                 
-                const conversationsWithLastMessage = await Promise.all(conversations.map(async conv => {
-                    const participants = conv.get('participants');
-                    const otherUser = participants.find(p => p.id !== currentUser.id);
-                    if (!otherUser) return null;
-                    
+                const convList = [];
+                
+                for (const conv of conversations) {
                     try {
+                        const participants = conv.get('participants');
+                        const otherUser = participants.find(p => p.id !== currentUser.id);
+                        if (!otherUser) continue;
+                        
                         await otherUser.fetch();
                         
-                        const lastMessageQuery = new Parse.Query('Message');
-                        lastMessageQuery.equalTo('conversation', conv);
-                        lastMessageQuery.descending('createdAt');
-                        lastMessageQuery.limit(1);
-                        const lastMessage = await lastMessageQuery.first();
+                        // Получаем последнее сообщение
+                        const messageQuery = new Parse.Query('Message');
+                        messageQuery.equalTo('conversation', conv);
+                        messageQuery.descending('createdAt');
+                        messageQuery.limit(1);
+                        const lastMessage = await messageQuery.first();
                         
-                        if (!lastMessage) return null;
+                        if (!lastMessage) continue;
                         
-                        return {
+                        // Получаем все сообщения в этом чате для подсчета непрочитанных
+                        const allMessagesQuery = new Parse.Query('Message');
+                        allMessagesQuery.equalTo('conversation', conv);
+                        allMessagesQuery.ascending('createdAt');
+                        const allMessages = await allMessagesQuery.find();
+                        
+                        // Считаем непрочитанные (сообщения от другого пользователя)
+                        let unreadCount = 0;
+                        for (const msg of allMessages) {
+                            const sender = msg.get('sender');
+                            if (sender && sender.id === otherUser.id) {
+                                unreadCount++;
+                            }
+                        }
+                        
+                        if (unreadCount > 0) {
+                            unreadMessages[conv.id] = unreadCount;
+                        }
+                        
+                        convList.push({
                             conversation: conv,
                             otherUser: otherUser,
                             lastMessage: lastMessage.get('text'),
                             lastMessageTime: lastMessage.createdAt,
-                            lastMessageId: lastMessage.id
-                        };
+                            lastMessageId: lastMessage.id,
+                            unreadCount: unreadCount
+                        });
                     } catch (e) {
-                        return null;
+                        console.error('Ошибка обработки чата:', e);
+                        continue;
                     }
-                }));
+                }
                 
-                return conversationsWithLastMessage.filter(c => c !== null);
+                updateChatBadges();
+                return convList;
             } catch (error) {
                 console.error('Ошибка получения чатов:', error);
                 return [];
@@ -2262,6 +2469,15 @@
                 currentChannel.bind('client-new-message', (data) => {
                     const isOwn = data.senderId === getCurrentUser().id;
                     addMessageToChat(data.text, isOwn, data.timestamp, data.messageId);
+                    
+                    if (!isOwn) {
+                        // Увеличиваем счетчик непрочитанных
+                        unreadMessages[conversationId] = (unreadMessages[conversationId] || 0) + 1;
+                        updateChatBadges();
+                        
+                        // Добавляем уведомление
+                        addNotification('📨 Новое сообщение', data.text);
+                    }
                 });
             } catch (error) {
                 console.error('Ошибка подписки на чат:', error);
@@ -2285,7 +2501,6 @@
                 </div>
             `;
             
-            // Добавляем обработчик для вызова панели реакций
             div.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 showReactionPanel(e, messageId);
@@ -2295,16 +2510,13 @@
             messages.scrollTop = messages.scrollHeight;
         }
 
-        // Функция для показа панели реакций
         window.showReactionPanel = function(e, messageId) {
             e.preventDefault();
             const panel = document.getElementById('reactionPanel');
             
-            // Получаем координаты клика
             const x = e.clientX;
             const y = e.clientY;
             
-            // Проверяем, не выйдет ли панель за границы экрана
             const panelWidth = 280;
             const panelHeight = 60;
             const windowWidth = window.innerWidth;
@@ -2313,7 +2525,6 @@
             let left = x - panelWidth / 2;
             let top = y - panelHeight - 10;
             
-            // Корректируем, если выходит за границы
             if (left < 10) left = 10;
             if (left + panelWidth > windowWidth - 10) left = windowWidth - panelWidth - 10;
             if (top < 10) top = y + 20;
@@ -2324,13 +2535,11 @@
             panel.classList.add('active');
             currentReactionMessage = messageId;
             
-            // Автоматически скрываем через 3 секунды
             setTimeout(() => {
                 panel.classList.remove('active');
             }, 3000);
         };
 
-        // Функция для добавления реакции
         window.addReaction = function(emoji) {
             if (!currentReactionMessage) return;
             
@@ -2344,23 +2553,29 @@
             }
             
             document.getElementById('reactionPanel').classList.remove('active');
-            
-            // Добавляем уведомление о реакции
             addNotification('😊 Реакция на сообщение', `Вы поставили ${emoji}`);
         };
 
         async function loadMessageHistory(conversationId) {
             try {
                 const query = new Parse.Query('Message');
-                query.equalTo('conversation', { __type: 'Pointer', className: 'Conversation', objectId: conversationId });
+                query.equalTo('conversation', {
+                    __type: 'Pointer',
+                    className: 'Conversation',
+                    objectId: conversationId
+                });
                 query.include('sender');
                 query.ascending('createdAt');
                 const messages = await query.find();
+                
                 messages.forEach(msg => {
                     const sender = msg.get('sender');
                     const isOwn = sender.id === getCurrentUser().id;
                     addMessageToChat(msg.get('text'), isOwn, msg.createdAt, msg.id);
                 });
+                
+                // Отмечаем чат как прочитанный
+                markConversationAsRead(conversationId);
             } catch (error) {
                 console.error('Ошибка загрузки истории сообщений:', error);
             }
@@ -2372,8 +2587,17 @@
                 const message = new Message();
                 message.set('text', text);
                 message.set('sender', getCurrentUser());
-                message.set('conversation', { __type: 'Pointer', className: 'Conversation', objectId: conversationId });
+                message.set('conversation', {
+                    __type: 'Pointer',
+                    className: 'Conversation',
+                    objectId: conversationId
+                });
                 await message.save();
+                
+                // Обновляем время последнего обновления чата
+                const conversation = new Parse.Object('Conversation');
+                conversation.id = conversationId;
+                await conversation.save(null, { useMasterKey: true });
                 
                 return { success: true, messageId: message.id };
             } catch (error) {
@@ -2426,7 +2650,11 @@
                 const Subscription = Parse.Object.extend('Subscription');
                 const query = new Parse.Query(Subscription);
                 query.equalTo('follower', currentUser);
-                query.equalTo('following', { __type: 'Pointer', className: '_User', objectId: targetUserId });
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: targetUserId
+                });
                 const existing = await query.first();
                 if (existing) {
                     await existing.destroy();
@@ -2434,27 +2662,17 @@
                 } else {
                     const subscription = new Subscription();
                     subscription.set('follower', currentUser);
-                    subscription.set('following', { __type: 'Pointer', className: '_User', objectId: targetUserId });
+                    subscription.set('following', {
+                        __type: 'Pointer',
+                        className: '_User',
+                        objectId: targetUserId
+                    });
                     await subscription.save();
                     return { subscribed: true };
                 }
             } catch (error) {
                 console.error('Ошибка подписки:', error);
                 return null;
-            }
-        }
-
-        async function checkIfSubscribed(targetUserId) {
-            const currentUser = getCurrentUser();
-            if (!currentUser) return false;
-            try {
-                const query = new Parse.Query('Subscription');
-                query.equalTo('follower', currentUser);
-                query.equalTo('following', { __type: 'Pointer', className: '_User', objectId: targetUserId });
-                return !!(await query.first());
-            } catch (error) {
-                console.error('Ошибка проверки подписки:', error);
-                return false;
             }
         }
 
@@ -2699,7 +2917,6 @@
             
             document.getElementById('userPostsGrid').innerHTML = postsHtml || '<p style="opacity:0.5; text-align:center;">Нет постов</p>';
             
-            // Обновляем имя в шапке
             updateHeaderName();
         }
 
@@ -2707,7 +2924,11 @@
             try {
                 const Post = Parse.Object.extend('Post');
                 const query = new Parse.Query(Post);
-                query.equalTo('author', { __type: 'Pointer', className: '_User', objectId: userId });
+                query.equalTo('author', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
                 return await query.find();
             } catch (error) {
                 console.error('Ошибка получения постов пользователя:', error);
@@ -2743,15 +2964,26 @@
         }
 
         async function updateChatList() {
-            const conversations = await getUserConversations();
+            conversations = await getUserConversations();
             
-            const html = await Promise.all(conversations.map(async c => {
+            let filteredConversations = conversations;
+            
+            if (currentChatFilter === 'requests') {
+                // Показываем только запросы (от неподписанных)
+                filteredConversations = [];
+            } else {
+                // Показываем все чаты (кроме запросов)
+                filteredConversations = conversations;
+            }
+            
+            const html = await Promise.all(filteredConversations.map(async c => {
                 const user = c.otherUser;
                 try {
                     await user.fetch();
                     const avatarClass = getAvatarClass(user);
                     const avatarStyle = getAvatarStyle(user);
                     const time = c.lastMessageTime ? formatTime(c.lastMessageTime) : '';
+                    const unread = c.unreadCount || 0;
                     
                     return `
                         <div class="chat-item" onclick="openConversation('${user.id}')">
@@ -2759,6 +2991,7 @@
                             <div class="chat-info">
                                 <div class="chat-name-row">
                                     <span class="chat-name">${user.get('firstName')} ${user.get('lastName')}</span>
+                                    ${unread > 0 ? `<span class="unread-badge">${unread}</span>` : ''}
                                 </div>
                                 <div class="chat-preview-row">
                                     <span class="chat-preview">${c.lastMessage}</span>
@@ -2771,6 +3004,7 @@
                     return '';
                 }
             }));
+            
             document.getElementById('chatList').innerHTML = html.join('') || '<p style="opacity:0.5; text-align:center;">Нет чатов</p>';
         }
 
@@ -2883,18 +3117,6 @@
                 document.getElementById('storyReplyInput').style.display = 'none';
                 document.getElementById('storyReplyText').value = '';
             }
-        };
-
-        window.filterChats = function(category) {
-            document.querySelectorAll('.chat-category').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
-            updateChatList();
-        };
-
-        window.switchSubTab = function(tab) {
-            document.querySelectorAll('.modal-tab').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
-            showSubscriptions(tab);
         };
 
         window.togglePostMenu = function(postId, event) {
@@ -3028,20 +3250,31 @@
 
         window.openUserProfile = async function(userId) {
             await updateProfileUI(userId);
-            navigateTo('profileScreen', document.querySelectorAll('.bottom-nav-item')[4]); // Индекс 4 - профиль
+            navigateTo('profileScreen', document.querySelectorAll('.bottom-nav-item')[4]);
         };
 
         window.openConversation = async function(otherUserId) {
-            const conversation = await getOrCreateConversation(otherUserId);
-            if (!conversation) {
-                alert('Не удалось создать чат');
-                return;
-            }
-            
-            currentConversationId = conversation.id;
-            currentOtherUserId = otherUserId;
-            
             try {
+                // Проверяем подписку
+                const isSubscribed = await checkIfSubscribed(otherUserId);
+                
+                if (!isSubscribed && currentChatFilter !== 'requests') {
+                    // Если не подписан, добавляем в запросы
+                    const otherUser = await new Parse.Query('_User').get(otherUserId);
+                    addToRequests('Хочет написать вам', otherUser);
+                    alert('Этот пользователь не подписан на вас. Сообщение будет отправлено в запросы.');
+                    return;
+                }
+                
+                const conversation = await getOrCreateConversation(otherUserId);
+                if (!conversation) {
+                    alert('Не удалось создать чат');
+                    return;
+                }
+                
+                currentConversationId = conversation.id;
+                currentOtherUserId = otherUserId;
+                
                 const otherUser = await new Parse.Query('_User').get(otherUserId);
                 
                 const avatarClass = getAvatarClass(otherUser);
@@ -3067,7 +3300,7 @@
                 await loadMessageHistory(currentConversationId);
                 subscribeToChat(currentConversationId);
                 
-                navigateTo('chatScreen', document.querySelectorAll('.bottom-nav-item')[3]); // Индекс 3 - чаты
+                navigateTo('chatScreen', document.querySelectorAll('.bottom-nav-item')[3]);
             } catch (error) {
                 console.error('Ошибка открытия чата:', error);
                 alert('Ошибка при открытии чата');
@@ -3150,6 +3383,12 @@
                     closePostViewer();
                 });
             }
+        };
+
+        window.switchSubTab = function(tab) {
+            document.querySelectorAll('.modal-tab').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+            showSubscriptions(tab);
         };
 
         // Форматирование даты
@@ -3254,7 +3493,6 @@
                             messageId: result.messageId
                         });
                     } catch (e) {
-                        // Если Pusher не работает, просто добавляем сообщение локально
                         addMessageToChat(text, true, new Date(), result.messageId);
                     }
                 }
@@ -3378,6 +3616,11 @@
                 await updateUserStatus(true);
                 updateHeaderName();
                 navigateTo('homeScreen', document.querySelectorAll('.bottom-nav-item')[0]);
+                
+                // Загружаем чаты в фоне
+                setTimeout(() => {
+                    getUserConversations();
+                }, 1000);
             } else {
                 navigateTo('authScreen', null);
             }
@@ -3393,7 +3636,6 @@
                     document.getElementById('notificationsPanel').classList.remove('active');
                 }
                 
-                // Закрываем панель реакций при клике вне её
                 if (!e.target.closest('.reaction-panel') && !e.target.closest('.message')) {
                     document.getElementById('reactionPanel').classList.remove('active');
                 }
