@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал · сториз</title>
+    <title>RealReel · финал · сториз · сетка</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -105,6 +105,7 @@
             gap: 4px;
             min-width: 64px;
             cursor: pointer;
+            position: relative;
         }
         .story-avatar {
             width: 64px;
@@ -113,6 +114,22 @@
             background-size: cover;
             background-position: center;
             border: 2px solid #6aa9ff;
+        }
+        .story-add {
+            position: absolute;
+            bottom: 20px;
+            right: -2px;
+            width: 22px;
+            height: 22px;
+            background: #6aa9ff;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            border: 2px solid white;
         }
         .story-name {
             font-size: 12px;
@@ -288,6 +305,7 @@
             display: flex;
             gap: 12px;
             margin-bottom: 12px;
+            align-items: center;
         }
         .post-avatar {
             width: 44px;
@@ -299,12 +317,9 @@
         }
         .post-author-info {
             flex: 1;
-        }
-        .post-author-row {
             display: flex;
             align-items: center;
             gap: 8px;
-            flex-wrap: wrap;
         }
         .post-author {
             font-weight: 600;
@@ -318,10 +333,13 @@
             font-size: 12px;
             color: #6aa9ff;
         }
-        .post-date {
-            font-size: 11px;
+        .post-menu-area {
+            display: flex;
+            align-items: center;
+            gap: 4px;
             color: #999;
-            margin-left: auto;
+            font-size: 12px;
+            cursor: pointer;
         }
         .post-menu-btn {
             background: none;
@@ -378,6 +396,7 @@
         }
         .post-actions {
             display: flex;
+            align-items: center;
             gap: 20px;
             padding-top: 8px;
             border-top: 1px solid #f0f0f0;
@@ -401,6 +420,11 @@
         }
         .post-action span {
             color: #666;
+        }
+        .post-date-bottom {
+            color: #999;
+            font-size: 11px;
+            margin-left: auto;
         }
 
         .comments-section {
@@ -835,11 +859,34 @@
             color: #333;
         }
 
-        .profile-posts {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+        /* ===== СЕТКА ПОСТОВ В ПРОФИЛЕ (КАК В INSTAGRAM) ===== */
+        .profile-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
             margin-top: 8px;
+        }
+        .profile-post-thumb {
+            aspect-ratio: 1;
+            background: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .profile-post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-post-thumb .text-thumb {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6aa9ff22, #9f6eff22);
+            color: #333;
+            font-size: 20px;
         }
 
         .settings-row {
@@ -978,7 +1025,6 @@
             </div>
         </div>
 
-        <!-- Модалка редактирования профиля -->
         <div class="edit-profile-modal" id="editProfileModal">
             <div class="edit-profile-title">Редактировать профиль</div>
             <input type="text" class="edit-profile-input" id="editFirstName" placeholder="Имя">
@@ -1090,7 +1136,8 @@
                         <button class="profile-action-btn secondary" id="profileSubscribeBtn">Подписаться</button>
                     </div>
 
-                    <div class="profile-posts" id="userPosts"></div>
+                    <!-- Сетка постов в профиле -->
+                    <div class="profile-posts-grid" id="userPostsGrid"></div>
 
                     <div class="settings-row">
                         <div class="settings-icon" id="editProfileBtn">
@@ -1122,6 +1169,7 @@
         let currentConversationId = null;
         let currentOtherUserId = null;
         let currentProfileUserId = null;
+        let stories = [];
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -1237,6 +1285,23 @@
             }
         }
 
+        async function createStory(imageFile = null) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const story = new Story();
+                story.set('author', getCurrentUser());
+                if (imageFile) {
+                    const parseFile = new Parse.File('story.jpg', imageFile);
+                    await parseFile.save();
+                    story.set('image', parseFile);
+                }
+                await story.save();
+                return { success: true, story };
+            } catch (error) {
+                return { success: false };
+            }
+        }
+
         async function getAllPosts() {
             try {
                 const Post = Parse.Object.extend('Post');
@@ -1251,8 +1316,18 @@
 
         async function getStories() {
             try {
-                const users = await new Parse.Query('_User').find();
-                return users.filter(u => u.id !== getCurrentUser().id).slice(0, 5);
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                query.include('author');
+                query.descending('createdAt');
+                const stories = await query.find();
+                const uniqueUsers = new Set();
+                return stories.filter(s => {
+                    const author = s.get('author');
+                    if (uniqueUsers.has(author.id)) return false;
+                    uniqueUsers.add(author.id);
+                    return true;
+                });
             } catch {
                 return [];
             }
@@ -1550,17 +1625,27 @@
             const stories = await getStories();
             
             // Сториз
-            const storiesHtml = stories.map(user => {
-                const avatarClass = getAvatarClass(user);
-                const avatarStyle = getAvatarStyle(user);
+            const currentUserStory = `
+                <div class="story-item" onclick="addStory()">
+                    <div class="story-avatar ${getAvatarClass(currentUser)}" style="${getAvatarStyle(currentUser)}"></div>
+                    <div class="story-add">+</div>
+                    <span class="story-name">Ваша история</span>
+                </div>
+            `;
+            
+            const storiesHtml = stories.map(s => {
+                const author = s.get('author');
+                const avatarClass = getAvatarClass(author);
+                const avatarStyle = getAvatarStyle(author);
                 return `
-                    <div class="story-item" onclick="openUserProfile('${user.id}')">
+                    <div class="story-item" onclick="viewStory('${author.id}')">
                         <div class="story-avatar ${avatarClass}" style="${avatarStyle}"></div>
-                        <span class="story-name">${user.get('firstName')}</span>
+                        <span class="story-name">${author.get('firstName')}</span>
                     </div>
                 `;
             }).join('');
-            document.getElementById('storiesRow').innerHTML = storiesHtml;
+            
+            document.getElementById('storiesRow').innerHTML = currentUserStory + storiesHtml;
 
             // Посты
             const postsHtml = await Promise.all(posts.map(async (post) => {
@@ -1571,31 +1656,34 @@
                 const avatarClass = getAvatarClass(author);
                 const avatarStyle = getAvatarStyle(author);
                 const nickname = author.get('nickname') || '';
+                const dateStr = formatDate(post.createdAt);
                 
                 return `
                     <div class="post-item" data-post-id="${post.id}" id="post-${post.id}">
                         <div class="post-header">
                             <div class="post-avatar ${avatarClass}" style="${avatarStyle}" onclick="openUserProfile('${author.id}')"></div>
                             <div class="post-author-info">
-                                <div class="post-author-row">
-                                    <span class="post-author" onclick="openUserProfile('${author.id}')">${author.get('firstName')} ${author.get('lastName')}</span>
-                                    <span class="post-nick">@${nickname}</span>
-                                    <span class="post-date">${formatDate(post.createdAt)}</span>
-                                    ${isAuthor ? `
-                                        <button class="post-menu-btn" onclick="togglePostMenu('${post.id}', event)">•••</button>
-                                        <div class="post-menu" id="menu-${post.id}">
-                                            <div class="post-menu-item" onclick="editPostHandler('${post.id}')">
-                                                <svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
-                                                Редактировать
-                                            </div>
-                                            <div class="post-menu-item" onclick="deletePostHandler('${post.id}')">
-                                                <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 4V2h8v2"/></svg>
-                                                Удалить
-                                            </div>
-                                        </div>
-                                    ` : ''}
-                                </div>
+                                <span class="post-author" onclick="openUserProfile('${author.id}')">${author.get('firstName')} ${author.get('lastName')}</span>
+                                <span class="post-nick">@${nickname}</span>
                             </div>
+                            ${isAuthor ? `
+                                <div class="post-menu-area" onclick="togglePostMenu('${post.id}', event)">
+                                    <span class="post-date">${dateStr}</span>
+                                    <button class="post-menu-btn">•••</button>
+                                </div>
+                                <div class="post-menu" id="menu-${post.id}">
+                                    <div class="post-menu-item" onclick="editPostHandler('${post.id}')">
+                                        <svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                                        Редактировать
+                                    </div>
+                                    <div class="post-menu-item" onclick="deletePostHandler('${post.id}')">
+                                        <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 4V2h8v2"/></svg>
+                                        Удалить
+                                    </div>
+                                </div>
+                            ` : `
+                                <span class="post-date">${dateStr}</span>
+                            `}
                         </div>
                         <div class="post-text">${post.get('text')}</div>
                         ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
@@ -1608,6 +1696,7 @@
                                 <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                                 <span>${comments.length}</span>
                             </div>
+                            <span class="post-date-bottom">${dateStr}</span>
                         </div>
                         <div class="comments-section" id="comments-${post.id}" style="display: none;">
                             <div class="comment-input-container">
@@ -1686,15 +1775,24 @@
                 };
             }
             
-            const postsHtml = await Promise.all(posts.map(async post => {
-                return `
-                    <div class="post-item">
-                        <div class="post-text">${post.get('text')}</div>
-                        ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
-                    </div>
-                `;
-            }));
-            document.getElementById('userPosts').innerHTML = postsHtml.join('');
+            // Сетка постов
+            const postsHtml = posts.map(post => {
+                if (post.get('image')) {
+                    return `
+                        <div class="profile-post-thumb">
+                            <img src="${post.get('image').url()}" alt="post">
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="profile-post-thumb">
+                            <div class="text-thumb">📝</div>
+                        </div>
+                    `;
+                }
+            }).join('');
+            
+            document.getElementById('userPostsGrid').innerHTML = postsHtml || '<p style="opacity:0.5; text-align:center;">Нет постов</p>';
         }
 
         async function getUserPosts(userId) {
@@ -1763,6 +1861,23 @@
             document.querySelectorAll('.post-menu').forEach(menu => menu.classList.remove('active'));
             const menu = document.getElementById(`menu-${postId}`);
             menu.classList.toggle('active');
+        };
+
+        window.addStory = function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                await createStory(file);
+                await updateHomeFeed();
+            };
+            input.click();
+        };
+
+        window.viewStory = function(userId) {
+            alert(`История пользователя ${userId}`);
         };
 
         window.likePostHandler = async function(postId, el) {
