@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · онлайн · никнеймы · арт</title>
+    <title>RealReel · финал · арт · темы · сториз</title>
     <!-- Подключаем шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         body {
@@ -25,6 +24,7 @@
             padding: 12px;
             position: relative;
             background: #f5f7fa;
+            transition: background-color 0.3s ease;
         }
 
         .phone-frame {
@@ -40,6 +40,58 @@
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.08);
             box-shadow: 0 30px 60px -15px rgba(0,0,0,0.1);
+        }
+
+        /* ТЕМЫ ЧАТА */
+        .theme-light {
+            --chat-bg: #ffffff;
+            --bubble-other: linear-gradient(135deg, #f0f4fa, #e8e2f2);
+            --bubble-own: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            --text-primary: #1a1e2a;
+            --text-secondary: #64748b;
+            --border-color: rgba(0, 0, 0, 0.08);
+        }
+        .theme-dark {
+            --chat-bg: #1a1e2a;
+            --bubble-other: linear-gradient(135deg, #2a2e3a, #2a1e3a);
+            --bubble-own: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        .theme-space {
+            --chat-bg: linear-gradient(135deg, #0b0f2a, #1a1f3a);
+            --bubble-other: linear-gradient(135deg, #2a2f4a, #2a1f4a);
+            --bubble-own: linear-gradient(135deg, #6a4fff, #9f4eff);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a8ff;
+            --border-color: rgba(160, 168, 255, 0.2);
+        }
+        .theme-neon {
+            --chat-bg: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+            --bubble-other: linear-gradient(135deg, #2a2a2a, #2a1a1a);
+            --bubble-own: linear-gradient(135deg, #00ff88, #00ffaa);
+            --text-primary: #00ff88;
+            --text-secondary: #00ffaa;
+            --border-color: rgba(0, 255, 136, 0.3);
+        }
+
+        .conversation-view {
+            background: var(--chat-bg);
+            color: var(--text-primary);
+        }
+        .bubble {
+            background: var(--bubble-other);
+            color: var(--text-primary);
+        }
+        .bubble.me {
+            background: var(--bubble-own);
+            color: white;
+        }
+        .chat-input {
+            background: var(--chat-bg);
+            border-color: var(--border-color);
+            color: var(--text-primary);
         }
 
         .top-nav {
@@ -241,6 +293,150 @@
             75% { transform: translateX(5px); }
         }
 
+        /* ===== КНОПКА ДОБАВЛЕНИЯ ПОСТА ===== */
+        .add-post-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(106, 169, 255, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        .add-post-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 6px 20px rgba(106, 169, 255, 0.6);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .add-post-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 1001;
+            display: none;
+        }
+        .add-post-modal.active {
+            display: block;
+        }
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1a1e2a;
+        }
+        .modal-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 20px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+        .modal-input:focus {
+            box-shadow: 0 0 0 2px rgba(106, 169, 255, 0.3);
+        }
+        .modal-file {
+            width: 100%;
+            padding: 12px;
+            border: 1px dashed rgba(106, 169, 255, 0.3);
+            border-radius: 20px;
+            margin-bottom: 16px;
+            cursor: pointer;
+        }
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .modal-btn.publish {
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            color: white;
+        }
+        .modal-btn.cancel {
+            background: #f0f0f0;
+            color: #666;
+        }
+        .modal-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* ===== СТОРИЗ ===== */
+        .stories-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding: 4px 0 12px 0;
+            scrollbar-width: none;
+        }
+        .stories-row::-webkit-scrollbar {
+            display: none;
+        }
+        .story-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            min-width: 64px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .story-item:hover {
+            transform: translateY(-5px);
+        }
+        .story-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(106, 169, 255, 0.3);
+            transition: all 0.3s;
+        }
+        .story-avatar.current-user {
+            border: 3px solid linear-gradient(135deg, #6aa9ff, #9f6eff);
+        }
+        .story-avatar:hover {
+            transform: scale(1.1);
+            border-color: #6aa9ff;
+            box-shadow: 0 0 15px #6aa9ff;
+        }
+        .story-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #1a1e2a;
+        }
+
         /* ===== ПРОФИЛЬ ===== */
         .profile-screen {
             display: flex;
@@ -273,6 +469,7 @@
             border-radius: 36px;
             background-size: cover;
             background-position: center;
+            border: 2px solid rgba(106, 169, 255, 0.3);
         }
         .profile-avatar img {
             width: 100%;
@@ -380,12 +577,13 @@
         .post-avatar-small {
             width: 36px;
             height: 36px;
+            border-radius: 18px;
             background-size: cover;
             background-position: center;
             flex-shrink: 0;
-            border-radius: 18px;
             cursor: pointer;
             transition: transform 0.2s;
+            border: 2px solid rgba(106, 169, 255, 0.3);
         }
         .post-avatar-small:hover {
             transform: scale(1.1);
@@ -416,7 +614,6 @@
         .post-nick {
             font-size: 12px;
             color: #6aa9ff;
-            opacity: 0.8;
         }
         .post-date {
             font-size: 11px;
@@ -428,6 +625,11 @@
             line-height: 1.5;
             color: #1a1e2a;
         }
+        .post-image {
+            max-width: 100%;
+            border-radius: 16px;
+            margin-top: 8px;
+        }
 
         /* ===== ЧАТ ===== */
         .chat-screen {
@@ -437,6 +639,10 @@
         }
         .search-in-chat {
             margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+        .search-in-chat.hidden {
+            display: none;
         }
         .search-container {
             display: flex;
@@ -531,11 +737,12 @@
         .user-search-avatar {
             width: 44px;
             height: 44px;
+            border-radius: 22px;
             background-size: cover;
             background-position: center;
-            border-radius: 22px;
             cursor: pointer;
             transition: transform 0.2s;
+            border: 2px solid rgba(106, 169, 255, 0.3);
         }
         .user-search-avatar:hover {
             transform: scale(1.1);
@@ -641,11 +848,12 @@
         .chat-avatar {
             width: 52px;
             height: 52px;
+            border-radius: 26px;
             background-size: cover;
             background-position: center;
-            border-radius: 26px;
             cursor: pointer;
             transition: transform 0.2s;
+            border: 2px solid rgba(106, 169, 255, 0.3);
         }
         .chat-avatar:hover {
             transform: scale(1.05);
@@ -702,7 +910,6 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            background: #f8fafd;
             border-radius: 24px;
             padding: 16px;
         }
@@ -712,7 +919,43 @@
             gap: 12px;
             padding: 8px 0 16px 0;
             margin-bottom: 8px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .theme-selector {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+        .theme-option {
+            width: 28px;
+            height: 28px;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 2px solid transparent;
+        }
+        .theme-option:hover {
+            transform: scale(1.1);
+        }
+        .theme-option.light {
+            background: #ffffff;
+            border: 2px solid #ddd;
+        }
+        .theme-option.dark {
+            background: #1a1e2a;
+            border: 2px solid #4a5b8a;
+        }
+        .theme-option.space {
+            background: linear-gradient(135deg, #0b0f2a, #1a1f3a);
+            border: 2px solid #6a4fff;
+        }
+        .theme-option.neon {
+            background: #0a0a0a;
+            border: 2px solid #00ff88;
+        }
+        .theme-option.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px currentColor;
         }
         .conversation-avatar-container {
             position: relative;
@@ -725,6 +968,7 @@
             background-position: center;
             cursor: pointer;
             transition: transform 0.2s;
+            border: 2px solid rgba(106, 169, 255, 0.3);
         }
         .conversation-avatar:hover {
             transform: scale(1.1);
@@ -740,7 +984,7 @@
         .conversation-name {
             font-weight: 600;
             font-size: 16px;
-            color: #1a1e2a;
+            color: var(--text-primary);
             cursor: pointer;
         }
         .conversation-name:hover {
@@ -765,7 +1009,7 @@
             cursor: pointer;
             font-size: 18px;
             transition: all 0.3s;
-            color: #1a1e2a;
+            color: var(--text-primary);
             border-radius: 18px;
         }
         .back-btn:hover {
@@ -800,9 +1044,6 @@
             word-break: break-word;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             transition: all 0.3s;
-            background: linear-gradient(135deg, #f0f4fa, #e8e2f2);
-            color: #1a1e2a;
-            border: 1px solid rgba(0, 0, 0, 0.04);
             border-radius: 24px 24px 24px 8px;
             position: relative;
         }
@@ -813,15 +1054,10 @@
             left: -6px;
             width: 12px;
             height: 12px;
-            background: linear-gradient(135deg, #f0f4fa, #e8e2f2);
+            background: var(--bubble-other);
             border-radius: 0 0 12px 0;
-            border-right: 1px solid rgba(0,0,0,0.04);
-            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
         .bubble.me {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            color: white;
-            border: none;
             border-radius: 24px 24px 8px 24px;
         }
         .bubble.me::after {
@@ -834,7 +1070,7 @@
             right: -6px;
             width: 12px;
             height: 12px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            background: var(--bubble-own);
             border-radius: 0 0 0 12px;
         }
         .bubble:hover {
@@ -855,9 +1091,7 @@
             font-size: 15px;
             outline: none;
             transition: all 0.3s;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            background: #ffffff;
-            color: #1a1e2a;
+            border: 1px solid var(--border-color);
             border-radius: 30px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
@@ -945,9 +1179,11 @@
             background-size: cover;
             background-position: center;
             cursor: pointer;
+            border: 2px solid rgba(106, 169, 255, 0.3);
         }
         .sub-info {
             flex: 1;
+            cursor: pointer;
         }
         .sub-name-row {
             display: flex;
@@ -959,7 +1195,6 @@
             font-weight: 600;
             font-size: 15px;
             color: #1a1e2a;
-            cursor: pointer;
         }
         .sub-nick {
             font-size: 11px;
@@ -1123,149 +1358,6 @@
             display: flex;
             flex-direction: column;
         }
-
-        .stories-row {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 24px;
-            overflow-x: auto;
-            padding: 4px 0 12px 0;
-            scrollbar-width: none;
-        }
-        .stories-row::-webkit-scrollbar {
-            display: none;
-        }
-        .story-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            min-width: 64px;
-            transition: all 0.3s;
-        }
-        .story-item:hover {
-            transform: translateY(-5px);
-        }
-        .story-avatar {
-            width: 64px;
-            height: 64px;
-            transition: all 0.3s;
-            border: 2px solid rgba(106, 169, 255, 0.3);
-            background-size: cover;
-            background-position: center;
-            animation: avatarPulse 3s infinite;
-            border-radius: 32px;
-        }
-        .story-avatar:hover {
-            transform: scale(1.1) rotate(5deg);
-            border-color: #6aa9ff;
-            box-shadow: 0 0 15px #6aa9ff;
-            animation: none;
-        }
-        @keyframes avatarPulse {
-            0% { box-shadow: 0 0 0 0 rgba(106, 169, 255, 0.3); }
-            70% { box-shadow: 0 0 0 8px rgba(106, 169, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(106, 169, 255, 0); }
-        }
-        .story-name {
-            font-size: 12px;
-            font-weight: 500;
-            transition: all 0.3s;
-            cursor: pointer;
-            color: #1a1e2a;
-        }
-
-        .post-avatar {
-            width: 44px;
-            height: 44px;
-            background-size: cover;
-            background-position: center;
-            flex-shrink: 0;
-            border: 2px solid rgba(106, 169, 255, 0.3);
-            transition: all 0.3s;
-            border-radius: 22px;
-            cursor: pointer;
-        }
-        .post-avatar:hover {
-            transform: scale(1.1) rotate(5deg);
-            border-color: #6aa9ff;
-        }
-
-        .post {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            padding: 16px;
-            transition: all 0.3s;
-            animation: postFadeIn 0.5s ease;
-            background: #ffffff;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-            border-radius: 24px;
-        }
-
-        @keyframes postFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .post:hover {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 8px 20px rgba(106, 169, 255, 0.15);
-        }
-        .post-content {
-            flex: 1;
-        }
-        .post-header {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 6px;
-        }
-        .post-author-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .post-name {
-            font-weight: 600;
-            font-size: 14px;
-            color: #1a1e2a;
-            cursor: pointer;
-        }
-        .post-name:hover {
-            color: #6aa9ff;
-        }
-        .post-nick {
-            font-size: 12px;
-            color: #6aa9ff;
-        }
-        .post-handle {
-            opacity: 0.5;
-            color: #64748b;
-        }
-        .post-text {
-            font-size: 15px;
-            line-height: 1.5;
-            margin-bottom: 12px;
-            transition: all 0.3s;
-            color: #1a1e2a;
-        }
-        .post-meta {
-            display: flex;
-            gap: 24px;
-            font-size: 13px;
-        }
-        .post-action {
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #64748b;
-        }
-        .post-action:hover {
-            opacity: 1;
-            transform: scale(1.1) rotate(5deg);
-            color: #6aa9ff;
-        }
     </style>
 </head>
 <body>
@@ -1273,6 +1365,21 @@
         <div class="top-nav">
             <div class="nav-logo" id="themeToggle">RealReel</div>
             <div class="nav-icons" id="navIcons"></div>
+        </div>
+
+        <!-- Кнопка добавления поста -->
+        <div class="add-post-btn" id="addPostBtn">+</div>
+
+        <!-- Модалка добавления поста -->
+        <div class="add-post-modal" id="addPostModal">
+            <div class="modal-title">Новый пост</div>
+            <textarea class="modal-input" id="postText" placeholder="Что у вас нового?" rows="3"></textarea>
+            <div class="modal-file" id="postFileInput">📸 Добавить фото (необязательно)</div>
+            <input type="file" id="postFile" accept="image/*" style="display: none;">
+            <div class="modal-actions">
+                <button class="modal-btn publish" id="publishPostBtn">Опубликовать</button>
+                <button class="modal-btn cancel" id="cancelPostBtn">Отмена</button>
+            </div>
         </div>
 
         <div class="content" id="content">
@@ -1297,27 +1404,8 @@
 
             <!-- Главная -->
             <div class="screen" id="homeScreen">
-                <div class="stories-row">
-                    <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat1&backgroundColor=ffdfbf');"></div>
-                        <span class="story-name">Антон</span>
-                    </div>
-                    <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat2&backgroundColor=c0a0d0');"></div>
-                        <span class="story-name">Ольга</span>
-                    </div>
-                    <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat3&backgroundColor=a0d0c0');"></div>
-                        <span class="story-name">Игорь</span>
-                    </div>
-                    <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat4&backgroundColor=d0c0a0');"></div>
-                        <span class="story-name">Лена</span>
-                    </div>
-                    <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat5&backgroundColor=ffd0a0');"></div>
-                        <span class="story-name">Дима</span>
-                    </div>
+                <div class="stories-row" id="storiesRow">
+                    <!-- Аватарка текущего пользователя будет добавлена динамически -->
                 </div>
 
                 <div id="homePosts"></div>
@@ -1326,7 +1414,7 @@
             <!-- Чат -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
-                    <div class="search-in-chat">
+                    <div class="search-in-chat" id="searchInChat">
                         <div class="search-container">
                             <svg class="search-icon" viewBox="0 0 24 24">
                                 <circle cx="11" cy="11" r="8" stroke="currentColor" fill="none"/>
@@ -1348,7 +1436,7 @@
                         <div class="chat-list" id="chatListContainer"></div>
                     </div>
 
-                    <div id="conversationView" style="display: none; flex-direction: column; height: 100%;">
+                    <div id="conversationView" style="display: none; flex-direction: column; height: 100%;" class="conversation-view theme-light">
                         <div class="conversation-header">
                             <span class="back-btn" onclick="backToChatList()">←</span>
                             <div class="conversation-avatar-container">
@@ -1361,6 +1449,12 @@
                                     <span class="conversation-nick" id="conversationNick"></span>
                                 </div>
                                 <div class="conversation-status" id="conversationStatus"></div>
+                            </div>
+                            <div class="theme-selector">
+                                <div class="theme-option light" onclick="setChatTheme('light')"></div>
+                                <div class="theme-option dark" onclick="setChatTheme('dark')"></div>
+                                <div class="theme-option space" onclick="setChatTheme('space')"></div>
+                                <div class="theme-option neon" onclick="setChatTheme('neon')"></div>
                             </div>
                         </div>
                         <div class="chat-messages" id="chatMessages"></div>
@@ -1406,7 +1500,7 @@
 
             <!-- Профиль другого пользователя -->
             <div class="screen" id="userProfileScreen">
-                <div class="user-profile-screen">
+                <div class="profile-screen">
                     <span class="back-btn" onclick="goBack()">←</span>
                     <div class="profile-header">
                         <div class="profile-avatar-container">
@@ -1537,7 +1631,17 @@
         let currentConversationId = null;
         let currentOtherUserId = null;
         let previousScreen = null;
-        let onlineUsers = new Map(); // карта онлайн пользователей
+        let onlineUsers = new Map();
+
+        // ===== ТЕМЫ ЧАТА =====
+        window.setChatTheme = function(theme) {
+            const conversationView = document.getElementById('conversationView');
+            conversationView.classList.remove('theme-light', 'theme-dark', 'theme-space', 'theme-neon');
+            conversationView.classList.add(`theme-${theme}`);
+            
+            document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
+            document.querySelector(`.theme-option.${theme}`).classList.add('active');
+        };
 
         // ===== СТАТУС ОНЛАЙН =====
         async function updateUserStatus(isOnline) {
@@ -1549,12 +1653,10 @@
             await currentUser.save();
         }
 
-        // Обновляем статус при загрузке
         if (getCurrentUser()) {
             updateUserStatus(true);
         }
 
-        // Каждые 30 секунд обновляем lastSeen
         setInterval(async () => {
             const currentUser = Parse.User.current();
             if (currentUser) {
@@ -1563,7 +1665,6 @@
             }
         }, 30000);
 
-        // При закрытии вкладки
         window.addEventListener('beforeunload', () => {
             updateUserStatus(false);
         });
@@ -1572,7 +1673,7 @@
             const isOnline = user.get('isOnline');
             const lastSeen = user.get('lastSeen');
             
-            if (isOnline || onlineUsers.has(user.id)) return { text: '🟢 Онлайн', isOnline: true };
+            if (isOnline) return { text: '🟢 Онлайн', isOnline: true };
             if (!lastSeen) return { text: '⚫ Не в сети', isOnline: false };
             
             const minutes = Math.floor((new Date() - new Date(lastSeen)) / 60000);
@@ -1582,21 +1683,21 @@
         }
 
         // ===== АВАТАРКИ =====
-        const avatarStyles = [
-            'https://api.dicebear.com/7.x/identicon/svg?seed=cat1&backgroundColor=ffdfbf',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=cat2&backgroundColor=c0a0d0',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=cat3&backgroundColor=a0d0c0',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=cat4&backgroundColor=d0c0a0',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=cat5&backgroundColor=ffd0a0',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=space1&backgroundColor=305070',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=space2&backgroundColor=703050',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=abstract1&backgroundColor=507030',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=abstract2&backgroundColor=703050',
-            'https://api.dicebear.com/7.x/identicon/svg?seed=animal1&backgroundColor=d0a080'
+        const artAvatars = [
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=cat1&backgroundColor=ffdfbf',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=cat2&backgroundColor=c0a0d0',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=cat3&backgroundColor=a0d0c0',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=cat4&backgroundColor=d0c0a0',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=cat5&backgroundColor=ffd0a0',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=space1&backgroundColor=305070',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=space2&backgroundColor=703050',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=abstract1&backgroundColor=507030',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=abstract2&backgroundColor=703050',
+            'https://api.dicebear.com/7.x/adventurer/svg?seed=animal1&backgroundColor=d0a080'
         ];
 
         function getRandomAvatar() {
-            return avatarStyles[Math.floor(Math.random() * avatarStyles.length)];
+            return artAvatars[Math.floor(Math.random() * artAvatars.length)];
         }
 
         // ===== ПОЛЬЗОВАТЕЛИ =====
@@ -1680,12 +1781,19 @@
         }
 
         // ===== ПОСТЫ =====
-        async function createPost(text) {
+        async function createPost(text, imageFile = null) {
             try {
                 const Post = Parse.Object.extend('Post');
                 const post = new Post();
                 post.set('text', text);
                 post.set('author', getCurrentUser());
+                
+                if (imageFile) {
+                    const parseFile = new Parse.File('post.jpg', imageFile);
+                    await parseFile.save();
+                    post.set('image', parseFile);
+                }
+                
                 await post.save();
                 return { success: true, post };
             } catch (error) {
@@ -2075,21 +2183,25 @@
             document.getElementById('profileFollowersCount').textContent = followersCount;
             document.getElementById('profileFollowingCount').textContent = followingCount;
             
-            const postsHtml = posts.map(post => `
-                <div class="post-item">
-                    <div class="post-avatar-small" style="background-image: url('${avatarUrl}');"></div>
-                    <div class="post-content">
-                        <div class="post-header">
-                            <div class="post-author-row">
-                                <span class="post-author">${firstName} ${lastName}</span>
-                                <span class="post-nick">${nickname ? `@${nickname}` : ''}</span>
-                                <span class="post-date">${formatDate(post.createdAt)}</span>
+            const postsHtml = posts.map(post => {
+                const imageUrl = post.get('image') ? post.get('image').url() : null;
+                return `
+                    <div class="post-item">
+                        <div class="post-avatar-small" style="background-image: url('${avatarUrl}');"></div>
+                        <div class="post-content">
+                            <div class="post-header">
+                                <div class="post-author-row">
+                                    <span class="post-author">${firstName} ${lastName}</span>
+                                    <span class="post-nick">${nickname ? `@${nickname}` : ''}</span>
+                                    <span class="post-date">${formatDate(post.createdAt)}</span>
+                                </div>
                             </div>
+                            <div class="post-body">${post.get('text')}</div>
+                            ${imageUrl ? `<img src="${imageUrl}" class="post-image" alt="post image">` : ''}
                         </div>
-                        <div class="post-body">${post.get('text')}</div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
             
             document.getElementById('userPosts').innerHTML = postsHtml || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
         }
@@ -2107,30 +2219,64 @@
                 const lastName = freshAuthor.get('lastName') || '';
                 const nickname = freshAuthor.get('nickname') || '';
                 const avatarUrl = freshAuthor.get('avatarUrl') || getRandomAvatar();
+                const imageUrl = post.get('image') ? post.get('image').url() : null;
                 
                 return `
                     <div class="post" data-author-id="${freshAuthor.id}">
-                        <div class="post-avatar" style="background-image: url('${avatarUrl}');" onclick="openUserProfile('${freshAuthor.id}')"></div>
+                        <div class="post-avatar-small" style="background-image: url('${avatarUrl}');" onclick="openUserProfile('${freshAuthor.id}')"></div>
                         <div class="post-content">
                             <div class="post-header">
                                 <div class="post-author-row">
-                                    <span class="post-name" onclick="openUserProfile('${freshAuthor.id}')">${firstName} ${lastName}</span>
+                                    <span class="post-author" onclick="openUserProfile('${freshAuthor.id}')">${firstName} ${lastName}</span>
                                     <span class="post-nick" onclick="openUserProfile('${freshAuthor.id}')">${nickname ? `@${nickname}` : ''}</span>
                                     <span class="post-date">${formatDate(post.createdAt)}</span>
                                 </div>
                             </div>
-                            <div class="post-text">${post.get('text')}</div>
-                            <div class="post-meta">
-                                <span class="post-action" onclick="alert('+1 reply')">0 replies</span>
-                                <span class="post-action" onclick="alert('+1 repost')">0 reposts</span>
-                                <span class="post-action" onclick="alert('+1 like')">0 likes</span>
-                            </div>
+                            <div class="post-body">${post.get('text')}</div>
+                            ${imageUrl ? `<img src="${imageUrl}" class="post-image" alt="post image">` : ''}
                         </div>
                     </div>
                 `;
             }));
             
             document.getElementById('homePosts').innerHTML = postsHtml.join('') || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
+            
+            // Обновляем сториз
+            await updateStories();
+        }
+
+        async function updateStories() {
+            const currentUser = getCurrentUser();
+            if (!currentUser) return;
+            
+            const firstName = currentUser.get('firstName') || '';
+            const lastName = currentUser.get('lastName') || '';
+            const avatarUrl = currentUser.get('avatarUrl') || getRandomAvatar();
+            
+            const storiesHtml = `
+                <div class="story-item">
+                    <div class="story-avatar current-user" style="background-image: url('${avatarUrl}');"></div>
+                    <span class="story-name">${firstName}</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=friend1');"></div>
+                    <span class="story-name">Антон</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=friend2');"></div>
+                    <span class="story-name">Ольга</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=friend3');"></div>
+                    <span class="story-name">Игорь</span>
+                </div>
+                <div class="story-item">
+                    <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=friend4');"></div>
+                    <span class="story-name">Лена</span>
+                </div>
+            `;
+            
+            document.getElementById('storiesRow').innerHTML = storiesHtml;
         }
 
         async function updateChatList() {
@@ -2214,21 +2360,25 @@
                     subscribeBtn.classList.remove('subscribed');
                 }
                 
-                const postsHtml = posts.map(post => `
-                    <div class="post-item">
-                        <div class="post-avatar-small" style="background-image: url('${avatarUrl}');"></div>
-                        <div class="post-content">
-                            <div class="post-header">
-                                <div class="post-author-row">
-                                    <span class="post-author">${firstName} ${lastName}</span>
-                                    <span class="post-nick">${nickname ? `@${nickname}` : ''}</span>
-                                    <span class="post-date">${formatDate(post.createdAt)}</span>
+                const postsHtml = posts.map(post => {
+                    const imageUrl = post.get('image') ? post.get('image').url() : null;
+                    return `
+                        <div class="post-item">
+                            <div class="post-avatar-small" style="background-image: url('${avatarUrl}');"></div>
+                            <div class="post-content">
+                                <div class="post-header">
+                                    <div class="post-author-row">
+                                        <span class="post-author">${firstName} ${lastName}</span>
+                                        <span class="post-nick">${nickname ? `@${nickname}` : ''}</span>
+                                        <span class="post-date">${formatDate(post.createdAt)}</span>
+                                    </div>
                                 </div>
+                                <div class="post-body">${post.get('text')}</div>
+                                ${imageUrl ? `<img src="${imageUrl}" class="post-image" alt="post image">` : ''}
                             </div>
-                            <div class="post-body">${post.get('text')}</div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
                 
                 document.getElementById('userProfilePosts').innerHTML = postsHtml || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
                 
@@ -2319,7 +2469,6 @@
                 list.innerHTML = itemsHtml.join('') || '<p style="opacity:0.7; text-align:center;">Нет подписок</p>';
             }
             
-            // Подсвечиваем активную вкладку
             document.getElementById('followersTab').classList.toggle('active', type === 'followers');
             document.getElementById('followingTab').classList.toggle('active', type === 'following');
         }
@@ -2357,8 +2506,59 @@
         const chatSearchInput = document.getElementById('chatSearchInput');
         const chatSearchBtn = document.getElementById('chatSearchBtn');
         const chatSearchResults = document.getElementById('chatSearchResults');
+        
+        const addPostBtn = document.getElementById('addPostBtn');
+        const addPostModal = document.getElementById('addPostModal');
+        const postText = document.getElementById('postText');
+        const postFileInput = document.getElementById('postFileInput');
+        const postFile = document.getElementById('postFile');
+        const publishPostBtn = document.getElementById('publishPostBtn');
+        const cancelPostBtn = document.getElementById('cancelPostBtn');
 
         let isLoginMode = false;
+
+        addPostBtn.addEventListener('click', () => {
+            addPostModal.classList.toggle('active');
+        });
+
+        postFileInput.addEventListener('click', () => {
+            postFile.click();
+        });
+
+        postFile.addEventListener('change', (e) => {
+            if (e.target.files[0]) {
+                postFileInput.textContent = `📸 ${e.target.files[0].name}`;
+            }
+        });
+
+        publishPostBtn.addEventListener('click', async () => {
+            const text = postText.value.trim();
+            if (!text) {
+                alert('Введите текст поста');
+                return;
+            }
+            
+            const file = postFile.files[0];
+            const result = await createPost(text, file);
+            
+            if (result.success) {
+                postText.value = '';
+                postFileInput.textContent = '📸 Добавить фото (необязательно)';
+                postFile.value = '';
+                addPostModal.classList.remove('active');
+                await updateHomeFeed();
+                await updateProfileUI();
+            } else {
+                alert(result.message);
+            }
+        });
+
+        cancelPostBtn.addEventListener('click', () => {
+            postText.value = '';
+            postFileInput.textContent = '📸 Добавить фото (необязательно)';
+            postFile.value = '';
+            addPostModal.classList.remove('active');
+        });
 
         authSwitch.addEventListener('click', () => {
             isLoginMode = !isLoginMode;
@@ -2585,6 +2785,9 @@
             currentConversationId = conversationId;
             currentOtherUserId = otherUserId;
             
+            // Скрываем поиск при открытии чата
+            document.getElementById('searchInChat').classList.add('hidden');
+            
             subscribeToChat(conversationId, otherUserId);
             
             document.getElementById('chatMessages').innerHTML = '';
@@ -2595,6 +2798,9 @@
         function backToChatList() {
             document.getElementById('chatList').style.display = 'flex';
             document.getElementById('conversationView').style.display = 'none';
+            
+            // Показываем поиск
+            document.getElementById('searchInChat').classList.remove('hidden');
             
             if (currentChannel) {
                 currentChannel.unbind_all();
@@ -2645,6 +2851,7 @@
                 await updateProfileUI();
                 await updateHomeFeed();
                 await updateChatList();
+                await updateStories();
                 authScreen.classList.remove('active');
                 homeScreen.classList.add('active');
                 showNavIcons();
@@ -2706,6 +2913,7 @@
                         screens.chat.classList.add('active');
                         document.getElementById('chatList').style.display = 'flex';
                         document.getElementById('conversationView').style.display = 'none';
+                        document.getElementById('searchInChat').classList.remove('hidden');
                         await updateChatList();
                     }
                     if (screenName === 'reels') {
