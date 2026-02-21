@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал · всё работает</title>
+    <title>RealReel · финал · сториз</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -85,6 +85,39 @@
             flex: 1;
             overflow-y: auto;
             padding: 16px;
+        }
+
+        /* ===== СТОРИЗ ===== */
+        .stories-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding: 4px 0;
+        }
+        .stories-row::-webkit-scrollbar {
+            display: none;
+        }
+        .story-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-width: 64px;
+            cursor: pointer;
+        }
+        .story-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #6aa9ff;
+        }
+        .story-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
         }
 
         /* ===== АВТОРИЗАЦИЯ ===== */
@@ -270,7 +303,7 @@
         .post-author-row {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .post-author {
@@ -290,26 +323,46 @@
             color: #999;
             margin-left: auto;
         }
-        .post-owner-actions {
-            display: flex;
-            gap: 12px;
-            margin-left: auto;
-        }
-        .post-owner-btn {
+        .post-menu-btn {
             background: none;
             border: none;
             cursor: pointer;
-            padding: 4px;
+            padding: 4px 8px;
+            font-size: 18px;
+            color: #888;
+            letter-spacing: 2px;
         }
-        .post-owner-btn svg {
-            width: 18px;
-            height: 18px;
-            stroke: #888;
-            fill: none;
-            transition: 0.2s;
+        .post-menu-btn:hover {
+            color: #6aa9ff;
         }
-        .post-owner-btn:hover svg {
-            stroke: #6aa9ff;
+        .post-menu {
+            position: absolute;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 8px;
+            z-index: 10;
+            display: none;
+        }
+        .post-menu.active {
+            display: block;
+        }
+        .post-menu-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .post-menu-item:hover {
+            background: #f5f5f5;
+        }
+        .post-menu-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: #555;
         }
         .post-text {
             font-size: 14px;
@@ -877,54 +930,6 @@
             background: #f0f0f0;
         }
 
-        .edit-post-modal {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            background: white;
-            border-radius: 30px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            z-index: 201;
-            display: none;
-        }
-        .edit-post-modal.active {
-            display: block;
-        }
-        .edit-post-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        .edit-post-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            outline: none;
-        }
-        .edit-post-actions {
-            display: flex;
-            gap: 8px;
-        }
-        .edit-post-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .edit-post-btn.save {
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            color: white;
-        }
-        .edit-post-btn.cancel {
-            background: #f0f0f0;
-        }
-
         .hidden {
             display: none;
         }
@@ -985,16 +990,6 @@
             </div>
         </div>
 
-        <!-- Модалка редактирования поста -->
-        <div class="edit-post-modal" id="editPostModal">
-            <div class="edit-post-title">Редактировать пост</div>
-            <textarea class="edit-post-input" id="editPostText" rows="3"></textarea>
-            <div class="edit-post-actions">
-                <button class="edit-post-btn save" id="savePostBtn">Сохранить</button>
-                <button class="edit-post-btn cancel" id="cancelEditPostBtn">Отмена</button>
-            </div>
-        </div>
-
         <div class="content" id="content">
             <!-- Авторизация -->
             <div class="screen active" id="authScreen">
@@ -1016,6 +1011,7 @@
 
             <!-- Главная -->
             <div class="screen" id="homeScreen">
+                <div class="stories-row" id="storiesRow"></div>
                 <div class="posts-list" id="homePosts"></div>
             </div>
 
@@ -1126,7 +1122,6 @@
         let currentConversationId = null;
         let currentOtherUserId = null;
         let currentProfileUserId = null;
-        let currentEditingPostId = null;
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -1250,6 +1245,15 @@
                 query.descending('createdAt');
                 return await query.find();
             } catch (error) {
+                return [];
+            }
+        }
+
+        async function getStories() {
+            try {
+                const users = await new Parse.Query('_User').find();
+                return users.filter(u => u.id !== getCurrentUser().id).slice(0, 5);
+            } catch {
                 return [];
             }
         }
@@ -1543,6 +1547,22 @@
         async function updateHomeFeed() {
             const posts = await getAllPosts();
             const currentUser = getCurrentUser();
+            const stories = await getStories();
+            
+            // Сториз
+            const storiesHtml = stories.map(user => {
+                const avatarClass = getAvatarClass(user);
+                const avatarStyle = getAvatarStyle(user);
+                return `
+                    <div class="story-item" onclick="openUserProfile('${user.id}')">
+                        <div class="story-avatar ${avatarClass}" style="${avatarStyle}"></div>
+                        <span class="story-name">${user.get('firstName')}</span>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('storiesRow').innerHTML = storiesHtml;
+
+            // Посты
             const postsHtml = await Promise.all(posts.map(async (post) => {
                 const author = post.get('author');
                 await author.fetch();
@@ -1550,24 +1570,28 @@
                 const isAuthor = currentUser && author.id === currentUser.id;
                 const avatarClass = getAvatarClass(author);
                 const avatarStyle = getAvatarStyle(author);
+                const nickname = author.get('nickname') || '';
                 
                 return `
-                    <div class="post-item" data-post-id="${post.id}">
+                    <div class="post-item" data-post-id="${post.id}" id="post-${post.id}">
                         <div class="post-header">
                             <div class="post-avatar ${avatarClass}" style="${avatarStyle}" onclick="openUserProfile('${author.id}')"></div>
                             <div class="post-author-info">
                                 <div class="post-author-row">
                                     <span class="post-author" onclick="openUserProfile('${author.id}')">${author.get('firstName')} ${author.get('lastName')}</span>
-                                    <span class="post-nick">@${author.get('nickname')}</span>
+                                    <span class="post-nick">@${nickname}</span>
                                     <span class="post-date">${formatDate(post.createdAt)}</span>
                                     ${isAuthor ? `
-                                        <div class="post-owner-actions">
-                                            <button class="post-owner-btn" onclick="editPostHandler('${post.id}')">
+                                        <button class="post-menu-btn" onclick="togglePostMenu('${post.id}', event)">•••</button>
+                                        <div class="post-menu" id="menu-${post.id}">
+                                            <div class="post-menu-item" onclick="editPostHandler('${post.id}')">
                                                 <svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
-                                            </button>
-                                            <button class="post-owner-btn" onclick="deletePostHandler('${post.id}')">
-                                                <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 4V2h8v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                                            </button>
+                                                Редактировать
+                                            </div>
+                                            <div class="post-menu-item" onclick="deletePostHandler('${post.id}')">
+                                                <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 4V2h8v2"/></svg>
+                                                Удалить
+                                            </div>
                                         </div>
                                     ` : ''}
                                 </div>
@@ -1615,13 +1639,16 @@
             currentProfileUserId = user.id;
             
             document.getElementById('profileFullName').textContent = `${user.get('firstName')} ${user.get('lastName')}`;
-            document.getElementById('profileNick').textContent = `@${user.get('nickname')}`;
+            const nickname = user.get('nickname') || '';
+            document.getElementById('profileNick').textContent = `@${nickname}`;
             
             const avatarClass = getAvatarClass(user);
             const avatarStyle = getAvatarStyle(user);
             document.getElementById('profileAvatar').className = `profile-avatar ${avatarClass}`;
             if (avatarStyle) {
                 document.getElementById('profileAvatar').style.cssText = avatarStyle;
+            } else {
+                document.getElementById('profileAvatar').style.cssText = '';
             }
             
             const starElement = document.getElementById('profileStar');
@@ -1682,13 +1709,14 @@
             const html = users.map(user => {
                 const avatarClass = getAvatarClass(user);
                 const avatarStyle = getAvatarStyle(user);
+                const nickname = user.get('nickname') || '';
                 return `
                     <div class="user-card" onclick="openUserProfile('${user.id}')">
                         <div class="user-avatar ${avatarClass}" style="${avatarStyle}"></div>
                         <div class="user-info">
                             <div class="user-name-row">
                                 <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                                <span class="user-nick">@${user.get('nickname')}</span>
+                                <span class="user-nick">@${nickname}</span>
                             </div>
                             <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                         </div>
@@ -1730,6 +1758,13 @@
             document.getElementById('chatList').innerHTML = html.join('');
         }
 
+        window.togglePostMenu = function(postId, event) {
+            event.stopPropagation();
+            document.querySelectorAll('.post-menu').forEach(menu => menu.classList.remove('active'));
+            const menu = document.getElementById(`menu-${postId}`);
+            menu.classList.toggle('active');
+        };
+
         window.likePostHandler = async function(postId, el) {
             await likePost(postId);
             const count = el.querySelector('span');
@@ -1759,10 +1794,12 @@
         };
 
         window.editPostHandler = async function(postId) {
-            const post = await new Parse.Query('Post').get(postId);
-            document.getElementById('editPostText').value = post.get('text');
-            currentEditingPostId = postId;
-            document.getElementById('editPostModal').classList.add('active');
+            const newText = prompt('Редактировать пост:');
+            if (newText && newText.trim()) {
+                await editPost(postId, newText);
+                await updateHomeFeed();
+                await updateProfileUI();
+            }
         };
 
         window.openUserProfile = async function(userId) {
@@ -1902,10 +1939,6 @@
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
         const avatarFileInput = document.getElementById('avatarFileInput');
-        const editPostModal = document.getElementById('editPostModal');
-        const editPostText = document.getElementById('editPostText');
-        const savePostBtn = document.getElementById('savePostBtn');
-        const cancelEditPostBtn = document.getElementById('cancelEditPostBtn');
 
         let isLoginMode = false;
 
@@ -2042,36 +2075,19 @@
             }
         });
 
-        savePostBtn.addEventListener('click', async () => {
-            if (!currentEditingPostId) return;
-            const newText = editPostText.value.trim();
-            if (!newText) return;
-            await editPost(currentEditingPostId, newText);
-            editPostModal.classList.remove('active');
-            currentEditingPostId = null;
-            editPostText.value = '';
-            await updateHomeFeed();
-            await updateProfileUI();
-        });
-
-        cancelEditPostBtn.addEventListener('click', () => {
-            editPostModal.classList.remove('active');
-            currentEditingPostId = null;
-            editPostText.value = '';
-        });
-
         searchBtn.addEventListener('click', async () => {
             const users = await searchUsers(searchInput.value);
             const html = users.map(user => {
                 const avatarClass = getAvatarClass(user);
                 const avatarStyle = getAvatarStyle(user);
+                const nickname = user.get('nickname') || '';
                 return `
                     <div class="user-card" onclick="openUserProfile('${user.id}')">
                         <div class="user-avatar ${avatarClass}" style="${avatarStyle}"></div>
                         <div class="user-info">
                             <div class="user-name-row">
                                 <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                                <span class="user-nick">@${user.get('nickname')}</span>
+                                <span class="user-nick">@${nickname}</span>
                             </div>
                             <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                         </div>
