@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финальная версия</title>
+    <title>RealReel · онлайн · никнеймы · арт</title>
     <!-- Подключаем шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,6 +75,7 @@
             align-items: center;
             justify-content: center;
             background: rgba(106, 169, 255, 0.1);
+            border-radius: 30px;
         }
         .nav-icon svg {
             width: 20px;
@@ -143,6 +144,10 @@
             to { transform: scale(1.05); }
         }
 
+        .auth-screen:hover .auth-bg {
+            transform: scale(1.02);
+        }
+
         .auth-form {
             width: 100%;
             max-width: 300px;
@@ -156,6 +161,7 @@
             z-index: 1;
             animation: slideUp 0.5s ease;
             border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
         }
 
         @keyframes slideUp {
@@ -181,6 +187,7 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
             background: #ffffff;
             color: #1a1e2a;
+            border-radius: 30px;
         }
         .auth-input::placeholder {
             color: #999;
@@ -202,6 +209,7 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            border-radius: 30px;
         }
         .auth-btn:hover {
             transform: scale(1.05);
@@ -233,7 +241,7 @@
             75% { transform: translateX(5px); }
         }
 
-        /* ===== ПРОФИЛЬ (ОСНОВНОЙ) ===== */
+        /* ===== ПРОФИЛЬ ===== */
         .profile-screen {
             display: flex;
             flex-direction: column;
@@ -255,7 +263,6 @@
         .profile-avatar {
             width: 72px;
             height: 72px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -264,6 +271,8 @@
             font-weight: 600;
             overflow: hidden;
             border-radius: 36px;
+            background-size: cover;
+            background-position: center;
         }
         .profile-avatar img {
             width: 100%;
@@ -339,6 +348,7 @@
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border-radius: 24px;
         }
 
         .hidden {
@@ -360,6 +370,12 @@
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            animation: slideIn 0.3s ease;
+            border-radius: 20px;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .post-avatar-small {
             width: 36px;
@@ -367,17 +383,26 @@
             background-size: cover;
             background-position: center;
             flex-shrink: 0;
-            background-color: #6aa9ff;
             border-radius: 18px;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .post-avatar-small:hover {
+            transform: scale(1.1);
         }
         .post-content {
             flex: 1;
         }
         .post-header {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
+            flex-direction: column;
+            margin-bottom: 4px;
+        }
+        .post-author-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .post-author {
             font-weight: 600;
@@ -388,6 +413,11 @@
         .post-author:hover {
             color: #6aa9ff;
         }
+        .post-nick {
+            font-size: 12px;
+            color: #6aa9ff;
+            opacity: 0.8;
+        }
         .post-date {
             font-size: 11px;
             opacity: 0.6;
@@ -397,31 +427,6 @@
             font-size: 13px;
             line-height: 1.5;
             color: #1a1e2a;
-        }
-
-        /* ===== ПРОФИЛЬ ДРУГОГО ПОЛЬЗОВАТЕЛЯ ===== */
-        .user-profile-screen {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            height: 100%;
-        }
-        .back-btn {
-            width: 36px;
-            height: 36px;
-            background: rgba(106, 169, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 18px;
-            transition: all 0.3s;
-            color: #1a1e2a;
-            margin-bottom: 8px;
-        }
-        .back-btn:hover {
-            transform: scale(1.1) rotate(-10deg);
-            background: rgba(106, 169, 255, 0.2);
         }
 
         /* ===== ЧАТ ===== */
@@ -437,35 +442,60 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            position: relative;
         }
         .search-input {
             flex: 1;
-            padding: 12px 16px;
+            padding: 14px 18px 14px 46px;
             font-size: 14px;
             outline: none;
             transition: all 0.3s;
             border: 1px solid rgba(0, 0, 0, 0.1);
             background: #ffffff;
             color: #1a1e2a;
+            border-radius: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
         .search-input:focus {
-            box-shadow: 0 0 0 2px rgba(106, 169, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(106, 169, 255, 0.3), 0 2px 8px rgba(0,0,0,0.05);
+            transform: scale(1.01);
+        }
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            stroke: #4a5b8a;
+            stroke-width: 2;
+            fill: none;
+            pointer-events: none;
         }
         .search-btn {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 18px;
             color: white;
             border: none;
             transition: 0.2s;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(106, 169, 255, 0.3);
+        }
+        .search-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
         }
         .search-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 6px 16px rgba(106, 169, 255, 0.4);
         }
         .search-results {
             margin-top: 12px;
@@ -480,34 +510,65 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px;
+            padding: 12px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s;
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border-radius: 20px;
+            animation: fadeInUp 0.3s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .user-search-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(106, 169, 255, 0.15);
+            border-color: rgba(106, 169, 255, 0.2);
         }
         .user-search-avatar {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background-size: cover;
             background-position: center;
-            border: 2px solid rgba(106, 169, 255, 0.3);
-            border-radius: 20px;
+            border-radius: 22px;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .user-search-avatar:hover {
+            transform: scale(1.1);
         }
         .user-search-info {
             flex: 1;
             cursor: pointer;
+        }
+        .user-search-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
         }
         .user-search-name {
             font-weight: 600;
             font-size: 15px;
             color: #1a1e2a;
         }
+        .user-search-nick {
+            font-size: 12px;
+            color: #6aa9ff;
+        }
+        .user-search-status {
+            font-size: 11px;
+            color: #4CAF50;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
         .user-search-email {
             font-size: 12px;
-            opacity: 0.7;
+            opacity: 0.6;
             color: #64748b;
         }
         .user-search-actions {
@@ -515,29 +576,32 @@
             gap: 8px;
         }
         .action-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 18px;
+            width: 38px;
+            height: 38px;
+            border-radius: 19px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             border: none;
-            transition: 0.2s;
+            transition: all 0.2s;
+            font-size: 16px;
         }
         .chat-btn {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             color: white;
-            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(106, 169, 255, 0.3);
         }
         .chat-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 4px 12px rgba(106, 169, 255, 0.4);
         }
         .subscribe-btn {
-            background: #e8ecf2;
+            background: #eef2f6;
             color: #1a1e2a;
             font-size: 18px;
             font-weight: 600;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         .subscribe-btn.subscribed {
             background: #4CAF50;
@@ -545,6 +609,7 @@
         }
         .subscribe-btn:hover {
             transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
         }
 
         .chat-list {
@@ -562,88 +627,156 @@
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border-radius: 20px;
+            animation: slideIn 0.3s ease;
         }
         .chat-item:hover {
             transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(106, 169, 255, 0.15);
+            border-color: rgba(106, 169, 255, 0.2);
+        }
+        .chat-avatar-container {
+            position: relative;
         }
         .chat-avatar {
-            width: 56px;
-            height: 56px;
+            width: 52px;
+            height: 52px;
             background-size: cover;
             background-position: center;
-            border: 2px solid rgba(106, 169, 255, 0.3);
-            flex-shrink: 0;
-            transition: all 0.3s;
-            border-radius: 28px;
+            border-radius: 26px;
             cursor: pointer;
+            transition: transform 0.2s;
         }
         .chat-avatar:hover {
             transform: scale(1.05);
-            border-color: #6aa9ff;
+        }
+        .online-dot {
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            border: 2px solid white;
         }
         .chat-info {
             flex: 1;
         }
+        .chat-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
         .chat-name {
             font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 4px;
-            transition: all 0.3s;
+            font-size: 15px;
             color: #1a1e2a;
             cursor: pointer;
         }
         .chat-name:hover {
             color: #6aa9ff;
         }
+        .chat-nick {
+            font-size: 11px;
+            color: #6aa9ff;
+        }
         .chat-preview {
-            font-size: 14px;
-            opacity: 0.8;
+            font-size: 13px;
+            opacity: 0.7;
             color: #64748b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
         }
         .chat-time {
-            font-size: 12px;
-            opacity: 0.6;
-            margin-left: auto;
-            transition: all 0.3s;
+            font-size: 10px;
+            opacity: 0.5;
             color: #8899bb;
+            align-self: flex-start;
         }
 
         .conversation-view {
             display: flex;
             flex-direction: column;
             height: 100%;
+            background: #f8fafd;
+            border-radius: 24px;
+            padding: 16px;
         }
         .conversation-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px 0;
-            margin-bottom: 16px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 8px 0 16px 0;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        .conversation-avatar-container {
+            position: relative;
         }
         .conversation-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
             background-size: cover;
             background-position: center;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .conversation-avatar:hover {
+            transform: scale(1.1);
+        }
+        .conversation-info {
+            flex: 1;
+        }
+        .conversation-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .conversation-name {
             font-weight: 600;
             font-size: 16px;
-            transition: all 0.3s;
             color: #1a1e2a;
             cursor: pointer;
-            flex: 1;
         }
         .conversation-name:hover {
             color: #6aa9ff;
         }
+        .conversation-nick {
+            font-size: 12px;
+            color: #6aa9ff;
+        }
+        .conversation-status {
+            font-size: 11px;
+            color: #4CAF50;
+            margin-top: 2px;
+        }
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            background: rgba(106, 169, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            color: #1a1e2a;
+            border-radius: 18px;
+        }
+        .back-btn:hover {
+            transform: scale(1.1) rotate(-10deg);
+            background: rgba(106, 169, 255, 0.2);
+        }
+
         .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding-bottom: 16px;
+            padding: 16px 4px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -652,19 +785,17 @@
             display: flex;
             gap: 10px;
             align-items: flex-end;
-            animation: messageSlide 0.3s ease;
+            animation: messageSlide 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.1);
         }
-
         @keyframes messageSlide {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .chat-bubble.own {
             justify-content: flex-end;
         }
         .bubble {
-            padding: 12px 16px;
+            padding: 12px 18px;
             max-width: 80%;
             word-break: break-word;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -672,40 +803,72 @@
             background: linear-gradient(135deg, #f0f4fa, #e8e2f2);
             color: #1a1e2a;
             border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: 24px 24px 24px 8px;
+            position: relative;
         }
-        .bubble:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 15px rgba(106, 169, 255, 0.2);
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -6px;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #f0f4fa, #e8e2f2);
+            border-radius: 0 0 12px 0;
+            border-right: 1px solid rgba(0,0,0,0.04);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
         .bubble.me {
-            background: linear-gradient(135deg, #e0e6f2, #d8d0e8);
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            color: white;
+            border: none;
+            border-radius: 24px 24px 8px 24px;
+        }
+        .bubble.me::after {
+            display: none;
+        }
+        .bubble.me::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: -6px;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            border-radius: 0 0 0 12px;
+        }
+        .bubble:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 20px rgba(106, 169, 255, 0.2);
         }
 
         .chat-input-container {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 0 16px 0;
+            gap: 8px;
+            padding: 8px 0 0 0;
             margin-top: auto;
         }
         .chat-input {
             flex: 1;
-            padding: 14px 18px;
+            padding: 16px 20px;
             font-size: 15px;
             outline: none;
             transition: all 0.3s;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             background: #ffffff;
             color: #1a1e2a;
+            border-radius: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
         .chat-input:focus {
-            box-shadow: 0 0 0 2px rgba(106, 169, 255, 0.3);
-            transform: scale(1.02);
+            box-shadow: 0 0 0 2px rgba(106, 169, 255, 0.3), 0 2px 8px rgba(0,0,0,0.05);
+            transform: scale(1.01);
         }
         .send-btn {
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, #6d8fd1, #9a7ad9);
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -716,17 +879,112 @@
             border: none;
             flex-shrink: 0;
             box-shadow: 0 4px 12px rgba(106, 169, 255, 0.3);
+            border-radius: 27px;
             animation: sendPulse 2s infinite;
         }
         .send-btn:hover {
-            transform: scale(1.1) rotate(90deg);
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 6px 18px rgba(106, 169, 255, 0.5);
             animation: none;
         }
-
         @keyframes sendPulse {
             0% { box-shadow: 0 4px 12px rgba(106, 169, 255, 0.3); }
-            50% { box-shadow: 0 4px 20px rgba(159, 110, 255, 0.6); }
+            50% { box-shadow: 0 6px 20px rgba(159, 110, 255, 0.6); }
             100% { box-shadow: 0 4px 12px rgba(106, 169, 255, 0.3); }
+        }
+
+        /* ===== ПОДПИСКИ ===== */
+        .subscriptions-screen {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .sub-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .sub-tab {
+            flex: 1;
+            padding: 12px;
+            background: rgba(106, 169, 255, 0.1);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #4a5b8a;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .sub-tab.active {
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            color: white;
+            box-shadow: 0 4px 12px rgba(106, 169, 255, 0.3);
+        }
+        .sub-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .sub-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border-radius: 20px;
+        }
+        .sub-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+        }
+        .sub-info {
+            flex: 1;
+        }
+        .sub-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .sub-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #1a1e2a;
+            cursor: pointer;
+        }
+        .sub-nick {
+            font-size: 11px;
+            color: #6aa9ff;
+        }
+        .sub-status {
+            font-size: 11px;
+            color: #4CAF50;
+        }
+        .sub-action {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background: rgba(106, 169, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
+            font-size: 16px;
+        }
+        .sub-action:hover {
+            transform: scale(1.1);
+            background: rgba(106, 169, 255, 0.2);
         }
 
         .settings-row {
@@ -746,6 +1004,7 @@
             justify-content: center;
             cursor: pointer;
             transition: 0.2s;
+            border-radius: 22px;
         }
         .settings-icon svg {
             width: 22px;
@@ -769,6 +1028,7 @@
             justify-content: center;
             cursor: pointer;
             transition: 0.2s;
+            border-radius: 22px;
         }
         .logout-icon svg {
             width: 22px;
@@ -801,13 +1061,12 @@
             position: relative;
             animation: reelFade 0.5s ease;
             background: linear-gradient(135deg, #2f4177, #392b5a);
+            border-radius: 24px;
         }
-
         @keyframes reelFade {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
-
         .reel-card video {
             position: absolute;
             top: 0;
@@ -831,6 +1090,7 @@
             backdrop-filter: blur(5px);
             z-index: 1;
             transition: all 0.3s;
+            border-radius: 30px;
         }
         .reel-play {
             width: 48px;
@@ -845,6 +1105,7 @@
             cursor: pointer;
             transition: all 0.3s;
             z-index: 1;
+            border-radius: 30px;
         }
         .reel-play:hover {
             transform: scale(1.1) rotate(360deg);
@@ -901,13 +1162,11 @@
             box-shadow: 0 0 15px #6aa9ff;
             animation: none;
         }
-
         @keyframes avatarPulse {
-            0% { box-shadow: 0 0 5px rgba(106, 169, 255, 0.3); }
-            50% { box-shadow: 0 0 15px rgba(159, 110, 255, 0.6); }
-            100% { box-shadow: 0 0 5px rgba(106, 169, 255, 0.3); }
+            0% { box-shadow: 0 0 0 0 rgba(106, 169, 255, 0.3); }
+            70% { box-shadow: 0 0 0 8px rgba(106, 169, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(106, 169, 255, 0); }
         }
-
         .story-name {
             font-size: 12px;
             font-weight: 500;
@@ -942,6 +1201,7 @@
             background: #ffffff;
             border: 1px solid rgba(0, 0, 0, 0.04);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border-radius: 24px;
         }
 
         @keyframes postFadeIn {
@@ -958,26 +1218,31 @@
         }
         .post-header {
             display: flex;
-            gap: 8px;
+            flex-direction: column;
             margin-bottom: 6px;
-            font-size: 14px;
+        }
+        .post-author-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .post-name {
             font-weight: 600;
-            transition: all 0.3s;
-            cursor: pointer;
+            font-size: 14px;
             color: #1a1e2a;
+            cursor: pointer;
         }
         .post-name:hover {
+            color: #6aa9ff;
+        }
+        .post-nick {
+            font-size: 12px;
             color: #6aa9ff;
         }
         .post-handle {
             opacity: 0.5;
             color: #64748b;
-            cursor: pointer;
-        }
-        .post-handle:hover {
-            color: #6aa9ff;
         }
         .post-text {
             font-size: 15px;
@@ -1019,6 +1284,7 @@
                         <div class="auth-title" id="authTitle">Регистрация</div>
                         <input type="text" class="auth-input" id="authFirstName" placeholder="Имя" autocomplete="off">
                         <input type="text" class="auth-input" id="authLastName" placeholder="Фамилия" autocomplete="off">
+                        <input type="text" class="auth-input" id="authNickname" placeholder="Никнейм (без @)" autocomplete="off">
                         <input type="email" class="auth-input" id="authEmail" placeholder="Почта" autocomplete="off">
                         <input type="password" class="auth-input" id="authPassword" placeholder="Пароль" autocomplete="off">
                         <div class="auth-error" id="authError"></div>
@@ -1033,23 +1299,23 @@
             <div class="screen" id="homeScreen">
                 <div class="stories-row">
                     <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://images.pexels.com/photos/1671325/pexels-photo-1671325.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop');"></div>
+                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat1&backgroundColor=ffdfbf');"></div>
                         <span class="story-name">Антон</span>
                     </div>
                     <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop');"></div>
+                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat2&backgroundColor=c0a0d0');"></div>
                         <span class="story-name">Ольга</span>
                     </div>
                     <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop');"></div>
+                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat3&backgroundColor=a0d0c0');"></div>
                         <span class="story-name">Игорь</span>
                     </div>
                     <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop');"></div>
+                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat4&backgroundColor=d0c0a0');"></div>
                         <span class="story-name">Лена</span>
                     </div>
                     <div class="story-item">
-                        <div class="story-avatar" style="background-image: url('https://images.pexels.com/photos/1121796/pexels-photo-1121796.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop');"></div>
+                        <div class="story-avatar" style="background-image: url('https://api.dicebear.com/7.x/identicon/svg?seed=cat5&backgroundColor=ffd0a0');"></div>
                         <span class="story-name">Дима</span>
                     </div>
                 </div>
@@ -1062,8 +1328,17 @@
                 <div class="chat-screen">
                     <div class="search-in-chat">
                         <div class="search-container">
+                            <svg class="search-icon" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" stroke="currentColor" fill="none"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor"/>
+                            </svg>
                             <input type="text" class="search-input" id="chatSearchInput" placeholder="Поиск пользователей...">
-                            <button class="search-btn" id="chatSearchBtn">🔍</button>
+                            <button class="search-btn" id="chatSearchBtn">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="11" cy="11" r="8" stroke="white" fill="none"/>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="white"/>
+                                </svg>
+                            </button>
                         </div>
                         <div class="search-results" id="chatSearchResults"></div>
                     </div>
@@ -1076,8 +1351,17 @@
                     <div id="conversationView" style="display: none; flex-direction: column; height: 100%;">
                         <div class="conversation-header">
                             <span class="back-btn" onclick="backToChatList()">←</span>
-                            <div class="conversation-avatar" id="conversationAvatar" style="background-image: url('');" onclick="openUserProfile(currentOtherUserId)"></div>
-                            <span class="conversation-name" id="conversationName" onclick="openUserProfile(currentOtherUserId)"></span>
+                            <div class="conversation-avatar-container">
+                                <div class="conversation-avatar" id="conversationAvatar" onclick="openUserProfile(currentOtherUserId)"></div>
+                                <div class="online-dot" id="onlineDot" style="display: none;"></div>
+                            </div>
+                            <div class="conversation-info">
+                                <div class="conversation-name-row">
+                                    <span class="conversation-name" id="conversationName" onclick="openUserProfile(currentOtherUserId)"></span>
+                                    <span class="conversation-nick" id="conversationNick"></span>
+                                </div>
+                                <div class="conversation-status" id="conversationStatus"></div>
+                            </div>
                         </div>
                         <div class="chat-messages" id="chatMessages"></div>
                         <div class="chat-input-container">
@@ -1088,44 +1372,15 @@
                 </div>
             </div>
 
-            <!-- Профиль другого пользователя -->
-            <div class="screen" id="userProfileScreen">
-                <div class="user-profile-screen">
-                    <span class="back-btn" onclick="goBack()">←</span>
-                    <div class="profile-header">
-                        <div class="profile-avatar-container">
-                            <div class="profile-avatar" id="userProfileAvatar">
-                                <img id="userProfileAvatarImg" src="" style="display: none;">
-                                <span id="userProfileAvatarInitials">RR</span>
-                            </div>
-                        </div>
-                        <div class="profile-info-text">
-                            <span class="profile-fullname" id="userProfileFullName">Имя Фамилия</span>
-                            <span class="profile-username" id="userProfileUsername">@username</span>
-                        </div>
+            <!-- Подписки -->
+            <div class="screen" id="subscriptionsScreen">
+                <div class="subscriptions-screen">
+                    <h3 style="margin-bottom: 16px;">Подписки</h3>
+                    <div class="sub-tabs">
+                        <button class="sub-tab active" id="followersTab">Подписчики</button>
+                        <button class="sub-tab" id="followingTab">Подписки</button>
                     </div>
-                    
-                    <div class="stats-row">
-                        <div class="stat-item">
-                            <div class="stat-value" id="userProfilePostsCount">0</div>
-                            <div class="stat-label">посты</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="userProfileFollowersCount">0</div>
-                            <div class="stat-label">подписчики</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value" id="userProfileFollowingCount">0</div>
-                            <div class="stat-label">подписки</div>
-                        </div>
-                    </div>
-
-                    <div class="user-search-actions" style="justify-content: center; margin: 10px 0;">
-                        <button class="action-btn chat-btn" id="userProfileChatBtn">💬 Написать</button>
-                        <button class="action-btn subscribe-btn" id="userProfileSubscribeBtn">+ Подписаться</button>
-                    </div>
-
-                    <div class="posts-list" id="userProfilePosts"></div>
+                    <div class="sub-list" id="subscriptionsList"></div>
                 </div>
             </div>
 
@@ -1149,34 +1404,69 @@
                 </div>
             </div>
 
+            <!-- Профиль другого пользователя -->
+            <div class="screen" id="userProfileScreen">
+                <div class="user-profile-screen">
+                    <span class="back-btn" onclick="goBack()">←</span>
+                    <div class="profile-header">
+                        <div class="profile-avatar-container">
+                            <div class="profile-avatar" id="userProfileAvatar"></div>
+                        </div>
+                        <div class="profile-info-text">
+                            <span class="profile-fullname" id="userProfileFullName">Имя Фамилия</span>
+                            <span class="profile-username" id="userProfileNick">@nickname</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-row">
+                        <div class="stat-item" onclick="showUserSubscriptions('followers')">
+                            <div class="stat-value" id="userProfilePostsCount">0</div>
+                            <div class="stat-label">посты</div>
+                        </div>
+                        <div class="stat-item" onclick="showUserSubscriptions('followers')">
+                            <div class="stat-value" id="userProfileFollowersCount">0</div>
+                            <div class="stat-label">подписчики</div>
+                        </div>
+                        <div class="stat-item" onclick="showUserSubscriptions('following')">
+                            <div class="stat-value" id="userProfileFollowingCount">0</div>
+                            <div class="stat-label">подписки</div>
+                        </div>
+                    </div>
+
+                    <div class="user-search-actions" style="justify-content: center; margin: 10px 0;">
+                        <button class="action-btn chat-btn" id="userProfileChatBtn">💬 Написать</button>
+                        <button class="action-btn subscribe-btn" id="userProfileSubscribeBtn">+ Подписаться</button>
+                    </div>
+
+                    <div class="posts-list" id="userProfilePosts"></div>
+                </div>
+            </div>
+
             <!-- Мой профиль -->
             <div class="screen" id="profileScreen">
                 <div class="profile-screen">
                     <div class="profile-header">
                         <div class="profile-avatar-container" id="avatarUpload">
-                            <div class="profile-avatar" id="profileAvatar">
-                                <img id="profileAvatarImg" src="" style="display: none;">
-                                <span id="profileAvatarInitials">RR</span>
-                            </div>
+                            <div class="profile-avatar" id="profileAvatar"></div>
                             <div class="avatar-overlay">📷</div>
                             <input type="file" id="avatarFileInput" accept="image/*" style="display: none;">
                         </div>
                         <div class="profile-info-text">
                             <span class="profile-fullname" id="profileFullName">Имя Фамилия</span>
-                            <span class="profile-username" id="profileUsername">@username</span>
+                            <span class="profile-username" id="profileNick">@nickname</span>
                         </div>
                     </div>
                     
                     <div class="stats-row">
-                        <div class="stat-item">
+                        <div class="stat-item" onclick="showSubscriptions('followers')">
                             <div class="stat-value" id="profilePostsCount">0</div>
                             <div class="stat-label">посты</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" onclick="showSubscriptions('followers')">
                             <div class="stat-value" id="profileFollowersCount">0</div>
                             <div class="stat-label">подписчики</div>
                         </div>
-                        <div class="stat-item">
+                        <div class="stat-item" onclick="showSubscriptions('following')">
                             <div class="stat-value" id="profileFollowingCount">0</div>
                             <div class="stat-label">подписки</div>
                         </div>
@@ -1211,6 +1501,7 @@
                     <div class="profile-info hidden" id="editProfileForm">
                         <input type="text" class="auth-input" id="editFirstName" placeholder="Новое имя">
                         <input type="text" class="auth-input" id="editLastName" placeholder="Новая фамилия">
+                        <input type="text" class="auth-input" id="editNickname" placeholder="Новый никнейм">
                         <button class="auth-btn" id="saveProfileBtn">Сохранить</button>
                         <button class="auth-btn" id="cancelEditBtn">Отмена</button>
                     </div>
@@ -1237,6 +1528,7 @@
         // ===== PUSHER =====
         const pusher = new Pusher('55cad6db51c45c8a66db', {
             cluster: 'eu',
+            forceTLS: true,
             enabledTransports: ['ws', 'wss']
         });
         console.log('✅ Pusher подключен!');
@@ -1245,21 +1537,70 @@
         let currentConversationId = null;
         let currentOtherUserId = null;
         let previousScreen = null;
+        let onlineUsers = new Map(); // карта онлайн пользователей
 
-        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
-        function formatDate(date) {
-            const d = new Date(date);
-            const now = new Date();
-            const diff = (now - d) / 1000;
+        // ===== СТАТУС ОНЛАЙН =====
+        async function updateUserStatus(isOnline) {
+            const currentUser = Parse.User.current();
+            if (!currentUser) return;
             
-            if (diff < 60) return 'только что';
-            if (diff < 3600) return `${Math.floor(diff / 60)} мин назад`;
-            if (diff < 86400) return `${Math.floor(diff / 3600)} ч назад`;
-            return `${Math.floor(diff / 86400)} дн назад`;
+            currentUser.set('isOnline', isOnline);
+            currentUser.set('lastSeen', new Date());
+            await currentUser.save();
+        }
+
+        // Обновляем статус при загрузке
+        if (getCurrentUser()) {
+            updateUserStatus(true);
+        }
+
+        // Каждые 30 секунд обновляем lastSeen
+        setInterval(async () => {
+            const currentUser = Parse.User.current();
+            if (currentUser) {
+                currentUser.set('lastSeen', new Date());
+                await currentUser.save();
+            }
+        }, 30000);
+
+        // При закрытии вкладки
+        window.addEventListener('beforeunload', () => {
+            updateUserStatus(false);
+        });
+
+        function getUserStatus(user) {
+            const isOnline = user.get('isOnline');
+            const lastSeen = user.get('lastSeen');
+            
+            if (isOnline || onlineUsers.has(user.id)) return { text: '🟢 Онлайн', isOnline: true };
+            if (!lastSeen) return { text: '⚫ Не в сети', isOnline: false };
+            
+            const minutes = Math.floor((new Date() - new Date(lastSeen)) / 60000);
+            if (minutes < 1) return { text: '🔵 только что', isOnline: false };
+            if (minutes < 60) return { text: `⏱️ ${minutes} мин назад`, isOnline: false };
+            return { text: `⏱️ ${Math.floor(minutes/60)} ч назад`, isOnline: false };
+        }
+
+        // ===== АВАТАРКИ =====
+        const avatarStyles = [
+            'https://api.dicebear.com/7.x/identicon/svg?seed=cat1&backgroundColor=ffdfbf',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=cat2&backgroundColor=c0a0d0',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=cat3&backgroundColor=a0d0c0',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=cat4&backgroundColor=d0c0a0',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=cat5&backgroundColor=ffd0a0',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=space1&backgroundColor=305070',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=space2&backgroundColor=703050',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=abstract1&backgroundColor=507030',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=abstract2&backgroundColor=703050',
+            'https://api.dicebear.com/7.x/identicon/svg?seed=animal1&backgroundColor=d0a080'
+        ];
+
+        function getRandomAvatar() {
+            return avatarStyles[Math.floor(Math.random() * avatarStyles.length)];
         }
 
         // ===== ПОЛЬЗОВАТЕЛИ =====
-        async function signUp(firstName, lastName, email, password) {
+        async function signUp(firstName, lastName, nickname, email, password) {
             try {
                 const user = new Parse.User();
                 user.set('username', email);
@@ -1267,6 +1608,10 @@
                 user.set('password', password);
                 user.set('firstName', firstName);
                 user.set('lastName', lastName);
+                user.set('nickname', nickname);
+                user.set('avatarUrl', getRandomAvatar());
+                user.set('isOnline', true);
+                user.set('lastSeen', new Date());
                 
                 await user.signUp();
                 return { success: true, user };
@@ -1282,6 +1627,9 @@
         async function signIn(email, password) {
             try {
                 const user = await Parse.User.logIn(email, password);
+                user.set('isOnline', true);
+                user.set('lastSeen', new Date());
+                await user.save();
                 return { success: true, user };
             } catch (error) {
                 return { success: false, message: 'Неверный email или пароль' };
@@ -1301,11 +1649,12 @@
             }
         }
 
-        async function updateProfile(firstName, lastName) {
+        async function updateProfile(firstName, lastName, nickname) {
             try {
                 const user = getCurrentUser();
                 user.set('firstName', firstName);
                 user.set('lastName', lastName);
+                user.set('nickname', nickname);
                 await user.save();
                 return { success: true };
             } catch (error) {
@@ -1321,6 +1670,7 @@
                 
                 const user = getCurrentUser();
                 user.set('avatar', parseFile);
+                user.set('avatarUrl', parseFile.url());
                 await user.save();
                 
                 return { success: true, url: parseFile.url() };
@@ -1433,6 +1783,38 @@
             }
         }
 
+        async function getFollowers(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                query.include('follower');
+                const subs = await query.find();
+                return subs.map(s => s.get('follower'));
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function getFollowing(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('follower', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                query.include('following');
+                const subs = await query.find();
+                return subs.map(s => s.get('following'));
+            } catch (error) {
+                return [];
+            }
+        }
+
         async function getFollowersCount(userId) {
             try {
                 const query = new Parse.Query('Subscription');
@@ -1479,37 +1861,40 @@
                     const lastNameQuery = new Parse.Query('_User');
                     lastNameQuery.matches('lastName', searchText, 'i');
                     
+                    const nickQuery = new Parse.Query('_User');
+                    nickQuery.matches('nickname', searchText, 'i');
+                    
                     const emailQuery = new Parse.Query('_User');
                     emailQuery.matches('email', searchText, 'i');
                     
-                    const mainQuery = Parse.Query.or(nameQuery, lastNameQuery, emailQuery);
+                    const mainQuery = Parse.Query.or(nameQuery, lastNameQuery, nickQuery, emailQuery);
                     mainQuery.notEqualTo('objectId', currentUser.id);
                     mainQuery.limit(20);
                     
                     const users = await mainQuery.find();
                     
-                    const usersWithSubStatus = await Promise.all(users.map(async (user) => {
+                    const usersWithDetails = await Promise.all(users.map(async (user) => {
                         const isSubscribed = await checkIfSubscribed(user.id);
                         return {
-                            ...user.toJSON(),
+                            user,
                             isSubscribed
                         };
                     }));
                     
-                    return usersWithSubStatus;
+                    return usersWithDetails;
                 } else {
                     query.limit(20);
                     const users = await query.find();
                     
-                    const usersWithSubStatus = await Promise.all(users.map(async (user) => {
+                    const usersWithDetails = await Promise.all(users.map(async (user) => {
                         const isSubscribed = await checkIfSubscribed(user.id);
                         return {
-                            ...user.toJSON(),
+                            user,
                             isSubscribed
                         };
                     }));
                     
-                    return usersWithSubStatus;
+                    return usersWithDetails;
                 }
             } catch (error) {
                 console.error('Ошибка поиска:', error);
@@ -1589,19 +1974,13 @@
                 currentChannel.unsubscribe();
             }
             
-            const channelName = `chat-${conversationId}`;
+            const channelName = `presence-chat-${conversationId}`;
             currentChannel = pusher.subscribe(channelName);
             
             currentChannel.bind('client-new-message', async function(data) {
                 console.log('Новое сообщение через Pusher:', data);
                 const isOwn = data.senderId === getCurrentUser().id;
                 addMessageToChat(data.text, isOwn, data.timestamp);
-                
-                // Обновляем список чатов
-                if (!isOwn && !document.getElementById('conversationView').style.display === 'flex') {
-                    // Если чат не открыт, можно показать уведомление
-                    console.log('Новое сообщение от', data.senderName);
-                }
             });
             
             console.log(`📡 Подписались на канал ${channelName}`);
@@ -1660,7 +2039,6 @@
                 });
                 await message.save();
                 
-                // Обновляем время последнего сообщения в беседе
                 const conversation = new Parse.Object('Conversation');
                 conversation.id = conversationId;
                 await conversation.save(null, { useMasterKey: true });
@@ -1679,25 +2057,15 @@
             
             const firstName = user.get('firstName') || '';
             const lastName = user.get('lastName') || '';
+            const nickname = user.get('nickname') || '';
             const email = user.get('email') || '';
-            const avatar = user.get('avatar');
-            const fullName = `${firstName} ${lastName}`.trim() || 'Пользователь';
+            const avatarUrl = user.get('avatarUrl') || getRandomAvatar();
             
             document.getElementById('profileEmail').textContent = email;
-            document.getElementById('profileFullName').textContent = fullName;
-            document.getElementById('profileUsername').textContent = `@${email.split('@')[0]}`;
+            document.getElementById('profileFullName').textContent = `${firstName} ${lastName}`;
+            document.getElementById('profileNick').textContent = nickname ? `@${nickname}` : '';
             
-            const initials = (firstName?.[0] || 'R') + (lastName?.[0] || 'R');
-            document.getElementById('profileAvatarInitials').textContent = initials.toUpperCase();
-            
-            if (avatar) {
-                document.getElementById('profileAvatarImg').src = avatar.url();
-                document.getElementById('profileAvatarImg').style.display = 'block';
-                document.getElementById('profileAvatarInitials').style.display = 'none';
-            } else {
-                document.getElementById('profileAvatarImg').style.display = 'none';
-                document.getElementById('profileAvatarInitials').style.display = 'block';
-            }
+            document.getElementById('profileAvatar').style.backgroundImage = `url('${avatarUrl}')`;
             
             const posts = await getUserPosts();
             document.getElementById('profilePostsCount').textContent = posts.length;
@@ -1709,11 +2077,14 @@
             
             const postsHtml = posts.map(post => `
                 <div class="post-item">
-                    <div class="post-avatar-small" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;"></div>
+                    <div class="post-avatar-small" style="background-image: url('${avatarUrl}');"></div>
                     <div class="post-content">
                         <div class="post-header">
-                            <span class="post-author">${firstName} ${lastName}</span>
-                            <span class="post-date">${formatDate(post.createdAt)}</span>
+                            <div class="post-author-row">
+                                <span class="post-author">${firstName} ${lastName}</span>
+                                <span class="post-nick">${nickname ? `@${nickname}` : ''}</span>
+                                <span class="post-date">${formatDate(post.createdAt)}</span>
+                            </div>
                         </div>
                         <div class="post-body">${post.get('text')}</div>
                     </div>
@@ -1721,79 +2092,6 @@
             `).join('');
             
             document.getElementById('userPosts').innerHTML = postsHtml || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
-        }
-
-        async function updateUserProfileUI(userId) {
-            try {
-                const userQuery = new Parse.Query('_User');
-                const user = await userQuery.get(userId);
-                
-                const firstName = user.get('firstName') || '';
-                const lastName = user.get('lastName') || '';
-                const email = user.get('email') || '';
-                const avatar = user.get('avatar');
-                const fullName = `${firstName} ${lastName}`.trim() || 'Пользователь';
-                
-                document.getElementById('userProfileFullName').textContent = fullName;
-                document.getElementById('userProfileUsername').textContent = `@${email.split('@')[0]}`;
-                
-                const initials = (firstName?.[0] || 'U') + (lastName?.[0] || 'R');
-                document.getElementById('userProfileAvatarInitials').textContent = initials.toUpperCase();
-                
-                if (avatar) {
-                    document.getElementById('userProfileAvatarImg').src = avatar.url();
-                    document.getElementById('userProfileAvatarImg').style.display = 'block';
-                    document.getElementById('userProfileAvatarInitials').style.display = 'none';
-                } else {
-                    document.getElementById('userProfileAvatarImg').style.display = 'none';
-                    document.getElementById('userProfileAvatarInitials').style.display = 'block';
-                }
-                
-                const posts = await getUserPosts(userId);
-                document.getElementById('userProfilePostsCount').textContent = posts.length;
-                
-                const followersCount = await getFollowersCount(userId);
-                const followingCount = await getFollowingCount(userId);
-                document.getElementById('userProfileFollowersCount').textContent = followersCount;
-                document.getElementById('userProfileFollowingCount').textContent = followingCount;
-                
-                const isSubscribed = await checkIfSubscribed(userId);
-                const subscribeBtn = document.getElementById('userProfileSubscribeBtn');
-                if (isSubscribed) {
-                    subscribeBtn.textContent = '✓ Подписан';
-                    subscribeBtn.classList.add('subscribed');
-                } else {
-                    subscribeBtn.textContent = '+ Подписаться';
-                    subscribeBtn.classList.remove('subscribed');
-                }
-                
-                const postsHtml = posts.map(post => `
-                    <div class="post-item">
-                        <div class="post-avatar-small" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;"></div>
-                        <div class="post-content">
-                            <div class="post-header">
-                                <span class="post-author">${firstName} ${lastName}</span>
-                                <span class="post-date">${formatDate(post.createdAt)}</span>
-                            </div>
-                            <div class="post-body">${post.get('text')}</div>
-                        </div>
-                    </div>
-                `).join('');
-                
-                document.getElementById('userProfilePosts').innerHTML = postsHtml || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
-                
-                // Сохраняем ID пользователя для кнопок
-                document.getElementById('userProfileChatBtn').onclick = () => startChat(userId, fullName, avatar ? avatar.url() : '');
-                document.getElementById('userProfileSubscribeBtn').onclick = async () => {
-                    const result = await toggleSubscribe(userId);
-                    if (result !== null) {
-                        await updateUserProfileUI(userId);
-                        await updateProfileUI();
-                    }
-                };
-            } catch (error) {
-                console.error('Ошибка загрузки профиля:', error);
-            }
         }
 
         async function updateHomeFeed() {
@@ -1807,16 +2105,19 @@
                 
                 const firstName = freshAuthor.get('firstName') || '';
                 const lastName = freshAuthor.get('lastName') || '';
-                const avatar = freshAuthor.get('avatar');
+                const nickname = freshAuthor.get('nickname') || '';
+                const avatarUrl = freshAuthor.get('avatarUrl') || getRandomAvatar();
                 
                 return `
                     <div class="post" data-author-id="${freshAuthor.id}">
-                        <div class="post-avatar" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;" onclick="openUserProfile('${freshAuthor.id}')"></div>
+                        <div class="post-avatar" style="background-image: url('${avatarUrl}');" onclick="openUserProfile('${freshAuthor.id}')"></div>
                         <div class="post-content">
                             <div class="post-header">
-                                <span class="post-name" onclick="openUserProfile('${freshAuthor.id}')">${firstName} ${lastName}</span>
-                                <span class="post-handle" onclick="openUserProfile('${freshAuthor.id}')">@${freshAuthor.get('email').split('@')[0]}</span>
-                                <span class="post-date">${formatDate(post.createdAt)}</span>
+                                <div class="post-author-row">
+                                    <span class="post-name" onclick="openUserProfile('${freshAuthor.id}')">${firstName} ${lastName}</span>
+                                    <span class="post-nick" onclick="openUserProfile('${freshAuthor.id}')">${nickname ? `@${nickname}` : ''}</span>
+                                    <span class="post-date">${formatDate(post.createdAt)}</span>
+                                </div>
                             </div>
                             <div class="post-text">${post.get('text')}</div>
                             <div class="post-meta">
@@ -1839,13 +2140,21 @@
                 const otherUser = c.otherUser;
                 const firstName = otherUser.get('firstName') || '';
                 const lastName = otherUser.get('lastName') || '';
-                const avatar = otherUser.get('avatar');
+                const nickname = otherUser.get('nickname') || '';
+                const avatarUrl = otherUser.get('avatarUrl') || getRandomAvatar();
+                const status = getUserStatus(otherUser);
                 
                 return `
-                    <div class="chat-item" onclick="openConversation('${firstName} ${lastName}', '${avatar ? avatar.url() : ''}', '${c.conversation.id}', '${otherUser.id}')">
-                        <div class="chat-avatar" style="background-image: url('${avatar ? avatar.url() : ''}'); background-color: #6aa9ff;" onclick="event.stopPropagation(); openUserProfile('${otherUser.id}')"></div>
+                    <div class="chat-item" onclick="openConversation('${firstName} ${lastName}', '${avatarUrl}', '${c.conversation.id}', '${otherUser.id}', '${nickname}')">
+                        <div class="chat-avatar-container">
+                            <div class="chat-avatar" style="background-image: url('${avatarUrl}');" onclick="event.stopPropagation(); openUserProfile('${otherUser.id}')"></div>
+                            ${status.isOnline ? '<div class="online-dot"></div>' : ''}
+                        </div>
                         <div class="chat-info">
-                            <div class="chat-name" onclick="event.stopPropagation(); openUserProfile('${otherUser.id}')">${firstName} ${lastName}</div>
+                            <div class="chat-name-row">
+                                <span class="chat-name" onclick="event.stopPropagation(); openUserProfile('${otherUser.id}')">${firstName} ${lastName}</span>
+                                <span class="chat-nick">${nickname ? `@${nickname}` : ''}</span>
+                            </div>
                             <div class="chat-preview">${c.lastMessage || 'Начните общение'}</div>
                         </div>
                         <div class="chat-time">${c.lastMessageTime ? formatDate(c.lastMessageTime) : ''}</div>
@@ -1873,6 +2182,148 @@
             }
         }
 
+        async function updateUserProfileUI(userId) {
+            try {
+                const userQuery = new Parse.Query('_User');
+                const user = await userQuery.get(userId);
+                
+                const firstName = user.get('firstName') || '';
+                const lastName = user.get('lastName') || '';
+                const nickname = user.get('nickname') || '';
+                const avatarUrl = user.get('avatarUrl') || getRandomAvatar();
+                
+                document.getElementById('userProfileFullName').textContent = `${firstName} ${lastName}`;
+                document.getElementById('userProfileNick').textContent = nickname ? `@${nickname}` : '';
+                document.getElementById('userProfileAvatar').style.backgroundImage = `url('${avatarUrl}')`;
+                
+                const posts = await getUserPosts(userId);
+                document.getElementById('userProfilePostsCount').textContent = posts.length;
+                
+                const followersCount = await getFollowersCount(userId);
+                const followingCount = await getFollowingCount(userId);
+                document.getElementById('userProfileFollowersCount').textContent = followersCount;
+                document.getElementById('userProfileFollowingCount').textContent = followingCount;
+                
+                const isSubscribed = await checkIfSubscribed(userId);
+                const subscribeBtn = document.getElementById('userProfileSubscribeBtn');
+                if (isSubscribed) {
+                    subscribeBtn.textContent = '✓ Подписан';
+                    subscribeBtn.classList.add('subscribed');
+                } else {
+                    subscribeBtn.textContent = '+ Подписаться';
+                    subscribeBtn.classList.remove('subscribed');
+                }
+                
+                const postsHtml = posts.map(post => `
+                    <div class="post-item">
+                        <div class="post-avatar-small" style="background-image: url('${avatarUrl}');"></div>
+                        <div class="post-content">
+                            <div class="post-header">
+                                <div class="post-author-row">
+                                    <span class="post-author">${firstName} ${lastName}</span>
+                                    <span class="post-nick">${nickname ? `@${nickname}` : ''}</span>
+                                    <span class="post-date">${formatDate(post.createdAt)}</span>
+                                </div>
+                            </div>
+                            <div class="post-body">${post.get('text')}</div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('userProfilePosts').innerHTML = postsHtml || '<p style="opacity:0.7; text-align:center;">Нет постов</p>';
+                
+                document.getElementById('userProfileChatBtn').onclick = () => startChat(userId, `${firstName} ${lastName}`, avatarUrl, nickname);
+                document.getElementById('userProfileSubscribeBtn').onclick = async () => {
+                    const result = await toggleSubscribe(userId);
+                    if (result !== null) {
+                        await updateUserProfileUI(userId);
+                        await updateProfileUI();
+                    }
+                };
+            } catch (error) {
+                console.error('Ошибка загрузки профиля:', error);
+            }
+        }
+
+        // ===== ПОДПИСКИ =====
+        window.showSubscriptions = async function(type) {
+            const currentUser = getCurrentUser();
+            if (!currentUser) return;
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('subscriptionsScreen').classList.add('active');
+            
+            await updateSubscriptionsList(type, currentUser.id);
+        };
+
+        window.showUserSubscriptions = async function(type) {
+            const userId = currentOtherUserId;
+            if (!userId) return;
+            
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('subscriptionsScreen').classList.add('active');
+            
+            await updateSubscriptionsList(type, userId);
+        };
+
+        async function updateSubscriptionsList(type, userId) {
+            const list = document.getElementById('subscriptionsList');
+            
+            if (type === 'followers') {
+                const followers = await getFollowers(userId);
+                const itemsHtml = await Promise.all(followers.map(async (user) => {
+                    const firstName = user.get('firstName') || '';
+                    const lastName = user.get('lastName') || '';
+                    const nickname = user.get('nickname') || '';
+                    const avatarUrl = user.get('avatarUrl') || getRandomAvatar();
+                    const status = getUserStatus(user);
+                    
+                    return `
+                        <div class="sub-item">
+                            <div class="sub-avatar" style="background-image: url('${avatarUrl}');" onclick="openUserProfile('${user.id}')"></div>
+                            <div class="sub-info" onclick="openUserProfile('${user.id}')">
+                                <div class="sub-name-row">
+                                    <span class="sub-name">${firstName} ${lastName}</span>
+                                    <span class="sub-nick">${nickname ? `@${nickname}` : ''}</span>
+                                </div>
+                                <div class="sub-status">${status.text}</div>
+                            </div>
+                            <button class="sub-action" onclick="startChat('${user.id}', '${firstName} ${lastName}', '${avatarUrl}', '${nickname}')">💬</button>
+                        </div>
+                    `;
+                }));
+                list.innerHTML = itemsHtml.join('') || '<p style="opacity:0.7; text-align:center;">Нет подписчиков</p>';
+            } else {
+                const following = await getFollowing(userId);
+                const itemsHtml = await Promise.all(following.map(async (user) => {
+                    const firstName = user.get('firstName') || '';
+                    const lastName = user.get('lastName') || '';
+                    const nickname = user.get('nickname') || '';
+                    const avatarUrl = user.get('avatarUrl') || getRandomAvatar();
+                    const status = getUserStatus(user);
+                    
+                    return `
+                        <div class="sub-item">
+                            <div class="sub-avatar" style="background-image: url('${avatarUrl}');" onclick="openUserProfile('${user.id}')"></div>
+                            <div class="sub-info" onclick="openUserProfile('${user.id}')">
+                                <div class="sub-name-row">
+                                    <span class="sub-name">${firstName} ${lastName}</span>
+                                    <span class="sub-nick">${nickname ? `@${nickname}` : ''}</span>
+                                </div>
+                                <div class="sub-status">${status.text}</div>
+                            </div>
+                            <button class="sub-action" onclick="startChat('${user.id}', '${firstName} ${lastName}', '${avatarUrl}', '${nickname}')">💬</button>
+                        </div>
+                    `;
+                }));
+                list.innerHTML = itemsHtml.join('') || '<p style="opacity:0.7; text-align:center;">Нет подписок</p>';
+            }
+            
+            // Подсвечиваем активную вкладку
+            document.getElementById('followersTab').classList.toggle('active', type === 'followers');
+            document.getElementById('followingTab').classList.toggle('active', type === 'following');
+        }
+
         // ===== ЛОГИКА ИНТЕРФЕЙСА =====
         const versionToggle = document.getElementById('versionToggle');
         const phoneFrame = document.getElementById('phoneFrame');
@@ -1882,6 +2333,7 @@
         const authTitle = document.getElementById('authTitle');
         const authFirstName = document.getElementById('authFirstName');
         const authLastName = document.getElementById('authLastName');
+        const authNickname = document.getElementById('authNickname');
         const authEmail = document.getElementById('authEmail');
         const authPassword = document.getElementById('authPassword');
         const authError = document.getElementById('authError');
@@ -1895,6 +2347,7 @@
         const profileInfo = document.getElementById('profileInfo');
         const editFirstName = document.getElementById('editFirstName');
         const editLastName = document.getElementById('editLastName');
+        const editNickname = document.getElementById('editNickname');
         const saveProfileBtn = document.getElementById('saveProfileBtn');
         const cancelEditBtn = document.getElementById('cancelEditBtn');
         const logoutBtn = document.getElementById('logoutBtn');
@@ -1915,12 +2368,14 @@
                 authSwitch.textContent = 'Нет аккаунта? Зарегистрироваться';
                 authFirstName.style.display = 'none';
                 authLastName.style.display = 'none';
+                authNickname.style.display = 'none';
             } else {
                 authTitle.textContent = 'Регистрация';
                 authActionBtn.textContent = 'Зарегистрироваться';
                 authSwitch.textContent = 'Уже есть аккаунт? Войти';
                 authFirstName.style.display = 'block';
                 authLastName.style.display = 'block';
+                authNickname.style.display = 'block';
             }
             authError.textContent = '';
         });
@@ -1956,9 +2411,10 @@
             } else {
                 const firstName = authFirstName.value.trim();
                 const lastName = authLastName.value.trim();
+                const nickname = authNickname.value.trim();
                 
-                if (!firstName || !lastName) {
-                    authError.textContent = 'Заполни имя и фамилию';
+                if (!firstName || !lastName || !nickname) {
+                    authError.textContent = 'Заполни имя, фамилию и никнейм';
                     return;
                 }
                 
@@ -1967,12 +2423,13 @@
                     return;
                 }
                 
-                result = await signUp(firstName, lastName, email, password);
+                result = await signUp(firstName, lastName, nickname, email, password);
             }
 
             if (result.success) {
                 await updateProfileUI();
                 await updateHomeFeed();
+                await updateChatList();
                 authScreen.classList.remove('active');
                 homeScreen.classList.add('active');
                 showNavIcons();
@@ -1985,6 +2442,7 @@
             const user = getCurrentUser();
             editFirstName.value = user.get('firstName') || '';
             editLastName.value = user.get('lastName') || '';
+            editNickname.value = user.get('nickname') || '';
             profileInfo.classList.add('hidden');
             editProfileForm.classList.remove('hidden');
         });
@@ -1997,13 +2455,14 @@
         saveProfileBtn.addEventListener('click', async () => {
             const firstName = editFirstName.value.trim();
             const lastName = editLastName.value.trim();
+            const nickname = editNickname.value.trim();
             
-            if (!firstName || !lastName) {
-                alert('Заполните имя и фамилию');
+            if (!firstName || !lastName || !nickname) {
+                alert('Заполните имя, фамилию и никнейм');
                 return;
             }
             
-            const result = await updateProfile(firstName, lastName);
+            const result = await updateProfile(firstName, lastName, nickname);
             if (result.success) {
                 await updateProfileUI();
                 profileInfo.classList.remove('hidden');
@@ -2039,23 +2498,30 @@
             const text = chatSearchInput.value.trim();
             const users = await searchUsers(text);
             
-            const resultsHtml = users.map(user => {
-                const firstName = user.firstName || '';
-                const lastName = user.lastName || '';
-                const email = user.email || '';
-                const avatar = user.avatar;
-                const isSubscribed = user.isSubscribed;
+            const resultsHtml = users.map(item => {
+                const user = item.user;
+                const firstName = user.get('firstName') || '';
+                const lastName = user.get('lastName') || '';
+                const nickname = user.get('nickname') || '';
+                const email = user.get('email') || '';
+                const avatarUrl = user.get('avatarUrl') || getRandomAvatar();
+                const isSubscribed = item.isSubscribed;
+                const status = getUserStatus(user);
                 
                 return `
                     <div class="user-search-item">
-                        <div class="user-search-avatar" style="background-image: url('${avatar ? avatar.url : ''}'); background-color: #6aa9ff;" onclick="openUserProfile('${user.objectId}')"></div>
-                        <div class="user-search-info" onclick="openUserProfile('${user.objectId}')">
-                            <div class="user-search-name">${firstName} ${lastName}</div>
+                        <div class="user-search-avatar" style="background-image: url('${avatarUrl}');" onclick="openUserProfile('${user.id}')"></div>
+                        <div class="user-search-info" onclick="openUserProfile('${user.id}')">
+                            <div class="user-search-name-row">
+                                <span class="user-search-name">${firstName} ${lastName}</span>
+                                <span class="user-search-nick">${nickname ? `@${nickname}` : ''}</span>
+                            </div>
+                            <div class="user-search-status">${status.text}</div>
                             <div class="user-search-email">${email}</div>
                         </div>
                         <div class="user-search-actions">
-                            <button class="action-btn chat-btn" onclick="startChat('${user.objectId}', '${firstName} ${lastName}', '${avatar ? avatar.url : ''}')">💬</button>
-                            <button class="action-btn subscribe-btn ${isSubscribed ? 'subscribed' : ''}" onclick="handleSubscribe('${user.objectId}', this)">
+                            <button class="action-btn chat-btn" onclick="startChat('${user.id}', '${firstName} ${lastName}', '${avatarUrl}', '${nickname}')">💬</button>
+                            <button class="action-btn subscribe-btn ${isSubscribed ? 'subscribed' : ''}" onclick="handleSubscribe('${user.id}', this)">
                                 ${isSubscribed ? '✓' : '+'}
                             </button>
                         </div>
@@ -2080,7 +2546,7 @@
             }
         };
 
-        window.startChat = async function(userId, name, avatarUrl) {
+        window.startChat = async function(userId, name, avatarUrl, nickname) {
             const conversation = await getOrCreateConversation(userId);
             
             if (conversation) {
@@ -2092,21 +2558,29 @@
                     chat: document.getElementById('chatScreen'),
                     reels: document.getElementById('reelsScreen'),
                     profile: document.getElementById('profileScreen'),
-                    userProfile: document.getElementById('userProfileScreen')
+                    userProfile: document.getElementById('userProfileScreen'),
+                    subscriptions: document.getElementById('subscriptionsScreen')
                 };
                 
                 Object.values(screens).forEach(screen => screen.classList.remove('active'));
                 screens.chat.classList.add('active');
                 
-                await openConversation(name, avatarUrl, conversation.id, userId);
+                await openConversation(name, avatarUrl, conversation.id, userId, nickname);
             }
         };
 
-        async function openConversation(name, avatarUrl, conversationId, otherUserId) {
+        async function openConversation(name, avatarUrl, conversationId, otherUserId, nickname) {
             document.getElementById('chatList').style.display = 'none';
             document.getElementById('conversationView').style.display = 'flex';
             document.getElementById('conversationName').textContent = name;
+            document.getElementById('conversationNick').textContent = nickname ? `@${nickname}` : '';
             document.getElementById('conversationAvatar').style.backgroundImage = `url('${avatarUrl}')`;
+            
+            const userQuery = new Parse.Query('_User');
+            const otherUser = await userQuery.get(otherUserId);
+            const status = getUserStatus(otherUser);
+            document.getElementById('conversationStatus').textContent = status.text;
+            document.getElementById('onlineDot').style.display = status.isOnline ? 'block' : 'none';
             
             currentConversationId = conversationId;
             currentOtherUserId = otherUserId;
@@ -2217,7 +2691,8 @@
                         chat: document.getElementById('chatScreen'),
                         reels: document.getElementById('reelsScreen'),
                         profile: document.getElementById('profileScreen'),
-                        userProfile: document.getElementById('userProfileScreen')
+                        userProfile: document.getElementById('userProfileScreen'),
+                        subscriptions: document.getElementById('subscriptionsScreen')
                     };
 
                     Object.values(screens).forEach(screen => screen.classList.remove('active'));
@@ -2242,6 +2717,18 @@
                     }
                 });
             });
+        }
+
+        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+        function formatDate(date) {
+            const d = new Date(date);
+            const now = new Date();
+            const diff = (now - d) / 1000;
+            
+            if (diff < 60) return 'только что';
+            if (diff < 3600) return `${Math.floor(diff / 60)} мин назад`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)} ч назад`;
+            return `${Math.floor(diff / 86400)} дн назад`;
         }
 
         const videos = document.querySelectorAll('video');
