@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал</title>
+    <title>RealReel · финал · всё работает</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -159,7 +159,7 @@
             text-align: center;
         }
 
-        /* ===== КНОПКА ДОБАВЛЕНИЯ ===== */
+        /* ===== КНОПКА ДОБАВЛЕНИЯ ПОСТА ===== */
         .add-post-btn {
             position: absolute;
             bottom: 20px;
@@ -238,39 +238,43 @@
             background: #f0f0f0;
         }
 
-        /* ===== СТОРИЗ ===== */
-        .stories-row {
+        /* ===== ЗАМЕТКИ (STORIES HIGHLIGHTS) ===== */
+        .highlights-row {
             display: flex;
             gap: 16px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             overflow-x: auto;
-            padding: 4px 0;
+            padding: 8px 0;
         }
-        .stories-row::-webkit-scrollbar {
+        .highlights-row::-webkit-scrollbar {
             display: none;
         }
-        .story-item {
+        .highlight-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
             min-width: 64px;
+            cursor: pointer;
         }
-        .story-avatar {
+        .highlight-circle {
             width: 64px;
             height: 64px;
             border-radius: 32px;
-            border: 2px solid #6aa9ff;
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
         }
-        .story-name {
+        .highlight-name {
             font-size: 12px;
             font-weight: 500;
             color: #333;
         }
 
-        /* ===== ПОСТЫ (тёмный фон) ===== */
+        /* ===== ПОСТЫ ===== */
         .posts-list {
             display: flex;
             flex-direction: column;
@@ -278,10 +282,10 @@
         }
         .post-item {
             padding: 16px;
-            background: #2a2a2a;
+            background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #f0f0f0;
         }
         .post-header {
             display: flex;
@@ -302,12 +306,12 @@
         .post-author-row {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
         }
         .post-author {
             font-weight: 600;
-            color: #fff;
+            color: #333;
             cursor: pointer;
         }
         .post-author:hover {
@@ -318,44 +322,60 @@
             color: #6aa9ff;
         }
         .post-star {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             display: inline-block;
-            margin-left: 4px;
         }
         .post-date {
             font-size: 11px;
             color: #999;
+            margin-left: auto;
+        }
+        .post-owner-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+        .post-owner-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+        }
+        .post-owner-btn:hover {
+            color: #6aa9ff;
         }
         .post-text {
             font-size: 14px;
             line-height: 1.5;
             margin-bottom: 12px;
-            color: #fff;
+            color: #333;
         }
         .post-image {
             max-width: 100%;
             border-radius: 16px;
             margin-bottom: 12px;
+            border: 1px solid #f0f0f0;
         }
         .post-actions {
             display: flex;
             gap: 20px;
             padding-top: 8px;
-            border-top: 1px solid #444;
+            border-top: 1px solid #f0f0f0;
         }
         .post-action {
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            color: #aaa;
+            color: #666;
         }
         .post-action svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             fill: none;
             stroke: currentColor;
         }
@@ -364,13 +384,13 @@
             stroke: #ff4d4d;
         }
         .post-action span {
-            color: #aaa;
+            color: #666;
         }
 
         .comments-section {
             margin-top: 12px;
             padding-top: 12px;
-            border-top: 1px solid #444;
+            border-top: 1px solid #f0f0f0;
         }
         .comment-input-container {
             display: flex;
@@ -380,14 +400,9 @@
         .comment-input {
             flex: 1;
             padding: 10px 14px;
-            border: 1px solid #555;
+            border: 1px solid #ddd;
             border-radius: 30px;
             outline: none;
-            background: #333;
-            color: #fff;
-        }
-        .comment-input::placeholder {
-            color: #999;
         }
         .comment-btn {
             width: 40px;
@@ -407,7 +422,7 @@
             display: flex;
             gap: 10px;
             padding: 8px;
-            background: #333;
+            background: #f8f9fa;
             border-radius: 16px;
         }
         .comment-avatar {
@@ -420,11 +435,10 @@
         .comment-author {
             font-weight: 600;
             font-size: 12px;
-            color: #fff;
         }
         .comment-text {
             font-size: 12px;
-            color: #ddd;
+            color: #333;
         }
 
         /* ===== ПОИСК ===== */
@@ -471,9 +485,6 @@
             border-radius: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             cursor: pointer;
-        }
-        .user-card:hover {
-            background: #f5f5f5;
         }
         .user-avatar {
             width: 48px;
@@ -632,21 +643,6 @@
             font-size: 12px;
             color: #999;
         }
-        .chat-themes {
-            display: flex;
-            gap: 8px;
-        }
-        .chat-theme {
-            width: 30px;
-            height: 30px;
-            border-radius: 15px;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-        .chat-theme.light { background: #fff; border: 2px solid #ddd; }
-        .chat-theme.dark { background: #1a1e2a; border: 2px solid #6aa9ff; }
-        .chat-theme.space { background: linear-gradient(135deg, #0b0f2a, #1a1f3a); border: 2px solid #6a4fff; }
-        .chat-theme.neon { background: #0a0a0a; border: 2px solid #00ff88; }
 
         .chat-messages {
             flex: 1;
@@ -724,6 +720,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 4px;
         }
         .profile-name {
             font-weight: 600;
@@ -731,15 +728,14 @@
             color: #333;
         }
         .profile-star {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
         .profile-nick {
             color: #6aa9ff;
             font-size: 14px;
-            margin-top: 4px;
         }
 
         .stats-row {
@@ -873,7 +869,6 @@
 
             <!-- Главная -->
             <div class="screen" id="homeScreen">
-                <div class="stories-row" id="storiesRow"></div>
                 <div class="posts-list" id="homePosts"></div>
             </div>
 
@@ -905,12 +900,6 @@
                             <div class="chat-name-header" id="chatName" onclick="openChatUserProfile()"></div>
                             <div class="chat-status-header" id="chatStatus"></div>
                         </div>
-                        <div class="chat-themes">
-                            <div class="chat-theme light" onclick="setTheme('light')"></div>
-                            <div class="chat-theme dark" onclick="setTheme('dark')"></div>
-                            <div class="chat-theme space" onclick="setTheme('space')"></div>
-                            <div class="chat-theme neon" onclick="setTheme('neon')"></div>
-                        </div>
                     </div>
                     <div class="chat-messages" id="chatMessages" style="display: none;"></div>
                     <div class="chat-input-area" id="chatInputArea" style="display: none;">
@@ -928,6 +917,22 @@
             <!-- Профиль -->
             <div class="screen" id="profileScreen">
                 <div class="profile-screen">
+                    <!-- Заметки (Highlights) как в Instagram -->
+                    <div class="highlights-row">
+                        <div class="highlight-item" onclick="alert('Заметка 1')">
+                            <div class="highlight-circle">📌</div>
+                            <span class="highlight-name">Заметки</span>
+                        </div>
+                        <div class="highlight-item" onclick="alert('Заметка 2')">
+                            <div class="highlight-circle">🎨</div>
+                            <span class="highlight-name">Дизайн</span>
+                        </div>
+                        <div class="highlight-item" onclick="alert('Заметка 3')">
+                            <div class="highlight-circle">✈️</div>
+                            <span class="highlight-name">Travel</span>
+                        </div>
+                    </div>
+
                     <div class="profile-header">
                         <div class="profile-avatar" id="profileAvatar"></div>
                         <div class="profile-info">
@@ -1049,7 +1054,7 @@
                     post.set('image', parseFile);
                 }
                 await post.save();
-                return { success: true };
+                return { success: true, post };
             } catch (error) {
                 return { success: false };
             }
@@ -1093,6 +1098,31 @@
                     date: new Date()
                 });
                 post.set('comments', comments);
+                await post.save();
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        async function deletePost(postId) {
+            try {
+                const Post = Parse.Object.extend('Post');
+                const query = new Parse.Query(Post);
+                const post = await query.get(postId);
+                await post.destroy();
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        async function editPost(postId, newText) {
+            try {
+                const Post = Parse.Object.extend('Post');
+                const query = new Parse.Query(Post);
+                const post = await query.get(postId);
+                post.set('text', newText);
                 await post.save();
                 return true;
             } catch (error) {
@@ -1234,6 +1264,30 @@
             }
         }
 
+        async function getFollowers(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('following', { __type: 'Pointer', className: '_User', objectId: userId });
+                query.include('follower');
+                const subs = await query.find();
+                return subs.map(s => s.get('follower'));
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function getFollowing(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('follower', { __type: 'Pointer', className: '_User', objectId: userId });
+                query.include('following');
+                const subs = await query.find();
+                return subs.map(s => s.get('following'));
+            } catch (error) {
+                return [];
+            }
+        }
+
         async function getFollowersCount(userId) {
             try {
                 const query = new Parse.Query('Subscription');
@@ -1261,6 +1315,8 @@
                 const author = post.get('author');
                 await author.fetch();
                 const comments = post.get('comments') || [];
+                const isAuthor = currentUser && author.id === currentUser.id;
+                
                 return `
                     <div class="post-item" data-post-id="${post.id}">
                         <div class="post-header">
@@ -1271,6 +1327,12 @@
                                     <span class="post-nick">@${author.get('nickname')}</span>
                                     <span class="post-star"></span>
                                     <span class="post-date">${formatDate(post.createdAt)}</span>
+                                    ${isAuthor ? `
+                                        <div class="post-owner-actions">
+                                            <button class="post-owner-btn" onclick="editPostHandler('${post.id}')">✏️</button>
+                                            <button class="post-owner-btn" onclick="deletePostHandler('${post.id}')">🗑️</button>
+                                        </div>
+                                    ` : ''}
                                 </div>
                             </div>
                         </div>
@@ -1307,15 +1369,6 @@
                 `;
             }));
             document.getElementById('homePosts').innerHTML = postsHtml.join('');
-
-            if (currentUser) {
-                document.getElementById('storiesRow').innerHTML = `
-                    <div class="story-item">
-                        <div class="story-avatar ${currentUser.get('avatarClass')}"></div>
-                        <span class="story-name">${currentUser.get('firstName')}</span>
-                    </div>
-                `;
-            }
         }
 
         async function updateProfileUI(userId = null) {
@@ -1334,6 +1387,7 @@
             const postsHtml = posts.map(post => `
                 <div class="post-item">
                     <div class="post-text">${post.get('text')}</div>
+                    ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
                 </div>
             `).join('');
             document.getElementById('userPosts').innerHTML = postsHtml;
@@ -1393,6 +1447,7 @@
             await likePost(postId);
             const count = el.querySelector('span');
             count.textContent = parseInt(count.textContent) + 1;
+            el.classList.add('liked');
         };
 
         window.addCommentHandler = async function(postId) {
@@ -1408,6 +1463,23 @@
             comments.style.display = comments.style.display === 'none' ? 'block' : 'none';
         };
 
+        window.deletePostHandler = async function(postId) {
+            if (confirm('Удалить пост?')) {
+                await deletePost(postId);
+                await updateHomeFeed();
+                await updateProfileUI();
+            }
+        };
+
+        window.editPostHandler = async function(postId) {
+            const newText = prompt('Редактировать пост:');
+            if (newText && newText.trim()) {
+                await editPost(postId, newText);
+                await updateHomeFeed();
+                await updateProfileUI();
+            }
+        };
+
         window.openUserProfile = async function(userId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('profileScreen').classList.add('active');
@@ -1415,13 +1487,16 @@
         };
 
         window.openChatUserProfile = function() {
-            openUserProfile(currentOtherUserId);
+            if (currentOtherUserId) {
+                openUserProfile(currentOtherUserId);
+            }
         };
 
         window.subscribeToUser = async function(userId, btn) {
             const result = await toggleSubscribe(userId);
             if (result) {
                 btn.textContent = result.subscribed ? '✓' : '+';
+                btn.style.background = result.subscribed ? '#4CAF50' : '#f0f0f0';
             }
         };
 
@@ -1459,24 +1534,29 @@
         };
 
         window.showPosts = function() {
-            alert('Посты пользователя');
+            alert('Все посты пользователя');
         };
 
         window.showFollowers = async function() {
             const user = getCurrentUser();
-            const count = await getFollowersCount(user.id);
-            alert(`У вас ${count} подписчиков`);
+            const followers = await getFollowers(user.id);
+            if (followers.length === 0) {
+                alert('Нет подписчиков');
+            } else {
+                const names = followers.map(f => `${f.get('firstName')} ${f.get('lastName')}`).join('\n');
+                alert(`Подписчики:\n${names}`);
+            }
         };
 
         window.showFollowing = async function() {
             const user = getCurrentUser();
-            const count = await getFollowingCount(user.id);
-            alert(`Вы подписаны на ${count} человек`);
-        };
-
-        window.setTheme = function(theme) {
-            document.querySelectorAll('.chat-theme').forEach(t => t.style.border = '2px solid transparent');
-            document.querySelector(`.chat-theme.${theme}`).style.border = '2px solid #6aa9ff';
+            const following = await getFollowing(user.id);
+            if (following.length === 0) {
+                alert('Нет подписок');
+            } else {
+                const names = following.map(f => `${f.get('firstName')} ${f.get('lastName')}`).join('\n');
+                alert(`Подписки:\n${names}`);
+            }
         };
 
         function formatDate(date) {
