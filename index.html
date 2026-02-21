@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал · анимации</title>
+    <title>RealReel · финал · всё работает</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -172,6 +172,51 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* ===== ПРОСМОТР ПОСТА ===== */
+        .post-viewer {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            animation: slideUpPost 0.3s;
+        }
+        @keyframes slideUpPost {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .post-viewer.active {
+            display: flex;
+        }
+        .post-viewer-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .post-viewer-back {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .post-viewer-back:hover {
+            transform: scale(1.1);
+        }
+        .post-viewer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
         /* ===== СТОРИЗ ===== */
         .stories-row {
             display: flex;
@@ -312,48 +357,113 @@
             width: 0%;
             transition: width 5s linear;
         }
+        .story-actions {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            justify-content: center;
+        }
+        .story-action-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .story-action-btn:hover {
+            transform: scale(1.2);
+            background: rgba(255,255,255,0.3);
+        }
+        .story-emoji-panel {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 40px;
+            margin: 16px;
+            animation: slideUp 0.3s;
+        }
+        .story-emoji {
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .story-emoji:hover {
+            transform: scale(1.2);
+            background: rgba(255,255,255,0.3);
+        }
 
         /* ===== МОДАЛКА ПОДПИСОК ===== */
         .subscriptions-modal {
             position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 320px;
-            max-height: 500px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: white;
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             z-index: 200;
             display: none;
             flex-direction: column;
-            overflow: hidden;
-            animation: scaleIn 0.3s;
-        }
-        @keyframes scaleIn {
-            from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
-            to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            animation: slideUpPost 0.3s;
         }
         .subscriptions-modal.active {
             display: flex;
         }
         .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid #eee;
+            padding: 16px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        .modal-back {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .modal-back:hover {
+            transform: scale(1.1);
         }
         .modal-header h3 {
+            flex: 1;
             font-size: 16px;
             font-weight: 600;
         }
-        .modal-close {
+        .modal-tabs {
+            display: flex;
+            gap: 16px;
+            padding: 0 16px;
+            border-bottom: 1px solid #eee;
+        }
+        .modal-tab {
+            padding: 12px 0;
             cursor: pointer;
-            font-size: 20px;
+            font-weight: 500;
+            color: #999;
+            border-bottom: 2px solid transparent;
             transition: 0.3s;
         }
-        .modal-close:hover {
-            transform: scale(1.1);
+        .modal-tab.active {
+            color: #6aa9ff;
+            border-bottom-color: #6aa9ff;
         }
         .modal-list {
             flex: 1;
@@ -418,6 +528,32 @@
         }
         .modal-user-btn:hover {
             transform: scale(1.1);
+        }
+
+        /* ===== КАТЕГОРИИ ЧАТОВ ===== */
+        .chat-categories {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding: 4px 0;
+        }
+        .chat-category {
+            padding: 8px 16px;
+            background: #f0f0f0;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+        .chat-category:hover {
+            background: #e0e0e0;
+        }
+        .chat-category.active {
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            color: white;
         }
 
         /* ===== АВТОРИЗАЦИЯ ===== */
@@ -614,7 +750,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             border: 1px solid #f0f0f0;
             animation: fadeInUp 0.5s;
-            cursor: pointer;
             transition: 0.3s;
         }
         .post-item:hover {
@@ -724,6 +859,7 @@
             margin-bottom: 12px;
             border: 1px solid #f0f0f0;
             transition: 0.3s;
+            cursor: pointer;
         }
         .post-image:hover {
             opacity: 0.9;
@@ -1137,6 +1273,50 @@
         .message-delete:hover {
             transform: scale(1.1);
         }
+        .message-reaction {
+            position: absolute;
+            bottom: -15px;
+            right: 0;
+            background: white;
+            border-radius: 20px;
+            padding: 4px 8px;
+            font-size: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .message.reacted .message-reaction {
+            display: block;
+        }
+        .reaction-panel {
+            display: flex;
+            gap: 8px;
+            padding: 8px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: absolute;
+            z-index: 10;
+            display: none;
+        }
+        .reaction-panel.active {
+            display: flex;
+        }
+        .reaction-emoji {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .reaction-emoji:hover {
+            transform: scale(1.2);
+            background: #e0e0e0;
+        }
 
         .chat-input-area {
             display: flex;
@@ -1486,6 +1666,15 @@
             <div class="photo-info" id="photoInfo"></div>
         </div>
 
+        <!-- Просмотр поста -->
+        <div class="post-viewer" id="postViewer">
+            <div class="post-viewer-header">
+                <div class="post-viewer-back" onclick="closePostViewer()">←</div>
+                <div style="flex:1; text-align:center; font-weight:600;">Пост</div>
+            </div>
+            <div class="post-viewer-content" id="postViewerContent"></div>
+        </div>
+
         <!-- Просмотр сториз -->
         <div class="story-viewer" id="storyViewer">
             <div class="story-header">
@@ -1494,6 +1683,17 @@
                 <div class="story-close" onclick="closeStory()">✕</div>
             </div>
             <div class="story-image" id="storyImage"></div>
+            <div class="story-actions">
+                <button class="story-action-btn" onclick="likeStory()">❤️</button>
+                <button class="story-action-btn" onclick="showStoryEmojis()">😊</button>
+            </div>
+            <div class="story-emoji-panel" id="storyEmojiPanel" style="display: none;">
+                <div class="story-emoji" onclick="sendStoryEmoji('👍')">👍</div>
+                <div class="story-emoji" onclick="sendStoryEmoji('😂')">😂</div>
+                <div class="story-emoji" onclick="sendStoryEmoji('😮')">😮</div>
+                <div class="story-emoji" onclick="sendStoryEmoji('😢')">😢</div>
+                <div class="story-emoji" onclick="sendStoryEmoji('😡')">😡</div>
+            </div>
             <div class="story-progress">
                 <div class="progress-bar">
                     <div class="progress-fill" id="storyProgress"></div>
@@ -1504,8 +1704,12 @@
         <!-- Модалка подписок -->
         <div class="subscriptions-modal" id="subscriptionsModal">
             <div class="modal-header">
+                <div class="modal-back" onclick="closeSubscriptions()">←</div>
                 <h3 id="subscriptionsTitle">Подписчики</h3>
-                <span class="modal-close" onclick="closeSubscriptions()">✕</span>
+            </div>
+            <div class="modal-tabs">
+                <div class="modal-tab active" onclick="switchSubTab('followers')">Подписчики</div>
+                <div class="modal-tab" onclick="switchSubTab('following')">Подписки</div>
             </div>
             <div class="modal-list" id="subscriptionsList"></div>
         </div>
@@ -1549,6 +1753,13 @@
             <!-- Чат -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
+                    <div class="chat-categories" id="chatCategories">
+                        <div class="chat-category active" onclick="filterChats('all')">Все</div>
+                        <div class="chat-category" onclick="filterChats('work')">Работа</div>
+                        <div class="chat-category" onclick="filterChats('friends')">Друзья</div>
+                        <div class="chat-category" onclick="filterChats('family')">Семья</div>
+                        <div class="chat-category" onclick="createCategory()">+ Создать</div>
+                    </div>
                     <div class="chat-list" id="chatList"></div>
 
                     <div class="chat-header" id="chatHeader" style="display: none;">
@@ -1563,6 +1774,13 @@
                         </div>
                     </div>
                     <div class="chat-messages" id="chatMessages" style="display: none;"></div>
+                    <div class="reaction-panel" id="reactionPanel">
+                        <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
+                        <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
+                        <div class="reaction-emoji" onclick="addReaction('😂')">😂</div>
+                        <div class="reaction-emoji" onclick="addReaction('😮')">😮</div>
+                        <div class="reaction-emoji" onclick="addReaction('😢')">😢</div>
+                    </div>
                     <div class="chat-input-area" id="chatInputArea" style="display: none;">
                         <input type="text" class="chat-input" id="chatInput" placeholder="Написать...">
                         <button class="send-btn" id="sendBtn">➤</button>
@@ -1591,7 +1809,7 @@
                     </div>
 
                     <div class="stats-row">
-                        <div class="stat-item" onclick="showPosts()">
+                        <div class="stat-item" onclick="showSubscriptions('followers')">
                             <div class="stat-value" id="profilePostsCount">0</div>
                             <div class="stat-label">посты</div>
                         </div>
@@ -1644,6 +1862,9 @@
         let currentProfileUserId = null;
         let currentStoryUser = null;
         let storyTimer = null;
+        let currentReactionMessage = null;
+        let chatCategories = ['Все', 'Работа', 'Друзья', 'Семья'];
+        let currentCategory = 'Все';
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -1912,12 +2133,14 @@
                 lastMessageQuery.limit(1);
                 const lastMessage = await lastMessageQuery.first();
                 
+                if (!lastMessage) return null;
+                
                 return {
                     conversation: conv,
                     otherUser: otherUser,
-                    lastMessage: lastMessage ? lastMessage.get('text') : 'Начните общение',
-                    lastMessageTime: lastMessage ? lastMessage.createdAt : null,
-                    lastMessageId: lastMessage ? lastMessage.id : null
+                    lastMessage: lastMessage.get('text'),
+                    lastMessageTime: lastMessage.createdAt,
+                    lastMessageId: lastMessage.id
                 };
             }));
             
@@ -1949,9 +2172,16 @@
                 <div class="message-content">
                     <div class="message-bubble">${text}</div>
                     <div class="message-time">${time}</div>
+                    <div class="message-reaction"></div>
                     ${isOwn ? `<div class="message-delete" onclick="deleteMessage('${messageId}')">✕</div>` : ''}
                 </div>
             `;
+            
+            div.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                showReactionPanel(e, messageId);
+            });
+            
             messages.appendChild(div);
             messages.scrollTop = messages.scrollHeight;
         }
@@ -2149,7 +2379,7 @@
                 const dateStr = formatDate(post.createdAt);
                 
                 return `
-                    <div class="post-item" data-post-id="${post.id}" id="post-${post.id}" onclick="openPostPhoto('${post.id}', event)">
+                    <div class="post-item" data-post-id="${post.id}" id="post-${post.id}">
                         <div class="post-header">
                             <div class="post-avatar ${avatarClass}" style="${avatarStyle}" onclick="event.stopPropagation(); openUserProfile('${author.id}')"></div>
                             <div class="post-author-info">
@@ -2173,7 +2403,7 @@
                             ` : ''}
                         </div>
                         <div class="post-text">${post.get('text')}</div>
-                        ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image" onclick="event.stopPropagation(); openPhoto('${post.get('image').url()}', '${author.get('firstName')} ${author.get('lastName')}')">` : ''}
+                        ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image" onclick="event.stopPropagation(); openPostViewer('${post.id}')">` : ''}
                         <div class="post-actions" onclick="event.stopPropagation()">
                             <div class="post-action" onclick="likePostHandler('${post.id}', this)">
                                 <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -2265,13 +2495,13 @@
             const postsHtml = posts.map(post => {
                 if (post.get('image')) {
                     return `
-                        <div class="profile-post-thumb" onclick="openPhoto('${post.get('image').url()}', '${user.get('firstName')} ${user.get('lastName')}')">
+                        <div class="profile-post-thumb" onclick="openPostViewer('${post.id}')">
                             <img src="${post.get('image').url()}" alt="post">
                         </div>
                     `;
                 } else {
                     return `
-                        <div class="profile-post-thumb" onclick="alert('Пост без фото')">
+                        <div class="profile-post-thumb" onclick="openPostViewer('${post.id}')">
                             <div class="text-thumb">📝</div>
                         </div>
                     `;
@@ -2317,7 +2547,9 @@
 
         async function updateChatList() {
             const conversations = await getUserConversations();
-            const html = await Promise.all(conversations.map(async c => {
+            const filtered = conversations.filter(c => currentCategory === 'Все' || c.otherUser.get('category') === currentCategory);
+            
+            const html = await Promise.all(filtered.map(async c => {
                 const user = c.otherUser;
                 await user.fetch();
                 const avatarClass = getAvatarClass(user);
@@ -2339,7 +2571,7 @@
                     </div>
                 `;
             }));
-            document.getElementById('chatList').innerHTML = html.join('');
+            document.getElementById('chatList').innerHTML = html.join('') || '<p style="opacity:0.5; text-align:center;">Нет чатов</p>';
         }
 
         window.openPhoto = function(url, author) {
@@ -2352,13 +2584,152 @@
             document.getElementById('photoViewer').classList.remove('active');
         };
 
-        window.openPostPhoto = function(postId, event) {
-            const post = document.getElementById(`post-${postId}`);
-            const img = post.querySelector('.post-image');
-            if (img) {
-                const author = post.querySelector('.post-author').textContent;
-                openPhoto(img.src, author);
+        window.openPostViewer = async function(postId) {
+            const post = await new Parse.Query('Post').get(postId);
+            await post.get('author').fetch();
+            
+            const comments = post.get('comments') || [];
+            const isAuthor = getCurrentUser().id === post.get('author').id;
+            const nickname = post.get('author').get('nickname') || '';
+            const dateStr = formatDate(post.createdAt);
+            const avatarClass = getAvatarClass(post.get('author'));
+            const avatarStyle = getAvatarStyle(post.get('author'));
+            
+            const postHtml = `
+                <div class="post-item" data-post-id="${post.id}">
+                    <div class="post-header">
+                        <div class="post-avatar ${avatarClass}" style="${avatarStyle}" onclick="openUserProfile('${post.get('author').id}')"></div>
+                        <div class="post-author-info">
+                            <span class="post-author" onclick="openUserProfile('${post.get('author').id}')">${post.get('author').get('firstName')} ${post.get('author').get('lastName')}</span>
+                            <span class="post-nick">${nickname}</span>
+                        </div>
+                        ${isAuthor ? `
+                            <div class="post-menu-area" onclick="togglePostMenu('${post.id}', event)">
+                                <button class="post-menu-btn">•••</button>
+                            </div>
+                            <div class="post-menu" id="menu-${post.id}">
+                                <div class="post-menu-item" onclick="editPostHandler('${post.id}'); closePostViewer()">
+                                    <svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                                    Редактировать
+                                </div>
+                                <div class="post-menu-item" onclick="deletePostHandler('${post.id}'); closePostViewer()">
+                                    <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 4V2h8v2"/></svg>
+                                    Удалить
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="post-text">${post.get('text')}</div>
+                    ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
+                    <div class="post-actions">
+                        <div class="post-action" onclick="likePostHandler('${post.id}', this)">
+                            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            <span>${post.get('likes')}</span>
+                        </div>
+                        <div class="post-action" onclick="toggleComments('${post.id}')">
+                            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            <span>${comments.length}</span>
+                        </div>
+                        <span class="post-date-bottom">${dateStr}</span>
+                    </div>
+                    <div class="comments-section" id="comments-${post.id}" style="display: none;">
+                        <div class="comment-input-container">
+                            <input type="text" class="comment-input" id="comment-input-${post.id}" placeholder="Написать комментарий...">
+                            <button class="comment-btn" onclick="addCommentHandler('${post.id}')">➤</button>
+                        </div>
+                        <div class="comments-list">
+                            ${comments.map(c => `
+                                <div class="comment-item">
+                                    <div class="comment-avatar avatar-default"></div>
+                                    <div>
+                                        <div class="comment-author">${c.authorName}</div>
+                                        <div class="comment-text">${c.text}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('postViewerContent').innerHTML = postHtml;
+            document.getElementById('postViewer').classList.add('active');
+        };
+
+        window.closePostViewer = function() {
+            document.getElementById('postViewer').classList.remove('active');
+        };
+
+        window.showReactionPanel = function(e, messageId) {
+            e.preventDefault();
+            const panel = document.getElementById('reactionPanel');
+            panel.style.left = e.clientX + 'px';
+            panel.style.top = e.clientY + 'px';
+            panel.classList.add('active');
+            currentReactionMessage = messageId;
+            
+            setTimeout(() => {
+                panel.classList.remove('active');
+            }, 3000);
+        };
+
+        window.addReaction = function(emoji) {
+            if (!currentReactionMessage) return;
+            const msg = document.querySelector(`[data-message-id="${currentReactionMessage}"]`);
+            if (msg) {
+                msg.classList.add('reacted');
+                msg.querySelector('.message-reaction').textContent = emoji;
             }
+            document.getElementById('reactionPanel').classList.remove('active');
+        };
+
+        window.showStoryEmojis = function() {
+            const panel = document.getElementById('storyEmojiPanel');
+            panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+        };
+
+        window.likeStory = function() {
+            alert('❤️ Лайк на историю');
+        };
+
+        window.sendStoryEmoji = function(emoji) {
+            alert(`Отправлен эмодзи: ${emoji}`);
+            document.getElementById('storyEmojiPanel').style.display = 'none';
+        };
+
+        window.filterChats = function(category) {
+            currentCategory = category;
+            document.querySelectorAll('.chat-category').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+            updateChatList();
+        };
+
+        window.createCategory = function() {
+            const name = prompt('Название категории:');
+            if (name) {
+                chatCategories.push(name);
+                const cat = document.createElement('div');
+                cat.className = 'chat-category';
+                cat.textContent = name;
+                cat.onclick = () => filterChats(name);
+                document.getElementById('chatCategories').insertBefore(cat, document.getElementById('chatCategories').lastElementChild);
+            }
+        };
+
+        window.switchSubTab = function(tab) {
+            document.querySelectorAll('.modal-tab').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+            showSubscriptions(tab);
+        };
+
+        window.openPhoto = function(url, author) {
+            document.getElementById('photoImage').style.backgroundImage = `url('${url}')`;
+            document.getElementById('photoInfo').textContent = `Фото · ${author}`;
+            document.getElementById('photoViewer').classList.add('active');
+        };
+
+        window.closePhoto = function() {
+            document.getElementById('photoViewer').classList.remove('active');
         };
 
         window.togglePostMenu = function(postId, event) {
@@ -2512,6 +2883,7 @@
                 await deletePost(postId);
                 await updateHomeFeed();
                 await updateProfileUI();
+                closePostViewer();
             }
         };
 
@@ -2521,12 +2893,14 @@
                 await editPost(postId, newText);
                 await updateHomeFeed();
                 await updateProfileUI();
+                closePostViewer();
             }
         };
 
         window.openUserProfile = async function(userId) {
             closeSubscriptions();
             closePhoto();
+            closePostViewer();
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('profileScreen').classList.add('active');
             await updateProfileUI(userId);
@@ -2541,6 +2915,7 @@
         window.openConversation = async function(userId) {
             closeSubscriptions();
             closePhoto();
+            closePostViewer();
             const conversation = await getOrCreateConversation(userId);
             const user = await new Parse.Query('_User').get(userId);
             
