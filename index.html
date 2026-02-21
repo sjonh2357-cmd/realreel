@@ -114,7 +114,7 @@
             right: 16px;
             width: 300px;
             background: white;
-            border-radius: 30px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             z-index: 1000;
             display: none;
@@ -145,7 +145,7 @@
         .notification-avatar {
             width: 40px;
             height: 40px;
-            border-radius: 20px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
         }
@@ -271,7 +271,7 @@
         /* ===== СТОРИЗ ===== */
         .stories-row {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             margin-bottom: 24px;
             overflow-x: auto;
             padding: 4px 0;
@@ -297,7 +297,7 @@
         .story-avatar {
             width: 64px;
             height: 64px;
-            border-radius: 32px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
             border: 2px solid transparent;
@@ -360,7 +360,7 @@
         .story-header-avatar {
             width: 40px;
             height: 40px;
-            border-radius: 20px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
         }
@@ -432,19 +432,25 @@
             transform: scale(1.2);
             background: rgba(255,255,255,0.3);
         }
+        .story-action-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            fill: none;
+        }
         .story-reply-input {
             display: flex;
             gap: 8px;
             padding: 16px;
             background: rgba(255,255,255,0.1);
-            border-radius: 40px;
+            border-radius: 30px;
             margin: 16px;
         }
         .story-reply-input input {
             flex: 1;
             padding: 12px 16px;
             border: none;
-            border-radius: 30px;
+            border-radius: 20px;
             outline: none;
         }
 
@@ -517,7 +523,7 @@
             gap: 8px;
             background: #f5f5f5;
             padding: 8px 16px;
-            border-radius: 30px;
+            border-radius: 20px;
         }
         .modal-search-box input {
             flex: 1;
@@ -539,7 +545,7 @@
             align-items: center;
             gap: 12px;
             padding: 8px;
-            border-radius: 20px;
+            border-radius: 16px;
             cursor: pointer;
             transition: 0.3s;
             animation: slideRight 0.3s;
@@ -555,7 +561,7 @@
         .modal-user-avatar {
             width: 48px;
             height: 48px;
-            border-radius: 24px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
         }
@@ -591,7 +597,7 @@
             transform: scale(1.1);
         }
 
-        /* ===== АВТОРИЗАЦИЯ (ВХОД ПЕРВЫЙ) ===== */
+        /* ===== АВТОРИЗАЦИЯ ===== */
         .auth-screen {
             height: 100%;
             display: flex;
@@ -691,7 +697,7 @@
             width: 56px;
             height: 56px;
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            border-radius: 30px;
+            border-radius: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -781,7 +787,7 @@
         .post-item {
             padding: 16px;
             background: #ffffff;
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             border: 1px solid #f0f0f0;
             animation: fadeInUp 0.5s;
@@ -800,7 +806,7 @@
         .post-avatar {
             width: 44px;
             height: 44px;
-            border-radius: 22px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
             cursor: pointer;
@@ -890,7 +896,7 @@
         }
         .post-image {
             max-width: 100%;
-            border-radius: 16px;
+            border-radius: 12px;
             margin-bottom: 12px;
             border: 1px solid #f0f0f0;
             transition: 0.3s;
@@ -905,6 +911,7 @@
             gap: 20px;
             padding-top: 8px;
             border-top: 1px solid #f0f0f0;
+            position: relative;
         }
         .post-action {
             display: flex;
@@ -937,6 +944,12 @@
             font-size: 11px;
             margin-left: auto;
         }
+        .comments-toggle {
+            color: #999;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: auto;
+        }
 
         .comments-section {
             margin-top: 12px;
@@ -952,7 +965,7 @@
             flex: 1;
             padding: 10px 14px;
             border: 1px solid #ddd;
-            border-radius: 30px;
+            border-radius: 20px;
             outline: none;
             transition: 0.3s;
         }
@@ -983,13 +996,13 @@
             gap: 10px;
             padding: 8px;
             background: #f8f9fa;
-            border-radius: 16px;
+            border-radius: 12px;
             animation: fadeIn 0.3s;
         }
         .comment-avatar {
             width: 28px;
             height: 28px;
-            border-radius: 14px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
         }
@@ -1012,7 +1025,7 @@
             gap: 12px;
             background: #f5f5f5;
             padding: 8px 16px;
-            border-radius: 30px;
+            border-radius: 20px;
             margin-bottom: 20px;
             animation: fadeIn 0.5s;
         }
@@ -1026,7 +1039,7 @@
         .search-box button {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             border: none;
-            border-radius: 30px;
+            border-radius: 20px;
             padding: 8px 20px;
             color: white;
             font-weight: 500;
@@ -1049,7 +1062,7 @@
             gap: 12px;
             padding: 12px;
             background: white;
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             cursor: pointer;
             animation: fadeInUp 0.5s;
@@ -1062,7 +1075,7 @@
         .user-avatar {
             width: 48px;
             height: 48px;
-            border-radius: 24px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
         }
@@ -1131,7 +1144,7 @@
         .chat-category {
             padding: 8px 16px;
             background: #f0f0f0;
-            border-radius: 30px;
+            border-radius: 20px;
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
@@ -1156,7 +1169,7 @@
             gap: 12px;
             padding: 12px;
             background: white;
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             cursor: pointer;
             animation: fadeInUp 0.5s;
@@ -1169,7 +1182,7 @@
         .chat-avatar {
             width: 48px;
             height: 48px;
-            border-radius: 24px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
         }
@@ -1232,7 +1245,7 @@
         .chat-avatar-large {
             width: 48px;
             height: 48px;
-            border-radius: 24px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
             transition: 0.3s;
@@ -1387,7 +1400,7 @@
             flex: 1;
             padding: 12px 16px;
             border: 1px solid #ddd;
-            border-radius: 30px;
+            border-radius: 20px;
             outline: none;
             transition: 0.3s;
         }
@@ -1426,7 +1439,7 @@
         .profile-avatar {
             width: 80px;
             height: 80px;
-            border-radius: 40px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
             border: 2px solid #6aa9ff;
@@ -1524,7 +1537,7 @@
         .profile-post-thumb {
             aspect-ratio: 1;
             background: #f0f0f0;
-            border-radius: 8px;
+            border-radius: 4px;
             overflow: hidden;
             cursor: pointer;
             transition: 0.3s;
@@ -1692,11 +1705,16 @@
             <div class="nav-icons" id="navIcons"></div>
         </div>
 
-        <div class="add-post-btn hidden" id="addPostBtn">+</div>
+        <!-- Сердце возле + -->
+        <div class="add-post-btn hidden" id="addPostBtn">
+            <svg viewBox="0 0 24 24" width="28" height="28" stroke="white" fill="white">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+        </div>
 
         <!-- Уведомления -->
         <div class="notifications-panel" id="notificationsPanel">
-            <div class="notifications-header">Уведомления</div>
+            <div class="notifications-header">Обновления</div>
             <div class="notifications-list" id="notificationsList"></div>
         </div>
 
@@ -1749,8 +1767,12 @@
             </div>
             <div class="story-image" id="storyImage"></div>
             <div class="story-actions">
-                <button class="story-action-btn" onclick="likeStory()">❤️</button>
-                <button class="story-action-btn" onclick="showReplyInput()">💬</button>
+                <button class="story-action-btn" onclick="likeStory()">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="story-action-btn" onclick="showReplyInput()">
+                    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </button>
             </div>
             <div class="story-reply-input" id="storyReplyInput" style="display: none;">
                 <input type="text" id="storyReplyText" placeholder="Ответить...">
@@ -1783,7 +1805,7 @@
         </div>
 
         <div class="content" id="content">
-            <!-- Авторизация (ВХОД первый) -->
+            <!-- Авторизация -->
             <div class="screen active" id="authScreen">
                 <div class="auth-screen">
                     <div class="auth-bg"></div>
@@ -2027,6 +2049,7 @@
                 post.set('text', text);
                 post.set('author', getCurrentUser());
                 post.set('likes', 0);
+                post.set('likedBy', []);
                 post.set('comments', []);
                 if (imageFile) {
                     const parseFile = new Parse.File('post.jpg', imageFile);
@@ -2035,7 +2058,6 @@
                 }
                 await post.save();
                 
-                // Уведомление о новом посте
                 addNotification('📝 Новый пост', 'Вы опубликовали пост');
                 
                 return { success: true, post };
@@ -2109,10 +2131,18 @@
                 const Post = Parse.Object.extend('Post');
                 const query = new Parse.Query(Post);
                 const post = await query.get(postId);
+                const likedBy = post.get('likedBy') || [];
+                const userId = getCurrentUser().id;
+                
+                if (likedBy.includes(userId)) {
+                    return false;
+                }
+                
+                likedBy.push(userId);
+                post.set('likedBy', likedBy);
                 post.increment('likes');
                 await post.save();
                 
-                // Уведомление о лайке
                 addNotification('❤️ Новый лайк', `${getCurrentUser().get('firstName')} лайкнул ваш пост`);
                 
                 return true;
@@ -2129,7 +2159,6 @@
             });
             updateNotifications();
             
-            // Показываем панель уведомлений
             document.getElementById('notificationsPanel').classList.add('active');
             setTimeout(() => {
                 document.getElementById('notificationsPanel').classList.remove('active');
@@ -2437,6 +2466,7 @@
             const posts = await getAllPosts();
             const currentUser = getCurrentUser();
             const stories = await getStories();
+            const likedPosts = posts.map(p => p.get('likedBy')?.includes(currentUser.id) || false);
             
             // Сториз
             const userStories = await getUserStories(currentUser.id);
@@ -2466,7 +2496,7 @@
             document.getElementById('storiesRow').innerHTML = currentUserStory + storiesHtml.join('');
 
             // Посты
-            const postsHtml = await Promise.all(posts.map(async (post) => {
+            const postsHtml = await Promise.all(posts.map(async (post, index) => {
                 const author = post.get('author');
                 await author.fetch();
                 const comments = post.get('comments') || [];
@@ -2475,6 +2505,7 @@
                 const avatarStyle = getAvatarStyle(author);
                 const nickname = author.get('nickname') || '';
                 const dateStr = formatDate(post.createdAt);
+                const isLiked = likedPosts[index];
                 
                 return `
                     <div class="post-item" data-post-id="${post.id}" id="post-${post.id}">
@@ -2503,7 +2534,7 @@
                         <div class="post-text">${post.get('text')}</div>
                         ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image" onclick="event.stopPropagation(); openPostViewer('${post.id}')">` : ''}
                         <div class="post-actions" onclick="event.stopPropagation()">
-                            <div class="post-action" onclick="likePostHandler('${post.id}', this)">
+                            <div class="post-action ${isLiked ? 'liked' : ''}" onclick="likePostHandler('${post.id}', this)">
                                 <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                                 <span>${post.get('likes')}</span>
                             </div>
@@ -2719,7 +2750,7 @@
                     <div class="post-text">${post.get('text')}</div>
                     ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
                     <div class="post-actions">
-                        <div class="post-action" onclick="likePostHandler('${post.id}', this)">
+                        <div class="post-action ${post.get('likedBy')?.includes(getCurrentUser().id) ? 'liked' : ''}" onclick="likePostHandler('${post.id}', this)">
                             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                             <span>${post.get('likes')}</span>
                         </div>
@@ -2931,7 +2962,6 @@
             
             document.getElementById('subscriptionsModal').classList.add('active');
             
-            // Поиск в подписчиках
             document.getElementById('subscriptionSearchBtn').onclick = () => filterSubscriptions(type);
             document.getElementById('subscriptionSearchInput').onkeypress = (e) => {
                 if (e.key === 'Enter') filterSubscriptions(type);
@@ -2982,10 +3012,14 @@
 
         window.likePostHandler = async function(postId, el) {
             el.stopPropagation?.();
-            await likePost(postId);
-            const count = el.querySelector('span');
-            count.textContent = parseInt(count.textContent) + 1;
-            el.classList.add('liked');
+            const success = await likePost(postId);
+            if (success) {
+                const count = el.querySelector('span');
+                count.textContent = parseInt(count.textContent) + 1;
+                el.classList.add('liked');
+            } else {
+                alert('Вы уже лайкали этот пост');
+            }
         };
 
         window.addCommentHandler = async function(postId) {
