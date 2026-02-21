@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал · чистый поиск</title>
+    <title>RealReel · финал · всё работает</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -285,13 +285,6 @@
             font-size: 12px;
             color: #6aa9ff;
         }
-        .post-star {
-            width: 14px;
-            height: 14px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            display: inline-block;
-        }
         .post-date {
             font-size: 11px;
             color: #999;
@@ -411,7 +404,7 @@
             color: #333;
         }
 
-        /* ===== ПОИСК (ЧИСТЫЙ) ===== */
+        /* ===== ПОИСК ===== */
         .search-screen {
             padding: 16px;
         }
@@ -469,18 +462,12 @@
         .user-name-row {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .user-name {
             font-weight: 600;
             color: #333;
-        }
-        .user-star {
-            width: 14px;
-            height: 14px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            display: inline-block;
+            font-size: 14px;
         }
         .user-nick {
             font-size: 12px;
@@ -552,13 +539,6 @@
         .chat-name {
             font-weight: 600;
             color: #333;
-        }
-        .chat-star {
-            width: 14px;
-            height: 14px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            display: inline-block;
         }
         .chat-preview-row {
             display: flex;
@@ -805,8 +785,8 @@
         .profile-posts {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            flex: 1;
+            gap: 16px;
+            margin-top: 8px;
         }
 
         .settings-row {
@@ -897,6 +877,54 @@
             background: #f0f0f0;
         }
 
+        .edit-post-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 201;
+            display: none;
+        }
+        .edit-post-modal.active {
+            display: block;
+        }
+        .edit-post-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .edit-post-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+        .edit-post-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .edit-post-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .edit-post-btn.save {
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            color: white;
+        }
+        .edit-post-btn.cancel {
+            background: #f0f0f0;
+        }
+
         .hidden {
             display: none;
         }
@@ -957,6 +985,16 @@
             </div>
         </div>
 
+        <!-- Модалка редактирования поста -->
+        <div class="edit-post-modal" id="editPostModal">
+            <div class="edit-post-title">Редактировать пост</div>
+            <textarea class="edit-post-input" id="editPostText" rows="3"></textarea>
+            <div class="edit-post-actions">
+                <button class="edit-post-btn save" id="savePostBtn">Сохранить</button>
+                <button class="edit-post-btn cancel" id="cancelEditPostBtn">Отмена</button>
+            </div>
+        </div>
+
         <div class="content" id="content">
             <!-- Авторизация -->
             <div class="screen active" id="authScreen">
@@ -981,7 +1019,7 @@
                 <div class="posts-list" id="homePosts"></div>
             </div>
 
-            <!-- Поиск (чистый) -->
+            <!-- Поиск -->
             <div class="screen" id="searchScreen">
                 <div class="search-screen">
                     <div class="search-box">
@@ -1088,6 +1126,7 @@
         let currentConversationId = null;
         let currentOtherUserId = null;
         let currentProfileUserId = null;
+        let currentEditingPostId = null;
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -1520,7 +1559,6 @@
                                 <div class="post-author-row">
                                     <span class="post-author" onclick="openUserProfile('${author.id}')">${author.get('firstName')} ${author.get('lastName')}</span>
                                     <span class="post-nick">@${author.get('nickname')}</span>
-                                    ${author.get('emailVerified') ? '<span class="post-star"></span>' : ''}
                                     <span class="post-date">${formatDate(post.createdAt)}</span>
                                     ${isAuthor ? `
                                         <div class="post-owner-actions">
@@ -1621,13 +1659,15 @@
                 };
             }
             
-            const postsHtml = posts.map(post => `
-                <div class="post-item">
-                    <div class="post-text">${post.get('text')}</div>
-                    ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
-                </div>
-            `).join('');
-            document.getElementById('userPosts').innerHTML = postsHtml;
+            const postsHtml = await Promise.all(posts.map(async post => {
+                return `
+                    <div class="post-item">
+                        <div class="post-text">${post.get('text')}</div>
+                        ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
+                    </div>
+                `;
+            }));
+            document.getElementById('userPosts').innerHTML = postsHtml.join('');
         }
 
         async function getUserPosts(userId) {
@@ -1648,9 +1688,8 @@
                         <div class="user-info">
                             <div class="user-name-row">
                                 <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                                ${user.get('emailVerified') ? '<span class="user-star"></span>' : ''}
+                                <span class="user-nick">@${user.get('nickname')}</span>
                             </div>
-                            <div class="user-nick">@${user.get('nickname')}</div>
                             <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                         </div>
                         <div class="user-actions">
@@ -1679,7 +1718,6 @@
                         <div class="chat-info">
                             <div class="chat-name-row">
                                 <span class="chat-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                                ${user.get('emailVerified') ? '<span class="chat-star"></span>' : ''}
                             </div>
                             <div class="chat-preview-row">
                                 <span class="chat-preview">${c.lastMessage}</span>
@@ -1721,12 +1759,10 @@
         };
 
         window.editPostHandler = async function(postId) {
-            const newText = prompt('Редактировать пост:');
-            if (newText && newText.trim()) {
-                await editPost(postId, newText);
-                await updateHomeFeed();
-                await updateProfileUI();
-            }
+            const post = await new Parse.Query('Post').get(postId);
+            document.getElementById('editPostText').value = post.get('text');
+            currentEditingPostId = postId;
+            document.getElementById('editPostModal').classList.add('active');
         };
 
         window.openUserProfile = async function(userId) {
@@ -1738,14 +1774,6 @@
         window.openChatUserProfile = function() {
             if (currentOtherUserId) {
                 openUserProfile(currentOtherUserId);
-            }
-        };
-
-        window.subscribeToUser = async function(userId, btn) {
-            const result = await toggleSubscribe(userId);
-            if (result) {
-                btn.textContent = result.subscribed ? '✓' : '+';
-                btn.style.background = result.subscribed ? '#4CAF50' : '#f0f0f0';
             }
         };
 
@@ -1765,6 +1793,8 @@
             document.getElementById('chatAvatar').className = `chat-avatar-large ${avatarClass}`;
             if (avatarStyle) {
                 document.getElementById('chatAvatar').style.cssText = avatarStyle;
+            } else {
+                document.getElementById('chatAvatar').style.cssText = '';
             }
             
             document.getElementById('chatOnlineDot').className = `online-dot ${user.get('isOnline') ? 'online' : 'offline'}`;
@@ -1872,6 +1902,10 @@
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
         const avatarFileInput = document.getElementById('avatarFileInput');
+        const editPostModal = document.getElementById('editPostModal');
+        const editPostText = document.getElementById('editPostText');
+        const savePostBtn = document.getElementById('savePostBtn');
+        const cancelEditPostBtn = document.getElementById('cancelEditPostBtn');
 
         let isLoginMode = false;
 
@@ -2008,6 +2042,24 @@
             }
         });
 
+        savePostBtn.addEventListener('click', async () => {
+            if (!currentEditingPostId) return;
+            const newText = editPostText.value.trim();
+            if (!newText) return;
+            await editPost(currentEditingPostId, newText);
+            editPostModal.classList.remove('active');
+            currentEditingPostId = null;
+            editPostText.value = '';
+            await updateHomeFeed();
+            await updateProfileUI();
+        });
+
+        cancelEditPostBtn.addEventListener('click', () => {
+            editPostModal.classList.remove('active');
+            currentEditingPostId = null;
+            editPostText.value = '';
+        });
+
         searchBtn.addEventListener('click', async () => {
             const users = await searchUsers(searchInput.value);
             const html = users.map(user => {
@@ -2019,9 +2071,8 @@
                         <div class="user-info">
                             <div class="user-name-row">
                                 <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
-                                ${user.get('emailVerified') ? '<span class="user-star"></span>' : ''}
+                                <span class="user-nick">@${user.get('nickname')}</span>
                             </div>
-                            <div class="user-nick">@${user.get('nickname')}</div>
                             <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
                         </div>
                         <div class="user-actions">
