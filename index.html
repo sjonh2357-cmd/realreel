@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · финал · всё работает</title>
+    <title>RealReel · Instagram-style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -51,12 +51,6 @@
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.8; }
-            100% { opacity: 1; }
         }
 
         .nav-icons {
@@ -71,8 +65,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.3s ease;
-            animation: fadeIn 0.5s;
+            transition: 0.3s;
             position: relative;
         }
         .nav-icon svg {
@@ -81,17 +74,9 @@
             stroke: #555;
             stroke-width: 1.8;
             fill: none;
-            transition: 0.3s;
-        }
-        .nav-icon:hover {
-            transform: scale(1.1) rotate(5deg);
         }
         .nav-icon:hover svg {
             stroke: #6aa9ff;
-        }
-        .nav-icon.active svg {
-            stroke: #6aa9ff;
-            animation: bounce 0.5s;
         }
         .notification-badge {
             position: absolute;
@@ -108,19 +93,80 @@
             justify-content: center;
             border: 2px solid white;
         }
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         .content {
             flex: 1;
             overflow-y: auto;
             padding: 16px;
+        }
+
+        /* ===== НИЖНЯЯ НАВИГАЦИЯ (КАК В INSTAGRAM) ===== */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0;
+            background: white;
+            border-top: 1px solid #eee;
+            position: relative;
+            z-index: 100;
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 4px 0;
+            flex: 1;
+            transition: 0.3s;
+        }
+
+        .bottom-nav-item svg {
+            width: 24px;
+            height: 24px;
+            stroke: #777;
+            fill: none;
+            stroke-width: 1.8;
+            transition: 0.3s;
+        }
+
+        .bottom-nav-item.active svg {
+            stroke: #6aa9ff;
+        }
+
+        .bottom-nav-item.active .nav-label {
+            color: #6aa9ff;
+        }
+
+        .bottom-nav-item:hover svg {
+            stroke: #6aa9ff;
+            transform: scale(1.1);
+        }
+
+        .nav-label {
+            font-size: 10px;
+            margin-top: 2px;
+            color: #777;
+        }
+
+        .add-post-bottom {
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            width: 42px;
+            height: 42px;
+            border-radius: 21px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -20px;
+            box-shadow: 0 4px 10px rgba(106,169,255,0.3);
+        }
+
+        .add-post-bottom svg {
+            width: 24px;
+            height: 24px;
+            stroke: white !important;
+            fill: white;
         }
 
         /* ===== УВЕДОМЛЕНИЯ ===== */
@@ -136,7 +182,6 @@
             display: none;
             flex-direction: column;
             overflow: hidden;
-            animation: slideDown 0.3s;
         }
         .notifications-panel.active {
             display: flex;
@@ -156,7 +201,6 @@
             gap: 12px;
             padding: 12px 16px;
             border-bottom: 1px solid #f0f0f0;
-            animation: fadeIn 0.3s;
         }
         .notification-avatar {
             width: 40px;
@@ -184,11 +228,6 @@
             z-index: 1000;
             display: none;
             flex-direction: column;
-            animation: fadeInPhoto 0.3s;
-        }
-        @keyframes fadeInPhoto {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         .photo-viewer.active {
             display: flex;
@@ -210,11 +249,6 @@
             justify-content: center;
             cursor: pointer;
             font-size: 20px;
-            transition: 0.3s;
-        }
-        .photo-close:hover {
-            transform: scale(1.1);
-            background: rgba(255,255,255,0.3);
         }
         .photo-image {
             flex: 1;
@@ -222,21 +256,11 @@
             background-position: center;
             background-repeat: no-repeat;
             margin: 16px;
-            animation: zoomIn 0.3s;
-        }
-        @keyframes zoomIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
         .photo-info {
             padding: 20px;
             color: white;
             text-align: center;
-            animation: slideUp 0.3s;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         /* ===== ПРОСМОТР ПОСТА ===== */
@@ -249,11 +273,6 @@
             z-index: 1000;
             display: none;
             flex-direction: column;
-            animation: slideUpPost 0.3s;
-        }
-        @keyframes slideUpPost {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
         }
         .post-viewer.active {
             display: flex;
@@ -273,10 +292,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .post-viewer-back:hover {
-            transform: scale(1.1);
         }
         .post-viewer-content {
             flex: 1;
@@ -291,7 +306,6 @@
             margin-bottom: 24px;
             overflow-x: auto;
             padding: 4px 0;
-            animation: fadeIn 0.5s;
         }
         .stories-row::-webkit-scrollbar {
             display: none;
@@ -304,11 +318,6 @@
             min-width: 64px;
             cursor: pointer;
             position: relative;
-            transition: 0.3s;
-            animation: fadeIn 0.5s;
-        }
-        .story-item:hover {
-            transform: translateY(-2px);
         }
         .story-avatar {
             width: 64px;
@@ -317,8 +326,6 @@
             background-size: cover;
             background-position: center;
             border: 2px solid transparent;
-            transition: 0.3s;
-            animation: pulse 3s infinite;
         }
         .story-avatar.has-story {
             border-color: #6aa9ff;
@@ -338,7 +345,6 @@
             font-size: 16px;
             font-weight: 600;
             border: 2px solid white;
-            animation: pulse 2s infinite;
         }
         .story-name {
             font-size: 12px;
@@ -356,7 +362,6 @@
             z-index: 1000;
             display: none;
             flex-direction: column;
-            animation: fadeIn 0.3s;
         }
         .story-viewer.active {
             display: flex;
@@ -367,11 +372,6 @@
             align-items: center;
             gap: 12px;
             color: white;
-            animation: slideDown 0.3s;
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
         .story-header-avatar {
             width: 40px;
@@ -394,11 +394,6 @@
             justify-content: center;
             cursor: pointer;
             font-size: 20px;
-            transition: 0.3s;
-        }
-        .story-close:hover {
-            transform: scale(1.1);
-            background: rgba(255,255,255,0.3);
         }
         .story-image {
             flex: 1;
@@ -406,7 +401,6 @@
             background-position: center;
             background-repeat: no-repeat;
             margin: 16px;
-            animation: zoomIn 0.5s;
         }
         .story-progress {
             padding: 16px;
@@ -438,14 +432,9 @@
             border: none;
             color: white;
             cursor: pointer;
-            transition: 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .story-action-btn:hover {
-            transform: scale(1.2);
-            background: rgba(255,255,255,0.3);
         }
         .story-action-btn svg {
             width: 24px;
@@ -480,7 +469,6 @@
             z-index: 200;
             display: none;
             flex-direction: column;
-            animation: slideUpPost 0.3s;
         }
         .subscriptions-modal.active {
             display: flex;
@@ -501,10 +489,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .modal-back:hover {
-            transform: scale(1.1);
         }
         .modal-header h3 {
             flex: 1;
@@ -523,7 +507,6 @@
             font-weight: 500;
             color: #999;
             border-bottom: 2px solid transparent;
-            transition: 0.3s;
         }
         .modal-tab.active {
             color: #6aa9ff;
@@ -562,16 +545,9 @@
             padding: 8px;
             border-radius: 16px;
             cursor: pointer;
-            transition: 0.3s;
-            animation: slideRight 0.3s;
-        }
-        @keyframes slideRight {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
         }
         .modal-user-item:hover {
             background: #f5f5f5;
-            transform: translateX(4px);
         }
         .modal-user-avatar {
             width: 48px;
@@ -606,10 +582,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.3s;
-        }
-        .modal-user-btn:hover {
-            transform: scale(1.1);
         }
 
         /* ===== АВТОРИЗАЦИЯ ===== */
@@ -629,11 +601,6 @@
             background-size: cover;
             background-position: center;
             filter: brightness(0.7);
-            animation: zoomBg 20s infinite alternate;
-        }
-        @keyframes zoomBg {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
         }
         .auth-form {
             width: 300px;
@@ -646,11 +613,6 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            animation: fadeInUp 0.5s;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .auth-title {
             font-size: 24px;
@@ -666,12 +628,9 @@
             border-radius: 30px;
             font-size: 14px;
             outline: none;
-            transition: 0.3s;
         }
         .auth-input:focus {
             border-color: #6aa9ff;
-            transform: scale(1.02);
-            box-shadow: 0 0 10px rgba(106,169,255,0.2);
         }
         .auth-btn {
             padding: 14px;
@@ -681,22 +640,12 @@
             color: white;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .auth-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(106,169,255,0.5);
         }
         .auth-switch {
             text-align: center;
             font-size: 14px;
             color: #666;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .auth-switch:hover {
-            color: #6aa9ff;
-            transform: scale(1.05);
         }
         .auth-error {
             color: #ff4444;
@@ -704,37 +653,7 @@
             text-align: center;
         }
 
-        /* ===== КНОПКА ДОБАВЛЕНИЯ ПОСТА ===== */
-        .add-post-btn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 4px 15px rgba(106,169,255,0.4);
-            z-index: 100;
-            animation: pulse 2s infinite;
-            transition: 0.3s;
-        }
-        .add-post-btn svg {
-            width: 28px;
-            height: 28px;
-            fill: white;
-            stroke: white;
-        }
-        .add-post-btn:hover {
-            transform: scale(1.1) rotate(90deg);
-        }
-        .add-post-btn.hidden {
-            display: none;
-        }
-
+        /* ===== МОДАЛКА ДОБАВЛЕНИЯ ПОСТА ===== */
         .add-post-modal {
             position: fixed;
             top: 50%; left: 50%;
@@ -746,7 +665,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             z-index: 101;
             display: none;
-            animation: scaleIn 0.3s;
         }
         .add-post-modal.active {
             display: block;
@@ -783,7 +701,6 @@
             border-radius: 20px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
         }
         .modal-btn.publish {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
@@ -791,9 +708,6 @@
         }
         .modal-btn.cancel {
             background: #f0f0f0;
-        }
-        .modal-btn:hover {
-            transform: scale(1.02);
         }
 
         /* ===== ПОСТЫ ===== */
@@ -808,12 +722,6 @@
             border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             border: 1px solid #f0f0f0;
-            animation: fadeInUp 0.5s;
-            transition: 0.3s;
-        }
-        .post-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(106,169,255,0.15);
         }
         .post-header {
             display: flex;
@@ -828,10 +736,6 @@
             background-size: cover;
             background-position: center;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .post-avatar:hover {
-            transform: scale(1.1);
         }
         .post-author-info {
             flex: 1;
@@ -843,10 +747,6 @@
             font-weight: 600;
             color: #333;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .post-author:hover {
-            color: #6aa9ff;
         }
         .post-nick {
             font-size: 12px;
@@ -867,12 +767,6 @@
             padding: 4px 8px;
             font-size: 18px;
             color: #888;
-            letter-spacing: 2px;
-            transition: 0.3s;
-        }
-        .post-menu-btn:hover {
-            color: #6aa9ff;
-            transform: scale(1.1);
         }
         .post-menu {
             position: absolute;
@@ -882,7 +776,6 @@
             padding: 8px;
             z-index: 10;
             display: none;
-            animation: scaleIn 0.2s;
         }
         .post-menu.active {
             display: block;
@@ -895,11 +788,9 @@
             align-items: center;
             gap: 8px;
             font-size: 14px;
-            transition: 0.3s;
         }
         .post-menu-item:hover {
             background: #f5f5f5;
-            transform: translateX(4px);
         }
         .post-menu-item svg {
             width: 16px;
@@ -919,11 +810,7 @@
             border-radius: 12px;
             margin-bottom: 12px;
             border: 1px solid #f0f0f0;
-            transition: 0.3s;
             cursor: pointer;
-        }
-        .post-image:hover {
-            opacity: 0.9;
         }
         .post-actions {
             display: flex;
@@ -931,7 +818,6 @@
             gap: 20px;
             padding-top: 8px;
             border-top: 1px solid #f0f0f0;
-            position: relative;
         }
         .post-action {
             display: flex;
@@ -939,35 +825,20 @@
             gap: 6px;
             cursor: pointer;
             color: #666;
-            transition: 0.3s;
         }
         .post-action svg {
             width: 20px;
             height: 20px;
             fill: none;
             stroke: currentColor;
-            transition: 0.3s;
-        }
-        .post-action:hover {
-            color: #6aa9ff;
-            transform: scale(1.1);
         }
         .post-action.liked svg {
             fill: #ff4d4d;
             stroke: #ff4d4d;
         }
-        .post-action span {
-            color: #666;
-        }
         .post-date-bottom {
             color: #999;
             font-size: 11px;
-            margin-left: auto;
-        }
-        .comments-toggle {
-            color: #999;
-            font-size: 12px;
-            cursor: pointer;
             margin-left: auto;
         }
 
@@ -987,11 +858,6 @@
             border: 1px solid #ddd;
             border-radius: 20px;
             outline: none;
-            transition: 0.3s;
-        }
-        .comment-input:focus {
-            border-color: #6aa9ff;
-            transform: scale(1.02);
         }
         .comment-btn {
             width: 40px;
@@ -1001,10 +867,6 @@
             border-radius: 20px;
             color: white;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .comment-btn:hover {
-            transform: scale(1.1);
         }
         .comments-list {
             display: flex;
@@ -1017,7 +879,6 @@
             padding: 8px;
             background: #f8f9fa;
             border-radius: 12px;
-            animation: fadeIn 0.3s;
         }
         .comment-avatar {
             width: 28px;
@@ -1047,7 +908,6 @@
             padding: 8px 16px;
             border-radius: 20px;
             margin-bottom: 20px;
-            animation: fadeIn 0.5s;
         }
         .search-box input {
             flex: 1;
@@ -1065,11 +925,6 @@
             font-weight: 500;
             font-size: 14px;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .search-box button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(106,169,255,0.3);
         }
         .search-results {
             display: flex;
@@ -1085,12 +940,9 @@
             border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             cursor: pointer;
-            animation: fadeInUp 0.5s;
-            transition: 0.3s;
         }
         .user-card:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(106,169,255,0.15);
+            background: #f5f5f5;
         }
         .user-avatar {
             width: 48px;
@@ -1136,10 +988,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.3s;
-        }
-        .user-btn:hover {
-            transform: scale(1.1);
         }
         .user-btn svg {
             width: 18px;
@@ -1168,11 +1016,7 @@
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.3s;
             white-space: nowrap;
-        }
-        .chat-category:hover {
-            background: #e0e0e0;
         }
         .chat-category.active {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
@@ -1192,12 +1036,9 @@
             border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             cursor: pointer;
-            animation: fadeInUp 0.5s;
-            transition: 0.3s;
         }
         .chat-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(106,169,255,0.15);
+            background: #f5f5f5;
         }
         .chat-avatar {
             width: 48px;
@@ -1252,11 +1093,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .back-btn:hover {
-            transform: scale(1.1) rotate(-10deg);
-            background: rgba(106,169,255,0.2);
         }
         .chat-avatar-container {
             position: relative;
@@ -1268,10 +1104,6 @@
             border-radius: 24px;
             background-size: cover;
             background-position: center;
-            transition: 0.3s;
-        }
-        .chat-avatar-large:hover {
-            transform: scale(1.1);
         }
         .online-dot {
             width: 12px;
@@ -1281,7 +1113,6 @@
             bottom: 2px;
             right: 2px;
             border: 2px solid white;
-            animation: pulse 2s infinite;
         }
         .online-dot.online { background: #4CAF50; }
         .online-dot.offline { background: #f44336; }
@@ -1309,24 +1140,15 @@
             display: flex;
             max-width: 80%;
             position: relative;
-            animation: slideUp 0.3s;
         }
         .message.own {
             align-self: flex-end;
-        }
-        .message-content {
-            position: relative;
         }
         .message-bubble {
             padding: 10px 14px;
             background: #f0f0f0;
             border-radius: 20px 20px 20px 8px;
             font-size: 14px;
-            transition: 0.3s;
-        }
-        .message-bubble:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(106,169,255,0.2);
         }
         .message.own .message-bubble {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
@@ -1357,57 +1179,9 @@
             font-size: 12px;
             cursor: pointer;
             opacity: 0;
-            transition: 0.3s;
         }
         .message:hover .message-delete {
             opacity: 1;
-        }
-        .message-delete:hover {
-            transform: scale(1.1);
-        }
-        .message-reaction {
-            position: absolute;
-            bottom: -15px;
-            left: 0;
-            background: white;
-            border-radius: 20px;
-            padding: 4px 8px;
-            font-size: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            display: none;
-        }
-        .message.reacted .message-reaction {
-            display: block;
-        }
-        .reaction-panel {
-            display: flex;
-            gap: 8px;
-            padding: 8px;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            position: absolute;
-            z-index: 10;
-            display: none;
-        }
-        .reaction-panel.active {
-            display: flex;
-        }
-        .reaction-emoji {
-            width: 36px;
-            height: 36px;
-            border-radius: 18px;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .reaction-emoji:hover {
-            transform: scale(1.2);
-            background: #e0e0e0;
         }
 
         .chat-input-area {
@@ -1422,12 +1196,6 @@
             border: 1px solid #ddd;
             border-radius: 20px;
             outline: none;
-            transition: 0.3s;
-        }
-        .chat-input:focus {
-            border-color: #6aa9ff;
-            transform: scale(1.02);
-            box-shadow: 0 0 10px rgba(106,169,255,0.2);
         }
         .send-btn {
             width: 48px;
@@ -1437,11 +1205,6 @@
             border-radius: 24px;
             color: white;
             cursor: pointer;
-            transition: 0.3s;
-            animation: pulse 2s infinite;
-        }
-        .send-btn:hover {
-            transform: scale(1.1) rotate(15deg);
         }
 
         /* ===== ПРОФИЛЬ ===== */
@@ -1464,10 +1227,6 @@
             background-position: center;
             border: 2px solid #6aa9ff;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .profile-avatar:hover {
-            transform: scale(1.05);
         }
         .profile-info {
             flex: 1;
@@ -1489,7 +1248,6 @@
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             display: inline-block;
-            animation: pulse 3s infinite;
         }
         .profile-nick {
             color: #6aa9ff;
@@ -1506,11 +1264,6 @@
         .stat-item {
             text-align: center;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .stat-item:hover {
-            transform: scale(1.05);
-            color: #6aa9ff;
         }
         .stat-value {
             font-weight: 600;
@@ -1533,7 +1286,6 @@
             border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
         }
         .profile-action-btn.primary {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
@@ -1542,10 +1294,6 @@
         .profile-action-btn.secondary {
             background: #f0f0f0;
             color: #333;
-        }
-        .profile-action-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(106,169,255,0.3);
         }
 
         .profile-posts-grid {
@@ -1560,11 +1308,6 @@
             border-radius: 4px;
             overflow: hidden;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        .profile-post-thumb:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(106,169,255,0.3);
         }
         .profile-post-thumb img {
             width: 100%;
@@ -1598,17 +1341,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.3s;
         }
         .settings-icon svg {
             width: 22px;
             height: 22px;
             stroke: #555;
             fill: none;
-        }
-        .settings-icon:hover {
-            transform: scale(1.1);
-            background: rgba(106,169,255,0.2);
         }
         .logout-icon {
             width: 44px;
@@ -1619,17 +1357,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.3s;
         }
         .logout-icon svg {
             width: 22px;
             height: 22px;
             stroke: #ff4444;
             fill: none;
-        }
-        .logout-icon:hover {
-            transform: scale(1.1);
-            background: #ffdddd;
         }
 
         .edit-profile-modal {
@@ -1643,7 +1376,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
             z-index: 200;
             display: none;
-            animation: scaleIn 0.3s;
         }
         .edit-profile-modal.active {
             display: block;
@@ -1660,11 +1392,6 @@
             border-radius: 20px;
             margin-bottom: 12px;
             outline: none;
-            transition: 0.3s;
-        }
-        .edit-profile-input:focus {
-            border-color: #6aa9ff;
-            transform: scale(1.02);
         }
         .edit-profile-actions {
             display: flex;
@@ -1677,7 +1404,6 @@
             border-radius: 20px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.3s;
         }
         .edit-profile-btn.save {
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
@@ -1685,9 +1411,6 @@
         }
         .edit-profile-btn.cancel {
             background: #f0f0f0;
-        }
-        .edit-profile-btn:hover {
-            transform: scale(1.02);
         }
 
         .hidden {
@@ -1728,13 +1451,6 @@
                     <span class="notification-badge" id="notificationBadge" style="display: none;">3</span>
                 </div>
             </div>
-        </div>
-
-        <!-- Сердце возле + -->
-        <div class="add-post-btn hidden" id="addPostBtn">
-            <svg viewBox="0 0 24 24">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
         </div>
 
         <!-- Уведомления -->
@@ -1862,6 +1578,13 @@
                 </div>
             </div>
 
+            <!-- Reels -->
+            <div class="screen" id="reelsScreen">
+                <div style="display: flex; align-items: center; justify-content: center; height: 100%; opacity: 0.5;">
+                    Reels — скоро
+                </div>
+            </div>
+
             <!-- Чат -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
@@ -1882,23 +1605,11 @@
                         </div>
                     </div>
                     <div class="chat-messages" id="chatMessages" style="display: none;"></div>
-                    <div class="reaction-panel" id="reactionPanel">
-                        <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
-                        <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
-                        <div class="reaction-emoji" onclick="addReaction('😂')">😂</div>
-                        <div class="reaction-emoji" onclick="addReaction('😮')">😮</div>
-                        <div class="reaction-emoji" onclick="addReaction('😢')">😢</div>
-                    </div>
                     <div class="chat-input-area" id="chatInputArea" style="display: none;">
                         <input type="text" class="chat-input" id="chatInput" placeholder="Написать...">
                         <button class="send-btn" id="sendBtn">➤</button>
                     </div>
                 </div>
-            </div>
-
-            <!-- Reels -->
-            <div class="screen" id="reelsScreen">
-                <div>Reels</div>
             </div>
 
             <!-- Профиль -->
@@ -1949,6 +1660,35 @@
                 </div>
             </div>
         </div>
+
+        <!-- Нижняя навигация (Instagram style) -->
+        <div class="bottom-nav">
+            <div class="bottom-nav-item active" onclick="navigateTo('homeScreen', this)">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span class="nav-label">Главная</span>
+            </div>
+            <div class="bottom-nav-item" onclick="navigateTo('searchScreen', this)">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span class="nav-label">Поиск</span>
+            </div>
+            <div class="bottom-nav-item" onclick="openAddPostModal()">
+                <div class="add-post-bottom">
+                    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </div>
+            </div>
+            <div class="bottom-nav-item" onclick="navigateTo('reelsScreen', this)">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="8" y1="2" x2="8" y2="22"/><line x1="16" y1="2" x2="16" y2="22"/><line x1="2" y1="8" x2="22" y2="8"/><line x1="2" y1="16" x2="22" y2="16"/></svg>
+                <span class="nav-label">Reels</span>
+            </div>
+            <div class="bottom-nav-item" onclick="navigateTo('chatScreen', this)">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span class="nav-label">Чаты</span>
+            </div>
+            <div class="bottom-nav-item" onclick="navigateTo('profileScreen', this)">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span class="nav-label">Профиль</span>
+            </div>
+        </div>
     </div>
 
     <!-- ===== BACK4APP ===== -->
@@ -1970,7 +1710,6 @@
         let currentProfileUserId = null;
         let currentStoryUser = null;
         let storyTimer = null;
-        let currentReactionMessage = null;
         let notifications = [];
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
@@ -1995,6 +1734,45 @@
             }
             return '';
         }
+
+        // Навигация как в Instagram
+        window.navigateTo = function(screenId, element) {
+            // Скрываем все экраны
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Показываем выбранный экран
+            document.getElementById(screenId).classList.add('active');
+            
+            // Обновляем активный пункт в нижней навигации
+            document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            if (element) {
+                element.classList.add('active');
+            }
+            
+            // Обновляем контент в зависимости от экрана
+            if (screenId === 'homeScreen') {
+                updateHomeFeed();
+            } else if (screenId === 'searchScreen') {
+                updateSearchResults();
+            } else if (screenId === 'chatScreen') {
+                updateChatList();
+                document.getElementById('chatList').style.display = 'flex';
+                document.getElementById('chatCategories').style.display = 'flex';
+                document.getElementById('chatHeader').style.display = 'none';
+                document.getElementById('chatMessages').style.display = 'none';
+                document.getElementById('chatInputArea').style.display = 'none';
+            } else if (screenId === 'profileScreen') {
+                updateProfileUI();
+            }
+        };
+
+        window.openAddPostModal = function() {
+            document.getElementById('addPostModal').classList.add('active');
+        };
 
         async function signUp(firstName, lastName, nickname, email, password) {
             try {
@@ -2330,15 +2108,9 @@
                 <div class="message-content">
                     <div class="message-bubble">${text}</div>
                     <div class="message-time">${time}</div>
-                    <div class="message-reaction"></div>
                     ${isOwn ? `<div class="message-delete" onclick="deleteMessage('${messageId}')">✕</div>` : ''}
                 </div>
             `;
-            
-            div.addEventListener('contextmenu', (e) => {
-                e.preventDefault();
-                showReactionPanel(e, messageId);
-            });
             
             messages.appendChild(div);
             messages.scrollTop = messages.scrollHeight;
@@ -2497,7 +2269,6 @@
             const posts = await getAllPosts();
             const currentUser = getCurrentUser();
             const stories = await getStories();
-            const likedPosts = posts.map(p => p.get('likedBy')?.includes(currentUser.id) || false);
             
             // Сториз
             const userStories = await getUserStories(currentUser.id);
@@ -2527,7 +2298,7 @@
             document.getElementById('storiesRow').innerHTML = currentUserStory + storiesHtml.join('');
 
             // Посты
-            const postsHtml = await Promise.all(posts.map(async (post, index) => {
+            const postsHtml = await Promise.all(posts.map(async (post) => {
                 const author = post.get('author');
                 await author.fetch();
                 const comments = post.get('comments') || [];
@@ -2536,7 +2307,7 @@
                 const avatarStyle = getAvatarStyle(author);
                 const nickname = author.get('nickname') || '';
                 const dateStr = formatDate(post.createdAt);
-                const isLiked = likedPosts[index];
+                const isLiked = post.get('likedBy')?.includes(currentUser.id) || false;
                 
                 return `
                     <div class="post-item" data-post-id="${post.id}" id="post-${post.id}">
@@ -2753,6 +2524,7 @@
             const dateStr = formatDate(post.createdAt);
             const avatarClass = getAvatarClass(post.get('author'));
             const avatarStyle = getAvatarStyle(post.get('author'));
+            const isLiked = post.get('likedBy')?.includes(getCurrentUser().id) || false;
             
             const postHtml = `
                 <div class="post-item" data-post-id="${post.id}">
@@ -2781,7 +2553,7 @@
                     <div class="post-text">${post.get('text')}</div>
                     ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
                     <div class="post-actions">
-                        <div class="post-action ${post.get('likedBy')?.includes(getCurrentUser().id) ? 'liked' : ''}" onclick="likePostHandler('${post.id}', this)">
+                        <div class="post-action ${isLiked ? 'liked' : ''}" onclick="likePostHandler('${post.id}', this)">
                             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                             <span>${post.get('likes')}</span>
                         </div>
@@ -2791,7 +2563,7 @@
                         </div>
                         <span class="post-date-bottom">${dateStr}</span>
                     </div>
-                    <div class="comments-section" id="comments-${post.id}" style="display: none;">
+                    <div class="comments-section" id="comments-${post.id}" style="display: block;">
                         <div class="comment-input-container">
                             <input type="text" class="comment-input" id="comment-input-${post.id}" placeholder="Написать комментарий...">
                             <button class="comment-btn" onclick="addCommentHandler('${post.id}')">➤</button>
@@ -2817,29 +2589,6 @@
 
         window.closePostViewer = function() {
             document.getElementById('postViewer').classList.remove('active');
-        };
-
-        window.showReactionPanel = function(e, messageId) {
-            e.preventDefault();
-            const panel = document.getElementById('reactionPanel');
-            panel.style.left = e.clientX + 'px';
-            panel.style.top = e.clientY + 'px';
-            panel.classList.add('active');
-            currentReactionMessage = messageId;
-            
-            setTimeout(() => {
-                panel.classList.remove('active');
-            }, 3000);
-        };
-
-        window.addReaction = function(emoji) {
-            if (!currentReactionMessage) return;
-            const msg = document.querySelector(`[data-message-id="${currentReactionMessage}"]`);
-            if (msg) {
-                msg.classList.add('reacted');
-                msg.querySelector('.message-reaction').textContent = emoji;
-            }
-            document.getElementById('reactionPanel').classList.remove('active');
         };
 
         window.likeStory = function() {
@@ -2954,9 +2703,31 @@
                     const status = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
                     
                     return `
-                        <div class="modal-user-item" onclick="openUserProfile
-                        // Продолжение кода с того места, где оборвалось:
-
+                        <div class="modal-user-item" onclick="openUserProfile('${user.id}')">
+                            <div class="modal-user-avatar ${avatarClass}" style="${avatarStyle}"></div>
+                            <div class="modal-user-info">
+                                <div class="modal-user-name">${firstName} ${lastName}</div>
+                                <div class="modal-user-nick">${nickname}</div>
+                                <div class="modal-user-status">${status}</div>
+                            </div>
+                            <button class="modal-user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+                list.innerHTML = html || '<p style="opacity:0.5; text-align:center;">Нет подписчиков</p>';
+            } else {
+                const following = await getFollowing(userId);
+                const html = following.map(user => {
+                    const firstName = user.get('firstName') || '';
+                    const lastName = user.get('lastName') || '';
+                    const nickname = user.get('nickname') || '';
+                    const avatarClass = getAvatarClass(user);
+                    const avatarStyle = getAvatarStyle(user);
+                    const status = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
+                    
+                    return `
                         <div class="modal-user-item" onclick="openUserProfile('${user.id}')">
                             <div class="modal-user-avatar ${avatarClass}" style="${avatarStyle}"></div>
                             <div class="modal-user-info">
@@ -2980,10 +2751,9 @@
             document.getElementById('subscriptionsModal').classList.remove('active');
         };
 
-        // ===== ОСНОВНЫЕ ФУНКЦИИ НАВИГАЦИИ =====
         window.openUserProfile = async function(userId) {
             await updateProfileUI(userId);
-            showScreen('profileScreen');
+            navigateTo('profileScreen', document.querySelectorAll('.bottom-nav-item')[5]);
         };
 
         window.openConversation = async function(otherUserId) {
@@ -3018,6 +2788,9 @@
             document.getElementById('chatMessages').innerHTML = '';
             await loadMessageHistory(currentConversationId);
             subscribeToChat(currentConversationId);
+            
+            // Переходим на экран чата
+            navigateTo('chatScreen', document.querySelectorAll('.bottom-nav-item')[4]);
         };
 
         window.backToChatList = function() {
@@ -3039,6 +2812,10 @@
             if (currentOtherUserId) {
                 openUserProfile(currentOtherUserId);
             }
+        };
+
+        window.showPosts = function() {
+            navigateTo('homeScreen', document.querySelectorAll('.bottom-nav-item')[0]);
         };
 
         // ===== ОБРАБОТЧИКИ ДЛЯ ПОСТОВ =====
@@ -3069,6 +2846,9 @@
             if (result) {
                 input.value = '';
                 await updateHomeFeed(); // Обновляем ленту
+                if (document.getElementById('postViewer').classList.contains('active')) {
+                    await openPostViewer(postId);
+                }
             }
         };
 
@@ -3090,30 +2870,6 @@
                 });
             }
         };
-
-        // ===== НАВИГАЦИЯ ПО ЭКРАНАМ =====
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-            
-            // Обновляем контент в зависимости от экрана
-            if (screenId === 'homeScreen') {
-                updateHomeFeed();
-            } else if (screenId === 'searchScreen') {
-                updateSearchResults();
-            } else if (screenId === 'chatScreen') {
-                updateChatList();
-                document.getElementById('chatList').style.display = 'flex';
-                document.getElementById('chatCategories').style.display = 'flex';
-                document.getElementById('chatHeader').style.display = 'none';
-                document.getElementById('chatMessages').style.display = 'none';
-                document.getElementById('chatInputArea').style.display = 'none';
-            } else if (screenId === 'profileScreen') {
-                updateProfileUI();
-            }
-        }
 
         // ===== ФОРМАТИРОВАНИЕ ДАТЫ =====
         function formatDate(date) {
@@ -3138,13 +2894,10 @@
         }
 
         // ===== ОБРАБОТЧИКИ ДЛЯ ЭЛЕМЕНТОВ ИНТЕРФЕЙСА =====
-        document.getElementById('addPostBtn').addEventListener('click', () => {
-            document.getElementById('addPostModal').classList.add('active');
-        });
-
         document.getElementById('cancelPostBtn').addEventListener('click', () => {
             document.getElementById('addPostModal').classList.remove('active');
             document.getElementById('postText').value = '';
+            document.getElementById('postFile').value = '';
         });
 
         document.getElementById('postFileInput').addEventListener('click', () => {
@@ -3279,7 +3032,7 @@
             if (confirm('Выйти из аккаунта?')) {
                 await updateUserStatus(false);
                 await Parse.User.logOut();
-                showScreen('authScreen');
+                navigateTo('authScreen', null);
             }
         });
 
@@ -3309,8 +3062,7 @@
                 if (result.success) {
                     document.getElementById('authEmail').value = '';
                     document.getElementById('authPassword').value = '';
-                    document.getElementById('addPostBtn').classList.remove('hidden');
-                    showScreen('homeScreen');
+                    navigateTo('homeScreen', document.querySelectorAll('.bottom-nav-item')[0]);
                 } else {
                     document.getElementById('authError').textContent = result.message;
                 }
@@ -3325,8 +3077,7 @@
                 if (result.success) {
                     document.getElementById('authEmail').value = '';
                     document.getElementById('authPassword').value = '';
-                    document.getElementById('addPostBtn').classList.remove('hidden');
-                    showScreen('homeScreen');
+                    navigateTo('homeScreen', document.querySelectorAll('.bottom-nav-item')[0]);
                 } else {
                     document.getElementById('authError').textContent = result.message;
                 }
@@ -3338,10 +3089,9 @@
             const currentUser = getCurrentUser();
             if (currentUser) {
                 await updateUserStatus(true);
-                document.getElementById('addPostBtn').classList.remove('hidden');
-                showScreen('homeScreen');
+                navigateTo('homeScreen', document.querySelectorAll('.bottom-nav-item')[0]);
             } else {
-                showScreen('authScreen');
+                navigateTo('authScreen', null);
             }
             
             // Обработчик закрытия окон при клике вне
