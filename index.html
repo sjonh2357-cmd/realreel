@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · рабочая версия</title>
-    <!-- Подключаем шрифт Inter -->
+    <title>RealReel · финал</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -39,7 +38,7 @@
         }
 
         .top-nav {
-            padding: 16px 20px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -48,7 +47,7 @@
         }
         .nav-logo {
             font-weight: 700;
-            font-size: 20px;
+            font-size: 18px;
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -56,12 +55,12 @@
 
         .nav-icons {
             display: flex;
-            gap: 12px;
+            gap: 6px;
         }
 
         .nav-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -69,8 +68,8 @@
             transition: 0.2s;
         }
         .nav-icon svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             stroke: #555;
             stroke-width: 1.8;
             fill: none;
@@ -271,7 +270,7 @@
             color: #333;
         }
 
-        /* ===== ПОСТЫ ===== */
+        /* ===== ПОСТЫ (тёмный фон) ===== */
         .posts-list {
             display: flex;
             flex-direction: column;
@@ -279,9 +278,10 @@
         }
         .post-item {
             padding: 16px;
-            background: white;
+            background: #2a2a2a;
             border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            color: #fff;
         }
         .post-header {
             display: flex;
@@ -307,12 +307,23 @@
         }
         .post-author {
             font-weight: 600;
-            color: #333;
+            color: #fff;
             cursor: pointer;
+        }
+        .post-author:hover {
+            color: #6aa9ff;
         }
         .post-nick {
             font-size: 12px;
             color: #6aa9ff;
+        }
+        .post-star {
+            width: 16px;
+            height: 16px;
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: inline-block;
+            margin-left: 4px;
         }
         .post-date {
             font-size: 11px;
@@ -322,6 +333,7 @@
             font-size: 14px;
             line-height: 1.5;
             margin-bottom: 12px;
+            color: #fff;
         }
         .post-image {
             max-width: 100%;
@@ -332,18 +344,18 @@
             display: flex;
             gap: 20px;
             padding-top: 8px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #444;
         }
         .post-action {
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
-            color: #666;
+            color: #aaa;
         }
         .post-action svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             fill: none;
             stroke: currentColor;
         }
@@ -351,11 +363,14 @@
             fill: #ff4d4d;
             stroke: #ff4d4d;
         }
+        .post-action span {
+            color: #aaa;
+        }
 
         .comments-section {
             margin-top: 12px;
             padding-top: 12px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #444;
         }
         .comment-input-container {
             display: flex;
@@ -365,9 +380,14 @@
         .comment-input {
             flex: 1;
             padding: 10px 14px;
-            border: 1px solid #ddd;
+            border: 1px solid #555;
             border-radius: 30px;
             outline: none;
+            background: #333;
+            color: #fff;
+        }
+        .comment-input::placeholder {
+            color: #999;
         }
         .comment-btn {
             width: 40px;
@@ -387,7 +407,7 @@
             display: flex;
             gap: 10px;
             padding: 8px;
-            background: #f8f9fa;
+            background: #333;
             border-radius: 16px;
         }
         .comment-avatar {
@@ -400,9 +420,11 @@
         .comment-author {
             font-weight: 600;
             font-size: 12px;
+            color: #fff;
         }
         .comment-text {
             font-size: 12px;
+            color: #ddd;
         }
 
         /* ===== ПОИСК ===== */
@@ -418,17 +440,22 @@
             border-radius: 30px;
             margin-bottom: 20px;
         }
-        .search-box svg {
-            width: 20px;
-            height: 20px;
-            stroke: #999;
-        }
         .search-box input {
             flex: 1;
             border: none;
             background: none;
             outline: none;
             font-size: 14px;
+        }
+        .search-box button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .search-box svg {
+            width: 20px;
+            height: 20px;
+            stroke: #6aa9ff;
         }
         .search-results {
             display: flex;
@@ -445,6 +472,9 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             cursor: pointer;
         }
+        .user-card:hover {
+            background: #f5f5f5;
+        }
         .user-avatar {
             width: 48px;
             height: 48px;
@@ -455,9 +485,21 @@
         .user-info {
             flex: 1;
         }
+        .user-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
         .user-name {
             font-weight: 600;
             color: #333;
+        }
+        .user-star {
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: inline-block;
         }
         .user-nick {
             font-size: 12px;
@@ -494,6 +536,52 @@
             flex-direction: column;
             height: 100%;
         }
+        .chat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .chat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            cursor: pointer;
+        }
+        .chat-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            background-size: cover;
+            background-position: center;
+        }
+        .chat-info {
+            flex: 1;
+        }
+        .chat-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chat-name {
+            font-weight: 600;
+            color: #333;
+        }
+        .chat-star {
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            display: inline-block;
+        }
+        .chat-preview {
+            font-size: 13px;
+            color: #999;
+        }
+
         .chat-header {
             display: flex;
             align-items: center;
@@ -502,10 +590,10 @@
             border-bottom: 1px solid #eee;
         }
         .back-btn {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: #f0f0f0;
-            border-radius: 18px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -513,8 +601,9 @@
         }
         .chat-avatar-container {
             position: relative;
+            cursor: pointer;
         }
-        .chat-avatar {
+        .chat-avatar-large {
             width: 48px;
             height: 48px;
             border-radius: 24px;
@@ -532,17 +621,33 @@
         }
         .online-dot.online { background: #4CAF50; }
         .online-dot.offline { background: #f44336; }
-        .chat-info {
+        .chat-info-header {
             flex: 1;
         }
-        .chat-name {
+        .chat-name-header {
             font-weight: 600;
             color: #333;
         }
-        .chat-status {
+        .chat-status-header {
             font-size: 12px;
             color: #999;
         }
+        .chat-themes {
+            display: flex;
+            gap: 8px;
+        }
+        .chat-theme {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .chat-theme.light { background: #fff; border: 2px solid #ddd; }
+        .chat-theme.dark { background: #1a1e2a; border: 2px solid #6aa9ff; }
+        .chat-theme.space { background: linear-gradient(135deg, #0b0f2a, #1a1f3a); border: 2px solid #6a4fff; }
+        .chat-theme.neon { background: #0a0a0a; border: 2px solid #00ff88; }
+
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -597,6 +702,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            height: 100%;
         }
         .profile-header {
             display: flex;
@@ -625,8 +731,8 @@
             color: #333;
         }
         .profile-star {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
@@ -660,6 +766,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            flex: 1;
         }
 
         .settings-row {
@@ -670,9 +777,9 @@
             margin-top: auto;
         }
         .settings-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 22px;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
             background: #f0f0f0;
             display: flex;
             align-items: center;
@@ -680,15 +787,15 @@
             cursor: pointer;
         }
         .settings-icon svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             stroke: #555;
             fill: none;
         }
         .logout-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 22px;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
             background: #ffeeee;
             display: flex;
             align-items: center;
@@ -696,8 +803,8 @@
             cursor: pointer;
         }
         .logout-icon svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             stroke: #ff4444;
             fill: none;
         }
@@ -774,27 +881,35 @@
             <div class="screen" id="searchScreen">
                 <div class="search-screen">
                     <div class="search-box">
-                        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                         <input type="text" id="searchInput" placeholder="Поиск пользователей...">
+                        <button id="searchBtn">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        </button>
                     </div>
                     <div class="search-results" id="searchResults"></div>
                 </div>
             </div>
 
-            <!-- Чат (на втором месте) -->
+            <!-- Чат -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
                     <div class="chat-list" id="chatList"></div>
 
                     <div class="chat-header" id="chatHeader" style="display: none;">
                         <div class="back-btn" onclick="backToChatList()">←</div>
-                        <div class="chat-avatar-container">
-                            <div class="chat-avatar" id="chatAvatar"></div>
+                        <div class="chat-avatar-container" onclick="openChatUserProfile()">
+                            <div class="chat-avatar-large" id="chatAvatar"></div>
                             <div class="online-dot" id="chatOnlineDot"></div>
                         </div>
-                        <div class="chat-info">
-                            <div class="chat-name" id="chatName"></div>
-                            <div class="chat-status" id="chatStatus"></div>
+                        <div class="chat-info-header">
+                            <div class="chat-name-header" id="chatName" onclick="openChatUserProfile()"></div>
+                            <div class="chat-status-header" id="chatStatus"></div>
+                        </div>
+                        <div class="chat-themes">
+                            <div class="chat-theme light" onclick="setTheme('light')"></div>
+                            <div class="chat-theme dark" onclick="setTheme('dark')"></div>
+                            <div class="chat-theme space" onclick="setTheme('space')"></div>
+                            <div class="chat-theme neon" onclick="setTheme('neon')"></div>
                         </div>
                     </div>
                     <div class="chat-messages" id="chatMessages" style="display: none;"></div>
@@ -825,15 +940,15 @@
                     </div>
 
                     <div class="stats-row">
-                        <div class="stat-item" onclick="alert('Посты')">
+                        <div class="stat-item" onclick="showPosts()">
                             <div class="stat-value" id="profilePostsCount">0</div>
                             <div class="stat-label">посты</div>
                         </div>
-                        <div class="stat-item" onclick="showSubscribers()">
+                        <div class="stat-item" onclick="showFollowers()">
                             <div class="stat-value" id="profileFollowersCount">0</div>
                             <div class="stat-label">подписчики</div>
                         </div>
-                        <div class="stat-item" onclick="showSubscriptions()">
+                        <div class="stat-item" onclick="showFollowing()">
                             <div class="stat-value" id="profileFollowingCount">0</div>
                             <div class="stat-label">подписки</div>
                         </div>
@@ -871,14 +986,12 @@
         let currentConversationId = null;
         let currentOtherUserId = null;
 
-        // АВАТАРКИ
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
         function getRandomAvatar() {
             return avatars[Math.floor(Math.random() * avatars.length)];
         }
 
-        // ПОЛЬЗОВАТЕЛИ
         async function signUp(firstName, lastName, nickname, email, password) {
             try {
                 const user = new Parse.User();
@@ -922,7 +1035,6 @@
             await user.save();
         }
 
-        // ПОСТЫ
         async function createPost(text, imageFile = null) {
             try {
                 const Post = Parse.Object.extend('Post');
@@ -988,7 +1100,6 @@
             }
         }
 
-        // ЧАТ
         async function getOrCreateConversation(otherUserId) {
             const currentUser = getCurrentUser();
             const query = new Parse.Query('Conversation');
@@ -1067,7 +1178,6 @@
             }
         }
 
-        // ПОИСК
         async function searchUsers(text) {
             try {
                 const query = new Parse.Query('_User');
@@ -1087,7 +1197,6 @@
             }
         }
 
-        // ПОДПИСКИ
         async function toggleSubscribe(targetUserId) {
             const currentUser = getCurrentUser();
             if (!currentUser || targetUserId === currentUser.id) return null;
@@ -1145,7 +1254,6 @@
             }
         }
 
-        // UI ОБНОВЛЕНИЯ
         async function updateHomeFeed() {
             const posts = await getAllPosts();
             const currentUser = getCurrentUser();
@@ -1161,6 +1269,7 @@
                                 <div class="post-author-row">
                                     <span class="post-author" onclick="openUserProfile('${author.id}')">${author.get('firstName')} ${author.get('lastName')}</span>
                                     <span class="post-nick">@${author.get('nickname')}</span>
+                                    <span class="post-star"></span>
                                     <span class="post-date">${formatDate(post.createdAt)}</span>
                                 </div>
                             </div>
@@ -1209,9 +1318,10 @@
             }
         }
 
-        async function updateProfileUI() {
-            const user = getCurrentUser();
+        async function updateProfileUI(userId = null) {
+            const user = userId ? await new Parse.Query('_User').get(userId) : getCurrentUser();
             if (!user) return;
+            
             document.getElementById('profileFullName').textContent = `${user.get('firstName')} ${user.get('lastName')}`;
             document.getElementById('profileNick').textContent = `@${user.get('nickname')}`;
             document.getElementById('profileAvatar').className = `profile-avatar ${user.get('avatarClass')}`;
@@ -1242,7 +1352,10 @@
                 <div class="user-card" onclick="openUserProfile('${user.id}')">
                     <div class="user-avatar ${user.get('avatarClass')}"></div>
                     <div class="user-info">
-                        <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
+                        <div class="user-name-row">
+                            <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
+                            <span class="user-star"></span>
+                        </div>
                         <div class="user-nick">@${user.get('nickname')}</div>
                         <div class="user-status">${user.get('isOnline') ? '🟢 Онлайн' : '🔴 Офлайн'}</div>
                     </div>
@@ -1261,11 +1374,14 @@
                 const user = c.otherUser;
                 await user.fetch();
                 return `
-                    <div class="user-card" onclick="openConversation('${user.id}')">
-                        <div class="user-avatar ${user.get('avatarClass')}"></div>
-                        <div class="user-info">
-                            <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
-                            <div class="user-nick">@${user.get('nickname')}</div>
+                    <div class="chat-item" onclick="openConversation('${user.id}')">
+                        <div class="chat-avatar ${user.get('avatarClass')}"></div>
+                        <div class="chat-info">
+                            <div class="chat-name-row">
+                                <span class="chat-name">${user.get('firstName')} ${user.get('lastName')}</span>
+                                <span class="chat-star"></span>
+                            </div>
+                            <div class="chat-preview">Нажмите чтобы открыть чат</div>
                         </div>
                     </div>
                 `;
@@ -1273,7 +1389,6 @@
             document.getElementById('chatList').innerHTML = html.join('');
         }
 
-        // ОБРАБОТЧИКИ
         window.likePostHandler = async function(postId, el) {
             await likePost(postId);
             const count = el.querySelector('span');
@@ -1294,7 +1409,13 @@
         };
 
         window.openUserProfile = async function(userId) {
-            alert(`Профиль пользователя ${userId}`);
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('profileScreen').classList.add('active');
+            await updateProfileUI(userId);
+        };
+
+        window.openChatUserProfile = function() {
+            openUserProfile(currentOtherUserId);
         };
 
         window.subscribeToUser = async function(userId, btn) {
@@ -1314,7 +1435,7 @@
             document.getElementById('chatInputArea').style.display = 'flex';
             
             document.getElementById('chatName').textContent = `${user.get('firstName')} ${user.get('lastName')}`;
-            document.getElementById('chatAvatar').className = `chat-avatar ${user.get('avatarClass')}`;
+            document.getElementById('chatAvatar').className = `chat-avatar-large ${user.get('avatarClass')}`;
             document.getElementById('chatOnlineDot').className = `online-dot ${user.get('isOnline') ? 'online' : 'offline'}`;
             document.getElementById('chatStatus').textContent = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
             
@@ -1337,16 +1458,25 @@
             }
         };
 
-        window.showSubscribers = async function() {
-            const user = getCurrentUser();
-            const followers = await getFollowersCount(user.id);
-            alert(`У вас ${followers} подписчиков`);
+        window.showPosts = function() {
+            alert('Посты пользователя');
         };
 
-        window.showSubscriptions = async function() {
+        window.showFollowers = async function() {
             const user = getCurrentUser();
-            const following = await getFollowingCount(user.id);
-            alert(`Вы подписаны на ${following} человек`);
+            const count = await getFollowersCount(user.id);
+            alert(`У вас ${count} подписчиков`);
+        };
+
+        window.showFollowing = async function() {
+            const user = getCurrentUser();
+            const count = await getFollowingCount(user.id);
+            alert(`Вы подписаны на ${count} человек`);
+        };
+
+        window.setTheme = function(theme) {
+            document.querySelectorAll('.chat-theme').forEach(t => t.style.border = '2px solid transparent');
+            document.querySelector(`.chat-theme.${theme}`).style.border = '2px solid #6aa9ff';
         };
 
         function formatDate(date) {
@@ -1358,7 +1488,6 @@
             return `${Math.floor(diff / 86400)} дн назад`;
         }
 
-        // ЛОГИКА ИНТЕРФЕЙСА
         const authScreen = document.getElementById('authScreen');
         const homeScreen = document.getElementById('homeScreen');
         const profileScreen = document.getElementById('profileScreen');
@@ -1384,6 +1513,7 @@
         const chatInput = document.getElementById('chatInput');
         const editProfileBtn = document.getElementById('editProfileBtn');
         const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
 
         let isLoginMode = false;
 
@@ -1466,6 +1596,7 @@
             postFile.value = '';
             addPostModal.classList.remove('active');
             await updateHomeFeed();
+            await updateProfileUI();
         });
 
         cancelPostBtn.addEventListener('click', () => {
@@ -1475,14 +1606,18 @@
             addPostModal.classList.remove('active');
         });
 
-        searchInput.addEventListener('input', async () => {
+        searchBtn.addEventListener('click', async () => {
             const users = await searchUsers(searchInput.value);
             const html = users.map(user => `
                 <div class="user-card" onclick="openUserProfile('${user.id}')">
                     <div class="user-avatar ${user.get('avatarClass')}"></div>
                     <div class="user-info">
-                        <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
+                        <div class="user-name-row">
+                            <span class="user-name">${user.get('firstName')} ${user.get('lastName')}</span>
+                            <span class="user-star"></span>
+                        </div>
                         <div class="user-nick">@${user.get('nickname')}</div>
+                        <div class="user-status">${user.get('isOnline') ? '🟢 Онлайн' : '🔴 Офлайн'}</div>
                     </div>
                     <div class="user-actions">
                         <button class="user-btn chat" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
@@ -1491,6 +1626,12 @@
                 </div>
             `).join('');
             document.getElementById('searchResults').innerHTML = html;
+        });
+
+        searchInput.addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter') {
+                searchBtn.click();
+            }
         });
 
         sendBtn.addEventListener('click', async () => {
