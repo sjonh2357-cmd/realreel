@@ -73,6 +73,7 @@
             cursor: pointer;
             transition: 0.3s ease;
             animation: fadeIn 0.5s;
+            position: relative;
         }
         .nav-icon svg {
             width: 20px;
@@ -91,6 +92,21 @@
         .nav-icon.active svg {
             stroke: #6aa9ff;
             animation: bounce 0.5s;
+        }
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 16px;
+            height: 16px;
+            background: #ff4444;
+            border-radius: 8px;
+            color: white;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
         }
         @keyframes bounce {
             0%, 100% { transform: scale(1); }
@@ -271,7 +287,7 @@
         /* ===== СТОРИЗ ===== */
         .stories-row {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             margin-bottom: 24px;
             overflow-x: auto;
             padding: 4px 0;
@@ -297,7 +313,7 @@
         .story-avatar {
             width: 64px;
             height: 64px;
-            border-radius: 4px;
+            border-radius: 32px;
             background-size: cover;
             background-position: center;
             border: 2px solid transparent;
@@ -360,7 +376,7 @@
         .story-header-avatar {
             width: 40px;
             height: 40px;
-            border-radius: 4px;
+            border-radius: 20px;
             background-size: cover;
             background-position: center;
         }
@@ -410,18 +426,17 @@
         }
         .story-actions {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             padding: 16px;
             justify-content: center;
         }
         .story-action-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
             background: rgba(255,255,255,0.2);
             border: none;
             color: white;
-            font-size: 20px;
             cursor: pointer;
             transition: 0.3s;
             display: flex;
@@ -702,13 +717,16 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 28px;
-            font-weight: 600;
-            cursor: pointer;
             box-shadow: 0 4px 15px rgba(106,169,255,0.4);
             z-index: 100;
             animation: pulse 2s infinite;
             transition: 0.3s;
+        }
+        .add-post-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+            stroke: white;
         }
         .add-post-btn:hover {
             transform: scale(1.1) rotate(90deg);
@@ -806,7 +824,7 @@
         .post-avatar {
             width: 44px;
             height: 44px;
-            border-radius: 4px;
+            border-radius: 22px;
             background-size: cover;
             background-position: center;
             cursor: pointer;
@@ -895,7 +913,9 @@
             color: #333;
         }
         .post-image {
-            max-width: 100%;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
             border-radius: 12px;
             margin-bottom: 12px;
             border: 1px solid #f0f0f0;
@@ -1002,7 +1022,7 @@
         .comment-avatar {
             width: 28px;
             height: 28px;
-            border-radius: 4px;
+            border-radius: 14px;
             background-size: cover;
             background-position: center;
         }
@@ -1075,7 +1095,7 @@
         .user-avatar {
             width: 48px;
             height: 48px;
-            border-radius: 4px;
+            border-radius: 24px;
             background-size: cover;
             background-position: center;
         }
@@ -1182,7 +1202,7 @@
         .chat-avatar {
             width: 48px;
             height: 48px;
-            border-radius: 4px;
+            border-radius: 24px;
             background-size: cover;
             background-position: center;
         }
@@ -1245,7 +1265,7 @@
         .chat-avatar-large {
             width: 48px;
             height: 48px;
-            border-radius: 4px;
+            border-radius: 24px;
             background-size: cover;
             background-position: center;
             transition: 0.3s;
@@ -1348,7 +1368,7 @@
         .message-reaction {
             position: absolute;
             bottom: -15px;
-            right: 0;
+            left: 0;
             background: white;
             border-radius: 20px;
             padding: 4px 8px;
@@ -1439,7 +1459,7 @@
         .profile-avatar {
             width: 80px;
             height: 80px;
-            border-radius: 4px;
+            border-radius: 40px;
             background-size: cover;
             background-position: center;
             border: 2px solid #6aa9ff;
@@ -1702,19 +1722,24 @@
     <div class="phone-frame" id="phoneFrame">
         <div class="top-nav">
             <div class="nav-logo">RealReel</div>
-            <div class="nav-icons" id="navIcons"></div>
+            <div class="nav-icons" id="navIcons">
+                <div class="nav-icon" onclick="toggleNotifications()">
+                    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="notification-badge" id="notificationBadge" style="display: none;">3</span>
+                </div>
+            </div>
         </div>
 
         <!-- Сердце возле + -->
         <div class="add-post-btn hidden" id="addPostBtn">
-            <svg viewBox="0 0 24 24" width="28" height="28" stroke="white" fill="white">
+            <svg viewBox="0 0 24 24">
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
             </svg>
         </div>
 
         <!-- Уведомления -->
         <div class="notifications-panel" id="notificationsPanel">
-            <div class="notifications-header">Обновления</div>
+            <div class="notifications-header">Уведомления</div>
             <div class="notifications-list" id="notificationsList"></div>
         </div>
 
@@ -2159,10 +2184,8 @@
             });
             updateNotifications();
             
-            document.getElementById('notificationsPanel').classList.add('active');
-            setTimeout(() => {
-                document.getElementById('notificationsPanel').classList.remove('active');
-            }, 5000);
+            document.getElementById('notificationBadge').style.display = 'flex';
+            document.getElementById('notificationBadge').textContent = notifications.length;
         }
 
         function updateNotifications() {
@@ -2179,6 +2202,14 @@
             `).join('');
             list.innerHTML = html;
         }
+
+        window.toggleNotifications = function() {
+            const panel = document.getElementById('notificationsPanel');
+            panel.classList.toggle('active');
+            if (panel.classList.contains('active')) {
+                document.getElementById('notificationBadge').style.display = 'none';
+            }
+        };
 
         async function addComment(postId, text) {
             try {
@@ -2923,6 +2954,9 @@
                     const status = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
                     
                     return `
+                        <div class="modal-user-item" onclick="openUserProfile
+                        // Продолжение кода с того места, где оборвалось:
+
                         <div class="modal-user-item" onclick="openUserProfile('${user.id}')">
                             <div class="modal-user-avatar ${avatarClass}" style="${avatarStyle}"></div>
                             <div class="modal-user-info">
@@ -2930,137 +2964,75 @@
                                 <div class="modal-user-nick">${nickname}</div>
                                 <div class="modal-user-status">${status}</div>
                             </div>
-                            <button class="modal-user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
+                            <button class="modal-user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            </button>
                         </div>
                     `;
                 }).join('');
-                list.innerHTML = html || '<p style="text-align:center; opacity:0.7;">Нет подписчиков</p>';
-            } else {
-                const following = await getFollowing(userId);
-                const html = following.map(user => {
-                    const firstName = user.get('firstName') || '';
-                    const lastName = user.get('lastName') || '';
-                    const nickname = user.get('nickname') || '';
-                    const avatarClass = getAvatarClass(user);
-                    const avatarStyle = getAvatarStyle(user);
-                    const status = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
-                    
-                    return `
-                        <div class="modal-user-item" onclick="openUserProfile('${user.id}')">
-                            <div class="modal-user-avatar ${avatarClass}" style="${avatarStyle}"></div>
-                            <div class="modal-user-info">
-                                <div class="modal-user-name">${firstName} ${lastName}</div>
-                                <div class="modal-user-nick">${nickname}</div>
-                                <div class="modal-user-status">${status}</div>
-                            </div>
-                            <button class="modal-user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
-                        </div>
-                    `;
-                }).join('');
-                list.innerHTML = html || '<p style="text-align:center; opacity:0.7;">Нет подписок</p>';
+                list.innerHTML = html || '<p style="opacity:0.5; text-align:center;">Нет подписок</p>';
             }
             
             document.getElementById('subscriptionsModal').classList.add('active');
-            
-            document.getElementById('subscriptionSearchBtn').onclick = () => filterSubscriptions(type);
-            document.getElementById('subscriptionSearchInput').onkeypress = (e) => {
-                if (e.key === 'Enter') filterSubscriptions(type);
-            };
         };
-
-        async function filterSubscriptions(type) {
-            const searchText = document.getElementById('subscriptionSearchInput').value.toLowerCase();
-            const userId = currentProfileUserId || getCurrentUser().id;
-            const list = document.getElementById('subscriptionsList');
-            
-            let users = type === 'followers' ? await getFollowers(userId) : await getFollowing(userId);
-            
-            if (searchText) {
-                users = users.filter(user => 
-                    user.get('firstName').toLowerCase().includes(searchText) ||
-                    user.get('lastName').toLowerCase().includes(searchText) ||
-                    user.get('nickname').toLowerCase().includes(searchText)
-                );
-            }
-            
-            const html = users.map(user => {
-                const firstName = user.get('firstName') || '';
-                const lastName = user.get('lastName') || '';
-                const nickname = user.get('nickname') || '';
-                const avatarClass = getAvatarClass(user);
-                const avatarStyle = getAvatarStyle(user);
-                const status = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
-                
-                return `
-                    <div class="modal-user-item" onclick="openUserProfile('${user.id}')">
-                        <div class="modal-user-avatar ${avatarClass}" style="${avatarStyle}"></div>
-                        <div class="modal-user-info">
-                            <div class="modal-user-name">${firstName} ${lastName}</div>
-                            <div class="modal-user-nick">${nickname}</div>
-                            <div class="modal-user-status">${status}</div>
-                        </div>
-                        <button class="modal-user-btn" onclick="event.stopPropagation(); openConversation('${user.id}')">💬</button>
-                    </div>
-                `;
-            }).join('');
-            list.innerHTML = html || '<p style="text-align:center; opacity:0.7;">Ничего не найдено</p>';
-        }
 
         window.closeSubscriptions = function() {
             document.getElementById('subscriptionsModal').classList.remove('active');
         };
 
-        window.likePostHandler = async function(postId, el) {
-            el.stopPropagation?.();
-            const success = await likePost(postId);
-            if (success) {
-                const count = el.querySelector('span');
-                count.textContent = parseInt(count.textContent) + 1;
-                el.classList.add('liked');
-            } else {
-                alert('Вы уже лайкали этот пост');
-            }
-        };
-
-        window.addCommentHandler = async function(postId) {
-            const input = document.getElementById(`comment-input-${postId}`);
-            if (!input.value.trim()) return;
-            await addComment(postId, input.value);
-            input.value = '';
-            await updateHomeFeed();
-        };
-
-        window.toggleComments = function(postId) {
-            const comments = document.getElementById(`comments-${postId}`);
-            comments.style.display = comments.style.display === 'none' ? 'block' : 'none';
-        };
-
-        window.deletePostHandler = async function(postId) {
-            if (confirm('Удалить пост?')) {
-                await deletePost(postId);
-                await updateHomeFeed();
-                await updateProfileUI();
-                closePostViewer();
-            }
-        };
-
-        window.editPostHandler = async function(postId) {
-            const newText = prompt('Редактировать пост:');
-            if (newText && newText.trim()) {
-                await editPost(postId, newText);
-                await updateHomeFeed();
-                await updateProfileUI();
-                closePostViewer();
-            }
-        };
-
+        // ===== ОСНОВНЫЕ ФУНКЦИИ НАВИГАЦИИ =====
         window.openUserProfile = async function(userId) {
-            closeSubscriptions();
-            closePhoto();
-            closePostViewer();
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('profileScreen').classList.add('active');
             await updateProfileUI(userId);
+            showScreen('profileScreen');
+        };
+
+        window.openConversation = async function(otherUserId) {
+            const conversation = await getOrCreateConversation(otherUserId);
+            currentConversationId = conversation.id;
+            currentOtherUserId = otherUserId;
+            
+            const otherUser = await new Parse.Query('_User').get(otherUserId);
+            
+            // Обновляем UI чата
+            const avatarClass = getAvatarClass(otherUser);
+            const avatarStyle = getAvatarStyle(otherUser);
+            document.getElementById('chatAvatar').className = `chat-avatar-large ${avatarClass}`;
+            if (avatarStyle) {
+                document.getElementById('chatAvatar').style.cssText = avatarStyle;
+            } else {
+                document.getElementById('chatAvatar').style.cssText = '';
+            }
+            
+            document.getElementById('chatName').textContent = `${otherUser.get('firstName')} ${otherUser.get('lastName')}`;
+            document.getElementById('chatStatus').textContent = otherUser.get('isOnline') ? 'Онлайн' : 'Офлайн';
+            document.getElementById('chatOnlineDot').className = `online-dot ${otherUser.get('isOnline') ? 'online' : 'offline'}`;
+            
+            // Показываем нужные элементы
+            document.getElementById('chatList').style.display = 'none';
+            document.getElementById('chatCategories').style.display = 'none';
+            document.getElementById('chatHeader').style.display = 'flex';
+            document.getElementById('chatMessages').style.display = 'flex';
+            document.getElementById('chatInputArea').style.display = 'flex';
+            
+            // Очищаем и загружаем сообщения
+            document.getElementById('chatMessages').innerHTML = '';
+            await loadMessageHistory(currentConversationId);
+            subscribeToChat(currentConversationId);
+        };
+
+        window.backToChatList = function() {
+            document.getElementById('chatList').style.display = 'flex';
+            document.getElementById('chatCategories').style.display = 'flex';
+            document.getElementById('chatHeader').style.display = 'none';
+            document.getElementById('chatMessages').style.display = 'none';
+            document.getElementById('chatInputArea').style.display = 'none';
+            
+            if (currentChannel) {
+                currentChannel.unbind_all();
+                currentChannel.unsubscribe();
+            }
+            
+            updateChatList();
         };
 
         window.openChatUserProfile = function() {
@@ -3069,251 +3041,142 @@
             }
         };
 
-        window.openConversation = async function(userId) {
-            closeSubscriptions();
-            closePhoto();
-            closePostViewer();
-            const conversation = await getOrCreateConversation(userId);
-            const user = await new Parse.Query('_User').get(userId);
-            
-            document.getElementById('chatList').style.display = 'none';
-            document.getElementById('chatHeader').style.display = 'flex';
-            document.getElementById('chatMessages').style.display = 'flex';
-            document.getElementById('chatInputArea').style.display = 'flex';
-            
-            document.getElementById('chatName').textContent = `${user.get('firstName')} ${user.get('lastName')}`;
-            
-            const avatarClass = getAvatarClass(user);
-            const avatarStyle = getAvatarStyle(user);
-            document.getElementById('chatAvatar').className = `chat-avatar-large ${avatarClass}`;
-            if (avatarStyle) {
-                document.getElementById('chatAvatar').style.cssText = avatarStyle;
+        // ===== ОБРАБОТЧИКИ ДЛЯ ПОСТОВ =====
+        window.likePostHandler = async function(postId, element) {
+            const result = await likePost(postId);
+            if (result) {
+                const span = element.querySelector('span');
+                span.textContent = parseInt(span.textContent) + 1;
+                element.classList.add('liked');
+            }
+        };
+
+        window.toggleComments = function(postId) {
+            const comments = document.getElementById(`comments-${postId}`);
+            if (comments.style.display === 'none') {
+                comments.style.display = 'block';
             } else {
-                document.getElementById('chatAvatar').style.cssText = '';
+                comments.style.display = 'none';
             }
-            
-            document.getElementById('chatOnlineDot').className = `online-dot ${user.get('isOnline') ? 'online' : 'offline'}`;
-            document.getElementById('chatStatus').textContent = user.get('isOnline') ? 'Онлайн' : 'Офлайн';
-            
-            currentConversationId = conversation.id;
-            currentOtherUserId = userId;
-            subscribeToChat(conversation.id);
-            document.getElementById('chatMessages').innerHTML = '';
-            await loadMessageHistory(conversation.id);
         };
 
-        window.backToChatList = function() {
-            document.getElementById('chatList').style.display = 'block';
-            document.getElementById('chatHeader').style.display = 'none';
-            document.getElementById('chatMessages').style.display = 'none';
-            document.getElementById('chatInputArea').style.display = 'none';
-            if (currentChannel) {
-                currentChannel.unbind_all();
-                currentChannel.unsubscribe();
-                currentChannel = null;
+        window.addCommentHandler = async function(postId) {
+            const input = document.getElementById(`comment-input-${postId}`);
+            const text = input.value.trim();
+            if (!text) return;
+            
+            const result = await addComment(postId, text);
+            if (result) {
+                input.value = '';
+                await updateHomeFeed(); // Обновляем ленту
             }
-            updateChatList();
         };
 
-        window.showPosts = function() {
-            alert('Все посты пользователя');
+        window.deletePostHandler = async function(postId) {
+            if (!confirm('Удалить пост?')) return;
+            const result = await deletePost(postId);
+            if (result) {
+                await updateHomeFeed();
+                closePostViewer();
+            }
         };
 
-        window.deleteMessage = async function(messageId) {
-            await deleteMessage(messageId);
+        window.editPostHandler = function(postId) {
+            const newText = prompt('Редактировать пост:');
+            if (newText) {
+                editPost(postId, newText).then(() => {
+                    updateHomeFeed();
+                    closePostViewer();
+                });
+            }
         };
 
+        // ===== НАВИГАЦИЯ ПО ЭКРАНАМ =====
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            
+            // Обновляем контент в зависимости от экрана
+            if (screenId === 'homeScreen') {
+                updateHomeFeed();
+            } else if (screenId === 'searchScreen') {
+                updateSearchResults();
+            } else if (screenId === 'chatScreen') {
+                updateChatList();
+                document.getElementById('chatList').style.display = 'flex';
+                document.getElementById('chatCategories').style.display = 'flex';
+                document.getElementById('chatHeader').style.display = 'none';
+                document.getElementById('chatMessages').style.display = 'none';
+                document.getElementById('chatInputArea').style.display = 'none';
+            } else if (screenId === 'profileScreen') {
+                updateProfileUI();
+            }
+        }
+
+        // ===== ФОРМАТИРОВАНИЕ ДАТЫ =====
         function formatDate(date) {
-            const d = new Date(date);
-            const diff = Math.floor((new Date() - d) / 1000);
-            if (diff < 60) return 'только что';
-            if (diff < 3600) return `${Math.floor(diff / 60)} мин назад`;
-            if (diff < 86400) return `${Math.floor(diff / 3600)} ч назад`;
-            return `${Math.floor(diff / 86400)} дн назад`;
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 60000) { // меньше минуты
+                return 'только что';
+            } else if (diff < 3600000) { // меньше часа
+                const minutes = Math.floor(diff / 60000);
+                return `${minutes} ${minutes === 1 ? 'минуту' : 'минут'} назад`;
+            } else if (diff < 86400000) { // меньше дня
+                const hours = Math.floor(diff / 3600000);
+                return `${hours} ${hours === 1 ? 'час' : 'часов'} назад`;
+            } else {
+                return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+            }
         }
 
         function formatTime(date) {
-            const d = new Date(date);
-            const now = new Date();
-            const diff = Math.floor((now - d) / 1000);
-            if (diff < 60) return 'сейчас';
-            if (diff < 3600) return `${Math.floor(diff / 60)} мин`;
-            if (diff < 86400) return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            return d.toLocaleDateString();
+            return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
         }
 
-        const authScreen = document.getElementById('authScreen');
-        const homeScreen = document.getElementById('homeScreen');
-        const profileScreen = document.getElementById('profileScreen');
-        const authTitle = document.getElementById('authTitle');
-        const authFirstName = document.getElementById('authFirstName');
-        const authLastName = document.getElementById('authLastName');
-        const authNickname = document.getElementById('authNickname');
-        const authEmail = document.getElementById('authEmail');
-        const authPassword = document.getElementById('authPassword');
-        const authError = document.getElementById('authError');
-        const authActionBtn = document.getElementById('authActionBtn');
-        const authSwitch = document.getElementById('authSwitch');
-        const navIcons = document.getElementById('navIcons');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const addPostBtn = document.getElementById('addPostBtn');
-        const addPostModal = document.getElementById('addPostModal');
-        const postText = document.getElementById('postText');
-        const postFileInput = document.getElementById('postFileInput');
-        const postFile = document.getElementById('postFile');
-        const publishPostBtn = document.getElementById('publishPostBtn');
-        const cancelPostBtn = document.getElementById('cancelPostBtn');
-        const sendBtn = document.getElementById('sendBtn');
-        const chatInput = document.getElementById('chatInput');
-        const editProfileBtn = document.getElementById('editProfileBtn');
-        const editProfileModal = document.getElementById('editProfileModal');
-        const editFirstName = document.getElementById('editFirstName');
-        const editLastName = document.getElementById('editLastName');
-        const editNickname = document.getElementById('editNickname');
-        const saveProfileBtn = document.getElementById('saveProfileBtn');
-        const cancelEditBtn = document.getElementById('cancelEditBtn');
-        const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-        const avatarFileInput = document.getElementById('avatarFileInput');
-
-        let isLoginMode = false;
-
-        authSwitch.addEventListener('click', () => {
-            isLoginMode = !isLoginMode;
-            if (isLoginMode) {
-                authTitle.textContent = 'Регистрация';
-                authActionBtn.textContent = 'Зарегистрироваться';
-                authSwitch.textContent = 'Уже есть аккаунт? Войти';
-                authFirstName.style.display = 'block';
-                authLastName.style.display = 'block';
-                authNickname.style.display = 'block';
-            } else {
-                authTitle.textContent = 'Вход';
-                authActionBtn.textContent = 'Войти';
-                authSwitch.textContent = 'Нет аккаунта? Зарегистрироваться';
-                authFirstName.style.display = 'none';
-                authLastName.style.display = 'none';
-                authNickname.style.display = 'none';
-            }
-            authError.textContent = '';
+        // ===== ОБРАБОТЧИКИ ДЛЯ ЭЛЕМЕНТОВ ИНТЕРФЕЙСА =====
+        document.getElementById('addPostBtn').addEventListener('click', () => {
+            document.getElementById('addPostModal').classList.add('active');
         });
 
-        authActionBtn.addEventListener('click', async () => {
-            const email = authEmail.value.trim();
-            const password = authPassword.value.trim();
-            if (!email || !password) {
-                authError.textContent = 'Заполни все поля';
+        document.getElementById('cancelPostBtn').addEventListener('click', () => {
+            document.getElementById('addPostModal').classList.remove('active');
+            document.getElementById('postText').value = '';
+        });
+
+        document.getElementById('postFileInput').addEventListener('click', () => {
+            document.getElementById('postFile').click();
+        });
+
+        document.getElementById('publishPostBtn').addEventListener('click', async () => {
+            const text = document.getElementById('postText').value.trim();
+            if (!text) {
+                alert('Введите текст поста');
                 return;
             }
-            let result;
-            if (isLoginMode) {
-                const firstName = authFirstName.value.trim();
-                const lastName = authLastName.value.trim();
-                const nickname = authNickname.value.trim();
-                if (!firstName || !lastName || !nickname) {
-                    authError.textContent = 'Заполни все поля';
-                    return;
-                }
-                if (password.length < 6) {
-                    authError.textContent = 'Пароль должен быть минимум 6 символов';
-                    return;
-                }
-                result = await signUp(firstName, lastName, nickname, email, password);
-            } else {
-                result = await signIn(email, password);
-            }
+            
+            const fileInput = document.getElementById('postFile');
+            const file = fileInput.files[0];
+            
+            const result = await createPost(text, file);
             if (result.success) {
-                await updateProfileUI();
+                document.getElementById('addPostModal').classList.remove('active');
+                document.getElementById('postText').value = '';
+                fileInput.value = '';
                 await updateHomeFeed();
-                await updateSearchResults();
-                await updateChatList();
-                authScreen.classList.remove('active');
-                homeScreen.classList.add('active');
-                addPostBtn.classList.remove('hidden');
-                showNavIcons();
             } else {
-                authError.textContent = result.message;
+                alert('Ошибка при создании поста');
             }
         });
 
-        logoutBtn.addEventListener('click', async () => {
-            await updateUserStatus(false);
-            await Parse.User.logOut();
-            location.reload();
-        });
-
-        addPostBtn.addEventListener('click', () => {
-            addPostModal.classList.toggle('active');
-        });
-
-        postFileInput.addEventListener('click', () => postFile.click());
-
-        publishPostBtn.addEventListener('click', async () => {
-            const text = postText.value.trim();
-            if (!text) return;
-            const file = postFile.files[0];
-            await createPost(text, file);
-            postText.value = '';
-            postFileInput.textContent = '📸 Добавить фото';
-            postFile.value = '';
-            addPostModal.classList.remove('active');
-            await updateHomeFeed();
-            await updateProfileUI();
-        });
-
-        cancelPostBtn.addEventListener('click', () => {
-            postText.value = '';
-            postFileInput.textContent = '📸 Добавить фото';
-            postFile.value = '';
-            addPostModal.classList.remove('active');
-        });
-
-        editProfileBtn.addEventListener('click', () => {
-            const user = getCurrentUser();
-            editFirstName.value = user.get('firstName') || '';
-            editLastName.value = user.get('lastName') || '';
-            editNickname.value = user.get('nickname') || '';
-            editProfileModal.classList.add('active');
-        });
-
-        cancelEditBtn.addEventListener('click', () => {
-            editProfileModal.classList.remove('active');
-        });
-
-        saveProfileBtn.addEventListener('click', async () => {
-            const firstName = editFirstName.value.trim();
-            const lastName = editLastName.value.trim();
-            const nickname = editNickname.value.trim();
-            if (!firstName || !lastName || !nickname) {
-                alert('Заполните все поля');
-                return;
-            }
-            const result = await updateProfile(firstName, lastName, nickname);
-            if (result.success) {
-                editProfileModal.classList.remove('active');
-                await updateProfileUI();
-                await updateHomeFeed();
-                await updateChatList();
-            } else {
-                alert('Ошибка сохранения');
-            }
-        });
-
-        avatarFileInput.addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const result = await uploadAvatar(file);
-            if (result.success) {
-                await updateProfileUI();
-                await updateHomeFeed();
-                await updateChatList();
-            } else {
-                alert(result.message);
-            }
-        });
-
-        searchBtn.addEventListener('click', async () => {
-            const users = await searchUsers(searchInput.value);
+        document.getElementById('searchBtn').addEventListener('click', async () => {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return;
+            
+            const users = await searchUsers(query);
             const html = users.map(user => {
                 const avatarClass = getAvatarClass(user);
                 const avatarStyle = getAvatarStyle(user);
@@ -3339,85 +3202,168 @@
             document.getElementById('searchResults').innerHTML = html;
         });
 
-        searchInput.addEventListener('keypress', async (e) => {
-            if (e.key === 'Enter') {
-                searchBtn.click();
-            }
-        });
-
-        sendBtn.addEventListener('click', async () => {
-            const text = chatInput.value.trim();
+        document.getElementById('sendBtn').addEventListener('click', async () => {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
             if (!text || !currentConversationId) return;
-            const currentUser = getCurrentUser();
+            
             const result = await sendMessageToServer(text, currentConversationId);
             if (result.success) {
-                const messageData = {
-                    text: text,
-                    senderId: currentUser.id,
-                    timestamp: new Date().toISOString(),
-                    messageId: result.messageId
-                };
+                input.value = '';
+                
+                // Отправляем через Pusher для realtime
                 if (currentChannel) {
-                    currentChannel.trigger('client-new-message', messageData);
+                    currentChannel.trigger('client-new-message', {
+                        text: text,
+                        senderId: getCurrentUser().id,
+                        timestamp: new Date(),
+                        messageId: result.messageId
+                    });
                 }
-                addMessageToChat(text, true, messageData.timestamp, result.messageId);
-                chatInput.value = '';
-                await updateChatList();
             }
         });
 
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendBtn.click();
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('sendBtn').click();
+            }
         });
 
-        if (getCurrentUser()) {
-            (async () => {
+        document.getElementById('avatarFileInput').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const result = await uploadAvatar(file);
+            if (result.success) {
                 await updateProfileUI();
-                await updateHomeFeed();
-                await updateSearchResults();
-                await updateChatList();
-                authScreen.classList.remove('active');
-                homeScreen.classList.add('active');
-                addPostBtn.classList.remove('hidden');
-                showNavIcons();
-            })();
-        }
+            } else {
+                alert('Ошибка загрузки аватарки');
+            }
+        });
 
-        function showNavIcons() {
-            navIcons.innerHTML = `
-                <div class="nav-icon active" data-screen="home">
-                    <svg viewBox="0 0 24 24"><path d="M12 3L4 9v12h16V9l-8-6z"/><path d="M9 21v-6h6v6"/></svg>
-                </div>
-                <div class="nav-icon" data-screen="search">
-                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                </div>
-                <div class="nav-icon" data-screen="chat">
-                    <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                </div>
-                <div class="nav-icon" data-screen="reels">
-                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M8 2v20"/><path d="M16 2v20"/><path d="M2 8h20"/><path d="M2 16h20"/></svg>
-                </div>
-                <div class="nav-icon" data-screen="profile">
-                    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </div>
-            `;
+        document.getElementById('editProfileBtn').addEventListener('click', () => {
+            const user = getCurrentUser();
+            if (!user) return;
+            
+            document.getElementById('editFirstName').value = user.get('firstName') || '';
+            document.getElementById('editLastName').value = user.get('lastName') || '';
+            document.getElementById('editNickname').value = user.get('nickname') || '';
+            
+            document.getElementById('editProfileModal').classList.add('active');
+        });
 
-            document.querySelectorAll('.nav-icon').forEach(icon => {
-                icon.addEventListener('click', async () => {
-                    document.querySelectorAll('.nav-icon').forEach(n => n.classList.remove('active'));
-                    icon.classList.add('active');
-                    const screens = ['home', 'search', 'chat', 'reels', 'profile'];
-                    screens.forEach(s => document.getElementById(`${s}Screen`).classList.remove('active'));
-                    const screenName = icon.dataset.screen;
-                    document.getElementById(`${screenName}Screen`).classList.add('active');
-                    addPostBtn.classList.toggle('hidden', screenName !== 'home');
-                    if (screenName === 'home') await updateHomeFeed();
-                    if (screenName === 'search') await updateSearchResults();
-                    if (screenName === 'chat') await updateChatList();
-                    if (screenName === 'profile') await updateProfileUI();
-                });
+        document.getElementById('saveProfileBtn').addEventListener('click', async () => {
+            const firstName = document.getElementById('editFirstName').value.trim();
+            const lastName = document.getElementById('editLastName').value.trim();
+            const nickname = document.getElementById('editNickname').value.trim();
+            
+            if (!firstName || !lastName || !nickname) {
+                alert('Все поля должны быть заполнены');
+                return;
+            }
+            
+            const result = await updateProfile(firstName, lastName, nickname);
+            if (result.success) {
+                document.getElementById('editProfileModal').classList.remove('active');
+                await updateProfileUI();
+            } else {
+                alert('Ошибка при сохранении');
+            }
+        });
+
+        document.getElementById('cancelEditBtn').addEventListener('click', () => {
+            document.getElementById('editProfileModal').classList.remove('active');
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            if (confirm('Выйти из аккаунта?')) {
+                await updateUserStatus(false);
+                await Parse.User.logOut();
+                showScreen('authScreen');
+            }
+        });
+
+        // ===== АВТОРИЗАЦИЯ =====
+        let isLoginMode = true;
+
+        document.getElementById('authSwitch').addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            document.getElementById('authTitle').textContent = isLoginMode ? 'Вход' : 'Регистрация';
+            document.getElementById('authActionBtn').textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+            document.getElementById('authSwitch').textContent = isLoginMode ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти';
+        });
+
+        document.getElementById('authActionBtn').addEventListener('click', async () => {
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            
+            if (!email || !password) {
+                document.getElementById('authError').textContent = 'Заполните все поля';
+                return;
+            }
+            
+            document.getElementById('authError').textContent = '';
+            
+            if (isLoginMode) {
+                const result = await signIn(email, password);
+                if (result.success) {
+                    document.getElementById('authEmail').value = '';
+                    document.getElementById('authPassword').value = '';
+                    document.getElementById('addPostBtn').classList.remove('hidden');
+                    showScreen('homeScreen');
+                } else {
+                    document.getElementById('authError').textContent = result.message;
+                }
+            } else {
+                // Генерируем имя из email
+                const namePart = email.split('@')[0];
+                const firstName = namePart;
+                const lastName = 'User';
+                const nickname = namePart.toLowerCase();
+                
+                const result = await signUp(firstName, lastName, nickname, email, password);
+                if (result.success) {
+                    document.getElementById('authEmail').value = '';
+                    document.getElementById('authPassword').value = '';
+                    document.getElementById('addPostBtn').classList.remove('hidden');
+                    showScreen('homeScreen');
+                } else {
+                    document.getElementById('authError').textContent = result.message;
+                }
+            }
+        });
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        window.onload = async () => {
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                await updateUserStatus(true);
+                document.getElementById('addPostBtn').classList.remove('hidden');
+                showScreen('homeScreen');
+            } else {
+                showScreen('authScreen');
+            }
+            
+            // Обработчик закрытия окон при клике вне
+            document.addEventListener('click', (e) => {
+                // Закрываем меню постов
+                if (!e.target.closest('.post-menu-area') && !e.target.closest('.post-menu')) {
+                    document.querySelectorAll('.post-menu').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                }
+                
+                // Закрываем панель уведомлений
+                if (!e.target.closest('.nav-icon') && !e.target.closest('.notifications-panel')) {
+                    document.getElementById('notificationsPanel').classList.remove('active');
+                }
             });
-        }
+            
+            // Обработчик перед закрытием страницы
+            window.addEventListener('beforeunload', () => {
+                updateUserStatus(false);
+            });
+        };
     </script>
 </body>
 </html>
