@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · v4.4</title>
+    <title>RealReel · v4.5</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
         .phone-frame {
             width: 380px;
             height: 720px;
-            background: #1e1e1e;
+            background: #1a1a1a;
             border-radius: 0;
             box-shadow: 0 30px 60px rgba(0,0,0,0.3);
             overflow: hidden;
@@ -37,16 +37,16 @@
             position: relative;
         }
 
-        /* ===== TELEGRAM DARK THEME ===== */
+        /* ===== НОВАЯ ЦВЕТОВАЯ ГАММА ===== */
         :root {
-            --tg-bg: #1e1e1e;
-            --tg-surface: #2b2b2b;
-            --tg-surface-hover: #3a3a3a;
-            --tg-text: #ffffff;
-            --tg-text-secondary: #aaaaaa;
-            --tg-accent: #8774e1; /* Фиолетовый как в Telegram */
-            --tg-accent-light: #a38ef7;
-            --tg-border: #333333;
+            --bg-primary: #1a1a1a;
+            --bg-surface: #2d2d2d;
+            --bg-surface-hover: #3d3d3d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-primary: #5f9ea0; /* Бирюзовый - мягкий для глаз */
+            --accent-secondary: #7bb5b7;
+            --border-color: #3a3a3a;
         }
 
         /* Верхняя навигация */
@@ -55,10 +55,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--tg-border);
+            border-bottom: 1px solid var(--border-color);
             position: relative;
             z-index: 10;
         }
@@ -70,14 +70,14 @@
         .logo {
             font-weight: 700;
             font-size: 20px;
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
             letter-spacing: -0.5px;
-            text-shadow: 0 0 10px rgba(135,116,225,0.3);
+            text-shadow: 0 0 10px rgba(95,158,160,0.3);
         }
 
         .version {
             font-size: 11px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             font-weight: 500;
             margin-left: 4px;
             background: rgba(255,255,255,0.05);
@@ -99,7 +99,7 @@
             justify-content: center;
             cursor: pointer;
             position: relative;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             transition: 0.2s;
             background: rgba(255,255,255,0.03);
             border-radius: 50%;
@@ -114,7 +114,7 @@
         }
 
         .nav-icon:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
             transform: scale(1.05);
         }
@@ -126,7 +126,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             transition: 0.2s;
             background: rgba(255,255,255,0.03);
             border-radius: 50%;
@@ -141,7 +141,7 @@
         }
 
         .add-post-icon:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
             transform: scale(1.05);
         }
@@ -161,7 +161,7 @@
             align-items: center;
             justify-content: center;
             padding: 0 3px;
-            border: 2px solid var(--tg-bg);
+            border: 2px solid var(--bg-primary);
         }
 
         /* Контент */
@@ -169,7 +169,7 @@
             flex: 1;
             overflow-y: auto;
             padding: 16px;
-            background: var(--tg-bg);
+            background: var(--bg-primary);
         }
 
         /* Нижняя навигация */
@@ -178,10 +178,10 @@
             align-items: center;
             justify-content: space-around;
             padding: 10px 0;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid var(--tg-border);
+            border-top: 1px solid var(--border-color);
             position: relative;
             z-index: 10;
         }
@@ -197,7 +197,7 @@
             cursor: pointer;
             padding: 4px 0;
             flex: 1;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             transition: 0.2s;
             position: relative;
         }
@@ -211,15 +211,15 @@
         }
 
         .nav-item.active {
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
         }
 
         .nav-item.active svg {
-            filter: drop-shadow(0 2px 4px rgba(135,116,225,0.3));
+            filter: drop-shadow(0 2px 4px rgba(95,158,160,0.3));
         }
 
         .nav-item:hover {
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
             transform: translateY(-2px);
         }
 
@@ -244,7 +244,7 @@
             align-items: center;
             justify-content: center;
             padding: 0 4px;
-            border: 2px solid var(--tg-bg);
+            border: 2px solid var(--bg-primary);
         }
 
         /* Экран авторизации с морем */
@@ -279,14 +279,14 @@
         .auth-form {
             width: 300px;
             padding: 35px 25px;
-            background: rgba(30,30,30,0.95);
+            background: rgba(26,26,26,0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
             box-shadow: 0 30px 50px rgba(0,0,0,0.3);
             position: relative;
             z-index: 1;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .auth-title {
@@ -294,32 +294,32 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 25px;
-            color: var(--tg-accent-light);
-            text-shadow: 0 0 10px rgba(135,116,225,0.3);
+            color: var(--accent-primary);
+            text-shadow: 0 0 10px rgba(95,158,160,0.3);
         }
 
         .auth-input {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             border-radius: 40px;
             margin-bottom: 14px;
             font-size: 14px;
             outline: none;
             transition: 0.2s;
-            background: var(--tg-surface);
-            color: var(--tg-text);
+            background: var(--bg-surface);
+            color: var(--text-primary);
         }
 
         .auth-input:focus {
-            border-color: var(--tg-accent);
-            box-shadow: 0 0 0 3px rgba(135,116,225,0.1);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(95,158,160,0.1);
         }
 
         .auth-btn {
             width: 100%;
             padding: 14px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border: none;
             border-radius: 40px;
             color: white;
@@ -327,12 +327,12 @@
             cursor: pointer;
             transition: 0.2s;
             position: relative;
-            box-shadow: 0 10px 20px rgba(135,116,225,0.3);
+            box-shadow: 0 10px 20px rgba(95,158,160,0.3);
         }
 
         .auth-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(135,116,225,0.4);
+            box-shadow: 0 15px 25px rgba(95,158,160,0.4);
         }
 
         .auth-btn.loading {
@@ -378,13 +378,13 @@
         }
 
         .auth-link {
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             cursor: pointer;
             transition: 0.2s;
         }
 
         .auth-link:hover {
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
         }
 
         .auth-error {
@@ -401,7 +401,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--tg-bg);
+            background: var(--bg-primary);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -417,8 +417,8 @@
         .loading-spinner {
             width: 40px;
             height: 40px;
-            border: 3px solid var(--tg-surface);
-            border-top-color: var(--tg-accent);
+            border: 3px solid var(--bg-surface);
+            border-top-color: var(--accent-primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -430,7 +430,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 300px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
@@ -438,7 +438,7 @@
             box-shadow: 0 30px 50px rgba(0,0,0,0.2);
             z-index: 200;
             display: none;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .modal.active {
@@ -449,38 +449,38 @@
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 20px;
-            color: var(--tg-text);
+            color: var(--text-primary);
         }
 
         .modal-input {
             width: 100%;
             padding: 14px;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             border-radius: 30px;
             margin-bottom: 15px;
             outline: none;
-            background: var(--tg-bg);
-            color: var(--tg-text);
+            background: var(--bg-primary);
+            color: var(--text-primary);
         }
 
         .modal-input:focus {
-            border-color: var(--tg-accent);
+            border-color: var(--accent-primary);
         }
 
         .modal-file {
             padding: 14px;
-            border: 2px dashed var(--tg-accent);
+            border: 2px dashed var(--accent-primary);
             border-radius: 30px;
             text-align: center;
             cursor: pointer;
             margin-bottom: 20px;
-            color: var(--tg-accent-light);
+            color: var(--accent-secondary);
             font-weight: 500;
             transition: 0.2s;
         }
 
         .modal-file:hover {
-            background: rgba(135,116,225,0.05);
+            background: rgba(95,158,160,0.05);
         }
 
         .modal-actions {
@@ -496,22 +496,22 @@
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
-            background: var(--tg-surface-hover);
-            color: var(--tg-text);
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
         }
 
         .modal-btn:hover {
-            background: #4a4a4a;
+            background: #4d4d4d;
         }
 
         .modal-btn.save {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
         }
 
         .modal-btn.save:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(135,116,225,0.3);
+            box-shadow: 0 10px 20px rgba(95,158,160,0.3);
         }
 
         .modal-success {
@@ -521,16 +521,16 @@
             margin-top: 15px;
         }
 
-        /* ===== PASSPORT STIQ - ПОЛНОСТЬЮ АНИМИРОВАННЫЙ ===== */
+        /* ===== PASSPORT STIQ ===== */
         .passport-stiq {
             position: relative;
             margin: 10px 0;
             padding: 20px;
-            background: linear-gradient(135deg, var(--tg-accent), #9b59b6);
+            background: linear-gradient(135deg, var(--accent-primary), #7bb5b7);
             border-radius: 20px;
             color: white;
             animation: passportAppear 0.5s ease-out, passportFloat 3s ease-in-out infinite;
-            box-shadow: 0 10px 30px rgba(135,116,225,0.4);
+            box-shadow: 0 10px 30px rgba(95,158,160,0.4);
             max-width: 90%;
             align-self: center;
             border: 2px solid rgba(255,255,255,0.3);
@@ -571,7 +571,7 @@
             transform: rotate(5deg);
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             animation: passportIconSpin 10s linear infinite;
-            border: 3px solid var(--tg-accent);
+            border: 3px solid var(--accent-primary);
         }
 
         @keyframes passportIconSpin {
@@ -685,7 +685,7 @@
         }
 
         .visa-item {
-            background: linear-gradient(135deg, var(--tg-accent), #9b59b6);
+            background: linear-gradient(135deg, var(--accent-primary), #7bb5b7);
             border-radius: 12px;
             padding: 12px 8px;
             text-align: center;
@@ -698,7 +698,7 @@
 
         .visa-item:hover {
             transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(135,116,225,0.4);
+            box-shadow: 0 5px 20px rgba(95,158,160,0.4);
         }
 
         @keyframes visaItemAppear {
@@ -751,13 +751,13 @@
             border-radius: 32px;
             background-size: cover;
             background-position: center;
-            border: 2px solid var(--tg-accent);
+            border: 2px solid var(--accent-primary);
             position: relative;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .story-avatar.no-story {
-            border-color: var(--tg-border);
+            border-color: var(--border-color);
             opacity: 0.7;
         }
 
@@ -767,14 +767,14 @@
             right: -2px;
             width: 22px;
             height: 22px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border-radius: 11px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 16px;
-            border: 2px solid var(--tg-bg);
+            border: 2px solid var(--bg-primary);
             animation: storyAddPulse 2s ease-in-out infinite;
         }
 
@@ -785,7 +785,7 @@
 
         .story-name {
             font-size: 11px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             font-weight: 500;
         }
 
@@ -872,11 +872,11 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--tg-accent), #9b59b6);
+            background: linear-gradient(90deg, var(--accent-primary), #7bb5b7);
             width: 0%;
             transition: width 5s linear;
             border-radius: 2px;
-            box-shadow: 0 0 10px var(--tg-accent);
+            box-shadow: 0 0 10px var(--accent-primary);
         }
 
         .story-footer {
@@ -904,7 +904,7 @@
         }
 
         .story-input:focus {
-            border-color: var(--tg-accent);
+            border-color: var(--accent-primary);
         }
 
         .story-action-btn {
@@ -1001,10 +1001,10 @@
 
         .post {
             padding: 15px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .post-header {
@@ -1021,7 +1021,7 @@
             background-size: cover;
             background-position: center;
             cursor: pointer;
-            border: 2px solid var(--tg-accent);
+            border: 2px solid var(--accent-primary);
         }
 
         .post-author-info {
@@ -1030,18 +1030,18 @@
 
         .post-author {
             font-weight: 600;
-            color: var(--tg-text);
+            color: var(--text-primary);
             cursor: pointer;
             font-size: 14px;
         }
 
         .post-author:hover {
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
         }
 
         .post-nick {
             font-size: 11px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
         }
 
         .post-menu {
@@ -1052,7 +1052,7 @@
             background: none;
             border: none;
             font-size: 16px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             cursor: pointer;
             padding: 4px 6px;
         }
@@ -1061,13 +1061,13 @@
             position: absolute;
             right: 0;
             top: 30px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 16px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             padding: 6px;
             z-index: 10;
             display: none;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .post-menu-dropdown.active {
@@ -1081,12 +1081,12 @@
             gap: 8px;
             cursor: pointer;
             border-radius: 12px;
-            color: var(--tg-text);
+            color: var(--text-primary);
             font-size: 12px;
         }
 
         .post-menu-item:hover {
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
         }
 
         .post-menu-item svg {
@@ -1100,7 +1100,7 @@
             font-size: 13px;
             margin-bottom: 10px;
             line-height: 1.5;
-            color: var(--tg-text);
+            color: var(--text-primary);
         }
 
         .post-image {
@@ -1109,7 +1109,7 @@
             object-fit: cover;
             margin-bottom: 10px;
             border-radius: 12px;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             cursor: pointer;
         }
 
@@ -1118,7 +1118,7 @@
             align-items: center;
             gap: 20px;
             padding-top: 8px;
-            border-top: 1px solid var(--tg-border);
+            border-top: 1px solid var(--border-color);
         }
 
         .post-action {
@@ -1126,7 +1126,7 @@
             align-items: center;
             gap: 4px;
             cursor: pointer;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             font-size: 12px;
         }
 
@@ -1150,14 +1150,14 @@
         .post-date {
             margin-left: auto;
             font-size: 10px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
         }
 
         /* Комментарии */
         .comments {
             margin-top: 10px;
             padding-top: 10px;
-            border-top: 1px solid var(--tg-border);
+            border-top: 1px solid var(--border-color);
         }
 
         .comment-input {
@@ -1169,22 +1169,22 @@
         .comment-input-field {
             flex: 1;
             padding: 10px 14px;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             border-radius: 30px;
             outline: none;
-            background: var(--tg-bg);
-            color: var(--tg-text);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             font-size: 12px;
         }
 
         .comment-input-field:focus {
-            border-color: var(--tg-accent);
+            border-color: var(--accent-primary);
         }
 
         .comment-btn {
             width: 38px;
             height: 38px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border: none;
             border-radius: 19px;
             color: white;
@@ -1197,7 +1197,7 @@
 
         .comment-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 3px 10px rgba(135,116,225,0.3);
+            box-shadow: 0 3px 10px rgba(95,158,160,0.3);
         }
 
         .comments-list {
@@ -1210,7 +1210,7 @@
             display: flex;
             gap: 8px;
             padding: 8px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 12px;
         }
 
@@ -1225,12 +1225,12 @@
         .comment-author {
             font-weight: 600;
             font-size: 11px;
-            color: var(--tg-text);
+            color: var(--text-primary);
         }
 
         .comment-text {
             font-size: 11px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
         }
 
         /* Поиск */
@@ -1241,12 +1241,12 @@
         .search-box {
             display: flex;
             gap: 10px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             padding: 6px 14px;
             border-radius: 30px;
             margin-bottom: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .search-input {
@@ -1255,15 +1255,15 @@
             background: none;
             outline: none;
             font-size: 13px;
-            color: var(--tg-text);
+            color: var(--text-primary);
         }
 
         .search-input::placeholder {
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
         }
 
         .search-btn {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border: none;
             border-radius: 25px;
             padding: 6px 16px;
@@ -1276,7 +1276,7 @@
 
         .search-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(135,116,225,0.3);
+            box-shadow: 0 3px 10px rgba(95,158,160,0.3);
         }
 
         .search-results {
@@ -1290,18 +1290,18 @@
             align-items: center;
             gap: 10px;
             padding: 12px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             cursor: pointer;
             transition: 0.2s;
         }
 
         .user-card:hover {
             transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(135,116,225,0.1);
-            border-color: var(--tg-accent);
+            box-shadow: 0 5px 15px rgba(95,158,160,0.1);
+            border-color: var(--accent-primary);
         }
 
         .user-avatar {
@@ -1310,7 +1310,7 @@
             border-radius: 22px;
             background-size: cover;
             background-position: center;
-            border: 2px solid var(--tg-accent);
+            border: 2px solid var(--accent-primary);
         }
 
         .user-info {
@@ -1319,19 +1319,19 @@
 
         .user-name {
             font-weight: 600;
-            color: var(--tg-text);
+            color: var(--text-primary);
             font-size: 13px;
         }
 
         .user-nick {
             font-size: 11px;
-            color: var(--tg-accent-light);
+            color: var(--accent-secondary);
             margin-top: 1px;
         }
 
         .user-status {
             font-size: 10px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             margin-top: 1px;
         }
 
@@ -1343,10 +1343,10 @@
         .user-btn {
             width: 36px;
             height: 36px;
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             border: none;
             border-radius: 18px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             cursor: pointer;
             transition: 0.2s;
             display: flex;
@@ -1355,7 +1355,7 @@
         }
 
         .user-btn:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
             transform: scale(1.05);
         }
@@ -1387,18 +1387,18 @@
             align-items: center;
             gap: 10px;
             padding: 12px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             cursor: pointer;
             transition: 0.2s;
         }
 
         .chat-item:hover {
             transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(135,116,225,0.1);
-            border-color: var(--tg-accent);
+            box-shadow: 0 5px 15px rgba(95,158,160,0.1);
+            border-color: var(--accent-primary);
         }
 
         .chat-avatar {
@@ -1407,7 +1407,7 @@
             border-radius: 24px;
             background-size: cover;
             background-position: center;
-            border: 2px solid var(--tg-accent);
+            border: 2px solid var(--accent-primary);
         }
 
         .chat-info {
@@ -1424,13 +1424,13 @@
 
         .chat-name {
             font-weight: 600;
-            color: var(--tg-text);
+            color: var(--text-primary);
             font-size: 14px;
             cursor: pointer;
         }
 
         .chat-name:hover {
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
         }
 
         .unread-badge {
@@ -1449,7 +1449,7 @@
 
         .chat-preview {
             font-size: 12px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1458,7 +1458,7 @@
 
         .chat-time {
             font-size: 9px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
         }
 
         /* Комната чата */
@@ -1466,7 +1466,7 @@
             display: flex;
             flex-direction: column;
             height: 100%;
-            background: var(--tg-bg);
+            background: var(--bg-primary);
         }
 
         .chat-room-header {
@@ -1474,28 +1474,28 @@
             align-items: center;
             gap: 12px;
             padding: 12px 16px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--tg-border);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .chat-room-back {
             width: 36px;
             height: 36px;
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             transition: 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .chat-room-back:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
             transform: scale(1.05);
         }
@@ -1509,7 +1509,7 @@
             cursor: pointer;
             position: relative;
             transition: 0.2s;
-            border: 2px solid var(--tg-accent);
+            border: 2px solid var(--accent-primary);
         }
 
         .chat-room-avatar:hover {
@@ -1522,12 +1522,12 @@
         }
 
         .chat-room-info:hover .chat-room-name {
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
         }
 
         .chat-room-name {
             font-weight: 600;
-            color: var(--tg-text);
+            color: var(--text-primary);
             font-size: 15px;
             margin-bottom: 2px;
             transition: 0.2s;
@@ -1535,7 +1535,7 @@
 
         .chat-room-status {
             font-size: 11px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             display: flex;
             align-items: center;
             gap: 4px;
@@ -1558,7 +1558,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            background: var(--tg-bg);
+            background: var(--bg-primary);
         }
 
         .typing-indicator {
@@ -1566,18 +1566,18 @@
             align-items: center;
             gap: 4px;
             padding: 6px 14px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 18px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             margin-bottom: 6px;
             align-self: flex-start;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .typing-indicator span {
             width: 5px;
             height: 5px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border-radius: 2.5px;
             display: inline-block;
             animation: typing 1.4s infinite ease-in-out;
@@ -1612,24 +1612,24 @@
 
         .message-bubble {
             padding: 8px 12px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 18px 18px 18px 6px;
             font-size: 13px;
             word-wrap: break-word;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            border: 1px solid var(--tg-border);
-            color: var(--tg-text);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
         }
 
         .message.right .message-bubble {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
             border-radius: 18px 18px 6px 18px;
         }
 
         .message-time {
             font-size: 8px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             margin-top: 2px;
             text-align: right;
             padding: 0 2px;
@@ -1641,7 +1641,7 @@
 
         .message-seen {
             font-size: 8px;
-            color: var(--tg-accent-light);
+            color: var(--accent-secondary);
             margin-left: 4px;
             display: inline-block;
         }
@@ -1672,14 +1672,14 @@
             position: absolute;
             bottom: -16px;
             left: 8px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 16px;
             padding: 2px 8px;
             font-size: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             display: none;
-            border: 1px solid var(--tg-border);
-            color: var(--tg-text);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
         }
 
         .message.reacted .message-reaction {
@@ -1688,14 +1688,14 @@
 
         .reaction-panel {
             position: fixed;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 30px;
             padding: 6px 10px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.15);
             display: none;
             gap: 6px;
             z-index: 1000;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .reaction-panel.active {
@@ -1705,7 +1705,7 @@
         .reaction-emoji {
             width: 36px;
             height: 36px;
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             border-radius: 18px;
             display: flex;
             align-items: center;
@@ -1717,39 +1717,39 @@
 
         .reaction-emoji:hover {
             transform: scale(1.2);
-            background: #4a4a4a;
+            background: #4d4d4d;
         }
 
         .chat-room-input {
             display: flex;
             gap: 8px;
             padding: 12px 16px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid var(--tg-border);
+            border-top: 1px solid var(--border-color);
         }
 
         .chat-room-input-field {
             flex: 1;
             padding: 10px 16px;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             border-radius: 30px;
             outline: none;
             font-size: 13px;
-            background: var(--tg-bg);
-            color: var(--tg-text);
+            background: var(--bg-primary);
+            color: var(--text-primary);
         }
 
         .chat-room-input-field:focus {
-            border-color: var(--tg-accent);
-            box-shadow: 0 0 0 2px rgba(135,116,225,0.1);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(95,158,160,0.1);
         }
 
         .chat-room-send {
             width: 44px;
             height: 44px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border: none;
             border-radius: 22px;
             color: white;
@@ -1758,7 +1758,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 3px 10px rgba(135,116,225,0.3);
+            box-shadow: 0 3px 10px rgba(95,158,160,0.3);
         }
 
         .chat-room-send:hover {
@@ -1794,7 +1794,7 @@
             border-radius: 40px;
             background-size: cover;
             background-position: center;
-            border: 3px solid var(--tg-accent);
+            border: 3px solid var(--accent-primary);
             cursor: pointer;
             transition: 0.2s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -1818,14 +1818,14 @@
         .profile-name {
             font-weight: 700;
             font-size: 20px;
-            color: var(--tg-text);
+            color: var(--text-primary);
         }
 
-        /* ЗВЕЗДА КАК В TELEGRAM */
+        /* ЗВЕЗДА */
         .profile-star {
             width: 32px;
             height: 32px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
             mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
             cursor: pointer;
@@ -1837,47 +1837,45 @@
         }
 
         .profile-nick {
-            color: var(--tg-accent-light);
+            color: var(--accent-secondary);
             font-size: 14px;
         }
 
-        /* БИО С ВОЗМОЖНОСТЬЮ ПЕРЕНОСА СТРОК */
         .profile-bio {
             font-size: 13px;
-            color: var(--tg-text);
+            color: var(--text-primary);
             margin: 8px 0;
             line-height: 1.6;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             padding: 16px 20px;
             border-radius: 20px;
-            border-left: 4px solid var(--tg-accent);
+            border-left: 4px solid var(--accent-primary);
             position: relative;
             white-space: pre-wrap;
             word-wrap: break-word;
             min-height: 60px;
         }
 
-        /* КНОПКА РЕДАКТИРОВАНИЯ НА ОДНОМ УРОВНЕ С БИО */
         .edit-bio-btn {
             position: absolute;
             right: 12px;
             top: 12px;
             width: 36px;
             height: 36px;
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             transition: 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .edit-bio-btn:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
             transform: scale(1.05);
         }
@@ -1889,7 +1887,6 @@
             fill: none;
         }
 
-        /* ЧЕРТЫ ХАРАКТЕРА */
         .profile-traits {
             display: flex;
             flex-wrap: wrap;
@@ -1898,22 +1895,20 @@
         }
 
         .profile-trait {
-            background: var(--tg-surface-hover);
-            color: var(--tg-text);
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
             padding: 6px 14px;
             border-radius: 25px;
             font-size: 12px;
             font-weight: 500;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             transition: 0.2s;
         }
 
         .profile-trait:hover {
-            border-color: var(--tg-accent);
+            border-color: var(--accent-primary);
             transform: translateY(-2px);
         }
-
-        /* СТАТИСТИКА УБРАНА ИЗ ПРОФИЛЯ - ТОЛЬКО В ПОПАПЕ */
 
         .profile-actions {
             display: flex;
@@ -1929,27 +1924,32 @@
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
-            background: var(--tg-surface-hover);
-            color: var(--tg-text);
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
             font-size: 13px;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .profile-btn.primary {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
-            box-shadow: 0 3px 10px rgba(135,116,225,0.2);
+            box-shadow: 0 3px 10px rgba(95,158,160,0.2);
             border: none;
         }
 
         .profile-btn.primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(135,116,225,0.3);
+            box-shadow: 0 5px 15px rgba(95,158,160,0.3);
         }
 
         .profile-btn.secondary:hover {
-            background: #4a4a4a;
+            background: #4d4d4d;
             transform: translateY(-1px);
+        }
+
+        /* КНОПКА ПОДПИСАТЬСЯ СКРЫТА В СВОЕМ ПРОФИЛЕ */
+        .profile-btn.secondary.hidden {
+            display: none;
         }
 
         .posts-grid {
@@ -1961,18 +1961,18 @@
 
         .post-thumb {
             aspect-ratio: 1;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
             transition: 0.2s;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .post-thumb:hover {
             transform: scale(1.02);
-            box-shadow: 0 3px 10px rgba(135,116,225,0.15);
-            border-color: var(--tg-accent);
+            box-shadow: 0 3px 10px rgba(95,158,160,0.15);
+            border-color: var(--accent-primary);
         }
 
         .post-thumb img {
@@ -1987,8 +1987,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--tg-surface);
-            color: var(--tg-text-secondary);
+            background: var(--bg-surface);
+            color: var(--text-secondary);
             font-size: 20px;
         }
 
@@ -1997,23 +1997,23 @@
             justify-content: flex-end;
             gap: 12px;
             padding: 16px 0;
-            border-top: 1px solid var(--tg-border);
+            border-top: 1px solid var(--border-color);
             margin-top: auto;
         }
 
         .settings-icon {
             width: 44px;
             height: 44px;
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             transition: 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .settings-icon svg {
@@ -2024,7 +2024,7 @@
         }
 
         .settings-icon:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
             transform: scale(1.05);
         }
@@ -2057,20 +2057,20 @@
             transform: scale(1.05);
         }
 
-        /* ПОПАП СО СТАТИСТИКОЙ (ПРИ НАЖАТИИ НА ЗВЕЗДУ) */
+        /* ПОПАП СО СТАТИСТИКОЙ - ИКОНКИ В СТИЛЕ НАВИГАЦИИ */
         .stats-popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 280px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
             padding: 25px;
             box-shadow: 0 30px 50px rgba(0,0,0,0.3);
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
             z-index: 1000;
             display: none;
             animation: statsAppear 0.3s ease-out;
@@ -2091,13 +2091,13 @@
             gap: 12px;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 1px solid var(--tg-border);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .stats-popup-header .star-icon {
             width: 40px;
             height: 40px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -2109,7 +2109,7 @@
         .stats-popup-header h3 {
             font-size: 20px;
             font-weight: 700;
-            color: var(--tg-text);
+            color: var(--text-primary);
             flex: 1;
         }
 
@@ -2125,28 +2125,36 @@
             align-items: center;
             gap: 12px;
             padding: 12px;
-            background: var(--tg-bg);
-            border-radius: 20px;
+            background: var(--bg-primary);
+            border-radius: 16px;
             transition: 0.2s;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .stat-item:hover {
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             transform: translateX(5px);
-            border-color: var(--tg-accent);
+            border-color: var(--accent-primary);
         }
 
+        /* ИКОНКИ В СТИЛЕ НАВИГАЦИИ */
         .stat-icon {
             width: 40px;
             height: 40px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 20px;
+        }
+
+        .stat-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
         }
 
         .stat-info {
@@ -2156,7 +2164,7 @@
         .stat-value {
             font-size: 20px;
             font-weight: 700;
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
             line-height: 1.2;
             animation: statValuePulse 2s ease-in-out infinite;
         }
@@ -2168,14 +2176,14 @@
 
         .stat-label {
             font-size: 12px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
         .stats-close {
             width: 100%;
             padding: 12px;
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             border: none;
             border-radius: 25px;
             color: white;
@@ -2186,7 +2194,7 @@
 
         .stats-close:hover {
             transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(135,116,225,0.3);
+            box-shadow: 0 5px 15px rgba(95,158,160,0.3);
         }
 
         /* Панель уведомлений */
@@ -2195,14 +2203,14 @@
             top: 70px;
             right: 16px;
             width: 280px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
             z-index: 1000;
             display: none;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .notifications-panel.active {
@@ -2211,9 +2219,9 @@
 
         .notifications-header {
             padding: 14px 16px;
-            border-bottom: 1px solid var(--tg-border);
+            border-bottom: 1px solid var(--border-color);
             font-weight: 600;
-            color: var(--tg-text);
+            color: var(--text-primary);
             font-size: 14px;
         }
 
@@ -2226,12 +2234,12 @@
             display: flex;
             gap: 10px;
             padding: 12px 16px;
-            border-bottom: 1px solid var(--tg-border);
+            border-bottom: 1px solid var(--border-color);
             cursor: pointer;
         }
 
         .notification-item:hover {
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
         }
 
         .notification-avatar {
@@ -2245,12 +2253,12 @@
         .notification-content {
             flex: 1;
             font-size: 12px;
-            color: var(--tg-text);
+            color: var(--text-primary);
         }
 
         .notification-time {
             font-size: 9px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
@@ -2261,7 +2269,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--tg-bg);
+            background: var(--bg-primary);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 200;
@@ -2278,24 +2286,24 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            border-bottom: 1px solid var(--tg-border);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .subscriptions-back {
             width: 36px;
             height: 36px;
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             transition: 0.2s;
         }
 
         .subscriptions-back:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
         }
 
@@ -2303,20 +2311,20 @@
             display: flex;
             gap: 16px;
             padding: 0 16px;
-            border-bottom: 1px solid var(--tg-border);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .subscriptions-tab {
             padding: 12px 0;
             cursor: pointer;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             border-bottom: 2px solid transparent;
             font-size: 13px;
         }
 
         .subscriptions-tab.active {
-            color: var(--tg-accent-light);
-            border-bottom-color: var(--tg-accent);
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
         }
 
         .subscriptions-search {
@@ -2326,10 +2334,10 @@
         .subscriptions-search-box {
             display: flex;
             gap: 8px;
-            background: var(--tg-surface);
+            background: var(--bg-surface);
             padding: 6px 14px;
             border-radius: 20px;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .subscriptions-search-input {
@@ -2338,26 +2346,26 @@
             background: none;
             outline: none;
             font-size: 13px;
-            color: var(--tg-text);
+            color: var(--text-primary);
         }
 
         .subscriptions-search-input::placeholder {
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
         }
 
         .subscriptions-search-btn {
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             border: none;
             border-radius: 18px;
             padding: 6px 14px;
-            color: var(--tg-text);
+            color: var(--text-primary);
             font-weight: 500;
             font-size: 12px;
             cursor: pointer;
         }
 
         .subscriptions-search-btn:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
         }
 
@@ -2377,7 +2385,7 @@
         }
 
         .subscription-item:hover {
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
         }
 
         .subscription-avatar {
@@ -2386,7 +2394,7 @@
             border-radius: 4px;
             background-size: cover;
             background-position: center;
-            border: 2px solid var(--tg-accent);
+            border: 2px solid var(--accent-primary);
         }
 
         .subscription-info {
@@ -2396,37 +2404,37 @@
         .subscription-name {
             font-weight: 600;
             font-size: 14px;
-            color: var(--tg-text);
+            color: var(--text-primary);
         }
 
         .subscription-name:hover {
-            color: var(--tg-accent-light);
+            color: var(--accent-primary);
         }
 
         .subscription-nick {
             font-size: 12px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
         .subscription-status {
             font-size: 11px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
         .subscription-btn {
             width: 36px;
             height: 36px;
-            background: var(--tg-surface-hover);
+            background: var(--bg-surface-hover);
             border: none;
             border-radius: 18px;
-            color: var(--tg-text-secondary);
+            color: var(--text-secondary);
             cursor: pointer;
         }
 
         .subscription-btn:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
         }
 
@@ -2454,28 +2462,28 @@
         }
 
         .trait-option {
-            background: var(--tg-surface-hover);
-            color: var(--tg-text);
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
             padding: 8px 16px;
             border-radius: 25px;
             font-size: 12px;
             cursor: pointer;
             transition: 0.2s;
-            border: 1px solid var(--tg-border);
+            border: 1px solid var(--border-color);
         }
 
         .trait-option:hover {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
             transform: scale(1.05);
-            border-color: var(--tg-accent);
+            border-color: var(--accent-primary);
         }
 
         .trait-option.selected {
-            background: var(--tg-accent);
+            background: var(--accent-primary);
             color: white;
-            border-color: var(--tg-accent);
-            box-shadow: 0 0 10px rgba(135,116,225,0.3);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px rgba(95,158,160,0.3);
         }
 
         /* Скрытые элементы */
@@ -2511,7 +2519,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v4.4</span></div>
+            <div class="logo">RealReel <span class="version">v4.5</span></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
@@ -2652,15 +2660,13 @@
             <div class="reaction-emoji" onclick="addReaction('🔥')">🔥</div>
         </div>
 
-        <!-- ПОПАП СО СТАТИСТИКОЙ (ПРИ НАЖАТИИ НА ЗВЕЗДУ) -->
+        <!-- ПОПАП СО СТАТИСТИКОЙ -->
         <div class="stats-popup" id="statsPopup">
             <div class="stats-popup-header">
                 <div class="star-icon">⭐</div>
                 <h3>Статистика</h3>
             </div>
-            <div class="stats-list" id="statsList">
-                <!-- Заполняется динамически -->
-            </div>
+            <div class="stats-list" id="statsList"></div>
             <button class="stats-close" onclick="closeStats()">Закрыть</button>
         </div>
 
@@ -2709,8 +2715,8 @@
                 <div class="search-screen">
                     <div style="text-align: center; margin: 20px 0;">
                         <div style="font-size: 60px; margin-bottom: 10px; animation: passportIconSpin 10s linear infinite;">🛂</div>
-                        <h2 style="color: var(--tg-accent-light);">PASSPORT STIQ</h2>
-                        <p style="color: var(--tg-text-secondary);">Твоя коллекция виз</p>
+                        <h2 style="color: var(--accent-primary);">PASSPORT STIQ</h2>
+                        <p style="color: var(--text-secondary);">Твоя коллекция виз</p>
                     </div>
                     <div class="visa-collection" id="visaCollection"></div>
                 </div>
@@ -2751,14 +2757,12 @@
                         <div class="profile-info">
                             <div class="profile-name-row">
                                 <span class="profile-name" id="profileFullName">Имя Фамилия</span>
-                                <!-- ЗВЕЗДА КАК В TELEGRAM -->
                                 <div class="profile-star" id="profileStarBtn" onclick="openStats()"></div>
                             </div>
                             <div class="profile-nick" id="profileNick">@nickname</div>
                         </div>
                     </div>
                     
-                    <!-- БИО С КНОПКОЙ РЕДАКТИРОВАНИЯ -->
                     <div class="profile-bio" id="profileBio">
                         <div class="edit-bio-btn" id="editProfileBtn">
                             <svg viewBox="0 0 24 24">
@@ -2767,10 +2771,7 @@
                         </div>
                     </div>
                     
-                    <!-- ЧЕРТЫ ХАРАКТЕРА -->
                     <div class="profile-traits" id="profileTraits"></div>
-
-                    <!-- СТАТИСТИКА УБРАНА ИЗ ПРОФИЛЯ - ТОЛЬКО В ПОПАПЕ -->
 
                     <div class="profile-actions">
                         <button class="profile-btn primary" id="profileMessageBtn">Написать</button>
@@ -3794,28 +3795,55 @@
             const statsList = document.getElementById('statsList');
             statsList.innerHTML = `
                 <div class="stat-item">
-                    <div class="stat-icon">👥</div>
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
                     <div class="stat-info">
                         <div class="stat-value">${followersCount}</div>
                         <div class="stat-label">подписчики</div>
                     </div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-icon">⭐</div>
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
                     <div class="stat-info">
                         <div class="stat-value">${followingCount}</div>
                         <div class="stat-label">подписки</div>
                     </div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-icon">📸</div>
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="2" width="20" height="20" rx="2.18"/>
+                            <line x1="8" y1="2" x2="8" y2="22"/>
+                            <line x1="16" y1="2" x2="16" y2="22"/>
+                            <line x1="2" y1="8" x2="22" y2="8"/>
+                            <line x1="2" y1="16" x2="22" y2="16"/>
+                        </svg>
+                    </div>
                     <div class="stat-info">
                         <div class="stat-value">${postsCount}</div>
                         <div class="stat-label">посты</div>
                     </div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-icon">🛂</div>
+                    <div class="stat-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <circle cx="9" cy="9" r="2"/>
+                            <circle cx="15" cy="15" r="2"/>
+                            <path d="M7 17 L17 7"/>
+                        </svg>
+                    </div>
                     <div class="stat-info">
                         <div class="stat-value">${visaCount}</div>
                         <div class="stat-label">визы</div>
