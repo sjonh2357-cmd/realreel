@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · v2.1</title>
+    <title>RealReel · v2.2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -64,17 +64,6 @@
             color: #999;
             font-weight: 500;
             margin-left: 4px;
-        }
-
-        .profile-name {
-            font-weight: 600;
-            font-size: 15px;
-            color: #333;
-            max-width: 150px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            display: none;
         }
 
         .nav-icons {
@@ -512,7 +501,7 @@
 
         .story-add {
             position: absolute;
-            bottom: 20px;
+            bottom: 0px;
             right: -2px;
             width: 22px;
             height: 22px;
@@ -1562,6 +1551,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
+            margin-bottom: 8px;
         }
 
         .profile-avatar {
@@ -1587,7 +1577,7 @@
             font-weight: 600;
             font-size: 18px;
             color: #333;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .profile-nick {
@@ -2108,8 +2098,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v2.1</span></div>
-            <div class="profile-name" id="profileName"></div>
+            <div class="logo">RealReel <span class="version">v2.2</span></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
@@ -2462,6 +2451,7 @@
         let messageRequests = [];
         let currentChatTab = 'all';
         let storyViews = [];
+        let chatUpdateInterval = null;
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -2578,7 +2568,6 @@
                 await currentUser.save();
                 
                 toggleAuthNav(false);
-                updateHeaderName();
                 navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
             } else {
                 console.log('Пользователь не найден');
@@ -2608,22 +2597,7 @@
             } else if (screenId === 'profileScreen') {
                 updateProfileUI();
             }
-            
-            updateHeaderName();
         };
-
-        function updateHeaderName() {
-            const user = getCurrentUser();
-            const nameElement = document.getElementById('profileName');
-            const currentScreen = document.querySelector('.screen.active')?.id;
-            
-            if (user && nameElement && currentScreen === 'profileScreen') {
-                nameElement.textContent = `${user.get('firstName') || ''} ${user.get('lastName') || ''}`.trim();
-                nameElement.style.display = 'block';
-            } else if (nameElement) {
-                nameElement.style.display = 'none';
-            }
-        }
 
         // ========== УВЕДОМЛЕНИЯ ==========
         function addNotification(type, title, message, fromUser = null) {
@@ -2729,7 +2703,6 @@
                     document.getElementById('authEmail').value = '';
                     document.getElementById('authPassword').value = '';
                     toggleAuthNav(false);
-                    updateHeaderName();
                     navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
                 } else {
                     document.getElementById('authError').textContent = result.message;
@@ -2741,7 +2714,6 @@
                     document.getElementById('authEmail').value = '';
                     document.getElementById('authPassword').value = '';
                     toggleAuthNav(false);
-                    updateHeaderName();
                     navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
                 } else {
                     document.getElementById('authError').textContent = result.message;
@@ -2845,7 +2817,6 @@
                 post.increment('likes');
                 await post.save();
                 
-                // Уведомление автору поста
                 const author = post.get('author');
                 if (author.id !== userId) {
                     const user = getCurrentUser();
@@ -2877,7 +2848,6 @@
                 post.set('comments', comments);
                 await post.save();
                 
-                // Уведомление автору поста
                 const author = post.get('author');
                 if (author.id !== user.id) {
                     addNotification('comment', '💬 Новый комментарий', 
@@ -2966,7 +2936,7 @@
                 const story = await query.get(storyId);
                 
                 const views = story.get('views') || [];
-                const alreadyViewed = views.some(v => v.user.id === userId);
+                const alreadyViewed = views.some(v => v.user && v.user.id === userId);
                 
                 if (!alreadyViewed) {
                     views.push({
@@ -3346,6 +3316,19 @@
             container.scrollTop = container.scrollHeight;
         }
 
+        // Функция для автоматического обновления чата
+        function startChatAutoUpdate() {
+            if (chatUpdateInterval) {
+                clearInterval(chatUpdateInterval);
+            }
+            
+            chatUpdateInterval = setInterval(async () => {
+                if (currentConversationId && document.getElementById('chatRoomScreen').classList.contains('active')) {
+                    await loadMessageHistory(currentConversationId);
+                }
+            }, 100); // 0.1 секунды, но для пользователя незаметно
+        }
+
         // ========== РЕАКЦИИ ==========
         window.showReactionPanel = function(e, messageId) {
             e.preventDefault();
@@ -3514,6 +3497,9 @@
                 await loadMessageHistory(currentConversationId);
                 subscribeToChat(currentConversationId);
                 
+                // Запускаем автообновление чата
+                startChatAutoUpdate();
+                
                 document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
                 document.getElementById('chatRoomScreen').classList.add('active');
                 
@@ -3530,6 +3516,11 @@
             if (currentChannel) {
                 currentChannel.unbind_all();
                 currentChannel.unsubscribe();
+            }
+            
+            if (chatUpdateInterval) {
+                clearInterval(chatUpdateInterval);
+                chatUpdateInterval = null;
             }
             
             updateChatList();
@@ -3744,8 +3735,6 @@
             
             document.getElementById('userPostsGrid').innerHTML = postsHtml || 
                 '<p style="opacity:0.5; text-align:center;">Нет постов</p>';
-            
-            updateHeaderName();
         }
 
         async function updateSearchResults() {
@@ -3926,7 +3915,6 @@
             const user = await new Parse.Query('_User').get(userId);
             currentStoryUser = { user, stories, index: 0 };
             
-            // Добавляем просмотр
             if (userId !== getCurrentUser().id) {
                 await addStoryView(stories[0].id, getCurrentUser().id);
             }
@@ -3948,7 +3936,6 @@
                 `url('${story.get('image').url()}')`;
             document.getElementById('storyViewer').classList.add('active');
             
-            // Показываем просмотры если это своя история
             if (user.id === getCurrentUser().id) {
                 const views = story.get('views') || [];
                 const viewsList = document.getElementById('storyViewsList');
@@ -4272,7 +4259,6 @@
                 await Parse.User.logOut();
                 toggleAuthNav(true);
                 document.getElementById('authScreen').classList.add('active');
-                document.getElementById('profileName').style.display = 'none';
             }
         });
 
