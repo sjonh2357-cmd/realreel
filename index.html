@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · v3.0</title>
+    <title>RealReel · v3.1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -509,7 +509,7 @@
             margin-top: 15px;
         }
 
-        /* PASSPORT STIQ 3.0 - НОВАЯ ВЕРСИЯ С МЕСТАМИ */
+        /* PASSPORT STIQ 3.1 */
         .passport-stiq {
             position: relative;
             margin: 10px 0;
@@ -1095,6 +1095,7 @@
             color: #333;
         }
 
+        /* Фото в постах - ИСПРАВЛЕНО */
         .post-image {
             width: 100%;
             aspect-ratio: 1;
@@ -1326,6 +1327,10 @@
             color: #999;
             margin-top: 2px;
             font-style: italic;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .user-match {
@@ -1336,6 +1341,22 @@
             padding: 2px 6px;
             border-radius: 12px;
             display: inline-block;
+        }
+
+        .user-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .user-trait {
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 8px;
+            font-weight: 500;
         }
 
         .user-status {
@@ -1656,7 +1677,6 @@
             color: rgba(255,255,255,0.7);
         }
 
-        /* Индикатор "Просмотрено" */
         .message-seen {
             font-size: 8px;
             color: #6C5CE7;
@@ -1788,7 +1808,7 @@
             fill: none;
         }
 
-        /* Профиль */
+        /* Профиль - ИСПРАВЛЕНЫ ФОТО */
         .profile-screen {
             display: flex;
             flex-direction: column;
@@ -1805,15 +1825,15 @@
         }
 
         .profile-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 35px;
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
             background-size: cover;
             background-position: center;
-            border: 2px solid #6C5CE7;
+            border: 3px solid #6C5CE7;
             cursor: pointer;
             transition: 0.2s;
-            box-shadow: 0 5px 15px rgba(108,92,231,0.15);
+            box-shadow: 0 5px 15px rgba(108,92,231,0.2);
         }
 
         .profile-avatar:hover {
@@ -1828,17 +1848,18 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-bottom: 2px;
         }
 
         .profile-name {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 18px;
             color: #333;
         }
 
         .profile-star {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             background: linear-gradient(135deg, #6C5CE7, #9b59b6);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
             animation: starPulse 2s ease-in-out infinite;
@@ -1852,34 +1873,33 @@
 
         .profile-nick {
             color: #6C5CE7;
-            font-size: 12px;
-            margin-top: 2px;
+            font-size: 13px;
         }
 
         .profile-bio {
             font-size: 12px;
             color: #666;
-            margin-top: 4px;
+            margin: 8px 0;
             line-height: 1.4;
             background: #f8faff;
-            padding: 8px 12px;
-            border-radius: 12px;
+            padding: 10px 14px;
+            border-radius: 16px;
             border-left: 3px solid #6C5CE7;
         }
 
         .profile-traits {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 8px;
+            gap: 8px;
+            margin: 8px 0;
         }
 
         .profile-trait {
             background: linear-gradient(135deg, #6C5CE7, #9b59b6);
             color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 10px;
+            padding: 5px 12px;
+            border-radius: 25px;
+            font-size: 11px;
             font-weight: 500;
             animation: traitPulse 2s ease-in-out infinite;
         }
@@ -1910,33 +1930,33 @@
 
         .stat-value {
             font-weight: 600;
-            font-size: 15px;
+            font-size: 16px;
             color: #333;
             transition: 0.2s;
         }
 
         .stat-label {
-            font-size: 10px;
+            font-size: 11px;
             color: #999;
             margin-top: 2px;
         }
 
         .profile-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .profile-btn {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: none;
-            border-radius: 25px;
-            font-weight: 500;
+            border-radius: 30px;
+            font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
             background: #f0f0f0;
             color: #333;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .profile-btn.primary {
@@ -1955,20 +1975,23 @@
             transform: translateY(-1px);
         }
 
-        /* Редактирование черт характера */
+        /* Редактирование черт характера - РАСШИРЕНО */
         .traits-edit {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin: 12px 0;
+            gap: 10px;
+            margin: 15px 0;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 5px;
         }
 
         .trait-option {
             background: #f0f0f0;
             color: #555;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -1984,10 +2007,12 @@
             color: white;
         }
 
+        /* Сетка постов - ИСПРАВЛЕНО */
         .posts-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2px;
+            margin-top: 8px;
         }
 
         .post-thumb {
@@ -2018,22 +2043,24 @@
             justify-content: center;
             background: #f0f0f0;
             color: #333;
-            font-size: 16px;
+            font-size: 20px;
         }
 
+        /* Кнопки редактирования и выхода - ОБНОВЛЕНЫ */
         .settings-row {
             display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 16px 0;
             border-top: 1px solid rgba(0,0,0,0.05);
             margin-top: auto;
         }
 
-        .settings-icon, .logout-icon {
-            width: 40px;
-            height: 40px;
+        .settings-icon {
+            width: 44px;
+            height: 44px;
             background: white;
-            border-radius: 20px;
+            border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2044,23 +2071,45 @@
             border: 1px solid rgba(0,0,0,0.02);
         }
 
+        .settings-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+        }
+
         .settings-icon:hover {
             background: #6C5CE7;
             color: white;
             transform: scale(1.05);
         }
 
+        .logout-icon {
+            width: 44px;
+            height: 44px;
+            background: #ffeeee;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #FF6B6B;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255,107,107,0.2);
+        }
+
+        .logout-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+        }
+
         .logout-icon:hover {
             background: #FF6B6B;
             color: white;
             transform: scale(1.05);
-        }
-
-        .settings-icon svg, .logout-icon svg {
-            width: 20px;
-            height: 20px;
-            stroke: currentColor;
-            fill: none;
         }
 
         /* Панель уведомлений */
@@ -2325,8 +2374,8 @@
         }
 
         .subscription-avatar {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 4px;
             background-size: cover;
             background-position: center;
@@ -2338,7 +2387,7 @@
 
         .subscription-name {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .subscription-name:hover {
@@ -2346,23 +2395,23 @@
         }
 
         .subscription-nick {
-            font-size: 11px;
+            font-size: 12px;
             color: #6C5CE7;
-            margin-top: 1px;
+            margin-top: 2px;
         }
 
         .subscription-status {
-            font-size: 10px;
+            font-size: 11px;
             color: #999;
-            margin-top: 1px;
+            margin-top: 2px;
         }
 
         .subscription-btn {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: #f0f0f0;
             border: none;
-            border-radius: 16px;
+            border-radius: 18px;
             color: #555;
             cursor: pointer;
         }
@@ -2521,7 +2570,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v3.0</span></div>
+            <div class="logo">RealReel <span class="version">v3.1</span></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
@@ -2564,7 +2613,7 @@
             <input type="text" class="modal-input" id="editLastName" placeholder="Фамилия">
             <input type="text" class="modal-input" id="editNickname" placeholder="Никнейм">
             <textarea class="modal-input" id="editBio" placeholder="О себе (биография)" rows="2"></textarea>
-            <div class="modal-title" style="font-size: 14px; margin-top: 10px;">Черты характера (выберите 3):</div>
+            <div class="modal-title" style="font-size: 14px; margin-top: 10px;">Черты характера (выберите до 5):</div>
             <div class="traits-edit" id="traitsEdit">
                 <span class="trait-option" data-trait="добрый">добрый</span>
                 <span class="trait-option" data-trait="веселый">веселый</span>
@@ -2574,6 +2623,23 @@
                 <span class="trait-option" data-trait="романтичный">романтичный</span>
                 <span class="trait-option" data-trait="честный">честный</span>
                 <span class="trait-option" data-trait="отзывчивый">отзывчивый</span>
+                <span class="trait-option" data-trait="умный">умный</span>
+                <span class="trait-option" data-trait="смелый">смелый</span>
+                <span class="trait-option" data-trait="талантливый">талантливый</span>
+                <span class="trait-option" data-trait="мечтательный">мечтательный</span>
+                <span class="trait-option" data-trait="целеустремленный">целеустремленный</span>
+                <span class="trait-option" data-trait="жизнерадостный">жизнерадостный</span>
+                <span class="trait-option" data-trait="общительный">общительный</span>
+                <span class="trait-option" data-trait="заботливый">заботливый</span>
+                <span class="trait-option" data-trait="искренний">искренний</span>
+                <span class="trait-option" data-trait="надежный">надежный</span>
+                <span class="trait-option" data-trait="оптимистичный">оптимистичный</span>
+                <span class="trait-option" data-trait="страстный">страстный</span>
+                <span class="trait-option" data-trait="чувствительный">чувствительный</span>
+                <span class="trait-option" data-trait="творческий">творческий</span>
+                <span class="trait-option" data-trait="любознательный">любознательный</span>
+                <span class="trait-option" data-trait="щедрый">щедрый</span>
+                <span class="trait-option" data-trait="терпеливый">терпеливый</span>
             </div>
             <div class="modal-actions" style="margin-top: 15px;">
                 <button class="modal-btn save" id="saveProfileBtn">Сохранить</button>
@@ -2692,9 +2758,7 @@
                         <input type="text" class="search-input" id="searchInput" placeholder="Поиск пользователей...">
                         <button class="search-btn" id="searchBtn">Найти</button>
                     </div>
-                    <div id="searchResults">
-                        <!-- Результаты поиска будут здесь -->
-                    </div>
+                    <div id="searchResults"></div>
                     <div class="search-suggestions-title">Рекомендации для вас</div>
                     <div id="recommendationsList"></div>
                 </div>
@@ -2710,9 +2774,7 @@
                         <div class="passport-stiq-title">PASSPORT STIQ</div>
                         <div class="passport-stiq-subtitle">Твоя коллекция виз</div>
                     </div>
-                    <div class="visa-collection" id="visaCollection">
-                        <!-- Визы будут добавляться сюда -->
-                    </div>
+                    <div class="visa-collection" id="visaCollection"></div>
                 </div>
             </div>
 
@@ -2912,11 +2974,12 @@
             { name: 'Собор Святого Семейства', city: 'Барселона', country: 'Испания', icon: '⛪' },
             { name: 'Красная площадь', city: 'Москва', country: 'Россия', icon: '🟥' },
             { name: 'Биг-Бен', city: 'Лондон', country: 'Великобритания', icon: '⏰' },
-                        { name: 'Сикстинская капелла', city: 'Ватикан', country: 'Италия', icon: '🎨' },
+            { name: 'Сикстинская капелла', city: 'Ватикан', country: 'Италия', icon: '🎨' },
             { name: 'Голливуд', city: 'Лос-Анджелес', country: 'США', icon: '🎬' },
             { name: 'Акрополь', city: 'Афины', country: 'Греция', icon: '🏛️' },
             { name: 'Мачу-Пикчу', city: 'Куско', country: 'Перу', icon: '🏔️' },
-            { name: 'Фудзияма', city: 'Токио', country: 'Япония', icon: '🗻' }
+            { name: 'Фудзияма', city: 'Токио', country: 'Япония', icon: '🗻' },
+            { name: 'Сиднейская опера', city: 'Сидней', country: 'Австралия', icon: '🎭' }
         ];
 
         // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
@@ -2961,7 +3024,7 @@
             return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
         }
 
-        // ========== PASSPORT STIQ 3.0 ==========
+        // ========== PASSPORT STIQ 3.1 ==========
         function generateVisaFromPlace(placeName) {
             const place = famousPlaces.find(p => p.name === placeName) || 
                          famousPlaces[Math.floor(Math.random() * famousPlaces.length)];
@@ -2985,10 +3048,10 @@
 
         function showPassportStiQ(placeName = null) {
             const container = document.getElementById('chatRoomMessages');
+            if (!container) return;
             
             const visa = generateVisaFromPlace(placeName);
             
-            // Добавляем в коллекцию
             visaCollection.unshift(visa);
             updateVisaCollection();
             
@@ -3110,7 +3173,6 @@
                 currentUser.set('lastSeen', new Date());
                 await currentUser.save();
                 
-                // Загружаем черты характера
                 userTraits = currentUser.get('traits') || [];
                 
                 toggleAuthNav(false);
@@ -3322,7 +3384,6 @@
                 
                 await post.save();
                 
-                // Проверяем наличие места в тексте поста
                 checkForPlaceInPost(text);
                 
                 return { success: true };
@@ -3667,7 +3728,6 @@
                 
                 const users = await query.find();
                 
-                // Сортируем по совпадению черт характера
                 return users.sort((a, b) => {
                     const aTraits = a.get('traits') || [];
                     const bTraits = b.get('traits') || [];
@@ -3685,9 +3745,11 @@
         async function updateRecommendations() {
             const recommendations = await getRecommendations();
             const list = document.getElementById('recommendationsList');
+            if (!list) return;
             
             list.innerHTML = recommendations.map(user => {
-                const matchCount = (user.get('traits') || []).filter(t => userTraits.includes(t)).length;
+                const userTraits = user.get('traits') || [];
+                const matchCount = userTraits.filter(t => userTraits.includes(t)).length;
                 const matchPercent = matchCount > 0 ? `${matchCount} совпадений` : '';
                 
                 return `
@@ -3699,6 +3761,11 @@
                             <div class="user-nick">@${user.get('nickname') || ''}</div>
                             ${user.get('bio') ? `<div class="user-bio">${user.get('bio')}</div>` : ''}
                             ${matchPercent ? `<div class="user-match">✨ ${matchPercent}</div>` : ''}
+                            <div class="user-traits">
+                                ${userTraits.slice(0, 3).map(t => 
+                                    `<span class="user-trait">${t}</span>`
+                                ).join('')}
+                            </div>
                         </div>
                         <div class="user-actions">
                             <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
@@ -3780,7 +3847,6 @@
                         
                         if (!lastMessage) continue;
                         
-                        // Считаем непрочитанные сообщения
                         const unreadQuery = new Parse.Query('Message');
                         unreadQuery.equalTo('conversation', conv);
                         unreadQuery.notEqualTo('sender', currentUser);
@@ -3855,7 +3921,6 @@
                     await msg.save();
                 }
                 
-                // Обновляем бейджи
                 delete unreadMessages[conversationId];
                 updateChatBadges();
                 
@@ -3902,7 +3967,6 @@
                     container.scrollTop = scrollPosition;
                 }
                 
-                // Отмечаем сообщения как прочитанные
                 await markMessagesAsSeen(conversationId);
                 
             } catch (error) {
@@ -3932,7 +3996,6 @@
                         showPassportStiQ();
                     }
                     
-                    // Отмечаем сообщение как прочитанное если открыт чат
                     markMessagesAsSeen(conversationId);
                 }
             });
@@ -4869,7 +4932,6 @@
             }
         });
 
-        // Редактирование профиля
         document.getElementById('editProfileBtn').addEventListener('click', () => {
             const user = getCurrentUser();
             if (!user) return;
@@ -4879,7 +4941,6 @@
             document.getElementById('editNickname').value = user.get('nickname') || '';
             document.getElementById('editBio').value = user.get('bio') || '';
             
-            // Отмечаем выбранные черты
             const currentTraits = user.get('traits') || [];
             document.querySelectorAll('.trait-option').forEach(opt => {
                 if (currentTraits.includes(opt.dataset.trait)) {
@@ -4892,10 +4953,16 @@
             document.getElementById('editProfileModal').classList.add('active');
         });
 
-        // Выбор черт характера
         document.querySelectorAll('.trait-option').forEach(opt => {
             opt.addEventListener('click', function() {
-                this.classList.toggle('selected');
+                const selectedCount = document.querySelectorAll('.trait-option.selected').length;
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                } else if (selectedCount < 5) {
+                    this.classList.add('selected');
+                } else {
+                    alert('Можно выбрать не более 5 черт характера');
+                }
             });
         });
 
@@ -4969,4 +5036,3 @@
     </script>
 </body>
 </html>
-                
