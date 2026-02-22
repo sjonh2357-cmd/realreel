@@ -37,7 +37,7 @@
             backdrop-filter: blur(10px);
         }
 
-        /* СОВРЕМЕННЫЙ СТИЛЬ - glassmorphism + неон */
+        /* Верхняя навигация */
         .top-nav {
             padding: 16px 20px;
             display: flex;
@@ -161,7 +161,7 @@
             background: #f8faff;
         }
 
-        /* СОВРЕМЕННАЯ нижняя навигация */
+        /* Нижняя навигация */
         .bottom-nav {
             display: flex;
             align-items: center;
@@ -236,7 +236,7 @@
             border: 2px solid white;
         }
 
-        /* Экран авторизации с морем (обновленный) */
+        /* Экран авторизации с морем */
         .auth-screen {
             height: 100%;
             display: flex;
@@ -412,7 +412,7 @@
             animation: spin 1s linear infinite;
         }
 
-        /* Модальное окно (обновленный стиль) */
+        /* Модальное окно */
         .modal {
             position: fixed;
             top: 50%;
@@ -509,7 +509,7 @@
             margin-top: 15px;
         }
 
-        /* Истории (обновленный стиль) */
+        /* Истории */
         .stories {
             display: flex;
             gap: 16px;
@@ -772,7 +772,7 @@
             font-size: 10px;
         }
 
-        /* Посты (обновленный стиль) */
+        /* Посты */
         .posts {
             display: flex;
             flex-direction: column;
@@ -1011,7 +1011,7 @@
             color: #666;
         }
 
-        /* Поиск (обновленный стиль) */
+        /* Поиск */
         .search-screen {
             padding: 16px;
         }
@@ -1139,7 +1139,7 @@
             fill: none;
         }
 
-        /* Чаты (только общие, без запросов) */
+        /* Чаты (только общие) */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -1232,7 +1232,7 @@
             color: #999;
         }
 
-        /* Комната чата (обновленная) */
+        /* Комната чата */
         .chat-room {
             display: flex;
             flex-direction: column;
@@ -1534,7 +1534,7 @@
             fill: none;
         }
 
-        /* Профиль (обновленный стиль) */
+        /* Профиль */
         .profile-screen {
             display: flex;
             flex-direction: column;
@@ -1727,7 +1727,7 @@
             fill: none;
         }
 
-        /* Панель уведомлений (обновленная) */
+        /* Панель уведомлений */
         .notifications-panel {
             position: fixed;
             top: 70px;
@@ -1789,7 +1789,7 @@
             margin-top: 4px;
         }
 
-        /* StiQ экран (бывший Reels) */
+        /* StiQ экран */
         .stiq-screen {
             display: flex;
             align-items: center;
@@ -1799,6 +1799,169 @@
             font-size: 16px;
             background: linear-gradient(135deg, #6C5CE710, #A463F510);
             border-radius: 30px;
+        }
+
+        /* Модалка подписок */
+        .subscriptions-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 200;
+            display: none;
+            flex-direction: column;
+        }
+
+        .subscriptions-modal.active {
+            display: flex;
+        }
+
+        .subscriptions-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .subscriptions-back {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #555;
+            transition: 0.2s;
+        }
+
+        .subscriptions-back:hover {
+            background: #6C5CE7;
+            color: white;
+        }
+
+        .subscriptions-tabs {
+            display: flex;
+            gap: 16px;
+            padding: 0 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .subscriptions-tab {
+            padding: 12px 0;
+            cursor: pointer;
+            color: #999;
+            border-bottom: 2px solid transparent;
+        }
+
+        .subscriptions-tab.active {
+            color: #6C5CE7;
+            border-bottom-color: #6C5CE7;
+        }
+
+        .subscriptions-search {
+            padding: 12px 16px;
+        }
+
+        .subscriptions-search-box {
+            display: flex;
+            gap: 8px;
+            background: #f5f5f5;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .subscriptions-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .subscriptions-search-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: #555;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .subscriptions-search-btn:hover {
+            background: #6C5CE7;
+            color: white;
+        }
+
+        .subscriptions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .subscription-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 16px;
+            cursor: pointer;
+        }
+
+        .subscription-item:hover {
+            background: #f5f5f5;
+        }
+
+        .subscription-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 4px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .subscription-info {
+            flex: 1;
+        }
+
+        .subscription-name {
+            font-weight: 600;
+        }
+
+        .subscription-name:hover {
+            color: #6C5CE7;
+        }
+
+        .subscription-nick {
+            font-size: 12px;
+            color: #6C5CE7;
+        }
+
+        .subscription-status {
+            font-size: 11px;
+            color: #999;
+        }
+
+        .subscription-btn {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 18px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .subscription-btn:hover {
+            background: #6C5CE7;
+            color: white;
         }
 
         /* Аватарки */
@@ -1905,6 +2068,25 @@
             <div class="modal-success" id="resetSuccess" style="display: none;">
                 Инструкция отправлена на почту
             </div>
+        </div>
+
+        <!-- Модалка подписок (ВАЖНО: вернул обратно!) -->
+        <div class="subscriptions-modal" id="subscriptionsModal">
+            <div class="subscriptions-header">
+                <div class="subscriptions-back" onclick="closeSubscriptions()">←</div>
+                <h3 id="subscriptionsTitle">Подписчики</h3>
+            </div>
+            <div class="subscriptions-tabs">
+                <div class="subscriptions-tab active" onclick="switchSubTab('followers')">Подписчики</div>
+                <div class="subscriptions-tab" onclick="switchSubTab('following')">Подписки</div>
+            </div>
+            <div class="subscriptions-search">
+                <div class="subscriptions-search-box">
+                    <input type="text" class="subscriptions-search-input" id="subscriptionsSearchInput" placeholder="Поиск...">
+                    <button class="subscriptions-search-btn" id="subscriptionsSearchBtn">Найти</button>
+                </div>
+            </div>
+            <div class="subscriptions-list" id="subscriptionsList"></div>
         </div>
 
         <!-- Просмотр фото -->
@@ -2101,7 +2283,7 @@
             </div>
         </div>
 
-        <!-- Нижняя навигация (обновленная) -->
+        <!-- Нижняя навигация -->
         <div class="bottom-nav" id="bottomNav">
             <div class="nav-item active" onclick="navigateTo('homeScreen', this)">
                 <svg viewBox="0 0 24 24">
@@ -2323,7 +2505,7 @@
 
         // ========== УВЕДОМЛЕНИЯ ==========
         function addNotification(type, title, message, fromUser = null) {
-            const allowedTypes = ['request', 'like', 'comment', 'story_reply'];
+            const allowedTypes = ['like', 'comment', 'story_reply'];
             
             if (!allowedTypes.includes(type)) return;
             
@@ -2822,7 +3004,7 @@
             }
         }
 
-        // ========== ЧАТЫ (только общие, без запросов) ==========
+        // ========== ЧАТЫ ==========
         async function getOrCreateConversation(otherUserId) {
             const currentUser = getCurrentUser();
             if (!currentUser) return null;
@@ -2958,7 +3140,6 @@
                 const messages = await query.find();
                 const container = document.getElementById('chatRoomMessages');
                 
-                // Сохраняем индикатор печатает, если он есть
                 const typingIndicator = container.querySelector('.typing-indicator');
                 
                 container.innerHTML = '';
@@ -2971,7 +3152,6 @@
                     }
                 });
                 
-                // Возвращаем индикатор, если он был
                 if (typingIndicator && isTyping) {
                     container.appendChild(typingIndicator);
                 }
@@ -3048,7 +3228,6 @@
             
             container.scrollTop = container.scrollHeight;
             
-            // Скрываем через 3 секунды бездействия
             if (typingTimeout) clearTimeout(typingTimeout);
             typingTimeout = setTimeout(() => {
                 const ind = container.querySelector('.typing-indicator');
@@ -3062,7 +3241,6 @@
             if (indicator) indicator.remove();
         }
 
-        // Функция для автообновления чата
         function startChatAutoUpdate() {
             if (chatUpdateInterval) {
                 clearInterval(chatUpdateInterval);
@@ -3125,7 +3303,7 @@
             }
         };
 
-        // ========== УПРАВЛЕНИЕ ЧАТАМИ (только общие) ==========
+        // ========== УПРАВЛЕНИЕ ЧАТАМИ ==========
         async function updateChatList() {
             const conversations = await getUserConversations();
             
@@ -3859,7 +4037,6 @@
             const isSubscribed = await checkIfSubscribed(currentOtherUserId, getCurrentUser().id);
             
             if (!isSubscribed) {
-                const otherUser = await new Parse.Query('_User').get(currentOtherUserId);
                 alert('Пользователь не подписан на вас');
                 input.value = '';
                 closeChatRoom();
