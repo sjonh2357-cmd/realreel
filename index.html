@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · v2.0</title>
+    <title>RealReel · v2.1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -63,6 +63,7 @@
             font-size: 12px;
             color: #999;
             font-weight: 500;
+            margin-left: 4px;
         }
 
         .profile-name {
@@ -602,16 +603,18 @@
         .progress-bar {
             width: 100%;
             height: 4px;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.2);
             border-radius: 2px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: #6aa9ff;
+            background: linear-gradient(90deg, #6aa9ff, #9f6eff);
             width: 0%;
             transition: width 5s linear;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(106,169,255,0.5);
         }
 
         .story-footer {
@@ -664,6 +667,58 @@
             height: 24px;
             stroke: white;
             fill: none;
+        }
+
+        /* Список просмотров сторис */
+        .story-views {
+            padding: 16px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 16px;
+            margin: 16px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .story-views.hidden {
+            display: none;
+        }
+
+        .story-views-title {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .story-view-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .story-view-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .story-view-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-view-name {
+            color: white;
+            font-weight: 500;
+        }
+
+        .story-view-time {
+            margin-left: auto;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
         }
 
         /* Посты */
@@ -1782,7 +1837,7 @@
             padding: 16px;
         }
 
-        /* Модалка подписок */
+        /* Модалка подписок с поиском */
         .subscriptions-modal {
             position: fixed;
             top: 0;
@@ -1842,6 +1897,41 @@
         .subscriptions-tab.active {
             color: #6aa9ff;
             border-bottom-color: #6aa9ff;
+        }
+
+        .subscriptions-search {
+            padding: 12px 16px;
+        }
+
+        .subscriptions-search-box {
+            display: flex;
+            gap: 8px;
+            background: #f5f5f5;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .subscriptions-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .subscriptions-search-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: #555;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .subscriptions-search-btn:hover {
+            background: #6aa9ff;
+            color: white;
         }
 
         .subscriptions-list {
@@ -1985,14 +2075,6 @@
         .avatar-3 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat3&backgroundColor=a0d0c0'); }
         .avatar-4 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat4&backgroundColor=d0c0a0'); }
 
-        /* Версия */
-        .version-badge {
-            font-size: 12px;
-            color: #999;
-            font-weight: 500;
-            margin-left: 8px;
-        }
-
         /* Скрытые элементы */
         .hidden {
             display: none !important;
@@ -2026,7 +2108,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v2.0</span></div>
+            <div class="logo">RealReel <span class="version">v2.1</span></div>
             <div class="profile-name" id="profileName"></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
@@ -2133,9 +2215,13 @@
                     </svg>
                 </button>
             </div>
+            <div class="story-views hidden" id="storyViews">
+                <div class="story-views-title">Просмотры</div>
+                <div id="storyViewsList"></div>
+            </div>
         </div>
 
-        <!-- Модальное окно подписок -->
+        <!-- Модальное окно подписок с поиском -->
         <div class="subscriptions-modal" id="subscriptionsModal">
             <div class="subscriptions-header">
                 <div class="subscriptions-back" onclick="closeSubscriptions()">←</div>
@@ -2144,6 +2230,12 @@
             <div class="subscriptions-tabs">
                 <div class="subscriptions-tab active" onclick="switchSubTab('followers')">Подписчики</div>
                 <div class="subscriptions-tab" onclick="switchSubTab('following')">Подписки</div>
+            </div>
+            <div class="subscriptions-search">
+                <div class="subscriptions-search-box">
+                    <input type="text" class="subscriptions-search-input" id="subscriptionsSearchInput" placeholder="Поиск...">
+                    <button class="subscriptions-search-btn" id="subscriptionsSearchBtn">Найти</button>
+                </div>
             </div>
             <div class="subscriptions-list" id="subscriptionsList"></div>
         </div>
@@ -2341,6 +2433,7 @@
 
     <!-- Back4App -->
     <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
         // ========== НАСТРОЙКИ BACK4APP ==========
         const APP_ID = 'CM3xa4Y0qWL6FdoMdzONdCQ5k3Tx5saPZ5tyDOwA';
@@ -2349,6 +2442,12 @@
         
         Parse.initialize(APP_ID, JS_KEY);
         Parse.serverURL = SERVER_URL;
+
+        // ========== ИНИЦИАЛИЗАЦИЯ PUSHER ==========
+        const pusher = new Pusher('55cad6db51c45c8a66db', { 
+            cluster: 'eu', 
+            forceTLS: true 
+        });
 
         // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
         let currentChannel = null;
@@ -2362,6 +2461,7 @@
         let unreadMessages = {};
         let messageRequests = [];
         let currentChatTab = 'all';
+        let storyViews = [];
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -2527,7 +2627,7 @@
 
         // ========== УВЕДОМЛЕНИЯ ==========
         function addNotification(type, title, message, fromUser = null) {
-            const allowedTypes = ['request', 'comment_like', 'story_reply'];
+            const allowedTypes = ['request', 'like', 'comment', 'story_reply'];
             
             if (!allowedTypes.includes(type)) return;
             
@@ -2745,6 +2845,14 @@
                 post.increment('likes');
                 await post.save();
                 
+                // Уведомление автору поста
+                const author = post.get('author');
+                if (author.id !== userId) {
+                    const user = getCurrentUser();
+                    addNotification('like', '❤️ Новый лайк', 
+                        `${user.get('firstName')} лайкнул ваш пост`, user);
+                }
+                
                 return true;
             } catch (error) {
                 return false;
@@ -2768,6 +2876,14 @@
                 
                 post.set('comments', comments);
                 await post.save();
+                
+                // Уведомление автору поста
+                const author = post.get('author');
+                if (author.id !== user.id) {
+                    addNotification('comment', '💬 Новый комментарий', 
+                        `${user.get('firstName')} прокомментировал ваш пост: "${text}"`, user);
+                }
+                
                 return true;
             } catch (error) {
                 return false;
@@ -2792,6 +2908,7 @@
                 const Story = Parse.Object.extend('Story');
                 const story = new Story();
                 story.set('author', getCurrentUser());
+                story.set('views', []);
                 
                 const parseFile = new Parse.File('story.jpg', imageFile);
                 await parseFile.save();
@@ -2809,6 +2926,7 @@
                 const Story = Parse.Object.extend('Story');
                 const query = new Parse.Query(Story);
                 query.include('author');
+                query.include('views.user');
                 query.descending('createdAt');
                 const stories = await query.find();
                 
@@ -2833,8 +2951,37 @@
                     className: '_User',
                     objectId: userId
                 });
+                query.include('views.user');
                 query.descending('createdAt');
                 return await query.find();
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function addStoryView(storyId, userId) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                const story = await query.get(storyId);
+                
+                const views = story.get('views') || [];
+                const alreadyViewed = views.some(v => v.user.id === userId);
+                
+                if (!alreadyViewed) {
+                    views.push({
+                        user: {
+                            __type: 'Pointer',
+                            className: '_User',
+                            objectId: userId
+                        },
+                        viewedAt: new Date()
+                    });
+                    story.set('views', views);
+                    await story.save();
+                }
+                
+                return views;
             } catch (error) {
                 return [];
             }
@@ -3643,10 +3790,23 @@
             document.getElementById('subscriptionsTitle').textContent = 
                 type === 'followers' ? 'Подписчики' : 'Подписки';
             
+            await updateSubscriptionsList(type, userId);
+            document.getElementById('subscriptionsModal').classList.add('active');
+        };
+
+        async function updateSubscriptionsList(type, userId, searchQuery = '') {
             const list = document.getElementById('subscriptionsList');
             const users = type === 'followers' ? await getFollowers(userId) : await getFollowing(userId);
             
-            list.innerHTML = users.map(user => `
+            const filteredUsers = searchQuery ? 
+                users.filter(u => {
+                    const name = `${u.get('firstName')} ${u.get('lastName')}`.toLowerCase();
+                    const nick = u.get('nickname')?.toLowerCase() || '';
+                    return name.includes(searchQuery.toLowerCase()) || 
+                           nick.includes(searchQuery.toLowerCase());
+                }) : users;
+            
+            list.innerHTML = filteredUsers.map(user => `
                 <div class="subscription-item" onclick="openUserProfile('${user.id}')">
                     <div class="subscription-avatar ${getAvatarClass(user)}" 
                          style="${getAvatarStyle(user)}"></div>
@@ -3662,18 +3822,34 @@
                     </button>
                 </div>
             `).join('') || '<p style="opacity:0.5; text-align:center;">Нет пользователей</p>';
+        }
+
+        document.getElementById('subscriptionsSearchBtn').addEventListener('click', async () => {
+            const searchInput = document.getElementById('subscriptionsSearchInput');
+            const query = searchInput.value.trim();
+            const activeTab = document.querySelector('.subscriptions-tab.active').textContent;
+            const type = activeTab === 'Подписчики' ? 'followers' : 'following';
+            const userId = currentProfileUserId || getCurrentUser().id;
             
-            document.getElementById('subscriptionsModal').classList.add('active');
-        };
+            await updateSubscriptionsList(type, userId, query);
+        });
+
+        document.getElementById('subscriptionsSearchInput').addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('subscriptionsSearchBtn').click();
+            }
+        });
 
         window.closeSubscriptions = function() {
             document.getElementById('subscriptionsModal').classList.remove('active');
+            document.getElementById('subscriptionsSearchInput').value = '';
         };
 
         window.switchSubTab = function(tab) {
             document.querySelectorAll('.subscriptions-tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
-            showSubscriptions(tab);
+            const userId = currentProfileUserId || getCurrentUser().id;
+            updateSubscriptionsList(tab, userId);
         };
 
         window.togglePostMenu = function(postId) {
@@ -3749,6 +3925,12 @@
             
             const user = await new Parse.Query('_User').get(userId);
             currentStoryUser = { user, stories, index: 0 };
+            
+            // Добавляем просмотр
+            if (userId !== getCurrentUser().id) {
+                await addStoryView(stories[0].id, getCurrentUser().id);
+            }
+            
             showStory(0);
         };
 
@@ -3765,6 +3947,23 @@
             document.getElementById('storyImage').style.backgroundImage = 
                 `url('${story.get('image').url()}')`;
             document.getElementById('storyViewer').classList.add('active');
+            
+            // Показываем просмотры если это своя история
+            if (user.id === getCurrentUser().id) {
+                const views = story.get('views') || [];
+                const viewsList = document.getElementById('storyViewsList');
+                viewsList.innerHTML = views.map(v => `
+                    <div class="story-view-item" onclick="openUserProfile('${v.user.id}')">
+                        <div class="story-view-avatar ${getAvatarClass(v.user)}" 
+                             style="${getAvatarStyle(v.user)}"></div>
+                        <div class="story-view-name">${v.user.get('firstName')} ${v.user.get('lastName')}</div>
+                        <div class="story-view-time">${formatTime(v.viewedAt)}</div>
+                    </div>
+                `).join('');
+                document.getElementById('storyViews').classList.remove('hidden');
+            } else {
+                document.getElementById('storyViews').classList.add('hidden');
+            }
             
             const progress = document.getElementById('storyProgress');
             progress.style.width = '0%';
@@ -3997,6 +4196,15 @@
             if (result.success) {
                 input.value = '';
                 addMessageToChat(text, true, new Date(), result.messageId);
+                
+                if (currentChannel) {
+                    currentChannel.trigger('client-new-message', {
+                        text: text,
+                        senderId: getCurrentUser().id,
+                        timestamp: new Date(),
+                        messageId: result.messageId
+                    });
+                }
             }
         });
 
