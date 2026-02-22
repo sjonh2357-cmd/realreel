@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · Чаты и запросы</title>
+    <title>RealReel · Instagram Style</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -44,6 +44,11 @@
             justify-content: space-between;
             border-bottom: 1px solid #eee;
             background: white;
+            transition: 0.3s;
+        }
+
+        .top-nav.hidden {
+            display: none;
         }
 
         .logo {
@@ -151,6 +156,11 @@
             padding: 8px 0;
             border-top: 1px solid #eee;
             background: white;
+            transition: 0.3s;
+        }
+
+        .bottom-nav.hidden {
+            display: none;
         }
 
         .nav-item {
@@ -204,14 +214,32 @@
             border: 2px solid white;
         }
 
-        /* Экран авторизации */
+        /* Экран авторизации с морем */
         .auth-screen {
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .auth-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7);
+            animation: zoom 20s infinite alternate;
+        }
+
+        @keyframes zoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
         }
 
         .auth-form {
@@ -221,6 +249,8 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
         }
 
         .auth-title {
@@ -258,21 +288,62 @@
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
+            position: relative;
         }
 
         .auth-btn:hover {
             background: #5a99ee;
         }
 
-        .auth-switch {
-            text-align: center;
-            margin-top: 12px;
-            color: #666;
-            font-size: 14px;
-            cursor: pointer;
+        .auth-btn.loading {
+            opacity: 0.7;
+            pointer-events: none;
         }
 
-        .auth-switch:hover {
+        .auth-btn .btn-text {
+            transition: 0.2s;
+        }
+
+        .auth-btn.loading .btn-text {
+            opacity: 0;
+        }
+
+        .auth-btn .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        .auth-btn.loading .spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        .auth-link {
+            color: #666;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .auth-link:hover {
             color: #6aa9ff;
         }
 
@@ -283,7 +354,120 @@
             margin-bottom: 10px;
         }
 
-        /* Истории */
+        /* Загрузочный экран */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f0f0f0;
+            border-top-color: #6aa9ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Модальное окно */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 200;
+            display: none;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        .modal-input:focus {
+            border-color: #6aa9ff;
+        }
+
+        .modal-file {
+            padding: 12px;
+            border: 1px dashed #6aa9ff;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 16px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        .modal-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .modal-btn.save {
+            background: #6aa9ff;
+            color: white;
+        }
+
+        .modal-btn.save:hover {
+            background: #5a99ee;
+        }
+
+        .modal-success {
+            color: #4CAF50;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Истории как в Instagram */
         .stories {
             display: flex;
             gap: 16px;
@@ -338,6 +522,131 @@
         .story-name {
             font-size: 12px;
             color: #333;
+        }
+
+        /* Просмотр сторис как в Instagram */
+        .story-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .story-viewer.active {
+            display: flex;
+        }
+
+        .story-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .story-header-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-header-name {
+            font-weight: 600;
+        }
+
+        .story-close {
+            margin-left: auto;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+        }
+
+        .story-image {
+            flex: 1;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 16px;
+        }
+
+        .story-progress {
+            padding: 16px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #6aa9ff;
+            width: 0%;
+            transition: width 5s linear;
+        }
+
+        .story-footer {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .story-input {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
+            color: white;
+            outline: none;
+        }
+
+        .story-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .story-send-btn {
+            width: 44px;
+            height: 44px;
+            background: #6aa9ff;
+            border: none;
+            border-radius: 22px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .story-like-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 22px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Посты */
@@ -421,10 +730,18 @@
             gap: 8px;
             cursor: pointer;
             border-radius: 12px;
+            color: #555;
         }
 
         .post-menu-item:hover {
             background: #f5f5f5;
+        }
+
+        .post-menu-item svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
         }
 
         .post-text {
@@ -468,6 +785,11 @@
         .post-action.liked svg {
             fill: #ff4444;
             stroke: #ff4444;
+        }
+
+        .post-action span {
+            min-width: 20px;
+            text-align: center;
         }
 
         .post-date {
@@ -587,6 +909,12 @@
             color: white;
         }
 
+        .search-results {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
         .user-card {
             display: flex;
             align-items: center;
@@ -595,7 +923,6 @@
             background: white;
             border-radius: 16px;
             border: 1px solid #eee;
-            margin-bottom: 8px;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -631,6 +958,11 @@
             color: #999;
         }
 
+        .user-actions {
+            display: flex;
+            gap: 8px;
+        }
+
         .user-btn {
             width: 36px;
             height: 36px;
@@ -640,6 +972,9 @@
             color: #555;
             cursor: pointer;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .user-btn:hover {
@@ -647,7 +982,14 @@
             color: white;
         }
 
-        /* ===== ЧАТЫ ===== */
+        .user-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        /* Чаты */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -698,7 +1040,6 @@
             border-radius: 12px;
         }
 
-        /* Список чатов */
         .chat-list {
             display: flex;
             flex-direction: column;
@@ -729,7 +1070,6 @@
             border-radius: 24px;
             background-size: cover;
             background-position: center;
-            position: relative;
         }
 
         .chat-info {
@@ -778,7 +1118,7 @@
             color: #999;
         }
 
-        /* Комната чата (отдельный экран) */
+        /* Комната чата как в Instagram */
         .chat-room {
             display: flex;
             flex-direction: column;
@@ -863,13 +1203,18 @@
             background: #fafafa;
         }
 
+        /* Стили сообщений как в Instagram */
         .message {
             display: flex;
-            max-width: 80%;
+            max-width: 70%;
             position: relative;
         }
 
-        .message.own {
+        .message.left {
+            align-self: flex-start;
+        }
+
+        .message.right {
             align-self: flex-end;
         }
 
@@ -879,14 +1224,13 @@
 
         .message-bubble {
             padding: 10px 14px;
-            background: white;
+            background: #f0f0f0;
             border-radius: 20px 20px 20px 8px;
             font-size: 14px;
             word-wrap: break-word;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .message.own .message-bubble {
+        .message.right .message-bubble {
             background: #6aa9ff;
             color: white;
             border-radius: 20px 20px 8px 20px;
@@ -900,7 +1244,7 @@
             padding: 0 4px;
         }
 
-        .message.own .message-time {
+        .message.right .message-time {
             color: #ccc;
         }
 
@@ -920,7 +1264,6 @@
             cursor: pointer;
             opacity: 0;
             transition: 0.2s;
-            z-index: 5;
         }
 
         .message:hover .message-delete {
@@ -938,7 +1281,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: none;
             border: 1px solid #eee;
-            z-index: 5;
         }
 
         .message.reacted .message-reaction {
@@ -1019,7 +1361,7 @@
             color: white;
         }
 
-        /* Запросы */
+        /* Запросы как в Instagram */
         .requests-list {
             display: flex;
             flex-direction: column;
@@ -1081,6 +1423,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 18px;
         }
 
         .request-btn.accept {
@@ -1178,6 +1521,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
+            background: #f0f0f0;
+            color: #333;
         }
 
         .profile-btn.primary {
@@ -1187,11 +1532,6 @@
 
         .profile-btn.primary:hover {
             background: #5a99ee;
-        }
-
-        .profile-btn.secondary {
-            background: #f0f0f0;
-            color: #333;
         }
 
         .profile-btn.secondary:hover {
@@ -1218,6 +1558,17 @@
             object-fit: cover;
         }
 
+        .post-thumb .text-thumb {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            color: #333;
+            font-size: 20px;
+        }
+
         .settings-row {
             display: flex;
             justify-content: space-between;
@@ -1226,7 +1577,7 @@
             margin-top: auto;
         }
 
-        .settings-icon {
+        .settings-icon, .logout-icon {
             width: 44px;
             height: 44px;
             background: #f0f0f0;
@@ -1239,158 +1590,24 @@
             transition: 0.2s;
         }
 
-        .settings-icon:hover {
+        .settings-icon:hover, .logout-icon:hover {
             background: #6aa9ff;
             color: white;
-        }
-
-        .logout-icon {
-            width: 44px;
-            height: 44px;
-            background: #ffeeee;
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #ff4444;
-            transition: 0.2s;
         }
 
         .logout-icon:hover {
-            background: #ffdddd;
-        }
-
-        /* Модальные окна */
-        .modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            background: white;
-            border-radius: 30px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            z-index: 200;
-            display: none;
-        }
-
-        .modal.active {
-            display: block;
-        }
-
-        .modal-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .modal-input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            outline: none;
-        }
-
-        .modal-input:focus {
-            border-color: #6aa9ff;
-        }
-
-        .modal-file {
-            padding: 12px;
-            border: 1px dashed #6aa9ff;
-            border-radius: 20px;
-            text-align: center;
-            cursor: pointer;
-            margin-bottom: 16px;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .modal-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .modal-btn.save {
-            background: #6aa9ff;
+            background: #ff4444;
             color: white;
         }
 
-        .modal-btn.save:hover {
-            background: #5a99ee;
+        .settings-icon svg, .logout-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
         }
 
-        .modal-btn.cancel {
-            background: #f0f0f0;
-        }
-
-        .modal-btn.cancel:hover {
-            background: #e0e0e0;
-        }
-
-        /* Просмотр фото */
-        .photo-viewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .photo-viewer.active {
-            display: flex;
-        }
-
-        .photo-header {
-            padding: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .photo-close {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .photo-image {
-            flex: 1;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 16px;
-        }
-
-        .photo-info {
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
-
-        /* Уведомления */
+        /* Панель уведомлений */
         .notifications-panel {
             position: fixed;
             top: 60px;
@@ -1476,122 +1693,18 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            color: #555;
+        }
+
+        .post-viewer-back:hover {
+            background: #6aa9ff;
+            color: white;
         }
 
         .post-viewer-content {
             flex: 1;
             overflow-y: auto;
             padding: 16px;
-        }
-
-        /* Просмотр сторис */
-        .story-viewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .story-viewer.active {
-            display: flex;
-        }
-
-        .story-header {
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: white;
-        }
-
-        .story-header-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .story-header-name {
-            font-weight: 600;
-        }
-
-        .story-close {
-            margin-left: auto;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .story-image {
-            flex: 1;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 16px;
-        }
-
-        .story-progress {
-            padding: 16px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #6aa9ff;
-            width: 0%;
-            transition: width 5s linear;
-        }
-
-        .story-actions {
-            display: flex;
-            gap: 12px;
-            padding: 16px;
-            justify-content: center;
-        }
-
-        .story-action-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            border-radius: 22px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .story-reply-input {
-            display: flex;
-            gap: 8px;
-            padding: 16px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 30px;
-            margin: 16px;
-        }
-
-        .story-reply-input input {
-            flex: 1;
-            padding: 12px 16px;
-            border: none;
-            border-radius: 20px;
-            outline: none;
         }
 
         /* Модалка подписок */
@@ -1628,6 +1741,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            color: #555;
+        }
+
+        .subscriptions-back:hover {
+            background: #6aa9ff;
+            color: white;
         }
 
         .subscriptions-tabs {
@@ -1709,6 +1828,65 @@
             color: white;
         }
 
+        /* Просмотр фото */
+        .photo-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .photo-viewer.active {
+            display: flex;
+        }
+
+        .photo-header {
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .photo-close {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .photo-image {
+            flex: 1;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 16px;
+        }
+
+        .photo-info {
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Reels экран */
+        .reels-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+        }
+
         /* Аватарки */
         .avatar-default {
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23cccccc"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
@@ -1720,15 +1898,6 @@
         .avatar-2 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat2&backgroundColor=c0a0d0'); }
         .avatar-3 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat3&backgroundColor=a0d0c0'); }
         .avatar-4 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat4&backgroundColor=d0c0a0'); }
-
-        /* Экран Reels */
-        .reels-screen {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: #999;
-        }
 
         /* Скрытые элементы */
         .hidden {
@@ -1748,12 +1917,21 @@
             display: flex;
             flex-direction: column;
         }
+
+        #chatRoomScreen.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div class="phone-frame">
+        <!-- Загрузочный экран -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="loading-spinner"></div>
+        </div>
+
         <!-- Верхняя навигация -->
-        <div class="top-nav">
+        <div class="top-nav" id="topNav">
             <div class="logo">RealReel</div>
             <div class="profile-name" id="profileName"></div>
             <div class="nav-icons">
@@ -1803,6 +1981,19 @@
             </div>
         </div>
 
+        <!-- Модальное окно восстановления пароля -->
+        <div class="modal" id="resetPasswordModal">
+            <div class="modal-title">Восстановление пароля</div>
+            <input type="email" class="modal-input" id="resetEmail" placeholder="Ваша почта">
+            <div class="modal-actions">
+                <button class="modal-btn save" id="resetPasswordBtn">Отправить</button>
+                <button class="modal-btn cancel" id="cancelResetBtn">Отмена</button>
+            </div>
+            <div class="modal-success" id="resetSuccess" style="display: none;">
+                Инструкция отправлена на почту
+            </div>
+        </div>
+
         <!-- Просмотр фото -->
         <div class="photo-viewer" id="photoViewer">
             <div class="photo-header">
@@ -1829,26 +2020,15 @@
                 <div class="story-close" onclick="closeStory()">✕</div>
             </div>
             <div class="story-image" id="storyImage"></div>
-            <div class="story-actions">
-                <button class="story-action-btn" onclick="likeStory()">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                </button>
-                <button class="story-action-btn" onclick="showReplyInput()">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="story-reply-input" id="storyReplyInput" style="display: none;">
-                <input type="text" id="storyReplyText" placeholder="Ответить...">
-                <button class="story-action-btn" onclick="sendStoryReply()">➤</button>
-            </div>
             <div class="story-progress">
                 <div class="progress-bar">
                     <div class="progress-fill" id="storyProgress"></div>
                 </div>
+            </div>
+            <div class="story-footer">
+                <input type="text" class="story-input" id="storyReplyText" placeholder="Ответить...">
+                <button class="story-like-btn" onclick="likeStory()">❤️</button>
+                <button class="story-send-btn" onclick="sendStoryReply()">➤</button>
             </div>
         </div>
 
@@ -1865,18 +2045,36 @@
             <div class="subscriptions-list" id="subscriptionsList"></div>
         </div>
 
+        <!-- Панель реакций -->
+        <div class="reaction-panel" id="reactionPanel">
+            <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
+            <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
+            <div class="reaction-emoji" onclick="addReaction('😂')">😂</div>
+            <div class="reaction-emoji" onclick="addReaction('😮')">😮</div>
+            <div class="reaction-emoji" onclick="addReaction('😢')">😢</div>
+            <div class="reaction-emoji" onclick="addReaction('🔥')">🔥</div>
+            <div class="reaction-emoji" onclick="addReaction('🎉')">🎉</div>
+        </div>
+
         <!-- Контентные экраны -->
         <div class="content" id="content">
-            <!-- Авторизация -->
+            <!-- Авторизация с морем -->
             <div class="screen active" id="authScreen">
                 <div class="auth-screen">
+                    <div class="auth-bg"></div>
                     <div class="auth-form">
                         <div class="auth-title" id="authTitle">Вход</div>
                         <input type="email" class="auth-input" id="authEmail" placeholder="Почта">
                         <input type="password" class="auth-input" id="authPassword" placeholder="Пароль">
                         <div class="auth-error" id="authError"></div>
-                        <button class="auth-btn" id="authActionBtn">Войти</button>
-                        <div class="auth-switch" id="authSwitch">Нет аккаунта? Зарегистрироваться</div>
+                        <button class="auth-btn" id="authActionBtn">
+                            <span class="btn-text">Войти</span>
+                            <span class="spinner"></span>
+                        </button>
+                        <div class="auth-links">
+                            <span class="auth-link" id="authSwitch">Регистрация</span>
+                            <span class="auth-link" id="forgotPasswordLink">Забыли пароль?</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1905,7 +2103,7 @@
                 </div>
             </div>
 
-            <!-- Чаты (основной экран со списком) -->
+            <!-- Чаты (список) -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
                     <div class="chat-tabs">
@@ -1919,7 +2117,7 @@
                 </div>
             </div>
 
-            <!-- Комната чата (отдельный экран) -->
+            <!-- Комната чата -->
             <div class="screen" id="chatRoomScreen">
                 <div class="chat-room">
                     <div class="chat-room-header">
@@ -1991,7 +2189,7 @@
         </div>
 
         <!-- Нижняя навигация -->
-        <div class="bottom-nav">
+        <div class="bottom-nav" id="bottomNav">
             <div class="nav-item active" onclick="navigateTo('homeScreen', this)">
                 <svg viewBox="0 0 24 24">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
@@ -2033,20 +2231,8 @@
         </div>
     </div>
 
-    <!-- Панель реакций (глобальная) -->
-    <div class="reaction-panel" id="reactionPanel">
-        <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
-        <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
-        <div class="reaction-emoji" onclick="addReaction('😂')">😂</div>
-        <div class="reaction-emoji" onclick="addReaction('😮')">😮</div>
-        <div class="reaction-emoji" onclick="addReaction('😢')">😢</div>
-        <div class="reaction-emoji" onclick="addReaction('🔥')">🔥</div>
-        <div class="reaction-emoji" onclick="addReaction('🎉')">🎉</div>
-    </div>
-
     <!-- Back4App -->
     <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
         // ========== НАСТРОЙКИ BACK4APP ==========
         const APP_ID = 'CM3xa4Y0qWL6FdoMdzONdCQ5k3Tx5saPZ5tyDOwA';
@@ -2055,9 +2241,6 @@
         
         Parse.initialize(APP_ID, JS_KEY);
         Parse.serverURL = SERVER_URL;
-
-        // Pusher для реального времени
-        const pusher = new Pusher('55cad6db51c45c8a66db', { cluster: 'eu', forceTLS: true });
 
         // ========== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ==========
         let currentChannel = null;
@@ -2071,6 +2254,7 @@
         let unreadMessages = {};
         let messageRequests = [];
         let currentChatTab = 'all';
+        let currentUser = null;
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -2116,62 +2300,91 @@
             return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
         }
 
-        // ========== УВЕДОМЛЕНИЯ ==========
-        function addNotification(title, message) {
-            notifications.unshift({
-                title,
-                message,
-                time: new Date()
-            });
-            updateNotifications();
+        // ========== УПРАВЛЕНИЕ НАВИГАЦИЕЙ ==========
+        function toggleAuthNav(showAuth) {
+            const topNav = document.getElementById('topNav');
+            const bottomNav = document.getElementById('bottomNav');
             
-            const badge = document.getElementById('notificationBadge');
-            badge.style.display = 'flex';
-            badge.textContent = notifications.length;
+            if (showAuth) {
+                topNav.classList.add('hidden');
+                bottomNav.classList.add('hidden');
+            } else {
+                topNav.classList.remove('hidden');
+                bottomNav.classList.remove('hidden');
+            }
         }
 
-        function updateNotifications() {
-            const list = document.getElementById('notificationsList');
-            list.innerHTML = notifications.map(n => `
-                <div class="notification-item">
-                    <div class="notification-avatar avatar-default"></div>
-                    <div class="notification-content">
-                        <strong>${n.title}</strong><br>
-                        ${n.message}
-                        <div class="notification-time">${formatTime(n.time)}</div>
-                    </div>
-                </div>
-            `).join('');
+        // ========== АВТОРИЗАЦИЯ ==========
+        async function signUp(firstName, lastName, nickname, email, password) {
+            try {
+                const user = new Parse.User();
+                user.set('username', email);
+                user.set('email', email);
+                user.set('password', password);
+                user.set('firstName', firstName);
+                user.set('lastName', lastName);
+                user.set('nickname', nickname);
+                user.set('avatarClass', getRandomAvatar());
+                user.set('isOnline', true);
+                user.set('lastSeen', new Date());
+                await user.signUp();
+                return { success: true, user };
+            } catch (error) {
+                console.error('Ошибка регистрации:', error);
+                return { success: false, message: error.message };
+            }
         }
 
-        window.toggleNotifications = function() {
-            const panel = document.getElementById('notificationsPanel');
-            panel.classList.toggle('active');
-            if (panel.classList.contains('active')) {
-                document.getElementById('notificationBadge').style.display = 'none';
+        async function signIn(email, password) {
+            try {
+                const user = await Parse.User.logIn(email, password);
+                user.set('isOnline', true);
+                user.set('lastSeen', new Date());
+                await user.save();
+                return { success: true, user };
+            } catch (error) {
+                console.error('Ошибка входа:', error);
+                return { success: false, message: 'Неверный email или пароль' };
             }
-        };
+        }
 
-        // ========== ОБНОВЛЕНИЕ БЕЙДЖЕЙ ==========
-        function updateChatBadges() {
-            const chatNavBadge = document.getElementById('chatNavBadge');
-            const requestsBadge = document.getElementById('requestsBadge');
+        async function resetPassword(email) {
+            try {
+                await Parse.User.requestPasswordReset(email);
+                return { success: true };
+            } catch (error) {
+                console.error('Ошибка сброса пароля:', error);
+                return { success: false, message: error.message };
+            }
+        }
+
+        // ========== ПРОВЕРКА АВТОРИЗАЦИИ ПРИ ЗАГРУЗКЕ ==========
+        async function checkAuth() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const currentUser = getCurrentUser();
             
-            const totalUnread = Object.values(unreadMessages).reduce((a, b) => a + b, 0);
-            
-            if (totalUnread > 0) {
-                chatNavBadge.textContent = totalUnread > 9 ? '9+' : totalUnread;
-                chatNavBadge.style.display = 'flex';
+            if (currentUser) {
+                console.log('Пользователь найден:', currentUser.id);
+                
+                // Обновляем статус онлайн
+                currentUser.set('isOnline', true);
+                currentUser.set('lastSeen', new Date());
+                await currentUser.save();
+                
+                // Показываем основной интерфейс
+                toggleAuthNav(false);
+                updateHeaderName();
+                navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
             } else {
-                chatNavBadge.style.display = 'none';
+                console.log('Пользователь не найден');
+                toggleAuthNav(true);
+                document.getElementById('authScreen').classList.add('active');
             }
             
-            if (messageRequests.length > 0) {
-                requestsBadge.textContent = messageRequests.length;
-                requestsBadge.style.display = 'inline-block';
-            } else {
-                requestsBadge.style.display = 'none';
-            }
+            // Скрываем загрузочный экран через небольшую задержку
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 500);
         }
 
         // ========== НАВИГАЦИЯ ==========
@@ -2182,7 +2395,7 @@
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             if (element) element.classList.add('active');
             
-            // Обновляем контент в зависимости от экрана
+            // Обновляем контент
             if (screenId === 'homeScreen') {
                 updateHomeFeed();
             } else if (screenId === 'searchScreen') {
@@ -2209,37 +2422,134 @@
             }
         }
 
-        // ========== АВТОРИЗАЦИЯ ==========
-        async function signUp(firstName, lastName, nickname, email, password) {
-            try {
-                const user = new Parse.User();
-                user.set('username', email);
-                user.set('email', email);
-                user.set('password', password);
-                user.set('firstName', firstName);
-                user.set('lastName', lastName);
-                user.set('nickname', nickname);
-                user.set('avatarClass', getRandomAvatar());
-                user.set('isOnline', true);
-                user.set('lastSeen', new Date());
-                await user.signUp();
-                return { success: true, user };
-            } catch (error) {
-                return { success: false, message: error.message };
-            }
+        // ========== УВЕДОМЛЕНИЯ (ТОЛЬКО ВАЖНЫЕ) ==========
+        function addNotification(type, title, message, fromUser = null) {
+            // Только важные уведомления: запросы, лайки комментариев, ответы на истории
+            const allowedTypes = ['request', 'comment_like', 'story_reply'];
+            
+            if (!allowedTypes.includes(type)) return;
+            
+            notifications.unshift({
+                type,
+                title,
+                message,
+                fromUser,
+                time: new Date()
+            });
+            
+            updateNotifications();
+            
+            const badge = document.getElementById('notificationBadge');
+            badge.style.display = 'flex';
+            badge.textContent = notifications.length;
         }
 
-        async function signIn(email, password) {
-            try {
-                const user = await Parse.User.logIn(email, password);
-                user.set('isOnline', true);
-                user.set('lastSeen', new Date());
-                await user.save();
-                return { success: true, user };
-            } catch (error) {
-                return { success: false, message: 'Неверный email или пароль' };
-            }
+        function updateNotifications() {
+            const list = document.getElementById('notificationsList');
+            list.innerHTML = notifications.map(n => `
+                <div class="notification-item">
+                    <div class="notification-avatar ${n.fromUser ? getAvatarClass(n.fromUser) : 'avatar-default'}" 
+                         style="${n.fromUser ? getAvatarStyle(n.fromUser) : ''}"></div>
+                    <div class="notification-content">
+                        <strong>${n.title}</strong><br>
+                        ${n.message}
+                        <div class="notification-time">${formatTime(n.time)}</div>
+                    </div>
+                </div>
+            `).join('');
         }
+
+        window.toggleNotifications = function() {
+            const panel = document.getElementById('notificationsPanel');
+            panel.classList.toggle('active');
+            if (panel.classList.contains('active')) {
+                document.getElementById('notificationBadge').style.display = 'none';
+            }
+        };
+
+        // ========== ОБРАБОТЧИКИ АВТОРИЗАЦИИ ==========
+        let isLoginMode = true;
+
+        document.getElementById('authSwitch').addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            document.getElementById('authTitle').textContent = isLoginMode ? 'Вход' : 'Регистрация';
+            document.getElementById('authActionBtn').querySelector('.btn-text').textContent = 
+                isLoginMode ? 'Войти' : 'Зарегистрироваться';
+            document.getElementById('authSwitch').textContent = isLoginMode ? 
+                'Регистрация' : 'Вход';
+        });
+
+        document.getElementById('forgotPasswordLink').addEventListener('click', () => {
+            document.getElementById('resetPasswordModal').classList.add('active');
+        });
+
+        document.getElementById('resetPasswordBtn').addEventListener('click', async () => {
+            const email = document.getElementById('resetEmail').value.trim();
+            if (!email) {
+                alert('Введите почту');
+                return;
+            }
+            
+            const result = await resetPassword(email);
+            if (result.success) {
+                document.getElementById('resetSuccess').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('resetPasswordModal').classList.remove('active');
+                    document.getElementById('resetEmail').value = '';
+                    document.getElementById('resetSuccess').style.display = 'none';
+                }, 3000);
+            } else {
+                alert('Ошибка: ' + result.message);
+            }
+        });
+
+        document.getElementById('cancelResetBtn').addEventListener('click', () => {
+            document.getElementById('resetPasswordModal').classList.remove('active');
+            document.getElementById('resetEmail').value = '';
+            document.getElementById('resetSuccess').style.display = 'none';
+        });
+
+        document.getElementById('authActionBtn').addEventListener('click', async function() {
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            
+            if (!email || !password) {
+                document.getElementById('authError').textContent = 'Заполните все поля';
+                return;
+            }
+            
+            document.getElementById('authError').textContent = '';
+            this.classList.add('loading');
+            
+            if (isLoginMode) {
+                // Вход
+                const result = await signIn(email, password);
+                if (result.success) {
+                    document.getElementById('authEmail').value = '';
+                    document.getElementById('authPassword').value = '';
+                    toggleAuthNav(false);
+                    updateHeaderName();
+                    navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
+                } else {
+                    document.getElementById('authError').textContent = result.message;
+                }
+            } else {
+                // Регистрация
+                const namePart = email.split('@')[0];
+                const result = await signUp(namePart, 'User', namePart, email, password);
+                if (result.success) {
+                    document.getElementById('authEmail').value = '';
+                    document.getElementById('authPassword').value = '';
+                    toggleAuthNav(false);
+                    updateHeaderName();
+                    navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
+                } else {
+                    document.getElementById('authError').textContent = result.message;
+                }
+            }
+            
+            this.classList.remove('loading');
+        });
 
         // ========== ПРОФИЛЬ ==========
         async function updateProfile(firstName, lastName, nickname) {
@@ -2287,7 +2597,6 @@
                 }
                 
                 await post.save();
-                addNotification('📝 Новый пост', 'Вы опубликовали пост');
                 return { success: true };
             } catch (error) {
                 return { success: false };
@@ -2335,12 +2644,6 @@
                 post.set('likedBy', likedBy);
                 post.increment('likes');
                 await post.save();
-                
-                const author = post.get('author');
-                if (author.id !== userId) {
-                    addNotification('❤️ Новый лайк', 
-                        `${getCurrentUser().get('firstName')} лайкнул ваш пост`);
-                }
                 
                 return true;
             } catch (error) {
@@ -2718,7 +3021,7 @@
                 updateChatBadges();
                 
                 const firstName = fromUser.get('firstName') || 'Пользователь';
-                addNotification('📨 Новый запрос', `${firstName} хочет написать вам`);
+                addNotification('request', '📨 Новый запрос', `${firstName} хочет написать вам`, fromUser);
                 
                 return true;
             } catch (error) {
@@ -2773,7 +3076,7 @@
         function addMessageToChat(text, isOwn, timestamp, messageId) {
             const container = document.getElementById('chatRoomMessages');
             const div = document.createElement('div');
-            div.className = `message ${isOwn ? 'own' : ''}`;
+            div.className = `message ${isOwn ? 'right' : 'left'}`;
             div.setAttribute('data-message-id', messageId || '');
             
             const time = timestamp ? new Date(timestamp).toLocaleTimeString([], { 
@@ -2828,7 +3131,6 @@
             }
             
             document.getElementById('reactionPanel').classList.remove('active');
-            addNotification('😊 Реакция', `Вы поставили ${emoji}`);
         };
 
         window.deleteMessage = async function(messageId) {
@@ -2999,6 +3301,27 @@
                 openUserProfile(currentOtherUserId);
             }
         };
+
+        function updateChatBadges() {
+            const chatNavBadge = document.getElementById('chatNavBadge');
+            const requestsBadge = document.getElementById('requestsBadge');
+            
+            const totalUnread = Object.values(unreadMessages).reduce((a, b) => a + b, 0);
+            
+            if (totalUnread > 0) {
+                chatNavBadge.textContent = totalUnread > 9 ? '9+' : totalUnread;
+                chatNavBadge.style.display = 'flex';
+            } else {
+                chatNavBadge.style.display = 'none';
+            }
+            
+            if (messageRequests.length > 0) {
+                requestsBadge.textContent = messageRequests.length;
+                requestsBadge.style.display = 'inline-block';
+            } else {
+                requestsBadge.style.display = 'none';
+            }
+        }
 
         // ========== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ==========
         async function updateHomeFeed() {
@@ -3176,9 +3499,7 @@
                 } else {
                     return `
                         <div class="post-thumb" onclick="openPostViewer('${post.id}')">
-                            <div style="display:flex; align-items:center; justify-content:center; height:100%;">
-                                📝
-                            </div>
+                            <div class="text-thumb">📝</div>
                         </div>
                     `;
                 }
@@ -3379,22 +3700,29 @@
         };
 
         window.likeStory = function() {
-            addNotification('❤️ Лайк на историю', 
-                `Вы лайкнули историю ${currentStoryUser?.user?.get('firstName') || 'пользователя'}`);
-            alert('❤️ Лайк на историю');
-        };
-
-        window.showReplyInput = function() {
-            document.getElementById('storyReplyInput').style.display = 'flex';
+            const input = document.getElementById('storyReplyText');
+            const text = input.value.trim();
+            
+            if (text) {
+                addNotification('story_reply', '💬 Ответ на историю', 
+                    `Вы ответили: "${text}"`, currentStoryUser?.user);
+                alert(`Ответ отправлен: ${text}`);
+                input.value = '';
+            } else {
+                addNotification('story_like', '❤️ Лайк на историю', 
+                    `Вы лайкнули историю ${currentStoryUser?.user?.get('firstName') || 'пользователя'}`);
+                alert('❤️ Лайк на историю');
+            }
         };
 
         window.sendStoryReply = function() {
-            const text = document.getElementById('storyReplyText').value;
+            const input = document.getElementById('storyReplyText');
+            const text = input.value.trim();
             if (text) {
-                addNotification('💬 Ответ на историю', `Вы ответили: "${text}"`);
+                addNotification('story_reply', '💬 Ответ на историю', 
+                    `Вы ответили: "${text}"`, currentStoryUser?.user);
                 alert(`Ответ отправлен: ${text}`);
-                document.getElementById('storyReplyInput').style.display = 'none';
-                document.getElementById('storyReplyText').value = '';
+                input.value = '';
             }
         };
 
@@ -3581,17 +3909,6 @@
             if (result.success) {
                 input.value = '';
                 addMessageToChat(text, true, new Date(), result.messageId);
-                
-                if (currentChannel) {
-                    try {
-                        currentChannel.trigger('client-new-message', {
-                            text: text,
-                            senderId: getCurrentUser().id,
-                            timestamp: new Date(),
-                            messageId: result.messageId
-                        });
-                    } catch (e) {}
-                }
             }
         });
 
@@ -3649,71 +3966,28 @@
 
         document.getElementById('logoutBtn').addEventListener('click', async () => {
             if (confirm('Выйти из аккаунта?')) {
+                const user = getCurrentUser();
+                if (user) {
+                    user.set('isOnline', false);
+                    user.set('lastSeen', new Date());
+                    await user.save();
+                }
+                
                 await Parse.User.logOut();
-                navigateTo('authScreen', null);
+                toggleAuthNav(true);
+                document.getElementById('authScreen').classList.add('active');
                 document.getElementById('profileName').style.display = 'none';
-            }
-        });
-
-        // ========== АВТОРИЗАЦИЯ ==========
-        let isLoginMode = true;
-
-        document.getElementById('authSwitch').addEventListener('click', () => {
-            isLoginMode = !isLoginMode;
-            document.getElementById('authTitle').textContent = isLoginMode ? 'Вход' : 'Регистрация';
-            document.getElementById('authActionBtn').textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
-            document.getElementById('authSwitch').textContent = isLoginMode ? 
-                'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти';
-        });
-
-        document.getElementById('authActionBtn').addEventListener('click', async () => {
-            const email = document.getElementById('authEmail').value.trim();
-            const password = document.getElementById('authPassword').value;
-            
-            if (!email || !password) {
-                document.getElementById('authError').textContent = 'Заполните все поля';
-                return;
-            }
-            
-            document.getElementById('authError').textContent = '';
-            
-            if (isLoginMode) {
-                const result = await signIn(email, password);
-                if (result.success) {
-                    document.getElementById('authEmail').value = '';
-                    document.getElementById('authPassword').value = '';
-                    updateHeaderName();
-                    navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
-                } else {
-                    document.getElementById('authError').textContent = result.message;
-                }
-            } else {
-                const namePart = email.split('@')[0];
-                const result = await signUp(namePart, 'User', namePart, email, password);
-                if (result.success) {
-                    document.getElementById('authEmail').value = '';
-                    document.getElementById('authPassword').value = '';
-                    updateHeaderName();
-                    navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
-                } else {
-                    document.getElementById('authError').textContent = result.message;
-                }
             }
         });
 
         // ========== ИНИЦИАЛИЗАЦИЯ ==========
         window.onload = async () => {
-            const currentUser = getCurrentUser();
-            if (currentUser) {
-                currentUser.set('isOnline', true);
-                currentUser.set('lastSeen', new Date());
-                await currentUser.save();
-                
-                updateHeaderName();
-                navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
-            } else {
-                navigateTo('authScreen', null);
-            }
+            // Показываем загрузочный экран
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.classList.remove('hidden');
+            
+            // Проверяем авторизацию
+            await checkAuth();
             
             // Закрытие меню и панелей при клике вне
             document.addEventListener('click', (e) => {
@@ -3728,16 +4002,7 @@
                 }
                 
                 if (!e.target.closest('.reaction-panel') && !e.target.closest('.message')) {
-                    document.getElementById('reactionPanel').classList.remove('active');
-                }
-            });
-            
-            window.addEventListener('beforeunload', async () => {
-                const user = getCurrentUser();
-                if (user) {
-                    user.set('isOnline', false);
-                    user.set('lastSeen', new Date());
-                    await user.save();
+                    document.getElementById('reactionPanel')?.classList.remove('active');
                 }
             });
         };
