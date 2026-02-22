@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · Instagram Style</title>
+    <title>RealReel · v2.0</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -57,6 +57,12 @@
             background: linear-gradient(135deg, #6aa9ff, #9f6eff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .version {
+            font-size: 12px;
+            color: #999;
+            font-weight: 500;
         }
 
         .profile-name {
@@ -467,7 +473,7 @@
             margin-top: 10px;
         }
 
-        /* Истории как в Instagram */
+        /* Истории */
         .stories {
             display: flex;
             gap: 16px;
@@ -524,7 +530,7 @@
             color: #333;
         }
 
-        /* Просмотр сторис как в Instagram */
+        /* Просмотр сторис */
         .story-viewer {
             position: fixed;
             top: 0;
@@ -573,6 +579,12 @@
             cursor: pointer;
             font-size: 20px;
             color: white;
+            transition: 0.2s;
+        }
+
+        .story-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
         }
 
         .story-image {
@@ -617,26 +629,18 @@
             border-radius: 30px;
             color: white;
             outline: none;
+            font-size: 14px;
         }
 
         .story-input::placeholder {
             color: rgba(255,255,255,0.5);
         }
 
-        .story-send-btn {
-            width: 44px;
-            height: 44px;
-            background: #6aa9ff;
-            border: none;
-            border-radius: 22px;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .story-input:focus {
+            border-color: #6aa9ff;
         }
 
-        .story-like-btn {
+        .story-action-btn {
             width: 44px;
             height: 44px;
             background: rgba(255,255,255,0.1);
@@ -647,6 +651,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: 0.2s;
+        }
+
+        .story-action-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        .story-action-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            fill: none;
         }
 
         /* Посты */
@@ -687,6 +704,10 @@
             font-weight: 600;
             color: #333;
             cursor: pointer;
+        }
+
+        .post-author:hover {
+            color: #6aa9ff;
         }
 
         .post-nick {
@@ -1088,6 +1109,11 @@
             font-weight: 600;
             color: #333;
             font-size: 14px;
+            cursor: pointer;
+        }
+
+        .chat-name:hover {
+            color: #6aa9ff;
         }
 
         .unread-badge {
@@ -1118,7 +1144,7 @@
             color: #999;
         }
 
-        /* Комната чата как в Instagram */
+        /* Комната чата */
         .chat-room {
             display: flex;
             flex-direction: column;
@@ -1161,6 +1187,11 @@
             background-position: center;
             cursor: pointer;
             position: relative;
+            transition: 0.2s;
+        }
+
+        .chat-room-avatar:hover {
+            transform: scale(1.05);
         }
 
         .chat-room-info {
@@ -1168,11 +1199,16 @@
             cursor: pointer;
         }
 
+        .chat-room-info:hover .chat-room-name {
+            color: #6aa9ff;
+        }
+
         .chat-room-name {
             font-weight: 600;
             color: #333;
             font-size: 16px;
             margin-bottom: 2px;
+            transition: 0.2s;
         }
 
         .chat-room-status {
@@ -1203,7 +1239,6 @@
             background: #fafafa;
         }
 
-        /* Стили сообщений как в Instagram */
         .message {
             display: flex;
             max-width: 70%;
@@ -1361,7 +1396,14 @@
             color: white;
         }
 
-        /* Запросы как в Instagram */
+        .chat-room-send svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        /* Запросы */
         .requests-list {
             display: flex;
             flex-direction: column;
@@ -1384,10 +1426,12 @@
             border-radius: 28px;
             background-size: cover;
             background-position: center;
+            cursor: pointer;
         }
 
         .request-info {
             flex: 1;
+            cursor: pointer;
         }
 
         .request-name {
@@ -1395,6 +1439,10 @@
             color: #333;
             font-size: 15px;
             margin-bottom: 4px;
+        }
+
+        .request-name:hover {
+            color: #6aa9ff;
         }
 
         .request-message {
@@ -1433,6 +1481,7 @@
 
         .request-btn.accept:hover {
             background: #5a99ee;
+            transform: scale(1.1);
         }
 
         .request-btn.decline {
@@ -1442,6 +1491,7 @@
 
         .request-btn.decline:hover {
             background: #ff3333;
+            transform: scale(1.1);
         }
 
         /* Профиль */
@@ -1467,6 +1517,11 @@
             background-position: center;
             border: 2px solid #6aa9ff;
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
         }
 
         .profile-info {
@@ -1498,9 +1553,14 @@
             cursor: pointer;
         }
 
+        .stat:hover .stat-value {
+            color: #6aa9ff;
+        }
+
         .stat-value {
             font-weight: 600;
             font-size: 16px;
+            transition: 0.2s;
         }
 
         .stat-label {
@@ -1532,10 +1592,12 @@
 
         .profile-btn.primary:hover {
             background: #5a99ee;
+            transform: scale(1.02);
         }
 
         .profile-btn.secondary:hover {
             background: #e0e0e0;
+            transform: scale(1.02);
         }
 
         .posts-grid {
@@ -1550,6 +1612,11 @@
             border-radius: 4px;
             overflow: hidden;
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .post-thumb:hover {
+            transform: scale(1.02);
         }
 
         .post-thumb img {
@@ -1590,14 +1657,16 @@
             transition: 0.2s;
         }
 
-        .settings-icon:hover, .logout-icon:hover {
+        .settings-icon:hover {
             background: #6aa9ff;
             color: white;
+            transform: scale(1.1);
         }
 
         .logout-icon:hover {
             background: #ff4444;
             color: white;
+            transform: scale(1.1);
         }
 
         .settings-icon svg, .logout-icon svg {
@@ -1640,6 +1709,11 @@
             gap: 12px;
             padding: 12px 16px;
             border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+
+        .notification-item:hover {
+            background: #f5f5f5;
         }
 
         .notification-avatar {
@@ -1694,6 +1768,7 @@
             justify-content: center;
             cursor: pointer;
             color: #555;
+            transition: 0.2s;
         }
 
         .post-viewer-back:hover {
@@ -1742,6 +1817,7 @@
             justify-content: center;
             cursor: pointer;
             color: #555;
+            transition: 0.2s;
         }
 
         .subscriptions-back:hover {
@@ -1803,6 +1879,10 @@
             font-weight: 600;
         }
 
+        .subscription-name:hover {
+            color: #6aa9ff;
+        }
+
         .subscription-nick {
             font-size: 12px;
             color: #6aa9ff;
@@ -1862,6 +1942,12 @@
             color: white;
             font-size: 20px;
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .photo-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
         }
 
         .photo-image {
@@ -1899,6 +1985,14 @@
         .avatar-3 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat3&backgroundColor=a0d0c0'); }
         .avatar-4 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat4&backgroundColor=d0c0a0'); }
 
+        /* Версия */
+        .version-badge {
+            font-size: 12px;
+            color: #999;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
         /* Скрытые элементы */
         .hidden {
             display: none !important;
@@ -1932,7 +2026,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel</div>
+            <div class="logo">RealReel <span class="version">v2.0</span></div>
             <div class="profile-name" id="profileName"></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
@@ -2026,9 +2120,18 @@
                 </div>
             </div>
             <div class="story-footer">
-                <input type="text" class="story-input" id="storyReplyText" placeholder="Ответить...">
-                <button class="story-like-btn" onclick="likeStory()">❤️</button>
-                <button class="story-send-btn" onclick="sendStoryReply()">➤</button>
+                <input type="text" class="story-input" id="storyReplyText" placeholder="Ответить..." autocomplete="off">
+                <button class="story-action-btn" onclick="likeStory()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </button>
+                <button class="story-action-btn" onclick="sendStoryReply()">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
             </div>
         </div>
 
@@ -2130,8 +2233,13 @@
                     </div>
                     <div class="chat-room-messages" id="chatRoomMessages"></div>
                     <div class="chat-room-input">
-                        <input type="text" class="chat-room-input-field" id="chatRoomInput" placeholder="Написать...">
-                        <button class="chat-room-send" id="chatRoomSendBtn">➤</button>
+                        <input type="text" class="chat-room-input-field" id="chatRoomInput" placeholder="Написать..." autocomplete="off">
+                        <button class="chat-room-send" id="chatRoomSendBtn">
+                            <svg viewBox="0 0 24 24">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -2254,7 +2362,6 @@
         let unreadMessages = {};
         let messageRequests = [];
         let currentChatTab = 'all';
-        let currentUser = null;
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -2366,12 +2473,10 @@
             if (currentUser) {
                 console.log('Пользователь найден:', currentUser.id);
                 
-                // Обновляем статус онлайн
                 currentUser.set('isOnline', true);
                 currentUser.set('lastSeen', new Date());
                 await currentUser.save();
                 
-                // Показываем основной интерфейс
                 toggleAuthNav(false);
                 updateHeaderName();
                 navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
@@ -2381,7 +2486,6 @@
                 document.getElementById('authScreen').classList.add('active');
             }
             
-            // Скрываем загрузочный экран через небольшую задержку
             setTimeout(() => {
                 loadingScreen.classList.add('hidden');
             }, 500);
@@ -2395,7 +2499,6 @@
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             if (element) element.classList.add('active');
             
-            // Обновляем контент
             if (screenId === 'homeScreen') {
                 updateHomeFeed();
             } else if (screenId === 'searchScreen') {
@@ -2422,9 +2525,8 @@
             }
         }
 
-        // ========== УВЕДОМЛЕНИЯ (ТОЛЬКО ВАЖНЫЕ) ==========
+        // ========== УВЕДОМЛЕНИЯ ==========
         function addNotification(type, title, message, fromUser = null) {
-            // Только важные уведомления: запросы, лайки комментариев, ответы на истории
             const allowedTypes = ['request', 'comment_like', 'story_reply'];
             
             if (!allowedTypes.includes(type)) return;
@@ -2447,7 +2549,7 @@
         function updateNotifications() {
             const list = document.getElementById('notificationsList');
             list.innerHTML = notifications.map(n => `
-                <div class="notification-item">
+                <div class="notification-item" onclick="${n.fromUser ? `openUserProfile('${n.fromUser.id}')` : ''}">
                     <div class="notification-avatar ${n.fromUser ? getAvatarClass(n.fromUser) : 'avatar-default'}" 
                          style="${n.fromUser ? getAvatarStyle(n.fromUser) : ''}"></div>
                     <div class="notification-content">
@@ -2522,7 +2624,6 @@
             this.classList.add('loading');
             
             if (isLoginMode) {
-                // Вход
                 const result = await signIn(email, password);
                 if (result.success) {
                     document.getElementById('authEmail').value = '';
@@ -2534,7 +2635,6 @@
                     document.getElementById('authError').textContent = result.message;
                 }
             } else {
-                // Регистрация
                 const namePart = email.split('@')[0];
                 const result = await signUp(namePart, 'User', namePart, email, password);
                 if (result.success) {
@@ -2889,7 +2989,6 @@
             if (!currentUser) return null;
             
             try {
-                // Ищем существующий чат
                 const query = new Parse.Query('Conversation');
                 query.equalTo('participants', currentUser);
                 query.equalTo('participants', {
@@ -2901,7 +3000,6 @@
                 let conversation = await query.first();
                 
                 if (!conversation) {
-                    // Создаем новый чат
                     const Conversation = Parse.Object.extend('Conversation');
                     conversation = new Conversation();
                     conversation.set('participants', [
@@ -2945,7 +3043,6 @@
                         
                         await otherUser.fetch();
                         
-                        // Получаем последнее сообщение
                         const messageQuery = new Parse.Query('Message');
                         messageQuery.equalTo('conversation', conv);
                         messageQuery.descending('createdAt');
@@ -2954,7 +3051,6 @@
                         
                         if (!lastMessage) continue;
                         
-                        // Считаем непрочитанные сообщения
                         const unreadQuery = new Parse.Query('Message');
                         unreadQuery.equalTo('conversation', conv);
                         unreadQuery.notEqualTo('sender', currentUser);
@@ -2998,7 +3094,6 @@
                 
                 await message.save();
                 
-                // Обновляем время чата
                 const conversation = new Parse.Object('Conversation');
                 conversation.id = conversationId;
                 conversation.set('updatedAt', new Date());
@@ -3055,6 +3150,8 @@
                 container.scrollTop = container.scrollHeight;
             } catch (error) {
                 console.error('Ошибка загрузки сообщений:', error);
+                document.getElementById('chatRoomMessages').innerHTML = 
+                    '<p style="opacity:0.5; text-align:center;">Ошибка загрузки</p>';
             }
         }
 
@@ -3164,7 +3261,6 @@
             const conversations = await getUserConversations();
             
             if (currentChatTab === 'all') {
-                // Показываем все чаты
                 const html = await Promise.all(conversations.map(async c => {
                     const user = c.otherUser;
                     await user.fetch();
@@ -3172,10 +3268,13 @@
                     return `
                         <div class="chat-item" onclick="openChatRoom('${user.id}')">
                             <div class="chat-avatar ${getAvatarClass(user)}" 
-                                 style="${getAvatarStyle(user)}"></div>
+                                 style="${getAvatarStyle(user)}"
+                                 onclick="event.stopPropagation(); openUserProfile('${user.id}')"></div>
                             <div class="chat-info">
                                 <div class="chat-name-row">
-                                    <span class="chat-name">${user.get('firstName')} ${user.get('lastName')}</span>
+                                    <span class="chat-name" onclick="event.stopPropagation(); openUserProfile('${user.id}')">
+                                        ${user.get('firstName')} ${user.get('lastName')}
+                                    </span>
                                     ${c.unreadCount > 0 ? 
                                         `<span class="unread-badge">${c.unreadCount}</span>` : ''}
                                 </div>
@@ -3189,13 +3288,13 @@
                 document.getElementById('chatList').innerHTML = html || 
                     '<p style="opacity:0.5; text-align:center; padding:20px;">Нет чатов</p>';
             } else {
-                // Показываем запросы
                 if (messageRequests.length > 0) {
                     const html = messageRequests.map(req => `
                         <div class="request-item">
                             <div class="request-avatar ${getAvatarClass(req.fromUser)}" 
-                                 style="${getAvatarStyle(req.fromUser)}"></div>
-                            <div class="request-info">
+                                 style="${getAvatarStyle(req.fromUser)}"
+                                 onclick="openUserProfile('${req.fromUser.id}')"></div>
+                            <div class="request-info" onclick="openUserProfile('${req.fromUser.id}')">
                                 <div class="request-name">
                                     ${req.fromUser.get('firstName')} ${req.fromUser.get('lastName')}
                                 </div>
@@ -3203,8 +3302,8 @@
                                 <div class="request-time">${formatTime(req.time)}</div>
                             </div>
                             <div class="request-actions">
-                                <button class="request-btn accept" onclick="acceptRequest('${req.fromUser.id}')">✓</button>
-                                <button class="request-btn decline" onclick="declineRequest('${req.fromUser.id}')">✕</button>
+                                <button class="request-btn accept" onclick="event.stopPropagation(); acceptRequest('${req.fromUser.id}')">✓</button>
+                                <button class="request-btn decline" onclick="event.stopPropagation(); declineRequest('${req.fromUser.id}')">✕</button>
                             </div>
                         </div>
                     `).join('');
@@ -3218,10 +3317,7 @@
         }
 
         window.acceptRequest = async function(userId) {
-            // Создаем чат и открываем его
             await openChatRoom(userId);
-            
-            // Удаляем из запросов
             messageRequests = messageRequests.filter(r => r.fromUser.id !== userId);
             updateChatBadges();
             updateChatList();
@@ -3238,7 +3334,7 @@
         // ========== КОМНАТА ЧАТА ==========
         window.openChatRoom = async function(otherUserId) {
             try {
-                console.log('Открываем комнату чата с пользователем:', otherUserId);
+                console.log('Открываем чат с пользователем:', otherUserId);
                 
                 const conversation = await getOrCreateConversation(otherUserId);
                 if (!conversation) {
@@ -3251,7 +3347,6 @@
                 
                 const otherUser = await new Parse.Query('_User').get(otherUserId);
                 
-                // Обновляем UI комнаты чата
                 document.getElementById('chatRoomAvatar').className = 
                     `chat-room-avatar ${getAvatarClass(otherUser)}`;
                 const avatarStyle = getAvatarStyle(otherUser);
@@ -3267,24 +3362,21 @@
                 document.getElementById('chatRoomStatus').innerHTML = 
                     `<span class="online-dot ${statusDot}"></span> ${status}`;
                 
-                // Загружаем сообщения
                 document.getElementById('chatRoomMessages').innerHTML = 
                     '<p style="opacity:0.5; text-align:center;">Загрузка...</p>';
                 await loadMessageHistory(currentConversationId);
                 subscribeToChat(currentConversationId);
                 
-                // Переключаемся на экран комнаты чата
                 document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
                 document.getElementById('chatRoomScreen').classList.add('active');
                 
             } catch (error) {
                 console.error('Ошибка открытия чата:', error);
-                alert('Ошибка при открытии чата');
+                alert('Ошибка при открытии чата: ' + error.message);
             }
         };
 
         window.closeChatRoom = function() {
-            // Возвращаемся к списку чатов
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('chatScreen').classList.add('active');
             
@@ -3329,7 +3421,6 @@
             const currentUser = getCurrentUser();
             const stories = await getStories();
             
-            // Обновляем сторис
             const userStories = await getUserStories(currentUser.id);
             const hasStory = userStories.length > 0;
             
@@ -3355,7 +3446,6 @@
             
             document.getElementById('stories').innerHTML = storiesHtml;
             
-            // Обновляем посты
             const postsHtml = await Promise.all(posts.map(async post => {
                 const author = post.get('author');
                 await author.fetch();
@@ -3885,14 +3975,12 @@
             document.getElementById('searchResults').innerHTML = html;
         });
 
-        // Обработчик отправки сообщения в комнате чата
         document.getElementById('chatRoomSendBtn').addEventListener('click', async function() {
             const input = document.getElementById('chatRoomInput');
             const text = input.value.trim();
             
             if (!text || !currentConversationId || !currentOtherUserId) return;
             
-            // Проверяем подписку
             const isSubscribed = await checkIfSubscribed(currentOtherUserId, getCurrentUser().id);
             
             if (!isSubscribed) {
@@ -3982,14 +4070,11 @@
 
         // ========== ИНИЦИАЛИЗАЦИЯ ==========
         window.onload = async () => {
-            // Показываем загрузочный экран
             const loadingScreen = document.getElementById('loadingScreen');
             loadingScreen.classList.remove('hidden');
             
-            // Проверяем авторизацию
             await checkAuth();
             
-            // Закрытие меню и панелей при клике вне
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.post-menu')) {
                     document.querySelectorAll('.post-menu-dropdown').forEach(m => {
