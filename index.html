@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · v2.3</title>
+    <title>RealReel · v2.4</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -34,7 +34,6 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            backdrop-filter: blur(10px);
         }
 
         /* Верхняя навигация */
@@ -509,6 +508,84 @@
             margin-top: 15px;
         }
 
+        /* PASSPORT STIQ - виза */
+        .passport-stiq {
+            position: relative;
+            margin: 10px 0;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            color: white;
+            animation: passportAppear 0.5s ease-out;
+            box-shadow: 0 20px 40px rgba(108,92,231,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            max-width: 90%;
+            align-self: center;
+        }
+
+        .passport-stiq.left {
+            align-self: flex-start;
+        }
+
+        .passport-stiq.right {
+            align-self: flex-end;
+        }
+
+        @keyframes passportAppear {
+            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .passport-stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transform: rotate(15deg);
+        }
+
+        .passport-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .passport-message {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .passport-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 8px;
+        }
+
+        .passport-visa-type {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
         /* Истории */
         .stories {
             display: flex;
@@ -772,7 +849,7 @@
             font-size: 10px;
         }
 
-        /* Посты */
+        /* Посты - теперь только на главной */
         .posts {
             display: flex;
             flex-direction: column;
@@ -2009,7 +2086,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v2.3</span></div>
+            <div class="logo">RealReel <span class="version">v2.4</span></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
@@ -2070,7 +2147,7 @@
             </div>
         </div>
 
-        <!-- Модалка подписок (ВАЖНО: вернул обратно!) -->
+        <!-- Модалка подписок -->
         <div class="subscriptions-modal" id="subscriptionsModal">
             <div class="subscriptions-header">
                 <div class="subscriptions-back" onclick="closeSubscriptions()">←</div>
@@ -2191,7 +2268,7 @@
                 </div>
             </div>
 
-            <!-- StiQ (бывший Reels) -->
+            <!-- StiQ -->
             <div class="screen" id="stiqScreen">
                 <div class="stiq-screen">
                     StiQ — скоро
@@ -2205,7 +2282,7 @@
                 </div>
             </div>
 
-            <!-- Комната чата -->
+            <!-- Комната чата с PASSPORT STIQ -->
             <div class="screen" id="chatRoomScreen">
                 <div class="chat-room">
                     <div class="chat-room-header">
@@ -2217,7 +2294,7 @@
                         </div>
                     </div>
                     <div class="chat-room-messages" id="chatRoomMessages">
-                        <!-- Индикатор "печатает" будет добавляться сюда динамически -->
+                        <!-- Сюда будут добавляться сообщения и Passport StiQ -->
                     </div>
                     <div class="chat-room-input">
                         <input type="text" class="chat-room-input-field" id="chatRoomInput" placeholder="Написать..." autocomplete="off">
@@ -2356,6 +2433,9 @@
         let chatUpdateInterval = null;
         let typingTimeout = null;
         let isTyping = false;
+        let messageCount = 0; // Счетчик сообщений для Passport StiQ
+        let lastScrollTop = 0;
+        let userScrolling = false;
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -2399,6 +2479,51 @@
 
         function formatTime(date) {
             return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // ========== PASSPORT STIQ ==========
+        function showPassportStiQ() {
+            const container = document.getElementById('chatRoomMessages');
+            
+            const warmMessages = [
+                "✨ Ты — чудо!",
+                "🌟 Сияй ярко!",
+                "💫 У тебя всё получится!",
+                "⭐ Ты особенный!",
+                "🌈 Мир лучше с тобой!",
+                "🦋 Верь в себя!",
+                "🌺 Ты прекрасен!",
+                "🚀 К новым вершинам!",
+                "🎯 Ты на правильном пути!",
+                "💖 Любовь рядом!",
+                "🌞 Улыбнись!",
+                "🍀 Удача любит тебя!",
+                "✨ Мечты сбываются!",
+                "💪 Ты сильнее, чем кажешься!",
+                "🎨 Твори свою реальность!"
+            ];
+            
+            const randomMessage = warmMessages[Math.floor(Math.random() * warmMessages.length)];
+            const visaTypes = ['VIP', 'GOLD', 'DREAM', 'LOVE', 'SUCCESS', 'HAPPY'];
+            const randomVisa = visaTypes[Math.floor(Math.random() * visaTypes.length)];
+            
+            const isOwn = Math.random() > 0.5; // Случайно от себя или собеседника
+            
+            const div = document.createElement('div');
+            div.className = `passport-stiq ${isOwn ? 'right' : 'left'}`;
+            
+            div.innerHTML = `
+                <div class="passport-stamp">🛂</div>
+                <div class="passport-title">PASSPORT StiQ · ${new Date().toLocaleDateString()}</div>
+                <div class="passport-message">${randomMessage}</div>
+                <div class="passport-footer">
+                    <span>✈️ ВИЗА ${randomVisa}</span>
+                    <span class="passport-visa-type">#${Math.floor(Math.random() * 1000)}</span>
+                </div>
+            `;
+            
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
         }
 
         // ========== УПРАВЛЕНИЕ НАВИГАЦИЕЙ ==========
@@ -3048,7 +3173,7 @@
             
             try {
                 const query = new Parse.Query('Conversation');
-                query.equalTo('participants', currentUser);
+                query.equalTo('participants', currentUser); // ВАЖНО: только чаты текущего пользователя
                 query.descending('updatedAt');
                 query.limit(50);
                 
@@ -3058,6 +3183,7 @@
                 for (const conv of conversations) {
                     try {
                         const participants = conv.get('participants');
+                        // Находим другого пользователя (не текущего)
                         const otherUser = participants.find(p => p && p.id !== currentUser.id);
                         
                         if (!otherUser) continue;
@@ -3072,6 +3198,7 @@
                         
                         if (!lastMessage) continue;
                         
+                        // Считаем непрочитанные сообщения для текущего пользователя
                         const unreadQuery = new Parse.Query('Message');
                         unreadQuery.equalTo('conversation', conv);
                         unreadQuery.notEqualTo('sender', currentUser);
@@ -3141,6 +3268,8 @@
                 const container = document.getElementById('chatRoomMessages');
                 
                 const typingIndicator = container.querySelector('.typing-indicator');
+                const scrollPosition = container.scrollTop;
+                const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
                 
                 container.innerHTML = '';
                 
@@ -3156,7 +3285,12 @@
                     container.appendChild(typingIndicator);
                 }
                 
-                container.scrollTop = container.scrollHeight;
+                // Если пользователь был внизу, прокручиваем вниз, иначе оставляем позицию
+                if (isAtBottom) {
+                    container.scrollTop = container.scrollHeight;
+                } else {
+                    container.scrollTop = scrollPosition;
+                }
             } catch (error) {
                 console.error('Ошибка загрузки сообщений:', error);
                 document.getElementById('chatRoomMessages').innerHTML = 
@@ -3176,6 +3310,16 @@
             currentChannel.bind('client-new-message', (data) => {
                 const isOwn = data.senderId === getCurrentUser().id;
                 addMessageToChat(data.text, isOwn, data.timestamp, data.messageId);
+                
+                // Увеличиваем счетчик сообщений для Passport StiQ
+                if (!isOwn) {
+                    messageCount++;
+                    
+                    // Каждые 50 сообщений (в диалоге) показываем Passport StiQ
+                    if (messageCount % 50 === 0) {
+                        showPassportStiQ();
+                    }
+                }
             });
             
             currentChannel.bind('client-typing', (data) => {
@@ -3211,7 +3355,12 @@
             });
             
             container.appendChild(div);
-            container.scrollTop = container.scrollHeight;
+            
+            // Прокручиваем вниз только если пользователь был внизу
+            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
+            if (isAtBottom) {
+                container.scrollTop = container.scrollHeight;
+            }
         }
 
         // ========== ИНДИКАТОР ПЕЧАТАЕТ ==========
@@ -3226,7 +3375,10 @@
                 container.appendChild(indicator);
             }
             
-            container.scrollTop = container.scrollHeight;
+            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
+            if (isAtBottom) {
+                container.scrollTop = container.scrollHeight;
+            }
             
             if (typingTimeout) clearTimeout(typingTimeout);
             typingTimeout = setTimeout(() => {
@@ -3348,6 +3500,7 @@
                 
                 currentConversationId = conversation.id;
                 currentOtherUserId = otherUserId;
+                messageCount = 0; // Сбрасываем счетчик для нового чата
                 
                 const otherUser = await new Parse.Query('_User').get(otherUserId);
                 
@@ -4048,6 +4201,12 @@
             if (result.success) {
                 input.value = '';
                 addMessageToChat(text, true, new Date(), result.messageId);
+                
+                // Увеличиваем счетчик для своих сообщений
+                messageCount++;
+                if (messageCount % 50 === 0) {
+                    showPassportStiQ();
+                }
                 
                 if (currentChannel) {
                     currentChannel.trigger('client-new-message', {
