@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · StiQStars v4.0</title>
+    <title>RealReel · StiQ v4.1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -509,416 +509,479 @@
             margin-top: 15px;
         }
 
-        /* ========== STIQSTARS ПОПАП ========== */
-        .stiqstars-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 320px;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 40px;
-            padding: 25px;
-            box-shadow: 0 40px 60px rgba(108,92,231,0.4);
-            border: 2px solid rgba(108,92,231,0.3);
-            z-index: 1000;
-            display: none;
-            animation: stiqstarsAppear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* ===== PASSPORT STIQ - ВОЗВРАЩЕН! ===== */
+        .passport-stiq {
+            position: relative;
+            margin: 10px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            border-radius: 20px;
+            color: white;
+            animation: passportAppear 0.5s ease-out, passportFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(108,92,231,0.4);
+            max-width: 90%;
+            align-self: center;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+            transform-origin: center;
         }
 
-        .stiqstars-popup.active {
-            display: block;
+        .passport-stiq:hover {
+            animation: passportGlow 2s ease-in-out infinite;
+            transform: scale(1.02);
         }
 
-        @keyframes stiqstarsAppear {
-            0% { transform: translate(-50%, -30%) scale(0.8); opacity: 0; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        @keyframes passportGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(108,92,231,0.4); }
+            50% { box-shadow: 0 20px 50px rgba(108,92,231,0.6); }
         }
 
-        .stiqstars-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(108,92,231,0.2);
+        .passport-stiq.left {
+            align-self: flex-start;
         }
 
-        .stiqstars-icon {
+        .passport-stiq.right {
+            align-self: flex-end;
+        }
+
+        @keyframes passportAppear {
+            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        @keyframes passportFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .passport-icon {
+            position: absolute;
+            top: -15px;
+            right: -15px;
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            background: white;
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 30px;
-            animation: stiqstarsIconPulse 2s ease-in-out infinite;
-            box-shadow: 0 10px 20px rgba(108,92,231,0.3);
-        }
-
-        @keyframes stiqstarsIconPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 10px 20px rgba(108,92,231,0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 15px 30px rgba(108,92,231,0.5); }
-        }
-
-        .stiqstars-title {
-            flex: 1;
-        }
-
-        .stiqstars-title h3 {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
-        }
-
-        .stiqstars-title p {
-            font-size: 12px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stiqstars-stats {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .stiqstars-stat {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(108,92,231,0.05);
-            border-radius: 25px;
-            transition: 0.3s;
-            cursor: pointer;
-            border: 1px solid transparent;
-        }
-
-        .stiqstars-stat:hover {
-            background: rgba(108,92,231,0.1);
-            transform: translateX(10px);
-            border-color: rgba(108,92,231,0.3);
-        }
-
-        .stiqstars-stat-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            animation: statIconFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes statIconFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .stiqstars-stat-info {
-            flex: 1;
-        }
-
-        .stiqstars-stat-value {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-
-        .stiqstars-stat-label {
-            font-size: 14px;
-            color: #666;
-            margin-top: 4px;
-        }
-
-        .stiqstars-stat-label span {
-            color: #6C5CE7;
-            font-weight: 600;
-            font-size: 12px;
-            margin-left: 6px;
-        }
-
-        .stiqstars-footer {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 10px;
-        }
-
-        .stiqstars-close {
-            background: none;
-            border: none;
-            color: #999;
-            font-size: 14px;
-            cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: 0.2s;
-        }
-
-        .stiqstars-close:hover {
-            background: rgba(108,92,231,0.1);
-            color: #6C5CE7;
-        }
-
-        /* Профиль - СКРЫТАЯ СТАТИСТИКА */
-        .profile-screen {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            height: 100%;
-            overflow-y: auto;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 4px;
-        }
-
-        .profile-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 40px;
-            background-size: cover;
-            background-position: center;
+            transform: rotate(5deg);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: passportIconSpin 15s linear infinite;
             border: 3px solid #6C5CE7;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 5px 15px rgba(108,92,231,0.2);
         }
 
-        .profile-avatar:hover {
-            transform: scale(1.05);
+        @keyframes passportIconSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        .profile-info {
-            flex: 1;
+        .passport-icon img {
+            width: 40px;
+            height: 40px;
+            animation: passportIconPulse 2s ease-in-out infinite;
         }
 
-        .profile-name-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 4px;
+        @keyframes passportIconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        .profile-name {
+        .passport-title {
+            font-size: 16px;
             font-weight: 700;
-            font-size: 20px;
-            color: #333;
-        }
-
-        .profile-star {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.2s;
-            animation: starGlow 2s ease-in-out infinite;
-        }
-
-        .profile-star:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        @keyframes starGlow {
-            0%, 100% { box-shadow: 0 0 10px rgba(108,92,231,0.3); }
-            50% { box-shadow: 0 0 20px rgba(108,92,231,0.6); }
-        }
-
-        .profile-nick {
-            color: #6C5CE7;
-            font-size: 14px;
-        }
-
-        .profile-bio {
-            font-size: 12px;
-            color: #666;
-            margin: 8px 0;
-            line-height: 1.4;
-            background: #f8faff;
-            padding: 10px 14px;
-            border-radius: 16px;
-            border-left: 3px solid #6C5CE7;
-        }
-
-        .profile-traits {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 8px 0;
-        }
-
-        .profile-trait {
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
-            color: white;
-            padding: 5px 12px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 14px;
             border-radius: 25px;
-            font-size: 11px;
-            font-weight: 500;
+            display: inline-block;
+            animation: titlePulse 3s ease-in-out infinite;
         }
 
-        /* СКРЫТАЯ СТАТИСТИКА - теперь ее нет в профиле! */
-        .hidden-stats {
+        @keyframes titlePulse {
+            0%, 100% { background: rgba(255,255,255,0.2); }
+            50% { background: rgba(255,255,255,0.3); }
+        }
+
+        .passport-number {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .passport-place {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: placeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes placeGlow {
+            0%, 100% { text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+            50% { text-shadow: 0 5px 20px rgba(255,255,255,0.5); }
+        }
+
+        .passport-message {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 15px;
+            border-left: 3px solid white;
+        }
+
+        .passport-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            opacity: 0.9;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .passport-visa-type {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            animation: visaPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes visaPulse {
+            0%, 100% { background: rgba(255,255,255,0.2); }
+            50% { background: rgba(255,255,255,0.3); }
+        }
+
+        .passport-country {
+            font-size: 10px;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* Коллекция виз */
+        .visa-collection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .visa-item {
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            color: white;
+            animation: visaItemAppear 0.5s ease-out;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .visa-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(108,92,231,0.4);
+        }
+
+        @keyframes visaItemAppear {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .visa-item-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .visa-item-place {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .visa-item-date {
+            font-size: 8px;
+            opacity: 0.8;
+        }
+
+        /* Истории */
+        .stories {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 8px 0;
+            margin-bottom: 20px;
+        }
+
+        .stories::-webkit-scrollbar {
             display: none;
         }
 
-        .profile-actions {
+        .story {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            min-width: 64px;
+            cursor: pointer;
         }
 
-        .profile-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            background: #f0f0f0;
+        .story-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #6C5CE7;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(108,92,231,0.2);
+        }
+
+        .story-avatar.no-story {
+            border-color: #ddd;
+            opacity: 0.7;
+        }
+
+        .story-add {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            border: 2px solid white;
+        }
+
+        .story-name {
+            font-size: 11px;
             color: #333;
+            font-weight: 500;
+        }
+
+        /* Просмотр сторис */
+        .story-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .story-viewer.active {
+            display: flex;
+        }
+
+        .story-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .story-header-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .story-header-name {
+            font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .story-close {
+            margin-left: auto;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            transition: 0.2s;
+        }
+
+        .story-close:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.1);
+        }
+
+        .story-image {
+            flex: 1;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 16px;
+        }
+
+        .story-progress {
+            padding: 16px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6C5CE7, #A463F5);
+            width: 0%;
+            transition: width 5s linear;
+            border-radius: 2px;
+            box-shadow: 0 0 10px #6C5CE7;
+        }
+
+        .story-footer {
+            padding: 16px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .story-input {
+            flex: 1;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 40px;
+            color: white;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .story-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .story-input:focus {
+            border-color: #6C5CE7;
+        }
+
+        .story-action-btn {
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .story-action-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.1);
+        }
+
+        .story-action-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: white;
+            fill: none;
+        }
+
+        /* Список просмотров сторис */
+        .story-views {
+            padding: 16px;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 16px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .story-views.hidden {
+            display: none;
+        }
+
+        .story-views-title {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .story-view-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .story-view-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .story-view-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-view-name {
+            color: white;
+            font-weight: 500;
             font-size: 13px;
         }
 
-        .profile-btn.primary {
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
-            color: white;
-            box-shadow: 0 3px 10px rgba(108,92,231,0.2);
-        }
-
-        .profile-btn.primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(108,92,231,0.3);
-        }
-
-        .profile-btn.secondary:hover {
-            background: #e0e0e0;
-            transform: translateY(-1px);
-        }
-
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-            margin-top: 8px;
-        }
-
-        .post-thumb {
-            aspect-ratio: 1;
-            background: #f0f0f0;
-            border-radius: 8px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .post-thumb:hover {
-            transform: scale(1.02);
-            box-shadow: 0 3px 10px rgba(108,92,231,0.15);
-        }
-
-        .post-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .post-thumb .text-thumb {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f0f0f0;
-            color: #333;
-            font-size: 20px;
-        }
-
-        .settings-row {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            padding: 16px 0;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            margin-top: auto;
-        }
-
-        .settings-icon {
-            width: 44px;
-            height: 44px;
-            background: white;
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #555;
-            transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            border: 1px solid rgba(0,0,0,0.02);
-        }
-
-        .settings-icon svg {
-            width: 22px;
-            height: 22px;
-            stroke: currentColor;
-            fill: none;
-        }
-
-        .settings-icon:hover {
-            background: #6C5CE7;
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .logout-icon {
-            width: 44px;
-            height: 44px;
-            background: #ffeeee;
-            border-radius: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #FF6B6B;
-            transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            border: 1px solid rgba(255,107,107,0.2);
-        }
-
-        .logout-icon svg {
-            width: 22px;
-            height: 22px;
-            stroke: currentColor;
-            fill: none;
-        }
-
-        .logout-icon:hover {
-            background: #FF6B6B;
-            color: white;
-            transform: scale(1.05);
+        .story-view-time {
+            margin-left: auto;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
         }
 
         /* Посты */
@@ -1690,115 +1753,459 @@
             fill: none;
         }
 
-        /* PASSPORT STIQ */
-        .passport-stiq {
-            position: relative;
-            margin: 10px 0;
-            padding: 20px;
+        /* ===== ПРОФИЛЬ С УМЕНЬШЕННОЙ СТАТИСТИКОЙ ===== */
+        .profile-screen {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 4px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #6C5CE7;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(108,92,231,0.2);
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .profile-star {
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, #6C5CE7, #9b59b6);
-            border-radius: 20px;
-            color: white;
-            animation: passportAppear 0.5s ease-out;
-            box-shadow: 0 10px 30px rgba(108,92,231,0.4);
-            max-width: 90%;
-            align-self: center;
-            border: 2px solid rgba(255,255,255,0.3);
-        }
-
-        .passport-stiq.left {
-            align-self: flex-start;
-        }
-
-        .passport-stiq.right {
-            align-self: flex-end;
-        }
-
-        @keyframes passportAppear {
-            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
-
-        .passport-icon {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 60px;
-            height: 60px;
-            background: white;
-            border-radius: 30px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            transform: rotate(5deg);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            border: 3px solid #6C5CE7;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+            animation: starGlow 2s ease-in-out infinite;
         }
 
-        .passport-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: 1px;
-            opacity: 0.9;
-            text-transform: uppercase;
-            background: rgba(255,255,255,0.2);
+        .profile-star:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        @keyframes starGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(108,92,231,0.3); }
+            50% { box-shadow: 0 0 20px rgba(108,92,231,0.6); }
+        }
+
+        .profile-nick {
+            color: #6C5CE7;
+            font-size: 14px;
+        }
+
+        .profile-bio {
+            font-size: 13px;
+            color: #666;
+            margin: 8px 0;
+            line-height: 1.5;
+            background: #f8faff;
+            padding: 12px 16px;
+            border-radius: 16px;
+            border-left: 3px solid #6C5CE7;
+        }
+
+        .profile-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .profile-trait {
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            color: white;
             padding: 6px 14px;
             border-radius: 25px;
-            display: inline-block;
-        }
-
-        .passport-place {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .passport-number {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: rgba(255,255,255,0.9);
-            letter-spacing: 2px;
-        }
-
-        .passport-message {
-            font-size: 16px;
+            font-size: 12px;
             font-weight: 500;
-            margin-bottom: 15px;
-            line-height: 1.5;
-            background: rgba(255,255,255,0.1);
-            padding: 10px;
-            border-radius: 15px;
-            border-left: 3px solid white;
+            animation: traitPulse 2s ease-in-out infinite;
         }
 
-        .passport-footer {
+        @keyframes traitPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* ===== УМЕНЬШЕННАЯ СТАТИСТИКА ===== */
+        .stats-mini {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 11px;
-            opacity: 0.9;
-            border-top: 1px solid rgba(255,255,255,0.3);
-            padding-top: 10px;
-            text-transform: uppercase;
+            justify-content: space-around;
+            background: white;
+            border-radius: 20px;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid rgba(108,92,231,0.1);
+            box-shadow: 0 2px 8px rgba(108,92,231,0.05);
         }
 
-        .passport-visa-type {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 15px;
-            border-radius: 25px;
-            font-size: 10px;
+        .stat-mini-item {
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 4px 12px;
+            border-radius: 16px;
+        }
+
+        .stat-mini-item:hover {
+            background: rgba(108,92,231,0.05);
+        }
+
+        .stat-mini-value {
+            font-size: 16px;
             font-weight: 700;
+            color: #6C5CE7;
+            line-height: 1.2;
+        }
+
+        .stat-mini-label {
+            font-size: 10px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 10px;
+            margin: 8px 0;
+        }
+
+        .profile-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #f0f0f0;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .profile-btn.primary {
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            color: white;
+            box-shadow: 0 3px 10px rgba(108,92,231,0.2);
+        }
+
+        .profile-btn.primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(108,92,231,0.3);
+        }
+
+        .profile-btn.secondary:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 8px;
+        }
+
+        .post-thumb {
+            aspect-ratio: 1;
+            background: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .post-thumb:hover {
+            transform: scale(1.02);
+            box-shadow: 0 3px 10px rgba(108,92,231,0.15);
+        }
+
+        .post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-thumb .text-thumb {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .settings-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 16px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            margin-top: auto;
+        }
+
+        .settings-icon {
+            width: 44px;
+            height: 44px;
+            background: white;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #555;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .settings-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .settings-icon:hover {
+            background: #6C5CE7;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .logout-icon {
+            width: 44px;
+            height: 44px;
+            background: #ffeeee;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #FF6B6B;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255,107,107,0.2);
+        }
+
+        .logout-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .logout-icon:hover {
+            background: #FF6B6B;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Модалка подписок */
+        .subscriptions-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 200;
+            display: none;
+            flex-direction: column;
+        }
+
+        .subscriptions-modal.active {
+            display: flex;
+        }
+
+        .subscriptions-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .subscriptions-back {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #555;
+            transition: 0.2s;
+        }
+
+        .subscriptions-back:hover {
+            background: #6C5CE7;
             color: white;
         }
 
-        .passport-country {
-            font-size: 10px;
-            opacity: 0.8;
-            font-style: italic;
+        .subscriptions-tabs {
+            display: flex;
+            gap: 16px;
+            padding: 0 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .subscriptions-tab {
+            padding: 12px 0;
+            cursor: pointer;
+            color: #999;
+            border-bottom: 2px solid transparent;
+            font-size: 13px;
+        }
+
+        .subscriptions-tab.active {
+            color: #6C5CE7;
+            border-bottom-color: #6C5CE7;
+        }
+
+        .subscriptions-search {
+            padding: 12px 16px;
+        }
+
+        .subscriptions-search-box {
+            display: flex;
+            gap: 8px;
+            background: #f5f5f5;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .subscriptions-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .subscriptions-search-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 18px;
+            padding: 6px 14px;
+            color: #555;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .subscriptions-search-btn:hover {
+            background: #6C5CE7;
+            color: white;
+        }
+
+        .subscriptions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .subscription-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .subscription-item:hover {
+            background: #f5f5f5;
+        }
+
+        .subscription-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 4px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .subscription-info {
+            flex: 1;
+        }
+
+        .subscription-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .subscription-name:hover {
+            color: #6C5CE7;
+        }
+
+        .subscription-nick {
+            font-size: 12px;
+            color: #6C5CE7;
+            margin-top: 2px;
+        }
+
+        .subscription-status {
+            font-size: 11px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .subscription-btn {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 18px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .subscription-btn:hover {
+            background: #6C5CE7;
+            color: white;
         }
 
         /* Аватарки */
@@ -1846,7 +2253,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v4.0</span></div>
+            <div class="logo">RealReel <span class="version">v4.1</span></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
@@ -1921,21 +2328,65 @@
             </div>
         </div>
 
-        <!-- StiQStars Попап -->
-        <div class="stiqstars-popup" id="stiqstarsPopup">
-            <div class="stiqstars-header">
-                <div class="stiqstars-icon">⭐</div>
-                <div class="stiqstars-title">
-                    <h3>StiQStars</h3>
-                    <p>твоя звездная статистика</p>
+        <!-- Просмотр фото -->
+        <div class="photo-viewer" id="photoViewer">
+            <div class="photo-header">
+                <div class="photo-close" onclick="closePhoto()">✕</div>
+            </div>
+            <div class="photo-image" id="photoImage"></div>
+            <div class="photo-info" id="photoInfo"></div>
+        </div>
+
+        <!-- Просмотр поста -->
+        <div class="post-viewer" id="postViewer">
+            <div class="post-viewer-header">
+                <div class="post-viewer-back" onclick="closePostViewer()">←</div>
+                <div style="flex:1; text-align:center; font-weight:600;"></div>
+            </div>
+            <div class="post-viewer-content" id="postViewerContent"></div>
+        </div>
+
+        <!-- Просмотр сторис -->
+        <div class="story-viewer" id="storyViewer">
+            <div class="story-header">
+                <div class="story-header-avatar" id="storyAvatar"></div>
+                <div class="story-header-name" id="storyName"></div>
+                <div class="story-close" onclick="closeStory()">✕</div>
+            </div>
+            <div class="story-image" id="storyImage"></div>
+            <div class="story-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="storyProgress"></div>
                 </div>
             </div>
-            <div class="stiqstars-stats" id="stiqstarsStats">
-                <!-- Заполняется динамически -->
+            <div class="story-footer">
+                <input type="text" class="story-input" id="storyReplyText" placeholder="Ответить..." autocomplete="off">
+                <button class="story-action-btn" onclick="likeStory()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </button>
+                <button class="story-action-btn" onclick="sendStoryReply()">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
             </div>
-            <div class="stiqstars-footer">
-                <button class="stiqstars-close" onclick="closeStiqStars()">Закрыть</button>
+            <div class="story-views hidden" id="storyViews">
+                <div class="story-views-title">Просмотры</div>
+                <div id="storyViewsList"></div>
             </div>
+        </div>
+
+        <!-- Панель реакций -->
+        <div class="reaction-panel" id="reactionPanel">
+            <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
+            <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
+            <div class="reaction-emoji" onclick="addReaction('😂')">😂</div>
+            <div class="reaction-emoji" onclick="addReaction('😮')">😮</div>
+            <div class="reaction-emoji" onclick="addReaction('😢')">😢</div>
+            <div class="reaction-emoji" onclick="addReaction('🔥')">🔥</div>
         </div>
 
         <!-- Контентные экраны -->
@@ -1975,6 +2426,20 @@
                         <button class="search-btn" id="searchBtn">Найти</button>
                     </div>
                     <div id="searchResults"></div>
+                </div>
+            </div>
+
+            <!-- PASSPORT STIQ -->
+            <div class="screen" id="passportStiQScreen">
+                <div class="search-screen">
+                    <div class="passport-stiq-card" style="margin-top: 20px;">
+                        <div class="passport-stiq-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1043/1043504.png" alt="passport">
+                        </div>
+                        <div class="passport-stiq-title">PASSPORT STIQ</div>
+                        <div class="passport-stiq-subtitle">Твоя коллекция виз</div>
+                    </div>
+                    <div class="visa-collection" id="visaCollection"></div>
                 </div>
             </div>
 
@@ -2021,12 +2486,20 @@
                     <div class="profile-bio" id="profileBio"></div>
                     <div class="profile-traits" id="profileTraits"></div>
 
-                    <!-- Скрытая статистика - не видна в профиле -->
-                    <div class="hidden-stats">
-                        <span id="profilePostsCount">0</span>
-                        <span id="profileFollowersCount">0</span>
-                        <span id="profileFollowingCount">0</span>
-                        <span id="profileVisaCount">0</span>
+                    <!-- УМЕНЬШЕННАЯ СТАТИСТИКА -->
+                    <div class="stats-mini">
+                        <div class="stat-mini-item" onclick="showSubscriptions('followers')">
+                            <div class="stat-mini-value" id="profileFollowersCount">0</div>
+                            <div class="stat-mini-label">подписчики</div>
+                        </div>
+                        <div class="stat-mini-item" onclick="showSubscriptions('following')">
+                            <div class="stat-mini-value" id="profileFollowingCount">0</div>
+                            <div class="stat-mini-label">подписки</div>
+                        </div>
+                        <div class="stat-mini-item" onclick="showPosts()">
+                            <div class="stat-mini-value" id="profilePostsCount">0</div>
+                            <div class="stat-mini-label">посты</div>
+                        </div>
                     </div>
 
                     <div class="profile-actions">
@@ -2054,6 +2527,25 @@
             </div>
         </div>
 
+        <!-- Модалка подписок -->
+        <div class="subscriptions-modal" id="subscriptionsModal">
+            <div class="subscriptions-header">
+                <div class="subscriptions-back" onclick="closeSubscriptions()">←</div>
+                <h3 id="subscriptionsTitle">Подписчики</h3>
+            </div>
+            <div class="subscriptions-tabs">
+                <div class="subscriptions-tab active" onclick="switchSubTab('followers')">Подписчики</div>
+                <div class="subscriptions-tab" onclick="switchSubTab('following')">Подписки</div>
+            </div>
+            <div class="subscriptions-search">
+                <div class="subscriptions-search-box">
+                    <input type="text" class="subscriptions-search-input" id="subscriptionsSearchInput" placeholder="Поиск...">
+                    <button class="subscriptions-search-btn" id="subscriptionsSearchBtn">Найти</button>
+                </div>
+            </div>
+            <div class="subscriptions-list" id="subscriptionsList"></div>
+        </div>
+
         <!-- Нижняя навигация -->
         <div class="bottom-nav" id="bottomNav">
             <div class="nav-item active" onclick="navigateTo('homeScreen', this)">
@@ -2070,6 +2562,15 @@
                 </svg>
                 <span class="nav-label">Поиск</span>
             </div>
+            <div class="nav-item" onclick="navigateTo('passportStiQScreen', this)">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor"/>
+                    <circle cx="9" cy="9" r="2" fill="none" stroke="currentColor"/>
+                    <circle cx="15" cy="15" r="2" fill="none" stroke="currentColor"/>
+                    <path d="M7 17 L17 7" stroke="currentColor" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="nav-label">Passport</span>
+            </div>
             <div class="nav-item" onclick="navigateTo('chatScreen', this)" id="chatNavItem">
                 <svg viewBox="0 0 24 24">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -2085,16 +2586,6 @@
                 <span class="nav-label">Профиль</span>
             </div>
         </div>
-    </div>
-
-    <!-- Панель реакций -->
-    <div class="reaction-panel" id="reactionPanel">
-        <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
-        <div class="reaction-emoji" onclick="addReaction('👍')">👍</div>
-        <div class="reaction-emoji" onclick="addReaction('😂')">😂</div>
-        <div class="reaction-emoji" onclick="addReaction('😮')">😮</div>
-        <div class="reaction-emoji" onclick="addReaction('😢')">😢</div>
-        <div class="reaction-emoji" onclick="addReaction('🔥')">🔥</div>
     </div>
 
     <!-- Back4App -->
@@ -2127,11 +2618,11 @@
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
         const famousPlaces = [
-            { name: 'Эйфелева башня', city: 'Париж', icon: '🗼' },
-            { name: 'Колизей', city: 'Рим', icon: '🏛️' },
-            { name: 'Пирамиды', city: 'Каир', icon: '🔺' },
-            { name: 'Статуя Свободы', city: 'Нью-Йорк', icon: '🗽' },
-            { name: 'Тадж-Махал', city: 'Агра', icon: '🕌' }
+            { name: 'Эйфелева башня', city: 'Париж', country: 'Франция', icon: '🗼' },
+            { name: 'Колизей', city: 'Рим', country: 'Италия', icon: '🏛️' },
+            { name: 'Пирамиды Гизы', city: 'Каир', country: 'Египет', icon: '🔺' },
+            { name: 'Статуя Свободы', city: 'Нью-Йорк', country: 'США', icon: '🗽' },
+            { name: 'Тадж-Махал', city: 'Агра', country: 'Индия', icon: '🕌' }
         ];
 
         // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
@@ -2171,61 +2662,90 @@
             return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
 
-        // ========== STIQSTARS ПОПАП ==========
-        window.openStiqStars = async function() {
-            const user = currentProfileUserId ? await new Parse.Query('_User').get(currentProfileUserId) : getCurrentUser();
-            if (!user) return;
-
-            const postsCount = (await getUserPosts(user.id)).length;
-            const followersCount = await getFollowersCount(user.id);
-            const followingCount = await getFollowingCount(user.id);
-            const visaCount = visaCollection.length;
-
-            const statsContainer = document.getElementById('stiqstarsStats');
+        // ========== PASSPORT STIQ ==========
+        function generateVisaFromPlace(placeName) {
+            const place = famousPlaces.find(p => p.name === placeName) || 
+                         famousPlaces[Math.floor(Math.random() * famousPlaces.length)];
             
-            // Уникальные названия в стиле StiQ
-            statsContainer.innerHTML = `
-                <div class="stiqstars-stat" onclick="showSubscriptions('followers')">
-                    <div class="stiqstars-stat-icon">👥</div>
-                    <div class="stiqstars-stat-info">
-                        <div class="stiqstars-stat-value">${followersCount}</div>
-                        <div class="stiqstars-stat-label">StiQFans <span>твои звездные фанаты</span></div>
-                    </div>
+            const visaTypes = ['VIP', 'GOLD', 'DREAM', 'LOVE', 'SUCCESS'];
+            const randomVisa = visaTypes[Math.floor(Math.random() * visaTypes.length)];
+            const visaNumber = Math.floor(Math.random() * 900000 + 100000);
+            
+            return {
+                id: Date.now() + Math.random(),
+                place: place.name,
+                city: place.city,
+                country: place.country,
+                icon: place.icon,
+                visaType: randomVisa,
+                number: visaNumber,
+                date: new Date(),
+                message: `Ты был в ${place.city}! ✨`
+            };
+        }
+
+        function showPassportStiQ(placeName = null) {
+            const container = document.getElementById('chatRoomMessages');
+            if (!container) return;
+            
+            const visa = generateVisaFromPlace(placeName);
+            
+            visaCollection.unshift(visa);
+            updateVisaCollection();
+            
+            const isOwn = Math.random() > 0.5;
+            
+            const div = document.createElement('div');
+            div.className = `passport-stiq ${isOwn ? 'right' : 'left'}`;
+            
+            div.innerHTML = `
+                <div class="passport-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1043/1043504.png" alt="passport">
                 </div>
-                <div class="stiqstars-stat" onclick="showSubscriptions('following')">
-                    <div class="stiqstars-stat-icon">⭐</div>
-                    <div class="stiqstars-stat-info">
-                        <div class="stiqstars-stat-value">${followingCount}</div>
-                        <div class="stiqstars-stat-label">StiQStars <span>твои звезды</span></div>
-                    </div>
-                </div>
-                <div class="stiqstars-stat" onclick="showPosts()">
-                    <div class="stiqstars-stat-icon">📸</div>
-                    <div class="stiqstars-stat-info">
-                        <div class="stiqstars-stat-value">${postsCount}</div>
-                        <div class="stiqstars-stat-label">StiQMoments <span>твои моменты</span></div>
-                    </div>
-                </div>
-                <div class="stiqstars-stat" onclick="openPassport()">
-                    <div class="stiqstars-stat-icon">🛂</div>
-                    <div class="stiqstars-stat-info">
-                        <div class="stiqstars-stat-value">${visaCount}</div>
-                        <div class="stiqstars-stat-label">StiQVisas <span>твои визы</span></div>
-                    </div>
+                <div class="passport-title">PASSPORT STIQ · ${visa.country}</div>
+                <div class="passport-place">${visa.icon} ${visa.place}</div>
+                <div class="passport-number">№ ${visa.number}</div>
+                <div class="passport-message">${visa.message}</div>
+                <div class="passport-footer">
+                    <span class="passport-country">${visa.city}, ${visa.country}</span>
+                    <span class="passport-visa-type">${visa.visaType}</span>
                 </div>
             `;
+            
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
 
-            document.getElementById('stiqstarsPopup').classList.add('active');
-        };
+        function updateVisaCollection() {
+            const container = document.getElementById('visaCollection');
+            if (!container) return;
+            
+            container.innerHTML = visaCollection.map(visa => `
+                <div class="visa-item" onclick="showVisaDetails('${visa.id}')">
+                    <div class="visa-item-icon">${visa.icon}</div>
+                    <div class="visa-item-place">${visa.place}</div>
+                    <div class="visa-item-date">${formatDate(visa.date)}</div>
+                </div>
+            `).join('');
+        }
 
-        window.closeStiqStars = function() {
-            document.getElementById('stiqstarsPopup').classList.remove('active');
-        };
+        function checkForPlaceInPost(text) {
+            for (const place of famousPlaces) {
+                if (text.toLowerCase().includes(place.name.toLowerCase()) ||
+                    text.toLowerCase().includes(place.city.toLowerCase())) {
+                    showPassportStiQ(place.name);
+                    break;
+                }
+            }
+        }
 
-        window.openPassport = function() {
-            closeStiqStars();
-            // Здесь можно открыть экран с визами
-            alert('Скоро здесь будет твой StiQPassport!');
+        // ========== STIQSTARS ==========
+        window.openStiqStars = async function() {
+            // Просто анимация звезды, статистика уже видна
+            const star = document.getElementById('profileStarBtn');
+            star.style.animation = 'none';
+            star.offsetHeight;
+            star.style.animation = 'starGlow 2s ease-in-out infinite';
         };
 
         // ========== УПРАВЛЕНИЕ НАВИГАЦИЕЙ ==========
@@ -2314,6 +2834,8 @@
                 updateChatList();
             } else if (screenId === 'profileScreen') {
                 updateProfileUI();
+            } else if (screenId === 'passportStiQScreen') {
+                updateVisaCollection();
             }
         };
 
@@ -2473,6 +2995,10 @@
                     post.set('image', parseFile);
                 }
                 await post.save();
+                
+                // Проверяем наличие мест в тексте
+                checkForPlaceInPost(text);
+                
                 return { success: true };
             } catch (error) {
                 return { success: false };
@@ -2835,6 +3361,9 @@
                 
                 if (!isOwn) {
                     messageCount++;
+                    if (messageCount % 50 === 0) {
+                        showPassportStiQ();
+                    }
                     markMessagesAsSeen(conversationId);
                 }
             });
@@ -2940,6 +3469,7 @@
                 
                 currentConversationId = conversation.id;
                 currentOtherUserId = otherUserId;
+                messageCount = 0;
                 
                 const otherUser = await new Parse.Query('_User').get(otherUserId);
                 
@@ -3079,12 +3609,10 @@
             document.getElementById('profileAvatar').className = `profile-avatar ${avatarClass}`;
             if (avatarStyle) document.getElementById('profileAvatar').style.cssText = avatarStyle;
             
-            // Обновляем скрытую статистику
             const posts = await getUserPosts(user.id);
             document.getElementById('profilePostsCount').textContent = posts.length;
             document.getElementById('profileFollowersCount').textContent = await getFollowersCount(user.id);
             document.getElementById('profileFollowingCount').textContent = await getFollowingCount(user.id);
-            document.getElementById('profileVisaCount').textContent = visaCollection.length;
             
             const messageBtn = document.getElementById('profileMessageBtn');
             const subscribeBtn = document.getElementById('profileSubscribeBtn');
@@ -3144,7 +3672,7 @@
 
         window.openUserProfile = async function(userId) {
             await updateProfileUI(userId);
-            navigateTo('profileScreen', document.querySelectorAll('.nav-item')[3]);
+            navigateTo('profileScreen', document.querySelectorAll('.nav-item')[4]);
         };
 
         window.showPosts = () => navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
@@ -3152,9 +3680,80 @@
         window.showSubscriptions = async function(type) {
             const userId = currentProfileUserId || getCurrentUser().id;
             document.getElementById('subscriptionsTitle').textContent = type === 'followers' ? 'Подписчики' : 'Подписки';
-            // Здесь можно открыть модалку с подписками
-            alert(`Скоро здесь будут твои ${type === 'followers' ? 'StiQFans' : 'StiQStars'}!`);
+            
+            const list = document.getElementById('subscriptionsList');
+            const users = type === 'followers' ? await getFollowers(userId) : await getFollowing(userId);
+            
+            list.innerHTML = users.map(user => `
+                <div class="subscription-item" onclick="openUserProfile('${user.id}')">
+                    <div class="subscription-avatar ${getAvatarClass(user)}" style="${getAvatarStyle(user)}"></div>
+                    <div class="subscription-info">
+                        <div class="subscription-name">${user.get('firstName')} ${user.get('lastName')}</div>
+                        <div class="subscription-nick">@${user.get('nickname') || ''}</div>
+                        <div class="subscription-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
+                    </div>
+                    <button class="subscription-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            `).join('') || '<p style="text-align:center;">Нет пользователей</p>';
+            
+            document.getElementById('subscriptionsModal').classList.add('active');
         };
+
+        window.closeSubscriptions = function() {
+            document.getElementById('subscriptionsModal').classList.remove('active');
+            document.getElementById('subscriptionsSearchInput').value = '';
+        };
+
+        window.switchSubTab = function(tab) {
+            document.querySelectorAll('.subscriptions-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            const userId = currentProfileUserId || getCurrentUser().id;
+            showSubscriptions(tab);
+        };
+
+        document.getElementById('subscriptionsSearchBtn').addEventListener('click', async () => {
+            const searchInput = document.getElementById('subscriptionsSearchInput');
+            const query = searchInput.value.trim();
+            const activeTab = document.querySelector('.subscriptions-tab.active').textContent;
+            const type = activeTab === 'Подписчики' ? 'followers' : 'following';
+            const userId = currentProfileUserId || getCurrentUser().id;
+            
+            const list = document.getElementById('subscriptionsList');
+            const users = type === 'followers' ? await getFollowers(userId) : await getFollowing(userId);
+            
+            const filteredUsers = query ? 
+                users.filter(u => {
+                    const name = `${u.get('firstName')} ${u.get('lastName')}`.toLowerCase();
+                    const nick = u.get('nickname')?.toLowerCase() || '';
+                    return name.includes(query.toLowerCase()) || nick.includes(query.toLowerCase());
+                }) : users;
+            
+            list.innerHTML = filteredUsers.map(user => `
+                <div class="subscription-item" onclick="openUserProfile('${user.id}')">
+                    <div class="subscription-avatar ${getAvatarClass(user)}" style="${getAvatarStyle(user)}"></div>
+                    <div class="subscription-info">
+                        <div class="subscription-name">${user.get('firstName')} ${user.get('lastName')}</div>
+                        <div class="subscription-nick">@${user.get('nickname') || ''}</div>
+                        <div class="subscription-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
+                    </div>
+                    <button class="subscription-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            `).join('') || '<p style="text-align:center;">Нет пользователей</p>';
+        });
+
+        document.getElementById('subscriptionsSearchInput').addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('subscriptionsSearchBtn').click();
+            }
+        });
 
         window.togglePostMenu = (postId) => {
             document.querySelectorAll('.post-menu-dropdown').forEach(m => m.classList.remove('active'));
@@ -3181,13 +3780,16 @@
             if (await addComment(postId, text)) {
                 input.value = '';
                 await updateHomeFeed();
+                if (document.getElementById('postViewer').classList.contains('active')) {
+                    await openPostViewer(postId);
+                }
             }
         };
 
         window.editPost = (postId) => {
             const newText = prompt('Редактировать пост:');
             if (newText) {
-                // Функция editPost не реализована
+                // Здесь должна быть функция editPost
                 updateHomeFeed();
             }
         };
@@ -3261,6 +3863,196 @@
 
         window.closePostViewer = () => document.getElementById('postViewer').classList.remove('active');
 
+        // ========== СТОРИС ==========
+        window.addStory = function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                await createStory(file);
+                await updateHomeFeed();
+            };
+            input.click();
+        };
+
+        async function createStory(imageFile) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const story = new Story();
+                story.set('author', getCurrentUser());
+                story.set('views', []);
+                
+                const parseFile = new Parse.File('story.jpg', imageFile);
+                await parseFile.save();
+                story.set('image', parseFile);
+                
+                await story.save();
+                return { success: true };
+            } catch (error) {
+                return { success: false };
+            }
+        }
+
+        async function getStories() {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                query.include('author');
+                query.include('views.user');
+                query.descending('createdAt');
+                const stories = await query.find();
+                
+                const uniqueUsers = new Set();
+                return stories.filter(s => {
+                    const author = s.get('author');
+                    if (uniqueUsers.has(author.id)) return false;
+                    uniqueUsers.add(author.id);
+                    return true;
+                });
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function getUserStories(userId) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                query.equalTo('author', { __type: 'Pointer', className: '_User', objectId: userId });
+                query.include('views.user');
+                query.descending('createdAt');
+                return await query.find();
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function addStoryView(storyId, userId) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                const story = await query.get(storyId);
+                
+                const views = story.get('views') || [];
+                const alreadyViewed = views.some(v => v.user && v.user.id === userId);
+                
+                if (!alreadyViewed) {
+                    views.push({
+                        user: { __type: 'Pointer', className: '_User', objectId: userId },
+                        viewedAt: new Date()
+                    });
+                    story.set('views', views);
+                    await story.save();
+                }
+                return views;
+            } catch (error) {
+                return [];
+            }
+        }
+
+        window.viewStory = async function(userId) {
+            const stories = await getUserStories(userId);
+            if (stories.length === 0) return;
+            
+            const user = await new Parse.Query('_User').get(userId);
+            currentStoryUser = { user, stories, index: 0 };
+            
+            if (userId !== getCurrentUser().id) {
+                await addStoryView(stories[0].id, getCurrentUser().id);
+            }
+            
+            showStory(0);
+        };
+
+        function showStory(index) {
+            if (!currentStoryUser) return;
+            
+            const story = currentStoryUser.stories[index];
+            const user = currentStoryUser.user;
+            
+            document.getElementById('storyAvatar').style.backgroundImage = 
+                getAvatarStyle(user) || `url('${getAvatarClass(user)}')`;
+            document.getElementById('storyName').textContent = 
+                `${user.get('firstName')} ${user.get('lastName')}`;
+            document.getElementById('storyImage').style.backgroundImage = 
+                `url('${story.get('image').url()}')`;
+            document.getElementById('storyViewer').classList.add('active');
+            
+            if (user.id === getCurrentUser().id) {
+                const views = story.get('views') || [];
+                const viewsList = document.getElementById('storyViewsList');
+                viewsList.innerHTML = views.map(v => `
+                    <div class="story-view-item" onclick="openUserProfile('${v.user.id}')">
+                        <div class="story-view-avatar ${getAvatarClass(v.user)}" style="${getAvatarStyle(v.user)}"></div>
+                        <div class="story-view-name">${v.user.get('firstName')} ${v.user.get('lastName')}</div>
+                        <div class="story-view-time">${formatTime(v.viewedAt)}</div>
+                    </div>
+                `).join('');
+                document.getElementById('storyViews').classList.remove('hidden');
+            } else {
+                document.getElementById('storyViews').classList.add('hidden');
+            }
+            
+            const progress = document.getElementById('storyProgress');
+            progress.style.width = '0%';
+            
+            setTimeout(() => {
+                progress.style.width = '100%';
+            }, 100);
+            
+            if (storyTimer) clearTimeout(storyTimer);
+            storyTimer = setTimeout(() => {
+                if (index + 1 < currentStoryUser.stories.length) {
+                    showStory(index + 1);
+                } else {
+                    closeStory();
+                }
+            }, 5000);
+        }
+
+        window.closeStory = function() {
+            document.getElementById('storyViewer').classList.remove('active');
+            if (storyTimer) clearTimeout(storyTimer);
+            currentStoryUser = null;
+        };
+
+        window.likeStory = function() {
+            const input = document.getElementById('storyReplyText');
+            const text = input.value.trim();
+            
+            if (text) {
+                addNotification('story_reply', '💬 Ответ на историю', 
+                    `Вы ответили: "${text}"`, currentStoryUser?.user);
+                alert(`Ответ отправлен: ${text}`);
+                input.value = '';
+            } else {
+                addNotification('story_like', '❤️ Лайк на историю', 
+                    `Вы лайкнули историю ${currentStoryUser?.user?.get('firstName') || 'пользователя'}`);
+                alert('❤️ Лайк на историю');
+            }
+        };
+
+        window.sendStoryReply = function() {
+            const input = document.getElementById('storyReplyText');
+            const text = input.value.trim();
+            if (text) {
+                addNotification('story_reply', '💬 Ответ на историю', 
+                    `Вы ответили: "${text}"`, currentStoryUser?.user);
+                alert(`Ответ отправлен: ${text}`);
+                input.value = '';
+            }
+        };
+
+        window.openPhoto = function(url, author) {
+            document.getElementById('photoImage').style.backgroundImage = `url('${url}')`;
+            document.getElementById('photoInfo').textContent = `Фото · ${author}`;
+            document.getElementById('photoViewer').classList.add('active');
+        };
+
+        window.closePhoto = () => document.getElementById('photoViewer').classList.remove('active');
+
         // ========== КНОПКИ ==========
         document.getElementById('cancelPostBtn').addEventListener('click', () => {
             document.getElementById('addPostModal').classList.remove('active');
@@ -3308,6 +4100,11 @@
             if (result.success) {
                 input.value = '';
                 addMessageToChat(text, true, new Date(), result.messageId, false);
+                
+                messageCount++;
+                if (messageCount % 50 === 0) {
+                    showPassportStiQ();
+                }
                 
                 if (currentChannel) {
                     currentChannel.trigger('client-new-message', {
