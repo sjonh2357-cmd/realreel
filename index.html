@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · v4.1</title>
+    <title>RealReel · v4.2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -58,7 +58,7 @@
         .logo {
             font-weight: 700;
             font-size: 20px;
-            background: linear-gradient(135deg, #6C5CE7, #A463F5, #FF6B6B);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
@@ -283,7 +283,7 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 25px;
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -308,7 +308,7 @@
         .auth-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border: none;
             border-radius: 40px;
             color: white;
@@ -493,7 +493,7 @@
         }
 
         .modal-btn.save {
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             color: white;
         }
 
@@ -509,12 +509,12 @@
             margin-top: 15px;
         }
 
-        /* ===== PASSPORT STIQ - ПОЛНОСТЬЮ ВОССТАНОВЛЕН ===== */
+        /* ===== PASSPORT STIQ ===== */
         .passport-stiq {
             position: relative;
             margin: 10px 0;
             padding: 20px;
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border-radius: 20px;
             color: white;
             animation: passportAppear 0.5s ease-out;
@@ -637,7 +637,7 @@
         }
 
         .visa-item {
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border-radius: 12px;
             padding: 12px 8px;
             text-align: center;
@@ -668,7 +668,7 @@
             opacity: 0.8;
         }
 
-        /* Истории - ВОССТАНОВЛЕНЫ */
+        /* Истории */
         .stories {
             display: flex;
             gap: 16px;
@@ -712,7 +712,7 @@
             right: -2px;
             width: 22px;
             height: 22px;
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border-radius: 11px;
             display: flex;
             align-items: center;
@@ -811,7 +811,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #6C5CE7, #A463F5);
+            background: linear-gradient(90deg, #6C5CE7, #4a90e2);
             width: 0%;
             transition: width 5s linear;
             border-radius: 2px;
@@ -1122,7 +1122,7 @@
         .comment-btn {
             width: 38px;
             height: 38px;
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border: none;
             border-radius: 19px;
             color: white;
@@ -1196,7 +1196,7 @@
         }
 
         .search-btn {
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border: none;
             border-radius: 25px;
             padding: 6px 16px;
@@ -1287,7 +1287,7 @@
         }
 
         .user-btn:hover {
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             color: white;
             transform: scale(1.05);
         }
@@ -1552,7 +1552,7 @@
         }
 
         .message.right .message-bubble {
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             color: white;
             border-radius: 18px 18px 6px 18px;
         }
@@ -1677,7 +1677,7 @@
         .chat-room-send {
             width: 44px;
             height: 44px;
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border: none;
             border-radius: 22px;
             color: white;
@@ -1749,20 +1749,15 @@
             color: #333;
         }
 
-        /* ФИОЛЕТОВО-ГОЛУБАЯ ЗВЕЗДА БЕЗ АНИМАЦИИ */
+        /* ЗВЕЗДА КАК В TELEGRAM - ФИОЛЕТОВО-ГОЛУБАЯ, БЕЗ АНИМАЦИИ */
         .profile-star {
             width: 32px;
             height: 32px;
             background: linear-gradient(135deg, #6C5CE7, #4a90e2);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
+            -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
+            mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>') center/contain no-repeat;
             cursor: pointer;
             transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(108,92,231,0.3);
         }
 
         .profile-star:hover {
@@ -1783,6 +1778,39 @@
             padding: 12px 16px;
             border-radius: 16px;
             border-left: 3px solid #6C5CE7;
+            position: relative;
+        }
+
+        /* КНОПКА РЕДАКТИРОВАНИЯ ВОЗЛЕ БИО */
+        .edit-bio-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            width: 32px;
+            height: 32px;
+            background: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #6C5CE7;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid rgba(108,92,231,0.1);
+        }
+
+        .edit-bio-btn:hover {
+            background: #6C5CE7;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .edit-bio-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
         }
 
         .profile-traits {
@@ -1793,131 +1821,65 @@
         }
 
         .profile-trait {
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             color: white;
             padding: 6px 14px;
             border-radius: 25px;
             font-size: 12px;
             font-weight: 500;
+            animation: traitPulse 2s ease-in-out infinite;
         }
 
-        /* СТАТИСТИКА ПРИ НАЖАТИИ НА ЗВЕЗДУ */
-        .stats-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 280px;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 30px;
-            padding: 25px;
-            box-shadow: 0 30px 50px rgba(108,92,231,0.3);
-            border: 2px solid rgba(108,92,231,0.2);
-            z-index: 1000;
-            display: none;
+        @keyframes traitPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .stats-popup.active {
-            display: block;
-        }
-
-        .stats-popup-header {
+        /* УМЕНЬШЕННАЯ СТАТИСТИКА */
+        .stats-mini {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(108,92,231,0.2);
+            justify-content: space-around;
+            background: white;
+            border-radius: 20px;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid rgba(108,92,231,0.1);
+            box-shadow: 0 2px 8px rgba(108,92,231,0.05);
         }
 
-        .stats-popup-header h3 {
-            font-size: 20px;
+        .stat-mini-item {
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .stat-mini-item:hover {
+            background: rgba(108,92,231,0.05);
+            transform: translateY(-2px);
+        }
+
+        .stat-mini-value {
+            font-size: 18px;
             font-weight: 700;
             background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            flex: 1;
+            line-height: 1.2;
+            animation: statPulse 2s ease-in-out infinite;
         }
 
-        .stats-popup-header .star-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
+        .stat-mini-label {
+            font-size: 10px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .stats-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 12px;
-            background: rgba(108,92,231,0.05);
-            border-radius: 20px;
-            transition: 0.2s;
-        }
-
-        .stat-item:hover {
-            background: rgba(108,92,231,0.1);
-            transform: translateX(5px);
-        }
-
-        .stat-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
-            border-radius: 22.5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            color: white;
-        }
-
-        .stat-info {
-            flex: 1;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #6C5CE7;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: #666;
-            margin-top: 2px;
-        }
-
-        .stats-close {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .stats-close:hover {
-            transform: scale(1.02);
+        @keyframes statPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .profile-actions {
@@ -1940,7 +1902,7 @@
         }
 
         .profile-btn.primary {
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             color: white;
             box-shadow: 0 3px 10px rgba(108,92,231,0.2);
         }
@@ -2058,7 +2020,7 @@
             transform: scale(1.05);
         }
 
-        /* Панель уведомлений - УБРАЛ ЛИШНИЕ СИМВОЛЫ */
+        /* Панель уведомлений - УБРАНЫ ЛИШНИЕ СИМВОЛЫ */
         .notifications-panel {
             position: fixed;
             top: 70px;
@@ -2335,7 +2297,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v4.1</span></div>
+            <div class="logo">RealReel <span class="version">v4.2</span></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
@@ -2511,7 +2473,7 @@
                 </div>
             </div>
 
-            <!-- PASSPORT STIQ - ПОЛНОСТЬЮ ВОССТАНОВЛЕН -->
+            <!-- PASSPORT STIQ -->
             <div class="screen" id="passportStiQScreen">
                 <div class="search-screen">
                     <div style="text-align: center; margin: 20px 0;">
@@ -2558,21 +2520,42 @@
                         <div class="profile-info">
                             <div class="profile-name-row">
                                 <span class="profile-name" id="profileFullName">Имя Фамилия</span>
-                                <!-- ФИОЛЕТОВО-ГОЛУБАЯ ЗВЕЗДА БЕЗ АНИМАЦИИ -->
-                                <div class="profile-star" id="profileStarBtn" onclick="openStats()">⭐</div>
+                                <!-- ЗВЕЗДА КАК В TELEGRAM -->
+                                <div class="profile-star" id="profileStarBtn" onclick="openStats()"></div>
                             </div>
                             <div class="profile-nick" id="profileNick">@nickname</div>
                         </div>
                     </div>
-                    <div class="profile-bio" id="profileBio"></div>
+                    
+                    <!-- БИО С КНОПКОЙ РЕДАКТИРОВАНИЯ -->
+                    <div class="profile-bio" id="profileBio">
+                        <div class="edit-bio-btn" id="editProfileBtn">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
                     <div class="profile-traits" id="profileTraits"></div>
 
-                    <!-- СКРЫТАЯ СТАТИСТИКА ДЛЯ ПОПАПА -->
-                    <div class="hidden-stats" style="display: none;">
-                        <span id="profilePostsCount">0</span>
-                        <span id="profileFollowersCount">0</span>
-                        <span id="profileFollowingCount">0</span>
-                        <span id="profileVisaCount">0</span>
+                    <!-- УМЕНЬШЕННАЯ АНИМИРОВАННАЯ СТАТИСТИКА -->
+                    <div class="stats-mini">
+                        <div class="stat-mini-item" onclick="showSubscriptions('followers')">
+                            <div class="stat-mini-value" id="profileFollowersCount">0</div>
+                            <div class="stat-mini-label">подписчики</div>
+                        </div>
+                        <div class="stat-mini-item" onclick="showSubscriptions('following')">
+                            <div class="stat-mini-value" id="profileFollowingCount">0</div>
+                            <div class="stat-mini-label">подписки</div>
+                        </div>
+                        <div class="stat-mini-item" onclick="showPosts()">
+                            <div class="stat-mini-value" id="profilePostsCount">0</div>
+                            <div class="stat-mini-label">посты</div>
+                        </div>
+                        <div class="stat-mini-item" onclick="openPassport()">
+                            <div class="stat-mini-value" id="profileVisaCount">0</div>
+                            <div class="stat-mini-label">визы</div>
+                        </div>
                     </div>
 
                     <div class="profile-actions">
@@ -2583,11 +2566,6 @@
                     <div class="posts-grid" id="userPostsGrid"></div>
 
                     <div class="settings-row">
-                        <div class="settings-icon" id="editProfileBtn">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-                            </svg>
-                        </div>
                         <div class="logout-icon" id="logoutBtn">
                             <svg viewBox="0 0 24 24">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
@@ -2598,16 +2576,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- ПОПАП СО СТАТИСТИКОЙ (открывается по звезде) -->
-        <div class="stats-popup" id="statsPopup">
-            <div class="stats-popup-header">
-                <div class="star-icon">⭐</div>
-                <h3>Твоя статистика</h3>
-            </div>
-            <div class="stats-list" id="statsList"></div>
-            <button class="stats-close" onclick="closeStats()">Закрыть</button>
         </div>
 
         <!-- Модалка подписок -->
@@ -2821,55 +2789,6 @@
                 }
             }
         }
-
-        // ========== СТАТИСТИКА ПО ЗВЕЗДЕ ==========
-        window.openStats = async function() {
-            const user = currentProfileUserId ? await new Parse.Query('_User').get(currentProfileUserId) : getCurrentUser();
-            if (!user) return;
-
-            const postsCount = (await getUserPosts(user.id)).length;
-            const followersCount = await getFollowersCount(user.id);
-            const followingCount = await getFollowingCount(user.id);
-            const visaCount = visaCollection.length;
-
-            const statsList = document.getElementById('statsList');
-            statsList.innerHTML = `
-                <div class="stat-item">
-                    <div class="stat-icon">👥</div>
-                    <div class="stat-info">
-                        <div class="stat-value">${followersCount}</div>
-                        <div class="stat-label">подписчики</div>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">⭐</div>
-                    <div class="stat-info">
-                        <div class="stat-value">${followingCount}</div>
-                        <div class="stat-label">подписки</div>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">📸</div>
-                    <div class="stat-info">
-                        <div class="stat-value">${postsCount}</div>
-                        <div class="stat-label">посты</div>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">🛂</div>
-                    <div class="stat-info">
-                        <div class="stat-value">${visaCount}</div>
-                        <div class="stat-label">визы</div>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('statsPopup').classList.add('active');
-        };
-
-        window.closeStats = function() {
-            document.getElementById('statsPopup').classList.remove('active');
-        };
 
         // ========== УПРАВЛЕНИЕ НАВИГАЦИЕЙ ==========
         function toggleAuthNav(showAuth) {
@@ -3644,7 +3563,6 @@
             const posts = await getAllPosts();
             const currentUser = getCurrentUser();
             
-            // Загружаем сторис
             const stories = await getStories();
             const userStories = await getUserStories(currentUser.id);
             const hasStory = userStories.length > 0;
@@ -3745,8 +3663,8 @@
             document.getElementById('profileFullName').textContent = `${user.get('firstName')} ${user.get('lastName')}`;
             document.getElementById('profileNick').textContent = `@${user.get('nickname') || ''}`;
             
-            document.getElementById('profileBio').textContent = user.get('bio') || '';
-            document.getElementById('profileBio').style.display = user.get('bio') ? 'block' : 'none';
+            const bio = user.get('bio') || 'Расскажи о себе...';
+            document.getElementById('profileBio').innerHTML = bio + `<div class="edit-bio-btn" id="editProfileBtn"><svg viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>`;
             
             const traits = user.get('traits') || [];
             const traitsContainer = document.getElementById('profileTraits');
@@ -3762,6 +3680,7 @@
             document.getElementById('profilePostsCount').textContent = posts.length;
             document.getElementById('profileFollowersCount').textContent = await getFollowersCount(user.id);
             document.getElementById('profileFollowingCount').textContent = await getFollowingCount(user.id);
+            document.getElementById('profileVisaCount').textContent = visaCollection.length;
             
             const messageBtn = document.getElementById('profileMessageBtn');
             const subscribeBtn = document.getElementById('profileSubscribeBtn');
@@ -3794,6 +3713,9 @@
             }).join('');
             
             document.getElementById('userPostsGrid').innerHTML = postsHtml || '<p style="text-align:center;">Нет постов</p>';
+            
+            // Добавляем обработчик для кнопки редактирования
+            document.getElementById('editProfileBtn').addEventListener('click', openEditProfile);
         }
 
         async function updateSearchResults() {
@@ -4008,6 +3930,12 @@
 
         window.showPosts = () => navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
 
+        window.openPassport = () => navigateTo('passportStiQScreen', document.querySelectorAll('.nav-item')[2]);
+
+        window.openStats = function() {
+            // Звезда просто красивая, без функции
+        };
+
         window.showSubscriptions = async function(type) {
             const userId = currentProfileUserId || getCurrentUser().id;
             document.getElementById('subscriptionsTitle').textContent = type === 'followers' ? 'Подписчики' : 'Подписки';
@@ -4200,6 +4128,24 @@
             document.getElementById('photoViewer').classList.add('active');
         };
 
+        // ========== РЕДАКТИРОВАНИЕ ПРОФИЛЯ ==========
+        function openEditProfile() {
+            const user = getCurrentUser();
+            if (!user) return;
+            
+            document.getElementById('editFirstName').value = user.get('firstName') || '';
+            document.getElementById('editLastName').value = user.get('lastName') || '';
+            document.getElementById('editNickname').value = user.get('nickname') || '';
+            document.getElementById('editBio').value = user.get('bio') || '';
+            
+            const currentTraits = user.get('traits') || [];
+            document.querySelectorAll('.trait-option').forEach(opt => {
+                opt.classList.toggle('selected', currentTraits.includes(opt.dataset.trait));
+            });
+            
+            document.getElementById('editProfileModal').classList.add('active');
+        }
+
         // ========== КНОПКИ ==========
         document.getElementById('cancelPostBtn').addEventListener('click', () => {
             document.getElementById('addPostModal').classList.remove('active');
@@ -4276,23 +4222,6 @@
             }
         });
 
-        document.getElementById('editProfileBtn').addEventListener('click', () => {
-            const user = getCurrentUser();
-            if (!user) return;
-            
-            document.getElementById('editFirstName').value = user.get('firstName') || '';
-            document.getElementById('editLastName').value = user.get('lastName') || '';
-            document.getElementById('editNickname').value = user.get('nickname') || '';
-            document.getElementById('editBio').value = user.get('bio') || '';
-            
-            const currentTraits = user.get('traits') || [];
-            document.querySelectorAll('.trait-option').forEach(opt => {
-                opt.classList.toggle('selected', currentTraits.includes(opt.dataset.trait));
-            });
-            
-            document.getElementById('editProfileModal').classList.add('active');
-        });
-
         document.querySelectorAll('.trait-option').forEach(opt => {
             opt.addEventListener('click', function() {
                 const selected = document.querySelectorAll('.trait-option.selected').length;
@@ -4355,9 +4284,6 @@
                 }
                 if (!e.target.closest('.reaction-panel') && !e.target.closest('.message')) {
                     document.getElementById('reactionPanel').classList.remove('active');
-                }
-                if (!e.target.closest('.stats-popup') && !e.target.closest('.profile-star')) {
-                    closeStats();
                 }
             });
         };
