@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · Instagram Clone</title>
+    <title>RealReel · v5.0</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fafafa;
+            background: #f5f5f5;
             padding: 0;
             margin: 0;
         }
@@ -30,33 +30,32 @@
             height: 720px;
             background: #ffffff;
             border-radius: 0;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
             overflow: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
         }
 
-        /* ===== ИНСТАГРАМ-СТИЛЬ ===== */
+        /* ===== БЕЛАЯ ТЕМА ===== */
         :root {
             --bg-primary: #ffffff;
-            --bg-surface: #fafafa;
-            --bg-surface-hover: #f0f0f0;
-            --text-primary: #262626;
-            --text-secondary: #8e8e8e;
+            --bg-surface: #f8f9fa;
+            --bg-surface-hover: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
             --accent-primary: #9b59b6;
             --accent-secondary: #8e44ad;
-            --border-color: #dbdbdb;
-            --story-border: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --border-color: #dee2e6;
         }
 
         /* Верхняя навигация */
         .top-nav {
-            padding: 12px 16px;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--bg-primary);
+            background: var(--bg-surface);
             border-bottom: 1px solid var(--border-color);
             position: relative;
             z-index: 10;
@@ -69,123 +68,118 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .logo {
-            font-weight: 600;
-            font-size: 22px;
-            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--accent-primary);
             letter-spacing: -0.5px;
         }
 
         .version {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-secondary);
-            font-weight: 400;
-            background: var(--bg-surface);
+            font-weight: 500;
+            background: rgba(0,0,0,0.05);
             padding: 2px 6px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
+            border-radius: 20px;
         }
 
-        /* GOOGLE-STYLE ДНЕВНАЯ ФИЧА (СТИЛИЗОВАНА ПОД НАВИГАЦИЮ) */
         .daily-feature {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
-            color: var(--text-primary);
-            background: var(--bg-surface);
-            padding: 6px 14px;
-            border-radius: 30px;
+            color: var(--accent-primary);
+            background: rgba(155, 89, 182, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
             cursor: pointer;
             transition: 0.2s;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            border: 1px solid rgba(155, 89, 182, 0.2);
         }
 
         .daily-feature:hover {
-            background: var(--bg-surface-hover);
-            border-color: var(--accent-primary);
-            transform: translateY(-1px);
-        }
-
-        .daily-feature span {
-            font-size: 16px;
+            background: rgba(155, 89, 182, 0.2);
+            transform: scale(1.02);
         }
 
         .nav-icons {
             display: flex;
-            gap: 16px;
+            gap: 18px;
             align-items: center;
         }
 
         .nav-icon {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: relative;
-            color: var(--text-primary);
+            color: var(--text-secondary);
             transition: 0.2s;
+            background: rgba(0,0,0,0.03);
             border-radius: 50%;
         }
 
         .nav-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 18px;
+            height: 18px;
             stroke: currentColor;
             fill: none;
-            stroke-width: 1.5;
+            stroke-width: 2;
         }
 
         .nav-icon:hover {
-            background: var(--bg-surface-hover);
+            background: var(--accent-primary);
+            color: white;
+            transform: scale(1.05);
         }
 
         .add-post-icon {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--text-primary);
+            color: var(--text-secondary);
             transition: 0.2s;
+            background: rgba(0,0,0,0.03);
             border-radius: 50%;
         }
 
         .add-post-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 18px;
+            height: 18px;
             stroke: currentColor;
             fill: none;
-            stroke-width: 1.5;
+            stroke-width: 2;
         }
 
         .add-post-icon:hover {
-            background: var(--bg-surface-hover);
+            background: var(--accent-primary);
+            color: white;
+            transform: scale(1.05);
         }
 
         .badge {
             position: absolute;
-            top: 4px;
-            right: 4px;
-            background: #ed4956;
+            top: -3px;
+            right: -3px;
+            background: #FF6B6B;
             color: white;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 9px;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 4px;
+            padding: 0 3px;
             border: 2px solid var(--bg-primary);
         }
 
@@ -193,16 +187,17 @@
         .content {
             flex: 1;
             overflow-y: auto;
+            padding: 16px;
             background: var(--bg-primary);
         }
 
-        /* Нижняя навигация (Instagram-style) */
+        /* Нижняя навигация */
         .bottom-nav {
             display: flex;
             align-items: center;
             justify-content: space-around;
-            padding: 8px 0;
-            background: var(--bg-primary);
+            padding: 10px 0;
+            background: var(--bg-surface);
             border-top: 1px solid var(--border-color);
             position: relative;
             z-index: 10;
@@ -225,43 +220,43 @@
         }
 
         .nav-item svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             stroke: currentColor;
             fill: none;
-            stroke-width: 1.5;
+            stroke-width: 2;
         }
 
         .nav-item.active {
-            color: var(--text-primary);
+            color: var(--accent-primary);
         }
 
         .nav-item.active svg {
-            stroke: var(--text-primary);
-            fill: var(--text-primary);
+            filter: drop-shadow(0 2px 4px rgba(155,89,182,0.3));
         }
 
         .nav-item:hover {
-            color: var(--text-primary);
+            color: var(--accent-primary);
+            transform: translateY(-2px);
         }
 
         .nav-label {
             font-size: 10px;
-            margin-top: 2px;
-            font-weight: 400;
+            margin-top: 4px;
+            font-weight: 500;
         }
 
         .nav-badge {
             position: absolute;
-            top: 0;
-            right: 20px;
-            background: #ed4956;
+            top: -2px;
+            right: 15px;
+            background: #FF6B6B;
             color: white;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 9px;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -304,16 +299,16 @@
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 30px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.1);
             position: relative;
             z-index: 1;
             border: 1px solid var(--border-color);
         }
 
         .auth-title {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 26px;
+            font-weight: 700;
             text-align: center;
             margin-bottom: 25px;
             color: var(--accent-primary);
@@ -321,10 +316,10 @@
 
         .auth-input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 14px 18px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 12px;
+            border-radius: 40px;
+            margin-bottom: 14px;
             font-size: 14px;
             outline: none;
             transition: 0.2s;
@@ -334,24 +329,26 @@
 
         .auth-input:focus {
             border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(155,89,182,0.1);
         }
 
         .auth-btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: var(--accent-primary);
             border: none;
-            border-radius: 8px;
+            border-radius: 40px;
             color: white;
             font-weight: 600;
-            font-size: 14px;
             cursor: pointer;
             transition: 0.2s;
             position: relative;
+            box-shadow: 0 10px 20px rgba(155,89,182,0.2);
         }
 
         .auth-btn:hover {
-            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(155,89,182,0.3);
         }
 
         .auth-btn.loading {
@@ -393,7 +390,7 @@
             display: flex;
             justify-content: space-between;
             margin-top: 15px;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .auth-link {
@@ -407,8 +404,8 @@
         }
 
         .auth-error {
-            color: #ed4956;
-            font-size: 12px;
+            color: #FF6B6B;
+            font-size: 13px;
             text-align: center;
             margin-bottom: 10px;
         }
@@ -448,11 +445,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 320px;
-            background: var(--bg-primary);
-            border-radius: 20px;
+            width: 300px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
             padding: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.1);
             z-index: 200;
             display: none;
             border: 1px solid var(--border-color);
@@ -471,14 +470,13 @@
 
         .modal-input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 30px;
             margin-bottom: 15px;
             outline: none;
-            background: var(--bg-surface);
+            background: var(--bg-primary);
             color: var(--text-primary);
-            font-size: 14px;
         }
 
         .modal-input:focus {
@@ -486,15 +484,14 @@
         }
 
         .modal-file {
-            padding: 12px;
+            padding: 14px;
             border: 2px dashed var(--accent-primary);
-            border-radius: 8px;
+            border-radius: 30px;
             text-align: center;
             cursor: pointer;
             margin-bottom: 20px;
-            color: var(--accent-primary);
+            color: var(--accent-secondary);
             font-weight: 500;
-            font-size: 14px;
             transition: 0.2s;
         }
 
@@ -509,11 +506,10 @@
 
         .modal-btn {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 8px;
+            border-radius: 30px;
             font-weight: 600;
-            font-size: 14px;
             cursor: pointer;
             transition: 0.2s;
             background: var(--bg-surface-hover);
@@ -521,7 +517,7 @@
         }
 
         .modal-btn:hover {
-            background: #e0e0e0;
+            background: #d3d9df;
         }
 
         .modal-btn.save {
@@ -530,7 +526,8 @@
         }
 
         .modal-btn.save:hover {
-            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(155,89,182,0.2);
         }
 
         .modal-success {
@@ -552,10 +549,10 @@
         }
 
         .trait-option, .politics-option {
-            background: var(--bg-surface);
+            background: var(--bg-surface-hover);
             color: var(--text-primary);
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 25px;
             font-size: 12px;
             cursor: pointer;
             transition: 0.2s;
@@ -563,7 +560,9 @@
         }
 
         .trait-option:hover, .politics-option:hover {
-            background: var(--bg-surface-hover);
+            background: var(--accent-primary);
+            color: white;
+            transform: scale(1.05);
             border-color: var(--accent-primary);
         }
 
@@ -571,16 +570,218 @@
             background: var(--accent-primary);
             color: white;
             border-color: var(--accent-primary);
+            box-shadow: 0 0 10px rgba(155,89,182,0.3);
         }
 
-        /* Истории (Instagram-style) */
+        /* ===== PASSPORT STIQ ===== */
+        .passport-stiq {
+            position: relative;
+            margin: 10px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--accent-primary), #8e44ad);
+            border-radius: 20px;
+            color: white;
+            animation: passportAppear 0.5s ease-out, passportFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(155,89,182,0.3);
+            max-width: 90%;
+            align-self: center;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .passport-stiq.left {
+            align-self: flex-start;
+        }
+
+        .passport-stiq.right {
+            align-self: flex-end;
+        }
+
+        @keyframes passportAppear {
+            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        @keyframes passportFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .passport-icon {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            transform: rotate(5deg);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            animation: passportIconSpin 10s linear infinite;
+            border: 3px solid var(--accent-primary);
+        }
+
+        @keyframes passportIconSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .passport-icon img {
+            width: 40px;
+            height: 40px;
+            animation: passportIconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes passportIconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .passport-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 14px;
+            border-radius: 25px;
+            display: inline-block;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { background: rgba(255,255,255,0.2); }
+            50% { background: rgba(255,255,255,0.3); }
+        }
+
+        .passport-number {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .passport-place {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: placeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes placeGlow {
+            0%, 100% { text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+            50% { text-shadow: 0 5px 20px rgba(255,255,255,0.5); }
+        }
+
+        .passport-message {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 15px;
+            border-left: 3px solid white;
+        }
+
+        .passport-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            opacity: 0.9;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .passport-visa-type {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            animation: visaPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes visaPulse {
+            0%, 100% { background: rgba(255,255,255,0.2); }
+            50% { background: rgba(255,255,255,0.3); }
+        }
+
+        .passport-country {
+            font-size: 10px;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* Коллекция виз */
+        .visa-collection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .visa-item {
+            background: linear-gradient(135deg, var(--accent-primary), #8e44ad);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: visaItemAppear 0.5s ease-out;
+        }
+
+        .visa-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(155,89,182,0.3);
+        }
+
+        @keyframes visaItemAppear {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .visa-item-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+        }
+
+        .visa-item-place {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .visa-item-date {
+            font-size: 8px;
+            opacity: 0.8;
+        }
+
+        /* Истории */
         .stories {
             display: flex;
             gap: 16px;
             overflow-x: auto;
-            padding: 16px;
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border-color);
+            padding: 8px 0;
+            margin-bottom: 20px;
         }
 
         .stories::-webkit-scrollbar {
@@ -591,7 +792,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             min-width: 64px;
             cursor: pointer;
         }
@@ -602,26 +803,20 @@
             border-radius: 32px;
             background-size: cover;
             background-position: center;
+            border: 2px solid var(--accent-primary);
             position: relative;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 3px solid transparent;
-            background-clip: padding-box;
-        }
-
-        .story-avatar.has-story {
-            border: 3px solid transparent;
-            background: linear-gradient(white, white) padding-box, 
-                        var(--story-border) border-box;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .story-avatar.no-story {
-            border: 3px solid var(--border-color);
+            border-color: var(--border-color);
+            opacity: 0.7;
         }
 
         .story-add {
             position: absolute;
-            bottom: 2px;
-            right: 2px;
+            bottom: -2px;
+            right: -2px;
             width: 22px;
             height: 22px;
             background: var(--accent-primary);
@@ -632,16 +827,18 @@
             color: white;
             font-size: 16px;
             border: 2px solid var(--bg-primary);
+            animation: storyAddPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes storyAddPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .story-name {
             font-size: 11px;
             color: var(--text-secondary);
-            font-weight: 400;
-            max-width: 70px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            font-weight: 500;
         }
 
         /* Просмотр сторис */
@@ -667,40 +864,42 @@
             align-items: center;
             gap: 12px;
             color: white;
-            background: linear-gradient(0deg, transparent, rgba(0,0,0,0.3));
         }
 
         .story-header-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
             background-size: cover;
             background-position: center;
-            border: 2px solid white;
+            border: 2px solid rgba(255,255,255,0.3);
         }
 
         .story-header-name {
             font-weight: 600;
-            font-size: 14px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .story-close {
             margin-left: auto;
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 18px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 20px;
             color: white;
             transition: 0.2s;
         }
 
         .story-close:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.1);
         }
 
         .story-image {
@@ -713,23 +912,23 @@
 
         .story-progress {
             padding: 16px;
-            display: flex;
-            gap: 4px;
         }
 
-        .progress-segment {
-            flex: 1;
-            height: 2px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 1px;
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: white;
+            background: linear-gradient(90deg, var(--accent-primary), #8e44ad);
             width: 0%;
             transition: width 5s linear;
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent-primary);
         }
 
         .story-footer {
@@ -737,30 +936,37 @@
             display: flex;
             gap: 12px;
             align-items: center;
-            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.3));
         }
 
         .story-input {
             flex: 1;
-            padding: 12px 16px;
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 25px;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 40px;
             color: white;
             outline: none;
             font-size: 14px;
         }
 
         .story-input::placeholder {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.5);
+        }
+
+        .story-input:focus {
+            border-color: var(--accent-primary);
         }
 
         .story-action-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 22px;
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 24px;
             color: white;
             cursor: pointer;
             display: flex;
@@ -770,7 +976,8 @@
         }
 
         .story-action-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.1);
         }
 
         .story-action-btn svg {
@@ -780,13 +987,17 @@
             fill: none;
         }
 
+        /* Список просмотров сторис */
         .story-views {
             padding: 16px;
             background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
             margin: 16px;
             max-height: 300px;
             overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .story-views.hidden {
@@ -804,8 +1015,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 8px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 12px;
             cursor: pointer;
         }
 
@@ -814,9 +1025,9 @@
         }
 
         .story-view-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
             background-size: cover;
             background-position: center;
         }
@@ -833,34 +1044,36 @@
             font-size: 10px;
         }
 
-        /* Посты (Instagram-style) */
+        /* Посты */
         .posts {
             display: flex;
             flex-direction: column;
+            gap: 12px;
         }
 
         .post {
-            border-bottom: 1px solid var(--border-color);
-            background: var(--bg-primary);
+            padding: 15px;
+            background: var(--bg-surface);
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
         }
 
         .post-header {
             display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
             align-items: center;
-            padding: 12px 16px;
-            gap: 12px;
         }
 
         .post-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
             background-size: cover;
             background-position: center;
             cursor: pointer;
-            border: 2px solid transparent;
-            background: linear-gradient(white, white) padding-box, 
-                        var(--story-border) border-box;
+            border: 2px solid var(--accent-primary);
         }
 
         .post-author-info {
@@ -893,17 +1106,17 @@
             font-size: 16px;
             color: var(--text-secondary);
             cursor: pointer;
-            padding: 4px;
+            padding: 4px 6px;
         }
 
         .post-menu-dropdown {
             position: absolute;
             right: 0;
             top: 30px;
-            background: var(--bg-primary);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 4px;
+            background: var(--bg-surface);
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 6px;
             z-index: 10;
             display: none;
             border: 1px solid var(--border-color);
@@ -919,9 +1132,9 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 12px;
             color: var(--text-primary);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .post-menu-item:hover {
@@ -929,24 +1142,35 @@
         }
 
         .post-menu-item svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             stroke: currentColor;
             fill: none;
+        }
+
+        .post-text {
+            font-size: 13px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+            color: var(--text-primary);
         }
 
         .post-image {
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
             cursor: pointer;
         }
 
         .post-actions {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 12px 16px;
+            gap: 20px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
         }
 
         .post-action {
@@ -955,71 +1179,54 @@
             gap: 4px;
             cursor: pointer;
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .post-action svg {
-            width: 24px;
-            height: 24px;
+            width: 18px;
+            height: 18px;
             stroke: currentColor;
             fill: none;
-            stroke-width: 1.5;
         }
 
         .post-action.liked svg {
-            fill: #ed4956;
-            stroke: #ed4956;
+            fill: #FF6B6B;
+            stroke: #FF6B6B;
         }
 
         .post-action span {
             min-width: 18px;
             text-align: center;
-            font-size: 13px;
         }
 
         .post-date {
             margin-left: auto;
             font-size: 10px;
             color: var(--text-secondary);
-            text-transform: uppercase;
-        }
-
-        .post-text {
-            padding: 0 16px 12px;
-            font-size: 14px;
-            color: var(--text-primary);
-            line-height: 1.5;
-        }
-
-        .post-text strong {
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .post-text strong:hover {
-            color: var(--accent-primary);
         }
 
         /* Комментарии */
         .comments {
-            padding: 0 16px 12px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
         }
 
         .comment-input {
             display: flex;
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .comment-input-field {
             flex: 1;
-            padding: 8px 12px;
+            padding: 10px 14px;
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 30px;
             outline: none;
-            background: var(--bg-surface);
+            background: var(--bg-primary);
             color: var(--text-primary);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .comment-input-field:focus {
@@ -1027,22 +1234,22 @@
         }
 
         .comment-btn {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             background: var(--accent-primary);
             border: none;
-            border-radius: 18px;
+            border-radius: 19px;
             color: white;
             cursor: pointer;
             transition: 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
         }
 
         .comment-btn:hover {
-            background: var(--accent-secondary);
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(155,89,182,0.2);
         }
 
         .comments-list {
@@ -1069,17 +1276,12 @@
 
         .comment-author {
             font-weight: 600;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-primary);
-            cursor: pointer;
-        }
-
-        .comment-author:hover {
-            color: var(--accent-primary);
         }
 
         .comment-text {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
         }
 
@@ -1092,9 +1294,10 @@
             display: flex;
             gap: 10px;
             background: var(--bg-surface);
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 30px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
             border: 1px solid var(--border-color);
         }
 
@@ -1103,7 +1306,7 @@
             border: none;
             background: none;
             outline: none;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-primary);
         }
 
@@ -1114,38 +1317,42 @@
         .search-btn {
             background: var(--accent-primary);
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 6px 16px;
             color: white;
             font-weight: 500;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: 0.2s;
         }
 
         .search-btn:hover {
-            background: var(--accent-secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(155,89,182,0.2);
         }
 
         .search-results {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .user-card {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             padding: 12px;
             background: var(--bg-surface);
-            border-radius: 12px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
             border: 1px solid var(--border-color);
             cursor: pointer;
             transition: 0.2s;
         }
 
         .user-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(155,89,182,0.1);
             border-color: var(--accent-primary);
         }
 
@@ -1165,19 +1372,19 @@
         .user-name {
             font-weight: 600;
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .user-nick {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 2px;
+            font-size: 11px;
+            color: var(--accent-secondary);
+            margin-top: 1px;
         }
 
         .user-status {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-secondary);
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .user-actions {
@@ -1188,8 +1395,8 @@
         .user-btn {
             width: 36px;
             height: 36px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
+            background: var(--bg-surface-hover);
+            border: none;
             border-radius: 18px;
             color: var(--text-secondary);
             cursor: pointer;
@@ -1202,17 +1409,17 @@
         .user-btn:hover {
             background: var(--accent-primary);
             color: white;
-            border-color: var(--accent-primary);
+            transform: scale(1.05);
         }
 
         .user-btn svg {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             stroke: currentColor;
             fill: none;
         }
 
-        /* Чаты (Instagram DM style) */
+        /* Чаты */
         .chat-screen {
             display: flex;
             flex-direction: column;
@@ -1222,7 +1429,7 @@
         .chat-list {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
             overflow-y: auto;
             flex: 1;
         }
@@ -1230,21 +1437,26 @@
         .chat-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: var(--bg-primary);
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-surface);
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
             cursor: pointer;
             transition: 0.2s;
         }
 
         .chat-item:hover {
-            background: var(--bg-surface);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(155,89,182,0.1);
+            border-color: var(--accent-primary);
         }
 
         .chat-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 28px;
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
             background-size: cover;
             background-position: center;
             border: 2px solid var(--accent-primary);
@@ -1259,7 +1471,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .chat-name {
@@ -1274,13 +1486,13 @@
         }
 
         .unread-badge {
-            background: #ed4956;
+            background: #FF6B6B;
             color: white;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 9px;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1288,16 +1500,16 @@
         }
 
         .chat-preview {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
 
         .chat-time {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-secondary);
         }
 
@@ -1314,33 +1526,44 @@
             align-items: center;
             gap: 12px;
             padding: 12px 16px;
-            background: var(--bg-primary);
+            background: var(--bg-surface);
             border-bottom: 1px solid var(--border-color);
         }
 
         .chat-room-back {
             width: 36px;
             height: 36px;
+            background: var(--bg-surface-hover);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--text-primary);
-            font-size: 20px;
+            color: var(--text-secondary);
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
 
         .chat-room-back:hover {
-            color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: white;
+            transform: scale(1.05);
         }
 
         .chat-room-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 22px;
             background-size: cover;
             background-position: center;
             cursor: pointer;
+            position: relative;
+            transition: 0.2s;
             border: 2px solid var(--accent-primary);
+        }
+
+        .chat-room-avatar:hover {
+            transform: scale(1.05);
         }
 
         .chat-room-info {
@@ -1348,11 +1571,16 @@
             cursor: pointer;
         }
 
+        .chat-room-info:hover .chat-room-name {
+            color: var(--accent-primary);
+        }
+
         .chat-room-name {
             font-weight: 600;
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: 15px;
             margin-bottom: 2px;
+            transition: 0.2s;
         }
 
         .chat-room-status {
@@ -1371,7 +1599,7 @@
         }
 
         .online-dot.online { background: #00B894; }
-        .online-dot.offline { background: #ed4956; }
+        .online-dot.offline { background: #FF6B6B; }
 
         .chat-room-messages {
             flex: 1;
@@ -1379,7 +1607,7 @@
             padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             background: var(--bg-primary);
         }
 
@@ -1387,19 +1615,20 @@
             display: flex;
             align-items: center;
             gap: 4px;
-            padding: 8px 12px;
+            padding: 6px 14px;
             background: var(--bg-surface);
-            border-radius: 20px;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             margin-bottom: 6px;
             align-self: flex-start;
             border: 1px solid var(--border-color);
         }
 
         .typing-indicator span {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             background: var(--accent-primary);
-            border-radius: 3px;
+            border-radius: 2.5px;
             display: inline-block;
             animation: typing 1.4s infinite ease-in-out;
         }
@@ -1415,7 +1644,7 @@
 
         .message {
             display: flex;
-            max-width: 70%;
+            max-width: 75%;
             position: relative;
         }
 
@@ -1427,12 +1656,17 @@
             align-self: flex-end;
         }
 
+        .message-content {
+            position: relative;
+        }
+
         .message-bubble {
-            padding: 10px 14px;
+            padding: 8px 12px;
             background: var(--bg-surface);
-            border-radius: 20px 20px 20px 4px;
-            font-size: 14px;
+            border-radius: 18px 18px 18px 6px;
+            font-size: 13px;
             word-wrap: break-word;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
         }
@@ -1440,15 +1674,15 @@
         .message.right .message-bubble {
             background: var(--accent-primary);
             color: white;
-            border-radius: 20px 20px 4px 20px;
+            border-radius: 18px 18px 6px 18px;
         }
 
         .message-time {
-            font-size: 9px;
+            font-size: 8px;
             color: var(--text-secondary);
             margin-top: 2px;
             text-align: right;
-            padding: 0 4px;
+            padding: 0 2px;
         }
 
         .message.right .message-time {
@@ -1456,7 +1690,7 @@
         }
 
         .message-seen {
-            font-size: 9px;
+            font-size: 8px;
             color: var(--accent-secondary);
             margin-left: 4px;
             display: inline-block;
@@ -1464,11 +1698,11 @@
 
         .message-delete {
             position: absolute;
-            top: -8px;
-            right: -8px;
+            top: -6px;
+            right: -6px;
             width: 18px;
             height: 18px;
-            background: #ed4956;
+            background: #FF6B6B;
             border-radius: 9px;
             display: flex;
             align-items: center;
@@ -1486,9 +1720,9 @@
 
         .message-reaction {
             position: absolute;
-            bottom: -18px;
+            bottom: -16px;
             left: 8px;
-            background: var(--bg-primary);
+            background: var(--bg-surface);
             border-radius: 16px;
             padding: 2px 8px;
             font-size: 12px;
@@ -1504,10 +1738,10 @@
 
         .reaction-panel {
             position: fixed;
-            background: var(--bg-primary);
+            background: var(--bg-surface);
             border-radius: 30px;
             padding: 6px 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
             display: none;
             gap: 6px;
             z-index: 1000;
@@ -1521,7 +1755,7 @@
         .reaction-emoji {
             width: 36px;
             height: 36px;
-            background: var(--bg-surface);
+            background: var(--bg-surface-hover);
             border-radius: 18px;
             display: flex;
             align-items: center;
@@ -1533,14 +1767,14 @@
 
         .reaction-emoji:hover {
             transform: scale(1.2);
-            background: var(--bg-surface-hover);
+            background: #d3d9df;
         }
 
         .chat-room-input {
             display: flex;
             gap: 8px;
             padding: 12px 16px;
-            background: var(--bg-primary);
+            background: var(--bg-surface);
             border-top: 1px solid var(--border-color);
         }
 
@@ -1548,15 +1782,16 @@
             flex: 1;
             padding: 10px 16px;
             border: 1px solid var(--border-color);
-            border-radius: 25px;
+            border-radius: 30px;
             outline: none;
-            font-size: 14px;
-            background: var(--bg-surface);
+            font-size: 13px;
+            background: var(--bg-primary);
             color: var(--text-primary);
         }
 
         .chat-room-input-field:focus {
             border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(155,89,182,0.1);
         }
 
         .chat-room-send {
@@ -1571,18 +1806,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            box-shadow: 0 3px 10px rgba(155,89,182,0.2);
         }
 
         .chat-room-send:hover {
-            background: var(--accent-secondary);
+            transform: scale(1.05);
         }
 
-        /* ===== ПРОФИЛЬ (Instagram-style) ===== */
+        .chat-room-send svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        /* ===== ПРОФИЛЬ ===== */
         .profile-screen {
             display: flex;
             flex-direction: column;
-            gap: 0;
+            gap: 16px;
             height: 100%;
             overflow-y: auto;
         }
@@ -1591,7 +1833,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            padding: 16px;
+            margin-bottom: 4px;
         }
 
         .profile-avatar {
@@ -1603,10 +1845,11 @@
             border: 3px solid var(--accent-primary);
             cursor: pointer;
             transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .profile-avatar:hover {
-            opacity: 0.9;
+            transform: scale(1.05);
         }
 
         .profile-info {
@@ -1617,15 +1860,16 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .profile-name {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 20px;
             color: var(--text-primary);
         }
 
+        /* ФИОЛЕТОВАЯ ЗВЕЗДА SVG */
         .profile-star {
             width: 32px;
             height: 32px;
@@ -1643,55 +1887,36 @@
 
         .profile-star:hover {
             transform: scale(1.1);
+            filter: drop-shadow(0 0 10px rgba(155,89,182,0.5));
         }
 
         .profile-nick {
-            color: var(--text-secondary);
+            color: var(--accent-secondary);
             font-size: 14px;
-        }
-
-        .profile-stats {
-            display: flex;
-            gap: 20px;
-            padding: 16px;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .profile-stat {
-            flex: 1;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .profile-stat-value {
-            font-weight: 600;
-            font-size: 16px;
-            color: var(--text-primary);
-        }
-
-        .profile-stat-label {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 2px;
         }
 
         .profile-bio {
-            padding: 16px;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-primary);
-            line-height: 1.5;
+            margin: 8px 0;
+            line-height: 1.6;
+            background: var(--bg-surface);
+            padding: 16px 20px;
+            border-radius: 20px;
+            border-left: 4px solid var(--accent-primary);
             position: relative;
-            background: var(--bg-primary);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 60px;
         }
 
         .edit-bio-btn {
             position: absolute;
-            right: 16px;
-            top: 16px;
+            right: 12px;
+            top: 12px;
             width: 36px;
             height: 36px;
-            background: var(--bg-surface);
+            background: var(--bg-surface-hover);
             border-radius: 18px;
             display: flex;
             align-items: center;
@@ -1699,12 +1924,14 @@
             cursor: pointer;
             color: var(--text-secondary);
             transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
         }
 
         .edit-bio-btn:hover {
-            background: var(--bg-surface-hover);
-            color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: white;
+            transform: scale(1.05);
         }
 
         .edit-bio-btn svg {
@@ -1718,71 +1945,95 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            padding: 0 16px 16px;
+            margin: 12px 0;
         }
 
         .profile-trait {
-            background: var(--bg-surface);
+            background: var(--bg-surface-hover);
             color: var(--text-primary);
             padding: 6px 14px;
-            border-radius: 8px;
+            border-radius: 25px;
             font-size: 12px;
+            font-weight: 500;
             border: 1px solid var(--border-color);
+            transition: 0.2s;
+        }
+
+        .profile-trait:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
         }
 
         .profile-politics {
-            padding: 0 16px 16px;
-            font-size: 13px;
-            color: var(--text-secondary);
+            display: inline-block;
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
+            padding: 6px 14px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            margin: 4px 0;
         }
 
         .profile-actions {
             display: flex;
             gap: 10px;
-            padding: 0 16px 16px;
+            margin: 12px 0;
         }
 
         .profile-btn {
             flex: 1;
-            padding: 8px;
+            padding: 12px;
             border: none;
-            border-radius: 8px;
+            border-radius: 30px;
             font-weight: 600;
-            font-size: 14px;
             cursor: pointer;
             transition: 0.2s;
-            background: var(--bg-surface);
+            background: var(--bg-surface-hover);
             color: var(--text-primary);
+            font-size: 13px;
             border: 1px solid var(--border-color);
         }
 
         .profile-btn.primary {
             background: var(--accent-primary);
             color: white;
+            box-shadow: 0 3px 10px rgba(155,89,182,0.2);
             border: none;
         }
 
         .profile-btn.primary:hover {
-            background: var(--accent-secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(155,89,182,0.3);
         }
 
         .profile-btn.secondary:hover {
-            background: var(--bg-surface-hover);
+            background: #d3d9df;
+            transform: translateY(-1px);
         }
 
         .posts-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2px;
-            padding: 2px;
+            margin-top: 8px;
         }
 
         .post-thumb {
             aspect-ratio: 1;
             background: var(--bg-surface);
+            border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
-            position: relative;
+            transition: 0.2s;
+            border: 1px solid var(--border-color);
+        }
+
+        .post-thumb:hover {
+            transform: scale(1.02);
+            box-shadow: 0 3px 10px rgba(155,89,182,0.1);
+            border-color: var(--accent-primary);
         }
 
         .post-thumb img {
@@ -1799,30 +2050,59 @@
             justify-content: center;
             background: var(--bg-surface);
             color: var(--text-secondary);
-            font-size: 24px;
+            font-size: 20px;
         }
 
         .settings-row {
             display: flex;
             justify-content: flex-end;
             gap: 12px;
-            padding: 16px;
+            padding: 16px 0;
             border-top: 1px solid var(--border-color);
             margin-top: auto;
         }
 
-        .logout-icon {
+        .settings-icon {
             width: 44px;
             height: 44px;
-            background: rgba(237,73,86,0.1);
+            background: var(--bg-surface-hover);
             border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: #ed4956;
+            color: var(--text-secondary);
             transition: 0.2s;
-            border: 1px solid rgba(237,73,86,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+        }
+
+        .settings-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .settings-icon:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .logout-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,107,107,0.1);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #FF6B6B;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255,107,107,0.2);
         }
 
         .logout-icon svg {
@@ -1833,28 +2113,37 @@
         }
 
         .logout-icon:hover {
-            background: #ed4956;
+            background: #FF6B6B;
             color: white;
+            transform: scale(1.05);
         }
 
-        /* Статистика */
+        /* ПОПАП СО СТАТИСТИКОЙ */
         .stats-popup {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 280px;
-            background: var(--bg-primary);
-            border-radius: 20px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
             padding: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
             z-index: 1000;
             display: none;
+            animation: statsAppear 0.3s ease-out;
         }
 
         .stats-popup.active {
             display: block;
+        }
+
+        @keyframes statsAppear {
+            from { transform: translate(-50%, -40%); opacity: 0; }
+            to { transform: translate(-50%, -50%); opacity: 1; }
         }
 
         .stats-popup-header {
@@ -1880,7 +2169,7 @@
 
         .stats-popup-header h3 {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-primary);
             flex: 1;
         }
@@ -1897,16 +2186,23 @@
             align-items: center;
             gap: 12px;
             padding: 12px;
-            background: var(--bg-surface);
-            border-radius: 12px;
+            background: var(--bg-primary);
+            border-radius: 16px;
+            transition: 0.2s;
             border: 1px solid var(--border-color);
+        }
+
+        .stat-item:hover {
+            background: var(--bg-surface-hover);
+            transform: translateX(5px);
+            border-color: var(--accent-primary);
         }
 
         .stat-icon {
             width: 40px;
             height: 40px;
             background: var(--accent-primary);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1927,9 +2223,15 @@
 
         .stat-value {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--accent-primary);
             line-height: 1.2;
+            animation: statValuePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statValuePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
         }
 
         .stat-label {
@@ -1943,26 +2245,29 @@
             padding: 12px;
             background: var(--accent-primary);
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             color: white;
             font-weight: 600;
-            font-size: 14px;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .stats-close:hover {
-            background: var(--accent-secondary);
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(155,89,182,0.2);
         }
 
         /* Панель уведомлений */
         .notifications-panel {
             position: fixed;
-            top: 60px;
+            top: 70px;
             right: 16px;
             width: 280px;
-            background: var(--bg-primary);
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: var(--bg-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
             z-index: 1000;
             display: none;
             border: 1px solid var(--border-color);
@@ -1994,20 +2299,20 @@
         }
 
         .notification-item:hover {
-            background: var(--bg-surface);
+            background: var(--bg-surface-hover);
         }
 
         .notification-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
             background-size: cover;
             background-position: center;
         }
 
         .notification-content {
             flex: 1;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-primary);
         }
 
@@ -2025,6 +2330,8 @@
             width: 100%;
             height: 100%;
             background: var(--bg-primary);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 200;
             display: none;
             flex-direction: column;
@@ -2045,16 +2352,19 @@
         .subscriptions-back {
             width: 36px;
             height: 36px;
+            background: var(--bg-surface-hover);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--text-primary);
-            font-size: 20px;
+            color: var(--text-secondary);
+            transition: 0.2s;
         }
 
         .subscriptions-back:hover {
-            color: var(--accent-primary);
+            background: var(--accent-primary);
+            color: white;
         }
 
         .subscriptions-tabs {
@@ -2069,8 +2379,7 @@
             cursor: pointer;
             color: var(--text-secondary);
             border-bottom: 2px solid transparent;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 13px;
         }
 
         .subscriptions-tab.active {
@@ -2086,7 +2395,7 @@
             display: flex;
             gap: 8px;
             background: var(--bg-surface);
-            padding: 8px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             border: 1px solid var(--border-color);
         }
@@ -2096,7 +2405,7 @@
             border: none;
             background: none;
             outline: none;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-primary);
         }
 
@@ -2105,10 +2414,10 @@
         }
 
         .subscriptions-search-btn {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            padding: 4px 12px;
+            background: var(--bg-surface-hover);
+            border: none;
+            border-radius: 18px;
+            padding: 6px 14px;
             color: var(--text-primary);
             font-weight: 500;
             font-size: 12px;
@@ -2116,7 +2425,8 @@
         }
 
         .subscriptions-search-btn:hover {
-            background: var(--bg-surface-hover);
+            background: var(--accent-primary);
+            color: white;
         }
 
         .subscriptions-list {
@@ -2130,18 +2440,18 @@
             align-items: center;
             gap: 12px;
             padding: 8px;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
         }
 
         .subscription-item:hover {
-            background: var(--bg-surface);
+            background: var(--bg-surface-hover);
         }
 
         .subscription-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 22px;
+            width: 48px;
+            height: 48px;
+            border-radius: 4px;
             background-size: cover;
             background-position: center;
             border: 2px solid var(--accent-primary);
@@ -2176,27 +2486,16 @@
         .subscription-btn {
             width: 36px;
             height: 36px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
+            background: var(--bg-surface-hover);
+            border: none;
             border-radius: 18px;
             color: var(--text-secondary);
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .subscription-btn:hover {
             background: var(--accent-primary);
             color: white;
-            border-color: var(--accent-primary);
-        }
-
-        .subscription-btn svg {
-            width: 18px;
-            height: 18px;
-            stroke: currentColor;
-            fill: none;
         }
 
         /* Аватарки */
@@ -2233,96 +2532,6 @@
         #chatRoomScreen.active {
             display: block;
         }
-
-        /* Просмотр фото */
-        .photo-viewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .photo-viewer.active {
-            display: flex;
-        }
-
-        .photo-header {
-            padding: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .photo-close {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .photo-image {
-            flex: 1;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .photo-info {
-            padding: 20px;
-            color: white;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        /* Просмотр поста */
-        .post-viewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .post-viewer.active {
-            display: flex;
-        }
-
-        .post-viewer-header {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .post-viewer-back {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-            color: var(--text-primary);
-        }
-
-        .post-viewer-content {
-            flex: 1;
-            overflow-y: auto;
-        }
     </style>
 </head>
 <body>
@@ -2336,18 +2545,15 @@
         <div class="top-nav" id="topNav">
             <div class="logo-container">
                 <div class="logo">RealReel</div>
-                <!-- GOOGLE-STYLE ДНЕВНАЯ ФИЧА (СТИЛИЗОВАНА ПОД НАВИГАЦИЮ) -->
-                <div class="daily-feature" id="dailyFeature" onclick="changeDailyFeature()">
-                    <span>67</span>
-                </div>
-                <span class="version">v6.0</span>
+                <!-- GOOGLE-STYLE ДНЕВНАЯ ФИЧА -->
+                <div class="daily-feature" id="dailyFeature" onclick="changeDailyFeature()">67</div>
+                <span class="version">v5.0</span>
             </div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <line x1="12" y1="8" x2="12" y2="16"/>
-                        <line x1="8" y1="12" x2="16" y2="12"/>
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
                     </svg>
                 </div>
                 <div class="nav-icon" onclick="toggleNotifications()">
@@ -2369,7 +2575,7 @@
         <!-- Модальное окно добавления поста -->
         <div class="modal" id="addPostModal">
             <div class="modal-title">Новый пост</div>
-            <textarea class="modal-input" id="postText" placeholder="Подпись..." rows="3"></textarea>
+            <textarea class="modal-input" id="postText" placeholder="Что у вас нового?" rows="3"></textarea>
             <div class="modal-file" id="postFileInput">📸 Добавить фото</div>
             <input type="file" id="postFile" accept="image/*" style="display: none;">
             <div class="modal-actions">
@@ -2424,7 +2630,7 @@
         <div class="post-viewer" id="postViewer">
             <div class="post-viewer-header">
                 <div class="post-viewer-back" onclick="closePostViewer()">←</div>
-                <div style="flex:1; text-align:center; font-weight:600;">Публикация</div>
+                <div style="flex:1; text-align:center; font-weight:600;"></div>
             </div>
             <div class="post-viewer-content" id="postViewerContent"></div>
         </div>
@@ -2437,9 +2643,13 @@
                 <div class="story-close" onclick="closeStory()">✕</div>
             </div>
             <div class="story-image" id="storyImage"></div>
-            <div class="story-progress" id="storyProgressContainer"></div>
+            <div class="story-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="storyProgress"></div>
+                </div>
+            </div>
             <div class="story-footer">
-                <input type="text" class="story-input" id="storyReplyText" placeholder="Отправить сообщение..." autocomplete="off">
+                <input type="text" class="story-input" id="storyReplyText" placeholder="Ответить..." autocomplete="off">
                 <button class="story-action-btn" onclick="likeStory()">
                     <svg viewBox="0 0 24 24">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -2490,7 +2700,7 @@
                     <div class="auth-bg"></div>
                     <div class="auth-form">
                         <div class="auth-title" id="authTitle">Вход</div>
-                        <input type="email" class="auth-input" id="authEmail" placeholder="Телефон, имя или email">
+                        <input type="email" class="auth-input" id="authEmail" placeholder="Почта">
                         <input type="password" class="auth-input" id="authPassword" placeholder="Пароль">
                         <div class="auth-error" id="authError"></div>
                         <button class="auth-btn" id="authActionBtn">
@@ -2505,24 +2715,24 @@
                 </div>
             </div>
 
-            <!-- Главная (лента) -->
+            <!-- Главная -->
             <div class="screen" id="homeScreen">
                 <div class="stories" id="stories"></div>
                 <div class="posts" id="posts"></div>
             </div>
 
-            <!-- Поиск (Reels/Explore) -->
+            <!-- Поиск -->
             <div class="screen" id="searchScreen">
                 <div class="search-screen">
                     <div class="search-box">
-                        <input type="text" class="search-input" id="searchInput" placeholder="Поиск">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Поиск...">
                         <button class="search-btn" id="searchBtn">Найти</button>
                     </div>
                     <div id="searchResults"></div>
                 </div>
             </div>
 
-            <!-- PASSPORT STIQ (Reels альтернатива) -->
+            <!-- PASSPORT STIQ -->
             <div class="screen" id="passportStiQScreen">
                 <div class="search-screen">
                     <div style="text-align: center; margin: 20px 0;">
@@ -2534,7 +2744,7 @@
                 </div>
             </div>
 
-            <!-- Чаты (Direct) -->
+            <!-- Чаты -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
                     <div class="chat-list" id="chatList"></div>
@@ -2554,7 +2764,7 @@
                     </div>
                     <div class="chat-room-messages" id="chatRoomMessages"></div>
                     <div class="chat-room-input">
-                        <input type="text" class="chat-room-input-field" id="chatRoomInput" placeholder="Сообщение...">
+                        <input type="text" class="chat-room-input-field" id="chatRoomInput" placeholder="Написать...">
                         <button class="chat-room-send" id="chatRoomSendBtn">➤</button>
                     </div>
                 </div>
@@ -2577,22 +2787,6 @@
                                 </div>
                             </div>
                             <div class="profile-nick" id="profileNick">@nickname</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Статистика профиля (Instagram-style) -->
-                    <div class="profile-stats" id="profileStats">
-                        <div class="profile-stat" onclick="showPostsGrid()">
-                            <div class="profile-stat-value" id="profilePostsCount">0</div>
-                            <div class="profile-stat-label">публикации</div>
-                        </div>
-                        <div class="profile-stat" onclick="showSubscriptions('followers')">
-                            <div class="profile-stat-value" id="profileFollowersCount">0</div>
-                            <div class="profile-stat-label">подписчики</div>
-                        </div>
-                        <div class="profile-stat" onclick="showSubscriptions('following')">
-                            <div class="profile-stat-value" id="profileFollowingCount">0</div>
-                            <div class="profile-stat-label">подписки</div>
                         </div>
                     </div>
                     
@@ -2641,40 +2835,41 @@
             </div>
             <div class="subscriptions-search">
                 <div class="subscriptions-search-box">
-                    <input type="text" class="subscriptions-search-input" id="subscriptionsSearchInput" placeholder="Поиск">
+                    <input type="text" class="subscriptions-search-input" id="subscriptionsSearchInput" placeholder="Поиск...">
                     <button class="subscriptions-search-btn" id="subscriptionsSearchBtn">Найти</button>
                 </div>
             </div>
             <div class="subscriptions-list" id="subscriptionsList"></div>
         </div>
 
-        <!-- Нижняя навигация (Instagram-style) -->
+        <!-- Нижняя навигация -->
         <div class="bottom-nav" id="bottomNav">
             <div class="nav-item active" onclick="navigateTo('homeScreen', this)">
                 <svg viewBox="0 0 24 24">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
                 </svg>
                 <span class="nav-label">Главная</span>
             </div>
             <div class="nav-item" onclick="navigateTo('searchScreen', this)">
                 <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="2" y1="2" x2="8" y2="8"/>
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
                 <span class="nav-label">Поиск</span>
             </div>
             <div class="nav-item" onclick="navigateTo('passportStiQScreen', this)">
                 <svg viewBox="0 0 24 24">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                    <circle cx="9" cy="9" r="2"/>
-                    <circle cx="15" cy="15" r="2"/>
-                    <path d="M7 17 L17 7"/>
+                    <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor"/>
+                    <circle cx="9" cy="9" r="2" fill="none" stroke="currentColor"/>
+                    <circle cx="15" cy="15" r="2" fill="none" stroke="currentColor"/>
+                    <path d="M7 17 L17 7" stroke="currentColor" stroke-dasharray="2 2"/>
                 </svg>
-                <span class="nav-label">Reels</span>
+                <span class="nav-label">Passport</span>
             </div>
             <div class="nav-item" onclick="navigateTo('chatScreen', this)" id="chatNavItem">
                 <svg viewBox="0 0 24 24">
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
                 </svg>
                 <span class="nav-label">Чаты</span>
                 <span class="nav-badge" id="chatNavBadge" style="display: none;">0</span>
@@ -2790,7 +2985,7 @@
         // ========== GOOGLE-STYLE ДНЕВНАЯ ФИЧА ==========
         window.changeDailyFeature = function() {
             currentFeatureIndex = (currentFeatureIndex + 1) % dailyFeatures.length;
-            document.getElementById('dailyFeature').innerHTML = `<span>${dailyFeatures[currentFeatureIndex]}</span>`;
+            document.getElementById('dailyFeature').textContent = dailyFeatures[currentFeatureIndex];
         };
 
         // ========== PASSPORT STIQ ==========
@@ -3168,8 +3363,8 @@
                 
                 const author = post.get('author');
                 if (author.id !== userId) {
-                    addNotification('like', 'Новый лайк', 
-                        `${getCurrentUser().get('firstName')} лайкнул вашу публикацию`);
+                    addNotification('like', '❤️ Новый лайк', 
+                        `${getCurrentUser().get('firstName')} лайкнул ваш пост`, author);
                 }
                 return true;
             } catch (error) {
@@ -3197,8 +3392,8 @@
                 
                 const author = post.get('author');
                 if (author.id !== user.id) {
-                    addNotification('comment', 'Новый комментарий', 
-                        `${user.get('firstName')} прокомментировал вашу публикацию`);
+                    addNotification('comment', '💬 Новый комментарий', 
+                        `${user.get('firstName')} прокомментировал ваш пост`, author);
                 }
                 return true;
             } catch (error) {
@@ -3650,10 +3845,6 @@
             const followingCount = await getFollowingCount(user.id);
             const visaCount = visaCollection.length;
 
-            document.getElementById('profilePostsCount').textContent = postsCount;
-            document.getElementById('profileFollowersCount').textContent = followersCount;
-            document.getElementById('profileFollowingCount').textContent = followingCount;
-
             const statsList = document.getElementById('statsList');
             statsList.innerHTML = `
                 <div class="stat-item">
@@ -3720,10 +3911,6 @@
             document.getElementById('statsPopup').classList.remove('active');
         };
 
-        window.showPostsGrid = function() {
-            document.getElementById('userPostsGrid').scrollIntoView({ behavior: 'smooth' });
-        };
-
         // ========== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ==========
         async function updateHomeFeed() {
             const posts = await getAllPosts();
@@ -3735,7 +3922,7 @@
             
             const storiesHtml = `
                 <div class="story" onclick="addStory()">
-                    <div class="story-avatar ${getAvatarClass(currentUser)} ${hasStory ? 'has-story' : 'no-story'}" 
+                    <div class="story-avatar ${getAvatarClass(currentUser)} ${hasStory ? '' : 'no-story'}" 
                          style="${getAvatarStyle(currentUser)}">
                         <div class="story-add">+</div>
                     </div>
@@ -3745,7 +3932,7 @@
                     const author = s.get('author');
                     return `
                         <div class="story" onclick="viewStory('${author.id}')">
-                            <div class="story-avatar ${getAvatarClass(author)} has-story" 
+                            <div class="story-avatar ${getAvatarClass(author)}" 
                                  style="${getAvatarStyle(author)}"></div>
                             <span class="story-name">${author.get('firstName')}</span>
                         </div>
@@ -3771,6 +3958,7 @@
                                 <div class="post-author" onclick="openUserProfile('${author.id}')">
                                     ${author.get('firstName')} ${author.get('lastName')}
                                 </div>
+                                <div class="post-nick">@${author.get('nickname') || ''}</div>
                             </div>
                             ${isAuthor ? `
                                 <div class="post-menu">
@@ -3782,34 +3970,22 @@
                                 </div>
                             ` : ''}
                         </div>
+                        <div class="post-text">${post.get('text')}</div>
                         ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image" onclick="openPostViewer('${post.id}')">` : ''}
                         <div class="post-actions">
                             <div class="post-action ${isLiked ? 'liked' : ''}" onclick="likePost('${post.id}', this)">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                                 <span>${post.get('likes') || 0}</span>
                             </div>
                             <div class="post-action" onclick="toggleComments('${post.id}')">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                                 <span>${comments.length}</span>
-                            </div>
-                            <div class="post-action">
-                                <svg viewBox="0 0 24 24">
-                                    <line x1="22" y1="2" x2="11" y2="13"/>
-                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                                </svg>
                             </div>
                             <span class="post-date">${formatDate(post.createdAt)}</span>
                         </div>
-                        <div class="post-text">
-                            <strong onclick="openUserProfile('${author.id}')">${author.get('firstName')} ${author.get('lastName')}</strong> ${post.get('text')}
-                        </div>
                         <div class="comments" id="comments-${post.id}" style="display: none;">
                             <div class="comment-input">
-                                <input type="text" class="comment-input-field" id="comment-input-${post.id}" placeholder="Добавьте комментарий...">
+                                <input type="text" class="comment-input-field" id="comment-input-${post.id}" placeholder="Комментарий...">
                                 <button class="comment-btn" onclick="addComment('${post.id}')">➤</button>
                             </div>
                             <div class="comments-list">
@@ -3817,7 +3993,7 @@
                                     <div class="comment">
                                         <div class="comment-avatar avatar-default"></div>
                                         <div>
-                                            <div class="comment-author" onclick="openUserProfile('${c.author}')">${c.authorName}</div>
+                                            <div class="comment-author">${c.authorName}</div>
                                             <div class="comment-text">${c.text}</div>
                                         </div>
                                     </div>
@@ -3828,11 +4004,11 @@
                 `;
             })).then(html => html.join(''));
             
-            document.getElementById('posts').innerHTML = postsHtml || '<p style="text-align:center; padding:20px;">Нет публикаций</p>';
+            document.getElementById('posts').innerHTML = postsHtml || '<p style="text-align:center;">Нет постов</p>';
         }
 
         async function updateProfileUI(userId = null) {
-            // Если userId не передан, показываем профиль текущего пользователя
+            // Если userId не передан, показываем текущего пользователя
             const user = userId ? await new Parse.Query('_User').get(userId) : getCurrentUser();
             if (!user) return;
             
@@ -3853,7 +4029,7 @@
             const politicsContainer = document.getElementById('profilePolitics');
             if (politics) {
                 politicsContainer.textContent = `Полит. ориентация: ${politics}`;
-                politicsContainer.style.display = 'block';
+                politicsContainer.style.display = 'inline-block';
             } else {
                 politicsContainer.style.display = 'none';
             }
@@ -3864,12 +4040,6 @@
             if (avatarStyle) document.getElementById('profileAvatar').style.cssText = avatarStyle;
             
             const posts = await getUserPosts(user.id);
-            const followersCount = await getFollowersCount(user.id);
-            const followingCount = await getFollowingCount(user.id);
-            
-            document.getElementById('profilePostsCount').textContent = posts.length;
-            document.getElementById('profileFollowersCount').textContent = followersCount;
-            document.getElementById('profileFollowingCount').textContent = followingCount;
             
             const messageBtn = document.getElementById('profileMessageBtn');
             const subscribeBtn = document.getElementById('profileSubscribeBtn');
@@ -3923,7 +4093,7 @@
                 </div>
             `).join('');
             
-            document.getElementById('searchResults').innerHTML = html || '<p style="text-align:center;">Ничего не найдено</p>';
+            document.getElementById('searchResults').innerHTML = html;
         }
 
         // ========== СТОРИС ==========
@@ -4043,14 +4213,6 @@
                 `url('${story.get('image').url()}')`;
             document.getElementById('storyViewer').classList.add('active');
             
-            // Прогресс-бар для сторис
-            const progressContainer = document.getElementById('storyProgressContainer');
-            progressContainer.innerHTML = currentStoryUser.stories.map((_, i) => `
-                <div class="progress-segment">
-                    <div class="progress-fill" id="progress-${i}" style="width: ${i < index ? '100%' : i === index ? '0%' : '0%'};"></div>
-                </div>
-            `).join('');
-            
             if (user.id === getCurrentUser().id) {
                 const views = story.get('views') || [];
                 const viewsList = document.getElementById('storyViewsList');
@@ -4066,8 +4228,11 @@
                 document.getElementById('storyViews').classList.add('hidden');
             }
             
+            const progress = document.getElementById('storyProgress');
+            progress.style.width = '0%';
+            
             setTimeout(() => {
-                document.getElementById(`progress-${index}`).style.width = '100%';
+                progress.style.width = '100%';
             }, 100);
             
             if (storyTimer) clearTimeout(storyTimer);
@@ -4091,12 +4256,12 @@
             const text = input.value.trim();
             
             if (text) {
-                addNotification('story_reply', 'Ответ на историю', 
+                addNotification('story_reply', '💬 Ответ на историю', 
                     `Вы ответили: "${text}"`, currentStoryUser?.user);
                 alert(`Ответ отправлен: ${text}`);
                 input.value = '';
             } else {
-                addNotification('story_like', 'Лайк на историю', 
+                addNotification('story_like', '❤️ Лайк на историю', 
                     `Вы лайкнули историю ${currentStoryUser?.user?.get('firstName') || 'пользователя'}`);
                 alert('❤️ Лайк на историю');
             }
@@ -4106,7 +4271,7 @@
             const input = document.getElementById('storyReplyText');
             const text = input.value.trim();
             if (text) {
-                addNotification('story_reply', 'Ответ на историю', 
+                addNotification('story_reply', '💬 Ответ на историю', 
                     `Вы ответили: "${text}"`, currentStoryUser?.user);
                 alert(`Ответ отправлен: ${text}`);
                 input.value = '';
@@ -4209,8 +4374,7 @@
 
         window.likePost = async function(postId, element) {
             if (await likePost(postId)) {
-                const span = element.querySelector('span');
-                span.textContent = parseInt(span.textContent) + 1;
+                element.querySelector('span').textContent = parseInt(element.querySelector('span').textContent) + 1;
                 element.classList.add('liked');
             }
         };
@@ -4268,8 +4432,10 @@
                                 <div class="post-author" onclick="openUserProfile('${post.get('author').id}')">
                                     ${post.get('author').get('firstName')} ${post.get('author').get('lastName')}
                                 </div>
+                                <div class="post-nick">@${post.get('author').get('nickname') || ''}</div>
                             </div>
                         </div>
+                        <div class="post-text">${post.get('text')}</div>
                         ${post.get('image') ? `<img src="${post.get('image').url()}" class="post-image">` : ''}
                         <div class="post-actions">
                             <div class="post-action ${isLiked ? 'liked' : ''}" onclick="likePost('${post.id}', this)">
@@ -4282,12 +4448,9 @@
                             </div>
                             <span class="post-date">${formatDate(post.createdAt)}</span>
                         </div>
-                        <div class="post-text">
-                            <strong onclick="openUserProfile('${post.get('author').id}')">${post.get('author').get('firstName')} ${post.get('author').get('lastName')}</strong> ${post.get('text')}
-                        </div>
                         <div class="comments" id="comments-${post.id}" style="display: block;">
                             <div class="comment-input">
-                                <input type="text" class="comment-input-field" id="comment-input-${post.id}" placeholder="Добавьте комментарий...">
+                                <input type="text" class="comment-input-field" id="comment-input-${post.id}" placeholder="Комментарий...">
                                 <button class="comment-btn" onclick="addComment('${post.id}')">➤</button>
                             </div>
                             <div class="comments-list">
@@ -4295,7 +4458,7 @@
                                     <div class="comment">
                                         <div class="comment-avatar avatar-default"></div>
                                         <div>
-                                            <div class="comment-author" onclick="openUserProfile('${c.author}')">${c.authorName}</div>
+                                            <div class="comment-author">${c.authorName}</div>
                                             <div class="comment-text">${c.text}</div>
                                         </div>
                                     </div>
@@ -4488,6 +4651,6 @@
                 }
             });
         };
-    </style>
+    </script>
 </body>
 </html>
