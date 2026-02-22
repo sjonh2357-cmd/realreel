@@ -544,11 +544,6 @@
             50% { transform: translateY(-5px); }
         }
 
-        @keyframes passportGlow {
-            0%, 100% { box-shadow: 0 10px 30px rgba(108,92,231,0.3); }
-            50% { box-shadow: 0 15px 40px rgba(108,92,231,0.5); }
-        }
-
         .passport-icon {
             position: absolute;
             top: -10px;
@@ -1921,7 +1916,7 @@
             margin-top: 2px;
         }
 
-        /* PASSPORT STIQ экран - ОБНОВЛЕННЫЙ */
+        /* PASSPORT STIQ экран */
         .passport-stiq-screen {
             padding: 20px;
             text-align: center;
@@ -1995,6 +1990,174 @@
             opacity: 0.9;
             margin-bottom: 20px;
             letter-spacing: 1px;
+        }
+
+        /* Модалка подписок (ЕДИНСТВЕННАЯ ВЕРСИЯ) */
+        .subscriptions-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 200;
+            display: none;
+            flex-direction: column;
+        }
+
+        .subscriptions-modal.active {
+            display: flex;
+        }
+
+        .subscriptions-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .subscriptions-back {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #555;
+            transition: 0.2s;
+        }
+
+        .subscriptions-back:hover {
+            background: #6C5CE7;
+            color: white;
+        }
+
+        .subscriptions-tabs {
+            display: flex;
+            gap: 16px;
+            padding: 0 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .subscriptions-tab {
+            padding: 12px 0;
+            cursor: pointer;
+            color: #999;
+            border-bottom: 2px solid transparent;
+            font-size: 13px;
+        }
+
+        .subscriptions-tab.active {
+            color: #6C5CE7;
+            border-bottom-color: #6C5CE7;
+        }
+
+        .subscriptions-search {
+            padding: 12px 16px;
+        }
+
+        .subscriptions-search-box {
+            display: flex;
+            gap: 8px;
+            background: #f5f5f5;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .subscriptions-search-input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .subscriptions-search-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 18px;
+            padding: 6px 14px;
+            color: #555;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .subscriptions-search-btn:hover {
+            background: #6C5CE7;
+            color: white;
+        }
+
+        .subscriptions-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .subscription-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .subscription-item:hover {
+            background: #f5f5f5;
+        }
+
+        .subscription-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 4px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .subscription-info {
+            flex: 1;
+        }
+
+        .subscription-name {
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .subscription-name:hover {
+            color: #6C5CE7;
+        }
+
+        .subscription-nick {
+            font-size: 11px;
+            color: #6C5CE7;
+            margin-top: 1px;
+        }
+
+        .subscription-status {
+            font-size: 10px;
+            color: #999;
+            margin-top: 1px;
+        }
+
+        .subscription-btn {
+            width: 32px;
+            height: 32px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 16px;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .subscription-btn:hover {
+            background: #6C5CE7;
+            color: white;
         }
 
         /* Аватарки */
@@ -2103,25 +2266,6 @@
             </div>
         </div>
 
-        <!-- Модалка подписок -->
-        <div class="subscriptions-modal" id="subscriptionsModal">
-            <div class="subscriptions-header">
-                <div class="subscriptions-back" onclick="closeSubscriptions()">←</div>
-                <h3 id="subscriptionsTitle">Подписчики</h3>
-            </div>
-            <div class="subscriptions-tabs">
-                <div class="subscriptions-tab active" onclick="switchSubTab('followers')">Подписчики</div>
-                <div class="subscriptions-tab" onclick="switchSubTab('following')">Подписки</div>
-            </div>
-            <div class="subscriptions-search">
-                <div class="subscriptions-search-box">
-                    <input type="text" class="subscriptions-search-input" id="subscriptionsSearchInput" placeholder="Поиск...">
-                    <button class="subscriptions-search-btn" id="subscriptionsSearchBtn">Найти</button>
-                </div>
-            </div>
-            <div class="subscriptions-list" id="subscriptionsList"></div>
-        </div>
-
         <!-- Просмотр фото -->
         <div class="photo-viewer" id="photoViewer">
             <div class="photo-header">
@@ -2224,7 +2368,7 @@
                 </div>
             </div>
 
-            <!-- PASSPORT STIQ - ОБНОВЛЕННЫЙ -->
+            <!-- PASSPORT STIQ -->
             <div class="screen" id="passportStiQScreen">
                 <div class="passport-stiq-screen">
                     <div class="passport-stiq-card">
@@ -2244,7 +2388,7 @@
                 </div>
             </div>
 
-            <!-- Комната чата с PASSPORT STIQ -->
+            <!-- Комната чата -->
             <div class="screen" id="chatRoomScreen">
                 <div class="chat-room">
                     <div class="chat-room-header">
@@ -2320,6 +2464,25 @@
             </div>
         </div>
 
+        <!-- Модалка подписок (единственная версия) -->
+        <div class="subscriptions-modal" id="subscriptionsModal">
+            <div class="subscriptions-header">
+                <div class="subscriptions-back" onclick="closeSubscriptions()">←</div>
+                <h3 id="subscriptionsTitle">Подписчики</h3>
+            </div>
+            <div class="subscriptions-tabs">
+                <div class="subscriptions-tab active" onclick="switchSubTab('followers')">Подписчики</div>
+                <div class="subscriptions-tab" onclick="switchSubTab('following')">Подписки</div>
+            </div>
+            <div class="subscriptions-search">
+                <div class="subscriptions-search-box">
+                    <input type="text" class="subscriptions-search-input" id="subscriptionsSearchInput" placeholder="Поиск...">
+                    <button class="subscriptions-search-btn" id="subscriptionsSearchBtn">Найти</button>
+                </div>
+            </div>
+            <div class="subscriptions-list" id="subscriptionsList"></div>
+        </div>
+
         <!-- Нижняя навигация -->
         <div class="bottom-nav" id="bottomNav">
             <div class="nav-item active" onclick="navigateTo('homeScreen', this)">
@@ -2362,7 +2525,7 @@
         </div>
     </div>
 
-    <!-- Back4App -->
+    <!-- Back4App и JavaScript код (такой же как в предыдущей версии) -->
     <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
@@ -2642,1648 +2805,1647 @@
         document.getElementById('authSwitch').addEventListener('click', () => {
             isLoginMode = !isLoginMode;
             document.getElementById('authTitle').textContent = isLoginMode ? 'Вход' : 'Регистрация';
-            document.getElementById('authActionBtn').querySelector('.btn-text').textC
-                    document.getElementById('authActionBtn').querySelector('.btn-text').textContent = 
-            isLoginMode ? 'Войти' : 'Зарегистрироваться';
-        document.getElementById('authSwitch').textContent = isLoginMode ? 
-            'Регистрация' : 'Вход';
-    });
+            document.getElementById('authActionBtn').querySelector('.btn-text').textContent = 
+                isLoginMode ? 'Войти' : 'Зарегистрироваться';
+            document.getElementById('authSwitch').textContent = isLoginMode ? 
+                'Регистрация' : 'Вход';
+        });
 
-    document.getElementById('forgotPasswordLink').addEventListener('click', () => {
-        document.getElementById('resetPasswordModal').classList.add('active');
-    });
+        document.getElementById('forgotPasswordLink').addEventListener('click', () => {
+            document.getElementById('resetPasswordModal').classList.add('active');
+        });
 
-    document.getElementById('resetPasswordBtn').addEventListener('click', async () => {
-        const email = document.getElementById('resetEmail').value.trim();
-        if (!email) {
-            alert('Введите почту');
-            return;
-        }
-        
-        const result = await resetPassword(email);
-        if (result.success) {
-            document.getElementById('resetSuccess').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('resetPasswordModal').classList.remove('active');
-                document.getElementById('resetEmail').value = '';
-                document.getElementById('resetSuccess').style.display = 'none';
-            }, 3000);
-        } else {
-            alert('Ошибка: ' + result.message);
-        }
-    });
-
-    document.getElementById('cancelResetBtn').addEventListener('click', () => {
-        document.getElementById('resetPasswordModal').classList.remove('active');
-        document.getElementById('resetEmail').value = '';
-        document.getElementById('resetSuccess').style.display = 'none';
-    });
-
-    document.getElementById('authActionBtn').addEventListener('click', async function() {
-        const email = document.getElementById('authEmail').value.trim();
-        const password = document.getElementById('authPassword').value;
-        
-        if (!email || !password) {
-            document.getElementById('authError').textContent = 'Заполните все поля';
-            return;
-        }
-        
-        document.getElementById('authError').textContent = '';
-        this.classList.add('loading');
-        
-        if (isLoginMode) {
-            const result = await signIn(email, password);
+        document.getElementById('resetPasswordBtn').addEventListener('click', async () => {
+            const email = document.getElementById('resetEmail').value.trim();
+            if (!email) {
+                alert('Введите почту');
+                return;
+            }
+            
+            const result = await resetPassword(email);
             if (result.success) {
-                document.getElementById('authEmail').value = '';
-                document.getElementById('authPassword').value = '';
-                toggleAuthNav(false);
-                navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
+                document.getElementById('resetSuccess').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('resetPasswordModal').classList.remove('active');
+                    document.getElementById('resetEmail').value = '';
+                    document.getElementById('resetSuccess').style.display = 'none';
+                }, 3000);
             } else {
-                document.getElementById('authError').textContent = result.message;
+                alert('Ошибка: ' + result.message);
             }
-        } else {
-            const namePart = email.split('@')[0];
-            const result = await signUp(namePart, 'User', namePart, email, password);
-            if (result.success) {
-                document.getElementById('authEmail').value = '';
-                document.getElementById('authPassword').value = '';
-                toggleAuthNav(false);
-                navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
+        });
+
+        document.getElementById('cancelResetBtn').addEventListener('click', () => {
+            document.getElementById('resetPasswordModal').classList.remove('active');
+            document.getElementById('resetEmail').value = '';
+            document.getElementById('resetSuccess').style.display = 'none';
+        });
+
+        document.getElementById('authActionBtn').addEventListener('click', async function() {
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            
+            if (!email || !password) {
+                document.getElementById('authError').textContent = 'Заполните все поля';
+                return;
+            }
+            
+            document.getElementById('authError').textContent = '';
+            this.classList.add('loading');
+            
+            if (isLoginMode) {
+                const result = await signIn(email, password);
+                if (result.success) {
+                    document.getElementById('authEmail').value = '';
+                    document.getElementById('authPassword').value = '';
+                    toggleAuthNav(false);
+                    navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
+                } else {
+                    document.getElementById('authError').textContent = result.message;
+                }
             } else {
-                document.getElementById('authError').textContent = result.message;
-            }
-        }
-        
-        this.classList.remove('loading');
-    });
-
-    // ========== ПРОФИЛЬ ==========
-    async function updateProfile(firstName, lastName, nickname) {
-        try {
-            const user = getCurrentUser();
-            user.set('firstName', firstName);
-            user.set('lastName', lastName);
-            user.set('nickname', nickname);
-            await user.save();
-            return { success: true };
-        } catch (error) {
-            return { success: false };
-        }
-    }
-
-    async function uploadAvatar(file) {
-        try {
-            const parseFile = new Parse.File('avatar.jpg', file);
-            await parseFile.save();
-            const user = getCurrentUser();
-            user.set('avatarUrl', parseFile.url());
-            user.set('avatarClass', '');
-            await user.save();
-            return { success: true };
-        } catch (error) {
-            return { success: false };
-        }
-    }
-
-    // ========== ПОСТЫ ==========
-    async function createPost(text, imageFile = null) {
-        try {
-            const Post = Parse.Object.extend('Post');
-            const post = new Post();
-            post.set('text', text);
-            post.set('author', getCurrentUser());
-            post.set('likes', 0);
-            post.set('likedBy', []);
-            post.set('comments', []);
-            
-            if (imageFile) {
-                const parseFile = new Parse.File('post.jpg', imageFile);
-                await parseFile.save();
-                post.set('image', parseFile);
+                const namePart = email.split('@')[0];
+                const result = await signUp(namePart, 'User', namePart, email, password);
+                if (result.success) {
+                    document.getElementById('authEmail').value = '';
+                    document.getElementById('authPassword').value = '';
+                    toggleAuthNav(false);
+                    navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
+                } else {
+                    document.getElementById('authError').textContent = result.message;
+                }
             }
             
-            await post.save();
-            return { success: true };
-        } catch (error) {
-            return { success: false };
-        }
-    }
+            this.classList.remove('loading');
+        });
 
-    async function getAllPosts() {
-        try {
-            const Post = Parse.Object.extend('Post');
-            const query = new Parse.Query(Post);
-            query.include('author');
-            query.descending('createdAt');
-            return await query.find();
-        } catch (error) {
-            return [];
-        }
-    }
-
-    async function getUserPosts(userId) {
-        try {
-            const Post = Parse.Object.extend('Post');
-            const query = new Parse.Query(Post);
-            query.equalTo('author', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: userId
-            });
-            return await query.find();
-        } catch (error) {
-            return [];
-        }
-    }
-
-    async function likePost(postId) {
-        try {
-            const Post = Parse.Object.extend('Post');
-            const query = new Parse.Query(Post);
-            const post = await query.get(postId);
-            const likedBy = post.get('likedBy') || [];
-            const userId = getCurrentUser().id;
-            
-            if (likedBy.includes(userId)) return false;
-            
-            likedBy.push(userId);
-            post.set('likedBy', likedBy);
-            post.increment('likes');
-            await post.save();
-            
-            const author = post.get('author');
-            if (author.id !== userId) {
+        // ========== ПРОФИЛЬ ==========
+        async function updateProfile(firstName, lastName, nickname) {
+            try {
                 const user = getCurrentUser();
-                addNotification('like', '❤️ Новый лайк', 
-                    `${user.get('firstName')} лайкнул ваш пост`, user);
+                user.set('firstName', firstName);
+                user.set('lastName', lastName);
+                user.set('nickname', nickname);
+                await user.save();
+                return { success: true };
+            } catch (error) {
+                return { success: false };
             }
-            
-            return true;
-        } catch (error) {
-            return false;
         }
-    }
 
-    async function addComment(postId, text) {
-        try {
-            const Post = Parse.Object.extend('Post');
-            const query = new Parse.Query(Post);
-            const post = await query.get(postId);
-            const comments = post.get('comments') || [];
-            const user = getCurrentUser();
-            
-            comments.push({
-                author: user.id,
-                authorName: `${user.get('firstName')} ${user.get('lastName')}`,
-                text: text,
-                date: new Date()
-            });
-            
-            post.set('comments', comments);
-            await post.save();
-            
-            const author = post.get('author');
-            if (author.id !== user.id) {
-                addNotification('comment', '💬 Новый комментарий', 
-                    `${user.get('firstName')} прокомментировал ваш пост: "${text}"`, user);
+        async function uploadAvatar(file) {
+            try {
+                const parseFile = new Parse.File('avatar.jpg', file);
+                await parseFile.save();
+                const user = getCurrentUser();
+                user.set('avatarUrl', parseFile.url());
+                user.set('avatarClass', '');
+                await user.save();
+                return { success: true };
+            } catch (error) {
+                return { success: false };
             }
-            
-            return true;
-        } catch (error) {
-            return false;
         }
-    }
 
-    async function deletePost(postId) {
-        try {
-            const Post = Parse.Object.extend('Post');
-            const query = new Parse.Query(Post);
-            const post = await query.get(postId);
-            await post.destroy();
-            return true;
-        } catch (error) {
-            return false;
+        // ========== ПОСТЫ ==========
+        async function createPost(text, imageFile = null) {
+            try {
+                const Post = Parse.Object.extend('Post');
+                const post = new Post();
+                post.set('text', text);
+                post.set('author', getCurrentUser());
+                post.set('likes', 0);
+                post.set('likedBy', []);
+                post.set('comments', []);
+                
+                if (imageFile) {
+                    const parseFile = new Parse.File('post.jpg', imageFile);
+                    await parseFile.save();
+                    post.set('image', parseFile);
+                }
+                
+                await post.save();
+                return { success: true };
+            } catch (error) {
+                return { success: false };
+            }
         }
-    }
 
-    // ========== СТОРИС ==========
-    async function createStory(imageFile) {
-        try {
-            const Story = Parse.Object.extend('Story');
-            const story = new Story();
-            story.set('author', getCurrentUser());
-            story.set('views', []);
-            
-            const parseFile = new Parse.File('story.jpg', imageFile);
-            await parseFile.save();
-            story.set('image', parseFile);
-            
-            await story.save();
-            return { success: true };
-        } catch (error) {
-            return { success: false };
+        async function getAllPosts() {
+            try {
+                const Post = Parse.Object.extend('Post');
+                const query = new Parse.Query(Post);
+                query.include('author');
+                query.descending('createdAt');
+                return await query.find();
+            } catch (error) {
+                return [];
+            }
         }
-    }
 
-    async function getStories() {
-        try {
-            const Story = Parse.Object.extend('Story');
-            const query = new Parse.Query(Story);
-            query.include('author');
-            query.include('views.user');
-            query.descending('createdAt');
-            const stories = await query.find();
-            
-            const uniqueUsers = new Set();
-            return stories.filter(s => {
-                const author = s.get('author');
-                if (uniqueUsers.has(author.id)) return false;
-                uniqueUsers.add(author.id);
-                return true;
-            });
-        } catch (error) {
-            return [];
-        }
-    }
-
-    async function getUserStories(userId) {
-        try {
-            const Story = Parse.Object.extend('Story');
-            const query = new Parse.Query(Story);
-            query.equalTo('author', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: userId
-            });
-            query.include('views.user');
-            query.descending('createdAt');
-            return await query.find();
-        } catch (error) {
-            return [];
-        }
-    }
-
-    async function addStoryView(storyId, userId) {
-        try {
-            const Story = Parse.Object.extend('Story');
-            const query = new Parse.Query(Story);
-            const story = await query.get(storyId);
-            
-            const views = story.get('views') || [];
-            const alreadyViewed = views.some(v => v.user && v.user.id === userId);
-            
-            if (!alreadyViewed) {
-                views.push({
-                    user: {
-                        __type: 'Pointer',
-                        className: '_User',
-                        objectId: userId
-                    },
-                    viewedAt: new Date()
+        async function getUserPosts(userId) {
+            try {
+                const Post = Parse.Object.extend('Post');
+                const query = new Parse.Query(Post);
+                query.equalTo('author', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
                 });
-                story.set('views', views);
-                await story.save();
+                return await query.find();
+            } catch (error) {
+                return [];
             }
-            
-            return views;
-        } catch (error) {
-            return [];
         }
-    }
 
-    // ========== ПОДПИСКИ ==========
-    async function checkIfSubscribed(fromUserId, toUserId) {
-        if (!fromUserId || !toUserId || fromUserId === toUserId) return true;
-        
-        try {
-            const query = new Parse.Query('Subscription');
-            query.equalTo('follower', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: fromUserId
-            });
-            query.equalTo('following', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: toUserId
-            });
-            const sub = await query.first();
-            return !!sub;
-        } catch (error) {
-            return false;
+        async function likePost(postId) {
+            try {
+                const Post = Parse.Object.extend('Post');
+                const query = new Parse.Query(Post);
+                const post = await query.get(postId);
+                const likedBy = post.get('likedBy') || [];
+                const userId = getCurrentUser().id;
+                
+                if (likedBy.includes(userId)) return false;
+                
+                likedBy.push(userId);
+                post.set('likedBy', likedBy);
+                post.increment('likes');
+                await post.save();
+                
+                const author = post.get('author');
+                if (author.id !== userId) {
+                    const user = getCurrentUser();
+                    addNotification('like', '❤️ Новый лайк', 
+                        `${user.get('firstName')} лайкнул ваш пост`, user);
+                }
+                
+                return true;
+            } catch (error) {
+                return false;
+            }
         }
-    }
 
-    async function toggleSubscribe(targetUserId) {
-        const currentUser = getCurrentUser();
-        if (!currentUser || targetUserId === currentUser.id) return null;
-        
-        try {
-            const Subscription = Parse.Object.extend('Subscription');
-            const query = new Parse.Query(Subscription);
-            query.equalTo('follower', currentUser);
-            query.equalTo('following', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: targetUserId
-            });
+        async function addComment(postId, text) {
+            try {
+                const Post = Parse.Object.extend('Post');
+                const query = new Parse.Query(Post);
+                const post = await query.get(postId);
+                const comments = post.get('comments') || [];
+                const user = getCurrentUser();
+                
+                comments.push({
+                    author: user.id,
+                    authorName: `${user.get('firstName')} ${user.get('lastName')}`,
+                    text: text,
+                    date: new Date()
+                });
+                
+                post.set('comments', comments);
+                await post.save();
+                
+                const author = post.get('author');
+                if (author.id !== user.id) {
+                    addNotification('comment', '💬 Новый комментарий', 
+                        `${user.get('firstName')} прокомментировал ваш пост: "${text}"`, user);
+                }
+                
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        async function deletePost(postId) {
+            try {
+                const Post = Parse.Object.extend('Post');
+                const query = new Parse.Query(Post);
+                const post = await query.get(postId);
+                await post.destroy();
+                return true;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        // ========== СТОРИС ==========
+        async function createStory(imageFile) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const story = new Story();
+                story.set('author', getCurrentUser());
+                story.set('views', []);
+                
+                const parseFile = new Parse.File('story.jpg', imageFile);
+                await parseFile.save();
+                story.set('image', parseFile);
+                
+                await story.save();
+                return { success: true };
+            } catch (error) {
+                return { success: false };
+            }
+        }
+
+        async function getStories() {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                query.include('author');
+                query.include('views.user');
+                query.descending('createdAt');
+                const stories = await query.find();
+                
+                const uniqueUsers = new Set();
+                return stories.filter(s => {
+                    const author = s.get('author');
+                    if (uniqueUsers.has(author.id)) return false;
+                    uniqueUsers.add(author.id);
+                    return true;
+                });
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function getUserStories(userId) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                query.equalTo('author', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                query.include('views.user');
+                query.descending('createdAt');
+                return await query.find();
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function addStoryView(storyId, userId) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                const story = await query.get(storyId);
+                
+                const views = story.get('views') || [];
+                const alreadyViewed = views.some(v => v.user && v.user.id === userId);
+                
+                if (!alreadyViewed) {
+                    views.push({
+                        user: {
+                            __type: 'Pointer',
+                            className: '_User',
+                            objectId: userId
+                        },
+                        viewedAt: new Date()
+                    });
+                    story.set('views', views);
+                    await story.save();
+                }
+                
+                return views;
+            } catch (error) {
+                return [];
+            }
+        }
+
+        // ========== ПОДПИСКИ ==========
+        async function checkIfSubscribed(fromUserId, toUserId) {
+            if (!fromUserId || !toUserId || fromUserId === toUserId) return true;
             
-            const existing = await query.first();
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('follower', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: fromUserId
+                });
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: toUserId
+                });
+                const sub = await query.first();
+                return !!sub;
+            } catch (error) {
+                return false;
+            }
+        }
+
+        async function toggleSubscribe(targetUserId) {
+            const currentUser = getCurrentUser();
+            if (!currentUser || targetUserId === currentUser.id) return null;
             
-            if (existing) {
-                await existing.destroy();
-                return { subscribed: false };
-            } else {
-                const subscription = new Subscription();
-                subscription.set('follower', currentUser);
-                subscription.set('following', {
+            try {
+                const Subscription = Parse.Object.extend('Subscription');
+                const query = new Parse.Query(Subscription);
+                query.equalTo('follower', currentUser);
+                query.equalTo('following', {
                     __type: 'Pointer',
                     className: '_User',
                     objectId: targetUserId
                 });
-                await subscription.save();
-                return { subscribed: true };
-            }
-        } catch (error) {
-            return null;
-        }
-    }
-
-    async function getFollowers(userId) {
-        try {
-            const query = new Parse.Query('Subscription');
-            query.equalTo('following', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: userId
-            });
-            query.include('follower');
-            const subs = await query.find();
-            return subs.map(s => s.get('follower'));
-        } catch (error) {
-            return [];
-        }
-    }
-
-    async function getFollowing(userId) {
-        try {
-            const query = new Parse.Query('Subscription');
-            query.equalTo('follower', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: userId
-            });
-            query.include('following');
-            const subs = await query.find();
-            return subs.map(s => s.get('following'));
-        } catch (error) {
-            return [];
-        }
-    }
-
-    async function getFollowersCount(userId) {
-        try {
-            const query = new Parse.Query('Subscription');
-            query.equalTo('following', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: userId
-            });
-            return await query.count();
-        } catch (error) {
-            return 0;
-        }
-    }
-
-    async function getFollowingCount(userId) {
-        try {
-            const query = new Parse.Query('Subscription');
-            query.equalTo('follower', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: userId
-            });
-            return await query.count();
-        } catch (error) {
-            return 0;
-        }
-    }
-
-    // ========== ПОИСК ПОЛЬЗОВАТЕЛЕЙ ==========
-    async function searchUsers(text) {
-        try {
-            const query = new Parse.Query('_User');
-            query.notEqualTo('objectId', getCurrentUser().id);
-            
-            if (text) {
-                const nameQuery = new Parse.Query('_User');
-                nameQuery.matches('firstName', text, 'i');
                 
-                const lastNameQuery = new Parse.Query('_User');
-                lastNameQuery.matches('lastName', text, 'i');
+                const existing = await query.first();
                 
-                const nickQuery = new Parse.Query('_User');
-                nickQuery.matches('nickname', text, 'i');
-                
-                return await Parse.Query.or(nameQuery, lastNameQuery, nickQuery).find();
-            }
-            
-            return await query.limit(20).find();
-        } catch (error) {
-            return [];
-        }
-    }
-
-    // ========== ЧАТЫ ==========
-    async function getOrCreateConversation(otherUserId) {
-        const currentUser = getCurrentUser();
-        if (!currentUser) return null;
-        
-        try {
-            const query = new Parse.Query('Conversation');
-            query.equalTo('participants', currentUser);
-            query.equalTo('participants', {
-                __type: 'Pointer',
-                className: '_User',
-                objectId: otherUserId
-            });
-            
-            let conversation = await query.first();
-            
-            if (!conversation) {
-                const Conversation = Parse.Object.extend('Conversation');
-                conversation = new Conversation();
-                conversation.set('participants', [
-                    currentUser,
-                    {
+                if (existing) {
+                    await existing.destroy();
+                    return { subscribed: false };
+                } else {
+                    const subscription = new Subscription();
+                    subscription.set('follower', currentUser);
+                    subscription.set('following', {
                         __type: 'Pointer',
                         className: '_User',
-                        objectId: otherUserId
-                    }
-                ]);
-                conversation.set('updatedAt', new Date());
-                await conversation.save();
-            }
-            
-            return conversation;
-        } catch (error) {
-            console.error('Ошибка создания чата:', error);
-            return null;
-        }
-    }
-
-    async function getUserConversations() {
-        const currentUser = getCurrentUser();
-        if (!currentUser) return [];
-        
-        try {
-            const query = new Parse.Query('Conversation');
-            query.equalTo('participants', currentUser);
-            query.descending('updatedAt');
-            query.limit(50);
-            
-            const conversations = await query.find();
-            const result = [];
-            
-            for (const conv of conversations) {
-                try {
-                    const participants = conv.get('participants');
-                    const otherUser = participants.find(p => p && p.id !== currentUser.id);
-                    
-                    if (!otherUser) continue;
-                    
-                    await otherUser.fetch();
-                    
-                    const messageQuery = new Parse.Query('Message');
-                    messageQuery.equalTo('conversation', conv);
-                    messageQuery.descending('createdAt');
-                    messageQuery.limit(1);
-                    const lastMessage = await messageQuery.first();
-                    
-                    if (!lastMessage) continue;
-                    
-                    const unreadQuery = new Parse.Query('Message');
-                    unreadQuery.equalTo('conversation', conv);
-                    unreadQuery.notEqualTo('sender', currentUser);
-                    unreadQuery.greaterThan('createdAt', currentUser.get('lastSeen') || new Date(0));
-                    const unreadCount = await unreadQuery.count();
-                    
-                    if (unreadCount > 0) {
-                        unreadMessages[conv.id] = unreadCount;
-                    }
-                    
-                    result.push({
-                        conversation: conv,
-                        otherUser: otherUser,
-                        lastMessage: lastMessage.get('text') || '',
-                        lastMessageTime: lastMessage.createdAt,
-                        unreadCount: unreadCount
+                        objectId: targetUserId
                     });
-                } catch (e) {
-                    continue;
+                    await subscription.save();
+                    return { subscribed: true };
                 }
+            } catch (error) {
+                return null;
+            }
+        }
+
+        async function getFollowers(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                query.include('follower');
+                const subs = await query.find();
+                return subs.map(s => s.get('follower'));
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function getFollowing(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('follower', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                query.include('following');
+                const subs = await query.find();
+                return subs.map(s => s.get('following'));
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function getFollowersCount(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('following', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                return await query.count();
+            } catch (error) {
+                return 0;
+            }
+        }
+
+        async function getFollowingCount(userId) {
+            try {
+                const query = new Parse.Query('Subscription');
+                query.equalTo('follower', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: userId
+                });
+                return await query.count();
+            } catch (error) {
+                return 0;
+            }
+        }
+
+        // ========== ПОИСК ПОЛЬЗОВАТЕЛЕЙ ==========
+        async function searchUsers(text) {
+            try {
+                const query = new Parse.Query('_User');
+                query.notEqualTo('objectId', getCurrentUser().id);
+                
+                if (text) {
+                    const nameQuery = new Parse.Query('_User');
+                    nameQuery.matches('firstName', text, 'i');
+                    
+                    const lastNameQuery = new Parse.Query('_User');
+                    lastNameQuery.matches('lastName', text, 'i');
+                    
+                    const nickQuery = new Parse.Query('_User');
+                    nickQuery.matches('nickname', text, 'i');
+                    
+                    return await Parse.Query.or(nameQuery, lastNameQuery, nickQuery).find();
+                }
+                
+                return await query.limit(20).find();
+            } catch (error) {
+                return [];
+            }
+        }
+
+        // ========== ЧАТЫ ==========
+        async function getOrCreateConversation(otherUserId) {
+            const currentUser = getCurrentUser();
+            if (!currentUser) return null;
+            
+            try {
+                const query = new Parse.Query('Conversation');
+                query.equalTo('participants', currentUser);
+                query.equalTo('participants', {
+                    __type: 'Pointer',
+                    className: '_User',
+                    objectId: otherUserId
+                });
+                
+                let conversation = await query.first();
+                
+                if (!conversation) {
+                    const Conversation = Parse.Object.extend('Conversation');
+                    conversation = new Conversation();
+                    conversation.set('participants', [
+                        currentUser,
+                        {
+                            __type: 'Pointer',
+                            className: '_User',
+                            objectId: otherUserId
+                        }
+                    ]);
+                    conversation.set('updatedAt', new Date());
+                    await conversation.save();
+                }
+                
+                return conversation;
+            } catch (error) {
+                console.error('Ошибка создания чата:', error);
+                return null;
+            }
+        }
+
+        async function getUserConversations() {
+            const currentUser = getCurrentUser();
+            if (!currentUser) return [];
+            
+            try {
+                const query = new Parse.Query('Conversation');
+                query.equalTo('participants', currentUser);
+                query.descending('updatedAt');
+                query.limit(50);
+                
+                const conversations = await query.find();
+                const result = [];
+                
+                for (const conv of conversations) {
+                    try {
+                        const participants = conv.get('participants');
+                        const otherUser = participants.find(p => p && p.id !== currentUser.id);
+                        
+                        if (!otherUser) continue;
+                        
+                        await otherUser.fetch();
+                        
+                        const messageQuery = new Parse.Query('Message');
+                        messageQuery.equalTo('conversation', conv);
+                        messageQuery.descending('createdAt');
+                        messageQuery.limit(1);
+                        const lastMessage = await messageQuery.first();
+                        
+                        if (!lastMessage) continue;
+                        
+                        const unreadQuery = new Parse.Query('Message');
+                        unreadQuery.equalTo('conversation', conv);
+                        unreadQuery.notEqualTo('sender', currentUser);
+                        unreadQuery.greaterThan('createdAt', currentUser.get('lastSeen') || new Date(0));
+                        const unreadCount = await unreadQuery.count();
+                        
+                        if (unreadCount > 0) {
+                            unreadMessages[conv.id] = unreadCount;
+                        }
+                        
+                        result.push({
+                            conversation: conv,
+                            otherUser: otherUser,
+                            lastMessage: lastMessage.get('text') || '',
+                            lastMessageTime: lastMessage.createdAt,
+                            unreadCount: unreadCount
+                        });
+                    } catch (e) {
+                        continue;
+                    }
+                }
+                
+                updateChatBadges();
+                return result;
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function sendMessage(text, conversationId) {
+            try {
+                const Message = Parse.Object.extend('Message');
+                const message = new Message();
+                message.set('text', text);
+                message.set('sender', getCurrentUser());
+                message.set('conversation', {
+                    __type: 'Pointer',
+                    className: 'Conversation',
+                    objectId: conversationId
+                });
+                
+                await message.save();
+                
+                const conversation = new Parse.Object('Conversation');
+                conversation.id = conversationId;
+                conversation.set('updatedAt', new Date());
+                await conversation.save(null, { useMasterKey: true });
+                
+                return { success: true, messageId: message.id };
+            } catch (error) {
+                return { success: false };
+            }
+        }
+
+        async function loadMessageHistory(conversationId) {
+            try {
+                const query = new Parse.Query('Message');
+                query.equalTo('conversation', {
+                    __type: 'Pointer',
+                    className: 'Conversation',
+                    objectId: conversationId
+                });
+                query.include('sender');
+                query.ascending('createdAt');
+                
+                const messages = await query.find();
+                const container = document.getElementById('chatRoomMessages');
+                
+                const typingIndicator = container.querySelector('.typing-indicator');
+                const scrollPosition = container.scrollTop;
+                const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
+                
+                container.innerHTML = '';
+                
+                messages.forEach(msg => {
+                    const sender = msg.get('sender');
+                    if (sender) {
+                        const isOwn = sender.id === getCurrentUser().id;
+                        addMessageToChat(msg.get('text'), isOwn, msg.createdAt, msg.id);
+                    }
+                });
+                
+                if (typingIndicator && isTyping) {
+                    container.appendChild(typingIndicator);
+                }
+                
+                if (isAtBottom) {
+                    container.scrollTop = container.scrollHeight;
+                } else {
+                    container.scrollTop = scrollPosition;
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки сообщений:', error);
+                document.getElementById('chatRoomMessages').innerHTML = 
+                    '<p style="opacity:0.5; text-align:center;">Ошибка загрузки</p>';
+            }
+        }
+
+        function subscribeToChat(conversationId) {
+            if (currentChannel) {
+                currentChannel.unbind_all();
+                currentChannel.unsubscribe();
             }
             
-            updateChatBadges();
-            return result;
-        } catch (error) {
-            return [];
-        }
-    }
-
-    async function sendMessage(text, conversationId) {
-        try {
-            const Message = Parse.Object.extend('Message');
-            const message = new Message();
-            message.set('text', text);
-            message.set('sender', getCurrentUser());
-            message.set('conversation', {
-                __type: 'Pointer',
-                className: 'Conversation',
-                objectId: conversationId
+            const channelName = `chat-${conversationId}`;
+            currentChannel = pusher.subscribe(channelName);
+            
+            currentChannel.bind('client-new-message', (data) => {
+                const isOwn = data.senderId === getCurrentUser().id;
+                addMessageToChat(data.text, isOwn, data.timestamp, data.messageId);
+                
+                if (!isOwn) {
+                    messageCount++;
+                    
+                    if (messageCount % 50 === 0) {
+                        showPassportStiQ();
+                    }
+                }
             });
             
-            await message.save();
-            
-            const conversation = new Parse.Object('Conversation');
-            conversation.id = conversationId;
-            conversation.set('updatedAt', new Date());
-            await conversation.save(null, { useMasterKey: true });
-            
-            return { success: true, messageId: message.id };
-        } catch (error) {
-            return { success: false };
-        }
-    }
-
-    async function loadMessageHistory(conversationId) {
-        try {
-            const query = new Parse.Query('Message');
-            query.equalTo('conversation', {
-                __type: 'Pointer',
-                className: 'Conversation',
-                objectId: conversationId
+            currentChannel.bind('client-typing', (data) => {
+                if (data.senderId !== getCurrentUser().id) {
+                    showTypingIndicator();
+                }
             });
-            query.include('sender');
-            query.ascending('createdAt');
-            
-            const messages = await query.find();
+        }
+
+        function addMessageToChat(text, isOwn, timestamp, messageId) {
             const container = document.getElementById('chatRoomMessages');
+            const div = document.createElement('div');
+            div.className = `message ${isOwn ? 'right' : 'left'}`;
+            div.setAttribute('data-message-id', messageId || '');
             
-            const typingIndicator = container.querySelector('.typing-indicator');
-            const scrollPosition = container.scrollTop;
-            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
+            const time = timestamp ? new Date(timestamp).toLocaleTimeString([], { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            }) : 'сейчас';
             
-            container.innerHTML = '';
+            div.innerHTML = `
+                <div class="message-content">
+                    <div class="message-bubble">${text}</div>
+                    <div class="message-time">${time}</div>
+                    <div class="message-reaction"></div>
+                    ${isOwn ? `<div class="message-delete" onclick="deleteMessage('${messageId}')">✕</div>` : ''}
+                </div>
+            `;
             
-            messages.forEach(msg => {
-                const sender = msg.get('sender');
-                if (sender) {
-                    const isOwn = sender.id === getCurrentUser().id;
-                    addMessageToChat(msg.get('text'), isOwn, msg.createdAt, msg.id);
-                }
+            div.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                showReactionPanel(e, messageId);
             });
             
-            if (typingIndicator && isTyping) {
-                container.appendChild(typingIndicator);
-            }
+            container.appendChild(div);
             
+            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
             if (isAtBottom) {
                 container.scrollTop = container.scrollHeight;
-            } else {
-                container.scrollTop = scrollPosition;
-            }
-        } catch (error) {
-            console.error('Ошибка загрузки сообщений:', error);
-            document.getElementById('chatRoomMessages').innerHTML = 
-                '<p style="opacity:0.5; text-align:center;">Ошибка загрузки</p>';
-        }
-    }
-
-    function subscribeToChat(conversationId) {
-        if (currentChannel) {
-            currentChannel.unbind_all();
-            currentChannel.unsubscribe();
-        }
-        
-        const channelName = `chat-${conversationId}`;
-        currentChannel = pusher.subscribe(channelName);
-        
-        currentChannel.bind('client-new-message', (data) => {
-            const isOwn = data.senderId === getCurrentUser().id;
-            addMessageToChat(data.text, isOwn, data.timestamp, data.messageId);
-            
-            if (!isOwn) {
-                messageCount++;
-                
-                if (messageCount % 50 === 0) {
-                    showPassportStiQ();
-                }
-            }
-        });
-        
-        currentChannel.bind('client-typing', (data) => {
-            if (data.senderId !== getCurrentUser().id) {
-                showTypingIndicator();
-            }
-        });
-    }
-
-    function addMessageToChat(text, isOwn, timestamp, messageId) {
-        const container = document.getElementById('chatRoomMessages');
-        const div = document.createElement('div');
-        div.className = `message ${isOwn ? 'right' : 'left'}`;
-        div.setAttribute('data-message-id', messageId || '');
-        
-        const time = timestamp ? new Date(timestamp).toLocaleTimeString([], { 
-            hour: '2-digit', 
-            minute: '2-digit' 
-        }) : 'сейчас';
-        
-        div.innerHTML = `
-            <div class="message-content">
-                <div class="message-bubble">${text}</div>
-                <div class="message-time">${time}</div>
-                <div class="message-reaction"></div>
-                ${isOwn ? `<div class="message-delete" onclick="deleteMessage('${messageId}')">✕</div>` : ''}
-            </div>
-        `;
-        
-        div.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            showReactionPanel(e, messageId);
-        });
-        
-        container.appendChild(div);
-        
-        const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
-        if (isAtBottom) {
-            container.scrollTop = container.scrollHeight;
-        }
-    }
-
-    // ========== ИНДИКАТОР ПЕЧАТАЕТ ==========
-    function showTypingIndicator() {
-        const container = document.getElementById('chatRoomMessages');
-        let indicator = container.querySelector('.typing-indicator');
-        
-        if (!indicator) {
-            indicator = document.createElement('div');
-            indicator.className = 'typing-indicator';
-            indicator.innerHTML = '<span></span><span></span><span></span>';
-            container.appendChild(indicator);
-        }
-        
-        const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
-        if (isAtBottom) {
-            container.scrollTop = container.scrollHeight;
-        }
-        
-        if (typingTimeout) clearTimeout(typingTimeout);
-        typingTimeout = setTimeout(() => {
-            const ind = container.querySelector('.typing-indicator');
-            if (ind) ind.remove();
-        }, 3000);
-    }
-
-    function hideTypingIndicator() {
-        const container = document.getElementById('chatRoomMessages');
-        const indicator = container.querySelector('.typing-indicator');
-        if (indicator) indicator.remove();
-    }
-
-    function startChatAutoUpdate() {
-        if (chatUpdateInterval) {
-            clearInterval(chatUpdateInterval);
-        }
-        
-        chatUpdateInterval = setInterval(async () => {
-            if (currentConversationId && document.getElementById('chatRoomScreen').classList.contains('active')) {
-                await loadMessageHistory(currentConversationId);
-            }
-        }, 100);
-    }
-
-    // ========== РЕАКЦИИ ==========
-    window.showReactionPanel = function(e, messageId) {
-        e.preventDefault();
-        const panel = document.getElementById('reactionPanel');
-        
-        const x = e.clientX;
-        const y = e.clientY;
-        
-        panel.style.left = (x - 140) + 'px';
-        panel.style.top = (y - 70) + 'px';
-        panel.classList.add('active');
-        currentReactionMessage = messageId;
-        
-        setTimeout(() => {
-            panel.classList.remove('active');
-        }, 3000);
-    };
-
-    window.addReaction = function(emoji) {
-        if (!currentReactionMessage) return;
-        
-        const msg = document.querySelector(`[data-message-id="${currentReactionMessage}"]`);
-        if (msg) {
-            msg.classList.add('reacted');
-            const reactionDiv = msg.querySelector('.message-reaction');
-            if (reactionDiv) reactionDiv.textContent = emoji;
-        }
-        
-        document.getElementById('reactionPanel').classList.remove('active');
-    };
-
-    window.deleteMessage = async function(messageId) {
-        if (!messageId || !confirm('Удалить сообщение?')) return;
-        
-        try {
-            const Message = Parse.Object.extend('Message');
-            const query = new Parse.Query(Message);
-            const message = await query.get(messageId);
-            const sender = message.get('sender');
-            
-            if (sender.id === getCurrentUser().id) {
-                await message.destroy();
-                const msgElement = document.querySelector(`[data-message-id="${messageId}"]`);
-                if (msgElement) msgElement.remove();
-            }
-        } catch (error) {
-            console.error('Ошибка удаления:', error);
-        }
-    };
-
-    // ========== УПРАВЛЕНИЕ ЧАТАМИ ==========
-    async function updateChatList() {
-        const conversations = await getUserConversations();
-        
-        const html = await Promise.all(conversations.map(async c => {
-            const user = c.otherUser;
-            await user.fetch();
-            
-            return `
-                <div class="chat-item" onclick="openChatRoom('${user.id}')">
-                    <div class="chat-avatar ${getAvatarClass(user)}" 
-                         style="${getAvatarStyle(user)}"
-                         onclick="event.stopPropagation(); openUserProfile('${user.id}')"></div>
-                    <div class="chat-info">
-                        <div class="chat-name-row">
-                            <span class="chat-name" onclick="event.stopPropagation(); openUserProfile('${user.id}')">
-                                ${user.get('firstName')} ${user.get('lastName')}
-                            </span>
-                            ${c.unreadCount > 0 ? 
-                                `<span class="unread-badge">${c.unreadCount}</span>` : ''}
-                        </div>
-                        <div class="chat-preview">${c.lastMessage}</div>
-                        <div class="chat-time">${formatTime(c.lastMessageTime)}</div>
-                    </div>
-                </div>
-            `;
-        })).then(html => html.join(''));
-        
-        document.getElementById('chatList').innerHTML = html || 
-            '<p style="opacity:0.5; text-align:center; padding:20px;">Нет чатов</p>';
-    }
-
-    // ========== КОМНАТА ЧАТА ==========
-    window.openChatRoom = async function(otherUserId) {
-        try {
-            console.log('Открываем чат с пользователем:', otherUserId);
-            
-            const conversation = await getOrCreateConversation(otherUserId);
-            if (!conversation) {
-                alert('Не удалось создать чат');
-                return;
-            }
-            
-            currentConversationId = conversation.id;
-            currentOtherUserId = otherUserId;
-            messageCount = 0;
-            
-            const otherUser = await new Parse.Query('_User').get(otherUserId);
-            
-            document.getElementById('chatRoomAvatar').className = 
-                `chat-room-avatar ${getAvatarClass(otherUser)}`;
-            const avatarStyle = getAvatarStyle(otherUser);
-            if (avatarStyle) {
-                document.getElementById('chatRoomAvatar').style.cssText = avatarStyle;
-            }
-            
-            document.getElementById('chatRoomName').textContent = 
-                `${otherUser.get('firstName')} ${otherUser.get('lastName')}`;
-            
-            const status = otherUser.get('isOnline') ? 'Онлайн' : 'Офлайн';
-            const statusDot = otherUser.get('isOnline') ? 'online' : 'offline';
-            document.getElementById('chatRoomStatus').innerHTML = 
-                `<span class="online-dot ${statusDot}"></span> ${status}`;
-            
-            document.getElementById('chatRoomMessages').innerHTML = 
-                '<p style="opacity:0.5; text-align:center;">Загрузка...</p>';
-            await loadMessageHistory(currentConversationId);
-            subscribeToChat(currentConversationId);
-            
-            startChatAutoUpdate();
-            
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('chatRoomScreen').classList.add('active');
-            
-        } catch (error) {
-            console.error('Ошибка открытия чата:', error);
-            alert('Ошибка при открытии чата: ' + error.message);
-        }
-    };
-
-    window.closeChatRoom = function() {
-        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById('chatScreen').classList.add('active');
-        
-        if (currentChannel) {
-            currentChannel.unbind_all();
-            currentChannel.unsubscribe();
-        }
-        
-        if (chatUpdateInterval) {
-            clearInterval(chatUpdateInterval);
-            chatUpdateInterval = null;
-        }
-        
-        hideTypingIndicator();
-        
-        updateChatList();
-    };
-
-    window.openChatUserProfile = function() {
-        if (currentOtherUserId) {
-            openUserProfile(currentOtherUserId);
-        }
-    };
-
-    function updateChatBadges() {
-        const chatNavBadge = document.getElementById('chatNavBadge');
-        
-        const totalUnread = Object.values(unreadMessages).reduce((a, b) => a + b, 0);
-        
-        if (totalUnread > 0) {
-            chatNavBadge.textContent = totalUnread > 9 ? '9+' : totalUnread;
-            chatNavBadge.style.display = 'flex';
-        } else {
-            chatNavBadge.style.display = 'none';
-        }
-    }
-
-    // ========== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ==========
-    async function updateHomeFeed() {
-        const posts = await getAllPosts();
-        const currentUser = getCurrentUser();
-        const stories = await getStories();
-        
-        const userStories = await getUserStories(currentUser.id);
-        const hasStory = userStories.length > 0;
-        
-        const storiesHtml = `
-            <div class="story" onclick="addStory()">
-                <div class="story-avatar ${getAvatarClass(currentUser)} ${hasStory ? '' : 'no-story'}" 
-                     style="${getAvatarStyle(currentUser)}">
-                    <div class="story-add">+</div>
-                </div>
-                <span class="story-name">Ваша история</span>
-            </div>
-            ${await Promise.all(stories.map(async s => {
-                const author = s.get('author');
-                return `
-                    <div class="story" onclick="viewStory('${author.id}')">
-                        <div class="story-avatar ${getAvatarClass(author)}" 
-                             style="${getAvatarStyle(author)}"></div>
-                        <span class="story-name">${author.get('firstName')}</span>
-                    </div>
-                `;
-            })).then(html => html.join(''))}
-        `;
-        
-        document.getElementById('stories').innerHTML = storiesHtml;
-        
-        const postsHtml = await Promise.all(posts.map(async post => {
-            const author = post.get('author');
-            await author.fetch();
-            
-            const comments = post.get('comments') || [];
-            const isAuthor = author.id === currentUser.id;
-            const isLiked = post.get('likedBy')?.includes(currentUser.id) || false;
-            
-            return `
-                <div class="post" data-post-id="${post.id}">
-                    <div class="post-header">
-                        <div class="post-avatar ${getAvatarClass(author)}" 
-                             style="${getAvatarStyle(author)}"
-                             onclick="openUserProfile('${author.id}')"></div>
-                        <div class="post-author-info">
-                            <div class="post-author" onclick="openUserProfile('${author.id}')">
-                                ${author.get('firstName')} ${author.get('lastName')}
-                            </div>
-                            <div class="post-nick">@${author.get('nickname') || ''}</div>
-                        </div>
-                        ${isAuthor ? `
-                            <div class="post-menu">
-                                <button class="post-menu-btn" onclick="togglePostMenu('${post.id}')">•••</button>
-                                <div class="post-menu-dropdown" id="menu-${post.id}">
-                                    <div class="post-menu-item" onclick="editPost('${post.id}')">
-                                        <svg viewBox="0 0 24 24" width="16" height="16">
-                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-                                        </svg>
-                                        Редактировать
-                                    </div>
-                                    <div class="post-menu-item" onclick="deletePost('${post.id}')">
-                                        <svg viewBox="0 0 24 24" width="16" height="16">
-                                            <path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
-                                            <path d="M8 4V2h8v2"/>
-                                        </svg>
-                                        Удалить
-                                    </div>
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div class="post-text">${post.get('text')}</div>
-                    ${post.get('image') ? 
-                        `<img src="${post.get('image').url()}" class="post-image" 
-                              onclick="openPostViewer('${post.id}')">` : ''}
-                    <div class="post-actions">
-                        <div class="post-action ${isLiked ? 'liked' : ''}" 
-                             onclick="likePost('${post.id}', this)">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                            </svg>
-                            <span>${post.get('likes') || 0}</span>
-                        </div>
-                        <div class="post-action" onclick="toggleComments('${post.id}')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                            </svg>
-                            <span>${comments.length}</span>
-                        </div>
-                        <span class="post-date">${formatDate(post.createdAt)}</span>
-                    </div>
-                    <div class="comments" id="comments-${post.id}" style="display: none;">
-                        <div class="comment-input">
-                            <input type="text" class="comment-input-field" 
-                                   id="comment-input-${post.id}" placeholder="Написать комментарий...">
-                            <button class="comment-btn" onclick="addComment('${post.id}')">➤</button>
-                        </div>
-                        <div class="comments-list">
-                            ${comments.map(c => `
-                                <div class="comment">
-                                    <div class="comment-avatar avatar-default"></div>
-                                    <div>
-                                        <div class="comment-author">${c.authorName}</div>
-                                        <div class="comment-text">${c.text}</div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-        })).then(html => html.join(''));
-        
-        document.getElementById('posts').innerHTML = postsHtml || 
-            '<p style="opacity:0.5; text-align:center;">Нет постов</p>';
-    }
-
-    async function updateProfileUI(userId = null) {
-        const user = userId ? await new Parse.Query('_User').get(userId) : getCurrentUser();
-        if (!user) return;
-        
-        currentProfileUserId = user.id;
-        
-        document.getElementById('profileFullName').textContent = 
-            `${user.get('firstName')} ${user.get('lastName')}`;
-        document.getElementById('profileNick').textContent = 
-            `@${user.get('nickname') || ''}`;
-        
-        const avatarClass = getAvatarClass(user);
-        const avatarStyle = getAvatarStyle(user);
-        document.getElementById('profileAvatar').className = `profile-avatar ${avatarClass}`;
-        if (avatarStyle) {
-            document.getElementById('profileAvatar').style.cssText = avatarStyle;
-        }
-        
-        const posts = await getUserPosts(user.id);
-        document.getElementById('profilePostsCount').textContent = posts.length;
-        document.getElementById('profileFollowersCount').textContent = await getFollowersCount(user.id);
-        document.getElementById('profileFollowingCount').textContent = await getFollowingCount(user.id);
-        
-        const messageBtn = document.getElementById('profileMessageBtn');
-        const subscribeBtn = document.getElementById('profileSubscribeBtn');
-        
-        if (user.id === getCurrentUser().id) {
-            messageBtn.style.display = 'none';
-            subscribeBtn.style.display = 'none';
-        } else {
-            messageBtn.style.display = 'block';
-            subscribeBtn.style.display = 'block';
-            
-            messageBtn.onclick = () => openChatRoom(user.id);
-            
-            const isSubscribed = await checkIfSubscribed(getCurrentUser().id, user.id);
-            subscribeBtn.textContent = isSubscribed ? '✓ Подписан' : 'Подписаться';
-            subscribeBtn.onclick = async () => {
-                const result = await toggleSubscribe(user.id);
-                if (result) {
-                    subscribeBtn.textContent = result.subscribed ? '✓ Подписан' : 'Подписаться';
-                    await updateProfileUI(user.id);
-                }
-            };
-        }
-        
-        const postsHtml = posts.map(post => {
-            if (post.get('image')) {
-                return `
-                    <div class="post-thumb" onclick="openPostViewer('${post.id}')">
-                        <img src="${post.get('image').url()}" alt="post">
-                    </div>
-                `;
-            } else {
-                return `
-                    <div class="post-thumb" onclick="openPostViewer('${post.id}')">
-                        <div class="text-thumb">📝</div>
-                    </div>
-                `;
-            }
-        }).join('');
-        
-        document.getElementById('userPostsGrid').innerHTML = postsHtml || 
-            '<p style="opacity:0.5; text-align:center;">Нет постов</p>';
-    }
-
-    async function updateSearchResults() {
-        const users = await searchUsers('');
-        
-        const html = users.map(user => `
-            <div class="user-card" onclick="openUserProfile('${user.id}')">
-                <div class="user-avatar ${getAvatarClass(user)}" 
-                     style="${getAvatarStyle(user)}"></div>
-                <div class="user-info">
-                    <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
-                    <div class="user-nick">@${user.get('nickname') || ''}</div>
-                    <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
-                </div>
-                <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
-                    <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                </button>
-            </div>
-        `).join('');
-        
-        document.getElementById('searchResults').innerHTML = html;
-    }
-
-    // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
-    window.openAddPostModal = function() {
-        document.getElementById('addPostModal').classList.add('active');
-    };
-
-    window.openUserProfile = async function(userId) {
-        await updateProfileUI(userId);
-        navigateTo('profileScreen', document.querySelectorAll('.nav-item')[4]);
-    };
-
-    window.showPosts = function() {
-        navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
-    };
-
-    window.showSubscriptions = async function(type) {
-        const userId = currentProfileUserId || getCurrentUser().id;
-        document.getElementById('subscriptionsTitle').textContent = 
-            type === 'followers' ? 'Подписчики' : 'Подписки';
-        
-        await updateSubscriptionsList(type, userId);
-        document.getElementById('subscriptionsModal').classList.add('active');
-    };
-
-    async function updateSubscriptionsList(type, userId, searchQuery = '') {
-        const list = document.getElementById('subscriptionsList');
-        const users = type === 'followers' ? await getFollowers(userId) : await getFollowing(userId);
-        
-        const filteredUsers = searchQuery ? 
-            users.filter(u => {
-                const name = `${u.get('firstName')} ${u.get('lastName')}`.toLowerCase();
-                const nick = u.get('nickname')?.toLowerCase() || '';
-                return name.includes(searchQuery.toLowerCase()) || 
-                       nick.includes(searchQuery.toLowerCase());
-            }) : users;
-        
-        list.innerHTML = filteredUsers.map(user => `
-            <div class="subscription-item" onclick="openUserProfile('${user.id}')">
-                <div class="subscription-avatar ${getAvatarClass(user)}" 
-                     style="${getAvatarStyle(user)}"></div>
-                <div class="subscription-info">
-                    <div class="subscription-name">${user.get('firstName')} ${user.get('lastName')}</div>
-                    <div class="subscription-nick">@${user.get('nickname') || ''}</div>
-                    <div class="subscription-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
-                </div>
-                <button class="subscription-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
-                    <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                </button>
-            </div>
-        `).join('') || '<p style="opacity:0.5; text-align:center;">Нет пользователей</p>';
-    }
-
-    document.getElementById('subscriptionsSearchBtn').addEventListener('click', async () => {
-        const searchInput = document.getElementById('subscriptionsSearchInput');
-        const query = searchInput.value.trim();
-        const activeTab = document.querySelector('.subscriptions-tab.active').textContent;
-        const type = activeTab === 'Подписчики' ? 'followers' : 'following';
-        const userId = currentProfileUserId || getCurrentUser().id;
-        
-        await updateSubscriptionsList(type, userId, query);
-    });
-
-    document.getElementById('subscriptionsSearchInput').addEventListener('keypress', async (e) => {
-        if (e.key === 'Enter') {
-            document.getElementById('subscriptionsSearchBtn').click();
-        }
-    });
-
-    window.closeSubscriptions = function() {
-        document.getElementById('subscriptionsModal').classList.remove('active');
-        document.getElementById('subscriptionsSearchInput').value = '';
-    };
-
-    window.switchSubTab = function(tab) {
-        document.querySelectorAll('.subscriptions-tab').forEach(t => t.classList.remove('active'));
-        event.target.classList.add('active');
-        const userId = currentProfileUserId || getCurrentUser().id;
-        updateSubscriptionsList(tab, userId);
-    };
-
-    window.togglePostMenu = function(postId) {
-        const menu = document.getElementById(`menu-${postId}`);
-        document.querySelectorAll('.post-menu-dropdown').forEach(m => m.classList.remove('active'));
-        menu.classList.toggle('active');
-    };
-
-    window.likePost = async function(postId, element) {
-        const result = await likePost(postId);
-        if (result) {
-            const span = element.querySelector('span');
-            span.textContent = parseInt(span.textContent) + 1;
-            element.classList.add('liked');
-        }
-    };
-
-    window.toggleComments = function(postId) {
-        const comments = document.getElementById(`comments-${postId}`);
-        comments.style.display = comments.style.display === 'none' ? 'block' : 'none';
-    };
-
-    window.addComment = async function(postId) {
-        const input = document.getElementById(`comment-input-${postId}`);
-        const text = input.value.trim();
-        if (!text) return;
-        
-        const result = await addComment(postId, text);
-        if (result) {
-            input.value = '';
-            await updateHomeFeed();
-            if (document.getElementById('postViewer').classList.contains('active')) {
-                await openPostViewer(postId);
             }
         }
-    };
 
-    window.editPost = function(postId) {
-        const newText = prompt('Редактировать пост:');
-        if (newText) {
-            editPost(postId, newText).then(() => {
-                updateHomeFeed();
-                closePostViewer();
-            });
-        }
-    };
-
-    window.deletePost = async function(postId) {
-        if (!confirm('Удалить пост?')) return;
-        const result = await deletePost(postId);
-        if (result) {
-            await updateHomeFeed();
-            closePostViewer();
-        }
-    };
-
-    window.addStory = function() {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.onchange = async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            await createStory(file);
-            await updateHomeFeed();
-        };
-        input.click();
-    };
-
-    window.viewStory = async function(userId) {
-        const stories = await getUserStories(userId);
-        if (stories.length === 0) return;
-        
-        const user = await new Parse.Query('_User').get(userId);
-        currentStoryUser = { user, stories, index: 0 };
-        
-        if (userId !== getCurrentUser().id) {
-            await addStoryView(stories[0].id, getCurrentUser().id);
-        }
-        
-        showStory(0);
-    };
-
-    function showStory(index) {
-        if (!currentStoryUser) return;
-        
-        const story = currentStoryUser.stories[index];
-        const user = currentStoryUser.user;
-        
-        document.getElementById('storyAvatar').style.backgroundImage = 
-            getAvatarStyle(user) || `url('${getAvatarClass(user)}')`;
-        document.getElementById('storyName').textContent = 
-            `${user.get('firstName')} ${user.get('lastName')}`;
-        document.getElementById('storyImage').style.backgroundImage = 
-            `url('${story.get('image').url()}')`;
-        document.getElementById('storyViewer').classList.add('active');
-        
-        if (user.id === getCurrentUser().id) {
-            const views = story.get('views') || [];
-            const viewsList = document.getElementById('storyViewsList');
-            viewsList.innerHTML = views.map(v => `
-                <div class="story-view-item" onclick="openUserProfile('${v.user.id}')">
-                    <div class="story-view-avatar ${getAvatarClass(v.user)}" 
-                         style="${getAvatarStyle(v.user)}"></div>
-                    <div class="story-view-name">${v.user.get('firstName')} ${v.user.get('lastName')}</div>
-                    <div class="story-view-time">${formatTime(v.viewedAt)}</div>
-                </div>
-            `).join('');
-            document.getElementById('storyViews').classList.remove('hidden');
-        } else {
-            document.getElementById('storyViews').classList.add('hidden');
-        }
-        
-        const progress = document.getElementById('storyProgress');
-        progress.style.width = '0%';
-        
-        setTimeout(() => {
-            progress.style.width = '100%';
-        }, 100);
-        
-        if (storyTimer) clearTimeout(storyTimer);
-        storyTimer = setTimeout(() => {
-            if (index + 1 < currentStoryUser.stories.length) {
-                showStory(index + 1);
-            } else {
-                closeStory();
-            }
-        }, 5000);
-    }
-
-    window.closeStory = function() {
-        document.getElementById('storyViewer').classList.remove('active');
-        if (storyTimer) clearTimeout(storyTimer);
-        currentStoryUser = null;
-    };
-
-    window.likeStory = function() {
-        const input = document.getElementById('storyReplyText');
-        const text = input.value.trim();
-        
-        if (text) {
-            addNotification('story_reply', '💬 Ответ на историю', 
-                `Вы ответили: "${text}"`, currentStoryUser?.user);
-            alert(`Ответ отправлен: ${text}`);
-            input.value = '';
-        } else {
-            addNotification('story_like', '❤️ Лайк на историю', 
-                `Вы лайкнули историю ${currentStoryUser?.user?.get('firstName') || 'пользователя'}`);
-            alert('❤️ Лайк на историю');
-        }
-    };
-
-    window.sendStoryReply = function() {
-        const input = document.getElementById('storyReplyText');
-        const text = input.value.trim();
-        if (text) {
-            addNotification('story_reply', '💬 Ответ на историю', 
-                `Вы ответили: "${text}"`, currentStoryUser?.user);
-            alert(`Ответ отправлен: ${text}`);
-            input.value = '';
-        }
-    };
-
-    window.openPhoto = function(url, author) {
-        document.getElementById('photoImage').style.backgroundImage = `url('${url}')`;
-        document.getElementById('photoInfo').textContent = `Фото · ${author}`;
-        document.getElementById('photoViewer').classList.add('active');
-    };
-
-    window.closePhoto = function() {
-        document.getElementById('photoViewer').classList.remove('active');
-    };
-
-    window.openPostViewer = async function(postId) {
-        try {
-            const post = await new Parse.Query('Post').get(postId);
-            await post.get('author').fetch();
+        // ========== ИНДИКАТОР ПЕЧАТАЕТ ==========
+        function showTypingIndicator() {
+            const container = document.getElementById('chatRoomMessages');
+            let indicator = container.querySelector('.typing-indicator');
             
-            const comments = post.get('comments') || [];
-            const isAuthor = getCurrentUser().id === post.get('author').id;
-            const isLiked = post.get('likedBy')?.includes(getCurrentUser().id) || false;
-            
-            const postHtml = `
-                <div class="post">
-                    <div class="post-header">
-                        <div class="post-avatar ${getAvatarClass(post.get('author'))}" 
-                             style="${getAvatarStyle(post.get('author'))}"
-                             onclick="openUserProfile('${post.get('author').id}')"></div>
-                        <div class="post-author-info">
-                            <div class="post-author" onclick="openUserProfile('${post.get('author').id}')">
-                                ${post.get('author').get('firstName')} ${post.get('author').get('lastName')}
-                            </div>
-                            <div class="post-nick">@${post.get('author').get('nickname') || ''}</div>
-                        </div>
-                        ${isAuthor ? `
-                            <div class="post-menu">
-                                <button class="post-menu-btn" onclick="togglePostMenu('${post.id}')">•••</button>
-                                <div class="post-menu-dropdown" id="menu-${post.id}">
-                                    <div class="post-menu-item" onclick="editPost('${post.id}'); closePostViewer()">
-                                        <svg viewBox="0 0 24 24" width="16" height="16">
-                                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-                                        </svg>
-                                        Редактировать
-                                    </div>
-                                    <div class="post-menu-item" onclick="deletePost('${post.id}'); closePostViewer()">
-                                        <svg viewBox="0 0 24 24" width="16" height="16">
-                                            <path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
-                                            <path d="M8 4V2h8v2"/>
-                                        </svg>
-                                        Удалить
-                                    </div>
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div class="post-text">${post.get('text')}</div>
-                    ${post.get('image') ? 
-                        `<img src="${post.get('image').url()}" class="post-image">` : ''}
-                    <div class="post-actions">
-                        <div class="post-action ${isLiked ? 'liked' : ''}" 
-                             onclick="likePost('${post.id}', this)">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                            </svg>
-                            <span>${post.get('likes') || 0}</span>
-                        </div>
-                        <div class="post-action" onclick="toggleComments('${post.id}')">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                            </svg>
-                            <span>${comments.length}</span>
-                        </div>
-                        <span class="post-date">${formatDate(post.createdAt)}</span>
-                    </div>
-                    <div class="comments" id="comments-${post.id}" style="display: block;">
-                        <div class="comment-input">
-                            <input type="text" class="comment-input-field" 
-                                   id="comment-input-${post.id}" placeholder="Написать комментарий...">
-                            <button class="comment-btn" onclick="addComment('${post.id}')">➤</button>
-                        </div>
-                        <div class="comments-list">
-                            ${comments.map(c => `
-                                <div class="comment">
-                                    <div class="comment-avatar avatar-default"></div>
-                                    <div>
-                                        <div class="comment-author">${c.authorName}</div>
-                                        <div class="comment-text">${c.text}</div>
-                                    </div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('postViewerContent').innerHTML = postHtml;
-            document.getElementById('postViewer').classList.add('active');
-        } catch (error) {
-            console.error('Ошибка открытия поста:', error);
-        }
-    };
-
-    window.closePostViewer = function() {
-        document.getElementById('postViewer').classList.remove('active');
-    };
-
-    // ========== ОБРАБОТЧИКИ КНОПОК ==========
-    document.getElementById('cancelPostBtn').addEventListener('click', () => {
-        document.getElementById('addPostModal').classList.remove('active');
-        document.getElementById('postText').value = '';
-        document.getElementById('postFile').value = '';
-    });
-
-    document.getElementById('postFileInput').addEventListener('click', () => {
-        document.getElementById('postFile').click();
-    });
-
-    document.getElementById('publishPostBtn').addEventListener('click', async () => {
-        const text = document.getElementById('postText').value.trim();
-        if (!text) {
-            alert('Введите текст поста');
-            return;
-        }
-        
-        const file = document.getElementById('postFile').files[0];
-        const result = await createPost(text, file);
-        
-        if (result.success) {
-            document.getElementById('addPostModal').classList.remove('active');
-            document.getElementById('postText').value = '';
-            document.getElementById('postFile').value = '';
-            await updateHomeFeed();
-        } else {
-            alert('Ошибка при создании поста');
-        }
-    });
-
-    document.getElementById('searchBtn').addEventListener('click', async () => {
-        const query = document.getElementById('searchInput').value.trim();
-        if (!query) return;
-        
-        const users = await searchUsers(query);
-        const html = users.map(user => `
-            <div class="user-card" onclick="openUserProfile('${user.id}')">
-                <div class="user-avatar ${getAvatarClass(user)}" 
-                     style="${getAvatarStyle(user)}"></div>
-                <div class="user-info">
-                    <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
-                    <div class="user-nick">@${user.get('nickname') || ''}</div>
-                    <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
-                </div>
-                <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
-                    <svg viewBox="0 0 24 24" width="18" height="18">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                </button>
-            </div>
-        `).join('');
-        
-        document.getElementById('searchResults').innerHTML = html;
-    });
-
-    document.getElementById('chatRoomSendBtn').addEventListener('click', async function() {
-        const input = document.getElementById('chatRoomInput');
-        const text = input.value.trim();
-        
-        if (!text || !currentConversationId || !currentOtherUserId) return;
-        
-        const isSubscribed = await checkIfSubscribed(currentOtherUserId, getCurrentUser().id);
-        
-        if (!isSubscribed) {
-            alert('Пользователь не подписан на вас');
-            input.value = '';
-            closeChatRoom();
-            return;
-        }
-        
-        const result = await sendMessage(text, currentConversationId);
-        
-        if (result.success) {
-            input.value = '';
-            addMessageToChat(text, true, new Date(), result.messageId);
-            
-            messageCount++;
-            if (messageCount % 50 === 0) {
-                showPassportStiQ();
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.className = 'typing-indicator';
+                indicator.innerHTML = '<span></span><span></span><span></span>';
+                container.appendChild(indicator);
             }
             
-            if (currentChannel) {
-                currentChannel.trigger('client-new-message', {
-                    text: text,
-                    senderId: getCurrentUser().id,
-                    timestamp: new Date(),
-                    messageId: result.messageId
-                });
+            const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
+            if (isAtBottom) {
+                container.scrollTop = container.scrollHeight;
             }
-            
-            hideTypingIndicator();
-        }
-    });
-
-    document.getElementById('chatRoomInput').addEventListener('input', function() {
-        if (currentChannel && currentConversationId && !isTyping) {
-            isTyping = true;
-            currentChannel.trigger('client-typing', {
-                senderId: getCurrentUser().id,
-                conversationId: currentConversationId
-            });
             
             if (typingTimeout) clearTimeout(typingTimeout);
             typingTimeout = setTimeout(() => {
-                isTyping = false;
-            }, 2000);
+                const ind = container.querySelector('.typing-indicator');
+                if (ind) ind.remove();
+            }, 3000);
         }
-    });
 
-    document.getElementById('chatRoomInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            document.getElementById('chatRoomSendBtn').click();
+        function hideTypingIndicator() {
+            const container = document.getElementById('chatRoomMessages');
+            const indicator = container.querySelector('.typing-indicator');
+            if (indicator) indicator.remove();
         }
-    });
 
-    document.getElementById('avatarFile').addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        const result = await uploadAvatar(file);
-        if (result.success) {
-            await updateProfileUI();
-        } else {
-            alert('Ошибка загрузки аватарки');
-        }
-    });
-
-    document.getElementById('editProfileBtn').addEventListener('click', () => {
-        const user = getCurrentUser();
-        if (!user) return;
-        
-        document.getElementById('editFirstName').value = user.get('firstName') || '';
-        document.getElementById('editLastName').value = user.get('lastName') || '';
-        document.getElementById('editNickname').value = user.get('nickname') || '';
-        
-        document.getElementById('editProfileModal').classList.add('active');
-    });
-
-    document.getElementById('saveProfileBtn').addEventListener('click', async () => {
-        const firstName = document.getElementById('editFirstName').value.trim();
-        const lastName = document.getElementById('editLastName').value.trim();
-        const nickname = document.getElementById('editNickname').value.trim();
-        
-        if (!firstName || !lastName || !nickname) {
-            alert('Все поля должны быть заполнены');
-            return;
-        }
-        
-        const result = await updateProfile(firstName, lastName, nickname);
-        if (result.success) {
-            document.getElementById('editProfileModal').classList.remove('active');
-            await updateProfileUI();
-        } else {
-            alert('Ошибка при сохранении');
-        }
-    });
-
-    document.getElementById('cancelEditBtn').addEventListener('click', () => {
-        document.getElementById('editProfileModal').classList.remove('active');
-    });
-
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-        if (confirm('Выйти из аккаунта?')) {
-            const user = getCurrentUser();
-            if (user) {
-                user.set('isOnline', false);
-                user.set('lastSeen', new Date());
-                await user.save();
+        function startChatAutoUpdate() {
+            if (chatUpdateInterval) {
+                clearInterval(chatUpdateInterval);
             }
             
-            await Parse.User.logOut();
-            toggleAuthNav(true);
-            document.getElementById('authScreen').classList.add('active');
+            chatUpdateInterval = setInterval(async () => {
+                if (currentConversationId && document.getElementById('chatRoomScreen').classList.contains('active')) {
+                    await loadMessageHistory(currentConversationId);
+                }
+            }, 100);
         }
-    });
 
-    // ========== ИНИЦИАЛИЗАЦИЯ ==========
-    window.onload = async () => {
-        const loadingScreen = document.getElementById('loadingScreen');
-        loadingScreen.classList.remove('hidden');
-        
-        await checkAuth();
-        
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.post-menu')) {
-                document.querySelectorAll('.post-menu-dropdown').forEach(m => {
-                    m.classList.remove('active');
-                });
+        // ========== РЕАКЦИИ ==========
+        window.showReactionPanel = function(e, messageId) {
+            e.preventDefault();
+            const panel = document.getElementById('reactionPanel');
+            
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            panel.style.left = (x - 140) + 'px';
+            panel.style.top = (y - 70) + 'px';
+            panel.classList.add('active');
+            currentReactionMessage = messageId;
+            
+            setTimeout(() => {
+                panel.classList.remove('active');
+            }, 3000);
+        };
+
+        window.addReaction = function(emoji) {
+            if (!currentReactionMessage) return;
+            
+            const msg = document.querySelector(`[data-message-id="${currentReactionMessage}"]`);
+            if (msg) {
+                msg.classList.add('reacted');
+                const reactionDiv = msg.querySelector('.message-reaction');
+                if (reactionDiv) reactionDiv.textContent = emoji;
             }
             
-            if (!e.target.closest('.nav-icon') && !e.target.closest('.notifications-panel')) {
-                document.getElementById('notificationsPanel').classList.remove('active');
+            document.getElementById('reactionPanel').classList.remove('active');
+        };
+
+        window.deleteMessage = async function(messageId) {
+            if (!messageId || !confirm('Удалить сообщение?')) return;
+            
+            try {
+                const Message = Parse.Object.extend('Message');
+                const query = new Parse.Query(Message);
+                const message = await query.get(messageId);
+                const sender = message.get('sender');
+                
+                if (sender.id === getCurrentUser().id) {
+                    await message.destroy();
+                    const msgElement = document.querySelector(`[data-message-id="${messageId}"]`);
+                    if (msgElement) msgElement.remove();
+                }
+            } catch (error) {
+                console.error('Ошибка удаления:', error);
+            }
+        };
+
+        // ========== УПРАВЛЕНИЕ ЧАТАМИ ==========
+        async function updateChatList() {
+            const conversations = await getUserConversations();
+            
+            const html = await Promise.all(conversations.map(async c => {
+                const user = c.otherUser;
+                await user.fetch();
+                
+                return `
+                    <div class="chat-item" onclick="openChatRoom('${user.id}')">
+                        <div class="chat-avatar ${getAvatarClass(user)}" 
+                             style="${getAvatarStyle(user)}"
+                             onclick="event.stopPropagation(); openUserProfile('${user.id}')"></div>
+                        <div class="chat-info">
+                            <div class="chat-name-row">
+                                <span class="chat-name" onclick="event.stopPropagation(); openUserProfile('${user.id}')">
+                                    ${user.get('firstName')} ${user.get('lastName')}
+                                </span>
+                                ${c.unreadCount > 0 ? 
+                                    `<span class="unread-badge">${c.unreadCount}</span>` : ''}
+                            </div>
+                            <div class="chat-preview">${c.lastMessage}</div>
+                            <div class="chat-time">${formatTime(c.lastMessageTime)}</div>
+                        </div>
+                    </div>
+                `;
+            })).then(html => html.join(''));
+            
+            document.getElementById('chatList').innerHTML = html || 
+                '<p style="opacity:0.5; text-align:center; padding:20px;">Нет чатов</p>';
+        }
+
+        // ========== КОМНАТА ЧАТА ==========
+        window.openChatRoom = async function(otherUserId) {
+            try {
+                console.log('Открываем чат с пользователем:', otherUserId);
+                
+                const conversation = await getOrCreateConversation(otherUserId);
+                if (!conversation) {
+                    alert('Не удалось создать чат');
+                    return;
+                }
+                
+                currentConversationId = conversation.id;
+                currentOtherUserId = otherUserId;
+                messageCount = 0;
+                
+                const otherUser = await new Parse.Query('_User').get(otherUserId);
+                
+                document.getElementById('chatRoomAvatar').className = 
+                    `chat-room-avatar ${getAvatarClass(otherUser)}`;
+                const avatarStyle = getAvatarStyle(otherUser);
+                if (avatarStyle) {
+                    document.getElementById('chatRoomAvatar').style.cssText = avatarStyle;
+                }
+                
+                document.getElementById('chatRoomName').textContent = 
+                    `${otherUser.get('firstName')} ${otherUser.get('lastName')}`;
+                
+                const status = otherUser.get('isOnline') ? 'Онлайн' : 'Офлайн';
+                const statusDot = otherUser.get('isOnline') ? 'online' : 'offline';
+                document.getElementById('chatRoomStatus').innerHTML = 
+                    `<span class="online-dot ${statusDot}"></span> ${status}`;
+                
+                document.getElementById('chatRoomMessages').innerHTML = 
+                    '<p style="opacity:0.5; text-align:center;">Загрузка...</p>';
+                await loadMessageHistory(currentConversationId);
+                subscribeToChat(currentConversationId);
+                
+                startChatAutoUpdate();
+                
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById('chatRoomScreen').classList.add('active');
+                
+            } catch (error) {
+                console.error('Ошибка открытия чата:', error);
+                alert('Ошибка при открытии чата: ' + error.message);
+            }
+        };
+
+        window.closeChatRoom = function() {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('chatScreen').classList.add('active');
+            
+            if (currentChannel) {
+                currentChannel.unbind_all();
+                currentChannel.unsubscribe();
             }
             
-            if (!e.target.closest('.reaction-panel') && !e.target.closest('.message')) {
-                document.getElementById('reactionPanel')?.classList.remove('active');
+            if (chatUpdateInterval) {
+                clearInterval(chatUpdateInterval);
+                chatUpdateInterval = null;
+            }
+            
+            hideTypingIndicator();
+            
+            updateChatList();
+        };
+
+        window.openChatUserProfile = function() {
+            if (currentOtherUserId) {
+                openUserProfile(currentOtherUserId);
+            }
+        };
+
+        function updateChatBadges() {
+            const chatNavBadge = document.getElementById('chatNavBadge');
+            
+            const totalUnread = Object.values(unreadMessages).reduce((a, b) => a + b, 0);
+            
+            if (totalUnread > 0) {
+                chatNavBadge.textContent = totalUnread > 9 ? '9+' : totalUnread;
+                chatNavBadge.style.display = 'flex';
+            } else {
+                chatNavBadge.style.display = 'none';
+            }
+        }
+
+        // ========== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ==========
+        async function updateHomeFeed() {
+            const posts = await getAllPosts();
+            const currentUser = getCurrentUser();
+            const stories = await getStories();
+            
+            const userStories = await getUserStories(currentUser.id);
+            const hasStory = userStories.length > 0;
+            
+            const storiesHtml = `
+                <div class="story" onclick="addStory()">
+                    <div class="story-avatar ${getAvatarClass(currentUser)} ${hasStory ? '' : 'no-story'}" 
+                         style="${getAvatarStyle(currentUser)}">
+                        <div class="story-add">+</div>
+                    </div>
+                    <span class="story-name">Ваша история</span>
+                </div>
+                ${await Promise.all(stories.map(async s => {
+                    const author = s.get('author');
+                    return `
+                        <div class="story" onclick="viewStory('${author.id}')">
+                            <div class="story-avatar ${getAvatarClass(author)}" 
+                                 style="${getAvatarStyle(author)}"></div>
+                            <span class="story-name">${author.get('firstName')}</span>
+                        </div>
+                    `;
+                })).then(html => html.join(''))}
+            `;
+            
+            document.getElementById('stories').innerHTML = storiesHtml;
+            
+            const postsHtml = await Promise.all(posts.map(async post => {
+                const author = post.get('author');
+                await author.fetch();
+                
+                const comments = post.get('comments') || [];
+                const isAuthor = author.id === currentUser.id;
+                const isLiked = post.get('likedBy')?.includes(currentUser.id) || false;
+                
+                return `
+                    <div class="post" data-post-id="${post.id}">
+                        <div class="post-header">
+                            <div class="post-avatar ${getAvatarClass(author)}" 
+                                 style="${getAvatarStyle(author)}"
+                                 onclick="openUserProfile('${author.id}')"></div>
+                            <div class="post-author-info">
+                                <div class="post-author" onclick="openUserProfile('${author.id}')">
+                                    ${author.get('firstName')} ${author.get('lastName')}
+                                </div>
+                                <div class="post-nick">@${author.get('nickname') || ''}</div>
+                            </div>
+                            ${isAuthor ? `
+                                <div class="post-menu">
+                                    <button class="post-menu-btn" onclick="togglePostMenu('${post.id}')">•••</button>
+                                    <div class="post-menu-dropdown" id="menu-${post.id}">
+                                        <div class="post-menu-item" onclick="editPost('${post.id}')">
+                                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                                            </svg>
+                                            Редактировать
+                                        </div>
+                                        <div class="post-menu-item" onclick="deletePost('${post.id}')">
+                                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                                <path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                                                <path d="M8 4V2h8v2"/>
+                                            </svg>
+                                            Удалить
+                                        </div>
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="post-text">${post.get('text')}</div>
+                        ${post.get('image') ? 
+                            `<img src="${post.get('image').url()}" class="post-image" 
+                                  onclick="openPostViewer('${post.id}')">` : ''}
+                        <div class="post-actions">
+                            <div class="post-action ${isLiked ? 'liked' : ''}" 
+                                 onclick="likePost('${post.id}', this)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                                <span>${post.get('likes') || 0}</span>
+                            </div>
+                            <div class="post-action" onclick="toggleComments('${post.id}')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                <span>${comments.length}</span>
+                            </div>
+                            <span class="post-date">${formatDate(post.createdAt)}</span>
+                        </div>
+                        <div class="comments" id="comments-${post.id}" style="display: none;">
+                            <div class="comment-input">
+                                <input type="text" class="comment-input-field" 
+                                       id="comment-input-${post.id}" placeholder="Написать комментарий...">
+                                <button class="comment-btn" onclick="addComment('${post.id}')">➤</button>
+                            </div>
+                            <div class="comments-list">
+                                ${comments.map(c => `
+                                    <div class="comment">
+                                        <div class="comment-avatar avatar-default"></div>
+                                        <div>
+                                            <div class="comment-author">${c.authorName}</div>
+                                            <div class="comment-text">${c.text}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            })).then(html => html.join(''));
+            
+            document.getElementById('posts').innerHTML = postsHtml || 
+                '<p style="opacity:0.5; text-align:center;">Нет постов</p>';
+        }
+
+        async function updateProfileUI(userId = null) {
+            const user = userId ? await new Parse.Query('_User').get(userId) : getCurrentUser();
+            if (!user) return;
+            
+            currentProfileUserId = user.id;
+            
+            document.getElementById('profileFullName').textContent = 
+                `${user.get('firstName')} ${user.get('lastName')}`;
+            document.getElementById('profileNick').textContent = 
+                `@${user.get('nickname') || ''}`;
+            
+            const avatarClass = getAvatarClass(user);
+            const avatarStyle = getAvatarStyle(user);
+            document.getElementById('profileAvatar').className = `profile-avatar ${avatarClass}`;
+            if (avatarStyle) {
+                document.getElementById('profileAvatar').style.cssText = avatarStyle;
+            }
+            
+            const posts = await getUserPosts(user.id);
+            document.getElementById('profilePostsCount').textContent = posts.length;
+            document.getElementById('profileFollowersCount').textContent = await getFollowersCount(user.id);
+            document.getElementById('profileFollowingCount').textContent = await getFollowingCount(user.id);
+            
+            const messageBtn = document.getElementById('profileMessageBtn');
+            const subscribeBtn = document.getElementById('profileSubscribeBtn');
+            
+            if (user.id === getCurrentUser().id) {
+                messageBtn.style.display = 'none';
+                subscribeBtn.style.display = 'none';
+            } else {
+                messageBtn.style.display = 'block';
+                subscribeBtn.style.display = 'block';
+                
+                messageBtn.onclick = () => openChatRoom(user.id);
+                
+                const isSubscribed = await checkIfSubscribed(getCurrentUser().id, user.id);
+                subscribeBtn.textContent = isSubscribed ? '✓ Подписан' : 'Подписаться';
+                subscribeBtn.onclick = async () => {
+                    const result = await toggleSubscribe(user.id);
+                    if (result) {
+                        subscribeBtn.textContent = result.subscribed ? '✓ Подписан' : 'Подписаться';
+                        await updateProfileUI(user.id);
+                    }
+                };
+            }
+            
+            const postsHtml = posts.map(post => {
+                if (post.get('image')) {
+                    return `
+                        <div class="post-thumb" onclick="openPostViewer('${post.id}')">
+                            <img src="${post.get('image').url()}" alt="post">
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="post-thumb" onclick="openPostViewer('${post.id}')">
+                            <div class="text-thumb">📝</div>
+                        </div>
+                    `;
+                }
+            }).join('');
+            
+            document.getElementById('userPostsGrid').innerHTML = postsHtml || 
+                '<p style="opacity:0.5; text-align:center;">Нет постов</p>';
+        }
+
+        async function updateSearchResults() {
+            const users = await searchUsers('');
+            
+            const html = users.map(user => `
+                <div class="user-card" onclick="openUserProfile('${user.id}')">
+                    <div class="user-avatar ${getAvatarClass(user)}" 
+                         style="${getAvatarStyle(user)}"></div>
+                    <div class="user-info">
+                        <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
+                        <div class="user-nick">@${user.get('nickname') || ''}</div>
+                        <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
+                    </div>
+                    <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            `).join('');
+            
+            document.getElementById('searchResults').innerHTML = html;
+        }
+
+        // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
+        window.openAddPostModal = function() {
+            document.getElementById('addPostModal').classList.add('active');
+        };
+
+        window.openUserProfile = async function(userId) {
+            await updateProfileUI(userId);
+            navigateTo('profileScreen', document.querySelectorAll('.nav-item')[4]);
+        };
+
+        window.showPosts = function() {
+            navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
+        };
+
+        window.showSubscriptions = async function(type) {
+            const userId = currentProfileUserId || getCurrentUser().id;
+            document.getElementById('subscriptionsTitle').textContent = 
+                type === 'followers' ? 'Подписчики' : 'Подписки';
+            
+            await updateSubscriptionsList(type, userId);
+            document.getElementById('subscriptionsModal').classList.add('active');
+        };
+
+        async function updateSubscriptionsList(type, userId, searchQuery = '') {
+            const list = document.getElementById('subscriptionsList');
+            const users = type === 'followers' ? await getFollowers(userId) : await getFollowing(userId);
+            
+            const filteredUsers = searchQuery ? 
+                users.filter(u => {
+                    const name = `${u.get('firstName')} ${u.get('lastName')}`.toLowerCase();
+                    const nick = u.get('nickname')?.toLowerCase() || '';
+                    return name.includes(searchQuery.toLowerCase()) || 
+                           nick.includes(searchQuery.toLowerCase());
+                }) : users;
+            
+            list.innerHTML = filteredUsers.map(user => `
+                <div class="subscription-item" onclick="openUserProfile('${user.id}')">
+                    <div class="subscription-avatar ${getAvatarClass(user)}" 
+                         style="${getAvatarStyle(user)}"></div>
+                    <div class="subscription-info">
+                        <div class="subscription-name">${user.get('firstName')} ${user.get('lastName')}</div>
+                        <div class="subscription-nick">@${user.get('nickname') || ''}</div>
+                        <div class="subscription-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
+                    </div>
+                    <button class="subscription-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            `).join('') || '<p style="opacity:0.5; text-align:center;">Нет пользователей</p>';
+        }
+
+        document.getElementById('subscriptionsSearchBtn').addEventListener('click', async () => {
+            const searchInput = document.getElementById('subscriptionsSearchInput');
+            const query = searchInput.value.trim();
+            const activeTab = document.querySelector('.subscriptions-tab.active').textContent;
+            const type = activeTab === 'Подписчики' ? 'followers' : 'following';
+            const userId = currentProfileUserId || getCurrentUser().id;
+            
+            await updateSubscriptionsList(type, userId, query);
+        });
+
+        document.getElementById('subscriptionsSearchInput').addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('subscriptionsSearchBtn').click();
             }
         });
-    };
-</script>
+
+        window.closeSubscriptions = function() {
+            document.getElementById('subscriptionsModal').classList.remove('active');
+            document.getElementById('subscriptionsSearchInput').value = '';
+        };
+
+        window.switchSubTab = function(tab) {
+            document.querySelectorAll('.subscriptions-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            const userId = currentProfileUserId || getCurrentUser().id;
+            updateSubscriptionsList(tab, userId);
+        };
+
+        window.togglePostMenu = function(postId) {
+            const menu = document.getElementById(`menu-${postId}`);
+            document.querySelectorAll('.post-menu-dropdown').forEach(m => m.classList.remove('active'));
+            menu.classList.toggle('active');
+        };
+
+        window.likePost = async function(postId, element) {
+            const result = await likePost(postId);
+            if (result) {
+                const span = element.querySelector('span');
+                span.textContent = parseInt(span.textContent) + 1;
+                element.classList.add('liked');
+            }
+        };
+
+        window.toggleComments = function(postId) {
+            const comments = document.getElementById(`comments-${postId}`);
+            comments.style.display = comments.style.display === 'none' ? 'block' : 'none';
+        };
+
+        window.addComment = async function(postId) {
+            const input = document.getElementById(`comment-input-${postId}`);
+            const text = input.value.trim();
+            if (!text) return;
+            
+            const result = await addComment(postId, text);
+            if (result) {
+                input.value = '';
+                await updateHomeFeed();
+                if (document.getElementById('postViewer').classList.contains('active')) {
+                    await openPostViewer(postId);
+                }
+            }
+        };
+
+        window.editPost = function(postId) {
+            const newText = prompt('Редактировать пост:');
+            if (newText) {
+                editPost(postId, newText).then(() => {
+                    updateHomeFeed();
+                    closePostViewer();
+                });
+            }
+        };
+
+        window.deletePost = async function(postId) {
+            if (!confirm('Удалить пост?')) return;
+            const result = await deletePost(postId);
+            if (result) {
+                await updateHomeFeed();
+                closePostViewer();
+            }
+        };
+
+        window.addStory = function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                await createStory(file);
+                await updateHomeFeed();
+            };
+            input.click();
+        };
+
+        window.viewStory = async function(userId) {
+            const stories = await getUserStories(userId);
+            if (stories.length === 0) return;
+            
+            const user = await new Parse.Query('_User').get(userId);
+            currentStoryUser = { user, stories, index: 0 };
+            
+            if (userId !== getCurrentUser().id) {
+                await addStoryView(stories[0].id, getCurrentUser().id);
+            }
+            
+            showStory(0);
+        };
+
+        function showStory(index) {
+            if (!currentStoryUser) return;
+            
+            const story = currentStoryUser.stories[index];
+            const user = currentStoryUser.user;
+            
+            document.getElementById('storyAvatar').style.backgroundImage = 
+                getAvatarStyle(user) || `url('${getAvatarClass(user)}')`;
+            document.getElementById('storyName').textContent = 
+                `${user.get('firstName')} ${user.get('lastName')}`;
+            document.getElementById('storyImage').style.backgroundImage = 
+                `url('${story.get('image').url()}')`;
+            document.getElementById('storyViewer').classList.add('active');
+            
+            if (user.id === getCurrentUser().id) {
+                const views = story.get('views') || [];
+                const viewsList = document.getElementById('storyViewsList');
+                viewsList.innerHTML = views.map(v => `
+                    <div class="story-view-item" onclick="openUserProfile('${v.user.id}')">
+                        <div class="story-view-avatar ${getAvatarClass(v.user)}" 
+                             style="${getAvatarStyle(v.user)}"></div>
+                        <div class="story-view-name">${v.user.get('firstName')} ${v.user.get('lastName')}</div>
+                        <div class="story-view-time">${formatTime(v.viewedAt)}</div>
+                    </div>
+                `).join('');
+                document.getElementById('storyViews').classList.remove('hidden');
+            } else {
+                document.getElementById('storyViews').classList.add('hidden');
+            }
+            
+            const progress = document.getElementById('storyProgress');
+            progress.style.width = '0%';
+            
+            setTimeout(() => {
+                progress.style.width = '100%';
+            }, 100);
+            
+            if (storyTimer) clearTimeout(storyTimer);
+            storyTimer = setTimeout(() => {
+                if (index + 1 < currentStoryUser.stories.length) {
+                    showStory(index + 1);
+                } else {
+                    closeStory();
+                }
+            }, 5000);
+        }
+
+        window.closeStory = function() {
+            document.getElementById('storyViewer').classList.remove('active');
+            if (storyTimer) clearTimeout(storyTimer);
+            currentStoryUser = null;
+        };
+
+        window.likeStory = function() {
+            const input = document.getElementById('storyReplyText');
+            const text = input.value.trim();
+            
+            if (text) {
+                addNotification('story_reply', '💬 Ответ на историю', 
+                    `Вы ответили: "${text}"`, currentStoryUser?.user);
+                alert(`Ответ отправлен: ${text}`);
+                input.value = '';
+            } else {
+                addNotification('story_like', '❤️ Лайк на историю', 
+                    `Вы лайкнули историю ${currentStoryUser?.user?.get('firstName') || 'пользователя'}`);
+                alert('❤️ Лайк на историю');
+            }
+        };
+
+        window.sendStoryReply = function() {
+            const input = document.getElementById('storyReplyText');
+            const text = input.value.trim();
+            if (text) {
+                addNotification('story_reply', '💬 Ответ на историю', 
+                    `Вы ответили: "${text}"`, currentStoryUser?.user);
+                alert(`Ответ отправлен: ${text}`);
+                input.value = '';
+            }
+        };
+
+        window.openPhoto = function(url, author) {
+            document.getElementById('photoImage').style.backgroundImage = `url('${url}')`;
+            document.getElementById('photoInfo').textContent = `Фото · ${author}`;
+            document.getElementById('photoViewer').classList.add('active');
+        };
+
+        window.closePhoto = function() {
+            document.getElementById('photoViewer').classList.remove('active');
+        };
+
+        window.openPostViewer = async function(postId) {
+            try {
+                const post = await new Parse.Query('Post').get(postId);
+                await post.get('author').fetch();
+                
+                const comments = post.get('comments') || [];
+                const isAuthor = getCurrentUser().id === post.get('author').id;
+                const isLiked = post.get('likedBy')?.includes(getCurrentUser().id) || false;
+                
+                const postHtml = `
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="post-avatar ${getAvatarClass(post.get('author'))}" 
+                                 style="${getAvatarStyle(post.get('author'))}"
+                                 onclick="openUserProfile('${post.get('author').id}')"></div>
+                            <div class="post-author-info">
+                                <div class="post-author" onclick="openUserProfile('${post.get('author').id}')">
+                                    ${post.get('author').get('firstName')} ${post.get('author').get('lastName')}
+                                </div>
+                                <div class="post-nick">@${post.get('author').get('nickname') || ''}</div>
+                            </div>
+                            ${isAuthor ? `
+                                <div class="post-menu">
+                                    <button class="post-menu-btn" onclick="togglePostMenu('${post.id}')">•••</button>
+                                    <div class="post-menu-dropdown" id="menu-${post.id}">
+                                        <div class="post-menu-item" onclick="editPost('${post.id}'); closePostViewer()">
+                                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+                                            </svg>
+                                            Редактировать
+                                        </div>
+                                        <div class="post-menu-item" onclick="deletePost('${post.id}'); closePostViewer()">
+                                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                                <path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                                                <path d="M8 4V2h8v2"/>
+                                            </svg>
+                                            Удалить
+                                        </div>
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="post-text">${post.get('text')}</div>
+                        ${post.get('image') ? 
+                            `<img src="${post.get('image').url()}" class="post-image">` : ''}
+                        <div class="post-actions">
+                            <div class="post-action ${isLiked ? 'liked' : ''}" 
+                                 onclick="likePost('${post.id}', this)">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                                <span>${post.get('likes') || 0}</span>
+                            </div>
+                            <div class="post-action" onclick="toggleComments('${post.id}')">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                <span>${comments.length}</span>
+                            </div>
+                            <span class="post-date">${formatDate(post.createdAt)}</span>
+                        </div>
+                        <div class="comments" id="comments-${post.id}" style="display: block;">
+                            <div class="comment-input">
+                                <input type="text" class="comment-input-field" 
+                                       id="comment-input-${post.id}" placeholder="Написать комментарий...">
+                                <button class="comment-btn" onclick="addComment('${post.id}')">➤</button>
+                            </div>
+                            <div class="comments-list">
+                                ${comments.map(c => `
+                                    <div class="comment">
+                                        <div class="comment-avatar avatar-default"></div>
+                                        <div>
+                                            <div class="comment-author">${c.authorName}</div>
+                                            <div class="comment-text">${c.text}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('postViewerContent').innerHTML = postHtml;
+                document.getElementById('postViewer').classList.add('active');
+            } catch (error) {
+                console.error('Ошибка открытия поста:', error);
+            }
+        };
+
+        window.closePostViewer = function() {
+            document.getElementById('postViewer').classList.remove('active');
+        };
+
+        // ========== ОБРАБОТЧИКИ КНОПОК ==========
+        document.getElementById('cancelPostBtn').addEventListener('click', () => {
+            document.getElementById('addPostModal').classList.remove('active');
+            document.getElementById('postText').value = '';
+            document.getElementById('postFile').value = '';
+        });
+
+        document.getElementById('postFileInput').addEventListener('click', () => {
+            document.getElementById('postFile').click();
+        });
+
+        document.getElementById('publishPostBtn').addEventListener('click', async () => {
+            const text = document.getElementById('postText').value.trim();
+            if (!text) {
+                alert('Введите текст поста');
+                return;
+            }
+            
+            const file = document.getElementById('postFile').files[0];
+            const result = await createPost(text, file);
+            
+            if (result.success) {
+                document.getElementById('addPostModal').classList.remove('active');
+                document.getElementById('postText').value = '';
+                document.getElementById('postFile').value = '';
+                await updateHomeFeed();
+            } else {
+                alert('Ошибка при создании поста');
+            }
+        });
+
+        document.getElementById('searchBtn').addEventListener('click', async () => {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return;
+            
+            const users = await searchUsers(query);
+            const html = users.map(user => `
+                <div class="user-card" onclick="openUserProfile('${user.id}')">
+                    <div class="user-avatar ${getAvatarClass(user)}" 
+                         style="${getAvatarStyle(user)}"></div>
+                    <div class="user-info">
+                        <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
+                        <div class="user-nick">@${user.get('nickname') || ''}</div>
+                        <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
+                    </div>
+                    <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            `).join('');
+            
+            document.getElementById('searchResults').innerHTML = html;
+        });
+
+        document.getElementById('chatRoomSendBtn').addEventListener('click', async function() {
+            const input = document.getElementById('chatRoomInput');
+            const text = input.value.trim();
+            
+            if (!text || !currentConversationId || !currentOtherUserId) return;
+            
+            const isSubscribed = await checkIfSubscribed(currentOtherUserId, getCurrentUser().id);
+            
+            if (!isSubscribed) {
+                alert('Пользователь не подписан на вас');
+                input.value = '';
+                closeChatRoom();
+                return;
+            }
+            
+            const result = await sendMessage(text, currentConversationId);
+            
+            if (result.success) {
+                input.value = '';
+                addMessageToChat(text, true, new Date(), result.messageId);
+                
+                messageCount++;
+                if (messageCount % 50 === 0) {
+                    showPassportStiQ();
+                }
+                
+                if (currentChannel) {
+                    currentChannel.trigger('client-new-message', {
+                        text: text,
+                        senderId: getCurrentUser().id,
+                        timestamp: new Date(),
+                        messageId: result.messageId
+                    });
+                }
+                
+                hideTypingIndicator();
+            }
+        });
+
+        document.getElementById('chatRoomInput').addEventListener('input', function() {
+            if (currentChannel && currentConversationId && !isTyping) {
+                isTyping = true;
+                currentChannel.trigger('client-typing', {
+                    senderId: getCurrentUser().id,
+                    conversationId: currentConversationId
+                });
+                
+                if (typingTimeout) clearTimeout(typingTimeout);
+                typingTimeout = setTimeout(() => {
+                    isTyping = false;
+                }, 2000);
+            }
+        });
+
+        document.getElementById('chatRoomInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('chatRoomSendBtn').click();
+            }
+        });
+
+        document.getElementById('avatarFile').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const result = await uploadAvatar(file);
+            if (result.success) {
+                await updateProfileUI();
+            } else {
+                alert('Ошибка загрузки аватарки');
+            }
+        });
+
+        document.getElementById('editProfileBtn').addEventListener('click', () => {
+            const user = getCurrentUser();
+            if (!user) return;
+            
+            document.getElementById('editFirstName').value = user.get('firstName') || '';
+            document.getElementById('editLastName').value = user.get('lastName') || '';
+            document.getElementById('editNickname').value = user.get('nickname') || '';
+            
+            document.getElementById('editProfileModal').classList.add('active');
+        });
+
+        document.getElementById('saveProfileBtn').addEventListener('click', async () => {
+            const firstName = document.getElementById('editFirstName').value.trim();
+            const lastName = document.getElementById('editLastName').value.trim();
+            const nickname = document.getElementById('editNickname').value.trim();
+            
+            if (!firstName || !lastName || !nickname) {
+                alert('Все поля должны быть заполнены');
+                return;
+            }
+            
+            const result = await updateProfile(firstName, lastName, nickname);
+            if (result.success) {
+                document.getElementById('editProfileModal').classList.remove('active');
+                await updateProfileUI();
+            } else {
+                alert('Ошибка при сохранении');
+            }
+        });
+
+        document.getElementById('cancelEditBtn').addEventListener('click', () => {
+            document.getElementById('editProfileModal').classList.remove('active');
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            if (confirm('Выйти из аккаунта?')) {
+                const user = getCurrentUser();
+                if (user) {
+                    user.set('isOnline', false);
+                    user.set('lastSeen', new Date());
+                    await user.save();
+                }
+                
+                await Parse.User.logOut();
+                toggleAuthNav(true);
+                document.getElementById('authScreen').classList.add('active');
+            }
+        });
+
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+        window.onload = async () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.classList.remove('hidden');
+            
+            await checkAuth();
+            
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.post-menu')) {
+                    document.querySelectorAll('.post-menu-dropdown').forEach(m => {
+                        m.classList.remove('active');
+                    });
+                }
+                
+                if (!e.target.closest('.nav-icon') && !e.target.closest('.notifications-panel')) {
+                    document.getElementById('notificationsPanel').classList.remove('active');
+                }
+                
+                if (!e.target.closest('.reaction-panel') && !e.target.closest('.message')) {
+                    document.getElementById('reactionPanel')?.classList.remove('active');
+                }
+            });
+        };
+    </script>
 </body>
 </html>
