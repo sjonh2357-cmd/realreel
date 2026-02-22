@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · v2.7</title>
+    <title>RealReel · v3.0</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -509,20 +509,31 @@
             margin-top: 15px;
         }
 
-        /* PASSPORT STIQ - ОБНОВЛЕННЫЙ ДИЗАЙН */
+        /* PASSPORT STIQ 3.0 - НОВАЯ ВЕРСИЯ С МЕСТАМИ */
         .passport-stiq {
             position: relative;
             margin: 10px 0;
             padding: 20px;
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
             border-radius: 20px;
             color: white;
             animation: passportAppear 0.5s ease-out, passportFloat 3s ease-in-out infinite;
-            box-shadow: 0 10px 30px rgba(108,92,231,0.3);
+            box-shadow: 0 10px 30px rgba(108,92,231,0.4);
             max-width: 90%;
             align-self: center;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
             backdrop-filter: blur(5px);
+            transform-origin: center;
+        }
+
+        .passport-stiq:hover {
+            animation: passportGlow 2s ease-in-out infinite;
+            transform: scale(1.02);
+        }
+
+        @keyframes passportGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(108,92,231,0.4); }
+            50% { box-shadow: 0 20px 50px rgba(108,92,231,0.6); }
         }
 
         .passport-stiq.left {
@@ -546,20 +557,20 @@
 
         .passport-icon {
             position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 50px;
-            height: 50px;
+            top: -15px;
+            right: -15px;
+            width: 60px;
+            height: 60px;
             background: white;
-            border-radius: 25px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 30px;
             transform: rotate(5deg);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            animation: passportIconSpin 10s linear infinite;
-            border: 2px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: passportIconSpin 15s linear infinite;
+            border: 3px solid #6C5CE7;
         }
 
         @keyframes passportIconSpin {
@@ -568,8 +579,8 @@
         }
 
         .passport-icon img {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             animation: passportIconPulse 2s ease-in-out infinite;
         }
 
@@ -579,57 +590,134 @@
         }
 
         .passport-title {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
             letter-spacing: 1px;
             opacity: 0.9;
             text-transform: uppercase;
             background: rgba(255,255,255,0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border-radius: 25px;
             display: inline-block;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { background: rgba(255,255,255,0.2); }
+            50% { background: rgba(255,255,255,0.3); }
         }
 
         .passport-number {
             font-size: 14px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .passport-place {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
             color: white;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: placeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes placeGlow {
+            0%, 100% { text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+            50% { text-shadow: 0 5px 20px rgba(255,255,255,0.5); }
         }
 
         .passport-message {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             margin-bottom: 15px;
-            line-height: 1.4;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.5;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 15px;
+            border-left: 3px solid white;
         }
 
         .passport-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 10px;
-            opacity: 0.8;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            padding-top: 8px;
+            font-size: 11px;
+            opacity: 0.9;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 10px;
             text-transform: uppercase;
         }
 
         .passport-visa-type {
             background: rgba(255,255,255,0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 9px;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 10px;
             font-weight: 700;
             color: white;
+            animation: visaPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes visaPulse {
+            0%, 100% { background: rgba(255,255,255,0.2); }
+            50% { background: rgba(255,255,255,0.3); }
         }
 
         .passport-country {
-            font-size: 9px;
+            font-size: 10px;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* Коллекция виз */
+        .visa-collection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .visa-item {
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            color: white;
+            animation: visaItemAppear 0.5s ease-out;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .visa-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(108,92,231,0.4);
+        }
+
+        @keyframes visaItemAppear {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .visa-item-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .visa-item-place {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .visa-item-date {
+            font-size: 8px;
             opacity: 0.8;
         }
 
@@ -1183,6 +1271,13 @@
             gap: 6px;
         }
 
+        .search-suggestions-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin: 16px 0 8px 0;
+        }
+
         .user-card {
             display: flex;
             align-items: center;
@@ -1224,6 +1319,23 @@
             font-size: 11px;
             color: #6C5CE7;
             margin-top: 1px;
+        }
+
+        .user-bio {
+            font-size: 10px;
+            color: #999;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .user-match {
+            font-size: 9px;
+            color: #6C5CE7;
+            margin-top: 1px;
+            background: rgba(108,92,231,0.1);
+            padding: 2px 6px;
+            border-radius: 12px;
+            display: inline-block;
         }
 
         .user-status {
@@ -1327,6 +1439,15 @@
 
         .chat-name:hover {
             color: #6C5CE7;
+        }
+
+        .chat-badge {
+            background: #6C5CE7;
+            color: white;
+            font-size: 8px;
+            padding: 2px 4px;
+            border-radius: 4px;
+            margin-left: 4px;
         }
 
         .unread-badge {
@@ -1535,6 +1656,14 @@
             color: rgba(255,255,255,0.7);
         }
 
+        /* Индикатор "Просмотрено" */
+        .message-seen {
+            font-size: 8px;
+            color: #6C5CE7;
+            margin-left: 4px;
+            display: inline-block;
+        }
+
         .message-delete {
             position: absolute;
             top: -6px;
@@ -1695,16 +1824,69 @@
             flex: 1;
         }
 
+        .profile-name-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .profile-name {
             font-weight: 600;
             font-size: 16px;
             color: #333;
-            margin-bottom: 2px;
+        }
+
+        .profile-star {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: starPulse 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes starPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
         }
 
         .profile-nick {
             color: #6C5CE7;
             font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .profile-bio {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+            line-height: 1.4;
+            background: #f8faff;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border-left: 3px solid #6C5CE7;
+        }
+
+        .profile-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .profile-trait {
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 500;
+            animation: traitPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes traitPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
         .stats {
@@ -1771,6 +1953,35 @@
         .profile-btn.secondary:hover {
             background: #e0e0e0;
             transform: translateY(-1px);
+        }
+
+        /* Редактирование черт характера */
+        .traits-edit {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .trait-option {
+            background: #f0f0f0;
+            color: #555;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .trait-option:hover {
+            background: #6C5CE7;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .trait-option.selected {
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            color: white;
         }
 
         .posts-grid {
@@ -1923,7 +2134,7 @@
         }
 
         .passport-stiq-card {
-            background: linear-gradient(135deg, #6C5CE7, #A463F5);
+            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
             border-radius: 30px;
             padding: 30px 20px;
             color: white;
@@ -1931,12 +2142,13 @@
             overflow: hidden;
             margin-top: 20px;
             animation: cardGlow 3s ease-in-out infinite;
-            box-shadow: 0 20px 40px rgba(108,92,231,0.3);
+            box-shadow: 0 20px 40px rgba(108,92,231,0.4);
+            border: 2px solid rgba(255,255,255,0.2);
         }
 
         @keyframes cardGlow {
-            0%, 100% { box-shadow: 0 20px 40px rgba(108,92,231,0.3); }
-            50% { box-shadow: 0 25px 50px rgba(108,92,231,0.5); }
+            0%, 100% { box-shadow: 0 20px 40px rgba(108,92,231,0.4); }
+            50% { box-shadow: 0 30px 60px rgba(108,92,231,0.6); }
         }
 
         .passport-stiq-card::before {
@@ -1964,7 +2176,7 @@
         .passport-stiq-icon img {
             width: 80px;
             height: 80px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 5px 20px rgba(0,0,0,0.3));
         }
 
         @keyframes iconBounce {
@@ -1976,12 +2188,12 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
             animation: titleGlow 2s ease-in-out infinite;
         }
 
         @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+            0%, 100% { text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
             50% { text-shadow: 0 5px 20px rgba(255,255,255,0.5); }
         }
 
@@ -1992,7 +2204,7 @@
             letter-spacing: 1px;
         }
 
-        /* Модалка подписок (ЕДИНСТВЕННАЯ ВЕРСИЯ) */
+        /* Модалка подписок */
         .subscriptions-modal {
             position: fixed;
             top: 0;
@@ -2160,6 +2372,110 @@
             color: white;
         }
 
+        /* Просмотр фото */
+        .photo-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .photo-viewer.active {
+            display: flex;
+        }
+
+        .photo-header {
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .photo-close {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .photo-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .photo-image {
+            flex: 1;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 16px;
+        }
+
+        .photo-info {
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Просмотр поста */
+        .post-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .post-viewer.active {
+            display: flex;
+        }
+
+        .post-viewer-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .post-viewer-back {
+            width: 36px;
+            height: 36px;
+            background: #f0f0f0;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #555;
+            transition: 0.2s;
+        }
+
+        .post-viewer-back:hover {
+            background: #6C5CE7;
+            color: white;
+        }
+
+        .post-viewer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
         /* Аватарки */
         .avatar-default {
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23cccccc"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
@@ -2205,7 +2521,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v2.7</span></div>
+            <div class="logo">RealReel <span class="version">v3.0</span></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
@@ -2247,7 +2563,19 @@
             <input type="text" class="modal-input" id="editFirstName" placeholder="Имя">
             <input type="text" class="modal-input" id="editLastName" placeholder="Фамилия">
             <input type="text" class="modal-input" id="editNickname" placeholder="Никнейм">
-            <div class="modal-actions">
+            <textarea class="modal-input" id="editBio" placeholder="О себе (биография)" rows="2"></textarea>
+            <div class="modal-title" style="font-size: 14px; margin-top: 10px;">Черты характера (выберите 3):</div>
+            <div class="traits-edit" id="traitsEdit">
+                <span class="trait-option" data-trait="добрый">добрый</span>
+                <span class="trait-option" data-trait="веселый">веселый</span>
+                <span class="trait-option" data-trait="креативный">креативный</span>
+                <span class="trait-option" data-trait="спокойный">спокойный</span>
+                <span class="trait-option" data-trait="энергичный">энергичный</span>
+                <span class="trait-option" data-trait="романтичный">романтичный</span>
+                <span class="trait-option" data-trait="честный">честный</span>
+                <span class="trait-option" data-trait="отзывчивый">отзывчивый</span>
+            </div>
+            <div class="modal-actions" style="margin-top: 15px;">
                 <button class="modal-btn save" id="saveProfileBtn">Сохранить</button>
                 <button class="modal-btn cancel" id="cancelEditBtn">Отмена</button>
             </div>
@@ -2364,7 +2692,11 @@
                         <input type="text" class="search-input" id="searchInput" placeholder="Поиск пользователей...">
                         <button class="search-btn" id="searchBtn">Найти</button>
                     </div>
-                    <div id="searchResults"></div>
+                    <div id="searchResults">
+                        <!-- Результаты поиска будут здесь -->
+                    </div>
+                    <div class="search-suggestions-title">Рекомендации для вас</div>
+                    <div id="recommendationsList"></div>
                 </div>
             </div>
 
@@ -2376,7 +2708,10 @@
                             <img src="https://cdn-icons-png.flaticon.com/512/1043/1043504.png" alt="passport">
                         </div>
                         <div class="passport-stiq-title">PASSPORT STIQ</div>
-                        <div class="passport-stiq-subtitle">Виртуальные визы</div>
+                        <div class="passport-stiq-subtitle">Твоя коллекция виз</div>
+                    </div>
+                    <div class="visa-collection" id="visaCollection">
+                        <!-- Визы будут добавляться сюда -->
                     </div>
                 </div>
             </div>
@@ -2419,10 +2754,15 @@
                         <div class="profile-avatar" id="profileAvatar" onclick="document.getElementById('avatarFile').click()"></div>
                         <input type="file" id="avatarFile" accept="image/*" style="display: none;">
                         <div class="profile-info">
-                            <div class="profile-name" id="profileFullName">Имя Фамилия</div>
+                            <div class="profile-name-row">
+                                <div class="profile-name" id="profileFullName">Имя Фамилия</div>
+                                <div class="profile-star" id="profileStar"></div>
+                            </div>
                             <div class="profile-nick" id="profileNick">@nickname</div>
                         </div>
                     </div>
+                    <div class="profile-bio" id="profileBio"></div>
+                    <div class="profile-traits" id="profileTraits"></div>
 
                     <div class="stats">
                         <div class="stat" onclick="showPosts()">
@@ -2464,7 +2804,7 @@
             </div>
         </div>
 
-        <!-- Модалка подписок (единственная версия) -->
+        <!-- Модалка подписок -->
         <div class="subscriptions-modal" id="subscriptionsModal">
             <div class="subscriptions-header">
                 <div class="subscriptions-back" onclick="closeSubscriptions()">←</div>
@@ -2525,7 +2865,7 @@
         </div>
     </div>
 
-    <!-- Back4App и JavaScript код (такой же как в предыдущей версии) -->
+    <!-- Back4App и JavaScript код -->
     <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
@@ -2558,8 +2898,26 @@
         let typingTimeout = null;
         let isTyping = false;
         let messageCount = 0;
+        let userTraits = [];
+        let visaCollection = [];
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
+        const famousPlaces = [
+            { name: 'Эйфелева башня', city: 'Париж', country: 'Франция', icon: '🗼' },
+            { name: 'Колизей', city: 'Рим', country: 'Италия', icon: '🏛️' },
+            { name: 'Пирамиды Гизы', city: 'Каир', country: 'Египет', icon: '🔺' },
+            { name: 'Статуя Свободы', city: 'Нью-Йорк', country: 'США', icon: '🗽' },
+            { name: 'Тадж-Махал', city: 'Агра', country: 'Индия', icon: '🕌' },
+            { name: 'Великая Китайская стена', city: 'Пекин', country: 'Китай', icon: '🧱' },
+            { name: 'Собор Святого Семейства', city: 'Барселона', country: 'Испания', icon: '⛪' },
+            { name: 'Красная площадь', city: 'Москва', country: 'Россия', icon: '🟥' },
+            { name: 'Биг-Бен', city: 'Лондон', country: 'Великобритания', icon: '⏰' },
+                        { name: 'Сикстинская капелла', city: 'Ватикан', country: 'Италия', icon: '🎨' },
+            { name: 'Голливуд', city: 'Лос-Анджелес', country: 'США', icon: '🎬' },
+            { name: 'Акрополь', city: 'Афины', country: 'Греция', icon: '🏛️' },
+            { name: 'Мачу-Пикчу', city: 'Куско', country: 'Перу', icon: '🏔️' },
+            { name: 'Фудзияма', city: 'Токио', country: 'Япония', icon: '🗻' }
+        ];
 
         // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
         function getRandomAvatar() {
@@ -2603,54 +2961,81 @@
             return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
         }
 
-        // ========== PASSPORT STIQ ==========
-        function showPassportStiQ() {
-            const container = document.getElementById('chatRoomMessages');
+        // ========== PASSPORT STIQ 3.0 ==========
+        function generateVisaFromPlace(placeName) {
+            const place = famousPlaces.find(p => p.name === placeName) || 
+                         famousPlaces[Math.floor(Math.random() * famousPlaces.length)];
             
-            const warmMessages = [
-                "✨ Ты — чудо!",
-                "🌟 Сияй ярко!",
-                "💫 У тебя всё получится!",
-                "⭐ Ты особенный!",
-                "🌈 Мир лучше с тобой!",
-                "🦋 Верь в себя!",
-                "🌺 Ты прекрасен!",
-                "🚀 К новым вершинам!",
-                "🎯 Ты на правильном пути!",
-                "💖 Любовь рядом!",
-                "🌞 Улыбнись!",
-                "🍀 Удача любит тебя!",
-                "✨ Мечты сбываются!",
-                "💪 Ты сильнее, чем кажешься!",
-                "🎨 Твори свою реальность!"
-            ];
-            
-            const randomMessage = warmMessages[Math.floor(Math.random() * warmMessages.length)];
             const visaTypes = ['VIP', 'GOLD', 'DREAM', 'LOVE', 'SUCCESS', 'HAPPY'];
             const randomVisa = visaTypes[Math.floor(Math.random() * visaTypes.length)];
+            const visaNumber = Math.floor(Math.random() * 900000 + 100000);
+            
+            return {
+                id: Date.now() + Math.random(),
+                place: place.name,
+                city: place.city,
+                country: place.country,
+                icon: place.icon,
+                visaType: randomVisa,
+                number: visaNumber,
+                date: new Date(),
+                message: `Ты был в ${place.city}! ✨`
+            };
+        }
+
+        function showPassportStiQ(placeName = null) {
+            const container = document.getElementById('chatRoomMessages');
+            
+            const visa = generateVisaFromPlace(placeName);
+            
+            // Добавляем в коллекцию
+            visaCollection.unshift(visa);
+            updateVisaCollection();
             
             const isOwn = Math.random() > 0.5;
             
             const div = document.createElement('div');
             div.className = `passport-stiq ${isOwn ? 'right' : 'left'}`;
             
-            const passportNumber = Math.floor(Math.random() * 900000 + 100000);
-            
             div.innerHTML = `
                 <div class="passport-icon">
                     <img src="https://cdn-icons-png.flaticon.com/512/1043/1043504.png" alt="passport">
                 </div>
-                <div class="passport-title">PASSPORT STIQ</div>
-                <div class="passport-number">№ ${passportNumber}</div>
-                <div class="passport-message">${randomMessage}</div>
+                <div class="passport-title">PASSPORT STIQ · ${visa.country}</div>
+                <div class="passport-place">${visa.icon} ${visa.place}</div>
+                <div class="passport-number">№ ${visa.number}</div>
+                <div class="passport-message">${visa.message}</div>
                 <div class="passport-footer">
-                    <span class="passport-country">REALREEL</span>
-                    <span class="passport-visa-type">${randomVisa}</span>
+                    <span class="passport-country">${visa.city}, ${visa.country}</span>
+                    <span class="passport-visa-type">${visa.visaType}</span>
                 </div>
             `;
             
             container.appendChild(div);
             container.scrollTop = container.scrollHeight;
+        }
+
+        function updateVisaCollection() {
+            const container = document.getElementById('visaCollection');
+            if (!container) return;
+            
+            container.innerHTML = visaCollection.map(visa => `
+                <div class="visa-item" onclick="showVisaDetails('${visa.id}')">
+                    <div class="visa-item-icon">${visa.icon}</div>
+                    <div class="visa-item-place">${visa.place}</div>
+                    <div class="visa-item-date">${formatDate(visa.date)}</div>
+                </div>
+            `).join('');
+        }
+
+        function checkForPlaceInPost(text) {
+            for (const place of famousPlaces) {
+                if (text.toLowerCase().includes(place.name.toLowerCase()) ||
+                    text.toLowerCase().includes(place.city.toLowerCase())) {
+                    showPassportStiQ(place.name);
+                    break;
+                }
+            }
         }
 
         // ========== УПРАВЛЕНИЕ НАВИГАЦИЕЙ ==========
@@ -2680,6 +3065,8 @@
                 user.set('avatarClass', getRandomAvatar());
                 user.set('isOnline', true);
                 user.set('lastSeen', new Date());
+                user.set('bio', '');
+                user.set('traits', []);
                 await user.signUp();
                 return { success: true, user };
             } catch (error) {
@@ -2723,6 +3110,9 @@
                 currentUser.set('lastSeen', new Date());
                 await currentUser.save();
                 
+                // Загружаем черты характера
+                userTraits = currentUser.get('traits') || [];
+                
                 toggleAuthNav(false);
                 navigateTo('homeScreen', document.querySelectorAll('.nav-item')[0]);
             } else {
@@ -2748,10 +3138,13 @@
                 updateHomeFeed();
             } else if (screenId === 'searchScreen') {
                 updateSearchResults();
+                updateRecommendations();
             } else if (screenId === 'chatScreen') {
                 updateChatList();
             } else if (screenId === 'profileScreen') {
                 updateProfileUI();
+            } else if (screenId === 'passportStiQScreen') {
+                updateVisaCollection();
             }
         };
 
@@ -2880,13 +3273,16 @@
         });
 
         // ========== ПРОФИЛЬ ==========
-        async function updateProfile(firstName, lastName, nickname) {
+        async function updateProfile(firstName, lastName, nickname, bio, traits) {
             try {
                 const user = getCurrentUser();
                 user.set('firstName', firstName);
                 user.set('lastName', lastName);
                 user.set('nickname', nickname);
+                user.set('bio', bio);
+                user.set('traits', traits);
                 await user.save();
+                userTraits = traits;
                 return { success: true };
             } catch (error) {
                 return { success: false };
@@ -2925,6 +3321,10 @@
                 }
                 
                 await post.save();
+                
+                // Проверяем наличие места в тексте поста
+                checkForPlaceInPost(text);
+                
                 return { success: true };
             } catch (error) {
                 return { success: false };
@@ -3231,7 +3631,7 @@
             }
         }
 
-        // ========== ПОИСК ПОЛЬЗОВАТЕЛЕЙ ==========
+        // ========== ПОИСК ПОЛЬЗОВАТЕЛЕЙ И РЕКОМЕНДАЦИИ ==========
         async function searchUsers(text) {
             try {
                 const query = new Parse.Query('_User');
@@ -3250,10 +3650,66 @@
                     return await Parse.Query.or(nameQuery, lastNameQuery, nickQuery).find();
                 }
                 
-                return await query.limit(20).find();
+                return [];
             } catch (error) {
                 return [];
             }
+        }
+
+        async function getRecommendations() {
+            try {
+                const currentUser = getCurrentUser();
+                const currentTraits = currentUser.get('traits') || [];
+                
+                const query = new Parse.Query('_User');
+                query.notEqualTo('objectId', currentUser.id);
+                query.limit(10);
+                
+                const users = await query.find();
+                
+                // Сортируем по совпадению черт характера
+                return users.sort((a, b) => {
+                    const aTraits = a.get('traits') || [];
+                    const bTraits = b.get('traits') || [];
+                    
+                    const aMatch = aTraits.filter(t => currentTraits.includes(t)).length;
+                    const bMatch = bTraits.filter(t => currentTraits.includes(t)).length;
+                    
+                    return bMatch - aMatch;
+                });
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function updateRecommendations() {
+            const recommendations = await getRecommendations();
+            const list = document.getElementById('recommendationsList');
+            
+            list.innerHTML = recommendations.map(user => {
+                const matchCount = (user.get('traits') || []).filter(t => userTraits.includes(t)).length;
+                const matchPercent = matchCount > 0 ? `${matchCount} совпадений` : '';
+                
+                return `
+                    <div class="user-card" onclick="openUserProfile('${user.id}')">
+                        <div class="user-avatar ${getAvatarClass(user)}" 
+                             style="${getAvatarStyle(user)}"></div>
+                        <div class="user-info">
+                            <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
+                            <div class="user-nick">@${user.get('nickname') || ''}</div>
+                            ${user.get('bio') ? `<div class="user-bio">${user.get('bio')}</div>` : ''}
+                            ${matchPercent ? `<div class="user-match">✨ ${matchPercent}</div>` : ''}
+                        </div>
+                        <div class="user-actions">
+                            <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
+                                <svg viewBox="0 0 24 24" width="16" height="16">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         // ========== ЧАТЫ ==========
@@ -3324,6 +3780,7 @@
                         
                         if (!lastMessage) continue;
                         
+                        // Считаем непрочитанные сообщения
                         const unreadQuery = new Parse.Query('Message');
                         unreadQuery.equalTo('conversation', conv);
                         unreadQuery.notEqualTo('sender', currentUser);
@@ -3364,6 +3821,7 @@
                     className: 'Conversation',
                     objectId: conversationId
                 });
+                message.set('seen', false);
                 
                 await message.save();
                 
@@ -3375,6 +3833,34 @@
                 return { success: true, messageId: message.id };
             } catch (error) {
                 return { success: false };
+            }
+        }
+
+        async function markMessagesAsSeen(conversationId) {
+            try {
+                const currentUser = getCurrentUser();
+                const query = new Parse.Query('Message');
+                query.equalTo('conversation', {
+                    __type: 'Pointer',
+                    className: 'Conversation',
+                    objectId: conversationId
+                });
+                query.notEqualTo('sender', currentUser);
+                query.notEqualTo('seen', true);
+                
+                const messages = await query.find();
+                
+                for (const msg of messages) {
+                    msg.set('seen', true);
+                    await msg.save();
+                }
+                
+                // Обновляем бейджи
+                delete unreadMessages[conversationId];
+                updateChatBadges();
+                
+            } catch (error) {
+                console.error('Ошибка отметки сообщений:', error);
             }
         }
 
@@ -3402,7 +3888,7 @@
                     const sender = msg.get('sender');
                     if (sender) {
                         const isOwn = sender.id === getCurrentUser().id;
-                        addMessageToChat(msg.get('text'), isOwn, msg.createdAt, msg.id);
+                        addMessageToChat(msg.get('text'), isOwn, msg.createdAt, msg.id, msg.get('seen'));
                     }
                 });
                 
@@ -3415,6 +3901,10 @@
                 } else {
                     container.scrollTop = scrollPosition;
                 }
+                
+                // Отмечаем сообщения как прочитанные
+                await markMessagesAsSeen(conversationId);
+                
             } catch (error) {
                 console.error('Ошибка загрузки сообщений:', error);
                 document.getElementById('chatRoomMessages').innerHTML = 
@@ -3433,7 +3923,7 @@
             
             currentChannel.bind('client-new-message', (data) => {
                 const isOwn = data.senderId === getCurrentUser().id;
-                addMessageToChat(data.text, isOwn, data.timestamp, data.messageId);
+                addMessageToChat(data.text, isOwn, data.timestamp, data.messageId, false);
                 
                 if (!isOwn) {
                     messageCount++;
@@ -3441,6 +3931,9 @@
                     if (messageCount % 50 === 0) {
                         showPassportStiQ();
                     }
+                    
+                    // Отмечаем сообщение как прочитанное если открыт чат
+                    markMessagesAsSeen(conversationId);
                 }
             });
             
@@ -3451,7 +3944,7 @@
             });
         }
 
-        function addMessageToChat(text, isOwn, timestamp, messageId) {
+        function addMessageToChat(text, isOwn, timestamp, messageId, seen) {
             const container = document.getElementById('chatRoomMessages');
             const div = document.createElement('div');
             div.className = `message ${isOwn ? 'right' : 'left'}`;
@@ -3462,10 +3955,13 @@
                 minute: '2-digit' 
             }) : 'сейчас';
             
+            const seenMark = isOwn && seen ? '<span class="message-seen">✓✓</span>' : 
+                            isOwn ? '<span class="message-seen">✓</span>' : '';
+            
             div.innerHTML = `
                 <div class="message-content">
                     <div class="message-bubble">${text}</div>
-                    <div class="message-time">${time}</div>
+                    <div class="message-time">${time} ${seenMark}</div>
                     <div class="message-reaction"></div>
                     ${isOwn ? `<div class="message-delete" onclick="deleteMessage('${messageId}')">✕</div>` : ''}
                 </div>
@@ -3823,6 +4319,17 @@
             document.getElementById('profileNick').textContent = 
                 `@${user.get('nickname') || ''}`;
             
+            const bio = user.get('bio') || '';
+            document.getElementById('profileBio').textContent = bio;
+            document.getElementById('profileBio').style.display = bio ? 'block' : 'none';
+            
+            const traits = user.get('traits') || [];
+            const traitsContainer = document.getElementById('profileTraits');
+            traitsContainer.innerHTML = traits.map(t => 
+                `<span class="profile-trait">${t}</span>`
+            ).join('');
+            traitsContainer.style.display = traits.length ? 'flex' : 'none';
+            
             const avatarClass = getAvatarClass(user);
             const avatarStyle = getAvatarStyle(user);
             document.getElementById('profileAvatar').className = `profile-avatar ${avatarClass}`;
@@ -3879,7 +4386,8 @@
         }
 
         async function updateSearchResults() {
-            const users = await searchUsers('');
+            const query = document.getElementById('searchInput').value.trim();
+            const users = query ? await searchUsers(query) : [];
             
             const html = users.map(user => `
                 <div class="user-card" onclick="openUserProfile('${user.id}')">
@@ -3888,13 +4396,15 @@
                     <div class="user-info">
                         <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
                         <div class="user-nick">@${user.get('nickname') || ''}</div>
-                        <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
+                        ${user.get('bio') ? `<div class="user-bio">${user.get('bio')}</div>` : ''}
                     </div>
-                    <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
-                        <svg viewBox="0 0 24 24" width="18" height="18">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                        </svg>
-                    </button>
+                    <div class="user-actions">
+                        <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
+                            <svg viewBox="0 0 24 24" width="16" height="16">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             `).join('');
             
@@ -4278,28 +4788,13 @@
         });
 
         document.getElementById('searchBtn').addEventListener('click', async () => {
-            const query = document.getElementById('searchInput').value.trim();
-            if (!query) return;
-            
-            const users = await searchUsers(query);
-            const html = users.map(user => `
-                <div class="user-card" onclick="openUserProfile('${user.id}')">
-                    <div class="user-avatar ${getAvatarClass(user)}" 
-                         style="${getAvatarStyle(user)}"></div>
-                    <div class="user-info">
-                        <div class="user-name">${user.get('firstName')} ${user.get('lastName')}</div>
-                        <div class="user-nick">@${user.get('nickname') || ''}</div>
-                        <div class="user-status">${user.get('isOnline') ? 'Онлайн' : 'Офлайн'}</div>
-                    </div>
-                    <button class="user-btn" onclick="event.stopPropagation(); openChatRoom('${user.id}')">
-                        <svg viewBox="0 0 24 24" width="18" height="18">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                        </svg>
-                    </button>
-                </div>
-            `).join('');
-            
-            document.getElementById('searchResults').innerHTML = html;
+            await updateSearchResults();
+        });
+
+        document.getElementById('searchInput').addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter') {
+                await updateSearchResults();
+            }
         });
 
         document.getElementById('chatRoomSendBtn').addEventListener('click', async function() {
@@ -4321,7 +4816,7 @@
             
             if (result.success) {
                 input.value = '';
-                addMessageToChat(text, true, new Date(), result.messageId);
+                addMessageToChat(text, true, new Date(), result.messageId, false);
                 
                 messageCount++;
                 if (messageCount % 50 === 0) {
@@ -4374,6 +4869,7 @@
             }
         });
 
+        // Редактирование профиля
         document.getElementById('editProfileBtn').addEventListener('click', () => {
             const user = getCurrentUser();
             if (!user) return;
@@ -4381,21 +4877,45 @@
             document.getElementById('editFirstName').value = user.get('firstName') || '';
             document.getElementById('editLastName').value = user.get('lastName') || '';
             document.getElementById('editNickname').value = user.get('nickname') || '';
+            document.getElementById('editBio').value = user.get('bio') || '';
+            
+            // Отмечаем выбранные черты
+            const currentTraits = user.get('traits') || [];
+            document.querySelectorAll('.trait-option').forEach(opt => {
+                if (currentTraits.includes(opt.dataset.trait)) {
+                    opt.classList.add('selected');
+                } else {
+                    opt.classList.remove('selected');
+                }
+            });
             
             document.getElementById('editProfileModal').classList.add('active');
+        });
+
+        // Выбор черт характера
+        document.querySelectorAll('.trait-option').forEach(opt => {
+            opt.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
         });
 
         document.getElementById('saveProfileBtn').addEventListener('click', async () => {
             const firstName = document.getElementById('editFirstName').value.trim();
             const lastName = document.getElementById('editLastName').value.trim();
             const nickname = document.getElementById('editNickname').value.trim();
+            const bio = document.getElementById('editBio').value.trim();
+            
+            const selectedTraits = [];
+            document.querySelectorAll('.trait-option.selected').forEach(opt => {
+                selectedTraits.push(opt.dataset.trait);
+            });
             
             if (!firstName || !lastName || !nickname) {
-                alert('Все поля должны быть заполнены');
+                alert('Имя, фамилия и никнейм должны быть заполнены');
                 return;
             }
             
-            const result = await updateProfile(firstName, lastName, nickname);
+            const result = await updateProfile(firstName, lastName, nickname, bio, selectedTraits);
             if (result.success) {
                 document.getElementById('editProfileModal').classList.remove('active');
                 await updateProfileUI();
@@ -4449,3 +4969,4 @@
     </script>
 </body>
 </html>
+                
