@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · StiQ v4.1</title>
+    <title>RealReel · v4.1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -509,7 +509,7 @@
             margin-top: 15px;
         }
 
-        /* ===== PASSPORT STIQ - ВОЗВРАЩЕН! ===== */
+        /* ===== PASSPORT STIQ - ПОЛНОСТЬЮ ВОССТАНОВЛЕН ===== */
         .passport-stiq {
             position: relative;
             margin: 10px 0;
@@ -517,23 +517,12 @@
             background: linear-gradient(135deg, #6C5CE7, #9b59b6);
             border-radius: 20px;
             color: white;
-            animation: passportAppear 0.5s ease-out, passportFloat 3s ease-in-out infinite;
+            animation: passportAppear 0.5s ease-out;
             box-shadow: 0 10px 30px rgba(108,92,231,0.4);
             max-width: 90%;
             align-self: center;
             border: 2px solid rgba(255,255,255,0.3);
             backdrop-filter: blur(5px);
-            transform-origin: center;
-        }
-
-        .passport-stiq:hover {
-            animation: passportGlow 2s ease-in-out infinite;
-            transform: scale(1.02);
-        }
-
-        @keyframes passportGlow {
-            0%, 100% { box-shadow: 0 10px 30px rgba(108,92,231,0.4); }
-            50% { box-shadow: 0 20px 50px rgba(108,92,231,0.6); }
         }
 
         .passport-stiq.left {
@@ -546,13 +535,7 @@
 
         @keyframes passportAppear {
             0% { transform: scale(0.8) translateY(20px); opacity: 0; }
-            50% { transform: scale(1.05); }
             100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
-
-        @keyframes passportFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .passport-icon {
@@ -569,24 +552,12 @@
             font-size: 30px;
             transform: rotate(5deg);
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            animation: passportIconSpin 15s linear infinite;
             border: 3px solid #6C5CE7;
-        }
-
-        @keyframes passportIconSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .passport-icon img {
             width: 40px;
             height: 40px;
-            animation: passportIconPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes passportIconPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
         }
 
         .passport-title {
@@ -600,12 +571,6 @@
             padding: 6px 14px;
             border-radius: 25px;
             display: inline-block;
-            animation: titlePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes titlePulse {
-            0%, 100% { background: rgba(255,255,255,0.2); }
-            50% { background: rgba(255,255,255,0.3); }
         }
 
         .passport-number {
@@ -623,12 +588,6 @@
             margin-bottom: 10px;
             color: white;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            animation: placeGlow 3s ease-in-out infinite;
-        }
-
-        @keyframes placeGlow {
-            0%, 100% { text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-            50% { text-shadow: 0 5px 20px rgba(255,255,255,0.5); }
         }
 
         .passport-message {
@@ -661,12 +620,6 @@
             font-size: 10px;
             font-weight: 700;
             color: white;
-            animation: visaPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes visaPulse {
-            0%, 100% { background: rgba(255,255,255,0.2); }
-            50% { background: rgba(255,255,255,0.3); }
         }
 
         .passport-country {
@@ -689,7 +642,6 @@
             padding: 12px 8px;
             text-align: center;
             color: white;
-            animation: visaItemAppear 0.5s ease-out;
             cursor: pointer;
             transition: 0.3s;
             border: 1px solid rgba(255,255,255,0.2);
@@ -698,11 +650,6 @@
         .visa-item:hover {
             transform: scale(1.05);
             box-shadow: 0 5px 20px rgba(108,92,231,0.4);
-        }
-
-        @keyframes visaItemAppear {
-            from { transform: scale(0); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .visa-item-icon {
@@ -721,7 +668,7 @@
             opacity: 0.8;
         }
 
-        /* Истории */
+        /* Истории - ВОССТАНОВЛЕНЫ */
         .stories {
             display: flex;
             gap: 16px;
@@ -1753,7 +1700,7 @@
             fill: none;
         }
 
-        /* ===== ПРОФИЛЬ С УМЕНЬШЕННОЙ СТАТИСТИКОЙ ===== */
+        /* ===== ПРОФИЛЬ ===== */
         .profile-screen {
             display: flex;
             flex-direction: column;
@@ -1802,10 +1749,11 @@
             color: #333;
         }
 
+        /* ФИОЛЕТОВО-ГОЛУБАЯ ЗВЕЗДА БЕЗ АНИМАЦИИ */
         .profile-star {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, #6C5CE7, #9b59b6);
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -1814,16 +1762,11 @@
             font-size: 18px;
             cursor: pointer;
             transition: 0.2s;
-            animation: starGlow 2s ease-in-out infinite;
+            box-shadow: 0 2px 8px rgba(108,92,231,0.3);
         }
 
         .profile-star:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        @keyframes starGlow {
-            0%, 100% { box-shadow: 0 0 10px rgba(108,92,231,0.3); }
-            50% { box-shadow: 0 0 20px rgba(108,92,231,0.6); }
+            transform: scale(1.05);
         }
 
         .profile-nick {
@@ -1856,50 +1799,125 @@
             border-radius: 25px;
             font-size: 12px;
             font-weight: 500;
-            animation: traitPulse 2s ease-in-out infinite;
         }
 
-        @keyframes traitPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        /* СТАТИСТИКА ПРИ НАЖАТИИ НА ЗВЕЗДУ */
+        .stats-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 30px 50px rgba(108,92,231,0.3);
+            border: 2px solid rgba(108,92,231,0.2);
+            z-index: 1000;
+            display: none;
         }
 
-        /* ===== УМЕНЬШЕННАЯ СТАТИСТИКА ===== */
-        .stats-mini {
+        .stats-popup.active {
+            display: block;
+        }
+
+        .stats-popup-header {
             display: flex;
-            justify-content: space-around;
-            background: white;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(108,92,231,0.2);
+        }
+
+        .stats-popup-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            flex: 1;
+        }
+
+        .stats-popup-header .star-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
             border-radius: 20px;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid rgba(108,92,231,0.1);
-            box-shadow: 0 2px 8px rgba(108,92,231,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
         }
 
-        .stat-mini-item {
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-            padding: 4px 12px;
-            border-radius: 16px;
+        .stats-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .stat-mini-item:hover {
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
             background: rgba(108,92,231,0.05);
+            border-radius: 20px;
+            transition: 0.2s;
         }
 
-        .stat-mini-value {
-            font-size: 16px;
+        .stat-item:hover {
+            background: rgba(108,92,231,0.1);
+            transform: translateX(5px);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
+            border-radius: 22.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+        }
+
+        .stat-info {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 24px;
             font-weight: 700;
             color: #6C5CE7;
-            line-height: 1.2;
+            line-height: 1;
         }
 
-        .stat-mini-label {
-            font-size: 10px;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .stat-label {
+            font-size: 13px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .stats-close {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #6C5CE7, #4a90e2);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .stats-close:hover {
+            transform: scale(1.02);
         }
 
         .profile-actions {
@@ -2038,6 +2056,70 @@
             background: #FF6B6B;
             color: white;
             transform: scale(1.05);
+        }
+
+        /* Панель уведомлений - УБРАЛ ЛИШНИЕ СИМВОЛЫ */
+        .notifications-panel {
+            position: fixed;
+            top: 70px;
+            right: 16px;
+            width: 280px;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: none;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .notifications-panel.active {
+            display: block;
+        }
+
+        .notifications-header {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .notifications-list {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            display: flex;
+            gap: 10px;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.02);
+            cursor: pointer;
+        }
+
+        .notification-item:hover {
+            background: rgba(108,92,231,0.02);
+        }
+
+        .notification-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .notification-content {
+            flex: 1;
+            font-size: 12px;
+        }
+
+        .notification-time {
+            font-size: 9px;
+            color: #999;
+            margin-top: 2px;
         }
 
         /* Модалка подписок */
@@ -2429,15 +2511,13 @@
                 </div>
             </div>
 
-            <!-- PASSPORT STIQ -->
+            <!-- PASSPORT STIQ - ПОЛНОСТЬЮ ВОССТАНОВЛЕН -->
             <div class="screen" id="passportStiQScreen">
                 <div class="search-screen">
-                    <div class="passport-stiq-card" style="margin-top: 20px;">
-                        <div class="passport-stiq-icon">
-                            <img src="https://cdn-icons-png.flaticon.com/512/1043/1043504.png" alt="passport">
-                        </div>
-                        <div class="passport-stiq-title">PASSPORT STIQ</div>
-                        <div class="passport-stiq-subtitle">Твоя коллекция виз</div>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="font-size: 60px; margin-bottom: 10px;">🛂</div>
+                        <h2 style="color: #6C5CE7;">PASSPORT STIQ</h2>
+                        <p style="color: #666;">Твоя коллекция виз</p>
                     </div>
                     <div class="visa-collection" id="visaCollection"></div>
                 </div>
@@ -2478,7 +2558,8 @@
                         <div class="profile-info">
                             <div class="profile-name-row">
                                 <span class="profile-name" id="profileFullName">Имя Фамилия</span>
-                                <div class="profile-star" id="profileStarBtn" onclick="openStiqStars()">⭐</div>
+                                <!-- ФИОЛЕТОВО-ГОЛУБАЯ ЗВЕЗДА БЕЗ АНИМАЦИИ -->
+                                <div class="profile-star" id="profileStarBtn" onclick="openStats()">⭐</div>
                             </div>
                             <div class="profile-nick" id="profileNick">@nickname</div>
                         </div>
@@ -2486,20 +2567,12 @@
                     <div class="profile-bio" id="profileBio"></div>
                     <div class="profile-traits" id="profileTraits"></div>
 
-                    <!-- УМЕНЬШЕННАЯ СТАТИСТИКА -->
-                    <div class="stats-mini">
-                        <div class="stat-mini-item" onclick="showSubscriptions('followers')">
-                            <div class="stat-mini-value" id="profileFollowersCount">0</div>
-                            <div class="stat-mini-label">подписчики</div>
-                        </div>
-                        <div class="stat-mini-item" onclick="showSubscriptions('following')">
-                            <div class="stat-mini-value" id="profileFollowingCount">0</div>
-                            <div class="stat-mini-label">подписки</div>
-                        </div>
-                        <div class="stat-mini-item" onclick="showPosts()">
-                            <div class="stat-mini-value" id="profilePostsCount">0</div>
-                            <div class="stat-mini-label">посты</div>
-                        </div>
+                    <!-- СКРЫТАЯ СТАТИСТИКА ДЛЯ ПОПАПА -->
+                    <div class="hidden-stats" style="display: none;">
+                        <span id="profilePostsCount">0</span>
+                        <span id="profileFollowersCount">0</span>
+                        <span id="profileFollowingCount">0</span>
+                        <span id="profileVisaCount">0</span>
                     </div>
 
                     <div class="profile-actions">
@@ -2525,6 +2598,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- ПОПАП СО СТАТИСТИКОЙ (открывается по звезде) -->
+        <div class="stats-popup" id="statsPopup">
+            <div class="stats-popup-header">
+                <div class="star-icon">⭐</div>
+                <h3>Твоя статистика</h3>
+            </div>
+            <div class="stats-list" id="statsList"></div>
+            <button class="stats-close" onclick="closeStats()">Закрыть</button>
         </div>
 
         <!-- Модалка подписок -->
@@ -2739,13 +2822,53 @@
             }
         }
 
-        // ========== STIQSTARS ==========
-        window.openStiqStars = async function() {
-            // Просто анимация звезды, статистика уже видна
-            const star = document.getElementById('profileStarBtn');
-            star.style.animation = 'none';
-            star.offsetHeight;
-            star.style.animation = 'starGlow 2s ease-in-out infinite';
+        // ========== СТАТИСТИКА ПО ЗВЕЗДЕ ==========
+        window.openStats = async function() {
+            const user = currentProfileUserId ? await new Parse.Query('_User').get(currentProfileUserId) : getCurrentUser();
+            if (!user) return;
+
+            const postsCount = (await getUserPosts(user.id)).length;
+            const followersCount = await getFollowersCount(user.id);
+            const followingCount = await getFollowingCount(user.id);
+            const visaCount = visaCollection.length;
+
+            const statsList = document.getElementById('statsList');
+            statsList.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <div class="stat-value">${followersCount}</div>
+                        <div class="stat-label">подписчики</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <div class="stat-value">${followingCount}</div>
+                        <div class="stat-label">подписки</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">📸</div>
+                    <div class="stat-info">
+                        <div class="stat-value">${postsCount}</div>
+                        <div class="stat-label">посты</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🛂</div>
+                    <div class="stat-info">
+                        <div class="stat-value">${visaCount}</div>
+                        <div class="stat-label">визы</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('statsPopup').classList.add('active');
+        };
+
+        window.closeStats = function() {
+            document.getElementById('statsPopup').classList.remove('active');
         };
 
         // ========== УПРАВЛЕНИЕ НАВИГАЦИЕЙ ==========
@@ -2996,7 +3119,6 @@
                 }
                 await post.save();
                 
-                // Проверяем наличие мест в тексте
                 checkForPlaceInPost(text);
                 
                 return { success: true };
@@ -3522,6 +3644,33 @@
             const posts = await getAllPosts();
             const currentUser = getCurrentUser();
             
+            // Загружаем сторис
+            const stories = await getStories();
+            const userStories = await getUserStories(currentUser.id);
+            const hasStory = userStories.length > 0;
+            
+            const storiesHtml = `
+                <div class="story" onclick="addStory()">
+                    <div class="story-avatar ${getAvatarClass(currentUser)} ${hasStory ? '' : 'no-story'}" 
+                         style="${getAvatarStyle(currentUser)}">
+                        <div class="story-add">+</div>
+                    </div>
+                    <span class="story-name">Ваша история</span>
+                </div>
+                ${await Promise.all(stories.map(async s => {
+                    const author = s.get('author');
+                    return `
+                        <div class="story" onclick="viewStory('${author.id}')">
+                            <div class="story-avatar ${getAvatarClass(author)}" 
+                                 style="${getAvatarStyle(author)}"></div>
+                            <span class="story-name">${author.get('firstName')}</span>
+                        </div>
+                    `;
+                })).then(html => html.join(''))}
+            `;
+            
+            document.getElementById('stories').innerHTML = storiesHtml;
+            
             const postsHtml = await Promise.all(posts.map(async post => {
                 const author = post.get('author');
                 await author.fetch();
@@ -3666,6 +3815,188 @@
             
             document.getElementById('searchResults').innerHTML = html;
         }
+
+        // ========== СТОРИС ==========
+        window.addStory = function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                await createStory(file);
+                await updateHomeFeed();
+            };
+            input.click();
+        };
+
+        async function createStory(imageFile) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const story = new Story();
+                story.set('author', getCurrentUser());
+                story.set('views', []);
+                
+                const parseFile = new Parse.File('story.jpg', imageFile);
+                await parseFile.save();
+                story.set('image', parseFile);
+                
+                await story.save();
+                return { success: true };
+            } catch (error) {
+                return { success: false };
+            }
+        }
+
+        async function getStories() {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                query.include('author');
+                query.include('views.user');
+                query.descending('createdAt');
+                const stories = await query.find();
+                
+                const uniqueUsers = new Set();
+                return stories.filter(s => {
+                    const author = s.get('author');
+                    if (uniqueUsers.has(author.id)) return false;
+                    uniqueUsers.add(author.id);
+                    return true;
+                });
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function getUserStories(userId) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                query.equalTo('author', { __type: 'Pointer', className: '_User', objectId: userId });
+                query.include('views.user');
+                query.descending('createdAt');
+                return await query.find();
+            } catch (error) {
+                return [];
+            }
+        }
+
+        async function addStoryView(storyId, userId) {
+            try {
+                const Story = Parse.Object.extend('Story');
+                const query = new Parse.Query(Story);
+                const story = await query.get(storyId);
+                
+                const views = story.get('views') || [];
+                const alreadyViewed = views.some(v => v.user && v.user.id === userId);
+                
+                if (!alreadyViewed) {
+                    views.push({
+                        user: { __type: 'Pointer', className: '_User', objectId: userId },
+                        viewedAt: new Date()
+                    });
+                    story.set('views', views);
+                    await story.save();
+                }
+                return views;
+            } catch (error) {
+                return [];
+            }
+        }
+
+        window.viewStory = async function(userId) {
+            const stories = await getUserStories(userId);
+            if (stories.length === 0) return;
+            
+            const user = await new Parse.Query('_User').get(userId);
+            currentStoryUser = { user, stories, index: 0 };
+            
+            if (userId !== getCurrentUser().id) {
+                await addStoryView(stories[0].id, getCurrentUser().id);
+            }
+            
+            showStory(0);
+        };
+
+        function showStory(index) {
+            if (!currentStoryUser) return;
+            
+            const story = currentStoryUser.stories[index];
+            const user = currentStoryUser.user;
+            
+            document.getElementById('storyAvatar').style.backgroundImage = 
+                getAvatarStyle(user) || `url('${getAvatarClass(user)}')`;
+            document.getElementById('storyName').textContent = 
+                `${user.get('firstName')} ${user.get('lastName')}`;
+            document.getElementById('storyImage').style.backgroundImage = 
+                `url('${story.get('image').url()}')`;
+            document.getElementById('storyViewer').classList.add('active');
+            
+            if (user.id === getCurrentUser().id) {
+                const views = story.get('views') || [];
+                const viewsList = document.getElementById('storyViewsList');
+                viewsList.innerHTML = views.map(v => `
+                    <div class="story-view-item" onclick="openUserProfile('${v.user.id}')">
+                        <div class="story-view-avatar ${getAvatarClass(v.user)}" style="${getAvatarStyle(v.user)}"></div>
+                        <div class="story-view-name">${v.user.get('firstName')} ${v.user.get('lastName')}</div>
+                        <div class="story-view-time">${formatTime(v.viewedAt)}</div>
+                    </div>
+                `).join('');
+                document.getElementById('storyViews').classList.remove('hidden');
+            } else {
+                document.getElementById('storyViews').classList.add('hidden');
+            }
+            
+            const progress = document.getElementById('storyProgress');
+            progress.style.width = '0%';
+            
+            setTimeout(() => {
+                progress.style.width = '100%';
+            }, 100);
+            
+            if (storyTimer) clearTimeout(storyTimer);
+            storyTimer = setTimeout(() => {
+                if (index + 1 < currentStoryUser.stories.length) {
+                    showStory(index + 1);
+                } else {
+                    closeStory();
+                }
+            }, 5000);
+        }
+
+        window.closeStory = function() {
+            document.getElementById('storyViewer').classList.remove('active');
+            if (storyTimer) clearTimeout(storyTimer);
+            currentStoryUser = null;
+        };
+
+        window.likeStory = function() {
+            const input = document.getElementById('storyReplyText');
+            const text = input.value.trim();
+            
+            if (text) {
+                addNotification('story_reply', '💬 Ответ на историю', 
+                    `Вы ответили: "${text}"`, currentStoryUser?.user);
+                alert(`Ответ отправлен: ${text}`);
+                input.value = '';
+            } else {
+                addNotification('story_like', '❤️ Лайк на историю', 
+                    `Вы лайкнули историю ${currentStoryUser?.user?.get('firstName') || 'пользователя'}`);
+                alert('❤️ Лайк на историю');
+            }
+        };
+
+        window.sendStoryReply = function() {
+            const input = document.getElementById('storyReplyText');
+            const text = input.value.trim();
+            if (text) {
+                addNotification('story_reply', '💬 Ответ на историю', 
+                    `Вы ответили: "${text}"`, currentStoryUser?.user);
+                alert(`Ответ отправлен: ${text}`);
+                input.value = '';
+            }
+        };
 
         // ========== ОБРАБОТЧИКИ ==========
         window.openAddPostModal = () => document.getElementById('addPostModal').classList.add('active');
@@ -3862,196 +4193,12 @@
         };
 
         window.closePostViewer = () => document.getElementById('postViewer').classList.remove('active');
-
-        // ========== СТОРИС ==========
-        window.addStory = function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = async (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                await createStory(file);
-                await updateHomeFeed();
-            };
-            input.click();
-        };
-
-        async function createStory(imageFile) {
-            try {
-                const Story = Parse.Object.extend('Story');
-                const story = new Story();
-                story.set('author', getCurrentUser());
-                story.set('views', []);
-                
-                const parseFile = new Parse.File('story.jpg', imageFile);
-                await parseFile.save();
-                story.set('image', parseFile);
-                
-                await story.save();
-                return { success: true };
-            } catch (error) {
-                return { success: false };
-            }
-        }
-
-        async function getStories() {
-            try {
-                const Story = Parse.Object.extend('Story');
-                const query = new Parse.Query(Story);
-                query.include('author');
-                query.include('views.user');
-                query.descending('createdAt');
-                const stories = await query.find();
-                
-                const uniqueUsers = new Set();
-                return stories.filter(s => {
-                    const author = s.get('author');
-                    if (uniqueUsers.has(author.id)) return false;
-                    uniqueUsers.add(author.id);
-                    return true;
-                });
-            } catch (error) {
-                return [];
-            }
-        }
-
-        async function getUserStories(userId) {
-            try {
-                const Story = Parse.Object.extend('Story');
-                const query = new Parse.Query(Story);
-                query.equalTo('author', { __type: 'Pointer', className: '_User', objectId: userId });
-                query.include('views.user');
-                query.descending('createdAt');
-                return await query.find();
-            } catch (error) {
-                return [];
-            }
-        }
-
-        async function addStoryView(storyId, userId) {
-            try {
-                const Story = Parse.Object.extend('Story');
-                const query = new Parse.Query(Story);
-                const story = await query.get(storyId);
-                
-                const views = story.get('views') || [];
-                const alreadyViewed = views.some(v => v.user && v.user.id === userId);
-                
-                if (!alreadyViewed) {
-                    views.push({
-                        user: { __type: 'Pointer', className: '_User', objectId: userId },
-                        viewedAt: new Date()
-                    });
-                    story.set('views', views);
-                    await story.save();
-                }
-                return views;
-            } catch (error) {
-                return [];
-            }
-        }
-
-        window.viewStory = async function(userId) {
-            const stories = await getUserStories(userId);
-            if (stories.length === 0) return;
-            
-            const user = await new Parse.Query('_User').get(userId);
-            currentStoryUser = { user, stories, index: 0 };
-            
-            if (userId !== getCurrentUser().id) {
-                await addStoryView(stories[0].id, getCurrentUser().id);
-            }
-            
-            showStory(0);
-        };
-
-        function showStory(index) {
-            if (!currentStoryUser) return;
-            
-            const story = currentStoryUser.stories[index];
-            const user = currentStoryUser.user;
-            
-            document.getElementById('storyAvatar').style.backgroundImage = 
-                getAvatarStyle(user) || `url('${getAvatarClass(user)}')`;
-            document.getElementById('storyName').textContent = 
-                `${user.get('firstName')} ${user.get('lastName')}`;
-            document.getElementById('storyImage').style.backgroundImage = 
-                `url('${story.get('image').url()}')`;
-            document.getElementById('storyViewer').classList.add('active');
-            
-            if (user.id === getCurrentUser().id) {
-                const views = story.get('views') || [];
-                const viewsList = document.getElementById('storyViewsList');
-                viewsList.innerHTML = views.map(v => `
-                    <div class="story-view-item" onclick="openUserProfile('${v.user.id}')">
-                        <div class="story-view-avatar ${getAvatarClass(v.user)}" style="${getAvatarStyle(v.user)}"></div>
-                        <div class="story-view-name">${v.user.get('firstName')} ${v.user.get('lastName')}</div>
-                        <div class="story-view-time">${formatTime(v.viewedAt)}</div>
-                    </div>
-                `).join('');
-                document.getElementById('storyViews').classList.remove('hidden');
-            } else {
-                document.getElementById('storyViews').classList.add('hidden');
-            }
-            
-            const progress = document.getElementById('storyProgress');
-            progress.style.width = '0%';
-            
-            setTimeout(() => {
-                progress.style.width = '100%';
-            }, 100);
-            
-            if (storyTimer) clearTimeout(storyTimer);
-            storyTimer = setTimeout(() => {
-                if (index + 1 < currentStoryUser.stories.length) {
-                    showStory(index + 1);
-                } else {
-                    closeStory();
-                }
-            }, 5000);
-        }
-
-        window.closeStory = function() {
-            document.getElementById('storyViewer').classList.remove('active');
-            if (storyTimer) clearTimeout(storyTimer);
-            currentStoryUser = null;
-        };
-
-        window.likeStory = function() {
-            const input = document.getElementById('storyReplyText');
-            const text = input.value.trim();
-            
-            if (text) {
-                addNotification('story_reply', '💬 Ответ на историю', 
-                    `Вы ответили: "${text}"`, currentStoryUser?.user);
-                alert(`Ответ отправлен: ${text}`);
-                input.value = '';
-            } else {
-                addNotification('story_like', '❤️ Лайк на историю', 
-                    `Вы лайкнули историю ${currentStoryUser?.user?.get('firstName') || 'пользователя'}`);
-                alert('❤️ Лайк на историю');
-            }
-        };
-
-        window.sendStoryReply = function() {
-            const input = document.getElementById('storyReplyText');
-            const text = input.value.trim();
-            if (text) {
-                addNotification('story_reply', '💬 Ответ на историю', 
-                    `Вы ответили: "${text}"`, currentStoryUser?.user);
-                alert(`Ответ отправлен: ${text}`);
-                input.value = '';
-            }
-        };
-
-        window.openPhoto = function(url, author) {
+        window.closePhoto = () => document.getElementById('photoViewer').classList.remove('active');
+        window.openPhoto = (url, author) => {
             document.getElementById('photoImage').style.backgroundImage = `url('${url}')`;
             document.getElementById('photoInfo').textContent = `Фото · ${author}`;
             document.getElementById('photoViewer').classList.add('active');
         };
-
-        window.closePhoto = () => document.getElementById('photoViewer').classList.remove('active');
 
         // ========== КНОПКИ ==========
         document.getElementById('cancelPostBtn').addEventListener('click', () => {
@@ -4208,6 +4355,9 @@
                 }
                 if (!e.target.closest('.reaction-panel') && !e.target.closest('.message')) {
                     document.getElementById('reactionPanel').classList.remove('active');
+                }
+                if (!e.target.closest('.stats-popup') && !e.target.closest('.profile-star')) {
+                    closeStats();
                 }
             });
         };
