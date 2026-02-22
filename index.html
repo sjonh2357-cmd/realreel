@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · v2.2</title>
+    <title>RealReel · v2.3</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -20,31 +20,35 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f0f2f5;
+            background: #0a0a0a;
             padding: 12px;
         }
 
         .phone-frame {
             width: 380px;
             height: 720px;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+            background: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 0 8px rgba(255,255,255,0.05);
             overflow: hidden;
             display: flex;
             flex-direction: column;
             position: relative;
+            backdrop-filter: blur(10px);
         }
 
-        /* Верхняя навигация */
+        /* СОВРЕМЕННЫЙ СТИЛЬ - glassmorphism + неон */
         .top-nav {
-            padding: 12px 20px;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #eee;
-            background: white;
-            transition: 0.3s;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
         }
 
         .top-nav.hidden {
@@ -53,79 +57,91 @@
 
         .logo {
             font-weight: 700;
-            font-size: 18px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            font-size: 20px;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5, #FF6B6B);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
         }
 
         .version {
-            font-size: 12px;
+            font-size: 11px;
             color: #999;
             font-weight: 500;
             margin-left: 4px;
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 20px;
         }
 
         .nav-icons {
             display: flex;
-            gap: 15px;
+            gap: 18px;
             align-items: center;
         }
 
         .nav-icon {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: relative;
-            color: #555;
+            color: #333;
             transition: 0.2s;
+            background: rgba(0,0,0,0.03);
+            border-radius: 50%;
         }
 
         .nav-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             stroke: currentColor;
             fill: none;
             stroke-width: 2;
         }
 
         .nav-icon:hover {
-            color: #6aa9ff;
+            background: #6C5CE7;
+            color: white;
+            transform: scale(1.05);
         }
 
         .add-post-icon {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: #555;
+            color: #333;
             transition: 0.2s;
+            background: rgba(0,0,0,0.03);
+            border-radius: 50%;
         }
 
         .add-post-icon svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             stroke: currentColor;
             fill: none;
             stroke-width: 2;
         }
 
         .add-post-icon:hover {
-            color: #6aa9ff;
+            background: #6C5CE7;
+            color: white;
+            transform: scale(1.05);
         }
 
         .badge {
             position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #ff4444;
+            top: -3px;
+            right: -3px;
+            background: #FF6B6B;
             color: white;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             min-width: 16px;
             height: 16px;
@@ -142,17 +158,21 @@
             flex: 1;
             overflow-y: auto;
             padding: 16px;
+            background: #f8faff;
         }
 
-        /* Нижняя навигация */
+        /* СОВРЕМЕННАЯ нижняя навигация */
         .bottom-nav {
             display: flex;
             align-items: center;
             justify-content: space-around;
-            padding: 8px 0;
-            border-top: 1px solid #eee;
-            background: white;
-            transition: 0.3s;
+            padding: 10px 0;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
         }
 
         .bottom-nav.hidden {
@@ -166,43 +186,49 @@
             cursor: pointer;
             padding: 4px 0;
             flex: 1;
-            color: #777;
+            color: #888;
             transition: 0.2s;
             position: relative;
         }
 
         .nav-item svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             stroke: currentColor;
             fill: none;
-            stroke-width: 1.8;
+            stroke-width: 2;
         }
 
         .nav-item.active {
-            color: #6aa9ff;
+            color: #6C5CE7;
+        }
+
+        .nav-item.active svg {
+            filter: drop-shadow(0 2px 4px rgba(108,92,231,0.3));
         }
 
         .nav-item:hover {
-            color: #6aa9ff;
+            color: #6C5CE7;
+            transform: translateY(-2px);
         }
 
         .nav-label {
             font-size: 10px;
-            margin-top: 2px;
+            margin-top: 4px;
+            font-weight: 500;
         }
 
         .nav-badge {
             position: absolute;
-            top: 0;
+            top: -2px;
             right: 15px;
-            background: #ff4444;
+            background: #FF6B6B;
             color: white;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
-            min-width: 18px;
-            height: 18px;
-            border-radius: 9px;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -210,7 +236,7 @@
             border: 2px solid white;
         }
 
-        /* Экран авторизации с морем */
+        /* Экран авторизации с морем (обновленный) */
         .auth-screen {
             height: 100%;
             display: flex;
@@ -218,6 +244,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .auth-bg {
@@ -229,7 +256,7 @@
             background-image: url('https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
             background-size: cover;
             background-position: center;
-            filter: brightness(0.7);
+            filter: brightness(0.6) blur(2px);
             animation: zoom 20s infinite alternate;
         }
 
@@ -240,59 +267,65 @@
 
         .auth-form {
             width: 300px;
-            padding: 30px 20px;
+            padding: 35px 25px;
             background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
             position: relative;
             z-index: 1;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .auth-title {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #6aa9ff, #9f6eff);
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .auth-input {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #ddd;
-            border-radius: 30px;
-            margin-bottom: 12px;
+            padding: 14px 18px;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 40px;
+            margin-bottom: 14px;
             font-size: 14px;
             outline: none;
             transition: 0.2s;
+            background: rgba(0,0,0,0.02);
         }
 
         .auth-input:focus {
-            border-color: #6aa9ff;
+            border-color: #6C5CE7;
+            box-shadow: 0 0 0 3px rgba(108,92,231,0.1);
         }
 
         .auth-btn {
             width: 100%;
-            padding: 12px;
-            background: #6aa9ff;
+            padding: 14px;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             border: none;
-            border-radius: 30px;
+            border-radius: 40px;
             color: white;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
             position: relative;
+            box-shadow: 0 10px 20px rgba(108,92,231,0.3);
         }
 
         .auth-btn:hover {
-            background: #5a99ee;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(108,92,231,0.4);
         }
 
         .auth-btn.loading {
-            opacity: 0.7;
+            opacity: 0.8;
             pointer-events: none;
         }
 
@@ -329,7 +362,7 @@
         .auth-links {
             display: flex;
             justify-content: space-between;
-            margin-top: 12px;
+            margin-top: 15px;
             font-size: 13px;
         }
 
@@ -340,11 +373,11 @@
         }
 
         .auth-link:hover {
-            color: #6aa9ff;
+            color: #6C5CE7;
         }
 
         .auth-error {
-            color: #ff4444;
+            color: #FF6B6B;
             font-size: 13px;
             text-align: center;
             margin-bottom: 10px;
@@ -374,24 +407,27 @@
             width: 40px;
             height: 40px;
             border: 3px solid #f0f0f0;
-            border-top-color: #6aa9ff;
+            border-top-color: #6C5CE7;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
-        /* Модальное окно */
+        /* Модальное окно (обновленный стиль) */
         .modal {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 300px;
-            background: white;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            padding: 25px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.2);
             z-index: 200;
             display: none;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .modal.active {
@@ -401,41 +437,50 @@
         .modal-title {
             font-size: 18px;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            color: #333;
         }
 
         .modal-input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            margin-bottom: 12px;
+            padding: 14px;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 30px;
+            margin-bottom: 15px;
             outline: none;
+            background: rgba(0,0,0,0.02);
         }
 
         .modal-input:focus {
-            border-color: #6aa9ff;
+            border-color: #6C5CE7;
         }
 
         .modal-file {
-            padding: 12px;
-            border: 1px dashed #6aa9ff;
-            border-radius: 20px;
+            padding: 14px;
+            border: 2px dashed #6C5CE7;
+            border-radius: 30px;
             text-align: center;
             cursor: pointer;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            color: #6C5CE7;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .modal-file:hover {
+            background: rgba(108,92,231,0.05);
         }
 
         .modal-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .modal-btn {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 20px;
+            border-radius: 30px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
@@ -448,27 +493,28 @@
         }
 
         .modal-btn.save {
-            background: #6aa9ff;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             color: white;
         }
 
         .modal-btn.save:hover {
-            background: #5a99ee;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(108,92,231,0.3);
         }
 
         .modal-success {
-            color: #4CAF50;
+            color: #00B894;
             font-size: 13px;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
-        /* Истории */
+        /* Истории (обновленный стиль) */
         .stories {
             display: flex;
             gap: 16px;
             overflow-x: auto;
-            padding: 4px 0;
+            padding: 8px 0;
             margin-bottom: 20px;
         }
 
@@ -480,7 +526,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             min-width: 64px;
             cursor: pointer;
         }
@@ -491,21 +537,23 @@
             border-radius: 32px;
             background-size: cover;
             background-position: center;
-            border: 2px solid #6aa9ff;
+            border: 2px solid #6C5CE7;
             position: relative;
+            box-shadow: 0 5px 15px rgba(108,92,231,0.2);
         }
 
         .story-avatar.no-story {
             border-color: #ddd;
+            opacity: 0.7;
         }
 
         .story-add {
             position: absolute;
-            bottom: 0px;
+            bottom: -2px;
             right: -2px;
             width: 22px;
             height: 22px;
-            background: #6aa9ff;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             border-radius: 11px;
             display: flex;
             align-items: center;
@@ -516,8 +564,9 @@
         }
 
         .story-name {
-            font-size: 12px;
+            font-size: 11px;
             color: #333;
+            font-weight: 500;
         }
 
         /* Просмотр сторис */
@@ -551,17 +600,21 @@
             border-radius: 20px;
             background-size: cover;
             background-position: center;
+            border: 2px solid rgba(255,255,255,0.3);
         }
 
         .story-header-name {
             font-weight: 600;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .story-close {
             margin-left: auto;
             width: 40px;
             height: 40px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -573,7 +626,7 @@
         }
 
         .story-close:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.25);
             transform: scale(1.1);
         }
 
@@ -599,11 +652,11 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #6aa9ff, #9f6eff);
+            background: linear-gradient(90deg, #6C5CE7, #A463F5);
             width: 0%;
             transition: width 5s linear;
             border-radius: 2px;
-            box-shadow: 0 0 10px rgba(106,169,255,0.5);
+            box-shadow: 0 0 10px #6C5CE7;
         }
 
         .story-footer {
@@ -615,10 +668,12 @@
 
         .story-input {
             flex: 1;
-            padding: 12px 16px;
+            padding: 14px 18px;
             background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 30px;
+            border-radius: 40px;
             color: white;
             outline: none;
             font-size: 14px;
@@ -629,15 +684,17 @@
         }
 
         .story-input:focus {
-            border-color: #6aa9ff;
+            border-color: #6C5CE7;
         }
 
         .story-action-btn {
-            width: 44px;
-            height: 44px;
-            background: rgba(255,255,255,0.1);
+            width: 48px;
+            height: 48px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 22px;
+            border-radius: 24px;
             color: white;
             cursor: pointer;
             display: flex;
@@ -647,13 +704,13 @@
         }
 
         .story-action-btn:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
             transform: scale(1.1);
         }
 
         .story-action-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             stroke: white;
             fill: none;
         }
@@ -662,10 +719,13 @@
         .story-views {
             padding: 16px;
             background: rgba(0,0,0,0.8);
-            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
             margin: 16px;
             max-height: 300px;
             overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .story-views.hidden {
@@ -676,14 +736,15 @@
             color: white;
             font-weight: 600;
             margin-bottom: 12px;
+            font-size: 14px;
         }
 
         .story-view-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 8px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 12px;
             cursor: pointer;
         }
 
@@ -702,32 +763,34 @@
         .story-view-name {
             color: white;
             font-weight: 500;
+            font-size: 13px;
         }
 
         .story-view-time {
             margin-left: auto;
             color: rgba(255,255,255,0.5);
-            font-size: 11px;
+            font-size: 10px;
         }
 
-        /* Посты */
+        /* Посты (обновленный стиль) */
         .posts {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
 
         .post {
-            padding: 16px;
+            padding: 20px;
             background: white;
-            border-radius: 16px;
-            border: 1px solid #eee;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
         .post-header {
             display: flex;
             gap: 12px;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             align-items: center;
         }
 
@@ -738,6 +801,7 @@
             background-size: cover;
             background-position: center;
             cursor: pointer;
+            border: 2px solid #6C5CE7;
         }
 
         .post-author-info {
@@ -748,15 +812,16 @@
             font-weight: 600;
             color: #333;
             cursor: pointer;
+            font-size: 15px;
         }
 
         .post-author:hover {
-            color: #6aa9ff;
+            color: #6C5CE7;
         }
 
         .post-nick {
             font-size: 12px;
-            color: #6aa9ff;
+            color: #6C5CE7;
         }
 
         .post-menu {
@@ -777,11 +842,12 @@
             right: 0;
             top: 30px;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             padding: 8px;
             z-index: 10;
             display: none;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .post-menu-dropdown.active {
@@ -789,13 +855,14 @@
         }
 
         .post-menu-item {
-            padding: 10px 16px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
             border-radius: 12px;
             color: #555;
+            font-size: 13px;
         }
 
         .post-menu-item:hover {
@@ -811,25 +878,27 @@
 
         .post-text {
             font-size: 14px;
-            margin-bottom: 12px;
-            line-height: 1.5;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #333;
         }
 
         .post-image {
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
-            margin-bottom: 12px;
-            border: 1px solid #eee;
+            margin-bottom: 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.02);
             cursor: pointer;
         }
 
         .post-actions {
             display: flex;
             align-items: center;
-            gap: 20px;
-            padding-top: 8px;
-            border-top: 1px solid #eee;
+            gap: 25px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
         .post-action {
@@ -848,13 +917,14 @@
         }
 
         .post-action.liked svg {
-            fill: #ff4444;
-            stroke: #ff4444;
+            fill: #FF6B6B;
+            stroke: #FF6B6B;
         }
 
         .post-action span {
             min-width: 20px;
             text-align: center;
+            font-size: 13px;
         }
 
         .post-date {
@@ -865,57 +935,61 @@
 
         /* Комментарии */
         .comments {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #eee;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
         .comment-input {
             display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         .comment-input-field {
             flex: 1;
-            padding: 10px 14px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
+            padding: 12px 18px;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 40px;
             outline: none;
+            background: #f8faff;
         }
 
         .comment-input-field:focus {
-            border-color: #6aa9ff;
+            border-color: #6C5CE7;
         }
 
         .comment-btn {
-            width: 40px;
-            height: 40px;
-            background: #f0f0f0;
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             border: none;
-            border-radius: 20px;
-            color: #555;
+            border-radius: 22px;
+            color: white;
             cursor: pointer;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .comment-btn:hover {
-            background: #6aa9ff;
-            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(108,92,231,0.3);
         }
 
         .comments-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .comment {
             display: flex;
             gap: 10px;
-            padding: 8px;
-            background: #f8f9fa;
-            border-radius: 12px;
+            padding: 10px;
+            background: #f8faff;
+            border-radius: 16px;
         }
 
         .comment-avatar {
@@ -929,14 +1003,15 @@
         .comment-author {
             font-weight: 600;
             font-size: 12px;
+            color: #333;
         }
 
         .comment-text {
             font-size: 12px;
-            color: #333;
+            color: #666;
         }
 
-        /* Поиск */
+        /* Поиск (обновленный стиль) */
         .search-screen {
             padding: 16px;
         }
@@ -944,10 +1019,12 @@
         .search-box {
             display: flex;
             gap: 12px;
-            background: #f5f5f5;
+            background: white;
             padding: 8px 16px;
-            border-radius: 20px;
+            border-radius: 40px;
             margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
         .search-input {
@@ -959,19 +1036,20 @@
         }
 
         .search-btn {
-            background: #f0f0f0;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             border: none;
-            border-radius: 20px;
+            border-radius: 30px;
             padding: 8px 20px;
-            color: #555;
+            color: white;
             font-weight: 500;
+            font-size: 13px;
             cursor: pointer;
             transition: 0.2s;
         }
 
         .search-btn:hover {
-            background: #6aa9ff;
-            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108,92,231,0.3);
         }
 
         .search-results {
@@ -984,16 +1062,18 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px;
+            padding: 15px;
             background: white;
-            border-radius: 16px;
-            border: 1px solid #eee;
+            border-radius: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.02);
             cursor: pointer;
             transition: 0.2s;
         }
 
         .user-card:hover {
-            background: #f5f5f5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108,92,231,0.1);
         }
 
         .user-avatar {
@@ -1002,6 +1082,7 @@
             border-radius: 24px;
             background-size: cover;
             background-position: center;
+            border: 2px solid #6C5CE7;
         }
 
         .user-info {
@@ -1011,16 +1092,19 @@
         .user-name {
             font-weight: 600;
             color: #333;
+            font-size: 14px;
         }
 
         .user-nick {
             font-size: 12px;
-            color: #6aa9ff;
+            color: #6C5CE7;
+            margin-top: 2px;
         }
 
         .user-status {
             font-size: 11px;
             color: #999;
+            margin-top: 2px;
         }
 
         .user-actions {
@@ -1029,11 +1113,11 @@
         }
 
         .user-btn {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             background: #f0f0f0;
             border: none;
-            border-radius: 18px;
+            border-radius: 20px;
             color: #555;
             cursor: pointer;
             transition: 0.2s;
@@ -1043,8 +1127,9 @@
         }
 
         .user-btn:hover {
-            background: #6aa9ff;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             color: white;
+            transform: scale(1.05);
         }
 
         .user-btn svg {
@@ -1054,55 +1139,11 @@
             fill: none;
         }
 
-        /* Чаты */
+        /* Чаты (только общие, без запросов) */
         .chat-screen {
             display: flex;
             flex-direction: column;
             height: 100%;
-        }
-
-        .chat-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-            overflow-x: auto;
-        }
-
-        .chat-tab {
-            padding: 8px 16px;
-            background: #f0f0f0;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            white-space: nowrap;
-            color: #555;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .chat-tab.active {
-            background: #6aa9ff;
-            color: white;
-        }
-
-        .chat-tab:hover {
-            background: #e0e0e0;
-        }
-
-        .chat-tab.active:hover {
-            background: #5a99ee;
-        }
-
-        .requests-badge {
-            background: #ff4444;
-            color: white;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 2px 6px;
-            border-radius: 12px;
         }
 
         .chat-list {
@@ -1117,24 +1158,27 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px;
+            padding: 15px;
             background: white;
-            border-radius: 16px;
-            border: 1px solid #eee;
+            border-radius: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.02);
             cursor: pointer;
             transition: 0.2s;
         }
 
         .chat-item:hover {
-            background: #f5f5f5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(108,92,231,0.1);
         }
 
         .chat-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 24px;
+            width: 52px;
+            height: 52px;
+            border-radius: 26px;
             background-size: cover;
             background-position: center;
+            border: 2px solid #6C5CE7;
         }
 
         .chat-info {
@@ -1152,22 +1196,22 @@
         .chat-name {
             font-weight: 600;
             color: #333;
-            font-size: 14px;
+            font-size: 15px;
             cursor: pointer;
         }
 
         .chat-name:hover {
-            color: #6aa9ff;
+            color: #6C5CE7;
         }
 
         .unread-badge {
-            background: #ff4444;
+            background: #FF6B6B;
             color: white;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            min-width: 20px;
-            height: 20px;
-            border-radius: 10px;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1184,16 +1228,16 @@
         }
 
         .chat-time {
-            font-size: 11px;
+            font-size: 10px;
             color: #999;
         }
 
-        /* Комната чата */
+        /* Комната чата (обновленная) */
         .chat-room {
             display: flex;
             flex-direction: column;
             height: 100%;
-            background: white;
+            background: #f8faff;
         }
 
         .chat-room-header {
@@ -1201,37 +1245,42 @@
             align-items: center;
             gap: 12px;
             padding: 12px 16px;
-            border-bottom: 1px solid #eee;
-            background: white;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         .chat-room-back {
-            width: 36px;
-            height: 36px;
-            background: #f0f0f0;
-            border-radius: 18px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             color: #555;
             transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
 
         .chat-room-back:hover {
-            background: #6aa9ff;
+            background: #6C5CE7;
             color: white;
+            transform: scale(1.05);
         }
 
         .chat-room-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 22px;
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
             background-size: cover;
             background-position: center;
             cursor: pointer;
             position: relative;
             transition: 0.2s;
+            border: 2px solid #6C5CE7;
         }
 
         .chat-room-avatar:hover {
@@ -1244,14 +1293,14 @@
         }
 
         .chat-room-info:hover .chat-room-name {
-            color: #6aa9ff;
+            color: #6C5CE7;
         }
 
         .chat-room-name {
             font-weight: 600;
             color: #333;
             font-size: 16px;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
             transition: 0.2s;
         }
 
@@ -1270,8 +1319,8 @@
             display: inline-block;
         }
 
-        .online-dot.online { background: #4CAF50; }
-        .online-dot.offline { background: #f44336; }
+        .online-dot.online { background: #00B894; }
+        .online-dot.offline { background: #FF6B6B; }
 
         .chat-room-messages {
             flex: 1;
@@ -1280,7 +1329,39 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            background: #fafafa;
+            background: #f8faff;
+        }
+
+        /* ИНДИКАТОР ПЕЧАТАЕТ */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 16px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            margin-bottom: 8px;
+            align-self: flex-start;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .typing-indicator span {
+            width: 6px;
+            height: 6px;
+            background: #6C5CE7;
+            border-radius: 3px;
+            display: inline-block;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-10px); opacity: 1; }
         }
 
         .message {
@@ -1302,21 +1383,23 @@
         }
 
         .message-bubble {
-            padding: 10px 14px;
-            background: #f0f0f0;
-            border-radius: 20px 20px 20px 8px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 25px 25px 25px 8px;
             font-size: 14px;
             word-wrap: break-word;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
         .message.right .message-bubble {
-            background: #6aa9ff;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             color: white;
-            border-radius: 20px 20px 8px 20px;
+            border-radius: 25px 25px 8px 25px;
         }
 
         .message-time {
-            font-size: 10px;
+            font-size: 9px;
             color: #999;
             margin-top: 4px;
             text-align: right;
@@ -1324,7 +1407,7 @@
         }
 
         .message.right .message-time {
-            color: #ccc;
+            color: rgba(255,255,255,0.7);
         }
 
         .message-delete {
@@ -1333,7 +1416,7 @@
             right: -8px;
             width: 20px;
             height: 20px;
-            background: #ff4444;
+            background: #FF6B6B;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -1356,10 +1439,10 @@
             background: white;
             border-radius: 20px;
             padding: 4px 10px;
-            font-size: 14px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 13px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             display: none;
-            border: 1px solid #eee;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .message.reacted .message-reaction {
@@ -1371,11 +1454,11 @@
             background: white;
             border-radius: 40px;
             padding: 8px 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             display: none;
             gap: 8px;
             z-index: 1000;
-            border: 1px solid #eee;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .reaction-panel.active {
@@ -1404,141 +1487,54 @@
             display: flex;
             gap: 8px;
             padding: 16px;
-            border-top: 1px solid #eee;
-            background: white;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
         .chat-room-input-field {
             flex: 1;
-            padding: 12px 16px;
-            border: 1px solid #ddd;
-            border-radius: 24px;
+            padding: 14px 18px;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 40px;
             outline: none;
             font-size: 14px;
+            background: white;
         }
 
         .chat-room-input-field:focus {
-            border-color: #6aa9ff;
+            border-color: #6C5CE7;
+            box-shadow: 0 0 0 3px rgba(108,92,231,0.1);
         }
 
         .chat-room-send {
-            width: 48px;
-            height: 48px;
-            background: #f0f0f0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             border: none;
-            border-radius: 24px;
-            color: #555;
+            border-radius: 25px;
+            color: white;
             cursor: pointer;
             transition: 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 5px 15px rgba(108,92,231,0.3);
         }
 
         .chat-room-send:hover {
-            background: #6aa9ff;
-            color: white;
+            transform: scale(1.05);
         }
 
         .chat-room-send svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             stroke: currentColor;
             fill: none;
         }
 
-        /* Запросы */
-        .requests-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .request-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #eee;
-        }
-
-        .request-avatar {
-            width: 56px;
-            height: 56px;
-            border-radius: 28px;
-            background-size: cover;
-            background-position: center;
-            cursor: pointer;
-        }
-
-        .request-info {
-            flex: 1;
-            cursor: pointer;
-        }
-
-        .request-name {
-            font-weight: 600;
-            color: #333;
-            font-size: 15px;
-            margin-bottom: 4px;
-        }
-
-        .request-name:hover {
-            color: #6aa9ff;
-        }
-
-        .request-message {
-            font-size: 13px;
-            color: #999;
-            margin-bottom: 4px;
-        }
-
-        .request-time {
-            font-size: 11px;
-            color: #999;
-        }
-
-        .request-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .request-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .request-btn.accept {
-            background: #6aa9ff;
-            color: white;
-        }
-
-        .request-btn.accept:hover {
-            background: #5a99ee;
-            transform: scale(1.1);
-        }
-
-        .request-btn.decline {
-            background: #ff4444;
-            color: white;
-        }
-
-        .request-btn.decline:hover {
-            background: #ff3333;
-            transform: scale(1.1);
-        }
-
-        /* Профиль */
+        /* Профиль (обновленный стиль) */
         .profile-screen {
             display: flex;
             flex-direction: column;
@@ -1555,14 +1551,15 @@
         }
 
         .profile-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 40px;
+            width: 85px;
+            height: 85px;
+            border-radius: 42.5px;
             background-size: cover;
             background-position: center;
-            border: 2px solid #6aa9ff;
+            border: 3px solid #6C5CE7;
             cursor: pointer;
             transition: 0.2s;
+            box-shadow: 0 10px 25px rgba(108,92,231,0.2);
         }
 
         .profile-avatar:hover {
@@ -1577,20 +1574,22 @@
             font-weight: 600;
             font-size: 18px;
             color: #333;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .profile-nick {
-            color: #6aa9ff;
+            color: #6C5CE7;
             font-size: 14px;
         }
 
         .stats {
             display: flex;
             justify-content: space-around;
-            padding: 16px 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
         .stat {
@@ -1599,50 +1598,54 @@
         }
 
         .stat:hover .stat-value {
-            color: #6aa9ff;
+            color: #6C5CE7;
         }
 
         .stat-value {
-            font-weight: 600;
-            font-size: 16px;
+            font-weight: 700;
+            font-size: 18px;
+            color: #333;
             transition: 0.2s;
         }
 
         .stat-label {
             font-size: 12px;
             color: #999;
+            margin-top: 4px;
         }
 
         .profile-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .profile-btn {
             flex: 1;
-            padding: 12px;
+            padding: 14px;
             border: none;
-            border-radius: 30px;
+            border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
             background: #f0f0f0;
             color: #333;
+            font-size: 13px;
         }
 
         .profile-btn.primary {
-            background: #6aa9ff;
+            background: linear-gradient(135deg, #6C5CE7, #A463F5);
             color: white;
+            box-shadow: 0 5px 15px rgba(108,92,231,0.3);
         }
 
         .profile-btn.primary:hover {
-            background: #5a99ee;
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(108,92,231,0.4);
         }
 
         .profile-btn.secondary:hover {
             background: #e0e0e0;
-            transform: scale(1.02);
+            transform: translateY(-2px);
         }
 
         .posts-grid {
@@ -1654,7 +1657,7 @@
         .post-thumb {
             aspect-ratio: 1;
             background: #f0f0f0;
-            border-radius: 4px;
+            border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
             transition: 0.2s;
@@ -1662,6 +1665,7 @@
 
         .post-thumb:hover {
             transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(108,92,231,0.2);
         }
 
         .post-thumb img {
@@ -1684,34 +1688,36 @@
         .settings-row {
             display: flex;
             justify-content: space-between;
-            padding: 16px 0;
-            border-top: 1px solid #eee;
+            padding: 20px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
             margin-top: auto;
         }
 
         .settings-icon, .logout-icon {
-            width: 44px;
-            height: 44px;
-            background: #f0f0f0;
-            border-radius: 22px;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             color: #555;
             transition: 0.2s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
         .settings-icon:hover {
-            background: #6aa9ff;
+            background: #6C5CE7;
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .logout-icon:hover {
-            background: #ff4444;
+            background: #FF6B6B;
             color: white;
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .settings-icon svg, .logout-icon svg {
@@ -1721,17 +1727,20 @@
             fill: none;
         }
 
-        /* Панель уведомлений */
+        /* Панель уведомлений (обновленная) */
         .notifications-panel {
             position: fixed;
-            top: 60px;
+            top: 70px;
             right: 16px;
             width: 300px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             z-index: 1000;
             display: none;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
         .notifications-panel.active {
@@ -1739,9 +1748,10 @@
         }
 
         .notifications-header {
-            padding: 16px;
-            border-bottom: 1px solid #eee;
+            padding: 18px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             font-weight: 600;
+            color: #333;
         }
 
         .notifications-list {
@@ -1752,19 +1762,19 @@
         .notification-item {
             display: flex;
             gap: 12px;
-            padding: 12px 16px;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 15px 18px;
+            border-bottom: 1px solid rgba(0,0,0,0.02);
             cursor: pointer;
         }
 
         .notification-item:hover {
-            background: #f5f5f5;
+            background: rgba(108,92,231,0.02);
         }
 
         .notification-avatar {
             width: 40px;
             height: 40px;
-            border-radius: 4px;
+            border-radius: 8px;
             background-size: cover;
             background-position: center;
         }
@@ -1779,278 +1789,16 @@
             margin-top: 4px;
         }
 
-        /* Просмотр поста */
-        .post-viewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .post-viewer.active {
-            display: flex;
-        }
-
-        .post-viewer-header {
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-        }
-
-        .post-viewer-back {
-            width: 36px;
-            height: 36px;
-            background: #f0f0f0;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #555;
-            transition: 0.2s;
-        }
-
-        .post-viewer-back:hover {
-            background: #6aa9ff;
-            color: white;
-        }
-
-        .post-viewer-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-        }
-
-        /* Модалка подписок с поиском */
-        .subscriptions-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 200;
-            display: none;
-            flex-direction: column;
-        }
-
-        .subscriptions-modal.active {
-            display: flex;
-        }
-
-        .subscriptions-header {
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .subscriptions-back {
-            width: 36px;
-            height: 36px;
-            background: #f0f0f0;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #555;
-            transition: 0.2s;
-        }
-
-        .subscriptions-back:hover {
-            background: #6aa9ff;
-            color: white;
-        }
-
-        .subscriptions-tabs {
-            display: flex;
-            gap: 16px;
-            padding: 0 16px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .subscriptions-tab {
-            padding: 12px 0;
-            cursor: pointer;
-            color: #999;
-            border-bottom: 2px solid transparent;
-        }
-
-        .subscriptions-tab.active {
-            color: #6aa9ff;
-            border-bottom-color: #6aa9ff;
-        }
-
-        .subscriptions-search {
-            padding: 12px 16px;
-        }
-
-        .subscriptions-search-box {
-            display: flex;
-            gap: 8px;
-            background: #f5f5f5;
-            padding: 8px 16px;
-            border-radius: 20px;
-        }
-
-        .subscriptions-search-input {
-            flex: 1;
-            border: none;
-            background: none;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .subscriptions-search-btn {
-            background: #f0f0f0;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 16px;
-            color: #555;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .subscriptions-search-btn:hover {
-            background: #6aa9ff;
-            color: white;
-        }
-
-        .subscriptions-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-        }
-
-        .subscription-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px;
-            border-radius: 16px;
-            cursor: pointer;
-        }
-
-        .subscription-item:hover {
-            background: #f5f5f5;
-        }
-
-        .subscription-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 4px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .subscription-info {
-            flex: 1;
-        }
-
-        .subscription-name {
-            font-weight: 600;
-        }
-
-        .subscription-name:hover {
-            color: #6aa9ff;
-        }
-
-        .subscription-nick {
-            font-size: 12px;
-            color: #6aa9ff;
-        }
-
-        .subscription-status {
-            font-size: 11px;
-            color: #999;
-        }
-
-        .subscription-btn {
-            width: 36px;
-            height: 36px;
-            background: #f0f0f0;
-            border: none;
-            border-radius: 18px;
-            color: #555;
-            cursor: pointer;
-        }
-
-        .subscription-btn:hover {
-            background: #6aa9ff;
-            color: white;
-        }
-
-        /* Просмотр фото */
-        .photo-viewer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-        }
-
-        .photo-viewer.active {
-            display: flex;
-        }
-
-        .photo-header {
-            padding: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .photo-close {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .photo-close:hover {
-            background: rgba(255,255,255,0.3);
-            transform: scale(1.1);
-        }
-
-        .photo-image {
-            flex: 1;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 16px;
-        }
-
-        .photo-info {
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
-
-        /* Reels экран */
-        .reels-screen {
+        /* StiQ экран (бывший Reels) */
+        .stiq-screen {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
             color: #999;
+            font-size: 16px;
+            background: linear-gradient(135deg, #6C5CE710, #A463F510);
+            border-radius: 30px;
         }
 
         /* Аватарки */
@@ -2098,7 +1846,7 @@
 
         <!-- Верхняя навигация -->
         <div class="top-nav" id="topNav">
-            <div class="logo">RealReel <span class="version">v2.2</span></div>
+            <div class="logo">RealReel <span class="version">v2.3</span></div>
             <div class="nav-icons">
                 <div class="add-post-icon" onclick="openAddPostModal()">
                     <svg viewBox="0 0 24 24">
@@ -2210,25 +1958,6 @@
             </div>
         </div>
 
-        <!-- Модальное окно подписок с поиском -->
-        <div class="subscriptions-modal" id="subscriptionsModal">
-            <div class="subscriptions-header">
-                <div class="subscriptions-back" onclick="closeSubscriptions()">←</div>
-                <h3 id="subscriptionsTitle">Подписчики</h3>
-            </div>
-            <div class="subscriptions-tabs">
-                <div class="subscriptions-tab active" onclick="switchSubTab('followers')">Подписчики</div>
-                <div class="subscriptions-tab" onclick="switchSubTab('following')">Подписки</div>
-            </div>
-            <div class="subscriptions-search">
-                <div class="subscriptions-search-box">
-                    <input type="text" class="subscriptions-search-input" id="subscriptionsSearchInput" placeholder="Поиск...">
-                    <button class="subscriptions-search-btn" id="subscriptionsSearchBtn">Найти</button>
-                </div>
-            </div>
-            <div class="subscriptions-list" id="subscriptionsList"></div>
-        </div>
-
         <!-- Панель реакций -->
         <div class="reaction-panel" id="reactionPanel">
             <div class="reaction-emoji" onclick="addReaction('❤️')">❤️</div>
@@ -2280,23 +2009,16 @@
                 </div>
             </div>
 
-            <!-- Reels -->
-            <div class="screen" id="reelsScreen">
-                <div class="reels-screen">
-                    Reels — скоро
+            <!-- StiQ (бывший Reels) -->
+            <div class="screen" id="stiqScreen">
+                <div class="stiq-screen">
+                    StiQ — скоро
                 </div>
             </div>
 
-            <!-- Чаты (список) -->
+            <!-- Чаты (только общий список) -->
             <div class="screen" id="chatScreen">
                 <div class="chat-screen">
-                    <div class="chat-tabs">
-                        <div class="chat-tab active" onclick="switchChatTab('all', this)">Все</div>
-                        <div class="chat-tab" onclick="switchChatTab('requests', this)" id="requestsTab">
-                            Запросы
-                            <span class="requests-badge" id="requestsBadge" style="display: none;">0</span>
-                        </div>
-                    </div>
                     <div class="chat-list" id="chatList"></div>
                 </div>
             </div>
@@ -2312,7 +2034,9 @@
                             <div class="chat-room-status" id="chatRoomStatus"></div>
                         </div>
                     </div>
-                    <div class="chat-room-messages" id="chatRoomMessages"></div>
+                    <div class="chat-room-messages" id="chatRoomMessages">
+                        <!-- Индикатор "печатает" будет добавляться сюда динамически -->
+                    </div>
                     <div class="chat-room-input">
                         <input type="text" class="chat-room-input-field" id="chatRoomInput" placeholder="Написать..." autocomplete="off">
                         <button class="chat-room-send" id="chatRoomSendBtn">
@@ -2377,7 +2101,7 @@
             </div>
         </div>
 
-        <!-- Нижняя навигация -->
+        <!-- Нижняя навигация (обновленная) -->
         <div class="bottom-nav" id="bottomNav">
             <div class="nav-item active" onclick="navigateTo('homeScreen', this)">
                 <svg viewBox="0 0 24 24">
@@ -2393,15 +2117,13 @@
                 </svg>
                 <span class="nav-label">Поиск</span>
             </div>
-            <div class="nav-item" onclick="navigateTo('reelsScreen', this)">
+            <div class="nav-item" onclick="navigateTo('stiqScreen', this)">
                 <svg viewBox="0 0 24 24">
-                    <rect x="2" y="2" width="20" height="20" rx="2.18"/>
-                    <line x1="8" y1="2" x2="8" y2="22"/>
-                    <line x1="16" y1="2" x2="16" y2="22"/>
-                    <line x1="2" y1="8" x2="22" y2="8"/>
-                    <line x1="2" y1="16" x2="22" y2="16"/>
+                    <rect x="2" y="2" width="20" height="20" rx="4" fill="none" stroke="currentColor"/>
+                    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor"/>
+                    <path d="M18 6 L20 8" stroke="currentColor"/>
                 </svg>
-                <span class="nav-label">Reels</span>
+                <span class="nav-label">StiQ</span>
             </div>
             <div class="nav-item" onclick="navigateTo('chatScreen', this)" id="chatNavItem">
                 <svg viewBox="0 0 24 24">
@@ -2448,10 +2170,10 @@
         let currentReactionMessage = null;
         let notifications = [];
         let unreadMessages = {};
-        let messageRequests = [];
-        let currentChatTab = 'all';
         let storyViews = [];
         let chatUpdateInterval = null;
+        let typingTimeout = null;
+        let isTyping = false;
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
 
@@ -3100,7 +2822,7 @@
             }
         }
 
-        // ========== ЧАТЫ ==========
+        // ========== ЧАТЫ (только общие, без запросов) ==========
         async function getOrCreateConversation(otherUserId) {
             const currentUser = getCurrentUser();
             if (!currentUser) return null;
@@ -3222,25 +2944,6 @@
             }
         }
 
-        async function addMessageToRequests(message, fromUser, toUserId) {
-            try {
-                messageRequests.push({
-                    fromUser: fromUser,
-                    message: message,
-                    time: new Date()
-                });
-                
-                updateChatBadges();
-                
-                const firstName = fromUser.get('firstName') || 'Пользователь';
-                addNotification('request', '📨 Новый запрос', `${firstName} хочет написать вам`, fromUser);
-                
-                return true;
-            } catch (error) {
-                return false;
-            }
-        }
-
         async function loadMessageHistory(conversationId) {
             try {
                 const query = new Parse.Query('Message');
@@ -3254,6 +2957,10 @@
                 
                 const messages = await query.find();
                 const container = document.getElementById('chatRoomMessages');
+                
+                // Сохраняем индикатор печатает, если он есть
+                const typingIndicator = container.querySelector('.typing-indicator');
+                
                 container.innerHTML = '';
                 
                 messages.forEach(msg => {
@@ -3263,6 +2970,11 @@
                         addMessageToChat(msg.get('text'), isOwn, msg.createdAt, msg.id);
                     }
                 });
+                
+                // Возвращаем индикатор, если он был
+                if (typingIndicator && isTyping) {
+                    container.appendChild(typingIndicator);
+                }
                 
                 container.scrollTop = container.scrollHeight;
             } catch (error) {
@@ -3284,6 +2996,12 @@
             currentChannel.bind('client-new-message', (data) => {
                 const isOwn = data.senderId === getCurrentUser().id;
                 addMessageToChat(data.text, isOwn, data.timestamp, data.messageId);
+            });
+            
+            currentChannel.bind('client-typing', (data) => {
+                if (data.senderId !== getCurrentUser().id) {
+                    showTypingIndicator();
+                }
             });
         }
 
@@ -3316,7 +3034,35 @@
             container.scrollTop = container.scrollHeight;
         }
 
-        // Функция для автоматического обновления чата
+        // ========== ИНДИКАТОР ПЕЧАТАЕТ ==========
+        function showTypingIndicator() {
+            const container = document.getElementById('chatRoomMessages');
+            let indicator = container.querySelector('.typing-indicator');
+            
+            if (!indicator) {
+                indicator = document.createElement('div');
+                indicator.className = 'typing-indicator';
+                indicator.innerHTML = '<span></span><span></span><span></span>';
+                container.appendChild(indicator);
+            }
+            
+            container.scrollTop = container.scrollHeight;
+            
+            // Скрываем через 3 секунды бездействия
+            if (typingTimeout) clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => {
+                const ind = container.querySelector('.typing-indicator');
+                if (ind) ind.remove();
+            }, 3000);
+        }
+
+        function hideTypingIndicator() {
+            const container = document.getElementById('chatRoomMessages');
+            const indicator = container.querySelector('.typing-indicator');
+            if (indicator) indicator.remove();
+        }
+
+        // Функция для автообновления чата
         function startChatAutoUpdate() {
             if (chatUpdateInterval) {
                 clearInterval(chatUpdateInterval);
@@ -3326,7 +3072,7 @@
                 if (currentConversationId && document.getElementById('chatRoomScreen').classList.contains('active')) {
                     await loadMessageHistory(currentConversationId);
                 }
-            }, 100); // 0.1 секунды, но для пользователя незаметно
+            }, 100);
         }
 
         // ========== РЕАКЦИИ ==========
@@ -3379,87 +3125,37 @@
             }
         };
 
-        // ========== УПРАВЛЕНИЕ ЧАТАМИ ==========
-        window.switchChatTab = function(tab, element) {
-            document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
-            element.classList.add('active');
-            currentChatTab = tab;
-            updateChatList();
-        };
-
+        // ========== УПРАВЛЕНИЕ ЧАТАМИ (только общие) ==========
         async function updateChatList() {
             const conversations = await getUserConversations();
             
-            if (currentChatTab === 'all') {
-                const html = await Promise.all(conversations.map(async c => {
-                    const user = c.otherUser;
-                    await user.fetch();
-                    
-                    return `
-                        <div class="chat-item" onclick="openChatRoom('${user.id}')">
-                            <div class="chat-avatar ${getAvatarClass(user)}" 
-                                 style="${getAvatarStyle(user)}"
-                                 onclick="event.stopPropagation(); openUserProfile('${user.id}')"></div>
-                            <div class="chat-info">
-                                <div class="chat-name-row">
-                                    <span class="chat-name" onclick="event.stopPropagation(); openUserProfile('${user.id}')">
-                                        ${user.get('firstName')} ${user.get('lastName')}
-                                    </span>
-                                    ${c.unreadCount > 0 ? 
-                                        `<span class="unread-badge">${c.unreadCount}</span>` : ''}
-                                </div>
-                                <div class="chat-preview">${c.lastMessage}</div>
-                                <div class="chat-time">${formatTime(c.lastMessageTime)}</div>
-                            </div>
-                        </div>
-                    `;
-                })).then(html => html.join(''));
+            const html = await Promise.all(conversations.map(async c => {
+                const user = c.otherUser;
+                await user.fetch();
                 
-                document.getElementById('chatList').innerHTML = html || 
-                    '<p style="opacity:0.5; text-align:center; padding:20px;">Нет чатов</p>';
-            } else {
-                if (messageRequests.length > 0) {
-                    const html = messageRequests.map(req => `
-                        <div class="request-item">
-                            <div class="request-avatar ${getAvatarClass(req.fromUser)}" 
-                                 style="${getAvatarStyle(req.fromUser)}"
-                                 onclick="openUserProfile('${req.fromUser.id}')"></div>
-                            <div class="request-info" onclick="openUserProfile('${req.fromUser.id}')">
-                                <div class="request-name">
-                                    ${req.fromUser.get('firstName')} ${req.fromUser.get('lastName')}
-                                </div>
-                                <div class="request-message">${req.message || 'Хочет написать вам'}</div>
-                                <div class="request-time">${formatTime(req.time)}</div>
+                return `
+                    <div class="chat-item" onclick="openChatRoom('${user.id}')">
+                        <div class="chat-avatar ${getAvatarClass(user)}" 
+                             style="${getAvatarStyle(user)}"
+                             onclick="event.stopPropagation(); openUserProfile('${user.id}')"></div>
+                        <div class="chat-info">
+                            <div class="chat-name-row">
+                                <span class="chat-name" onclick="event.stopPropagation(); openUserProfile('${user.id}')">
+                                    ${user.get('firstName')} ${user.get('lastName')}
+                                </span>
+                                ${c.unreadCount > 0 ? 
+                                    `<span class="unread-badge">${c.unreadCount}</span>` : ''}
                             </div>
-                            <div class="request-actions">
-                                <button class="request-btn accept" onclick="event.stopPropagation(); acceptRequest('${req.fromUser.id}')">✓</button>
-                                <button class="request-btn decline" onclick="event.stopPropagation(); declineRequest('${req.fromUser.id}')">✕</button>
-                            </div>
+                            <div class="chat-preview">${c.lastMessage}</div>
+                            <div class="chat-time">${formatTime(c.lastMessageTime)}</div>
                         </div>
-                    `).join('');
-                    
-                    document.getElementById('chatList').innerHTML = html;
-                } else {
-                    document.getElementById('chatList').innerHTML = 
-                        '<p style="opacity:0.5; text-align:center; padding:20px;">Нет запросов</p>';
-                }
-            }
+                    </div>
+                `;
+            })).then(html => html.join(''));
+            
+            document.getElementById('chatList').innerHTML = html || 
+                '<p style="opacity:0.5; text-align:center; padding:20px;">Нет чатов</p>';
         }
-
-        window.acceptRequest = async function(userId) {
-            await openChatRoom(userId);
-            messageRequests = messageRequests.filter(r => r.fromUser.id !== userId);
-            updateChatBadges();
-            updateChatList();
-        };
-
-        window.declineRequest = function(userId) {
-            if (confirm('Отклонить запрос?')) {
-                messageRequests = messageRequests.filter(r => r.fromUser.id !== userId);
-                updateChatBadges();
-                updateChatList();
-            }
-        };
 
         // ========== КОМНАТА ЧАТА ==========
         window.openChatRoom = async function(otherUserId) {
@@ -3497,7 +3193,6 @@
                 await loadMessageHistory(currentConversationId);
                 subscribeToChat(currentConversationId);
                 
-                // Запускаем автообновление чата
                 startChatAutoUpdate();
                 
                 document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -3523,6 +3218,8 @@
                 chatUpdateInterval = null;
             }
             
+            hideTypingIndicator();
+            
             updateChatList();
         };
 
@@ -3534,7 +3231,6 @@
 
         function updateChatBadges() {
             const chatNavBadge = document.getElementById('chatNavBadge');
-            const requestsBadge = document.getElementById('requestsBadge');
             
             const totalUnread = Object.values(unreadMessages).reduce((a, b) => a + b, 0);
             
@@ -3543,13 +3239,6 @@
                 chatNavBadge.style.display = 'flex';
             } else {
                 chatNavBadge.style.display = 'none';
-            }
-            
-            if (messageRequests.length > 0) {
-                requestsBadge.textContent = messageRequests.length;
-                requestsBadge.style.display = 'inline-block';
-            } else {
-                requestsBadge.style.display = 'none';
             }
         }
 
@@ -4171,8 +3860,7 @@
             
             if (!isSubscribed) {
                 const otherUser = await new Parse.Query('_User').get(currentOtherUserId);
-                await addMessageToRequests(text, getCurrentUser(), currentOtherUserId);
-                alert('Пользователь не подписан на вас. Сообщение отправлено в запросы.');
+                alert('Пользователь не подписан на вас');
                 input.value = '';
                 closeChatRoom();
                 return;
@@ -4192,6 +3880,23 @@
                         messageId: result.messageId
                     });
                 }
+                
+                hideTypingIndicator();
+            }
+        });
+
+        document.getElementById('chatRoomInput').addEventListener('input', function() {
+            if (currentChannel && currentConversationId && !isTyping) {
+                isTyping = true;
+                currentChannel.trigger('client-typing', {
+                    senderId: getCurrentUser().id,
+                    conversationId: currentConversationId
+                });
+                
+                if (typingTimeout) clearTimeout(typingTimeout);
+                typingTimeout = setTimeout(() => {
+                    isTyping = false;
+                }, 2000);
             }
         });
 
