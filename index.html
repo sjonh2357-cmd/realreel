@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RealReel · Full Version</title>
+    <title>RealReel · Полная версия</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -506,13 +506,6 @@
         .modal-btn.save:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(95,158,160,0.3);
-        }
-
-        .modal-success {
-            color: #00B894;
-            font-size: 13px;
-            text-align: center;
-            margin-top: 15px;
         }
 
         /* Passport STIQ */
@@ -1018,7 +1011,7 @@
             <div class="logo-container">
                 <div class="logo">RealReel</div>
                 <div class="daily-feature" id="dailyFeature" onclick="changeDailyFeature()">67</div>
-                <span class="version">v9.0</span>
+                <span class="version">v10.0</span>
             </div>
             <div class="nav-icons">
                 <div class="nav-icon" onclick="openAddPostModal()">
@@ -1112,7 +1105,9 @@
 
         <!-- Чаты -->
         <div class="screen" id="chatScreen">
-            <div style="padding: 20px; color: var(--text-primary);">Чаты (в разработке)</div>
+            <div class="chat-screen">
+                <div class="chat-list" id="chatList"></div>
+            </div>
         </div>
 
         <!-- Нижняя навигация -->
@@ -1152,9 +1147,13 @@
 
         // ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
         let currentUser = null;
+        let currentChannel = null;
+        let currentConversationId = null;
+        let currentOtherUserId = null;
         let stories = [];
         let reels = [];
         let notifications = [];
+        let unreadMessages = {};
         let visaCollection = [];
 
         const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
@@ -1168,6 +1167,7 @@
             { name: 'Статуя Свободы', city: 'Нью-Йорк', country: 'США', icon: '🗽' }
         ];
 
+        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
         function getRandomAvatar() {
             return avatars[Math.floor(Math.random() * avatars.length)];
         }
@@ -1188,6 +1188,10 @@
         function formatDate(date) {
             const d = new Date(date);
             return `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
+        }
+
+        function formatTime(date) {
+            return formatDate(date);
         }
 
         // ===== АВТОРИЗАЦИЯ =====
@@ -1219,6 +1223,7 @@
             loadStories();
             loadReels();
             updateProfile();
+            loadChats();
         }
 
         // ===== STORIES =====
@@ -1371,6 +1376,10 @@
             `).join('');
         }
 
+        function showPassportStiQ() {
+            generateVisa();
+        }
+
         // ===== ПРОФИЛЬ =====
         async function updateProfile() {
             if (!currentUser) return;
@@ -1396,60 +1405,1416 @@
             document.getElementById('editProfileModal').classList.add('active');
         }
 
-        // ===== НАВИГАЦИЯ =====
-        window.navigateTo = function(screenId, element) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            if (element) element.classList.add('active');
+        // ===== ЧАСТИНА 2 =====
+        // Продовження JavaScript (чати Pusher, навігація, подписки, модалки)
+        // Напиши "ЧАСТИНА 2", і я надішлю продовження
+        <!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealReel · Полная версия</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-            if (screenId === 'profileScreen') updateProfile();
-            if (screenId === 'passportScreen') updateVisaCollection();
-        };
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            padding: 0;
+            margin: 0;
+        }
 
-        // ===== УВЕДОМЛЕНИЯ =====
-        window.toggleNotifications = function() {
-            document.getElementById('notificationsPanel').classList.toggle('active');
-        };
+        .phone-frame {
+            width: 380px;
+            height: 720px;
+            background: #1a1a1a;
+            border-radius: 0;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
 
-        // ===== МОДАЛКИ =====
-        window.openAddPostModal = () => document.getElementById('addPostModal').classList.add('active');
+        :root {
+            --bg-primary: #1a1a1a;
+            --bg-surface: #2d2d2d;
+            --bg-surface-hover: #3d3d3d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-primary: #5f9ea0;
+            --accent-secondary: #7bb5b7;
+            --border-color: #3a3a3a;
+        }
 
-        document.getElementById('cancelPostBtn').addEventListener('click', () => {
-            document.getElementById('addPostModal').classList.remove('active');
-        });
+        /* Верхняя навигация */
+        .top-nav {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            z-index: 10;
+        }
 
-        document.getElementById('cancelEditBtn').addEventListener('click', () => {
-            document.getElementById('editProfileModal').classList.remove('active');
-        });
+        .top-nav.hidden {
+            display: none;
+        }
 
-        document.getElementById('saveProfileBtn').addEventListener('click', async () => {
-            const firstName = document.getElementById('editFirstName').value;
-            const lastName = document.getElementById('editLastName').value;
-            const nickname = document.getElementById('editNickname').value;
-            const bio = document.getElementById('editBio').value;
-            
-            currentUser.set('firstName', firstName);
-            currentUser.set('lastName', lastName);
-            currentUser.set('nickname', nickname);
-            currentUser.set('bio', bio);
-            await currentUser.save();
-            
-            document.getElementById('editProfileModal').classList.remove('active');
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--accent-primary);
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 10px rgba(95,158,160,0.3);
+        }
+
+        .version {
+            font-size: 11px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-left: 4px;
+            background: rgba(255,255,255,0.05);
+            padding: 2px 6px;
+            border-radius: 20px;
+        }
+
+        .daily-feature {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            background: rgba(95,158,160,0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid rgba(95,158,160,0.2);
+        }
+
+        .daily-feature:hover {
+            background: rgba(95,158,160,0.2);
+            transform: scale(1.02);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            color: var(--text-secondary);
+            transition: 0.2s;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .nav-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .nav-icon:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .badge {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background: #FF6B6B;
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 3px;
+            border: 2px solid var(--bg-primary);
+        }
+
+        /* Контент */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            background: var(--bg-primary);
+        }
+
+        /* Нижняя навигация */
+        .bottom-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px 0;
+            background: var(--bg-surface);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            z-index: 10;
+        }
+
+        .bottom-nav.hidden {
+            display: none;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 4px 0;
+            flex: 1;
+            color: var(--text-secondary);
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .nav-item.active {
+            color: var(--accent-primary);
+        }
+
+        .nav-item.active svg {
+            filter: drop-shadow(0 2px 4px rgba(95,158,160,0.3));
+        }
+
+        .nav-item:hover {
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-label {
+            font-size: 10px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: -2px;
+            right: 15px;
+            background: #FF6B6B;
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            min-width: 16px;
+            height: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            border: 2px solid var(--bg-primary);
+        }
+
+        /* Экран авторизации */
+        .auth-screen {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .auth-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.6) blur(2px);
+            animation: zoom 20s infinite alternate;
+        }
+
+        @keyframes zoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .auth-form {
+            width: 300px;
+            padding: 35px 25px;
+            background: rgba(26,26,26,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-title {
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--accent-primary);
+            text-shadow: 0 0 10px rgba(95,158,160,0.3);
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            margin-bottom: 14px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+            background: var(--bg-surface);
+            color: var(--text-primary);
+        }
+
+        .auth-input:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(95,158,160,0.1);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--accent-primary);
+            border: none;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(95,158,160,0.3);
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(95,158,160,0.4);
+        }
+
+        .auth-btn.loading {
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .auth-btn .btn-text {
+            transition: 0.2s;
+        }
+
+        .auth-btn.loading .btn-text {
+            opacity: 0;
+        }
+
+        .auth-btn .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+
+        .auth-btn.loading .spinner {
+            display: block;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .auth-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .auth-link {
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .auth-link:hover {
+            color: var(--accent-primary);
+        }
+
+        .auth-error {
+            color: #FF6B6B;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Загрузочный экран */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--bg-surface);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Модальное окно */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.2);
+            z-index: 200;
+            display: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            margin-bottom: 15px;
+            outline: none;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .modal-input:focus {
+            border-color: var(--accent-primary);
+        }
+
+        .modal-file {
+            padding: 14px;
+            border: 2px dashed var(--accent-primary);
+            border-radius: 30px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            color: var(--accent-secondary);
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .modal-file:hover {
+            background: rgba(95,158,160,0.05);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
+        }
+
+        .modal-btn:hover {
+            background: #4d4d4d;
+        }
+
+        .modal-btn.save {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .modal-btn.save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(95,158,160,0.3);
+        }
+
+        /* Passport STIQ */
+        .passport-stiq {
+            position: relative;
+            margin: 10px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--accent-primary), #7bb5b7);
+            border-radius: 20px;
+            color: white;
+            animation: passportAppear 0.5s ease-out, passportFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(95,158,160,0.4);
+            max-width: 90%;
+            align-self: center;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .passport-stiq.left {
+            align-self: flex-start;
+        }
+
+        .passport-stiq.right {
+            align-self: flex-end;
+        }
+
+        @keyframes passportAppear {
+            0% { transform: scale(0.8) translateY(20px); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        @keyframes passportFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .passport-icon {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            transform: rotate(5deg);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            animation: passportIconSpin 10s linear infinite;
+            border: 3px solid var(--accent-primary);
+        }
+
+        @keyframes passportIconSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .passport-icon img {
+            width: 40px;
+            height: 40px;
+            animation: passportIconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes passportIconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .passport-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 14px;
+            border-radius: 25px;
+            display: inline-block;
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { background: rgba(255,255,255,0.2); }
+            50% { background: rgba(255,255,255,0.3); }
+        }
+
+        .passport-number {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .passport-place {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: placeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes placeGlow {
+            0%, 100% { text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+            50% { text-shadow: 0 5px 20px rgba(255,255,255,0.5); }
+        }
+
+        .passport-message {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 15px;
+            border-left: 3px solid white;
+        }
+
+        .passport-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            opacity: 0.9;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .passport-visa-type {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            animation: visaPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes visaPulse {
+            0%, 100% { background: rgba(255,255,255,0.2); }
+            50% { background: rgba(255,255,255,0.3); }
+        }
+
+        .passport-country {
+            font-size: 10px;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* Коллекция виз */
+        .visa-collection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .visa-item {
+            background: linear-gradient(135deg, var(--accent-primary), #7bb5b7);
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+            animation: visaItemAppear 0.5s ease-out;
+        }
+
+        .visa-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(95,158,160,0.4);
+        }
+
+        @keyframes visaItemAppear {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .visa-item-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+        }
+
+        .visa-item-place {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .visa-item-date {
+            font-size: 8px;
+            opacity: 0.8;
+        }
+
+        /* STORIES */
+        .stories-container {
+            padding: 16px 12px;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stories {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .stories::-webkit-scrollbar {
+            display: none;
+        }
+
+        .story {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-width: 70px;
+            cursor: pointer;
+        }
+
+        .story-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 35px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--accent-primary);
+            position: relative;
+        }
+
+        .story-avatar.no-story {
+            border-color: var(--border-color);
+            opacity: 0.7;
+        }
+
+        .story-add {
+            width: 70px;
+            height: 70px;
+            background: var(--bg-surface);
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: var(--accent-primary);
+            border: 2px dashed var(--accent-primary);
+        }
+
+        .story-name {
+            font-size: 12px;
+            color: var(--text-secondary);
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* REELS */
+        .reels-container {
+            height: calc(100vh - 220px);
+            overflow-y: auto;
+            scroll-snap-type: y mandatory;
+            background: var(--bg-primary);
+        }
+
+        .reel {
+            height: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            background: #000;
+        }
+
+        .reel video, .reel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent);
+            color: white;
+        }
+
+        .reel-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .reel-author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid white;
+        }
+
+        .reel-actions {
+            position: absolute;
+            right: 10px;
+            bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .reel-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .reel-action svg {
+            width: 28px;
+            height: 28px;
+            stroke: white;
+            fill: none;
+            margin-bottom: 4px;
+        }
+
+        /* Профиль */
+        .profile-screen {
+            padding: 16px;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--accent-primary);
+            cursor: pointer;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .profile-nick {
+            color: var(--accent-secondary);
+            font-size: 14px;
+        }
+
+        .profile-bio {
+            background: var(--bg-surface);
+            padding: 16px;
+            border-radius: 16px;
+            margin: 16px 0;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .edit-bio-btn {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            width: 36px;
+            height: 36px;
+            background: var(--bg-surface-hover);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+            margin: 16px 0;
+        }
+
+        .profile-stat {
+            text-align: center;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .profile-stat-value {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text-primary);
+        }
+
+        .profile-stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .profile-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .profile-btn.primary {
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 16px;
+        }
+
+        .post-thumb {
+            aspect-ratio: 1;
+            background: var(--bg-surface);
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .post-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Аватарки */
+        .avatar-default {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23cccccc"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .avatar-1 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat1&backgroundColor=ffdfbf'); }
+        .avatar-2 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat2&backgroundColor=c0a0d0'); }
+        .avatar-3 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat3&backgroundColor=a0d0c0'); }
+        .avatar-4 { background-image: url('https://api.dicebear.com/7.x/adventurer/svg?seed=cat4&backgroundColor=d0c0a0'); }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .screen {
+            display: none;
+            height: 100%;
+        }
+
+        .screen.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="loading-screen" id="loadingScreen">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <div class="top-nav" id="topNav">
+            <div class="logo-container">
+                <div class="logo">RealReel</div>
+                <div class="daily-feature" id="dailyFeature" onclick="changeDailyFeature()">67</div>
+                <span class="version">v10.0</span>
+            </div>
+            <div class="nav-icons">
+                <div class="nav-icon" onclick="openAddPostModal()">
+                    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </div>
+                <div class="nav-icon" onclick="toggleNotifications()">
+                    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="badge" id="notificationBadge" style="display: none;">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="addPostModal">
+            <div class="modal-title">Новый пост</div>
+            <textarea class="modal-input" id="postText" placeholder="Что у вас нового?" rows="3"></textarea>
+            <div class="modal-file" id="postFileInput">📸 Добавить фото</div>
+            <input type="file" id="postFile" accept="image/*" style="display: none;">
+            <div class="modal-actions">
+                <button class="modal-btn save" id="publishPostBtn">Опубликовать</button>
+                <button class="modal-btn cancel" id="cancelPostBtn">Отмена</button>
+            </div>
+        </div>
+
+        <div class="modal" id="editProfileModal">
+            <div class="modal-title">Редактировать профиль</div>
+            <input type="text" class="modal-input" id="editFirstName" placeholder="Имя">
+            <input type="text" class="modal-input" id="editLastName" placeholder="Фамилия">
+            <input type="text" class="modal-input" id="editNickname" placeholder="Никнейм">
+            <textarea class="modal-input" id="editBio" placeholder="О себе" rows="3"></textarea>
+            <div class="modal-actions">
+                <button class="modal-btn save" id="saveProfileBtn">Сохранить</button>
+                <button class="modal-btn cancel" id="cancelEditBtn">Отмена</button>
+            </div>
+        </div>
+
+        <div class="notifications-panel" id="notificationsPanel">
+            <div class="notifications-header">Уведомления</div>
+            <div class="notifications-list" id="notificationsList"></div>
+        </div>
+
+        <!-- Основной экран: Stories + Reels -->
+        <div class="screen active" id="reelsScreen">
+            <div class="stories-container">
+                <div class="stories" id="stories"></div>
+            </div>
+            <div class="reels-container" id="reelsContainer"></div>
+        </div>
+
+        <!-- Профиль -->
+        <div class="screen" id="profileScreen">
+            <div class="profile-screen">
+                <div class="profile-header">
+                    <div class="profile-avatar avatar-default" id="profileAvatar" onclick="document.getElementById('avatarFile').click()"></div>
+                    <input type="file" id="avatarFile" accept="image/*" style="display: none;">
+                    <div class="profile-info">
+                        <div class="profile-name" id="profileFullName">Загрузка...</div>
+                        <div class="profile-nick" id="profileNick">@...</div>
+                    </div>
+                </div>
+                <div class="profile-bio" id="profileBio">
+                    ...
+                    <div class="edit-bio-btn" id="editProfileBtn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="white"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="profile-stat" onclick="showSubscriptions('followers')">
+                        <div class="profile-stat-value" id="profileFollowersCount">0</div>
+                        <div class="profile-stat-label">подписчики</div>
+                    </div>
+                    <div class="profile-stat" onclick="showSubscriptions('following')">
+                        <div class="profile-stat-value" id="profileFollowingCount">0</div>
+                        <div class="profile-stat-label">подписки</div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="profile-btn primary" id="profileMessageBtn">Написать</button>
+                    <button class="profile-btn secondary" id="profileSubscribeBtn">Подписаться</button>
+                </div>
+                <div class="posts-grid" id="userPostsGrid"></div>
+            </div>
+        </div>
+
+        <!-- Passport StiQ экран -->
+        <div class="screen" id="passportScreen">
+            <div style="padding: 20px; text-align: center;">
+                <h2 style="color: var(--accent-primary);">Passport StiQ</h2>
+                <div class="visa-collection" id="visaCollection"></div>
+            </div>
+        </div>
+
+        <!-- Чаты -->
+        <div class="screen" id="chatScreen">
+            <div class="chat-screen">
+                <div class="chat-list" id="chatList"></div>
+            </div>
+        </div>
+
+        <!-- Нижняя навигация -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="navigateTo('reelsScreen', this)">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="4"/><line x1="8" y1="2" x2="8" y2="22"/><line x1="16" y1="2" x2="16" y2="22"/></svg>
+                <span class="nav-label">Reels</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('passportScreen', this)">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><circle cx="15" cy="15" r="2"/><path d="M7 17 L17 7"/></svg>
+                <span class="nav-label">Passport</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('profileScreen', this)">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span class="nav-label">Профиль</span>
+            </div>
+            <div class="nav-item" onclick="navigateTo('chatScreen', this)">
+                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span class="nav-label">Чаты</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        // ===== НАСТРОЙКИ BACK4APP =====
+        const APP_ID = 'CM3xa4Y0qWL6FdoMdzONdCQ5k3Tx5saPZ5tyDOwA';
+        const JS_KEY = '2LElNDGzKSp6xQcK86pRk1i3qUMytf1TYQBIIG4s';
+        const SERVER_URL = 'https://parseapi.back4app.com/';
+        
+        Parse.initialize(APP_ID, JS_KEY);
+        Parse.serverURL = SERVER_URL;
+
+        // ===== ИНИЦИАЛИЗАЦИЯ PUSHER =====
+        const pusher = new Pusher('55cad6db51c45c8a66db', { cluster: 'eu' });
+
+        // ===== ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
+        let currentUser = null;
+        let currentChannel = null;
+        let currentConversationId = null;
+        let currentOtherUserId = null;
+        let stories = [];
+        let reels = [];
+        let notifications = [];
+        let unreadMessages = {};
+        let visaCollection = [];
+
+        const avatars = ['avatar-1', 'avatar-2', 'avatar-3', 'avatar-4'];
+        const dailyFeatures = ['67', '☀️', '🎯', '🔥', '⭐', '💫', '✨', '🎨', '📸', '🎵', '🎮', '⚡'];
+        let featureIndex = 0;
+
+        const famousPlaces = [
+            { name: 'Эйфелева башня', city: 'Париж', country: 'Франция', icon: '🗼' },
+            { name: 'Колизей', city: 'Рим', country: 'Италия', icon: '🏛️' },
+            { name: 'Пирамиды Гизы', city: 'Каир', country: 'Египет', icon: '🔺' },
+            { name: 'Статуя Свободы', city: 'Нью-Йорк', country: 'США', icon: '🗽' }
+        ];
+
+        // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+        function getRandomAvatar() {
+            return avatars[Math.floor(Math.random() * avatars.length)];
+        }
+
+        function getAvatarClass(user) {
+            if (user?.get('avatarUrl')) return '';
+            if (user?.get('avatarClass')) return user.get('avatarClass');
+            return 'avatar-default';
+        }
+
+        function getAvatarStyle(user) {
+            if (user?.get('avatarUrl')) {
+                return `background-image: url('${user.get('avatarUrl')}');`;
+            }
+            return '';
+        }
+
+        function formatDate(date) {
+            const d = new Date(date);
+            return `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
+        }
+
+        function formatTime(date) {
+            return formatDate(date);
+        }
+
+        // ===== АВТОРИЗАЦИЯ =====
+        async function checkAuth() {
+            currentUser = Parse.User.current();
+            if (!currentUser) {
+                try {
+                    const user = new Parse.User();
+                    user.set('username', 'test@test.com');
+                    user.set('password', 'test123');
+                    user.set('email', 'test@test.com');
+                    user.set('firstName', 'Тест');
+                    user.set('lastName', 'Пользователь');
+                    user.set('nickname', 'test');
+                    user.set('avatarClass', getRandomAvatar());
+                    user.set('isOnline', true);
+                    user.set('bio', '');
+                    await user.signUp();
+                    currentUser = user;
+                } catch (e) {
+                    try {
+                        currentUser = await Parse.User.logIn('test@test.com', 'test123');
+                    } catch (err) {
+                        console.error('Auth error');
+                    }
+                }
+            }
+            document.getElementById('loadingScreen').classList.add('hidden');
+            loadStories();
+            loadReels();
             updateProfile();
-        });
+            loadChats();
+        }
 
-        // ===== ДНЕВНАЯ ФИЧА =====
-        window.changeDailyFeature = function() {
-            featureIndex = (featureIndex + 1) % dailyFeatures.length;
-            document.getElementById('dailyFeature').textContent = dailyFeatures[featureIndex];
+        // ===== STORIES =====
+        async function loadStories() {
+            const Story = Parse.Object.extend('Story');
+            const query = new Parse.Query(Story);
+            query.include('author');
+            query.descending('createdAt');
+            const results = await query.find();
+            
+            stories = [
+                { id: 'me', author: currentUser, isOwn: true },
+                ...results
+            ];
+            renderStories();
+        }
+
+        function renderStories() {
+            const container = document.getElementById('stories');
+            container.innerHTML = stories.map(s => {
+                if (s.isOwn) {
+                    return `
+                        <div class="story" onclick="addStory()">
+                            <div class="story-add">+</div>
+                            <span class="story-name">Ваша история</span>
+                        </div>
+                    `;
+                }
+                const author = s.get('author');
+                return `
+                    <div class="story" onclick="viewStory('${author.id}')">
+                        <div class="story-avatar ${getAvatarClass(author)}" style="${getAvatarStyle(author)}"></div>
+                        <span class="story-name">${author.get('firstName')}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.addStory = function() {
+            alert('Добавление истории (заглушка)');
         };
 
-        // ===== ЗАПУСК =====
-        window.onload = () => {
-            checkAuth();
+        window.viewStory = function(userId) {
+            alert('Просмотр истории пользователя ' + userId);
+        };
+
+        // ===== REELS =====
+        async function loadReels() {
+            reels = [
+                {
+                    id: 1,
+                    video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+                    author: { firstName: 'Анна', lastName: 'К', avatar: 'avatar-1' },
+                    description: '🌸 Весна пришла',
+                    likes: 234,
+                    comments: 12
+                },
+                {
+                    id: 2,
+                    video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+                    author: { firstName: 'Максим', lastName: 'Л', avatar: 'avatar-2' },
+                    description: '🏔️ Путешествие в горы',
+                    likes: 567,
+                    comments: 34
+                }
+            ];
+            renderReels();
+        }
+
+        function renderReels() {
+            const container = document.getElementById('reelsContainer');
+            container.innerHTML = reels.map(r => `
+                <div class="reel">
+                    <video class="reel-video" src="${r.video}" loop muted playsinline></video>
+                    <div class="reel-overlay">
+                        <div class="reel-author">
+                            <div class="reel-author-avatar ${r.author.avatar}"></div>
+                            <span>${r.author.firstName} ${r.author.lastName}</span>
+                        </div>
+                        <div>${r.description}</div>
+                    </div>
+                    <div class="reel-actions">
+                        <div class="reel-action" onclick="likeReel('${r.id}')">
+                            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            <span>${r.likes}</span>
+                        </div>
+                        <div class="reel-action" onclick="commentReel('${r.id}')">
+                            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            <span>${r.comments}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            const videos = container.querySelectorAll('video');
+            if (videos.length) videos[0].play();
+
+            container.addEventListener('scroll', () => {
+                const reels = container.querySelectorAll('.reel');
+                reels.forEach((reel, index) => {
+                    const rect = reel.getBoundingClientRect();
+                    const video = reel.querySelector('video');
+                    if (video) {
+                        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                            video.play();
+                        } else {
+                            video.pause();
+                        }
+                    }
+                });
+            });
+        }
+
+        window.likeReel = function(id) {
+            alert('Лайк для рилса ' + id);
+        };
+
+        window.commentReel = function(id) {
+            alert('Комментарий для рилса ' + id);
+        };
+
+        // ===== PASSPORT STIQ =====
+        function generateVisa() {
+            const place = famousPlaces[Math.floor(Math.random() * famousPlaces.length)];
+            const visaTypes = ['VIP', 'GOLD', 'DREAM', 'LOVE', 'SUCCESS'];
+            const visa = {
+                id: Date.now() + Math.random(),
+                place: place.name,
+                city: place.city,
+                country: place.country,
+                icon: place.icon,
+                visaType: visaTypes[Math.floor(Math.random() * visaTypes.length)],
+                number: Math.floor(Math.random() * 900000 + 100000),
+                date: new Date()
+            };
+            visaCollection.unshift(visa);
+            updateVisaCollection();
+            return visa;
+        }
+
+        function updateVisaCollection() {
+            const container = document.getElementById('visaCollection');
+            if (!container) return;
+            container.innerHTML = visaCollection.map(v => `
+                <div class="visa-item">
+                    <div class="visa-item-icon">${v.icon}</div>
+                    <div class="visa-item-place">${v.place}</div>
+                    <div class="visa-item-date">${formatDate(v.date)}</div>
+                </div>
+            `).join('');
+        }
+
+        function showPassportStiQ() {
             generateVisa();
-        };
-    </script>
-</body>
-</html>
+        }
+
+        // ===== ПРОФИЛЬ =====
+        async function updateProfile() {
+            if (!currentUser) return;
+            document.getElementById('profileFullName').textContent = `${currentUser.get('firstName')} ${currentUser.get('lastName')}`;
+            document.getElementById('profileNick').textContent = `@${currentUser.get('nickname') || ''}`;
+            document.getElementById('profileBio').innerHTML = (currentUser.get('bio') || 'Расскажи о себе...') + 
+                '<div class="edit-bio-btn" id="editProfileBtn"><svg viewBox="0 0 24 24" width="16" height="16" stroke="white"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>';
+            
+            const avatar = document.getElementById('profileAvatar');
+            avatar.className = `profile-avatar ${getAvatarClass(currentUser)}`;
+            if (currentUser.get('avatarUrl')) {
+                avatar.style.backgroundImage = `url('${currentUser.get('avatarUrl')}')`;
+            }
+
+            document.getElementById('editProfileBtn').addEventListener('click', openEditProfile);
+        }
+
+        function openEditProfile() {
+            document.getElementById('editFirstName').value = currentUser.get('firstName') || '';
+            document.getElementById('editLastName').value = currentUser.get('lastName') || '';
+            document.getElementById('editNickname').value = currentUser.get('nickname') || '';
+            document.getElementById('editBio').value = currentUser.get('bio') || '';
+            document.getElementById('editProfileModal').classList.add('active');
+        }
+
+        // ===== ЧАСТИНА 2 =====
+        // Продовження JavaScript (чати Pusher, навігація, подписки, модалки)
+        // Напиши "ЧАСТИНА 2", і я надішлю продовження
