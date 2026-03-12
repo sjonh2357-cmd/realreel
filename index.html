@@ -33,20 +33,27 @@
             transition: background 0.3s;
         }
 
-        /* ===== ГЛОБАЛЬНІ ВІЗЕРУНКИ ===== */
+        /* ===== ГЛОБАЛЬНІ ВІЗЕРУНКИ (повністю перероблені) ===== */
         .phone-frame.pattern-default {
             background: #17212b;
+            position: relative;
         }
-        .phone-frame.pattern-default .top-nav,
-        .phone-frame.pattern-default .bottom-nav,
-        .phone-frame.pattern-default .chat-header,
-        .phone-frame.pattern-default .modal,
-        .phone-frame.pattern-default .notifications-panel {
-            background: #1e2b3a;
+        .phone-frame.pattern-default::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, rgba(29,161,242,0.03) 0px, rgba(29,161,242,0.03) 20px, transparent 20px, transparent 40px),
+                repeating-linear-gradient(-45deg, rgba(29,161,242,0.03) 0px, rgba(29,161,242,0.03) 20px, transparent 20px, transparent 40px);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .phone-frame.pattern-waves {
-            background: linear-gradient(135deg, #17212b 0%, #1e3a5f 50%, #17212b 100%);
+            background: #17212b;
             position: relative;
         }
         .phone-frame.pattern-waves::before {
@@ -56,18 +63,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                repeating-linear-gradient(45deg, rgba(29,161,242,0.02) 0px, rgba(29,161,242,0.02) 20px, transparent 20px, transparent 40px),
-                repeating-linear-gradient(-45deg, rgba(29,161,242,0.02) 0px, rgba(29,161,242,0.02) 20px, transparent 20px, transparent 40px);
+            background-image: 
+                repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(29,161,242,0.05) 20px, rgba(29,161,242,0.05) 40px),
+                repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(29,161,242,0.03) 30px, rgba(29,161,242,0.03) 60px);
             pointer-events: none;
             z-index: 0;
-        }
-        .phone-frame.pattern-waves .top-nav,
-        .phone-frame.pattern-waves .bottom-nav,
-        .phone-frame.pattern-waves .chat-header,
-        .phone-frame.pattern-waves .modal {
-            background: rgba(30, 43, 58, 0.85);
-            backdrop-filter: blur(5px);
         }
 
         .phone-frame.pattern-dots {
@@ -81,13 +81,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(29,161,242,0.1) 1px, transparent 1px),
-                radial-gradient(circle at 90% 70%, rgba(29,161,242,0.1) 1px, transparent 1px),
-                radial-gradient(circle at 30% 80%, rgba(29,161,242,0.1) 1px, transparent 1px),
-                radial-gradient(circle at 70% 30%, rgba(29,161,242,0.1) 1px, transparent 1px),
-                radial-gradient(circle at 50% 50%, rgba(29,161,242,0.15) 2px, transparent 2px);
-            background-size: 50px 50px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(29,161,242,0.15) 2px, transparent 2px),
+                radial-gradient(circle at 90% 70%, rgba(29,161,242,0.15) 3px, transparent 3px),
+                radial-gradient(circle at 30% 80%, rgba(29,161,242,0.1) 2px, transparent 2px),
+                radial-gradient(circle at 70% 30%, rgba(29,161,242,0.1) 4px, transparent 4px),
+                radial-gradient(circle at 50% 50%, rgba(29,161,242,0.2) 5px, transparent 5px);
+            background-size: 80px 80px;
             pointer-events: none;
             z-index: 0;
         }
@@ -104,9 +104,9 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.15"><path d="M35,45 Q45,30 55,45 Q65,60 75,45" stroke="%231da1f2" fill="none" stroke-width="2"/><circle cx="30" cy="40" r="3" fill="%231da1f2"/><circle cx="70" cy="40" r="3" fill="%231da1f2"/><path d="M40,55 Q50,70 60,55" stroke="%231da1f2" fill="none" stroke-width="1.5"/><text x="15" y="80" font-size="12" fill="%231da1f2" opacity="0.5">⚡</text><text x="80" y="20" font-size="16" fill="%231da1f2" opacity="0.5">⋆</text><text x="10" y="15" font-size="20" fill="%231da1f2" opacity="0.3">🐦</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><path d="M30,40 Q45,20 60,40 Q50,30 30,40" fill="%231da1f2"/><circle cx="25" cy="35" r="3" fill="%231da1f2"/><path d="M40,50 Q55,70 70,50" stroke="%231da1f2" fill="none" stroke-width="3"/><text x="15" y="80" font-size="25" fill="%231da1f2" opacity="0.3">𓅪</text></svg>');
             background-repeat: repeat;
-            background-size: 150px 150px;
+            background-size: 120px 120px;
             pointer-events: none;
             z-index: 0;
         }
@@ -123,9 +123,9 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="35" cy="40" r="8" fill="%231da1f2"/><circle cx="65" cy="40" r="8" fill="%231da1f2"/><circle cx="35" cy="40" r="3" fill="white"/><circle cx="65" cy="40" r="3" fill="white"/><path d="M40 60 Q50 70 60 60" stroke="%231da1f2" fill="none" stroke-width="3"/><text x="20" y="25" font-size="30" fill="%231da1f2" opacity="0.2">𓅓</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="35" cy="35" r="10" fill="%231da1f2"/><circle cx="65" cy="35" r="10" fill="%231da1f2"/><circle cx="35" cy="35" r="4" fill="white"/><circle cx="65" cy="35" r="4" fill="white"/><circle cx="35" cy="35" r="2" fill="black"/><circle cx="65" cy="35" r="2" fill="black"/><path d="M40 55 Q50 70 60 55" stroke="%231da1f2" fill="none" stroke-width="4"/><text x="20" y="80" font-size="25" fill="%231da1f2" opacity="0.3">𓅓</text></svg>');
             background-repeat: repeat;
-            background-size: 120px 120px;
+            background-size: 130px 130px;
             pointer-events: none;
             z-index: 0;
         }
@@ -142,9 +142,9 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><path d="M30,40 Q45,20 60,40 Q45,35 30,40" fill="%231da1f2"/><path d="M40,45 Q50,65 60,45 Q50,55 40,45" fill="%231da1f2"/><text x="15" y="70" font-size="35" fill="%231da1f2" opacity="0.2">𓆦</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><path d="M25,40 Q40,15 55,40 Q45,30 25,40" fill="%231da1f2"/><path d="M45,45 Q60,70 75,45 Q65,55 45,45" fill="%231da1f2"/><path d="M30,50 Q45,35 50,50 Q45,45 30,50" fill="%231da1f2"/><text x="15" y="80" font-size="30" fill="%231da1f2" opacity="0.3">𓆦</text></svg>');
             background-repeat: repeat;
-            background-size: 130px 130px;
+            background-size: 140px 140px;
             pointer-events: none;
             z-index: 0;
         }
@@ -161,9 +161,9 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><circle cx="30" cy="30" r="5" fill="%231da1f2"/><circle cx="70" cy="60" r="4" fill="%231da1f2"/><circle cx="50" cy="80" r="3" fill="%231da1f2"/><path d="M75 20 Q85 25 75 30" stroke="%231da1f2" fill="none" stroke-width="2"/><text x="20" y="50" font-size="40" fill="%231da1f2" opacity="0.15">☾</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><circle cx="70" cy="30" r="4" fill="%231da1f2"/><circle cx="30" cy="60" r="3" fill="%231da1f2"/><circle cx="80" cy="70" r="5" fill="%231da1f2"/><circle cx="20" cy="20" r="2" fill="%231da1f2"/><circle cx="50" cy="50" r="6" fill="%231da1f2"/><path d="M60 20 Q70 15 75 25" stroke="%231da1f2" fill="none" stroke-width="2"/><text x="15" y="40" font-size="35" fill="%231da1f2" opacity="0.2">☾</text></svg>');
             background-repeat: repeat;
-            background-size: 140px 140px;
+            background-size: 150px 150px;
             pointer-events: none;
             z-index: 0;
         }
@@ -180,9 +180,9 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M20,60 Q50,30 80,60" stroke="%231da1f2" fill="none" stroke-width="3"/><path d="M20,70 Q50,45 80,70" stroke="%231da1f2" fill="none" stroke-width="3"/><path d="M20,80 Q50,60 80,80" stroke="%231da1f2" fill="none" stroke-width="3"/><text x="40" y="40" font-size="30" fill="%231da1f2" opacity="0.2">⌒</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M10,70 Q30,40 50,70" stroke="%231da1f2" fill="none" stroke-width="4"/><path d="M20,75 Q40,50 60,75" stroke="%23ff7f50" fill="none" stroke-width="4"/><path d="M30,80 Q50,60 70,80" stroke="%23ffd700" fill="none" stroke-width="4"/><text x="45" y="40" font-size="35" fill="%231da1f2" opacity="0.2">⌒</text></svg>');
             background-repeat: repeat;
-            background-size: 120px 120px;
+            background-size: 140px 140px;
             pointer-events: none;
             z-index: 0;
         }
@@ -222,7 +222,7 @@
         .logo-upload, .anon-create-btn, .visa-video, .visa-overlay,
         .threads-reply, .location-badge, .circle-overlay, .circle-action,
         .mini-profile, .chat-bubble, .chat-date, .profile-circle,
-        .pattern-option {
+        .pattern-option, .settings-item, .language-item {
             transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
         }
 
@@ -1599,7 +1599,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 280px;
+            width: 300px;
+            max-width: 90%;
             background: #1e2b3a;
             border-radius: 30px;
             padding: 24px;
@@ -1652,6 +1653,7 @@
         .modal-actions {
             display: flex;
             gap: 8px;
+            margin-top: 16px;
         }
 
         .modal-btn {
@@ -1685,9 +1687,9 @@
         }
 
         .settings-modal {
-            width: 300px;
             max-height: 400px;
             overflow-y: auto;
+            padding-right: 4px;
         }
 
         .settings-section {
@@ -1700,6 +1702,7 @@
             font-weight: 600;
             margin-bottom: 8px;
             padding-left: 8px;
+            letter-spacing: 0.5px;
         }
 
         .settings-item {
@@ -1714,10 +1717,13 @@
             color: white;
             font-size: 14px;
             backdrop-filter: blur(2px);
+            border: 1px solid transparent;
         }
 
         .settings-item:hover {
             background: #3a4a5a;
+            border-color: #1da1f2;
+            transform: scale(1.01);
         }
 
         .settings-item-left {
@@ -1775,6 +1781,49 @@
         .pattern-preview {
             font-size: 24px;
             margin-bottom: 2px;
+        }
+
+        /* Модальне вікно мови */
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .language-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            background: #2c3e50;
+            border-radius: 30px;
+            cursor: pointer;
+            color: white;
+            font-size: 13px;
+            border: 1px solid transparent;
+        }
+
+        .language-item:hover {
+            background: #3a4a5a;
+            border-color: #1da1f2;
+            transform: scale(1.02);
+        }
+
+        .language-item.active {
+            background: #1da1f2;
+            color: white;
+        }
+
+        .language-item.active span:last-child {
+            color: white;
+        }
+
+        .flag-icon {
+            font-size: 20px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
         }
 
         .notifications-panel {
@@ -1882,6 +1931,13 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        @keyframes toastFade {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
         }
     </style>
 </head>
@@ -2136,12 +2192,11 @@
             </div>
         </div>
 
-        <!-- Modal: Налаштування (оновлено) -->
+        <!-- Modal: Налаштування -->
         <div class="modal" id="settingsModal" style="width: 320px;">
             <div class="modal-title">Налаштування</div>
             <div class="settings-modal" style="max-height: 400px; overflow-y: auto; padding-right: 4px;">
                 
-                <!-- АКАУНТ -->
                 <div class="settings-section">
                     <div class="settings-header">АКАУНТ</div>
                     <div class="settings-item" onclick="openEditProfile()">
@@ -2156,7 +2211,6 @@
                     </div>
                     <div class="settings-item" onclick="openPatternsModal()">
                         <div class="settings-item-left">
-                            <!-- СТИЛІЗОВАНА ПАЛІТРА (SVG) замість % -->
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1da1f2" stroke-width="2">
                                 <circle cx="12" cy="12" r="10"/>
                                 <path d="M12 2a10 10 0 0 0 0 20 10 10 0 0 0 0-20z M12 22v-4 M12 2v4 M2 12h4 M22 12h-4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M19.07 4.93l-2.83 2.83 M7.76 16.24l-2.83 2.83"/>
@@ -2168,7 +2222,6 @@
                     </div>
                 </div>
 
-                <!-- КОНФІДЕНЦІЙНІСТЬ -->
                 <div class="settings-section">
                     <div class="settings-header">КОНФІДЕНЦІЙНІСТЬ</div>
                     <div class="settings-item">
@@ -2183,7 +2236,18 @@
                     </div>
                 </div>
 
-                <!-- СПОВІЩЕННЯ -->
+                <!-- МОВА (тепер відкриває окреме модальне вікно) -->
+                <div class="settings-section">
+                    <div class="settings-header">МОВА</div>
+                    <div class="settings-item" onclick="openLanguageModal()">
+                        <div class="settings-item-left">
+                            <span style="font-size: 20px; margin-right: 8px;">🌐</span>
+                            <span>Мова</span>
+                        </div>
+                        <span class="settings-arrow">›</span>
+                    </div>
+                </div>
+
                 <div class="settings-section">
                     <div class="settings-header">СПОВІЩЕННЯ</div>
                     <div class="settings-item">
@@ -2198,23 +2262,6 @@
                     </div>
                 </div>
 
-                <!-- МОВА -->
-                <div class="settings-section">
-                    <div class="settings-header">МОВА</div>
-                    <div class="settings-item">
-                        <div class="settings-item-left">
-                            <svg viewBox="0 0 24 24" width="20" height="20">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="2" y1="12" x2="22" y2="12"/>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            <span>Українська</span>
-                        </div>
-                        <span class="settings-arrow">›</span>
-                    </div>
-                </div>
-
-                <!-- ТЕМА -->
                 <div class="settings-section">
                     <div class="settings-header">ТЕМА</div>
                     <div class="settings-item">
@@ -2236,7 +2283,6 @@
                     </div>
                 </div>
 
-                <!-- ІНШЕ -->
                 <div class="settings-section">
                     <div class="settings-header">ІНШЕ</div>
                     <div class="settings-item">
@@ -2268,7 +2314,7 @@
             </div>
         </div>
 
-        <!-- Modal: Візерунки (оновлено: єгипетська сова) -->
+        <!-- Modal: Візерунки -->
         <div class="modal" id="patternsModal">
             <div class="modal-title">Візерунки Stiqly</div>
             <div class="settings-header" style="text-align: center; margin-bottom: 12px;">обери свій стиль</div>
@@ -2290,7 +2336,7 @@
                     <div>Колібрі</div>
                 </div>
                 <div class="pattern-option" onclick="selectPattern('owl')">
-                    <div class="pattern-preview">𓅓</div>   <!-- Єгипетська сова -->
+                    <div class="pattern-preview">𓅓</div>
                     <div>Сова</div>
                 </div>
                 <div class="pattern-option" onclick="selectPattern('butterfly')">
@@ -2311,6 +2357,15 @@
             </div>
         </div>
 
+        <!-- Modal: Мова (окреме вікно) -->
+        <div class="modal" id="languageModal" style="width: 320px;">
+            <div class="modal-title">Оберіть мову</div>
+            <div class="language-grid" id="languageGrid"></div>
+            <div class="modal-actions" style="margin-top: 16px;">
+                <button class="modal-btn cancel" onclick="closeModal('languageModal')">Закрити</button>
+            </div>
+        </div>
+
         <!-- Modal: Додати пост -->
         <div class="modal" id="addPostModal">
             <div class="modal-title">Додати новий пост</div>
@@ -2322,7 +2377,6 @@
         </div>
     </div>
 
-    <!-- Інпути для завантаження файлів -->
     <input type="file" id="videoUploadInput" accept="video/*,image/*" style="display: none;">
     <input type="file" id="profileVideoUpload" accept="video/*,image/*" style="display: none;">
     <input type="file" id="profilePostUpload" accept="video/*,image/*" style="display: none;">
@@ -2346,6 +2400,7 @@
         };
 
         let savedPattern = localStorage.getItem('stiqly_pattern') || 'default';
+        let currentLanguage = localStorage.getItem('stiqly_language') || 'uk';
 
         let postComments = JSON.parse(localStorage.getItem('stiqly_comments')) || {};
         let circleLikes = JSON.parse(localStorage.getItem('circle_likes')) || {};
@@ -2422,6 +2477,43 @@
         let currentProfilePostIndex = null;
         let currentVisaIndex = null;
 
+        // Список мов (ЄС + кандидати)
+        const languages = [
+            { code: 'uk', name: 'Українська', flag: '🇺🇦' },
+            { code: 'pl', name: 'Polski', flag: '🇵🇱' },
+            { code: 'cs', name: 'Čeština', flag: '🇨🇿' },
+            { code: 'sk', name: 'Slovenčina', flag: '🇸🇰' },
+            { code: 'hu', name: 'Magyar', flag: '🇭🇺' },
+            { code: 'ro', name: 'Română', flag: '🇷🇴' },
+            { code: 'bg', name: 'Български', flag: '🇧🇬' },
+            { code: 'el', name: 'Ελληνικά', flag: '🇬🇷' },
+            { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+            { code: 'fr', name: 'Français', flag: '🇫🇷' },
+            { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+            { code: 'es', name: 'Español', flag: '🇪🇸' },
+            { code: 'pt', name: 'Português', flag: '🇵🇹' },
+            { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+            { code: 'be', name: 'Belgisch', flag: '🇧🇪' },
+            { code: 'sv', name: 'Svenska', flag: '🇸🇪' },
+            { code: 'da', name: 'Dansk', flag: '🇩🇰' },
+            { code: 'fi', name: 'Suomi', flag: '🇫🇮' },
+            { code: 'et', name: 'Eesti', flag: '🇪🇪' },
+            { code: 'lv', name: 'Latviešu', flag: '🇱🇻' },
+            { code: 'lt', name: 'Lietuvių', flag: '🇱🇹' },
+            { code: 'hr', name: 'Hrvatski', flag: '🇭🇷' },
+            { code: 'sl', name: 'Slovenščina', flag: '🇸🇮' },
+            { code: 'mt', name: 'Malti', flag: '🇲🇹' },
+            { code: 'ga', name: 'Gaeilge', flag: '🇮🇪' },
+            { code: 'sq', name: 'Shqip', flag: '🇦🇱' },
+            { code: 'bs', name: 'Bosanski', flag: '🇧🇦' },
+            { code: 'ka', name: 'ქართული', flag: '🇬🇪' },
+            { code: 'ro-md', name: 'Română (Moldova)', flag: '🇲🇩' },
+            { code: 'mk', name: 'Македонски', flag: '🇲🇰' },
+            { code: 'sr', name: 'Српски / Srpski', flag: '🇷🇸' },
+            { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+            { code: 'cnr', name: 'Crnogorski', flag: '🇲🇪' }
+        ];
+
         // ========== ЗБЕРЕЖЕННЯ ==========
         function saveVideos() {
             localStorage.setItem('stiqly_videos', JSON.stringify(savedVideos));
@@ -2475,6 +2567,79 @@
             });
             event.currentTarget.classList.add('active');
         };
+
+        // ========== МОВА (окреме модальне вікно) ==========
+        window.openLanguageModal = function() {
+            closeModal('settingsModal');
+            loadLanguageGrid();
+            document.getElementById('languageModal').classList.add('active');
+        };
+
+        function loadLanguageGrid() {
+            const grid = document.getElementById('languageGrid');
+            if (!grid) return;
+            
+            let html = '';
+            languages.forEach(lang => {
+                html += `
+                    <div class="language-item ${lang.code === currentLanguage ? 'active' : ''}" onclick="setLanguage('${lang.code}')">
+                        <span class="flag-icon">${lang.flag}</span>
+                        <span>${lang.name}</span>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        window.setLanguage = function(langCode) {
+            currentLanguage = langCode;
+            localStorage.setItem('stiqly_language', langCode);
+            
+            // Оновлюємо підсвітку в сітці
+            document.querySelectorAll('.language-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            const activeItem = Array.from(document.querySelectorAll('.language-item')).find(
+                item => item.getAttribute('onclick')?.includes(`'${langCode}'`)
+            );
+            if (activeItem) {
+                activeItem.classList.add('active');
+            }
+            
+            // Знаходимо назву мови
+            const langObj = languages.find(l => l.code === langCode);
+            const langName = langObj ? langObj.name : langCode;
+            
+            // Показуємо сповіщення
+            showLanguageToast(langName);
+            
+            // Тут можна додати логіку для реальної зміни мови в інтерфейсі
+            console.log('Мова змінена на:', langCode);
+        };
+
+        function showLanguageToast(langName) {
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.background = '#1da1f2';
+            toast.style.color = 'white';
+            toast.style.padding = '12px 24px';
+            toast.style.borderRadius = '40px';
+            toast.style.fontSize = '14px';
+            toast.style.fontWeight = '600';
+            toast.style.boxShadow = '0 4px 15px rgba(29,161,242,0.5)';
+            toast.style.zIndex = '2000';
+            toast.style.animation = 'toastFade 2s ease forwards';
+            toast.textContent = `🌐 Мова змінена на ${langName}`;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2000);
+        }
 
         // ========== ЗАВАНТАЖЕННЯ ВІДЕО ==========
         window.uploadVisaVideo = function(index) {
@@ -2853,7 +3018,6 @@
             feed.innerHTML = threadsHtml;
         }
 
-        // ========== НАВІГАЦІЯ ТА ЧАТИ ==========
         window.onload = function() {
             setTimeout(() => {
                 document.getElementById('loadingScreen').classList.add('hidden');
@@ -2863,6 +3027,8 @@
             loadThreads();
             
             applyPattern(savedPattern);
+            
+            // Мова завантажиться при відкритті модалки
             
             const visaGrid = document.getElementById('passportVisaGrid');
             if (visaGrid) {
@@ -3163,248 +3329,6 @@
         window.showFollowing = () => alert('Підписки: ' + currentUser.following);
         window.addCircle = () => alert('Додати новий стік');
         window.switchAuth = () => {}
-    </script>
-
-    <!-- Стилі для реакцій -->
-    <style>
-        .message-reactions {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1e2b3a;
-            border: 1px solid #3a4a5a;
-            border-radius: 30px;
-            padding: 6px 12px;
-            display: flex;
-            gap: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 1000;
-            margin-bottom: 8px;
-            animation: slideUp 0.2s ease;
-            pointer-events: auto;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        .reaction-emoji-sprite {
-            width: 28px;
-            height: 28px;
-            background-image: url('1.jpg');
-            background-repeat: no-repeat;
-            background-size: 140px 28px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: transform 0.2s, background-color 0.2s;
-            position: relative;
-        }
-
-        .reaction-emoji-sprite:hover {
-            transform: scale(1.3);
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        .reaction-emoji-1 { background-position: 0 0; }
-        .reaction-emoji-2 { background-position: -28px 0; }
-        .reaction-emoji-3 { background-position: -56px 0; }
-        .reaction-emoji-4 { background-position: -84px 0; }
-        .reaction-emoji-5 { background-position: -112px 0; }
-
-        .reaction-toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1da1f2;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(29,161,242,0.5);
-            z-index: 2000;
-            animation: toastFade 2s ease forwards;
-            white-space: nowrap;
-        }
-
-        @keyframes toastFade {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            85% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-        }
-
-        .message {
-            position: relative !important;
-            cursor: pointer;
-            user-select: none;
-            transition: background-color 0.2s;
-        }
-
-        .message.mine:hover {
-            background: #1a8cd8;
-        }
-
-        .message.other:hover {
-            background: #2c3e50;
-        }
-
-        .message.has-reaction::after {
-            content: attr(data-reaction);
-            position: absolute;
-            bottom: -10px;
-            right: 10px;
-            background: #1e2b3a;
-            border: 2px solid #17212b;
-            border-radius: 20px;
-            padding: 2px 6px;
-            font-size: 12px;
-            color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 5;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        .message.anon-mine:hover {
-            background: #1a8cd8;
-        }
-
-        .message.anon-other:hover {
-            background: #2c3e50;
-        }
-    </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(initMessageReactions, 1000);
-        });
-
-        const originalOpenChat = window.openChat;
-        window.openChat = function(id) {
-            if (originalOpenChat) originalOpenChat(id);
-            setTimeout(initMessageReactions, 200);
-        };
-
-        const originalSendMessage = window.sendMessage;
-        window.sendMessage = function() {
-            if (originalSendMessage) originalSendMessage();
-            setTimeout(initMessageReactions, 100);
-        };
-
-        function initMessageReactions() {
-            const messages = document.querySelectorAll('.message');
-            
-            messages.forEach(msg => {
-                msg.removeEventListener('click', showReactionMenu);
-                msg.addEventListener('click', showReactionMenu);
-            });
-        }
-
-        function showReactionMenu(event) {
-            event.stopPropagation();
-            
-            const message = event.currentTarget;
-            
-            document.querySelectorAll('.message-reactions').forEach(el => el.remove());
-            
-            const menu = document.createElement('div');
-            menu.className = 'message-reactions';
-            
-            for (let i = 1; i <= 5; i++) {
-                const emoji = document.createElement('div');
-                emoji.className = `reaction-emoji-sprite reaction-emoji-${i}`;
-                emoji.setAttribute('data-emoji-num', i);
-                emoji.setAttribute('data-emoji-char', getEmojiChar(i));
-                emoji.onclick = function(e) {
-                    e.stopPropagation();
-                    const emojiNum = this.getAttribute('data-emoji-num');
-                    const emojiChar = this.getAttribute('data-emoji-char');
-                    addReactionToMessage(message, emojiNum, emojiChar);
-                    menu.remove();
-                };
-                menu.appendChild(emoji);
-            }
-            
-            message.appendChild(menu);
-            
-            setTimeout(() => {
-                document.addEventListener('click', function closeMenu(e) {
-                    if (!menu.contains(e.target) && e.target !== message) {
-                        menu.remove();
-                        document.removeEventListener('click', closeMenu);
-                    }
-                });
-            }, 100);
-        }
-
-        function getEmojiChar(num) {
-            const emojis = ['👍', '❤️', '🔥', '😂', '😮'];
-            return emojis[num-1] || '👍';
-        }
-
-        function addReactionToMessage(message, emojiNum, emojiChar) {
-            const existingReaction = message.getAttribute('data-reaction');
-            
-            if (existingReaction && existingReaction.includes(emojiChar)) {
-                message.removeAttribute('data-reaction');
-                message.classList.remove('has-reaction');
-                showToast('Реакцію прибрано');
-            } else {
-                message.setAttribute('data-reaction', emojiChar);
-                message.classList.add('has-reaction');
-                showToast('❤️ ' + emojiChar);
-            }
-            
-            saveReactionToStorage(message, emojiNum);
-        }
-
-        function showToast(text) {
-            const toast = document.createElement('div');
-            toast.className = 'reaction-toast';
-            toast.textContent = text;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.remove();
-            }, 2000);
-        }
-
-        function saveReactionToStorage(message, emojiNum) {
-            console.log('Reaction added to message:', message.textContent, 'emoji:', emojiNum);
-        }
-
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.addedNodes.length) {
-                    mutation.addedNodes.forEach(function(node) {
-                        if (node.nodeType === 1 && node.classList && node.classList.contains('message')) {
-                            node.addEventListener('click', showReactionMenu);
-                        }
-                    });
-                }
-            });
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-
-        const originalSendMessageAnon = window.sendAnonMessage;
-        window.sendAnonMessage = function() {
-            if (originalSendMessageAnon) originalSendMessageAnon();
-            setTimeout(initMessageReactions, 100);
-        };
     </script>
 </body>
 </html>
