@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stiqly</title>
+    <title>Stiqly · фінальна версія</title>
     <style>
         * {
             margin: 0;
@@ -34,7 +34,6 @@
         }
 
         /* ===== ГЛОБАЛЬНІ ВІЗЕРУНКИ ===== */
-        /* Базовий стиль */
         .phone-frame.pattern-default {
             background: #17212b;
         }
@@ -46,7 +45,6 @@
             background: #1e2b3a;
         }
 
-        /* Візерунок "Хвилі" */
         .phone-frame.pattern-waves {
             background: linear-gradient(135deg, #17212b 0%, #1e3a5f 50%, #17212b 100%);
             position: relative;
@@ -72,7 +70,6 @@
             backdrop-filter: blur(5px);
         }
 
-        /* Візерунок "Іскри/Крапки" */
         .phone-frame.pattern-dots {
             background: #17212b;
             position: relative;
@@ -95,7 +92,6 @@
             z-index: 0;
         }
 
-        /* Візерунок "Колібрі" (спеціальний) */
         .phone-frame.pattern-hummingbird {
             background: #17212b;
             position: relative;
@@ -115,7 +111,6 @@
             z-index: 0;
         }
 
-        /* Візерунок "Сова" */
         .phone-frame.pattern-owl {
             background: #17212b;
             position: relative;
@@ -128,14 +123,13 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="35" cy="40" r="8" fill="%231da1f2"/><circle cx="65" cy="40" r="8" fill="%231da1f2"/><circle cx="35" cy="40" r="3" fill="white"/><circle cx="65" cy="40" r="3" fill="white"/><path d="M40 60 Q50 70 60 60" stroke="%231da1f2" fill="none" stroke-width="3"/><text x="20" y="25" font-size="30" fill="%231da1f2" opacity="0.2">ꜰ</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="35" cy="40" r="8" fill="%231da1f2"/><circle cx="65" cy="40" r="8" fill="%231da1f2"/><circle cx="35" cy="40" r="3" fill="white"/><circle cx="65" cy="40" r="3" fill="white"/><path d="M40 60 Q50 70 60 60" stroke="%231da1f2" fill="none" stroke-width="3"/><text x="20" y="25" font-size="30" fill="%231da1f2" opacity="0.2">𓅓</text></svg>');
             background-repeat: repeat;
             background-size: 120px 120px;
             pointer-events: none;
             z-index: 0;
         }
 
-        /* Візерунок "Метелик" */
         .phone-frame.pattern-butterfly {
             background: linear-gradient(145deg, #17212b, #1a2f3f);
             position: relative;
@@ -155,7 +149,6 @@
             z-index: 0;
         }
 
-        /* Візерунок "Місяць/Зірки" */
         .phone-frame.pattern-moon {
             background: #17212b;
             position: relative;
@@ -175,7 +168,6 @@
             z-index: 0;
         }
 
-        /* Візерунок "Райдуга" */
         .phone-frame.pattern-rainbow {
             background: linear-gradient(125deg, #17212b, #1e3445);
             position: relative;
@@ -195,19 +187,12 @@
             z-index: 0;
         }
 
-        .phone-frame.pattern-hummingbird .top-nav::after,
-        .phone-frame.pattern-hummingbird .bottom-nav::after {
-            display: none;
-        }
-
-        /* Загальні стилі для контенту поверх візерунків */
         .screen, .top-nav, .bottom-nav, .modal, .notifications-panel,
         .chat-room, .profile-container, .passport-container {
             position: relative;
             z-index: 2;
         }
 
-        /* Затемнення фону для читабельності тексту на візерунках */
         .phone-frame.pattern-waves .screen,
         .phone-frame.pattern-dots .screen,
         .phone-frame.pattern-hummingbird .screen,
@@ -218,7 +203,6 @@
             background: transparent;
         }
 
-        /* Адаптація для елементів з напівпрозорим фоном */
         .chat-item:hover,
         .message.other,
         .profile-bio,
@@ -228,7 +212,6 @@
             backdrop-filter: blur(2px);
         }
 
-        /* Плавні анімації */
         .nav-icon, .mode-circle, .big-circle-image, .big-circle-add, 
         .profile-avatar, .verified-badge, .post-circle, .chat-item,
         .chat-avatar, .chat-back, .chat-send, .nav-item, .threads-card,
@@ -259,7 +242,6 @@
             gap: 8px;
         }
 
-        /* Лого з можливістю завантаження */
         .logo-upload {
             width: 40px;
             height: 40px;
@@ -293,10 +275,6 @@
             position: absolute;
             top: 0;
             left: 0;
-        }
-
-        .logo-upload span {
-            display: none;
         }
 
         .logo-upload-input {
@@ -364,7 +342,6 @@
             display: flex;
         }
 
-        /* Passport StiQ */
         .passport-container {
             padding: 20px 16px;
             background: #1e2b3a;
@@ -537,7 +514,6 @@
             stroke: #1e2b3a;
         }
 
-        /* Великі кола з оверлеєм */
         .big-circles-feed {
             padding: 16px 16px 20px;
             display: flex;
@@ -617,7 +593,6 @@
             transform: scale(1.2);
         }
 
-        /* Сірі кольори для лайків та коментарів */
         .circle-action:first-child:hover svg {
             stroke: #a0b3c5;
         }
@@ -635,7 +610,6 @@
             left: 0;
         }
 
-        /* Покращений профіль у стіках */
         .big-circle-header {
             display: flex;
             align-items: center;
@@ -691,7 +665,6 @@
             border-color: #1da1f2;
         }
 
-        /* Профіль */
         .profile-container {
             padding: 16px;
             overflow-y: auto;
@@ -869,7 +842,6 @@
             color: #a0b3c5;
         }
 
-        /* Одна кнопка налаштувань під біо */
         .profile-settings-btn {
             display: flex;
             align-items: center;
@@ -907,7 +879,6 @@
             transform: rotate(90deg);
         }
 
-        /* Кружечки в профілі з сірими лайками */
         .posts-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -946,7 +917,6 @@
             left: 0;
         }
 
-        /* Перемикач типів чатів */
         .chat-type-switch {
             display: flex;
             align-items: center;
@@ -1015,7 +985,6 @@
             color: #a0b3c5;
         }
 
-        /* Telegram-стайл чати */
         .chat-item {
             display: flex;
             align-items: center;
@@ -1071,7 +1040,6 @@
             text-overflow: ellipsis;
         }
 
-        /* Анонімний чат - синій фон, білий текст */
         .anon-container {
             display: flex;
             flex-direction: column;
@@ -1117,7 +1085,6 @@
             font-size: 13px;
         }
 
-        /* Чат кімната */
         .chat-room {
             display: flex;
             flex-direction: column;
@@ -1327,7 +1294,6 @@
             transform: scale(1.1);
         }
 
-        /* Пости */
         .threads-feed {
             padding: 12px 16px 20px;
             display: flex;
@@ -1477,7 +1443,6 @@
             fill: none;
         }
 
-        /* Коментарі */
         .threads-reply {
             margin-top: 10px;
             padding: 10px;
@@ -1563,7 +1528,6 @@
             font-size: 11px;
         }
 
-        /* Bottom Navigation */
         .bottom-nav {
             display: flex;
             flex-direction: column;
@@ -1630,7 +1594,6 @@
             font-size: 14px;
         }
 
-        /* Modals */
         .modal {
             position: fixed;
             top: 50%;
@@ -1721,7 +1684,6 @@
             color: white;
         }
 
-        /* Telegram-style Settings Modal */
         .settings-modal {
             width: 300px;
             max-height: 400px;
@@ -1776,7 +1738,6 @@
             font-size: 18px;
         }
 
-        /* Patterns selector */
         .patterns-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -1926,12 +1887,10 @@
 </head>
 <body>
     <div class="phone-frame" id="phoneFrame">
-        <!-- Loading Screen -->
         <div class="loading-screen" id="loadingScreen">
             <div class="loading-spinner"></div>
         </div>
 
-        <!-- Top Navigation -->
         <div class="top-nav">
             <div class="logo-container">
                 <div class="logo-upload" id="logoUpload" onclick="uploadLogo()">
@@ -1963,13 +1922,11 @@
             </div>
         </div>
 
-        <!-- Notifications Panel -->
         <div class="notifications-panel" id="notificationsPanel">
             <div class="notifications-header">Сповіщення</div>
             <div id="notificationsList"></div>
         </div>
 
-        <!-- Auth Screen -->
         <div class="screen" id="authScreen">
             <div class="auth-screen">
                 <div class="auth-form">
@@ -1985,7 +1942,6 @@
             </div>
         </div>
 
-        <!-- Chat Screen -->
         <div class="screen active" id="chatScreen">
             <div class="search-chat">
                 <input type="text" id="chatSearch" placeholder="Пошук..." oninput="filterChats(this.value)">
@@ -1998,7 +1954,6 @@
 
             <div id="regularChats" class="chats-container"></div>
             
-            <!-- Анонімний чат - синій фон, білий текст -->
             <div id="anonChats" class="chats-container" style="display: none;">
                 <div class="anon-container">
                     <div class="anon-create-btn" onclick="createAnonChat()">
@@ -2011,7 +1966,6 @@
             </div>
         </div>
 
-        <!-- Stiki Screen -->
         <div class="screen" id="stikiScreen">
             <div class="switch-container">
                 <div class="mode-switch">
@@ -2033,7 +1987,6 @@
             </div>
         </div>
 
-        <!-- Profile Screen -->
         <div class="screen" id="profileScreen">
             <div class="profile-container" id="profileContainer">
                 <div class="profile-header">
@@ -2078,7 +2031,6 @@
                     </div>
                 </div>
 
-                <!-- Одна кнопка налаштувань під біо -->
                 <div class="profile-settings-btn" onclick="openSettings()">
                     <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="3"/>
@@ -2092,7 +2044,6 @@
             </div>
         </div>
 
-        <!-- Passport Screen -->
         <div class="screen" id="passportScreen">
             <div class="passport-container">
                 <div class="passport-header">
@@ -2104,7 +2055,6 @@
             </div>
         </div>
 
-        <!-- Regular Chat Room -->
         <div class="screen" id="chatRoomScreen">
             <div class="chat-room">
                 <div class="chat-header">
@@ -2129,7 +2079,6 @@
             </div>
         </div>
 
-        <!-- Anonymous Chat Room -->
         <div class="screen" id="anonChatRoomScreen">
             <div class="chat-room">
                 <div class="chat-header">
@@ -2150,7 +2099,6 @@
             </div>
         </div>
 
-        <!-- Bottom Navigation -->
         <div class="bottom-nav">
             <div class="nav-items">
                 <div class="nav-item active" onclick="navigate('chatScreen', this)">
@@ -2176,7 +2124,7 @@
             </div>
         </div>
 
-        <!-- Edit Profile Modal -->
+        <!-- Modal: Редагувати профіль -->
         <div class="modal" id="editProfileModal">
             <div class="modal-title">Редагувати профіль</div>
             <input type="text" class="modal-input" id="editName" value="Олександр">
@@ -2188,16 +2136,17 @@
             </div>
         </div>
 
-        <!-- Settings Modal (Telegram-style) -->
+        <!-- Modal: Налаштування (оновлено) -->
         <div class="modal" id="settingsModal" style="width: 320px;">
             <div class="modal-title">Налаштування</div>
             <div class="settings-modal" style="max-height: 400px; overflow-y: auto; padding-right: 4px;">
                 
+                <!-- АКАУНТ -->
                 <div class="settings-section">
                     <div class="settings-header">АКАУНТ</div>
                     <div class="settings-item" onclick="openEditProfile()">
                         <div class="settings-item-left">
-                            <svg viewBox="0 0 24 24">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                                 <circle cx="12" cy="7" r="4"/>
                             </svg>
@@ -2207,11 +2156,11 @@
                     </div>
                     <div class="settings-item" onclick="openPatternsModal()">
                         <div class="settings-item-left">
-                            <svg viewBox="0 0 24 24">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                <circle cx="9" cy="9" r="2"/>
-                                <circle cx="15" cy="15" r="2"/>
-                                <path d="M7 17 L17 7"/>
+                            <!-- СТИЛІЗОВАНА ПАЛІТРА (SVG) замість % -->
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1da1f2" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 2a10 10 0 0 0 0 20 10 10 0 0 0 0-20z M12 22v-4 M12 2v4 M2 12h4 M22 12h-4 M4.93 4.93l2.83 2.83 M16.24 16.24l2.83 2.83 M19.07 4.93l-2.83 2.83 M7.76 16.24l-2.83 2.83"/>
+                                <circle cx="12" cy="12" r="2" fill="#1da1f2"/>
                             </svg>
                             <span>Візерунки Stiqly</span>
                         </div>
@@ -2219,11 +2168,12 @@
                     </div>
                 </div>
 
+                <!-- КОНФІДЕНЦІЙНІСТЬ -->
                 <div class="settings-section">
                     <div class="settings-header">КОНФІДЕНЦІЙНІСТЬ</div>
                     <div class="settings-item">
                         <div class="settings-item-left">
-                            <svg viewBox="0 0 24 24">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
@@ -2233,11 +2183,76 @@
                     </div>
                 </div>
 
+                <!-- СПОВІЩЕННЯ -->
+                <div class="settings-section">
+                    <div class="settings-header">СПОВІЩЕННЯ</div>
+                    <div class="settings-item">
+                        <div class="settings-item-left">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                            <span>Сповіщення</span>
+                        </div>
+                        <span class="settings-arrow">›</span>
+                    </div>
+                </div>
+
+                <!-- МОВА -->
+                <div class="settings-section">
+                    <div class="settings-header">МОВА</div>
+                    <div class="settings-item">
+                        <div class="settings-item-left">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            <span>Українська</span>
+                        </div>
+                        <span class="settings-arrow">›</span>
+                    </div>
+                </div>
+
+                <!-- ТЕМА -->
+                <div class="settings-section">
+                    <div class="settings-header">ТЕМА</div>
+                    <div class="settings-item">
+                        <div class="settings-item-left">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <circle cx="12" cy="12" r="5"/>
+                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                            </svg>
+                            <span>Темна</span>
+                        </div>
+                        <span class="settings-arrow">›</span>
+                    </div>
+                </div>
+
+                <!-- ІНШЕ -->
                 <div class="settings-section">
                     <div class="settings-header">ІНШЕ</div>
+                    <div class="settings-item">
+                        <div class="settings-item-left">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            <span>Допомога</span>
+                        </div>
+                        <span class="settings-arrow">›</span>
+                    </div>
                     <div class="settings-item" onclick="logout()">
                         <div class="settings-item-left">
-                            <svg viewBox="0 0 24 24">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
                                 <polyline points="16 17 21 12 16 7"/>
                                 <line x1="21" y1="12" x2="9" y2="12"/>
@@ -2253,7 +2268,7 @@
             </div>
         </div>
 
-        <!-- Patterns Modal -->
+        <!-- Modal: Візерунки (оновлено: єгипетська сова) -->
         <div class="modal" id="patternsModal">
             <div class="modal-title">Візерунки Stiqly</div>
             <div class="settings-header" style="text-align: center; margin-bottom: 12px;">обери свій стиль</div>
@@ -2275,7 +2290,7 @@
                     <div>Колібрі</div>
                 </div>
                 <div class="pattern-option" onclick="selectPattern('owl')">
-                    <div class="pattern-preview">ꜰ</div>
+                    <div class="pattern-preview">𓅓</div>   <!-- Єгипетська сова -->
                     <div>Сова</div>
                 </div>
                 <div class="pattern-option" onclick="selectPattern('butterfly')">
@@ -2296,7 +2311,7 @@
             </div>
         </div>
 
-        <!-- Add Post Modal -->
+        <!-- Modal: Додати пост -->
         <div class="modal" id="addPostModal">
             <div class="modal-title">Додати новий пост</div>
             <textarea class="modal-textarea" id="postText" placeholder="Що у вас нового?" rows="4"></textarea>
@@ -2307,12 +2322,14 @@
         </div>
     </div>
 
+    <!-- Інпути для завантаження файлів -->
     <input type="file" id="videoUploadInput" accept="video/*,image/*" style="display: none;">
     <input type="file" id="profileVideoUpload" accept="video/*,image/*" style="display: none;">
     <input type="file" id="profilePostUpload" accept="video/*,image/*" style="display: none;">
     <input type="file" id="visaVideoUpload" accept="video/*,image/*" style="display: none;">
 
     <script>
+        // ========== ДАНІ ==========
         let currentUser = {
             name: 'Олександр',
             nick: 'stiqly',
@@ -2405,6 +2422,7 @@
         let currentProfilePostIndex = null;
         let currentVisaIndex = null;
 
+        // ========== ЗБЕРЕЖЕННЯ ==========
         function saveVideos() {
             localStorage.setItem('stiqly_videos', JSON.stringify(savedVideos));
         }
@@ -2421,28 +2439,23 @@
             localStorage.setItem('circle_comments', JSON.stringify(circleComments));
         }
 
-        // Функція для застосування візерунка
+        // ========== ВІЗЕРУНКИ ==========
         function applyPattern(pattern) {
             const phoneFrame = document.getElementById('phoneFrame');
             if (!phoneFrame) return;
             
-            // Видаляємо всі класи візерунків
             phoneFrame.classList.remove('pattern-default', 'pattern-waves', 'pattern-dots', 'pattern-hummingbird', 'pattern-owl', 'pattern-butterfly', 'pattern-moon', 'pattern-rainbow');
             
-            // Додаємо вибраний клас
             phoneFrame.classList.add(`pattern-${pattern}`);
             
-            // Зберігаємо в localStorage
             localStorage.setItem('stiqly_pattern', pattern);
             savedPattern = pattern;
         }
 
-        // Відкрити модалку вибору візерунків
         window.openPatternsModal = function() {
             closeModal('settingsModal');
             document.getElementById('patternsModal').classList.add('active');
             
-            // Підсвічуємо активний візерунок
             document.querySelectorAll('.pattern-option').forEach(opt => {
                 opt.classList.remove('active');
             });
@@ -2454,17 +2467,16 @@
             }
         };
 
-        // Вибрати візерунок
         window.selectPattern = function(pattern) {
             applyPattern(pattern);
             
-            // Підсвічуємо вибраний
             document.querySelectorAll('.pattern-option').forEach(opt => {
                 opt.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
         };
 
+        // ========== ЗАВАНТАЖЕННЯ ВІДЕО ==========
         window.uploadVisaVideo = function(index) {
             currentVisaIndex = index;
             const input = document.getElementById('visaVideoUpload');
@@ -2841,6 +2853,7 @@
             feed.innerHTML = threadsHtml;
         }
 
+        // ========== НАВІГАЦІЯ ТА ЧАТИ ==========
         window.onload = function() {
             setTimeout(() => {
                 document.getElementById('loadingScreen').classList.add('hidden');
@@ -2849,7 +2862,6 @@
             loadBigCircles();
             loadThreads();
             
-            // Застосовуємо збережений візерунок
             applyPattern(savedPattern);
             
             const visaGrid = document.getElementById('passportVisaGrid');
@@ -3152,275 +3164,247 @@
         window.addCircle = () => alert('Додати новий стік');
         window.switchAuth = () => {}
     </script>
-<!-- Telegram-style Reactions with custom sprite -->
-<style>
-    /* Контейнер для реакций над сообщением */
-    .message-reactions {
-        position: absolute;
-        bottom: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #1e2b3a;
-        border: 1px solid #3a4a5a;
-        border-radius: 30px;
-        padding: 6px 12px;
-        display: flex;
-        gap: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        z-index: 1000;
-        margin-bottom: 8px;
-        animation: slideUp 0.2s ease;
-        pointer-events: auto;
-    }
 
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateX(-50%) translateY(10px);
+    <!-- Стилі для реакцій -->
+    <style>
+        .message-reactions {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e2b3a;
+            border: 1px solid #3a4a5a;
+            border-radius: 30px;
+            padding: 6px 12px;
+            display: flex;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            margin-bottom: 8px;
+            animation: slideUp 0.2s ease;
+            pointer-events: auto;
         }
-        to {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
         }
-    }
 
-    /* Спрайт с эмодзи */
-    .reaction-emoji-sprite {
-        width: 28px;
-        height: 28px;
-        background-image: url('1.jpg'); /* твой файл */
-        background-repeat: no-repeat;
-        background-size: 140px 28px; /* 5 эмодзи по 28px */
-        cursor: pointer;
-        border-radius: 50%;
-        transition: transform 0.2s, background-color 0.2s;
-        position: relative;
-    }
+        .reaction-emoji-sprite {
+            width: 28px;
+            height: 28px;
+            background-image: url('1.jpg');
+            background-repeat: no-repeat;
+            background-size: 140px 28px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: transform 0.2s, background-color 0.2s;
+            position: relative;
+        }
 
-    .reaction-emoji-sprite:hover {
-        transform: scale(1.3);
-        background-color: rgba(255,255,255,0.1);
-    }
+        .reaction-emoji-sprite:hover {
+            transform: scale(1.3);
+            background-color: rgba(255,255,255,0.1);
+        }
 
-    /* Позиции для каждого эмодзи (если в ряд по горизонтали) */
-    .reaction-emoji-1 { background-position: 0 0; }
-    .reaction-emoji-2 { background-position: -28px 0; }
-    .reaction-emoji-3 { background-position: -56px 0; }
-    .reaction-emoji-4 { background-position: -84px 0; }
-    .reaction-emoji-5 { background-position: -112px 0; }
+        .reaction-emoji-1 { background-position: 0 0; }
+        .reaction-emoji-2 { background-position: -28px 0; }
+        .reaction-emoji-3 { background-position: -56px 0; }
+        .reaction-emoji-4 { background-position: -84px 0; }
+        .reaction-emoji-5 { background-position: -112px 0; }
 
-    /* Уведомление о реакции */
-    .reaction-toast {
-        position: fixed;
-        bottom: 100px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #1da1f2;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 30px;
-        font-size: 14px;
-        font-weight: 600;
-        box-shadow: 0 4px 15px rgba(29,161,242,0.5);
-        z-index: 2000;
-        animation: toastFade 2s ease forwards;
-        white-space: nowrap;
-    }
+        .reaction-toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1da1f2;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(29,161,242,0.5);
+            z-index: 2000;
+            animation: toastFade 2s ease forwards;
+            white-space: nowrap;
+        }
 
-    @keyframes toastFade {
-        0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-        15% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        85% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-    }
+        @keyframes toastFade {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            85% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
 
-    /* Само сообщение - делаем позиционированным для реакций */
-    .message {
-        position: relative !important;
-        cursor: pointer;
-        user-select: none;
-        transition: background-color 0.2s;
-    }
+        .message {
+            position: relative !important;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
 
-    .message.mine:hover {
-        background: #1a8cd8;
-    }
+        .message.mine:hover {
+            background: #1a8cd8;
+        }
 
-    .message.other:hover {
-        background: #2c3e50;
-    }
+        .message.other:hover {
+            background: #2c3e50;
+        }
 
-    /* Индикатор что есть реакция */
-    .message.has-reaction::after {
-        content: attr(data-reaction);
-        position: absolute;
-        bottom: -10px;
-        right: 10px;
-        background: #1e2b3a;
-        border: 2px solid #17212b;
-        border-radius: 20px;
-        padding: 2px 6px;
-        font-size: 12px;
-        color: white;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        z-index: 5;
-        pointer-events: none;
-        white-space: nowrap;
-    }
+        .message.has-reaction::after {
+            content: attr(data-reaction);
+            position: absolute;
+            bottom: -10px;
+            right: 10px;
+            background: #1e2b3a;
+            border: 2px solid #17212b;
+            border-radius: 20px;
+            padding: 2px 6px;
+            font-size: 12px;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 5;
+            pointer-events: none;
+            white-space: nowrap;
+        }
 
-    /* Для анонимных чатов */
-    .message.anon-mine:hover {
-        background: #1a8cd8;
-    }
+        .message.anon-mine:hover {
+            background: #1a8cd8;
+        }
 
-    .message.anon-other:hover {
-        background: #2c3e50;
-    }
-</style>
+        .message.anon-other:hover {
+            background: #2c3e50;
+        }
+    </style>
 
-<script>
-    // Ждем загрузки страницы
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ждем немного чтобы старый код инициализировался
-        setTimeout(initMessageReactions, 1000);
-    });
-
-    // Перехватываем открытие чата
-    const originalOpenChat = window.openChat;
-    window.openChat = function(id) {
-        if (originalOpenChat) originalOpenChat(id);
-        setTimeout(initMessageReactions, 200);
-    };
-
-    const originalSendMessage = window.sendMessage;
-    window.sendMessage = function() {
-        if (originalSendMessage) originalSendMessage();
-        setTimeout(initMessageReactions, 100);
-    };
-
-    function initMessageReactions() {
-        const messages = document.querySelectorAll('.message');
-        
-        messages.forEach(msg => {
-            // Убираем старый обработчик если был
-            msg.removeEventListener('click', showReactionMenu);
-            // Добавляем новый
-            msg.addEventListener('click', showReactionMenu);
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initMessageReactions, 1000);
         });
-    }
 
-    // Показываем меню реакций над сообщением
-    function showReactionMenu(event) {
-        event.stopPropagation();
-        
-        const message = event.currentTarget;
-        
-        // Убираем другие открытые меню
-        document.querySelectorAll('.message-reactions').forEach(el => el.remove());
-        
-        // Создаем меню
-        const menu = document.createElement('div');
-        menu.className = 'message-reactions';
-        
-        // Добавляем 5 эмодзи из спрайта
-        for (let i = 1; i <= 5; i++) {
-            const emoji = document.createElement('div');
-            emoji.className = `reaction-emoji-sprite reaction-emoji-${i}`;
-            emoji.setAttribute('data-emoji-num', i);
-            emoji.setAttribute('data-emoji-char', getEmojiChar(i));
-            emoji.onclick = function(e) {
-                e.stopPropagation();
-                const emojiNum = this.getAttribute('data-emoji-num');
-                const emojiChar = this.getAttribute('data-emoji-char');
-                addReactionToMessage(message, emojiNum, emojiChar);
-                menu.remove(); // закрываем меню
-            };
-            menu.appendChild(emoji);
-        }
-        
-        message.appendChild(menu);
-        
-        // Закрываем меню при клике вне его
-        setTimeout(() => {
-            document.addEventListener('click', function closeMenu(e) {
-                if (!menu.contains(e.target) && e.target !== message) {
-                    menu.remove();
-                    document.removeEventListener('click', closeMenu);
-                }
+        const originalOpenChat = window.openChat;
+        window.openChat = function(id) {
+            if (originalOpenChat) originalOpenChat(id);
+            setTimeout(initMessageReactions, 200);
+        };
+
+        const originalSendMessage = window.sendMessage;
+        window.sendMessage = function() {
+            if (originalSendMessage) originalSendMessage();
+            setTimeout(initMessageReactions, 100);
+        };
+
+        function initMessageReactions() {
+            const messages = document.querySelectorAll('.message');
+            
+            messages.forEach(msg => {
+                msg.removeEventListener('click', showReactionMenu);
+                msg.addEventListener('click', showReactionMenu);
             });
-        }, 100);
-    }
-
-    // Получаем символ для отображения (для красоты)
-    function getEmojiChar(num) {
-        const emojis = ['👍', '❤️', '🔥', '😂', '😮'];
-        return emojis[num-1] || '👍';
-    }
-
-    // Добавляем реакцию к сообщению
-    function addReactionToMessage(message, emojiNum, emojiChar) {
-        // Проверяем есть ли уже реакция
-        const existingReaction = message.getAttribute('data-reaction');
-        
-        if (existingReaction && existingReaction.includes(emojiChar)) {
-            // Если такая же реакция - убираем
-            message.removeAttribute('data-reaction');
-            message.classList.remove('has-reaction');
-            showToast('Реакцію прибрано');
-        } else {
-            // Иначе ставим новую
-            message.setAttribute('data-reaction', emojiChar);
-            message.classList.add('has-reaction');
-            showToast('❤️ ' + emojiChar);
         }
-        
-        // Сохраняем в localStorage (опционально)
-        saveReactionToStorage(message, emojiNum);
-    }
 
-    // Показываем уведомление
-    function showToast(text) {
-        const toast = document.createElement('div');
-        toast.className = 'reaction-toast';
-        toast.textContent = text;
-        document.body.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.remove();
-        }, 2000);
-    }
-
-    // Сохраняем реакцию (можно расширить для сохранения между сессиями)
-    function saveReactionToStorage(message, emojiNum) {
-        // Здесь можно добавить сохранение в базу данных
-        console.log('Reaction added to message:', message.textContent, 'emoji:', emojiNum);
-    }
-
-    // Обновляем реакции при изменении чата
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.addedNodes.length) {
-                mutation.addedNodes.forEach(function(node) {
-                    if (node.nodeType === 1 && node.classList && node.classList.contains('message')) {
-                        node.addEventListener('click', showReactionMenu);
+        function showReactionMenu(event) {
+            event.stopPropagation();
+            
+            const message = event.currentTarget;
+            
+            document.querySelectorAll('.message-reactions').forEach(el => el.remove());
+            
+            const menu = document.createElement('div');
+            menu.className = 'message-reactions';
+            
+            for (let i = 1; i <= 5; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = `reaction-emoji-sprite reaction-emoji-${i}`;
+                emoji.setAttribute('data-emoji-num', i);
+                emoji.setAttribute('data-emoji-char', getEmojiChar(i));
+                emoji.onclick = function(e) {
+                    e.stopPropagation();
+                    const emojiNum = this.getAttribute('data-emoji-num');
+                    const emojiChar = this.getAttribute('data-emoji-char');
+                    addReactionToMessage(message, emojiNum, emojiChar);
+                    menu.remove();
+                };
+                menu.appendChild(emoji);
+            }
+            
+            message.appendChild(menu);
+            
+            setTimeout(() => {
+                document.addEventListener('click', function closeMenu(e) {
+                    if (!menu.contains(e.target) && e.target !== message) {
+                        menu.remove();
+                        document.removeEventListener('click', closeMenu);
                     }
                 });
+            }, 100);
+        }
+
+        function getEmojiChar(num) {
+            const emojis = ['👍', '❤️', '🔥', '😂', '😮'];
+            return emojis[num-1] || '👍';
+        }
+
+        function addReactionToMessage(message, emojiNum, emojiChar) {
+            const existingReaction = message.getAttribute('data-reaction');
+            
+            if (existingReaction && existingReaction.includes(emojiChar)) {
+                message.removeAttribute('data-reaction');
+                message.classList.remove('has-reaction');
+                showToast('Реакцію прибрано');
+            } else {
+                message.setAttribute('data-reaction', emojiChar);
+                message.classList.add('has-reaction');
+                showToast('❤️ ' + emojiChar);
             }
+            
+            saveReactionToStorage(message, emojiNum);
+        }
+
+        function showToast(text) {
+            const toast = document.createElement('div');
+            toast.className = 'reaction-toast';
+            toast.textContent = text;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2000);
+        }
+
+        function saveReactionToStorage(message, emojiNum) {
+            console.log('Reaction added to message:', message.textContent, 'emoji:', emojiNum);
+        }
+
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes.length) {
+                    mutation.addedNodes.forEach(function(node) {
+                        if (node.nodeType === 1 && node.classList && node.classList.contains('message')) {
+                            node.addEventListener('click', showReactionMenu);
+                        }
+                    });
+                }
+            });
         });
-    });
 
-    // Наблюдаем за добавлением новых сообщений
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
 
-    // Переопределяем sendMessage чтобы обновлять обработчики
-    const originalSendMessageAnon = window.sendAnonMessage;
-    window.sendAnonMessage = function() {
-        if (originalSendMessageAnon) originalSendMessageAnon();
-        setTimeout(initMessageReactions, 100);
-    };
-</script>
+        const originalSendMessageAnon = window.sendAnonMessage;
+        window.sendAnonMessage = function() {
+            if (originalSendMessageAnon) originalSendMessageAnon();
+            setTimeout(initMessageReactions, 100);
+        };
+    </script>
 </body>
 </html>
