@@ -33,25 +33,14 @@
             transition: background 0.3s;
         }
 
-        /* ===== ГЛОБАЛЬНІ ВІЗЕРУНКИ (повністю перероблені) ===== */
+        /* ===== ВІЗЕРУНКИ (оновлені) ===== */
+
+        /* Класика (чистий темний фон) */
         .phone-frame.pattern-default {
             background: #17212b;
-            position: relative;
-        }
-        .phone-frame.pattern-default::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                repeating-linear-gradient(45deg, rgba(29,161,242,0.03) 0px, rgba(29,161,242,0.03) 20px, transparent 20px, transparent 40px),
-                repeating-linear-gradient(-45deg, rgba(29,161,242,0.03) 0px, rgba(29,161,242,0.03) 20px, transparent 20px, transparent 40px);
-            pointer-events: none;
-            z-index: 0;
         }
 
+        /* Хвилі (статичні) */
         .phone-frame.pattern-waves {
             background: #17212b;
             position: relative;
@@ -63,13 +52,39 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(29,161,242,0.05) 20px, rgba(29,161,242,0.05) 40px),
-                repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(29,161,242,0.03) 30px, rgba(29,161,242,0.03) 60px);
+            background: 
+                repeating-linear-gradient(0deg, 
+                    transparent, 
+                    transparent 30px, 
+                    rgba(29,161,242,0.1) 30px, 
+                    rgba(29,161,242,0.1) 32px,
+                    transparent 32px,
+                    transparent 60px);
             pointer-events: none;
             z-index: 0;
         }
 
+        /* Листя */
+        .phone-frame.pattern-leaves {
+            background: #17212b;
+            position: relative;
+        }
+        .phone-frame.pattern-leaves::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><path d="M30,40 Q45,15 60,40 Q45,30 30,40" fill="%231da1f2"/><path d="M45,45 Q60,20 75,45 Q60,35 45,45" fill="%231da1f2"/><path d="M20,60 Q35,40 50,60 Q35,50 20,60" fill="%231da1f2"/><path d="M55,65 Q70,45 85,65 Q70,55 55,65" fill="%231da1f2"/></svg>');
+            background-repeat: repeat;
+            background-size: 120px 120px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Іскри */
         .phone-frame.pattern-dots {
             background: #17212b;
             position: relative;
@@ -81,7 +96,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background: 
                 radial-gradient(circle at 10% 20%, rgba(29,161,242,0.15) 2px, transparent 2px),
                 radial-gradient(circle at 90% 70%, rgba(29,161,242,0.15) 3px, transparent 3px),
                 radial-gradient(circle at 30% 80%, rgba(29,161,242,0.1) 2px, transparent 2px),
@@ -92,6 +107,7 @@
             z-index: 0;
         }
 
+        /* Колібрі */
         .phone-frame.pattern-hummingbird {
             background: #17212b;
             position: relative;
@@ -104,13 +120,14 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><path d="M30,40 Q45,20 60,40 Q50,30 30,40" fill="%231da1f2"/><circle cx="25" cy="35" r="3" fill="%231da1f2"/><path d="M40,50 Q55,70 70,50" stroke="%231da1f2" fill="none" stroke-width="3"/><text x="15" y="80" font-size="25" fill="%231da1f2" opacity="0.3">𓅪</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><path d="M30,40 Q45,20 60,40 Q50,30 30,40" fill="%231da1f2"/><circle cx="25" cy="35" r="3" fill="%231da1f2"/><path d="M40,50 Q55,70 70,50" stroke="%231da1f2" fill="none" stroke-width="3"/></svg>');
             background-repeat: repeat;
             background-size: 120px 120px;
             pointer-events: none;
             z-index: 0;
         }
 
+        /* Сова (єгипетський символ) */
         .phone-frame.pattern-owl {
             background: #17212b;
             position: relative;
@@ -123,13 +140,14 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="35" cy="35" r="10" fill="%231da1f2"/><circle cx="65" cy="35" r="10" fill="%231da1f2"/><circle cx="35" cy="35" r="4" fill="white"/><circle cx="65" cy="35" r="4" fill="white"/><circle cx="35" cy="35" r="2" fill="black"/><circle cx="65" cy="35" r="2" fill="black"/><path d="M40 55 Q50 70 60 55" stroke="%231da1f2" fill="none" stroke-width="4"/><text x="20" y="80" font-size="25" fill="%231da1f2" opacity="0.3">𓅓</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.15"><circle cx="35" cy="35" r="12" fill="%231da1f2"/><circle cx="65" cy="35" r="12" fill="%231da1f2"/><circle cx="35" cy="35" r="5" fill="white"/><circle cx="65" cy="35" r="5" fill="white"/><circle cx="35" cy="35" r="2" fill="black"/><circle cx="65" cy="35" r="2" fill="black"/><polygon points="48,48 52,48 50,55" fill="%23ffaa00"/><path d="M30 50 Q45 70 70 50" stroke="%231da1f2" fill="none" stroke-width="4"/><path d="M25 30 L10 15" stroke="%231da1f2" fill="none" stroke-width="3"/><path d="M75 30 L90 15" stroke="%231da1f2" fill="none" stroke-width="3"/></svg>');
             background-repeat: repeat;
-            background-size: 130px 130px;
+            background-size: 140px 140px;
             pointer-events: none;
             z-index: 0;
         }
 
+        /* Метелик */
         .phone-frame.pattern-butterfly {
             background: linear-gradient(145deg, #17212b, #1a2f3f);
             position: relative;
@@ -142,13 +160,14 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><path d="M25,40 Q40,15 55,40 Q45,30 25,40" fill="%231da1f2"/><path d="M45,45 Q60,70 75,45 Q65,55 45,45" fill="%231da1f2"/><path d="M30,50 Q45,35 50,50 Q45,45 30,50" fill="%231da1f2"/><text x="15" y="80" font-size="30" fill="%231da1f2" opacity="0.3">𓆦</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><path d="M25,40 Q40,15 55,40 Q45,30 25,40" fill="%231da1f2"/><path d="M45,45 Q60,20 75,45 Q65,35 45,45" fill="%231da1f2"/><path d="M30,55 Q45,40 60,55 Q50,45 30,55" fill="%231da1f2"/></svg>');
             background-repeat: repeat;
-            background-size: 140px 140px;
+            background-size: 130px 130px;
             pointer-events: none;
             z-index: 0;
         }
 
+        /* Місяць (багато місяців) */
         .phone-frame.pattern-moon {
             background: #17212b;
             position: relative;
@@ -161,15 +180,16 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.12"><circle cx="70" cy="30" r="4" fill="%231da1f2"/><circle cx="30" cy="60" r="3" fill="%231da1f2"/><circle cx="80" cy="70" r="5" fill="%231da1f2"/><circle cx="20" cy="20" r="2" fill="%231da1f2"/><circle cx="50" cy="50" r="6" fill="%231da1f2"/><path d="M60 20 Q70 15 75 25" stroke="%231da1f2" fill="none" stroke-width="2"/><text x="15" y="40" font-size="35" fill="%231da1f2" opacity="0.2">☾</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.15"><circle cx="30" cy="30" r="12" fill="%231da1f2"/><circle cx="90" cy="70" r="15" fill="%231da1f2"/><circle cx="150" cy="40" r="10" fill="%231da1f2"/><circle cx="50" cy="120" r="8" fill="%231da1f2"/><circle cx="120" cy="150" r="12" fill="%231da1f2"/><circle cx="170" cy="100" r="9" fill="%231da1f2"/><circle cx="20" cy="170" r="7" fill="%231da1f2"/><circle cx="80" cy="180" r="11" fill="%231da1f2"/><circle cx="140" cy="180" r="6" fill="%231da1f2"/><path d="M30,30 Q38,25 45,30 Q38,35 30,30" fill="white" opacity="0.3"/><path d="M90,70 Q100,60 110,70 Q100,75 90,70" fill="white" opacity="0.3"/><path d="M150,40 Q158,35 165,40 Q158,45 150,40" fill="white" opacity="0.3"/><path d="M50,120 Q55,115 60,120 Q55,125 50,120" fill="white" opacity="0.3"/><path d="M120,150 Q128,145 135,150 Q128,155 120,150" fill="white" opacity="0.3"/></svg>');
             background-repeat: repeat;
-            background-size: 150px 150px;
+            background-size: 200px 200px;
             pointer-events: none;
             z-index: 0;
         }
 
+        /* Райдуга */
         .phone-frame.pattern-rainbow {
-            background: linear-gradient(125deg, #17212b, #1e3445);
+            background: #17212b;
             position: relative;
         }
         .phone-frame.pattern-rainbow::before {
@@ -180,9 +200,29 @@
             right: 0;
             bottom: 0;
             background-image: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M10,70 Q30,40 50,70" stroke="%231da1f2" fill="none" stroke-width="4"/><path d="M20,75 Q40,50 60,75" stroke="%23ff7f50" fill="none" stroke-width="4"/><path d="M30,80 Q50,60 70,80" stroke="%23ffd700" fill="none" stroke-width="4"/><text x="45" y="40" font-size="35" fill="%231da1f2" opacity="0.2">⌒</text></svg>');
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.2"><path d="M10,90 Q50,30 90,90" stroke="%23ff0000" fill="none" stroke-width="6"/><path d="M20,90 Q50,40 80,90" stroke="%23ff7f00" fill="none" stroke-width="6"/><path d="M30,90 Q50,50 70,90" stroke="%23ffff00" fill="none" stroke-width="6"/><path d="M40,90 Q50,60 60,90" stroke="%2300ff00" fill="none" stroke-width="6"/><path d="M45,90 Q50,65 55,90" stroke="%230000ff" fill="none" stroke-width="6"/></svg>');
             background-repeat: repeat;
-            background-size: 140px 140px;
+            background-size: 200px 100px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Дуги (радіохвилі вліво) */
+        .phone-frame.pattern-arcs {
+            background: #17212b;
+            position: relative;
+        }
+        .phone-frame.pattern-arcs::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.15"><path d="M150,50 Q100,50 100,100 Q100,150 150,150" stroke="%231da1f2" fill="none" stroke-width="3"/><path d="M180,30 Q120,30 120,100 Q120,170 180,170" stroke="%231da1f2" fill="none" stroke-width="3"/><path d="M200,10 Q140,10 140,100 Q140,190 200,190" stroke="%231da1f2" fill="none" stroke-width="3"/><path d="M130,70 Q90,70 90,100 Q90,130 130,130" stroke="%231da1f2" fill="none" stroke-width="2"/><path d="M110,80 Q70,80 70,100 Q70,120 110,120" stroke="%231da1f2" fill="none" stroke-width="2"/></svg>');
+            background-repeat: repeat;
+            background-size: 200px 200px;
             pointer-events: none;
             z-index: 0;
         }
@@ -194,12 +234,14 @@
         }
 
         .phone-frame.pattern-waves .screen,
+        .phone-frame.pattern-leaves .screen,
         .phone-frame.pattern-dots .screen,
         .phone-frame.pattern-hummingbird .screen,
         .phone-frame.pattern-owl .screen,
         .phone-frame.pattern-butterfly .screen,
         .phone-frame.pattern-moon .screen,
-        .phone-frame.pattern-rainbow .screen {
+        .phone-frame.pattern-rainbow .screen,
+        .phone-frame.pattern-arcs .screen {
             background: transparent;
         }
 
@@ -1783,7 +1825,6 @@
             margin-bottom: 2px;
         }
 
-        /* Модальне вікно мови */
         .language-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -2236,7 +2277,6 @@
                     </div>
                 </div>
 
-                <!-- МОВА (тепер відкриває окреме модальне вікно) -->
                 <div class="settings-section">
                     <div class="settings-header">МОВА</div>
                     <div class="settings-item" onclick="openLanguageModal()">
@@ -2314,21 +2354,25 @@
             </div>
         </div>
 
-        <!-- Modal: Візерунки -->
+        <!-- Modal: Візерунки (оновлена, без емодзі) -->
         <div class="modal" id="patternsModal">
             <div class="modal-title">Візерунки Stiqly</div>
             <div class="settings-header" style="text-align: center; margin-bottom: 12px;">обери свій стиль</div>
             <div class="patterns-grid">
                 <div class="pattern-option" onclick="selectPattern('default')">
-                    <div class="pattern-preview">◈</div>
+                    <div class="pattern-preview">⬛</div>
                     <div>Класика</div>
                 </div>
                 <div class="pattern-option" onclick="selectPattern('waves')">
                     <div class="pattern-preview">⌇</div>
                     <div>Хвилі</div>
                 </div>
-                <div class="pattern-option" onclick="selectPattern('dots')">
+                <div class="pattern-option" onclick="selectPattern('leaves')">
                     <div class="pattern-preview">✧</div>
+                    <div>Листя</div>
+                </div>
+                <div class="pattern-option" onclick="selectPattern('dots')">
+                    <div class="pattern-preview">◈</div>
                     <div>Іскри</div>
                 </div>
                 <div class="pattern-option" onclick="selectPattern('hummingbird')">
@@ -2351,13 +2395,17 @@
                     <div class="pattern-preview">⌒</div>
                     <div>Райдуга</div>
                 </div>
+                <div class="pattern-option" onclick="selectPattern('arcs')">
+                    <div class="pattern-preview">⌇</div>
+                    <div>Дуги</div>
+                </div>
             </div>
             <div class="modal-actions" style="margin-top: 16px;">
                 <button class="modal-btn save" onclick="closeModal('patternsModal')">Готово</button>
             </div>
         </div>
 
-        <!-- Modal: Мова (окреме вікно) -->
+        <!-- Modal: Мова -->
         <div class="modal" id="languageModal" style="width: 320px;">
             <div class="modal-title">Оберіть мову</div>
             <div class="language-grid" id="languageGrid"></div>
@@ -2477,7 +2525,6 @@
         let currentProfilePostIndex = null;
         let currentVisaIndex = null;
 
-        // Список мов (ЄС + кандидати)
         const languages = [
             { code: 'uk', name: 'Українська', flag: '🇺🇦' },
             { code: 'pl', name: 'Polski', flag: '🇵🇱' },
@@ -2536,7 +2583,7 @@
             const phoneFrame = document.getElementById('phoneFrame');
             if (!phoneFrame) return;
             
-            phoneFrame.classList.remove('pattern-default', 'pattern-waves', 'pattern-dots', 'pattern-hummingbird', 'pattern-owl', 'pattern-butterfly', 'pattern-moon', 'pattern-rainbow');
+            phoneFrame.classList.remove('pattern-default', 'pattern-waves', 'pattern-leaves', 'pattern-dots', 'pattern-hummingbird', 'pattern-owl', 'pattern-butterfly', 'pattern-moon', 'pattern-rainbow', 'pattern-arcs');
             
             phoneFrame.classList.add(`pattern-${pattern}`);
             
@@ -2552,7 +2599,7 @@
                 opt.classList.remove('active');
             });
             
-            const patterns = ['default', 'waves', 'dots', 'hummingbird', 'owl', 'butterfly', 'moon', 'rainbow'];
+            const patterns = ['default', 'waves', 'leaves', 'dots', 'hummingbird', 'owl', 'butterfly', 'moon', 'rainbow', 'arcs'];
             const activeIndex = patterns.indexOf(savedPattern);
             if (activeIndex >= 0) {
                 document.querySelectorAll('.pattern-option')[activeIndex].classList.add('active');
@@ -2566,9 +2613,13 @@
                 opt.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
+            
+            setTimeout(() => {
+                closeModal('patternsModal');
+            }, 300);
         };
 
-        // ========== МОВА (окреме модальне вікно) ==========
+        // ========== МОВА ==========
         window.openLanguageModal = function() {
             closeModal('settingsModal');
             loadLanguageGrid();
@@ -2595,10 +2646,10 @@
             currentLanguage = langCode;
             localStorage.setItem('stiqly_language', langCode);
             
-            // Оновлюємо підсвітку в сітці
             document.querySelectorAll('.language-item').forEach(item => {
                 item.classList.remove('active');
             });
+            
             const activeItem = Array.from(document.querySelectorAll('.language-item')).find(
                 item => item.getAttribute('onclick')?.includes(`'${langCode}'`)
             );
@@ -2606,15 +2657,14 @@
                 activeItem.classList.add('active');
             }
             
-            // Знаходимо назву мови
             const langObj = languages.find(l => l.code === langCode);
             const langName = langObj ? langObj.name : langCode;
             
-            // Показуємо сповіщення
             showLanguageToast(langName);
             
-            // Тут можна додати логіку для реальної зміни мови в інтерфейсі
-            console.log('Мова змінена на:', langCode);
+            setTimeout(() => {
+                closeModal('languageModal');
+            }, 300);
         };
 
         function showLanguageToast(langName) {
@@ -3027,8 +3077,6 @@
             loadThreads();
             
             applyPattern(savedPattern);
-            
-            // Мова завантажиться при відкритті модалки
             
             const visaGrid = document.getElementById('passportVisaGrid');
             if (visaGrid) {
