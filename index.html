@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stiqly · фінальна версія</title>
+    <title>Stiqly · фінальна версія + Пости</title>
     <style>
         * {
             margin: 0;
@@ -1250,7 +1250,6 @@
             backdrop-filter: blur(2px);
         }
 
-        /* ===== ОНОВЛЕНІ ГОЛОСОВІ ПОВІДОМЛЕННЯ ===== */
         .voice-message {
             display: flex;
             align-items: center;
@@ -1349,7 +1348,6 @@
             background: white;
         }
 
-        /* ===== РЕГУЛЯРНІ ПОВІДОМЛЕННЯ ===== */
         .message {
             max-width: 75%;
             padding: 6px 10px;
@@ -1445,7 +1443,6 @@
             transform: scale(1.1);
         }
 
-        /* Кнопка запису */
         .record-btn {
             width: 44px;
             height: 44px;
@@ -1984,7 +1981,6 @@
             color: white;
         }
 
-        /* Перемикачі */
         .modal-switch {
             width: 52px;
             height: 28px;
@@ -2017,7 +2013,6 @@
             left: 26px;
         }
 
-        /* Мови */
         .language-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -2055,7 +2050,6 @@
             font-size: 22px;
         }
 
-        /* Налаштування меню */
         .settings-modal {
             max-height: 400px;
             overflow-y: auto;
@@ -2113,7 +2107,6 @@
             font-size: 18px;
         }
 
-        /* Візерунки */
         .patterns-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -2595,6 +2588,147 @@
             85% { opacity: 1; transform: translateX(-50%) translateY(0); }
             100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
         }
+
+        /* СТИЛИ ДЛЯ ПОСТІВ (ПРЯМОКУТНИКИ) */
+        .posts-feed {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .post-card {
+            background: #1e2b3a;
+            border-radius: 20px;
+            padding: 16px;
+            border: 1px solid #3a4a5a;
+            transition: all 0.25s ease;
+        }
+        
+        .post-card:hover {
+            transform: scale(1.01);
+            border-color: #1da1f2;
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid white;
+        }
+        
+        .post-author-info {
+            flex: 1;
+        }
+        
+        .post-author-name {
+            font-weight: 700;
+            color: white;
+            font-size: 15px;
+        }
+        
+        .post-author-nick {
+            color: #a0b3c5;
+            font-size: 12px;
+        }
+        
+        .post-time {
+            font-size: 11px;
+            color: #a0b3c5;
+            background: #2c3e50;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        
+        .post-content {
+            color: white;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .post-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-top: 12px;
+            border-top: 1px solid #3a4a5a;
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #a0b3c5;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 30px;
+            background: #2c3e50;
+            transition: all 0.2s;
+        }
+        
+        .post-action:hover {
+            background: #1da1f2;
+            color: white;
+        }
+        
+        .post-action.active-like {
+            background: #1da1f2;
+            color: white;
+        }
+        
+        .post-action svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+        }
+        
+        .create-post-card {
+            background: #1e2b3a;
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px dashed #3a4a5a;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s;
+        }
+        
+        .create-post-card:hover {
+            border-color: #1da1f2;
+            transform: scale(1.01);
+        }
+        
+        .create-post-card span:first-child {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 8px;
+            color: white;
+        }
+        
+        .create-post-card div {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .create-post-card p {
+            color: #a0b3c5;
+            font-size: 12px;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -2655,7 +2789,7 @@
             </div>
         </div>
 
-        <!-- НОВЫЙ ЭКРАН: ВЕРТИКАЛЬНАЯ ЛЕНТА (СТІКИ) -->
+        <!-- ВЕРТИКАЛЬНА ЛЕНТА (СТІКИ) -->
         <div class="screen" id="feedScreen">
             <div class="vertical-feed" id="verticalFeed"></div>
         </div>
@@ -2672,7 +2806,6 @@
             </div>
 
             <div id="regularChats" class="chats-container">
-                <!-- Чат з Анною -->
                 <div class="chat-item" onclick="openChat(1)">
                     <div class="chat-avatar" style="background-image: url('https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=600')"></div>
                     <div class="chat-info">
@@ -2683,7 +2816,6 @@
                         <div class="chat-preview">Голосове повідомлення</div>
                     </div>
                 </div>
-                <!-- Чат з Максом -->
                 <div class="chat-item" onclick="openChat(2)">
                     <div class="chat-avatar" style="background-image: url('https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600')"></div>
                     <div class="chat-info">
@@ -2694,7 +2826,6 @@
                         <div class="chat-preview">Привіт!</div>
                     </div>
                 </div>
-                <!-- Чат з Катею -->
                 <div class="chat-item" onclick="openChat(3)">
                     <div class="chat-avatar" style="background-image: url('https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg?auto=compress&cs=tinysrgb&w=600')"></div>
                     <div class="chat-info">
@@ -2739,6 +2870,11 @@
             <div id="storizMode" style="display: none; flex: 1; overflow-y: auto;">
                 <div class="threads-feed" id="threadsFeed"></div>
             </div>
+        </div>
+
+        <!-- НОВИЙ ЕКРАН: ПОСТИ (ПРЯМОКУТНИКИ) -->
+        <div class="screen" id="postsScreen">
+            <div class="posts-feed" id="postsFeed"></div>
         </div>
 
         <!-- Екран профілю -->
@@ -2828,19 +2964,14 @@
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="chat-date">Сьогодні</div>
-                    
-                    <!-- Текстові повідомлення -->
                     <div class="message other">
                         Привіт!
                         <div class="message-time">12:30</div>
                     </div>
-                    
                     <div class="message mine">
                         Як справи?
                         <div class="message-time">12:31</div>
                     </div>
-                    
-                    <!-- Голосове повідомлення від співрозмовника -->
                     <div class="message other">
                         <div class="voice-message">
                             <div class="drop-container state-normal" onclick="playVoiceMessage(this)">
@@ -2862,8 +2993,6 @@
                         </div>
                         <div class="message-time">12:32</div>
                     </div>
-                    
-                    <!-- Голосове повідомлення від мене -->
                     <div class="message mine">
                         <div class="voice-message">
                             <div class="drop-container state-normal" onclick="playVoiceMessage(this)">
@@ -2920,7 +3049,7 @@
             </div>
         </div>
 
-        <!-- Нижня навігація -->
+        <!-- Нижня навігація з 5 вкладками: Чат, Стіки, Пости, Профіль, Passport -->
         <div class="bottom-nav">
             <div class="nav-items">
                 <div class="nav-item" onclick="navigate('chatScreen', this)">
@@ -2930,6 +3059,10 @@
                 <div class="nav-item" onclick="navigate('feedScreen', this)">
                     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>
                     <span>Стіки</span>
+                </div>
+                <div class="nav-item" onclick="navigate('postsScreen', this)">
+                    <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                    <span>Пости</span>
                 </div>
                 <div class="nav-item" onclick="navigate('profileScreen', this)">
                     <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -3060,7 +3193,7 @@
             </div>
         </div>
 
-        <!-- Modal: SmartLang (тепер з ✨) -->
+        <!-- Modal: SmartLang -->
         <div class="modal" id="smartlangModal">
             <div class="modal-header">
                 <div class="modal-back" onclick="closeModal('smartlangModal'); openSettings()">←</div>
@@ -3078,7 +3211,7 @@
             <p style="color:#a0b3c5; font-size:12px; margin-top:8px; text-align:center;">Автоматично змінювати мову вводу залежно від тексту</p>
         </div>
 
-        <!-- Modal: PrioritySort (окремий перемикач) -->
+        <!-- Modal: PrioritySort -->
         <div class="modal" id="prioritySortModal">
             <div class="modal-header">
                 <div class="modal-back" onclick="closeModal('prioritySortModal'); openSettings()">←</div>
@@ -3168,7 +3301,7 @@
             </div>
             <textarea class="modal-textarea" id="postText" placeholder="Що у вас нового?" rows="4"></textarea>
             <div class="modal-actions">
-                <button class="modal-btn save" onclick="publishPost()">Опублікувати</button>
+                <button class="modal-btn save" onclick="publishPostToFeed()">Опублікувати</button>
                 <button class="modal-btn cancel" onclick="closeModal('addPostModal')">Скасувати</button>
             </div>
         </div>
@@ -3326,6 +3459,13 @@
             { id: 0, userName: "Анна", avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100", media: null, type: null, hashtag: "#ранок", theme: 1, comments: [] },
             { id: 1, userName: "Макс", avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100", media: null, type: null, hashtag: "#природа", theme: 3, comments: [] },
             { id: 2, userName: "Катя", avatar: "https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg?auto=compress&cs=tinysrgb&w=100", media: null, type: null, hashtag: "#подорожі", theme: 5, comments: [] }
+        ];
+        
+        // ========== ДАНІ ДЛЯ ПОСТІВ ==========
+        let postsData = [
+            { id: 1, author: { name: "Анна", nick: "anna_style", avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100" }, text: "Кто тоже думал что для подключения спотифая нужна иностранная карта? а нет, все работает с нашей. лайфхак дня 🎵", time: "2 год тому", likes: 12453, liked: false, comments: [] },
+            { id: 2, author: { name: "Макс", nick: "max_dev", avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=100" }, text: "наконец то сделал ремонт в зале 3 года собирался. результат 🔥", time: "5 год тому", likes: 23456, liked: true, comments: [] },
+            { id: 3, author: { name: "Катя", nick: "katya_travel", avatar: "https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg?auto=compress&cs=tinysrgb&w=100" }, text: "сегодня в метро видела парня который читал книгу и улыбался. так мило что кто то еще может получать удовольствие от бумажных книг 📚", time: "вчора", likes: 7892, liked: false, comments: [] }
         ];
         
         let postBgIntervals = {};
@@ -3754,8 +3894,98 @@
             document.getElementById('stickerHashtag').value = '#новийстік';
         }
 
+        // ========== ФУНКЦІЇ ДЛЯ ПОСТІВ ==========
+        function renderPosts() {
+            const feed = document.getElementById('postsFeed');
+            if (!feed) return;
+            
+            let html = `
+                <div class="create-post-card" onclick="openAddPostModal()">
+                    <span>+</span>
+                    <div>Створити новий пост</div>
+                    <p>поділіться думками</p>
+                </div>
+            `;
+            
+            postsData.forEach(post => {
+                html += `
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-avatar" style="background-image: url('${post.author.avatar}')"></div>
+                            <div class="post-author-info">
+                                <div class="post-author-name">${post.author.name}</div>
+                                <div class="post-author-nick">@${post.author.nick}</div>
+                            </div>
+                            <div class="post-time">${post.time}</div>
+                        </div>
+                        <div class="post-content">${post.text}</div>
+                        <div class="post-actions">
+                            <div class="post-action ${post.liked ? 'active-like' : ''}" onclick="likePost(${post.id})">
+                                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                                <span>${post.likes.toLocaleString()}</span>
+                            </div>
+                            <div class="post-action" onclick="commentOnPost(${post.id})">
+                                <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                <span>${post.comments.length}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            feed.innerHTML = html;
+        }
+        
+        function likePost(id) {
+            const post = postsData.find(p => p.id === id);
+            if (post) {
+                if (post.liked) {
+                    post.likes--;
+                    post.liked = false;
+                } else {
+                    post.likes++;
+                    post.liked = true;
+                    addNotification('❤️ Лайк', `Ви лайкнули пост @${post.author.nick}`);
+                }
+                renderPosts();
+            }
+        }
+        
+        function commentOnPost(id) {
+            const comment = prompt("Ваш коментар:");
+            if (comment) {
+                const post = postsData.find(p => p.id === id);
+                post.comments.push({ user: currentUser.name, text: comment, time: "щойно" });
+                addNotification('💬 Коментар', `Ви залишили коментар до посту`);
+                renderPosts();
+            }
+        }
+        
+        function openAddPostModal() {
+            document.getElementById('addPostModal').classList.add('active');
+        }
+        
+        function publishPostToFeed() {
+            const text = document.getElementById('postText').value.trim();
+            if (!text) return alert("Напишіть щось");
+            
+            postsData.unshift({
+                id: Date.now(),
+                author: { name: currentUser.name, nick: currentUser.nick, avatar: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=100" },
+                text: text,
+                time: "щойно",
+                likes: 0,
+                liked: false,
+                comments: []
+            });
+            
+            renderPosts();
+            closeModal('addPostModal');
+            document.getElementById('postText').value = '';
+            addNotification('✨ Новий пост', 'Ваш пост опубліковано!');
+        }
+
         // ========== ОСТАЛЬНЫЕ ФУНКЦИИ ИЗ ТВОЕГО КОДА ==========
-        // (сохраняем все твои функции без изменений)
         
         window.navigate = function(screenId, element) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -3772,6 +4002,9 @@
             }
             if (screenId === 'feedScreen') {
                 renderFeed();
+            }
+            if (screenId === 'postsScreen') {
+                renderPosts();
             }
             if (screenId === 'chatScreen') {
                 document.getElementById('regularChats').style.display = 'flex';
@@ -4399,7 +4632,7 @@
                         </div>
                         <div class="threads-content">${post.text}</div>
                         <div class="threads-actions">
-                            <div class="threads-action ${post.liked ? 'active-like' : ''}" onclick="likePost(${post.id})">
+                            <div class="threads-action ${post.liked ? 'active-like' : ''}" onclick="likePostThread(${post.id})">
                                 <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                                 ${post.likes.toLocaleString()}
                             </div>
@@ -4430,6 +4663,20 @@
             });
             
             feed.innerHTML = threadsHtml;
+        }
+        
+        function likePostThread(id) {
+            const post = threadsPosts.find(p => p.id === id);
+            if (post) {
+                if (post.liked) {
+                    post.likes--;
+                    post.liked = false;
+                } else {
+                    post.likes++;
+                    post.liked = true;
+                }
+                loadThreads();
+            }
         }
 
         function initVoiceMessages() {
@@ -4779,19 +5026,10 @@
             }
         };
 
-        window.likePost = function(id) {
-            const post = threadsPosts.find(p => p.id === id);
-            if (post) {
-                if (post.liked) {
-                    post.likes--;
-                    post.liked = false;
-                } else {
-                    post.likes++;
-                    post.liked = true;
-                }
-                loadThreads();
-            }
-        };
+        window.likePost = likePost;
+        window.commentOnPost = commentOnPost;
+        window.openAddPostModal = openAddPostModal;
+        window.publishPostToFeed = publishPostToFeed;
 
         window.createThreadPost = function() {
             openAddPost();
@@ -4831,6 +5069,7 @@
             loadBigCircles();
             loadThreads();
             renderFeed();
+            renderPosts();
             
             applyPattern(savedPattern);
             
