@@ -1646,7 +1646,8 @@
 
     const chatList = document.getElementById('chatList');
     const chatDialogAvatar = document.getElementById('chatDialogAvatar');
-    const chatDialogName = document.getElementById('chatDialogName');
+    theChatDialogName = document.getElementById('chatDialogName');
+    const chatDialogName = theChatDialogName;
     const chatDialogNick = document.getElementById('chatDialogNick');
     const chatDialogBody = document.getElementById('chatDialogBody');
     const chatInput = document.getElementById('chatInput');
@@ -1869,15 +1870,16 @@
       const text = (feedText.value || '').trim();
       const file = feedImage.files[0];
 
-      if (!text && !file) return;
+      if (!text || !file) {
+        alert('Нужны и текст, и фото.');
+        return;
+      }
 
       let imageURL = '';
       try {
-        if (file) {
-          const ref = storage.ref().child(`posts/${state.currentUser.uid}/${Date.now()}-${file.name}`);
-          await ref.put(file);
-          imageURL = await ref.getDownloadURL();
-        }
+        const ref = storage.ref().child(`posts/${state.currentUser.uid}/${Date.now()}-${file.name}`);
+        await ref.put(file);
+        imageURL = await ref.getDownloadURL();
 
         await db.collection('posts').add({
           authorId: state.currentUser.uid,
@@ -1890,6 +1892,7 @@
         feedImage.value = '';
       } catch (e) {
         console.error('Ошибка публикации поста', e);
+        alert('Не удалось опубликовать пост (проверь правила Firestore/Storage).');
       }
     });
 
@@ -1924,7 +1927,6 @@
       feedEmptyText.style.display = 'none';
 
       state.posts.forEach(post => {
-        const user = getUserFromCache(post.authorId);
         const reactions = state.postReactions[post.id] || { fire: 0 };
 
         const card = document.createElement('div');
@@ -2198,7 +2200,7 @@
       chatList.innerHTML = '';
       const q = filter.toLowerCase().trim();
 
-      Object.values(state.usersCache)
+      const users = Object.values(state.usersCache)
         .filter(u => u.id !== currentId)
         .filter(u => {
           if (!q) return true;
@@ -2207,30 +2209,46 @@
             (u.nick || '').toLowerCase().includes(q) ||
             (u.email || '').toLowerCase().includes(q)
           );
-        })
-        .forEach(u => {
-          const key = chatKey(currentId, u.id);
-          const msgs = state.messages[key] || [];
-          const last = msgs[msgs.length - 1];
-          const item = document.createElement('div');
-          item.className = 'chat-item' + (u.id === currentChatUserId ? ' active' : '');
-          item.dataset.chatId = u.id;
-          item.innerHTML = `
-            <div class="chat-avatar">
-              ${u.avatar ? `<img src="${u.avatar}" alt="">` : ''}
-            </div>
-            <div>
-              <div class="chat-main">${u.name || u.email}</div>
-              <div class="chat-sub">${last ? last.text : (u.nick || 'Нет сообщений')}</div>
-            </div>
-          `;
-          item.addEventListener('click', () => {
-            currentChatUserId = u.id;
-            renderChatList(userSearch.value);
-            listenMessagesForChat(currentId, currentChatUserId);
-          });
-          chatList.appendChild(item);
         });
+
+      if (!users.length) {
+        const empty = document.createElement('div');
+        empty.style.padding = '10px 12px';
+        empty.style.fontSize = '13px';
+        empty.style.color = '#8e8e8e';
+        empty.textContent = 'Пока нет собеседников.';
+        chatList.appendChild(empty);
+        return;
+      }
+
+      users.forEach(u => {
+        const key = chatKey(currentId, u.id);
+        const msgs = state.messages[key] || [];
+        const last = msgs[msgs.length - 1];
+        const item = document.createElement('div');
+        item.className = 'chat-item' + (u.id === currentChatUserId ? ' active' : '');
+        item.dataset.chatId = u.id;
+        item.innerHTML = `
+          <div class="chat-avatar">
+            ${u.avatar ? `<img src="${u.avatar}" alt="">` : ''}
+          </div>
+          <div>
+            <div class="chat-main">${u.name || u.email}</div>
+            <div class="chat-sub">${last ? last.text : (u.nick || 'Нет сообщений')}</div>
+          </div>
+        `;
+        item.addEventListener('click', () => {
+          currentChatUserId = u.id;
+          renderChatList(userSearch.value);
+          listenMessagesForChat(currentId, currentChatUserId);
+        });
+        chatList.appendChild(item);
+      });
+
+      if (!currentChatUserId && users.length) {
+        currentChatUserId = users[0].id;
+        listenMessagesForChat(currentId, currentChatUserId);
+      }
     }
 
     function renderChatDialog() {
@@ -2423,9 +2441,11 @@
       await ensureUserDoc(user);
       loginWrapper.style.display = 'none';
       appRoot.style.display = 'flex';
+
       listenUsers();
       listenPostsFromFirestore();
       listenStikiFromFirestore();
+
       currentChatUserId = null;
       renderChatList(userSearch.value);
       renderChatDialog();
