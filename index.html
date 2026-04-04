@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -19,15 +20,11 @@
       display: flex;
       overflow: hidden;
       background: #000;
-      background-image: url('bg-nature.jpg'); /* фон природы — подставь свой файл */
+      background-image: url('bg-nature.jpg');
       background-size: cover;
       background-position: center;
     }
 
-    body.theme-paper {
-    }
-
-    /* LOGIN */
     .login-wrapper {
       position: fixed;
       inset: 0;
@@ -123,7 +120,7 @@
     .login-file {
       font-size: 12px;
       text-align: left;
-      color: #6b7280;
+      color: #4b5563;
     }
 
     .login-btn {
@@ -165,7 +162,6 @@
       color: #6b7280;
     }
 
-    /* APP LAYOUT */
     .app {
       flex: 1;
       display: none;
@@ -270,13 +266,6 @@
       letter-spacing: 0.08em;
     }
 
-    .nav-logo-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-    }
-
     .nav-items {
       margin-top: 10px;
       display: flex;
@@ -347,7 +336,6 @@
       display: block;
     }
 
-    /* STORIES / STIKI BAR */
     .stories-bar {
       max-width: 600px;
       margin: 0 auto 12px auto;
@@ -423,7 +411,6 @@
       transform: translateY(-1px);
     }
 
-    /* FEED */
     .feed-column {
       max-width: 600px;
       margin: 0 auto;
@@ -557,7 +544,6 @@
       cursor: pointer;
     }
 
-    /* STIKI */
     .stiki-upload {
       max-width: 520px;
       margin: 0 auto 10px auto;
@@ -642,7 +628,6 @@
       text-align: center;
     }
 
-    /* CHATS */
     .chats-layout {
       max-width: 980px;
       margin: 0 auto;
@@ -776,7 +761,6 @@
       white-space: nowrap;
     }
 
-    /* PASSPORT */
     .passport-layout {
       max-width: 980px;
       margin: 0 auto;
@@ -955,7 +939,6 @@
       font-size: 12px;
     }
 
-    /* PROFILE */
     .profile-header {
       max-width: 720px;
       margin: 0 auto 16px auto;
@@ -1108,7 +1091,6 @@
       background-size: cover;
     }
 
-    /* MODAL */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -1252,9 +1234,9 @@
     }
   </style>
 </head>
-<body class="theme-paper">
+<body>
 
-  <!-- LOGIN SCREEN -->
+  <!-- LOGIN -->
   <div class="login-wrapper" id="loginWrapper">
     <div class="login-card">
       <div class="login-logo">RENITEA</div>
@@ -1265,14 +1247,14 @@
         <button class="login-tab" data-tab="register">Создать аккаунт</button>
       </div>
 
-      <!-- Форма входа -->
+      <!-- Вход -->
       <div class="login-form" id="loginForm">
-        <input type="email" class="login-input" id="loginEmail" placeholder="Email" autocomplete="off">
-        <input type="password" class="login-input" id="loginPass" placeholder="Пароль" autocomplete="off">
+        <input type="email" class="login-input" id="loginEmail" placeholder="Email">
+        <input type="password" class="login-input" id="loginPass" placeholder="Пароль">
         <button class="login-btn" id="loginBtn">Войти</button>
       </div>
 
-      <!-- Форма регистрации -->
+      <!-- Регистрация -->
       <div class="login-form" id="registerForm" style="display:none;">
         <input type="text" class="login-input" id="regName" placeholder="Имя">
         <input type="text" class="login-input" id="regNick" placeholder="Никнейм">
@@ -1293,6 +1275,7 @@
     </div>
   </div>
 
+  <!-- APP -->
   <div class="app" id="appRoot">
     <header class="topbar">
       <div class="brand">RENITEA</div>
@@ -1336,12 +1319,6 @@
               </div>
               <span>София</span>
             </div>
-            <div class="story-item">
-              <div class="story-avatar-wrap">
-                <div class="story-avatar"></div>
-              </div>
-              <span>Арсеков</span>
-            </div>
           </div>
 
           <div class="new-post-form">
@@ -1367,24 +1344,6 @@
                 <div class="story-avatar"></div>
               </div>
               <span>Давид</span>
-            </div>
-            <div class="story-item">
-              <div class="story-avatar-wrap">
-                <div class="story-avatar"></div>
-              </div>
-              <span>Полина</span>
-            </div>
-            <div class="story-item">
-              <div class="story-avatar-wrap">
-                <div class="story-avatar"></div>
-              </div>
-              <span>Ваня</span>
-            </div>
-            <div class="story-item">
-              <div class="story-avatar-wrap">
-                <div class="story-avatar"></div>
-              </div>
-              <span>София</span>
             </div>
           </div>
 
@@ -1486,12 +1445,6 @@
                   </div>
                   <span>Ночь</span>
                 </div>
-                <div class="passport-story-item">
-                  <div class="passport-story-avatar-wrap">
-                    <div class="passport-story-avatar"></div>
-                  </div>
-                  <span>Друзья</span>
-                </div>
               </div>
             </div>
 
@@ -1515,12 +1468,8 @@
                   <div class="profile-location">Кёльн · путешествия, фото, обычные дни</div>
                 </div>
                 <div class="profile-actions">
-                  <button class="btn-primary" id="editProfileBtn">
-                    Редактировать
-                  </button>
-                  <button class="btn-ghost" id="logoutBtn">
-                    Выйти
-                  </button>
+                  <button class="btn-primary" id="editProfileBtn">Редактировать</button>
+                  <button class="btn-ghost" id="logoutBtn">Выйти</button>
                 </div>
               </div>
               <div class="profile-stats">
@@ -1542,12 +1491,9 @@
         </section>
       </main>
 
-      <!-- НАВИГАЦИЯ СПРАВА -->
+      <!-- НАВИГАЦИЯ -->
       <aside class="right-nav">
-        <div class="nav-logo-box" id="navLogoBox">
-          RENI
-          <input type="file" id="navLogoInput" accept="image/*" style="display:none">
-        </div>
+        <div class="nav-logo-box" id="navLogoBox">RENI</div>
 
         <div class="nav-items">
           <div class="nav-block">
@@ -1640,7 +1586,7 @@
     </div>
   </div>
 
-  <!-- Firebase compat -->
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -1662,7 +1608,6 @@
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-    // ---------- DOM ----------
     const loginWrapper = document.getElementById('loginWrapper');
     const appRoot = document.getElementById('appRoot');
 
@@ -1732,7 +1677,6 @@
 
     const navItems = document.querySelectorAll('.nav-item');
 
-    // ---------- STATE ----------
     const state = {
       currentUser: null,
       usersCache: {},
@@ -1748,7 +1692,6 @@
     let unsubscribeMessages = null;
     let unsubscribeUsers = null;
 
-    // ---------- HELPERS ----------
     function formatTime(ts) {
       const d = new Date(ts);
       return d.toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
@@ -1774,11 +1717,11 @@
       if (!snap.exists) {
         await ref.set({
           email: user.email,
-          name: user.email.split('@')[0],
+          name: user.displayName || user.email.split('@')[0],
           nick: '@' + user.email.split('@')[0],
           persona: '',
           bio: '',
-          avatar: '',
+          avatar: user.photoURL || '',
           followers: 0,
           following: 0,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1798,7 +1741,7 @@
       });
     }
 
-    // ---------- LOGIN TABS (исправлено разделение) ----------
+    // ТАБЫ ВХОД / РЕГИСТРАЦИЯ — ЧИСТАЯ ЛОГИКА
     loginTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         loginTabs.forEach(t => t.classList.remove('active'));
@@ -1817,7 +1760,7 @@
       });
     });
 
-    // ---------- AUTH: LOGIN ----------
+    // ВХОД
     loginBtn.addEventListener('click', async () => {
       loginError.textContent = '';
       const email = (loginEmail.value || '').trim();
@@ -1833,11 +1776,11 @@
         await afterLogin(cred.user);
       } catch (e) {
         console.error(e);
-        loginError.textContent = 'Неверный email или пароль.';
+        loginError.textContent = e.code + ' — ' + (e.message || 'Ошибка входа.');
       }
     });
 
-    // ---------- AUTH: REGISTER ----------
+    // РЕГИСТРАЦИЯ С АВАТАРОМ
     registerBtn.addEventListener('click', async () => {
       loginError.textContent = '';
       const name = regName.value.trim();
@@ -1891,25 +1834,14 @@
         await afterLogin(user);
       } catch (e) {
         console.error(e);
-        if (e.code === 'auth/email-already-in-use') {
-          loginError.textContent = 'Этот email уже используется.';
-        } else {
-          loginError.textContent = 'Ошибка при регистрации.';
-        }
+        loginError.textContent = e.code + ' — ' + (e.message || 'Ошибка при регистрации.');
       }
     });
 
-    // ENTER KEY
     loginPass.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
         loginBtn.click();
-      }
-    });
-    loginEmail.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        loginPass.focus();
       }
     });
 
@@ -1920,7 +1852,6 @@
       }
     });
 
-    // ---------- POSTS ----------
     function renderPosts() {
       feedColumn.innerHTML = '';
       state.posts.forEach(p => {
@@ -1989,7 +1920,6 @@
       newPostText.value = '';
     });
 
-    // ---------- STIKI ----------
     function renderStiki() {
       stikiWrapper.innerHTML = '';
       if (!state.stiki.length) {
@@ -2041,24 +1971,6 @@
         });
     }
 
-    stikiInput.addEventListener('change', async (e) => {
-      const files = Array.from(e.target.files || []);
-      if (!files.length || !state.currentUser) return;
-
-      for (const file of files) {
-        const ref = storage.ref().child(`stiki/${state.currentUser.uid}/${Date.now()}-${file.name}`);
-        await ref.put(file);
-        const url = await ref.getDownloadURL();
-        await db.collection('stiki').add({
-          authorId: state.currentUser.uid,
-          videoURL: url,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-      }
-      stikiInput.value = '';
-    });
-
-    // ---------- PROFILE ----------
     function renderProfile() {
       if (!state.currentUser) return;
       const userDoc = getUserFromCache(state.currentUser.uid);
@@ -2067,6 +1979,8 @@
       profileNickEl.textContent = userDoc.nick || '—';
       profileBioEl.textContent = userDoc.bio || '—';
       profileAvatarImg.src = userDoc.avatar || '';
+      passportPhoto.style.backgroundImage = userDoc.avatar ? `url('${userDoc.avatar}')` : '';
+      passportPhoto.style.backgroundSize = 'cover';
       profilePostsCount.textContent = state.posts.filter(p => p.authorId === state.currentUser.uid).length;
       profileFollowersCount.textContent = userDoc.followers || 0;
       profileFollowingCount.textContent = userDoc.following || 0;
@@ -2118,7 +2032,6 @@
       if (e.target === editProfileModal) closeEditProfileModal();
     });
 
-    // ---------- PASSPORT ----------
     function renderPassport() {
       if (!state.currentUser) return;
       const userDoc = getUserFromCache(state.currentUser.uid);
@@ -2126,7 +2039,6 @@
       passportName.textContent = userDoc.name || '—';
       passportNick.textContent = userDoc.nick || '—';
       passportPersona.textContent = userDoc.persona || '—';
-      passportPhoto.style.background = '#ddd';
       const userPosts = state.posts.filter(p => p.authorId === state.currentUser.uid);
       passportMomentsCount.textContent = userPosts.length;
       const visas = state.visas[state.currentUser.uid] || [];
@@ -2143,7 +2055,6 @@
       });
     }
 
-    // ---------- CHATS ----------
     function renderChatList(filter = '') {
       if (!state.currentUser) return;
       const currentId = state.currentUser.uid;
@@ -2272,7 +2183,6 @@
       renderChatList(userSearch.value);
     });
 
-    // ---------- NAV ----------
     navItems.forEach(item => {
       item.addEventListener('click', () => {
         const screen = item.dataset.screen;
@@ -2283,12 +2193,10 @@
       });
     });
 
-    // ---------- LOGOUT ----------
     logoutBtn.addEventListener('click', async () => {
       await auth.signOut();
     });
 
-    // ---------- AFTER LOGIN ----------
     async function afterLogin(user) {
       state.currentUser = user;
       await ensureUserDoc(user);
@@ -2317,4 +2225,5 @@
   </script>
 </body>
 </html>
-```
+
+Если после этого всё равно пишет «Ошибка при регистрации» — напиши, какой **код ошибки** показывает (он теперь выводится полностью внизу формы)
