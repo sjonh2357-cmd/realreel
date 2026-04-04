@@ -351,6 +351,43 @@
       color: #6b7280;
     }
 
+    .feed-composer {
+      max-width: 600px;
+      margin: 0 auto 16px auto;
+      background: #fffdf7;
+      border-radius: 12px;
+      border: 1px solid #e0d5c2;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .feed-composer textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #e0d5c2;
+      padding: 6px 8px;
+      resize: vertical;
+      min-height: 50px;
+      max-height: 120px;
+      outline: none;
+      background: #fffdf7;
+      font-size: 13px;
+    }
+
+    .feed-composer button {
+      align-self: flex-end;
+      border-radius: 999px;
+      border: none;
+      padding: 6px 14px;
+      font-size: 12px;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+    }
+
     .recommendations-title {
       max-width: 600px;
       margin: 0 auto 8px auto;
@@ -555,6 +592,30 @@
       margin-top: 2px;
     }
 
+    .stiki-reactions {
+      position: absolute;
+      left: 10px;
+      bottom: 16px;
+      display: flex;
+      gap: 8px;
+      background: rgba(0,0,0,0.35);
+      padding: 4px 6px;
+      border-radius: 999px;
+      font-size: 16px;
+    }
+
+    .stiki-reaction {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-size: 14px;
+    }
+
+    .stiki-reaction small {
+      font-size: 11px;
+    }
+
     .stiki-empty {
       max-width: 520px;
       margin: 20px auto 0 auto;
@@ -598,6 +659,21 @@
       background: #f0e6d5;
     }
 
+    .chat-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ddd;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .chat-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .chat-main {
       font-size: 14px;
       font-weight: 600;
@@ -629,6 +705,13 @@
       align-items: center;
       gap: 8px;
       justify-content: space-between;
+    }
+
+    .chat-dialog-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
     }
 
     .chat-dialog-body {
@@ -778,6 +861,8 @@
       background: #ddd;
       overflow: hidden;
       border: 2px solid rgba(148,163,184,0.8);
+      background-size: cover;
+      background-position: center;
     }
 
     .passport-row {
@@ -1221,8 +1306,14 @@
 
     <div class="main-row">
       <main class="content">
-        <!-- ПОСТЫ (без постов, только текст + рекомендации) -->
+        <!-- ПОСТЫ -->
         <section class="screen active" id="screen-posts">
+          <div class="feed-composer">
+            <div>Опубликовать в ленте</div>
+            <textarea id="feedText" placeholder="Что у вас сегодня?"></textarea>
+            <button id="feedPublishBtn">Опубликовать</button>
+          </div>
+
           <div class="empty-feed-text">
             Лента пуста, но вы можете оживить ее.
           </div>
@@ -1231,7 +1322,7 @@
           <div class="recommendations-list" id="recommendationsList"></div>
         </section>
 
-        <!-- СТИКИ (со сториз) -->
+        <!-- СТИКИ -->
         <section class="screen" id="screen-stiki">
           <div class="stories-bar">
             <div class="story-item">
@@ -1283,9 +1374,12 @@
 
             <div class="chat-dialog" id="chatDialog">
               <div class="chat-dialog-header">
-                <div style="display:flex;align-items:center;gap:8px;cursor:pointer;" id="chatHeaderProfile">
-                  <div class="avatar" id="chatDialogAvatar"></div>
-                  <div class="chat-dialog-name" id="chatDialogName"></div>
+                <div class="chat-dialog-header-left" id="chatHeaderProfile">
+                  <div class="chat-avatar" id="chatDialogAvatar"></div>
+                  <div>
+                    <div class="chat-main" id="chatDialogName"></div>
+                    <div class="chat-sub" id="chatDialogNick"></div>
+                  </div>
                 </div>
               </div>
               <div class="chat-dialog-body" id="chatDialogBody"></div>
@@ -1388,6 +1482,7 @@
                 </div>
                 <div class="profile-actions">
                   <button class="btn-primary" id="editProfileBtn">Редактировать</button>
+                  <button class="btn-ghost" id="profileMessageBtn">Написать</button>
                   <button class="btn-ghost" id="logoutBtn">Выйти</button>
                 </div>
               </div>
@@ -1550,6 +1645,9 @@
 
     const userSearch = document.getElementById('userSearch');
 
+    const feedText = document.getElementById('feedText');
+    const feedPublishBtn = document.getElementById('feedPublishBtn');
+
     const stikiInput = document.getElementById('stikiInput');
     const stikiWrapper = document.getElementById('stikiWrapper');
     const stikiEmptyText = document.getElementById('stikiEmptyText');
@@ -1557,6 +1655,7 @@
     const chatList = document.getElementById('chatList');
     const chatDialogAvatar = document.getElementById('chatDialogAvatar');
     const chatDialogName = document.getElementById('chatDialogName');
+    const chatDialogNick = document.getElementById('chatDialogNick');
     const chatDialogBody = document.getElementById('chatDialogBody');
     const chatInput = document.getElementById('chatInput');
     const chatSendBtn = document.getElementById('chatSendBtn');
@@ -1580,6 +1679,7 @@
     const profileGrid = document.getElementById('profileGrid');
 
     const editProfileBtn = document.getElementById('editProfileBtn');
+    const profileMessageBtn = document.getElementById('profileMessageBtn');
     const logoutBtn = document.getElementById('logoutBtn');
 
     const editProfileModal = document.getElementById('editProfileModal');
@@ -1601,7 +1701,8 @@
       stiki: [],
       messages: {},
       visas: {},
-      viewProfileUserId: null
+      viewProfileUserId: null,
+      stikiReactions: {} // {stikiId: {emoji: count}}
     };
 
     let currentChatUserId = null;
@@ -1768,6 +1869,22 @@
       }
     });
 
+    feedPublishBtn.addEventListener('click', async () => {
+      if (!state.currentUser) return;
+      const text = (feedText.value || '').trim();
+      if (!text) return;
+      try {
+        await db.collection('posts').add({
+          authorId: state.currentUser.uid,
+          text,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        feedText.value = '';
+      } catch (e) {
+        console.error('Ошибка публикации поста', e);
+      }
+    });
+
     function listenPostsFromFirestore() {
       if (unsubscribePosts) unsubscribePosts();
       unsubscribePosts = db.collection('posts')
@@ -1787,6 +1904,28 @@
         });
     }
 
+    stikiInput.addEventListener('change', async () => {
+      if (!state.currentUser) return;
+      const files = Array.from(stikiInput.files || []);
+      if (!files.length) return;
+
+      for (const file of files) {
+        try {
+          const ref = storage.ref().child(`stiki/${state.currentUser.uid}/${Date.now()}-${file.name}`);
+          await ref.put(file);
+          const url = await ref.getDownloadURL();
+          await db.collection('stiki').add({
+            authorId: state.currentUser.uid,
+            videoURL: url,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        } catch (e) {
+          console.error('Ошибка загрузки стика', e);
+        }
+      }
+      stikiInput.value = '';
+    });
+
     function renderStiki() {
       stikiWrapper.innerHTML = '';
       if (!state.stiki.length) {
@@ -1795,6 +1934,7 @@
       }
       stikiEmptyText.style.display = 'none';
       state.stiki.forEach(s => {
+        const reactions = state.stikiReactions[s.id] || { '🔥': 0, '😂': 0, '😢': 0, '❤️': 0 };
         const card = document.createElement('div');
         card.className = 'stiki-card';
         card.innerHTML = `
@@ -1803,20 +1943,31 @@
           </div>
           <div class="stiki-actions">
             <div class="stiki-action">
-              <span>🔥</span>
-              <small>0</small>
+              <span>👁</span>
+              <small>стик</small>
             </div>
-            <div class="stiki-action">
-              <span>💬</span>
-              <small>0</small>
-            </div>
-            <div class="stiki-action">
-              <span>✉</span>
-              <small>подел.</small>
-            </div>
+          </div>
+          <div class="stiki-reactions">
+            ${Object.keys(reactions).map(e => `
+              <div class="stiki-reaction" data-id="${s.id}" data-emoji="${e}">
+                <span>${e}</span><small>${reactions[e]}</small>
+              </div>
+            `).join('')}
           </div>
         `;
         stikiWrapper.appendChild(card);
+      });
+
+      stikiWrapper.querySelectorAll('.stiki-reaction').forEach(el => {
+        el.addEventListener('click', () => {
+          const id = el.dataset.id;
+          const emoji = el.dataset.emoji;
+          if (!state.stikiReactions[id]) {
+            state.stikiReactions[id] = { '🔥': 0, '😂': 0, '😢': 0, '❤️': 0 };
+          }
+          state.stikiReactions[id][emoji] += 1;
+          renderStiki();
+        });
       });
     }
 
@@ -1858,8 +2009,10 @@
 
       if (uid === state.currentUser.uid) {
         editProfileBtn.style.display = 'inline-flex';
+        profileMessageBtn.style.display = 'none';
       } else {
         editProfileBtn.style.display = 'none';
+        profileMessageBtn.style.display = 'inline-flex';
       }
     }
 
@@ -1959,10 +2112,12 @@
           item.className = 'chat-item' + (u.id === currentChatUserId ? ' active' : '');
           item.dataset.chatId = u.id;
           item.innerHTML = `
-            <div class="avatar"></div>
+            <div class="chat-avatar">
+              ${u.avatar ? `<img src="${u.avatar}" alt="">` : ''}
+            </div>
             <div>
               <div class="chat-main">${u.name || u.email}</div>
-              <div class="chat-sub">${last ? last.text : 'Нет сообщений'}</div>
+              <div class="chat-sub">${last ? last.text : (u.nick || 'Нет сообщений')}</div>
             </div>
           `;
           item.addEventListener('click', () => {
@@ -1976,8 +2131,9 @@
 
     function renderChatDialog() {
       if (!state.currentUser || !currentChatUserId) {
-        chatDialogAvatar.style.background = '#ddd';
+        chatDialogAvatar.innerHTML = '';
         chatDialogName.textContent = '';
+        chatDialogNick.textContent = '';
         chatDialogBody.innerHTML = '';
         return;
       }
@@ -1985,12 +2141,14 @@
       const other = getUserFromCache(currentChatUserId);
       chatDialogBody.innerHTML = '';
       if (!other) {
-        chatDialogAvatar.style.background = '#ddd';
+        chatDialogAvatar.innerHTML = '';
         chatDialogName.textContent = '';
+        chatDialogNick.textContent = '';
         return;
       }
-      chatDialogAvatar.style.background = '#ddd';
+      chatDialogAvatar.innerHTML = other.avatar ? `<img src="${other.avatar}" alt="">` : '';
       chatDialogName.textContent = other.name || other.email;
+      chatDialogNick.textContent = other.nick || '';
 
       const key = chatKey(currentId, other.id);
       const msgs = state.messages[key] || [];
@@ -2035,21 +2193,38 @@
 
       const chatId = chatKey(currentId, otherId);
 
-      await db.collection('chats').doc(chatId).set({
-        user1: currentId,
-        user2: otherId,
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true });
+      try {
+        await db.collection('chats').doc(chatId).set({
+          user1: currentId,
+          user2: otherId,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
 
-      await db.collection('messages').add({
-        chatId,
-        fromId: currentId,
-        toId: otherId,
-        text,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
+        const now = new Date();
 
-      chatInput.value = '';
+        await db.collection('messages').add({
+          chatId,
+          fromId: currentId,
+          toId: otherId,
+          text,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        // локально сразу добавляем, чтобы не было ощущения "пропало"
+        if (!state.messages[chatId]) state.messages[chatId] = [];
+        state.messages[chatId].push({
+          fromId: currentId,
+          toId: otherId,
+          text,
+          time: formatTime(now.getTime())
+        });
+        renderChatList(userSearch.value);
+        renderChatDialog();
+
+        chatInput.value = '';
+      } catch (e) {
+        console.error('Ошибка отправки сообщения', e);
+      }
     });
 
     chatInput.addEventListener('keydown', (e) => {
@@ -2116,7 +2291,9 @@
           const card = document.createElement('div');
           card.className = 'rec-card';
           card.innerHTML = `
-            <div class="rec-avatar"></div>
+            <div class="rec-avatar">
+              ${u.avatar ? `<img src="${u.avatar}" alt="" style="width:100%;height:100%;object-fit:cover;">` : ''}
+            </div>
             <div>
               <div class="rec-main">${u.name || u.email}</div>
               <div class="rec-sub">${u.nick || ''}</div>
@@ -2130,6 +2307,18 @@
     chatHeaderProfile.addEventListener('click', () => {
       if (!currentChatUserId) return;
       openProfile(currentChatUserId);
+    });
+
+    profileMessageBtn.addEventListener('click', () => {
+      if (!state.currentUser || !state.viewProfileUserId) return;
+      const otherId = state.viewProfileUserId;
+      if (otherId === state.currentUser.uid) return;
+      currentChatUserId = otherId;
+      navItems.forEach(i => i.classList.remove('active'));
+      const chatsNav = document.querySelector('.nav-item[data-screen="chats"]');
+      if (chatsNav) chatsNav.classList.add('active');
+      showScreen('chats');
+      listenMessagesForChat(state.currentUser.uid, otherId);
     });
 
     async function afterLogin(user) {
@@ -2165,4 +2354,5 @@
   </script>
 </body>
 </html>
-```
+
+Если что‑то из этого всё ещё ведёт себя не так, как ты ожидаешь — скажи конкретно, какой экран и какое действие, и добьём до идеала.
