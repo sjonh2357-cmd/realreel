@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -30,9 +30,126 @@
       background-size: auto, 100% 100%, 100% 100%;
     }
 
+    /* LOGIN SCREEN */
+
+    .login-wrapper {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(rgba(10, 35, 20, 0.55), rgba(10, 35, 20, 0.55)),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2000;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 360px;
+      background: rgba(255, 253, 247, 0.96);
+      border-radius: 16px;
+      border: 1px solid #e0d5c2;
+      padding: 24px 26px 20px 26px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      text-align: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .login-logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, #ff6cab, #ffdd59, #4cd964, #34aadc, #5856d6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .login-subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 18px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .login-input {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #e0d5c2;
+      padding: 8px 10px;
+      font-size: 13px;
+      outline: none;
+      background: #fffdf7;
+      text-align: left;
+    }
+
+    .login-input:focus {
+      border-color: #111;
+      background: #ffffff;
+    }
+
+    .login-btn {
+      margin-top: 4px;
+      width: 100%;
+      border-radius: 8px;
+      border: none;
+      padding: 8px 10px;
+      font-size: 14px;
+      font-weight: 600;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+    }
+
+    .login-btn:hover {
+      background: #000;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    .login-error {
+      min-height: 16px;
+      font-size: 12px;
+      color: #b91c1c;
+      margin-bottom: 4px;
+    }
+
+    .login-footer-text {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+
+    .login-footer-text b {
+      font-weight: 600;
+      color: #6b7280;
+    }
+
+    .login-small-link {
+      color: #00376b;
+      cursor: pointer;
+    }
+
+    .login-small-link:hover {
+      text-decoration: underline;
+    }
+
     .app {
       flex: 1;
-      display: flex;
+      display: none; /* скрыто до логина */
       flex-direction: column;
       height: 100vh;
       min-width: 0;
@@ -1373,7 +1490,26 @@
   </style>
 </head>
 <body class="theme-paper">
-  <div class="app">
+
+  <!-- LOGIN SCREEN -->
+  <div class="login-wrapper" id="loginWrapper">
+    <div class="login-card">
+      <div class="login-logo">RENITEA</div>
+      <div class="login-subtitle">Войдите, чтобы продолжить.</div>
+      <div class="login-form">
+        <input type="text" class="login-input" id="loginUser" placeholder="Логин" autocomplete="off">
+        <input type="password" class="login-input" id="loginPass" placeholder="Пароль" autocomplete="off">
+        <button class="login-btn" id="loginBtn">Войти</button>
+      </div>
+      <div class="login-error" id="loginError"></div>
+      <div class="login-footer-text">
+        Это закрытый доступ. Если вы здесь случайно — просто закройте вкладку.
+        <br>Проект: <b>Renitea / David</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="app" id="appRoot">
     <header class="topbar">
       <div class="brand">RENITEA</div>
       <div class="topbar-right">
@@ -1706,7 +1842,7 @@
             </div>
 
             <div class="visa-grid">
-              <!-- можно добавить карточки виз при необходимости -->
+              <!-- карточки виз при необходимости -->
             </div>
           </div>
         </section>
@@ -1928,6 +2064,54 @@ https://example.link/ivan</textarea>
   </div>
 
   <script>
+    // LOGIN LOGIC (обфускация логина/пароля)
+    (function() {
+      const loginWrapper = document.getElementById('loginWrapper');
+      const appRoot = document.getElementById('appRoot');
+      const loginUser = document.getElementById('loginUser');
+      const loginPass = document.getElementById('loginPass');
+      const loginBtn = document.getElementById('loginBtn');
+      const loginError = document.getElementById('loginError');
+
+      // "David"
+      const uCodes = [68,97,118,105,100];
+      // "Interval321!"
+      const pCodes = [73,110,116,101,114,118,97,108,51,50,49,33];
+
+      function decode(arr) {
+        return arr.map(c => String.fromCharCode(c)).join('');
+      }
+
+      const validUser = decode(uCodes);
+      const validPass = decode(pCodes);
+
+      function tryLogin() {
+        const u = (loginUser.value || '').trim();
+        const p = loginPass.value || '';
+        if (u === validUser && p === validPass) {
+          loginError.textContent = '';
+          loginWrapper.style.display = 'none';
+          appRoot.style.display = 'flex';
+        } else {
+          loginError.textContent = 'Неверный логин или пароль.';
+        }
+      }
+
+      loginBtn.addEventListener('click', tryLogin);
+      loginPass.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          tryLogin();
+        }
+      });
+      loginUser.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          loginPass.focus();
+        }
+      });
+    })();
+
     const screens = {
       posts: document.getElementById("screen-posts"),
       stiki: document.getElementById("screen-stiki"),
@@ -2164,3 +2348,4 @@ https://example.link/ivan</textarea>
   </script>
 </body>
 </html>
+```
