@@ -377,6 +377,10 @@
       font-size: 13px;
     }
 
+    .feed-composer input[type="file"] {
+      font-size: 12px;
+    }
+
     .feed-composer button {
       align-self: flex-end;
       border-radius: 999px;
@@ -386,6 +390,74 @@
       background: #111;
       color: #fff;
       cursor: pointer;
+    }
+
+    .feed-list {
+      max-width: 600px;
+      margin: 0 auto 16px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feed-post {
+      background: #fffdf7;
+      border-radius: 12px;
+      border: 1px solid #e0d5c2;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .feed-post-image {
+      width: 100%;
+      max-height: 420px;
+      background: #111;
+      overflow: hidden;
+    }
+
+    .feed-post-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .feed-post-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .feed-post-text {
+      flex: 1;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    .feed-post-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      font-size: 16px;
+    }
+
+    .feed-post-actions button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .feed-post-actions small {
+      font-size: 11px;
+      color: #6b7280;
     }
 
     .recommendations-title {
@@ -1024,20 +1096,6 @@
       margin-bottom: 6px;
     }
 
-    .profile-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .tag {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: #f0e6d5;
-    }
-
     .profile-grid {
       max-width: 720px;
       margin: 0 auto;
@@ -1052,6 +1110,14 @@
       border-radius: 8px;
       background-position: center;
       background-size: cover;
+      overflow: hidden;
+    }
+
+    .profile-grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .modal-backdrop {
@@ -1133,7 +1199,14 @@
     .modal-footer {
       margin-top: 12px;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .modal-footer-right {
+      display: flex;
       gap: 8px;
     }
 
@@ -1254,10 +1327,13 @@
           <div class="feed-composer">
             <div>Опубликовать в ленте</div>
             <textarea id="feedText" placeholder="Что у вас сегодня?"></textarea>
+            <input type="file" id="feedImage" accept="image/*">
             <button id="feedPublishBtn">Опубликовать</button>
           </div>
 
-          <div class="empty-feed-text">
+          <div class="feed-list" id="feedList"></div>
+
+          <div class="empty-feed-text" id="feedEmptyText">
             Лента пуста, но вы можете оживить ее.
           </div>
 
@@ -1403,12 +1479,6 @@
                 <span><b id="profileFollowingCount">0</b> подписки</span>
               </div>
               <div class="profile-bio" id="profileBio">—</div>
-              <div class="profile-tags" id="profileTags">
-                <div class="tag">фото</div>
-                <div class="tag">путешествия</div>
-                <div class="tag">улицы</div>
-                <div class="tag">музыка</div>
-              </div>
             </div>
           </div>
 
@@ -1503,10 +1573,17 @@
           <div class="modal-label">Био</div>
           <textarea class="modal-textarea" id="editProfileBioInput"></textarea>
         </div>
+        <div class="modal-field">
+          <div class="modal-label">Аватар</div>
+          <input type="file" class="modal-input" id="editProfileAvatarInput" accept="image/*">
+        </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-ghost" id="editProfileCancel">Отмена</button>
-        <button class="btn-primary" id="editProfileSave">Сохранить</button>
+        <button class="btn-ghost" id="modalLogoutBtn">Выйти</button>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="editProfileCancel">Отмена</button>
+          <button class="btn-primary" id="editProfileSave">Сохранить</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1557,7 +1634,10 @@
     const userSearch = document.getElementById('userSearch');
 
     const feedText = document.getElementById('feedText');
+    const feedImage = document.getElementById('feedImage');
     const feedPublishBtn = document.getElementById('feedPublishBtn');
+    const feedList = document.getElementById('feedList');
+    const feedEmptyText = document.getElementById('feedEmptyText');
 
     const stikiInput = document.getElementById('stikiInput');
     const stikiPublishBtn = document.getElementById('stikiPublishBtn');
@@ -1602,6 +1682,8 @@
     const editProfileNickInput = document.getElementById('editProfileNickInput');
     const editProfilePersonaInput = document.getElementById('editProfilePersonaInput');
     const editProfileBioInput = document.getElementById('editProfileBioInput');
+    const editProfileAvatarInput = document.getElementById('editProfileAvatarInput');
+    const modalLogoutBtn = document.getElementById('modalLogoutBtn');
 
     const navItems = document.querySelectorAll('.nav-item');
     const recommendationsList = document.getElementById('recommendationsList');
@@ -1614,7 +1696,8 @@
       messages: {},
       visas: {},
       viewProfileUserId: null,
-      stikiReactions: {}
+      stikiReactions: {},
+      postReactions: {}
     };
 
     let currentChatUserId = null;
@@ -1784,14 +1867,27 @@
     feedPublishBtn.addEventListener('click', async () => {
       if (!state.currentUser) return;
       const text = (feedText.value || '').trim();
-      if (!text) return;
+      const file = feedImage.files[0];
+
+      if (!text && !file) return;
+
+      let imageURL = '';
       try {
+        if (file) {
+          const ref = storage.ref().child(`posts/${state.currentUser.uid}/${Date.now()}-${file.name}`);
+          await ref.put(file);
+          imageURL = await ref.getDownloadURL();
+        }
+
         await db.collection('posts').add({
           authorId: state.currentUser.uid,
           text,
+          imageURL,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
+
         feedText.value = '';
+        feedImage.value = '';
       } catch (e) {
         console.error('Ошибка публикации поста', e);
       }
@@ -1807,13 +1903,75 @@
             return {
               id: doc.id,
               authorId: data.authorId,
-              text: data.text,
+              text: data.text || '',
+              imageURL: data.imageURL || '',
+              createdAt: data.createdAt,
               time: data.createdAt ? formatTime(data.createdAt.toDate().getTime()) : ''
             };
           });
+          renderFeed();
           renderProfileGrid();
           renderPassport();
         });
+    }
+
+    function renderFeed() {
+      feedList.innerHTML = '';
+      if (!state.posts.length) {
+        feedEmptyText.style.display = 'block';
+        return;
+      }
+      feedEmptyText.style.display = 'none';
+
+      state.posts.forEach(post => {
+        const user = getUserFromCache(post.authorId);
+        const reactions = state.postReactions[post.id] || { fire: 0 };
+
+        const card = document.createElement('div');
+        card.className = 'feed-post';
+
+        const imgBlock = document.createElement('div');
+        imgBlock.className = 'feed-post-image';
+        if (post.imageURL) {
+          imgBlock.innerHTML = `<img src="${post.imageURL}" alt="">`;
+        } else {
+          imgBlock.style.height = '0';
+          imgBlock.style.display = 'none';
+        }
+
+        const footer = document.createElement('div');
+        footer.className = 'feed-post-footer';
+
+        const textDiv = document.createElement('div');
+        textDiv.className = 'feed-post-text';
+        textDiv.textContent = post.text || '';
+
+        const actions = document.createElement('div');
+        actions.className = 'feed-post-actions';
+        actions.innerHTML = `
+          <button class="feed-fire-btn" data-id="${post.id}">🔥</button>
+          <small>${reactions.fire || 0}</small>
+          <button>⋯</button>
+          <button>✉️</button>
+        `;
+
+        footer.appendChild(textDiv);
+        footer.appendChild(actions);
+
+        card.appendChild(imgBlock);
+        card.appendChild(footer);
+
+        feedList.appendChild(card);
+      });
+
+      feedList.querySelectorAll('.feed-fire-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.id;
+          if (!state.postReactions[id]) state.postReactions[id] = { fire: 0 };
+          state.postReactions[id].fire += 1;
+          renderFeed();
+        });
+      });
     }
 
     stikiPublishBtn.addEventListener('click', async () => {
@@ -1930,9 +2088,12 @@
       const uid = state.viewProfileUserId || state.currentUser.uid;
       profileGrid.innerHTML = '';
       const userPosts = state.posts.filter(p => p.authorId === uid);
-      userPosts.forEach(() => {
+      userPosts.forEach(p => {
         const div = document.createElement('div');
         div.className = 'profile-grid-item';
+        if (p.imageURL) {
+          div.innerHTML = `<img src="${p.imageURL}" alt="">`;
+        }
         profileGrid.appendChild(div);
       });
     }
@@ -1946,6 +2107,7 @@
       editProfileNickInput.value = userDoc.nick || '';
       editProfilePersonaInput.value = userDoc.persona || '';
       editProfileBioInput.value = userDoc.bio || '';
+      editProfileAvatarInput.value = '';
       editProfileModal.classList.add('active');
     }
 
@@ -1959,18 +2121,51 @@
 
     editProfileSave.addEventListener('click', async () => {
       if (!state.currentUser) return;
-      const ref = db.collection('users').doc(state.currentUser.uid);
-      await ref.set({
-        name: editProfileNameInput.value.trim(),
-        nick: editProfileNickInput.value.trim(),
-        persona: editProfilePersonaInput.value.trim(),
-        bio: editProfileBioInput.value.trim()
-      }, { merge: true });
-      closeEditProfileModal();
+      const uid = state.currentUser.uid;
+      const ref = db.collection('users').doc(uid);
+
+      let avatarURL = null;
+      const file = editProfileAvatarInput.files[0];
+
+      try {
+        if (file) {
+          const storageRef = storage.ref().child(`avatars/${uid}/${Date.now()}-${file.name}`);
+          await storageRef.put(file);
+          avatarURL = await storageRef.getDownloadURL();
+        }
+
+        const updateData = {
+          name: editProfileNameInput.value.trim(),
+          nick: editProfileNickInput.value.trim(),
+          persona: editProfilePersonaInput.value.trim(),
+          bio: editProfileBioInput.value.trim()
+        };
+
+        if (avatarURL) {
+          updateData.avatar = avatarURL;
+          await auth.currentUser.updateProfile({
+            photoURL: avatarURL,
+            displayName: updateData.name
+          });
+        } else {
+          await auth.currentUser.updateProfile({
+            displayName: updateData.name
+          });
+        }
+
+        await ref.set(updateData, { merge: true });
+        closeEditProfileModal();
+      } catch (e) {
+        console.error('Ошибка обновления профиля', e);
+      }
     });
 
     editProfileModal.addEventListener('click', (e) => {
       if (e.target === editProfileModal) closeEditProfileModal();
+    });
+
+    modalLogoutBtn.addEventListener('click', async () => {
+      await auth.signOut();
     });
 
     function renderPassport() {
@@ -2076,7 +2271,9 @@
     function listenMessagesForChat(currentUserId, otherUserId) {
       const key = chatKey(currentUserId, otherUserId);
       const chatRef = db.collection('chats').doc(key);
+
       if (unsubscribeMessages) unsubscribeMessages();
+
       unsubscribeMessages = chatRef
         .collection('messages')
         .orderBy('createdAt', 'asc')
@@ -2090,6 +2287,7 @@
               time: data.createdAt ? formatTime(data.createdAt.toDate().getTime()) : ''
             };
           });
+
           renderChatList(userSearch.value);
           renderChatDialog();
         });
@@ -2098,6 +2296,7 @@
     chatSendBtn.addEventListener('click', async () => {
       const text = chatInput.value.trim();
       if (!text || !state.currentUser || !currentChatUserId) return;
+
       const currentId = state.currentUser.uid;
       const otherId = currentChatUserId;
 
@@ -2111,24 +2310,12 @@
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
-        const now = new Date();
-
         await chatRef.collection('messages').add({
           fromId: currentId,
           toId: otherId,
           text,
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-
-        if (!state.messages[key]) state.messages[key] = [];
-        state.messages[key].push({
-          fromId: currentId,
-          toId: otherId,
-          text,
-          time: formatTime(now.getTime())
-        });
-        renderChatList(userSearch.value);
-        renderChatDialog();
 
         chatInput.value = '';
       } catch (e) {
