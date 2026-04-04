@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>RENITEA — закрытая лента</title>
+  <title>RENITEA</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
@@ -14,10 +14,12 @@
     }
 
     body {
-      color: #111;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
-      overflow: hidden;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+      color: #111;
       background: #000;
       background-image: url('bg-nature.jpg');
       background-size: cover;
@@ -165,8 +167,9 @@
       flex: 1;
       display: none;
       flex-direction: column;
-      height: 100vh;
-      min-width: 0;
+      min-height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
       background: #f5f0e6;
       background-image:
         radial-gradient(circle at 0 0, rgba(0,0,0,0.04) 0, transparent 40%),
@@ -223,7 +226,8 @@
     .main-row {
       flex: 1;
       display: flex;
-      overflow: hidden;
+      overflow-y: auto;
+      overflow-x: hidden;
       min-height: 0;
       min-width: 0;
     }
@@ -335,6 +339,71 @@
       display: block;
     }
 
+    .empty-feed-text {
+      max-width: 600px;
+      margin: 40px auto 20px auto;
+      padding: 16px 18px;
+      border-radius: 12px;
+      border: 1px dashed #d4c7b3;
+      background: #fffdf7;
+      font-size: 14px;
+      text-align: center;
+      color: #6b7280;
+    }
+
+    .recommendations-title {
+      max-width: 600px;
+      margin: 0 auto 8px auto;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+    }
+
+    .recommendations-list {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .rec-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #e0d5c2;
+      background: #fffdf7;
+      cursor: pointer;
+    }
+
+    .rec-card:hover {
+      background: #f5ecdd;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    }
+
+    .rec-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ddd;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .rec-main {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .rec-sub {
+      font-size: 12px;
+      color: #8e8e8e;
+    }
+
     .stories-bar {
       max-width: 600px;
       margin: 0 auto 12px auto;
@@ -408,139 +477,6 @@
 
     .story-item:hover {
       transform: translateY(-1px);
-    }
-
-    .feed-column {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .feed-post {
-      background: #fffdf7;
-      border-radius: 12px;
-      border: 1px solid #e0d5c2;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .feed-post:hover {
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    }
-
-    .feed-header {
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: #ddd;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .avatar::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 30%, #f5f5f5, #d4d4d4);
-    }
-
-    .feed-user {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .feed-meta {
-      font-size: 11px;
-      color: #8e8e8e;
-    }
-
-    .feed-actions-row {
-      padding: 8px 12px 0 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .feed-caption-inline {
-      font-size: 13px;
-      line-height: 1.4;
-      flex: 1;
-    }
-
-    .feed-caption-inline b {
-      font-weight: 600;
-    }
-
-    .feed-actions-right {
-      display: flex;
-      gap: 16px;
-      align-items: flex-end;
-    }
-
-    .feed-action {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 20px;
-      color: #262626;
-      cursor: pointer;
-    }
-
-    .feed-action small {
-      font-size: 11px;
-      margin-top: 2px;
-    }
-
-    .feed-time {
-      padding: 4px 12px 10px 12px;
-      font-size: 10px;
-      text-transform: uppercase;
-      color: #8e8e8e;
-    }
-
-    .new-post-form {
-      max-width: 600px;
-      margin: 0 auto 16px auto;
-      background: #fffdf7;
-      border-radius: 12px;
-      border: 1px solid #e0d5c2;
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 13px;
-    }
-
-    .new-post-form textarea {
-      border-radius: 8px;
-      border: 1px solid #e0d5c2;
-      padding: 6px 8px;
-      font-size: 13px;
-      outline: none;
-      background: #fffdf7;
-      resize: vertical;
-      min-height: 60px;
-    }
-
-    .new-post-form button {
-      align-self: flex-end;
-      border-radius: 999px;
-      border: none;
-      padding: 6px 14px;
-      font-size: 13px;
-      background: #111;
-      color: #fff;
-      cursor: pointer;
     }
 
     .stiki-upload {
@@ -1187,7 +1123,7 @@
 
     @media (max-width: 720px) {
       body {
-        overflow: auto;
+        overflow-y: auto;
       }
       .main-row {
         flex-direction: column-reverse;
@@ -1285,8 +1221,18 @@
 
     <div class="main-row">
       <main class="content">
-        <!-- ПОСТЫ -->
+        <!-- ПОСТЫ (без постов, только текст + рекомендации) -->
         <section class="screen active" id="screen-posts">
+          <div class="empty-feed-text">
+            Лента пуста, но вы можете оживить ее.
+          </div>
+
+          <div class="recommendations-title">Рекомендации</div>
+          <div class="recommendations-list" id="recommendationsList"></div>
+        </section>
+
+        <!-- СТИКИ (со сториз) -->
+        <section class="screen" id="screen-stiki">
           <div class="stories-bar">
             <div class="story-item">
               <div class="story-avatar-wrap self">
@@ -1320,39 +1266,13 @@
             </div>
           </div>
 
-          <div class="new-post-form">
-            <div>Новый момент</div>
-            <textarea id="newPostText" placeholder="Что за момент ты хочешь сохранить?"></textarea>
-            <button id="newPostBtn">Опубликовать</button>
-          </div>
-
-          <div class="feed-column" id="feedColumn"></div>
-        </section>
-
-        <!-- СТИКИ -->
-        <section class="screen" id="screen-stiki">
-          <div class="stories-bar">
-            <div class="story-item">
-              <div class="story-avatar-wrap self">
-                <div class="story-avatar"></div>
-              </div>
-              <span>Вы</span>
-            </div>
-            <div class="story-item">
-              <div class="story-avatar-wrap">
-                <div class="story-avatar"></div>
-              </div>
-              <span>Давид</span>
-            </div>
-          </div>
-
           <div class="stiki-upload">
             <span>Стики:</span>
             <input type="file" id="stikiInput" accept="video/*" multiple>
           </div>
           <div class="stiki-wrapper" id="stikiWrapper"></div>
           <div class="stiki-empty" id="stikiEmptyText">
-            Пока нет стиков. Залей короткое видео, чтобы лента ожила.
+            Сейчас пусто, но вы можете это исправить.
           </div>
         </section>
 
@@ -1363,7 +1283,7 @@
 
             <div class="chat-dialog" id="chatDialog">
               <div class="chat-dialog-header">
-                <div style="display:flex;align-items:center;gap:8px;">
+                <div style="display:flex;align-items:center;gap:8px;cursor:pointer;" id="chatHeaderProfile">
                   <div class="avatar" id="chatDialogAvatar"></div>
                   <div class="chat-dialog-name" id="chatDialogName"></div>
                 </div>
@@ -1630,10 +1550,6 @@
 
     const userSearch = document.getElementById('userSearch');
 
-    const newPostText = document.getElementById('newPostText');
-    const newPostBtn = document.getElementById('newPostBtn');
-    const feedColumn = document.getElementById('feedColumn');
-
     const stikiInput = document.getElementById('stikiInput');
     const stikiWrapper = document.getElementById('stikiWrapper');
     const stikiEmptyText = document.getElementById('stikiEmptyText');
@@ -1644,6 +1560,7 @@
     const chatDialogBody = document.getElementById('chatDialogBody');
     const chatInput = document.getElementById('chatInput');
     const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatHeaderProfile = document.getElementById('chatHeaderProfile');
 
     const passportName = document.getElementById('passportName');
     const passportNick = document.getElementById('passportNick');
@@ -1675,6 +1592,7 @@
     const editProfileBioInput = document.getElementById('editProfileBioInput');
 
     const navItems = document.querySelectorAll('.nav-item');
+    const recommendationsList = document.getElementById('recommendationsList');
 
     const state = {
       currentUser: null,
@@ -1682,7 +1600,8 @@
       posts: [],
       stiki: [],
       messages: {},
-      visas: {}
+      visas: {},
+      viewProfileUserId: null
     };
 
     let currentChatUserId = null;
@@ -1737,10 +1656,10 @@
         renderProfile();
         renderPassport();
         renderChatList(userSearch.value);
+        renderRecommendations();
       });
     }
 
-    // ТАБЫ ВХОД / РЕГИСТРАЦИЯ — ЧИСТАЯ ЛОГИКА
     loginTabs.forEach(tab => {
       tab.addEventListener('click', () => {
         loginTabs.forEach(t => t.classList.remove('active'));
@@ -1759,7 +1678,6 @@
       });
     });
 
-    // ВХОД
     loginBtn.addEventListener('click', async () => {
       loginError.textContent = '';
       const email = (loginEmail.value || '').trim();
@@ -1779,7 +1697,6 @@
       }
     });
 
-    // РЕГИСТРАЦИЯ С АВАТАРОМ
     registerBtn.addEventListener('click', async () => {
       loginError.textContent = '';
       const name = regName.value.trim();
@@ -1851,41 +1768,6 @@
       }
     });
 
-    function renderPosts() {
-      feedColumn.innerHTML = '';
-      state.posts.forEach(p => {
-        const user = getUserFromCache(p.authorId) || { name: 'Неизвестно', nick: '@unknown' };
-        const card = document.createElement('article');
-        card.className = 'feed-post';
-        card.innerHTML = `
-          <div class="feed-header">
-            <div class="avatar"></div>
-            <div>
-              <div class="feed-user">${user.name}</div>
-              <div class="feed-meta">${user.nick}</div>
-            </div>
-          </div>
-          <div class="feed-actions-row">
-            <div class="feed-caption-inline">
-              <b>${user.name}</b> ${p.text}
-            </div>
-            <div class="feed-actions-right">
-              <div class="feed-action">
-                <span>♡</span>
-                <small>0</small>
-              </div>
-              <div class="feed-action">
-                <span>💬</span>
-                <small>0</small>
-              </div>
-            </div>
-          </div>
-          <div class="feed-time">${p.time}</div>
-        `;
-        feedColumn.appendChild(card);
-      });
-    }
-
     function listenPostsFromFirestore() {
       if (unsubscribePosts) unsubscribePosts();
       unsubscribePosts = db.collection('posts')
@@ -1900,24 +1782,10 @@
               time: data.createdAt ? formatTime(data.createdAt.toDate().getTime()) : ''
             };
           });
-          renderPosts();
           renderProfileGrid();
           renderPassport();
         });
     }
-
-    newPostBtn.addEventListener('click', async () => {
-      const text = newPostText.value.trim();
-      if (!text || !state.currentUser) return;
-
-      await db.collection('posts').add({
-        authorId: state.currentUser.uid,
-        text,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-
-      newPostText.value = '';
-    });
 
     function renderStiki() {
       stikiWrapper.innerHTML = '';
@@ -1972,23 +1840,34 @@
 
     function renderProfile() {
       if (!state.currentUser) return;
-      const userDoc = getUserFromCache(state.currentUser.uid);
+      const uid = state.viewProfileUserId || state.currentUser.uid;
+      const userDoc = getUserFromCache(uid);
       if (!userDoc) return;
+
       profileNameEl.textContent = userDoc.name || '—';
       profileNickEl.textContent = userDoc.nick || '—';
       profileBioEl.textContent = userDoc.bio || '—';
       profileAvatarImg.src = userDoc.avatar || '';
       passportPhoto.style.backgroundImage = userDoc.avatar ? `url('${userDoc.avatar}')` : '';
       passportPhoto.style.backgroundSize = 'cover';
-      profilePostsCount.textContent = state.posts.filter(p => p.authorId === state.currentUser.uid).length;
+
+      const userPosts = state.posts.filter(p => p.authorId === uid);
+      profilePostsCount.textContent = userPosts.length;
       profileFollowersCount.textContent = userDoc.followers || 0;
       profileFollowingCount.textContent = userDoc.following || 0;
+
+      if (uid === state.currentUser.uid) {
+        editProfileBtn.style.display = 'inline-flex';
+      } else {
+        editProfileBtn.style.display = 'none';
+      }
     }
 
     function renderProfileGrid() {
       if (!state.currentUser) return;
+      const uid = state.viewProfileUserId || state.currentUser.uid;
       profileGrid.innerHTML = '';
-      const userPosts = state.posts.filter(p => p.authorId === state.currentUser.uid);
+      const userPosts = state.posts.filter(p => p.authorId === uid);
       userPosts.forEach(() => {
         const div = document.createElement('div');
         div.className = 'profile-grid-item';
@@ -1998,7 +1877,8 @@
 
     function openEditProfileModal() {
       if (!state.currentUser) return;
-      const userDoc = getUserFromCache(state.currentUser.uid);
+      const uid = state.currentUser.uid;
+      const userDoc = getUserFromCache(uid);
       if (!userDoc) return;
       editProfileNameInput.value = userDoc.name || '';
       editProfileNickInput.value = userDoc.nick || '';
@@ -2033,14 +1913,15 @@
 
     function renderPassport() {
       if (!state.currentUser) return;
-      const userDoc = getUserFromCache(state.currentUser.uid);
+      const uid = state.currentUser.uid;
+      const userDoc = getUserFromCache(uid);
       if (!userDoc) return;
       passportName.textContent = userDoc.name || '—';
       passportNick.textContent = userDoc.nick || '—';
       passportPersona.textContent = userDoc.persona || '—';
-      const userPosts = state.posts.filter(p => p.authorId === state.currentUser.uid);
+      const userPosts = state.posts.filter(p => p.authorId === uid);
       passportMomentsCount.textContent = userPosts.length;
-      const visas = state.visas[state.currentUser.uid] || [];
+      const visas = state.visas[uid] || [];
       passportVisasCount.textContent = visas.length;
       visaGrid.innerHTML = '';
       visas.forEach(v => {
@@ -2180,6 +2061,7 @@
 
     userSearch.addEventListener('input', () => {
       renderChatList(userSearch.value);
+      renderRecommendations();
     });
 
     navItems.forEach(item => {
@@ -2188,6 +2070,13 @@
         if (!screen) return;
         navItems.forEach(i => i.classList.remove('active'));
         item.classList.add('active');
+
+        if (screen === 'profile') {
+          state.viewProfileUserId = state.currentUser ? state.currentUser.uid : null;
+          renderProfile();
+          renderProfileGrid();
+        }
+
         showScreen(screen);
       });
     });
@@ -2196,8 +2085,56 @@
       await auth.signOut();
     });
 
+    function openProfile(userId) {
+      if (!userId) return;
+      state.viewProfileUserId = userId;
+      renderProfile();
+      renderProfileGrid();
+      showScreen('profile');
+      navItems.forEach(i => i.classList.remove('active'));
+      const profileNav = document.querySelector('.nav-item[data-screen="profile"]');
+      if (profileNav) profileNav.classList.add('active');
+    }
+
+    function renderRecommendations() {
+      if (!state.currentUser || !recommendationsList) return;
+      const currentId = state.currentUser.uid;
+      const q = (userSearch.value || '').toLowerCase().trim();
+      recommendationsList.innerHTML = '';
+
+      Object.values(state.usersCache)
+        .filter(u => u.id !== currentId)
+        .filter(u => {
+          if (!q) return true;
+          return (
+            (u.name || '').toLowerCase().includes(q) ||
+            (u.nick || '').toLowerCase().includes(q) ||
+            (u.email || '').toLowerCase().includes(q)
+          );
+        })
+        .forEach(u => {
+          const card = document.createElement('div');
+          card.className = 'rec-card';
+          card.innerHTML = `
+            <div class="rec-avatar"></div>
+            <div>
+              <div class="rec-main">${u.name || u.email}</div>
+              <div class="rec-sub">${u.nick || ''}</div>
+            </div>
+          `;
+          card.addEventListener('click', () => openProfile(u.id));
+          recommendationsList.appendChild(card);
+        });
+    }
+
+    chatHeaderProfile.addEventListener('click', () => {
+      if (!currentChatUserId) return;
+      openProfile(currentChatUserId);
+    });
+
     async function afterLogin(user) {
       state.currentUser = user;
+      state.viewProfileUserId = user.uid;
       await ensureUserDoc(user);
       loginWrapper.style.display = 'none';
       appRoot.style.display = 'flex';
@@ -2207,6 +2144,9 @@
       currentChatUserId = null;
       renderChatList(userSearch.value);
       renderChatDialog();
+      renderProfile();
+      renderProfileGrid();
+      renderRecommendations();
       showScreen('posts');
       navItems.forEach(i => i.classList.remove('active'));
       document.querySelector('.nav-item[data-screen="posts"]').classList.add('active');
@@ -2217,6 +2157,7 @@
         await afterLogin(user);
       } else {
         state.currentUser = null;
+        state.viewProfileUserId = null;
         loginWrapper.style.display = 'flex';
         appRoot.style.display = 'none';
       }
@@ -2224,3 +2165,4 @@
   </script>
 </body>
 </html>
+```
