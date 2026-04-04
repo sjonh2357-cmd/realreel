@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>RENITEA — макет</title>
+  <title>RENITEA — макет соцсети</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
@@ -10,15 +10,23 @@
       padding: 0;
       box-sizing: border-box;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
 
     body {
-      background: #fafafa;
       color: #111;
       height: 100vh;
       display: flex;
       overflow: hidden;
+    }
+
+    body.theme-paper {
+      background: #f5f0e6;
+      background-image:
+        url("https://www.transparenttextures.com/patterns/paper-fibers.png"),
+        radial-gradient(circle at 0 0, rgba(0,0,0,0.04) 0, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(0,0,0,0.04) 0, transparent 40%);
+      background-size: auto, 100% 100%, 100% 100%;
     }
 
     .app {
@@ -26,13 +34,13 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
+      min-width: 0;
     }
 
-    /* TOPBAR */
     .topbar {
       height: 56px;
-      background: #ffffff;
-      border-bottom: 1px solid #dbdbdb;
+      background: #fffdf7;
+      border-bottom: 1px solid #e0d5c2;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -49,42 +57,51 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      white-space: nowrap;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .search {
-      width: 260px;
+      width: 220px;
+      max-width: 50vw;
       height: 32px;
       border-radius: 999px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid #e0d5c2;
       padding: 0 10px;
       font-size: 13px;
       outline: none;
-      background: #fafafa;
+      background: #fffdf7;
     }
 
     .search:focus {
       border-color: #111;
-      background: #fff;
+      background: #ffffff;
     }
 
-    /* LAYOUT */
     .main-row {
       flex: 1;
       display: flex;
       overflow: hidden;
+      min-height: 0;
+      min-width: 0;
     }
 
     .content {
       flex: 1;
       overflow-y: auto;
       padding: 12px 16px 16px 16px;
+      min-width: 0;
     }
 
-    /* ПРАВАЯ НАВИГАЦИЯ — ч/б как инста */
     .right-nav {
       width: 90px;
-      background: #ffffff;
-      border-left: 1px solid #dbdbdb;
+      background: #fffdf7;
+      border-left: 1px solid #e0d5c2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -101,6 +118,7 @@
       background: #ddd;
       cursor: pointer;
       position: relative;
+      flex-shrink: 0;
     }
 
     .nav-logo-box:hover {
@@ -122,6 +140,7 @@
       gap: 12px;
       align-items: center;
       flex: 1;
+      min-height: 0;
     }
 
     .nav-block {
@@ -138,10 +157,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
 
     .nav-item:hover {
-      background-color: #f5f5f5;
+      background-color: #f5f0e6;
       transform: translateY(-1px);
     }
 
@@ -159,7 +179,7 @@
     }
 
     .nav-item.active {
-      background-color: #f0f0f0;
+      background-color: #f0e6d5;
       transform: translateY(-1px);
     }
 
@@ -175,7 +195,6 @@
       margin-top: 2px;
     }
 
-    /* СКРИНЫ */
     .screen {
       display: none;
     }
@@ -184,14 +203,22 @@
       display: block;
     }
 
-    /* СТОРИЗ НАД ЛЕНТОЙ */
     .stories-bar {
-      max-width: 900px;
+      max-width: 600px;
       margin: 0 auto 12px auto;
       display: flex;
       gap: 10px;
       overflow-x: auto;
       padding-bottom: 4px;
+    }
+
+    .stories-bar::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .stories-bar::-webkit-scrollbar-thumb {
+      background: #c9bba3;
+      border-radius: 999px;
     }
 
     .story-item {
@@ -210,7 +237,6 @@
       height: 56px;
       border-radius: 50%;
       padding: 2px;
-      background: linear-gradient(135deg, #ff6cab, #ffdd59, #4cd964, #34aadc, #5856d6);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -219,7 +245,7 @@
     }
 
     .story-avatar-wrap.self {
-      background: #dbdbdb;
+      background: linear-gradient(135deg, #ff6cab, #ffdd59, #4cd964, #34aadc, #5856d6);
     }
 
     .story-avatar-wrap.self::after {
@@ -239,6 +265,18 @@
       border: 2px solid #fff;
     }
 
+    .story-avatar-wrap.red {
+      background: linear-gradient(135deg, #ff0000, #ff6b6b);
+    }
+
+    .story-avatar-wrap.yellow {
+      background: linear-gradient(135deg, #ffb300, #ffdd55);
+    }
+
+    .story-avatar-wrap.green {
+      background: linear-gradient(135deg, #00c853, #aeea00);
+    }
+
     .story-avatar {
       width: 50px;
       height: 50px;
@@ -252,9 +290,8 @@
       transform: translateY(-1px);
     }
 
-    /* ЛЕНТА */
     .feed-column {
-      max-width: 900px;
+      max-width: 600px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -262,10 +299,11 @@
     }
 
     .feed-post {
-      background: #ffffff;
+      background: #fffdf7;
       border-radius: 12px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid #e0d5c2;
       overflow: hidden;
+      position: relative;
     }
 
     .feed-post:hover {
@@ -300,7 +338,8 @@
 
     .feed-image {
       width: 100%;
-      height: 520px;
+      position: relative;
+      padding-top: 100%;
       background-position: center;
       background-size: cover;
     }
@@ -308,52 +347,69 @@
     .feed-actions-row {
       padding: 8px 12px 0 12px;
       display: flex;
-      gap: 14px;
-      font-size: 18px;
-      color: #262626;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
     }
 
-    .feed-actions-row span {
-      cursor: pointer;
-    }
-
-    .feed-actions-row span:hover {
-      transform: scale(1.05);
-    }
-
-    .feed-likes {
-      padding: 4px 12px 0 12px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .feed-caption {
-      padding: 4px 12px 8px 12px;
+    .feed-caption-inline {
       font-size: 13px;
       line-height: 1.4;
+      flex: 1;
     }
 
-    .feed-caption b {
+    .feed-caption-inline b {
       font-weight: 600;
     }
 
-    .feed-caption .hashtag {
-      color: #00376b;
-      cursor: pointer;
+    .feed-actions-right {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
     }
 
-    .feed-caption .hashtag:hover {
+    .feed-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 20px;
+      color: #262626;
+      cursor: pointer;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+
+    .feed-action span {
+      line-height: 1;
+    }
+
+    .feed-action small {
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .feed-action:hover {
+      transform: translateY(-1px) scale(1.05);
+      opacity: .85;
+    }
+
+    .hashtag {
+      color: #00376b;
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    .hashtag:hover {
       text-decoration: underline;
     }
 
     .feed-time {
-      padding: 0 12px 10px 12px;
+      padding: 4px 12px 10px 12px;
       font-size: 10px;
       text-transform: uppercase;
       color: #8e8e8e;
     }
 
-    /* СТИКИ */
     .stiki-upload {
       max-width: 520px;
       margin: 0 auto 10px auto;
@@ -361,23 +417,29 @@
       gap: 8px;
       align-items: center;
       font-size: 13px;
-    }
-
-    .stiki-upload input {
-      font-size: 12px;
+      flex-wrap: wrap;
     }
 
     .stiki-wrapper {
       max-width: 520px;
       margin: 0 auto;
-      height: calc(100vh - 56px - 16px);
+      height: calc(100vh - 56px - 16px - 40px);
       overflow-y: auto;
       scroll-snap-type: y mandatory;
     }
 
+    .stiki-wrapper::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .stiki-wrapper::-webkit-scrollbar-thumb {
+      background: #c9bba3;
+      border-radius: 999px;
+    }
+
     .stiki-card {
       position: relative;
-      height: calc(100vh - 56px - 32px);
+      height: calc(100vh - 56px - 32px - 40px);
       margin-bottom: 16px;
       border-radius: 18px;
       overflow: hidden;
@@ -416,7 +478,7 @@
       flex-direction: column;
       gap: 14px;
       align-items: center;
-      font-size: 18px;
+      font-size: 20px;
     }
 
     .stiki-action {
@@ -424,10 +486,11 @@
       flex-direction: column;
       align-items: center;
       cursor: pointer;
+      transition: transform .15s ease;
     }
 
     .stiki-action span {
-      font-size: 18px;
+      font-size: 22px;
     }
 
     .stiki-action small {
@@ -439,7 +502,6 @@
       transform: translateY(-1px) scale(1.03);
     }
 
-    /* ЧАТЫ */
     .chats-layout {
       max-width: 980px;
       margin: 0 auto;
@@ -447,14 +509,16 @@
       grid-template-columns: 320px minmax(0, 1fr);
       gap: 12px;
       height: calc(100vh - 56px - 32px);
+      min-height: 0;
     }
 
     .chat-list {
-      background: #ffffff;
+      background: #fffdf7;
       border-radius: 12px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid #e0d5c2;
       overflow-y: auto;
       padding: 8px 0;
+      min-height: 0;
     }
 
     .chat-item {
@@ -466,11 +530,11 @@
     }
 
     .chat-item:hover {
-      background: #f5f5f5;
+      background: #f5ecdd;
     }
 
     .chat-item.active {
-      background: #efefef;
+      background: #f0e6d5;
     }
 
     .chat-main {
@@ -507,17 +571,25 @@
     }
 
     .chat-dialog {
-      background: #ffffff;
+      background: #fffdf7;
       border-radius: 12px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid #e0d5c2;
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      min-width: 0;
     }
 
     .chat-dialog-header {
       padding: 10px 12px;
-      border-bottom: 1px solid #dbdbdb;
+      border-bottom: 1px solid #e0d5c2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: space-between;
+    }
+
+    .chat-dialog-header-left {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -534,8 +606,9 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 12px;
       font-size: 13px;
+      min-height: 0;
     }
 
     .msg {
@@ -543,15 +616,16 @@
       padding: 6px 10px;
       border-radius: 16px;
       line-height: 1.4;
+      position: relative;
     }
 
     .msg.me {
       margin-left: auto;
-      background: #efefef;
+      background: #f0e6d5;
     }
 
     .msg.them {
-      background: #f5f5f5;
+      background: #f5ecdd;
     }
 
     .msg-time {
@@ -560,24 +634,62 @@
       margin-top: 2px;
     }
 
+    .msg-reactions {
+      position: absolute;
+      bottom: -32px;
+      right: 0;
+      display: flex;
+      gap: 6px;
+      background: #fffdf7;
+      padding: 4px 6px;
+      border-radius: 12px;
+      border: 1px solid #e0d5c2;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      font-size: 18px;
+      display: none;
+      z-index: 2;
+    }
+
+    .msg:hover .msg-reactions {
+      display: flex;
+    }
+
+    .screen:not(#screen-chats) .msg-reactions {
+      display: none !important;
+    }
+
+    .msg-reactions span {
+      cursor: pointer;
+      transition: transform .15s ease;
+    }
+
+    .msg-reactions span:hover {
+      transform: scale(1.15);
+    }
+
     .chat-dialog-input {
-      border-top: 1px solid #dbdbdb;
+      border-top: 1px solid #e0d5c2;
       padding: 8px 10px;
       display: flex;
       gap: 8px;
+      align-items: center;
+      flex-wrap: nowrap;
     }
 
     .chat-dialog-input input {
       flex: 1;
       border-radius: 999px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid #e0d5c2;
       padding: 6px 10px;
       font-size: 13px;
       outline: none;
+      min-width: 0;
+      background: #fffdf7;
     }
 
     .chat-dialog-input input:focus {
       border-color: #111;
+      background: #ffffff;
     }
 
     .chat-dialog-input button {
@@ -588,6 +700,8 @@
       background: #111;
       color: #fff;
       cursor: pointer;
+      white-space: nowrap;
+      transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
     }
 
     .chat-dialog-input button:hover {
@@ -596,69 +710,230 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
-    /* ПАСПОРТ */
-    .visa-grid {
-      max-width: 900px;
+    .chat-pet {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+    }
+
+    .chat-pet-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #f5ecdd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .passport-layout {
+      max-width: 980px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 16px;
     }
 
-    .visa-card {
-      border-radius: 16px;
+    .passport-card {
+      background: linear-gradient(135deg, #fffdf7, #f5ecdd);
+      border-radius: 18px;
+      border: 1px solid #e0d5c2;
+      padding: 14px 16px;
+      position: relative;
       overflow: hidden;
-      background: #ffffff;
-      border: 1px solid #dbdbdb;
+      color: #111827;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+    }
+
+    .passport-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("https://www.transparenttextures.com/patterns/asfalt-light.png");
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .passport-chip {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid rgba(148,163,184,0.8);
+      box-shadow: 0 0 0 1px rgba(148,163,184,0.6);
+      background: radial-gradient(circle at 0 0, #fef3c7, #e5e7eb);
+    }
+
+    .passport-chip::before,
+    .passport-chip::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: 4px;
+      border: 1px solid rgba(148,163,184,0.7);
+    }
+
+    .passport-stamp {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px dashed rgba(148,163,184,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      opacity: 0.7;
+      background: rgba(255,253,247,0.6);
+      backdrop-filter: blur(2px);
+    }
+
+    .passport-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .passport-title {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .passport-meta {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .passport-id {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .passport-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      background: #ddd;
+      overflow: hidden;
+      object-fit: cover;
+      border: 2px solid rgba(148,163,184,0.8);
+    }
+
+    .passport-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .passport-fields {
+      flex: 1;
+      font-size: 12px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 12px;
+    }
+
+    .passport-field-label {
+      font-size: 11px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .passport-field-value {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .passport-stories-title {
+      margin-top: 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      position: relative;
+      z-index: 1;
+    }
+
+    .passport-stories-bar {
+      margin-top: 8px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .passport-stories-bar::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .passport-stories-bar::-webkit-scrollbar-thumb {
+      background: #c9bba3;
+      border-radius: 999px;
+    }
+
+    .passport-story-item {
+      flex: 0 0 auto;
+      width: 64px;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      font-size: 11px;
+      color: #111827;
+      cursor: pointer;
     }
 
-    .visa-card:hover {
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      transform: translateY(-1px);
-    }
-
-    .visa-image {
-      height: 160px;
-      background-position: center;
-      background-size: cover;
-    }
-
-    .visa-body {
-      padding: 8px 10px 10px 10px;
-      font-size: 12px;
-    }
-
-    .visa-title {
-      font-size: 13px;
-      font-weight: 600;
+    .passport-story-avatar-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      padding: 2px;
+      background: linear-gradient(135deg, #f9a825, #ffeb3b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 4px;
     }
 
-    .visa-meta {
-      font-size: 11px;
-      color: #8e8e8e;
-      margin-bottom: 4px;
+    .passport-story-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #ddd;
+      object-fit: cover;
+      border: 2px solid #fff;
     }
 
-    .visa-tag {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: #f0f0f0;
-      font-size: 11px;
+    .visa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
     }
 
-    /* ПРОФИЛЬ */
     .profile-header {
       max-width: 720px;
       margin: 0 auto 16px auto;
-      background: #ffffff;
+      background: #fffdf7;
       border-radius: 12px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid #e0d5c2;
       overflow: hidden;
+      position: relative;
     }
 
     .profile-cover {
@@ -677,6 +952,7 @@
       bottom: -45px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.25);
       overflow: hidden;
+      z-index: 2;
     }
 
     .profile-avatar img {
@@ -687,6 +963,8 @@
 
     .profile-info {
       padding: 56px 24px 16px 24px;
+      position: relative;
+      z-index: 1;
     }
 
     .profile-top-row {
@@ -694,6 +972,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .profile-name-block {
@@ -721,6 +1001,7 @@
     .profile-actions {
       display: flex;
       gap: 6px;
+      flex-wrap: wrap;
     }
 
     .btn-primary {
@@ -731,6 +1012,13 @@
       padding: 6px 14px;
       font-size: 12px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      position: relative;
+      z-index: 10;
+      transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
     }
 
     .btn-primary:hover {
@@ -741,16 +1029,22 @@
 
     .btn-ghost {
       border-radius: 999px;
-      border: 1px solid #dbdbdb;
-      background: #fafafa;
+      border: 1px solid #e0d5c2;
+      background: #fffdf7;
       color: #111;
       padding: 6px 12px;
       font-size: 12px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      white-space: nowrap;
+      transition: transform .15s ease, background-color .15s ease;
     }
 
     .btn-ghost:hover {
-      background: #f0f0f0;
+      background: #f5ecdd;
       transform: translateY(-1px);
     }
 
@@ -759,6 +1053,7 @@
       gap: 18px;
       font-size: 13px;
       margin-bottom: 8px;
+      flex-wrap: wrap;
     }
 
     .profile-stats span b {
@@ -792,7 +1087,7 @@
       font-size: 11px;
       padding: 4px 8px;
       border-radius: 999px;
-      background: #f0f0f0;
+      background: #f0e6d5;
     }
 
     .profile-highlights {
@@ -800,6 +1095,7 @@
       display: flex;
       gap: 12px;
       font-size: 11px;
+      flex-wrap: wrap;
     }
 
     .highlight-item {
@@ -813,8 +1109,8 @@
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      border: 1px solid #dbdbdb;
-      background: #f5f5f5;
+      border: 1px solid #e0d5c2;
+      background: #f5ecdd;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -838,6 +1134,7 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #8e8e8e;
+      flex-wrap: wrap;
     }
 
     .profile-tab {
@@ -887,6 +1184,129 @@
       background-size: cover;
     }
 
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 16px 18px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .modal-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .modal-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8e8e8e;
+    }
+
+    .modal-input,
+    .modal-select,
+    .modal-textarea {
+      border-radius: 8px;
+      border: 1px solid #e0d5c2;
+      padding: 6px 8px;
+      font-size: 13px;
+      outline: none;
+      background: #fffdf7;
+    }
+
+    .modal-input:focus,
+    .modal-select:focus,
+    .modal-textarea:focus {
+      border-color: #111;
+      background: #ffffff;
+    }
+
+    .modal-textarea {
+      resize: vertical;
+      min-height: 60px;
+      max-height: 160px;
+    }
+
+    .modal-footer {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .modal-avatar-preview {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-avatar-preview img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .modal-avatar-btn {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #e0d5c2;
+      background: #fffdf7;
+      cursor: pointer;
+      transition: background-color .15s ease, transform .15s ease;
+    }
+
+    .modal-avatar-btn:hover {
+      background: #f5ecdd;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost#editProfileCancel {
+      padding: 6px 12px;
+    }
+
     @media (max-width: 900px) {
       .right-nav {
         width: 72px;
@@ -894,67 +1314,118 @@
       .chats-layout {
         grid-template-columns: 1fr;
       }
-      .chat-dialog {
+      .passport-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        overflow: auto;
+      }
+      .main-row {
+        flex-direction: column-reverse;
+      }
+      .right-nav {
+        width: 100%;
+        height: 64px;
+        border-left: none;
+        border-top: 1px solid #e0d5c2;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 6px 8px;
+      }
+      .nav-items {
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 0;
+      }
+      .nav-block {
+        flex: 1;
+      }
+      .nav-label {
         display: none;
+      }
+      .content {
+        padding: 8px 8px 72px 8px;
+      }
+      .stiki-wrapper {
+        height: calc(100vh - 56px - 64px - 32px);
+      }
+      .stiki-card {
+        height: calc(100vh - 56px - 64px - 48px);
+      }
+      .chats-layout {
+        height: auto;
+      }
+      .chat-dialog {
+        min-height: 320px;
+      }
+      .profile-header {
+        margin: 0 0 12px 0;
+      }
+      .profile-tabs,
+      .profile-grid {
+        margin: 0;
       }
     }
   </style>
 </head>
-<body>
+<body class="theme-paper">
   <div class="app">
-    <!-- TOPBAR -->
     <header class="topbar">
       <div class="brand">RENITEA</div>
-      <input class="search" type="text" placeholder="Поиск">
+      <div class="topbar-right">
+        <input class="search" type="text" placeholder="Поиск">
+      </div>
     </header>
 
     <div class="main-row">
-      <!-- CONTENT -->
       <main class="content">
         <!-- ПОСТЫ -->
         <section class="screen active" id="screen-posts">
-          <!-- СТОРИЗ -->
           <div class="stories-bar">
             <div class="story-item">
               <div class="story-avatar-wrap self">
                 <img class="story-avatar" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
               </div>
-              <span>Ваша история</span>
+              <span>Вы</span>
             </div>
             <div class="story-item">
-              <div class="story-avatar-wrap">
+              <div class="story-avatar-wrap red">
                 <img class="story-avatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
               </div>
               <span>anya.lens</span>
             </div>
             <div class="story-item">
-              <div class="story-avatar-wrap">
+              <div class="story-avatar-wrap yellow">
                 <img class="story-avatar" src="https://randomuser.me/api/portraits/men/22.jpg" alt="">
               </div>
               <span>max.motion</span>
             </div>
             <div class="story-item">
-              <div class="story-avatar-wrap">
+              <div class="story-avatar-wrap green">
                 <img class="story-avatar" src="https://randomuser.me/api/portraits/women/33.jpg" alt="">
               </div>
               <span>tanya.frame</span>
             </div>
             <div class="story-item">
-              <div class="story-avatar-wrap">
+              <div class="story-avatar-wrap yellow">
                 <img class="story-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="">
               </div>
               <span>lena.day</span>
             </div>
             <div class="story-item">
-              <div class="story-avatar-wrap">
+              <div class="story-avatar-wrap red">
                 <img class="story-avatar" src="https://randomuser.me/api/portraits/men/31.jpg" alt="">
               </div>
-              <span>oleg.live</span>
+              <span>city.mood</span>
             </div>
           </div>
 
           <div class="feed-column">
-            <article class="feed-post">
+            <!-- Пост 1 -->
+            <article class="feed-post" data-post-id="1">
               <div class="feed-header">
                 <img class="avatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
                 <div>
@@ -962,21 +1433,34 @@
                   <div class="feed-meta">Берлин · 2 ч назад</div>
                 </div>
               </div>
-              <div class="feed-image" style="background-image:url('https://picsum.photos/900/600?random=1');"></div>
+              <div class="feed-image" style="background-image:url('https://picsum.photos/900/900?random=1');"></div>
               <div class="feed-actions-row">
-                <span>🔥</span>
-                <span>⋯</span>
-                <span>✉</span>
-              </div>
-              <div class="feed-likes">Нравится: 1 284</div>
-              <div class="feed-caption">
-                <b>anya.lens</b> Поймала этот свет случайно по дороге домой. Город шумит, но в такие моменты он
-                кажется почти домашним. <span class="hashtag">#evening</span> <span class="hashtag">#citylights</span>
+                <div class="feed-caption-inline">
+                  <b>anya.lens</b> Поймала мягкий вечерний свет по дороге домой. Город шумит, но в такие моменты он
+                  кажется почти домашним.
+                  <span class="hashtag">#evening</span>
+                  <span class="hashtag">#citylights</span>
+                </div>
+                <div class="feed-actions-right">
+                  <div class="feed-action">
+                    <span>🔥</span>
+                    <small>1284</small>
+                  </div>
+                  <div class="feed-action">
+                    <span>⋯</span>
+                    <small>32</small>
+                  </div>
+                  <div class="feed-action">
+                    <span>✉</span>
+                    <small>12</small>
+                  </div>
+                </div>
               </div>
               <div class="feed-time">2 часа назад</div>
             </article>
 
-            <article class="feed-post">
+            <!-- Пост 2 -->
+            <article class="feed-post" data-post-id="2">
               <div class="feed-header">
                 <img class="avatar" src="https://randomuser.me/api/portraits/men/22.jpg" alt="">
                 <div>
@@ -984,21 +1468,34 @@
                   <div class="feed-meta">Кёльн · 5 ч назад</div>
                 </div>
               </div>
-              <div class="feed-image" style="background-image:url('https://picsum.photos/900/600?random=2');"></div>
+              <div class="feed-image" style="background-image:url('https://picsum.photos/900/900?random=2');"></div>
               <div class="feed-actions-row">
-                <span>🔥</span>
-                <span>⋯</span>
-                <span>✉</span>
-              </div>
-              <div class="feed-likes">Нравится: 842</div>
-              <div class="feed-caption">
-                <b>max.motion</b> Прогнал пару тестовых вертикальных роликов. Хочу, чтобы в RENITEA всё листалось
-                так же легко, как в привычных приложениях. <span class="hashtag">#product</span> <span class="hashtag">#ux</span>
+                <div class="feed-caption-inline">
+                  <b>max.motion</b> Снял пару вертикальных кадров на улице, просто чтобы не терять руку. Люблю, когда
+                  картинка получается живой без лишних усилий.
+                  <span class="hashtag">#street</span>
+                  <span class="hashtag">#motion</span>
+                </div>
+                <div class="feed-actions-right">
+                  <div class="feed-action">
+                    <span>🔥</span>
+                    <small>842</small>
+                  </div>
+                  <div class="feed-action">
+                    <span>⋯</span>
+                    <small>18</small>
+                  </div>
+                  <div class="feed-action">
+                    <span>✉</span>
+                    <small>9</small>
+                  </div>
+                </div>
               </div>
               <div class="feed-time">5 часов назад</div>
             </article>
 
-            <article class="feed-post">
+            <!-- Пост 3 -->
+            <article class="feed-post" data-post-id="3">
               <div class="feed-header">
                 <img class="avatar" src="https://randomuser.me/api/portraits/women/33.jpg" alt="">
                 <div>
@@ -1006,40 +1503,30 @@
                   <div class="feed-meta">Прага · 1 дн назад</div>
                 </div>
               </div>
-              <div class="feed-image" style="background-image:url('https://picsum.photos/900/600?random=3');"></div>
+              <div class="feed-image" style="background-image:url('https://picsum.photos/900/900?random=3');"></div>
               <div class="feed-actions-row">
-                <span>🔥</span>
-                <span>⋯</span>
-                <span>✉</span>
-              </div>
-              <div class="feed-likes">Нравится: 3 102</div>
-              <div class="feed-caption">
-                <b>tanya.frame</b> Вышла без плана, вернулась с десятком кадров и ощущением, что день прожит не зря.
-                <span class="hashtag">#street</span> <span class="hashtag">#film</span>
-              </div>
-              <div class="feed-time">1 день назад</div>
-            </article>
-
-            <article class="feed-post">
-              <div class="feed-header">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
-                <div>
-                  <div class="feed-user">renitea.dev</div>
-                  <div class="feed-meta">Онлайн · только что</div>
+                <div class="feed-caption-inline">
+                  <b>tanya.frame</b> Вышла без плана, вернулась с десятком снимков и ощущением, что день прожит не зря.
+                  Иногда лучшее получается, когда ничего не ждёшь.
+                  <span class="hashtag">#walk</span>
+                  <span class="hashtag">#film</span>
+                </div>
+                <div class="feed-actions-right">
+                  <div class="feed-action">
+                    <span>🔥</span>
+                    <small>3102</small>
+                  </div>
+                  <div class="feed-action">
+                    <span>⋯</span>
+                    <small>64</small>
+                  </div>
+                  <div class="feed-action">
+                    <span>✉</span>
+                    <small>27</small>
+                  </div>
                 </div>
               </div>
-              <div class="feed-image" style="background-image:url('https://picsum.photos/900/600?random=16');"></div>
-              <div class="feed-actions-row">
-                <span>🔥</span>
-                <span>⋯</span>
-                <span>✉</span>
-              </div>
-              <div class="feed-likes">Нравится: 97</div>
-              <div class="feed-caption">
-                <b>renitea.dev</b> Собираю интерфейс по кускам. Навигация справа, стики, визы и профиль — всё должно
-                ощущаться как одна система. <span class="hashtag">#renitea</span> <span class="hashtag">#buildinpublic</span>
-              </div>
-              <div class="feed-time">Только что</div>
+              <div class="feed-time">1 день назад</div>
             </article>
           </div>
         </section>
@@ -1062,7 +1549,7 @@
                   <small>210</small>
                 </div>
                 <div class="stiki-action">
-                  <span>⋯</span>
+                  <span>💬</span>
                   <small>32</small>
                 </div>
                 <div class="stiki-action">
@@ -1082,28 +1569,8 @@
                   <small>180</small>
                 </div>
                 <div class="stiki-action">
-                  <span>⋯</span>
+                  <span>💬</span>
                   <small>21</small>
-                </div>
-                <div class="stiki-action">
-                  <span>✉</span>
-                  <small>подел.</small>
-                </div>
-              </div>
-            </div>
-            <div class="stiki-card">
-              <div class="stiki-video" style="background-image:url('https://picsum.photos/500/900?random=6');"></div>
-              <div class="stiki-info">
-                renitea.dev · тест интерфейса · 🔥 99 · 💬 10
-              </div>
-              <div class="stiki-actions">
-                <div class="stiki-action">
-                  <span>🔥</span>
-                  <small>99</small>
-                </div>
-                <div class="stiki-action">
-                  <span>⋯</span>
-                  <small>10</small>
                 </div>
                 <div class="stiki-action">
                   <span>✉</span>
@@ -1140,27 +1607,19 @@
                   <div>09:51</div>
                 </div>
               </div>
-
-              <div class="chat-item" data-chat-id="user">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
-                <div>
-                  <div class="chat-main">User</div>
-                  <div class="chat-sub">Профиль стал выглядеть живее...</div>
-                </div>
-                <div class="chat-right">
-                  <div>Вчера</div>
-                </div>
-              </div>
             </div>
 
             <div class="chat-dialog" id="chatDialog">
               <div class="chat-dialog-header">
-                <img class="avatar" id="chatDialogAvatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
-                <div class="chat-dialog-name" id="chatDialogName">Аня</div>
+                <div class="chat-dialog-header-left">
+                  <img class="avatar" id="chatDialogAvatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
+                  <div class="chat-dialog-name" id="chatDialogName">Аня</div>
+                </div>
+                <div class="chat-pet">
+                  <div class="chat-pet-avatar" id="chatPetAvatar">🐱</div>
+                </div>
               </div>
-              <div class="chat-dialog-body" id="chatDialogBody">
-                <!-- сообщения подставляются скриптом -->
-              </div>
+              <div class="chat-dialog-body" id="chatDialogBody"></div>
               <div class="chat-dialog-input">
                 <input type="text" placeholder="Написать сообщение..." id="chatInput">
                 <button type="button" id="chatSendBtn">Отпр.</button>
@@ -1171,35 +1630,82 @@
 
         <!-- ПАСПОРТ -->
         <section class="screen" id="screen-passport">
-          <div class="visa-grid">
-            <div class="visa-card">
-              <div class="visa-image" style="background-image:url('https://picsum.photos/800/500?random=7');"></div>
-              <div class="visa-body">
-                <div class="visa-title">Виза: Городской вечер</div>
-                <div class="visa-meta">Момент: прогулка по городу • max.motion</div>
-                <div class="visa-meta">Собрана за 5 моментов из поездки в Берлин</div>
-                <span class="visa-tag">путешествие · цифровая виза</span>
+          <div class="passport-layout">
+            <div class="passport-card">
+              <div class="passport-chip"></div>
+              <div class="passport-stamp">renitea visa</div>
+
+              <div class="passport-header">
+                <div>
+                  <div class="passport-title">Цифровой паспорт RENITEA</div>
+                  <div class="passport-meta">Собран из ваших моментов, виз и историй</div>
+                  <div class="passport-id">ID: RENI-2026-0420 · Статус: активен</div>
+                </div>
+                <img class="passport-photo" src="https://randomuser.me/api/portraits/men/45.jpg" alt="" id="passportPhoto">
+              </div>
+
+              <div class="passport-row">
+                <div class="passport-fields">
+                  <div>
+                    <div class="passport-field-label">Имя</div>
+                    <div class="passport-field-value" id="passportName">Иван Петров</div>
+                  </div>
+                  <div>
+                    <div class="passport-field-label">Ник</div>
+                    <div class="passport-field-value" id="passportNick">@ivan.petrov</div>
+                  </div>
+                  <div>
+                    <div class="passport-field-label">Характер</div>
+                    <div class="passport-field-value" id="passportPersona">честный</div>
+                  </div>
+                  <div>
+                    <div class="passport-field-label">Город</div>
+                    <div class="passport-field-value">Кёльн</div>
+                  </div>
+                  <div>
+                    <div class="passport-field-label">Виз собрано</div>
+                    <div class="passport-field-value">7</div>
+                  </div>
+                  <div>
+                    <div class="passport-field-label">Моментов</div>
+                    <div class="passport-field-value">128</div>
+                  </div>
+                  <div>
+                    <div class="passport-field-label">Дата регистрации</div>
+                    <div class="passport-field-value">04.2026</div>
+                  </div>
+                  <div>
+                    <div class="passport-field-label">Уровень доверия</div>
+                    <div class="passport-field-value">круг друзей · круг близких</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="passport-stories-title">Истории виз</div>
+              <div class="passport-stories-bar">
+                <div class="passport-story-item">
+                  <div class="passport-story-avatar-wrap">
+                    <img class="passport-story-avatar" src="https://picsum.photos/200/200?random=30" alt="">
+                  </div>
+                  <span>Берлин</span>
+                </div>
+                <div class="passport-story-item">
+                  <div class="passport-story-avatar-wrap">
+                    <img class="passport-story-avatar" src="https://picsum.photos/200/200?random=31" alt="">
+                  </div>
+                  <span>Ночь</span>
+                </div>
+                <div class="passport-story-item">
+                  <div class="passport-story-avatar-wrap">
+                    <img class="passport-story-avatar" src="https://picsum.photos/200/200?random=32" alt="">
+                  </div>
+                  <span>Друзья</span>
+                </div>
               </div>
             </div>
 
-            <div class="visa-card">
-              <div class="visa-image" style="background-image:url('https://picsum.photos/800/500?random=8');"></div>
-              <div class="visa-body">
-                <div class="visa-title">Виза: Чай и музыка</div>
-                <div class="visa-meta">Момент: вечер дома • anya.lens</div>
-                <div class="visa-meta">Собрана за серию уютных моментов</div>
-                <span class="visa-tag">домашние моменты</span>
-              </div>
-            </div>
-
-            <div class="visa-card">
-              <div class="visa-image" style="background-image:url('https://picsum.photos/800/500?random=9');"></div>
-              <div class="visa-body">
-                <div class="visa-title">Виза: Тест интерфейса</div>
-                <div class="visa-meta">Момент: сборка RENITEA • renitea.dev</div>
-                <div class="visa-meta">Черновая виза за первые тестовые сессии</div>
-                <span class="visa-tag">beta · прототип</span>
-              </div>
+            <div class="visa-grid">
+              <!-- можно добавить карточки виз при необходимости -->
             </div>
           </div>
         </section>
@@ -1209,19 +1715,27 @@
           <div class="profile-header">
             <div class="profile-cover">
               <div class="profile-avatar">
-                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
+                <img id="profileAvatarImg" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
               </div>
             </div>
             <div class="profile-info">
               <div class="profile-top-row">
                 <div class="profile-name-block">
-                  <div class="profile-name">Иван Петров</div>
-                  <div class="profile-username">@ivan.petrov</div>
-                  <div class="profile-location">Кёльн · путешествия, фото, интерфейсы</div>
+                  <div class="profile-name" id="profileName">Иван Петров</div>
+                  <div class="profile-username" id="profileNick">@ivan.petrov</div>
+                  <div class="profile-location">Кёльн · путешествия, фото, обычные дни</div>
                 </div>
                 <div class="profile-actions">
-                  <button class="btn-primary">Редактировать</button>
-                  <button class="btn-ghost">Поделиться профилем</button>
+                  <button class="btn-primary" id="editProfileBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" style="margin-right:6px;">
+                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/>
+                      <path d="M20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"/>
+                    </svg>
+                    Редактировать
+                  </button>
+                  <button class="btn-ghost">
+                    ✉ <span>Поделиться</span>
+                  </button>
                 </div>
               </div>
               <div class="profile-stats">
@@ -1229,15 +1743,14 @@
                 <span><b>2 304</b> подписчиков</span>
                 <span><b>312</b> подписки</span>
               </div>
-              <div class="profile-bio">
-                Собираю моменты из поездок и обычных дней. Люблю, когда интерфейсы не мешают, а помогают жить.
-                <br>Сейчас экспериментирую с RENITEA как с местом для «виз» за путешествия и истории.
-                <br><a href="#">renitea.app/ivan</a>
+              <div class="profile-bio" id="profileBio">
+                Собираю моменты из поездок и обычных дней. Люблю, когда вокруг спокойно и по‑настоящему.
+                <br><a href="#">example.link/ivan</a>
               </div>
               <div class="profile-tags">
                 <div class="tag">фото</div>
                 <div class="tag">путешествия</div>
-                <div class="tag">ux/ui</div>
+                <div class="tag">улицы</div>
                 <div class="tag">музыка</div>
               </div>
               <div class="profile-highlights">
@@ -1301,16 +1814,14 @@
         </section>
       </main>
 
-      <!-- RIGHT NAV -->
+      <!-- НАВИГАЦИЯ СПРАВА -->
       <aside class="right-nav">
-        <!-- ЛОГО ПРИЛОЖЕНИЯ (загрузка своего) -->
         <div class="nav-logo-box" id="navLogoBox">
           <img id="navLogoImg" src="https://picsum.photos/200/200?random=99" alt="logo">
           <input type="file" id="navLogoInput" accept="image/*" style="display:none">
         </div>
 
         <div class="nav-items">
-          <!-- ПОСТЫ -->
           <div class="nav-block">
             <div class="nav-item active" data-screen="posts">
               <svg viewBox="0 0 24 24">
@@ -1323,7 +1834,6 @@
             <div class="nav-label">Посты</div>
           </div>
 
-          <!-- СТИКИ -->
           <div class="nav-block">
             <div class="nav-item" data-screen="stiki">
               <svg viewBox="0 0 24 24">
@@ -1336,7 +1846,6 @@
             <div class="nav-label">Стики</div>
           </div>
 
-          <!-- ЧАТЫ -->
           <div class="nav-block">
             <div class="nav-item" data-screen="chats">
               <svg viewBox="0 0 24 24">
@@ -1348,7 +1857,6 @@
             <div class="nav-label">Чаты</div>
           </div>
 
-          <!-- ВИЗЫ -->
           <div class="nav-block">
             <div class="nav-item" data-screen="passport">
               <svg viewBox="0 0 24 24">
@@ -1362,10 +1870,9 @@
             <div class="nav-label">Визы</div>
           </div>
 
-          <!-- ПРОФИЛЬ (фото юзера) -->
           <div class="nav-block">
             <div class="nav-item" data-screen="profile">
-              <img src="https://randomuser.me/api/portraits/men/45.jpg"
+              <img id="navProfileAvatar" src="https://randomuser.me/api/portraits/men/45.jpg"
                    style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
             </div>
             <div class="nav-label">Профиль</div>
@@ -1375,8 +1882,51 @@
     </div>
   </div>
 
+  <!-- МОДАЛКА РЕДАКТИРОВАНИЯ ПРОФИЛЯ -->
+  <div class="modal-backdrop" id="editProfileModal">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title">Редактировать профиль</div>
+        <div class="modal-close" id="editProfileClose">×</div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-avatar-preview">
+          <img id="editProfileAvatarPreview" src="https://randomuser.me/api/portraits/men/45.jpg" alt="">
+          <button class="modal-avatar-btn" id="editProfileAvatarBtn">Изменить фото</button>
+          <input type="file" id="editProfileAvatarInput" accept="image/*" style="display:none">
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Имя</div>
+          <input type="text" class="modal-input" id="editProfileNameInput" value="Иван Петров">
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Ник</div>
+          <input type="text" class="modal-input" id="editProfileNickInput" value="@ivan.petrov">
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Характер</div>
+          <select class="modal-select" id="editProfilePersonaSelect" multiple size="5">
+            <option value="честный">честный</option>
+            <option value="стеснительный">стеснительный</option>
+            <option value="ироничный">ироничный</option>
+            <option value="спокойный">спокойный</option>
+            <option value="экспрессивный">экспрессивный</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Био</div>
+          <textarea class="modal-textarea" id="editProfileBioInput">Собираю моменты из поездок и обычных дней. Люблю, когда вокруг спокойно и по‑настоящему.
+https://example.link/ivan</textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" id="editProfileCancel">Отмена</button>
+        <button class="btn-primary" id="editProfileSave">Сохранить</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // переключение экранов
     const screens = {
       posts: document.getElementById("screen-posts"),
       stiki: document.getElementById("screen-stiki"),
@@ -1384,57 +1934,44 @@
       passport: document.getElementById("screen-passport"),
       profile: document.getElementById("screen-profile"),
     };
-
     const navItems = document.querySelectorAll(".nav-item");
-
     function showScreen(name) {
       Object.keys(screens).forEach(key => {
-        if (key === name) {
-          screens[key].classList.add("active");
-        } else {
-          screens[key].classList.remove("active");
-        }
+        screens[key].classList.toggle("active", key === name);
       });
     }
-
     navItems.forEach(item => {
       item.addEventListener("click", () => {
         navItems.forEach(i => i.classList.remove("active"));
         item.classList.add("active");
         const target = item.dataset.screen;
-        showScreen(target);
+        if (target) showScreen(target);
       });
     });
 
-    // загрузка логотипа в правой навигации
     const navLogoBox = document.getElementById('navLogoBox');
     const navLogoImg = document.getElementById('navLogoImg');
     const navLogoInput = document.getElementById('navLogoInput');
-
-    navLogoBox.addEventListener('click', () => {
-      navLogoInput.click();
-    });
-
+    navLogoBox.addEventListener('click', () => navLogoInput.click());
     navLogoInput.addEventListener('change', () => {
       const file = navLogoInput.files[0];
       if (!file) return;
-      const url = URL.createObjectURL(file);
-      navLogoImg.src = url;
+      navLogoImg.src = URL.createObjectURL(file);
     });
 
-    // ЧАТЫ — живые диалоги
     const chatList = document.getElementById('chatList');
-    const chatDialog = document.getElementById('chatDialog');
     const chatDialogAvatar = document.getElementById('chatDialogAvatar');
     const chatDialogName = document.getElementById('chatDialogName');
     const chatDialogBody = document.getElementById('chatDialogBody');
     const chatInput = document.getElementById('chatInput');
     const chatSendBtn = document.getElementById('chatSendBtn');
+    const chatPetAvatar = document.getElementById('chatPetAvatar');
 
     const chatData = {
       anya: {
         name: 'Аня',
         avatar: 'https://randomuser.me/api/portraits/women/12.jpg',
+        pet: '🐱',
         messages: [
           { from: 'them', text: 'Я кинула ещё один момент в стики, посмотри, как он там смотрится.', time: '10:21' },
           { from: 'me', text: 'Ща долистаю. Хочу понять, не слишком ли быстро всё мелькает.', time: '10:22' },
@@ -1445,20 +1982,12 @@
       max: {
         name: 'Макс',
         avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
+        pet: '🐶',
         messages: [
           { from: 'them', text: 'Скролл в стиках уже норм, почти как в тиктоке по ощущениям.', time: '09:40' },
           { from: 'me', text: 'Да, листается легко. Можно потом добавить свайп влево под другую ленту.', time: '09:44' },
           { from: 'them', text: 'Давай сначала добьём базу, а потом уже будем мудрить с жестами.', time: '09:47' },
           { from: 'me', text: 'Ок, главное, что сейчас не ощущается сырым.', time: '09:49' },
-        ]
-      },
-      user: {
-        name: 'User',
-        avatar: 'https://randomuser.me/api/portraits/men/45.jpg',
-        messages: [
-          { from: 'them', text: 'Профиль сейчас выглядит уже как норм экран, не как заглушка.', time: 'Вчера' },
-          { from: 'me', text: 'Да, с кнопками и хайлайтами он стал живее. Уже не стыдно показать.', time: 'Вчера' },
-          { from: 'them', text: 'Осталось только добить мелочи и можно звать людей тестить.', time: 'Вчера' },
         ]
       }
     };
@@ -1471,6 +2000,7 @@
       currentChatId = chatId;
       chatDialogAvatar.src = chat.avatar;
       chatDialogName.textContent = chat.name;
+      chatPetAvatar.textContent = chat.pet || '🐱';
       chatDialogBody.innerHTML = '';
       chat.messages.forEach(msg => {
         const wrap = document.createElement('div');
@@ -1478,6 +2008,13 @@
         wrap.innerHTML = `
           <div>${msg.text}</div>
           <div class="msg-time">${msg.time}</div>
+          <div class="msg-reactions">
+            <span>❤️</span>
+            <span>🔥</span>
+            <span>😂</span>
+            <span>👍</span>
+            <span>😮</span>
+          </div>
         `;
         chatDialogBody.appendChild(wrap);
       });
@@ -1488,16 +2025,14 @@
       item.addEventListener('click', () => {
         chatList.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
         item.classList.add('active');
-        const id = item.dataset.chatId;
-        renderChat(id);
+        renderChat(item.dataset.chatId);
       });
     });
 
     chatSendBtn.addEventListener('click', () => {
       const text = chatInput.value.trim();
       if (!text) return;
-      const chat = chatData[currentChatId];
-      chat.messages.push({ from: 'me', text, time: 'сейчас' });
+      chatData[currentChatId].messages.push({ from: 'me', text, time: 'сейчас' });
       chatInput.value = '';
       renderChat(currentChatId);
     });
@@ -1509,19 +2044,16 @@
       }
     });
 
-    // начальный чат
     renderChat('anya');
 
-    // СТИКИ — загрузка локальных видео (без текста снизу, только действия справа)
     const stikiInput = document.getElementById('stikiInput');
     const stikiWrapper = document.getElementById('stikiWrapper');
 
     stikiInput.addEventListener('change', () => {
       const files = Array.from(stikiInput.files || []);
       if (!files.length) return;
-
       stikiWrapper.innerHTML = '';
-      files.forEach((file, index) => {
+      files.forEach((file) => {
         const url = URL.createObjectURL(file);
         const card = document.createElement('div');
         card.className = 'stiki-card';
@@ -1535,7 +2067,7 @@
               <small>0</small>
             </div>
             <div class="stiki-action">
-              <span>⋯</span>
+              <span>💬</span>
               <small>0</small>
             </div>
             <div class="stiki-action">
@@ -1547,7 +2079,87 @@
         stikiWrapper.appendChild(card);
       });
     });
+
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const editProfileModal = document.getElementById('editProfileModal');
+    const editProfileClose = document.getElementById('editProfileClose');
+    const editProfileCancel = document.getElementById('editProfileCancel');
+    const editProfileSave = document.getElementById('editProfileSave');
+
+    const editProfileAvatarBtn = document.getElementById('editProfileAvatarBtn');
+    const editProfileAvatarInput = document.getElementById('editProfileAvatarInput');
+    const editProfileAvatarPreview = document.getElementById('editProfileAvatarPreview');
+
+    const editProfileNameInput = document.getElementById('editProfileNameInput');
+    const editProfileNickInput = document.getElementById('editProfileNickInput');
+    const editProfilePersonaSelect = document.getElementById('editProfilePersonaSelect');
+    const editProfileBioInput = document.getElementById('editProfileBioInput');
+
+    const profileName = document.getElementById('profileName');
+    const profileNick = document.getElementById('profileNick');
+    const profileAvatarImg = document.getElementById('profileAvatarImg');
+    const navProfileAvatar = document.getElementById('navProfileAvatar');
+    const passportName = document.getElementById('passportName');
+    const passportNick = document.getElementById('passportNick');
+    const passportPersona = document.getElementById('passportPersona');
+    const passportPhoto = document.getElementById('passportPhoto');
+    const profileBio = document.getElementById('profileBio');
+
+    let tempAvatarUrl = profileAvatarImg.src;
+
+    function openEditProfileModal() {
+      editProfileNameInput.value = profileName.textContent;
+      editProfileNickInput.value = profileNick.textContent;
+      editProfileAvatarPreview.src = profileAvatarImg.src;
+      tempAvatarUrl = profileAvatarImg.src;
+
+      const bioText = profileBio.innerText.replace(/\n+/g, '\n').trim();
+      editProfileBioInput.value = bioText;
+
+      editProfileModal.classList.add('active');
+    }
+    function closeEditProfileModal() {
+      editProfileModal.classList.remove('active');
+    }
+
+    editProfileBtn.addEventListener('click', openEditProfileModal);
+    editProfileClose.addEventListener('click', closeEditProfileModal);
+    editProfileCancel.addEventListener('click', closeEditProfileModal);
+
+    editProfileAvatarBtn.addEventListener('click', () => editProfileAvatarInput.click());
+    editProfileAvatarInput.addEventListener('change', () => {
+      const file = editProfileAvatarInput.files[0];
+      if (!file) return;
+      tempAvatarUrl = URL.createObjectURL(file);
+      editProfileAvatarPreview.src = tempAvatarUrl;
+    });
+
+    editProfileSave.addEventListener('click', () => {
+      const newName = editProfileNameInput.value.trim() || 'Без имени';
+      const newNick = editProfileNickInput.value.trim() || '@user';
+      const selected = Array.from(editProfilePersonaSelect.selectedOptions).map(o => o.value);
+      const newBioRaw = editProfileBioInput.value.trim() || '';
+
+      profileName.textContent = newName;
+      profileNick.textContent = newNick;
+      profileAvatarImg.src = tempAvatarUrl;
+      navProfileAvatar.src = tempAvatarUrl;
+      passportPhoto.src = tempAvatarUrl;
+      passportName.textContent = newName;
+      passportNick.textContent = newNick;
+      passportPersona.textContent = selected.join(", ") || '—';
+
+      const bioLines = newBioRaw.split('\n').map(l => l.trim()).filter(Boolean);
+      profileBio.innerHTML = bioLines
+        .map(line => line.replace(/(https?:\/\/\S+)/g, '<a href="#">$1</a>'))
+        .join('<br>');
+
+      closeEditProfileModal();
+    });
+
+    editProfileModal.addEventListener('click', (e) => {
+      if (e.target === editProfileModal) closeEditProfileModal();
+    });
   </script>
 </body>
 </html>
-```
