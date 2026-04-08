@@ -12,7 +12,6 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
-    /* БЕЛАЯ ТЕМА */
     body {
       min-height: 100vh;
       background: #fafafa;
@@ -54,7 +53,7 @@
       font-size: 34px;
       font-weight: 800;
       letter-spacing: 4px;
-      background: linear-gradient(135deg, #d4a373, #b88352);
+      background: linear-gradient(135deg, #ff6cab, #ffdd59, #4cd964, #34aadc, #5856d6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -94,7 +93,7 @@
     }
 
     .login-tab.active {
-      background: #d4a373;
+      background: #262626;
       color: white;
     }
 
@@ -110,7 +109,7 @@
 
     .login-input:focus {
       outline: none;
-      border-color: #d4a373;
+      border-color: #262626;
     }
 
     .login-btn {
@@ -118,7 +117,7 @@
       border: none;
       border-radius: 40px;
       padding: 12px;
-      background: #d4a373;
+      background: #262626;
       color: white;
       font-weight: 600;
       cursor: pointer;
@@ -126,7 +125,7 @@
     }
 
     .login-btn:hover {
-      background: #b88352;
+      background: #111;
     }
 
     .login-error {
@@ -160,7 +159,7 @@
       font-size: 24px;
       font-weight: 800;
       letter-spacing: 3px;
-      background: linear-gradient(135deg, #d4a373, #b88352);
+      background: linear-gradient(135deg, #ff6cab, #ffdd59, #4cd964, #34aadc, #5856d6);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -177,7 +176,7 @@
 
     .search:focus {
       outline: none;
-      border-color: #d4a373;
+      border-color: #262626;
     }
 
     /* УВЕДОМЛЕНИЯ */
@@ -242,7 +241,7 @@
       padding: 20px;
     }
 
-    /* DESKTOP NAV */
+    /* DESKTOP NAV — ЧЁРНО-БЕЛАЯ */
     .right-nav {
       width: 80px;
       background: white;
@@ -272,8 +271,8 @@
     }
 
     .nav-item.active {
-      background: #f0f0f0;
-      color: #d4a373;
+      background: #262626;
+      color: white;
     }
 
     .nav-item svg {
@@ -381,6 +380,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
     }
 
     .post-avatar-small {
@@ -441,7 +441,7 @@
       color: #262626;
     }
 
-    /* ДЕЙСТВИЯ НАД БИО (лайки, комментарии, поделиться) */
+    /* ДЕЙСТВИЯ НАД БИО (лайк, комментарий, поделиться) */
     .post-actions-top {
       display: flex;
       align-items: center;
@@ -454,7 +454,7 @@
     .post-actions-bottom {
       display: flex;
       align-items: center;
-      gap: 24px;
+      justify-content: space-between;
       padding: 8px 16px 12px;
       border-top: 1px solid #efefef;
     }
@@ -513,6 +513,7 @@
     .comment-author {
       font-weight: 600;
       color: #262626;
+      cursor: pointer;
     }
 
     .comment-text {
@@ -543,6 +544,7 @@
       cursor: pointer;
     }
 
+    /* КОРЗИНА — ВИДНА */
     .delete-post-btn {
       background: none;
       border: none;
@@ -577,7 +579,6 @@
       transition: background 0.3s;
     }
 
-    /* УЗОРЫ ХЕДЕРА (6 штук) */
     .profile-cover.pattern-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
     .profile-cover.pattern-2 { background: repeating-linear-gradient(45deg, #ff6cab, #ff6cab 20px, #ffdd59 20px, #ffdd59 40px); }
     .profile-cover.pattern-3 { background: radial-gradient(circle at 20% 40%, #4cd964, #34aadc); }
@@ -643,6 +644,10 @@
       color: #262626;
     }
 
+    .profile-stats span {
+      cursor: pointer;
+    }
+
     .profile-stats span b {
       font-size: 18px;
     }
@@ -695,6 +700,57 @@
       object-fit: cover;
     }
 
+    /* МОДАЛКА ПОДПИСЧИКОВ/ПОДПИСОК */
+    .follows-modal .modal {
+      max-width: 400px;
+    }
+
+    .follows-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .follow-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-bottom: 1px solid #efefef;
+      cursor: pointer;
+    }
+
+    .follow-item:hover {
+      background: #fafafa;
+    }
+
+    .follow-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #efefef;
+      overflow: hidden;
+    }
+
+    .follow-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .follow-info {
+      flex: 1;
+    }
+
+    .follow-name {
+      font-weight: 600;
+      color: #262626;
+    }
+
+    .follow-nick {
+      font-size: 12px;
+      color: #8e8e8e;
+    }
+
     /* НАСТРОЙКИ */
     .settings-panel {
       max-width: 600px;
@@ -735,7 +791,7 @@
     }
 
     .pattern-card.selected .pattern-preview {
-      border-color: #0095f6;
+      border-color: #262626;
     }
 
     .pattern-name {
@@ -879,6 +935,7 @@
       padding: 10px 14px;
       border-radius: 18px;
       font-size: 14px;
+      position: relative;
     }
 
     .msg.me {
@@ -891,6 +948,21 @@
       background: white;
       color: #262626;
       border: 1px solid #dbdbdb;
+    }
+
+    .msg-edit-btn {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      background: none;
+      border: none;
+      font-size: 10px;
+      cursor: pointer;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .msg.them .msg-edit-btn {
+      color: #8e8e8e;
     }
 
     .chat-dialog-input {
@@ -1034,7 +1106,7 @@
     }
 
     .mobile-nav-item.active {
-      color: #d4a373;
+      color: #262626;
     }
 
     .mobile-nav-item svg {
@@ -1127,7 +1199,7 @@
   <header class="topbar">
     <div class="brand">RENITEA</div>
     <div style="display: flex; align-items: center; gap: 12px;">
-      <input class="search" id="userSearch" placeholder="Поиск...">
+      <input class="search" id="userSearch" placeholder="Поиск по имени...">
       <div class="notifications-icon" id="notificationsIcon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
@@ -1180,7 +1252,10 @@
             <div class="profile-name" id="profileName">—</div>
             <div class="profile-username" id="profileNick">—</div>
             <div class="profile-bio" id="profileBio">—</div>
-            <div class="profile-stats"><span><b id="profilePostsCount">0</b> постов</span><span><b id="profileFollowersCount">0</b> подписчиков</span><span><b id="profileFollowingCount">0</b> подписки</span></div>
+            <div class="profile-stats">
+              <span id="followersStat"><b id="profileFollowersCount">0</b> подписчиков</span>
+              <span id="followingStat"><b id="profileFollowingCount">0</b> подписки</span>
+            </div>
             <div class="profile-actions" id="profileActions"></div>
           </div>
         </div>
@@ -1220,6 +1295,11 @@
     <div class="mobile-nav-item" data-screen="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3"/><path d="M6 19c1.5-3 4-4 6-4s4.5 1 6 4"/></svg><span>Профиль</span></div>
     <div class="mobile-nav-item" data-screen="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Настройки</span></div>
   </div>
+</div>
+
+<!-- МОДАЛКА ПОДПИСЧИКОВ/ПОДПИСОК -->
+<div class="modal-backdrop" id="followersModal">
+  <div class="modal follows-modal"><h3 id="followersModalTitle">Подписчики</h3><div class="follows-list" id="followersList"></div><button id="closeFollowersModal" style="margin-top:16px; width:100%;">Закрыть</button></div>
 </div>
 
 <div class="modal-backdrop" id="editProfileModal">
@@ -1380,7 +1460,6 @@
   const editProfilePersonaInput = document.getElementById('editProfilePersonaInput');
   const editProfileBioInput = document.getElementById('editProfileBioInput');
   const editProfileAvatarInput = document.getElementById('editProfileAvatarInput');
-  const modalLogoutBtn = document.getElementById('modalLogoutBtn');
   const navItems = document.querySelectorAll('.nav-item, .mobile-nav-item');
   const profileCover = document.getElementById('profileCover');
   const logoutSettingsBtn = document.getElementById('logoutSettingsBtn');
@@ -1389,6 +1468,12 @@
   const notificationsBadge = document.getElementById('notificationsBadge');
   const notificationsDropdown = document.getElementById('notificationsDropdown');
   const totalUsersSpan = document.getElementById('totalUsersCount');
+  const followersModal = document.getElementById('followersModal');
+  const followersList = document.getElementById('followersList');
+  const followersModalTitle = document.getElementById('followersModalTitle');
+  const closeFollowersModal = document.getElementById('closeFollowersModal');
+  const followersStat = document.getElementById('followersStat');
+  const followingStat = document.getElementById('followingStat');
 
   // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
   function showScreen(name) {
@@ -1449,7 +1534,6 @@
       });
       state.subscriptions[targetUserId] = true;
       
-      // Уведомление о подписке
       await db.collection('notifications').add({
         toUserId: targetUserId,
         fromUserId: currentUserId,
@@ -1461,7 +1545,6 @@
     renderProfile();
   }
 
-  // Добавление комментария
   async function addComment(postId, text) {
     if (!state.currentUser || !text.trim()) return;
     await db.collection('comments').add({
@@ -1471,7 +1554,6 @@
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
     
-    // Уведомление о комментарии
     const post = state.posts.find(p => p.id === postId);
     if (post && post.authorId !== state.currentUser.uid) {
       await db.collection('notifications').add({
@@ -1485,7 +1567,14 @@
     }
   }
 
-  // Пересылка поста в чат
+  async function editMessage(messageId, chatKey, newText) {
+    if (!newText.trim()) return;
+    await db.collection('chats').doc(chatKey).collection('messages').doc(messageId).update({
+      text: newText.trim(),
+      edited: true
+    });
+  }
+
   async function sharePostToChat(postId, targetUserId) {
     const post = state.posts.find(p => p.id === postId);
     if (!post) return;
@@ -1522,6 +1611,45 @@
     profileCover.style.background = patterns[pattern] || patterns['1'];
   }
 
+  // Показать подписчиков/подписок
+  function showFollows(type) {
+    const uid = state.viewProfileUserId || state.currentUser.uid;
+    const user = getUserFromCache(uid);
+    if (!user) return;
+    
+    const followIds = type === 'followers' ? (user.followers || []) : (user.following || []);
+    followersModalTitle.textContent = type === 'followers' ? 'Подписчики' : 'Подписки';
+    followersList.innerHTML = '';
+    
+    if (followIds.length === 0) {
+      followersList.innerHTML = '<div style="padding:20px;text-align:center;color:#8e8e8e;">Нет пользователей</div>';
+    } else {
+      followIds.forEach(uid => {
+        const u = getUserFromCache(uid);
+        if (u) {
+          const item = document.createElement('div');
+          item.className = 'follow-item';
+          item.innerHTML = `
+            <div class="follow-avatar">${u.avatarBase64 ? `<img src="${u.avatarBase64}">` : ''}</div>
+            <div class="follow-info">
+              <div class="follow-name">${escapeHtml(u.name || u.email)}</div>
+              <div class="follow-nick">${u.nick || ''}</div>
+            </div>
+          `;
+          item.addEventListener('click', () => {
+            followersModal.classList.remove('active');
+            state.viewProfileUserId = u.id;
+            renderProfile();
+            renderProfileGrid();
+            showScreen('profile');
+          });
+          followersList.appendChild(item);
+        }
+      });
+    }
+    followersModal.classList.add('active');
+  }
+
   // ========== RENDER FUNCTIONS ==========
   
   function renderFeed() {
@@ -1544,7 +1672,7 @@
       
       card.innerHTML = `
         <div class="post-header">
-          <div class="post-author-info">
+          <div class="post-author-info" data-userid="${post.authorId}">
             <div class="post-avatar-small">
               ${author.avatarBase64 ? `<img src="${author.avatarBase64}">` : '<div style="width:36px;height:36px;background:#f0f0f0;border-radius:50%;"></div>'}
             </div>
@@ -1574,15 +1702,15 @@
             <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             <span class="action-count">${comments.length}</span>
           </button>
-          <button class="action-btn share-post-btn" data-id="${post.id}" data-author="${post.authorId}">
+          <button class="action-btn share-post-btn" data-id="${post.id}">
             <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
           </button>
         </div>
         
-        <!-- Блок комментариев (скрыт по умолчанию) -->
+        <!-- Блок комментариев -->
         <div class="comments-section" id="comments-${post.id}" style="display: none;">
           <div class="comments-list" id="comments-list-${post.id}">
-            ${comments.map(c => `<div class="comment-item"><span class="comment-author">${escapeHtml(c.authorName)}</span> <span class="comment-text">${escapeHtml(c.text)}</span></div>`).join('')}
+            ${comments.map(c => `<div class="comment-item"><span class="comment-author" data-userid="${c.authorId}">${escapeHtml(c.authorName)}</span> <span class="comment-text">${escapeHtml(c.text)}</span></div>`).join('')}
           </div>
           <div class="comment-input-wrapper">
             <input type="text" class="comment-input" id="comment-input-${post.id}" placeholder="Добавить комментарий...">
@@ -1598,10 +1726,38 @@
       
       feedList.appendChild(card);
       
+      // Зум фото
       const imgDiv = card.querySelector('.feed-post-image');
       if (imgDiv && imgDiv.querySelector('img')) {
         imgDiv.addEventListener('click', () => imgDiv.classList.toggle('zoomed'));
       }
+      
+      // Переход на профиль по клику на автора
+      const authorInfo = card.querySelector('.post-author-info');
+      if (authorInfo) {
+        authorInfo.addEventListener('click', () => {
+          const userId = authorInfo.dataset.userid;
+          if (userId) {
+            state.viewProfileUserId = userId;
+            renderProfile();
+            renderProfileGrid();
+            showScreen('profile');
+          }
+        });
+      }
+      
+      // Переход на профиль по клику на автора комментария
+      card.querySelectorAll('.comment-author').forEach(el => {
+        el.addEventListener('click', () => {
+          const userId = el.dataset.userid;
+          if (userId) {
+            state.viewProfileUserId = userId;
+            renderProfile();
+            renderProfileGrid();
+            showScreen('profile');
+          }
+        });
+      });
       
       // Переключение комментариев
       const toggleBtn = card.querySelector('.toggle-comments-btn');
@@ -1887,16 +2043,33 @@
     chatDialogBody.innerHTML = '';
     const key = chatKey(currentId, other.id);
     const msgs = state.messages[key] || [];
-    msgs.forEach(m => {
+    msgs.forEach((m, idx) => {
       const div = document.createElement('div');
       div.className = 'msg ' + (m.fromId === currentId ? 'me' : 'them');
-      div.innerHTML = `<div>${escapeHtml(m.text)}</div><div class="msg-time">${m.time || ''}</div>`;
+      div.innerHTML = `
+        <div>${escapeHtml(m.text)}${m.edited ? ' <span style="font-size:10px;">(ред.)</span>' : ''}</div>
+        <div class="msg-time">${m.time || ''}</div>
+        ${m.fromId === currentId ? `<button class="msg-edit-btn" data-msg-id="${m.id}" data-msg-text="${escapeHtml(m.text)}">✏️</button>` : ''}
+      `;
       chatDialogBody.appendChild(div);
     });
+    
+    // Редактирование сообщений
+    chatDialogBody.querySelectorAll('.msg-edit-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const msgId = btn.dataset.msgId;
+        const oldText = btn.dataset.msgText;
+        const newText = prompt('Редактировать сообщение:', oldText);
+        if (newText && newText !== oldText) {
+          await editMessage(msgId, key, newText);
+        }
+      });
+    });
+    
     chatDialogBody.scrollTop = chatDialogBody.scrollHeight;
   }
 
-  // Рекомендации — только в поиске, НЕ во вкладке посты
+  // Рекомендации — только в поиске по ИМЕНИ
   function renderRecommendations(searchQuery = '') {
     if (!state.currentUser) return;
     const currentId = state.currentUser.uid;
@@ -1905,7 +2078,7 @@
     if (!q) return;
     
     let users = Object.values(state.usersCache).filter(u => u.id !== currentId);
-    users = users.filter(u => (u.name || '').toLowerCase().includes(q) || (u.nick || '').toLowerCase().includes(q));
+    users = users.filter(u => (u.name || '').toLowerCase().includes(q));
     
     const recContainer = document.getElementById('recommendationsList');
     if (!recContainer) return;
@@ -1913,10 +2086,9 @@
     recContainer.innerHTML = '';
     users.slice(0, 5).forEach(u => {
       const card = document.createElement('div');
-      card.className = 'rec-card';
       card.style.cssText = 'display:flex;align-items:center;gap:12px;padding:12px;background:white;border:1px solid #dbdbdb;border-radius:12px;margin-bottom:8px;cursor:pointer;';
       card.innerHTML = `
-        <div class="rec-avatar" style="width:40px;height:40px;border-radius:50%;background:#efefef;overflow:hidden;">${u.avatarBase64 ? `<img src="${u.avatarBase64}" style="width:100%;height:100%;object-fit:cover;">` : ''}</div>
+        <div style="width:40px;height:40px;border-radius:50%;background:#efefef;overflow:hidden;">${u.avatarBase64 ? `<img src="${u.avatarBase64}" style="width:100%;height:100%;object-fit:cover;">` : ''}</div>
         <div><strong>${escapeHtml(u.name || u.email)}</strong><br><small>${u.nick || ''}</small></div>
       `;
       card.addEventListener('click', () => {
@@ -2039,8 +2211,10 @@
       state.messages[key] = snap.docs.map(doc => {
         const data = doc.data();
         return {
+          id: doc.id,
           fromId: data.fromId,
           text: data.text,
+          edited: data.edited || false,
           time: data.createdAt ? formatTime(data.createdAt) : ''
         };
       });
@@ -2077,6 +2251,15 @@
     renderChatList('');
     showScreen('posts');
     
+    // Создаём контейнер для рекомендаций
+    if (!document.getElementById('recommendationsList')) {
+      const recContainer = document.createElement('div');
+      recContainer.id = 'recommendationsList';
+      recContainer.style.maxWidth = '600px';
+      recContainer.style.margin = '0 auto';
+      document.querySelector('#screen-posts')?.appendChild(recContainer);
+    }
+    
     if (patternSelector) {
       const userDoc = getUserFromCache(user.uid);
       const currentPattern = userDoc?.headerPattern || '1';
@@ -2105,7 +2288,7 @@
   }
     // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
   
-  // Уведомления (клик по иконке)
+  // Уведомления
   if (notificationsIcon) {
     notificationsIcon.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -2115,6 +2298,24 @@
     });
     document.addEventListener('click', () => {
       if (notificationsDropdown) notificationsDropdown.classList.remove('active');
+    });
+  }
+  
+  // Подписчики/подписки
+  if (followersStat) {
+    followersStat.addEventListener('click', () => showFollows('followers'));
+  }
+  if (followingStat) {
+    followingStat.addEventListener('click', () => showFollows('following'));
+  }
+  if (closeFollowersModal) {
+    closeFollowersModal.addEventListener('click', () => {
+      followersModal.classList.remove('active');
+    });
+  }
+  if (followersModal) {
+    followersModal.addEventListener('click', (e) => {
+      if (e.target === followersModal) followersModal.classList.remove('active');
     });
   }
   
@@ -2324,7 +2525,7 @@
     });
   }
 
-  // Поиск — показывает рекомендации ТОЛЬКО в поиске
+  // Поиск — только по имени, показывает рекомендации
   if (userSearch) {
     userSearch.addEventListener('input', () => {
       const query = userSearch.value;
@@ -2344,7 +2545,6 @@
           renderProfileGrid();
         }
         if (screen === 'posts') {
-          // Очищаем поиск и рекомендации при переходе на посты
           if (userSearch) userSearch.value = '';
           const recContainer = document.getElementById('recommendationsList');
           if (recContainer) recContainer.innerHTML = '';
@@ -2446,24 +2646,33 @@
       state.stiki = [];
       state.messages = {};
       state.comments = {};
-      state.notifications = [];
+      state.notifications = {};
       if (loginWrapper) loginWrapper.style.display = 'flex';
       if (appRoot) appRoot.style.display = 'none';
       unsubscribeAll();
     }
   });
 
-  // Инициализация рекомендаций (пустой контейнер)
-  const recContainer = document.getElementById('recommendationsList');
-  if (!recContainer) {
-    const newRecContainer = document.createElement('div');
-    newRecContainer.id = 'recommendationsList';
-    newRecContainer.style.maxWidth = '600px';
-    newRecContainer.style.margin = '0 auto';
-    document.querySelector('#screen-posts')?.appendChild(newRecContainer);
+  // Создаём контейнер для рекомендаций
+  if (!document.getElementById('recommendationsList')) {
+    const recContainer = document.createElement('div');
+    recContainer.id = 'recommendationsList';
+    recContainer.style.maxWidth = '600px';
+    recContainer.style.margin = '0 auto';
+    const postsScreen = document.getElementById('screen-posts');
+    if (postsScreen) postsScreen.appendChild(recContainer);
   }
 
-  console.log('RENITEA — полностью загружено. Белая тема, комментарии работают, уведомления есть, чаты только с активными диалогами, рекомендации только в поиске, 6 узоров хедера, пересылка постов в чаты.');
+  console.log('RENITEA — полностью загружено!');
+  console.log('✅ Лайки, комментарии, поделиться — НАД био');
+  console.log('✅ Навигация чёрно-белая');
+  console.log('✅ Оригинальный логотип RENITEA');
+  console.log('✅ Корзина видна');
+  console.log('✅ Поиск по имени, рекомендации только в поиске');
+  console.log('✅ Уведомления работают');
+  console.log('✅ Подписчики/подписки — кликабельные');
+  console.log('✅ Редактирование сообщений в чатах');
+  console.log('✅ Чаты только с теми, у кого есть сообщения');
 </script>
 </body>
 </html>
