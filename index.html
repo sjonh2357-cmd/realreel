@@ -17,6 +17,11 @@
       background: #fafafa;
     }
 
+    /* ПЛАВНЫЕ АНИМАЦИИ */
+    .feed-post, .chat-item, .nav-item, .action-btn, .rec-card, .profile-grid-item {
+      transition: all 0.2s ease;
+    }
+
     /* LOGIN — ПРИРОДА */
     .login-wrapper {
       position: fixed;
@@ -90,6 +95,7 @@
       cursor: pointer;
       font-weight: 600;
       color: #6b7280;
+      transition: all 0.2s;
     }
 
     .login-tab.active {
@@ -105,11 +111,13 @@
       margin-bottom: 14px;
       background: white;
       font-size: 14px;
+      transition: all 0.2s;
     }
 
     .login-input:focus {
       outline: none;
       border-color: #262626;
+      box-shadow: 0 0 0 3px rgba(38, 38, 38, 0.1);
     }
 
     .login-btn {
@@ -126,6 +134,7 @@
 
     .login-btn:hover {
       background: #111;
+      transform: translateY(-2px);
     }
 
     .login-error {
@@ -134,7 +143,7 @@
       margin-top: 10px;
     }
 
-    /* APP — БЕЛАЯ ТЕМА */
+    /* APP */
     .app {
       display: none;
       flex-direction: column;
@@ -172,11 +181,13 @@
       padding: 8px 16px;
       background: #fafafa;
       font-size: 14px;
+      transition: all 0.2s;
     }
 
     .search:focus {
       outline: none;
       border-color: #262626;
+      box-shadow: 0 0 0 3px rgba(38, 38, 38, 0.05);
     }
 
     /* УВЕДОМЛЕНИЯ */
@@ -223,6 +234,7 @@
       border-bottom: 1px solid #f0f0f0;
       cursor: pointer;
       font-size: 13px;
+      transition: background 0.2s;
     }
 
     .notification-item:hover {
@@ -241,7 +253,7 @@
       padding: 20px;
     }
 
-    /* DESKTOP NAV — ЧЁРНО-БЕЛАЯ */
+    /* DESKTOP NAV — анимация, не меняет пассивную */
     .right-nav {
       width: 80px;
       background: white;
@@ -261,13 +273,14 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
       color: #8e8e8e;
+      background: transparent;
     }
 
     .nav-item:hover {
       background: #f0f0f0;
-      color: #262626;
+      transform: scale(1.05);
     }
 
     .nav-item.active {
@@ -284,6 +297,7 @@
       stroke: currentColor;
       stroke-width: 2;
       fill: none;
+      transition: all 0.2s;
     }
 
     .nav-item.active svg * {
@@ -336,6 +350,12 @@
       resize: vertical;
       min-height: 70px;
       font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .feed-composer textarea:focus {
+      outline: none;
+      border-color: #262626;
     }
 
     .feed-composer input[type="file"] {
@@ -352,6 +372,12 @@
       color: white;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .feed-composer button:hover {
+      background: #0081d6;
+      transform: translateY(-1px);
     }
 
     .feed-list {
@@ -367,6 +393,12 @@
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid #dbdbdb;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .post-header {
@@ -423,7 +455,7 @@
       width: 100%;
       height: auto;
       object-fit: contain;
-      transition: transform 0.3s;
+      transition: transform 0.3s ease;
     }
 
     .feed-post-image.zoomed {
@@ -441,7 +473,7 @@
       color: #262626;
     }
 
-    /* ДЕЙСТВИЯ НАД БИО (лайк, комментарий, поделиться) */
+    /* ДЕЙСТВИЯ НАД БИО (лайк, комментарий, поделиться) — ПОД ТЕКСТОМ, ПЕРЕД КОММЕНТАРИЯМИ */
     .post-actions-top {
       display: flex;
       align-items: center;
@@ -466,7 +498,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
       color: #8e8e8e;
       padding: 6px 12px;
       border-radius: 8px;
@@ -474,6 +506,7 @@
 
     .action-btn:hover {
       background: #f0f0f0;
+      transform: scale(1.02);
     }
 
     .action-btn svg {
@@ -485,6 +518,7 @@
       stroke: currentColor;
       stroke-width: 2;
       fill: none;
+      transition: all 0.2s;
     }
 
     .action-btn.liked svg * {
@@ -505,9 +539,16 @@
 
     .comment-item {
       display: flex;
-      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
       padding: 8px 0;
       font-size: 13px;
+    }
+
+    .comment-content {
+      display: flex;
+      gap: 8px;
+      flex: 1;
     }
 
     .comment-author {
@@ -518,6 +559,22 @@
 
     .comment-text {
       color: #262626;
+    }
+
+    .delete-comment-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #8e8e8e;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .delete-comment-btn:hover {
+      color: #ed4956;
+      background: #fef0f0;
     }
 
     .comment-input-wrapper {
@@ -542,9 +599,14 @@
       color: #0095f6;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
-    /* КОРЗИНА — ВИДНА */
+    .comment-submit:hover {
+      color: #0081d6;
+    }
+
+    /* КОРЗИНА */
     .delete-post-btn {
       background: none;
       border: none;
@@ -552,11 +614,13 @@
       padding: 6px;
       border-radius: 8px;
       color: #8e8e8e;
+      transition: all 0.2s;
     }
 
     .delete-post-btn:hover {
       color: #ed4956;
       background: #fef0f0;
+      transform: scale(1.05);
     }
 
     .delete-post-btn svg {
@@ -626,6 +690,7 @@
       margin-bottom: 8px;
     }
 
+    /* БИО — СНИЗУ ЛАЙКОВ */
     .profile-bio {
       font-size: 14px;
       margin: 12px auto;
@@ -646,6 +711,11 @@
 
     .profile-stats span {
       cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .profile-stats span:hover {
+      opacity: 0.7;
     }
 
     .profile-stats span b {
@@ -666,6 +736,7 @@
       font-weight: 600;
       cursor: pointer;
       border: none;
+      transition: all 0.2s;
     }
 
     .btn-primary {
@@ -673,9 +744,19 @@
       color: white;
     }
 
+    .btn-primary:hover {
+      background: #0081d6;
+      transform: translateY(-1px);
+    }
+
     .btn-ghost {
       background: #efefef;
       color: #262626;
+    }
+
+    .btn-ghost:hover {
+      background: #e0e0e0;
+      transform: translateY(-1px);
     }
 
     .profile-grid {
@@ -692,6 +773,11 @@
       border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .profile-grid-item:hover {
+      transform: scale(0.98);
     }
 
     .profile-grid-item img {
@@ -700,7 +786,7 @@
       object-fit: cover;
     }
 
-    /* МОДАЛКА ПОДПИСЧИКОВ/ПОДПИСОК */
+    /* МОДАЛКА ПОДПИСЧИКОВ */
     .follows-modal .modal {
       max-width: 400px;
     }
@@ -717,6 +803,7 @@
       padding: 12px;
       border-bottom: 1px solid #efefef;
       cursor: pointer;
+      transition: background 0.2s;
     }
 
     .follow-item:hover {
@@ -779,6 +866,11 @@
       width: 100px;
       cursor: pointer;
       text-align: center;
+      transition: all 0.2s;
+    }
+
+    .pattern-card:hover {
+      transform: scale(1.02);
     }
 
     .pattern-preview {
@@ -809,6 +901,7 @@
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
+      transition: all 0.2s;
     }
 
     .settings-btn:hover {
@@ -899,6 +992,11 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      transition: background 0.2s;
+    }
+
+    .chat-dialog-header:hover {
+      background: #f0f0f0;
     }
 
     .chat-dialog-header-avatar {
@@ -936,6 +1034,7 @@
       border-radius: 18px;
       font-size: 14px;
       position: relative;
+      transition: all 0.2s;
     }
 
     .msg.me {
@@ -959,10 +1058,20 @@
       font-size: 10px;
       cursor: pointer;
       color: rgba(255,255,255,0.6);
+      transition: all 0.2s;
+    }
+
+    .msg-edit-btn:hover {
+      color: white;
+      transform: scale(1.1);
     }
 
     .msg.them .msg-edit-btn {
       color: #8e8e8e;
+    }
+
+    .msg.them .msg-edit-btn:hover {
+      color: #262626;
     }
 
     .chat-dialog-input {
@@ -979,6 +1088,12 @@
       border: 1px solid #dbdbdb;
       padding: 12px;
       font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .chat-dialog-input input:focus {
+      outline: none;
+      border-color: #262626;
     }
 
     .chat-dialog-input button {
@@ -989,6 +1104,12 @@
       color: white;
       cursor: pointer;
       font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .chat-dialog-input button:hover {
+      background: #0081d6;
+      transform: translateY(-1px);
     }
 
     /* СТИКИ */
@@ -1042,6 +1163,11 @@
       gap: 6px;
       color: white;
       font-size: 20px;
+      transition: transform 0.2s;
+    }
+
+    .stiki-reaction:hover {
+      transform: scale(1.1);
     }
 
     /* ПАСПОРТ */
@@ -1103,6 +1229,12 @@
       width: 60px;
       cursor: pointer;
       color: #8e8e8e;
+      transition: all 0.2s;
+    }
+
+    .mobile-nav-item:hover {
+      color: #262626;
+      transform: translateY(-2px);
     }
 
     .mobile-nav-item.active {
@@ -1127,6 +1259,7 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
+      backdrop-filter: blur(4px);
     }
 
     .modal-backdrop.active {
@@ -1139,6 +1272,7 @@
       padding: 24px;
       max-width: 420px;
       width: 90%;
+      animation: fadeIn 0.2s ease;
     }
 
     .modal input, .modal textarea {
@@ -1147,6 +1281,12 @@
       border-radius: 8px;
       border: 1px solid #dbdbdb;
       padding: 12px;
+      transition: all 0.2s;
+    }
+
+    .modal input:focus, .modal textarea:focus {
+      outline: none;
+      border-color: #262626;
     }
 
     @media (max-width: 720px) {
@@ -1177,7 +1317,7 @@
       <button class="login-tab" data-tab="register">Создать</button>
     </div>
     <div id="loginForm">
-      <input type="email" id="loginEmail" placeholder="Email">
+      <input type="email" id="loginEmail" placeholder="Email" autocomplete="off">
       <input type="password" id="loginPass" placeholder="Пароль">
       <button class="login-btn" id="loginBtn">Войти</button>
     </div>
@@ -1186,9 +1326,9 @@
       <input type="text" id="regNick" placeholder="Никнейм">
       <input type="email" id="regEmail" placeholder="Email">
       <input type="password" id="regPass" placeholder="Пароль">
-      <input type="password" id="regPass2" placeholder="Повтор">
+      <input type="password" id="regPass2" placeholder="Повтор пароля">
       <div style="margin: 10px 0;"><label style="color:#6b7280;">Аватар:</label><input type="file" id="regAvatar" accept="image/*"></div>
-      <button class="login-btn" id="registerBtn">Создать</button>
+      <button class="login-btn" id="registerBtn">Создать аккаунт</button>
     </div>
     <div class="login-error" id="loginError"></div>
   </div>
@@ -1251,11 +1391,11 @@
           <div class="profile-info">
             <div class="profile-name" id="profileName">—</div>
             <div class="profile-username" id="profileNick">—</div>
-            <div class="profile-bio" id="profileBio">—</div>
             <div class="profile-stats">
               <span id="followersStat"><b id="profileFollowersCount">0</b> подписчиков</span>
               <span id="followingStat"><b id="profileFollowingCount">0</b> подписки</span>
             </div>
+            <div class="profile-bio" id="profileBio">—</div>
             <div class="profile-actions" id="profileActions"></div>
           </div>
         </div>
@@ -1297,13 +1437,13 @@
   </div>
 </div>
 
-<!-- МОДАЛКА ПОДПИСЧИКОВ/ПОДПИСОК -->
+<!-- МОДАЛКИ -->
 <div class="modal-backdrop" id="followersModal">
-  <div class="modal follows-modal"><h3 id="followersModalTitle">Подписчики</h3><div class="follows-list" id="followersList"></div><button id="closeFollowersModal" style="margin-top:16px; width:100%;">Закрыть</button></div>
+  <div class="modal follows-modal"><h3 id="followersModalTitle">Подписчики</h3><div class="follows-list" id="followersList"></div><button id="closeFollowersModal" style="margin-top:16px; width:100%; padding:10px; background:#efefef; border:none; border-radius:8px; cursor:pointer;">Закрыть</button></div>
 </div>
 
 <div class="modal-backdrop" id="editProfileModal">
-  <div class="modal"><h3>Редактировать</h3><input id="editProfileNameInput" placeholder="Имя"><input id="editProfileNickInput" placeholder="Ник"><input id="editProfilePersonaInput" placeholder="Характер"><textarea id="editProfileBioInput" placeholder="Био"></textarea><input type="file" id="editProfileAvatarInput" accept="image/*"><div style="display:flex; gap:12px; margin-top:16px;"><button id="editProfileSave">Сохранить</button><button id="editProfileCancel">Отмена</button></div></div>
+  <div class="modal"><h3>Редактировать профиль</h3><input id="editProfileNameInput" placeholder="Имя"><input id="editProfileNickInput" placeholder="Никнейм"><input id="editProfilePersonaInput" placeholder="Характер"><textarea id="editProfileBioInput" placeholder="Био" rows="3"></textarea><input type="file" id="editProfileAvatarInput" accept="image/*"><div style="display:flex; gap:12px; margin-top:16px;"><button id="editProfileSave" style="background:#0095f6; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">Сохранить</button><button id="editProfileCancel" style="background:#efefef; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">Отмена</button></div></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -1402,6 +1542,7 @@
   let unsubscribeMessages = null;
   let unsubscribeUsers = null;
   let unsubscribeNotifications = null;
+  let unsubscribeComments = null;
 
   // ========== DOM ELEMENTS ==========
   const loginWrapper = document.getElementById('loginWrapper');
@@ -1567,6 +1708,15 @@
     }
   }
 
+  async function deleteComment(commentId, postId, commentAuthorId) {
+    if (!state.currentUser) return;
+    // Только автор комментария или автор поста могут удалить
+    const post = state.posts.find(p => p.id === postId);
+    if (commentAuthorId === state.currentUser.uid || (post && post.authorId === state.currentUser.uid)) {
+      await db.collection('comments').doc(commentId).delete();
+    }
+  }
+
   async function editMessage(messageId, chatKey, newText) {
     if (!newText.trim()) return;
     await db.collection('chats').doc(chatKey).collection('messages').doc(messageId).update({
@@ -1611,7 +1761,6 @@
     profileCover.style.background = patterns[pattern] || patterns['1'];
   }
 
-  // Показать подписчиков/подписок
   function showFollows(type) {
     const uid = state.viewProfileUserId || state.currentUser.uid;
     const user = getUserFromCache(uid);
@@ -1692,7 +1841,6 @@
         </div>
         <div class="feed-post-text">${escapeHtml(post.text || '')}</div>
         
-        <!-- Действия НАД био (лайк, комментарий, поделиться) -->
         <div class="post-actions-top">
           <button class="action-btn like-btn ${reactions.like > 0 ? 'liked' : ''}" data-id="${post.id}">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
@@ -1707,10 +1855,18 @@
           </button>
         </div>
         
-        <!-- Блок комментариев -->
         <div class="comments-section" id="comments-${post.id}" style="display: none;">
           <div class="comments-list" id="comments-list-${post.id}">
-            ${comments.map(c => `<div class="comment-item"><span class="comment-author" data-userid="${c.authorId}">${escapeHtml(c.authorName)}</span> <span class="comment-text">${escapeHtml(c.text)}</span></div>`).join('')}
+            ${comments.map(c => `
+              <div class="comment-item" data-comment-id="${c.id}" data-comment-author="${c.authorId}">
+                <div class="comment-content">
+                  <span class="comment-author" data-userid="${c.authorId}">${escapeHtml(c.authorName)}</span>
+                  <span class="comment-text">${escapeHtml(c.text)}</span>
+                </div>
+                ${(c.authorId === state.currentUser?.uid || post.authorId === state.currentUser?.uid) ? 
+                  `<button class="delete-comment-btn" data-comment-id="${c.id}" data-post-id="${post.id}" data-author-id="${c.authorId}">🗑️</button>` : ''}
+              </div>
+            `).join('')}
           </div>
           <div class="comment-input-wrapper">
             <input type="text" class="comment-input" id="comment-input-${post.id}" placeholder="Добавить комментарий...">
@@ -1718,7 +1874,6 @@
           </div>
         </div>
         
-        <!-- Действия СНИЗУ (когда выложил) -->
         <div class="post-actions-bottom">
           <span style="font-size:12px; color:#8e8e8e;">${post.time || ''}</span>
         </div>
@@ -1732,7 +1887,7 @@
         imgDiv.addEventListener('click', () => imgDiv.classList.toggle('zoomed'));
       }
       
-      // Переход на профиль по клику на автора
+      // Переход на профиль автора
       const authorInfo = card.querySelector('.post-author-info');
       if (authorInfo) {
         authorInfo.addEventListener('click', () => {
@@ -1746,7 +1901,7 @@
         });
       }
       
-      // Переход на профиль по клику на автора комментария
+      // Переход на профиль из комментария
       card.querySelectorAll('.comment-author').forEach(el => {
         el.addEventListener('click', () => {
           const userId = el.dataset.userid;
@@ -1756,6 +1911,17 @@
             renderProfileGrid();
             showScreen('profile');
           }
+        });
+      });
+      
+      // Удаление комментария
+      card.querySelectorAll('.delete-comment-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const commentId = btn.dataset.commentId;
+          const postId = btn.dataset.postId;
+          const authorId = btn.dataset.authorId;
+          await deleteComment(commentId, postId, authorId);
         });
       });
       
@@ -1987,6 +2153,7 @@
     const currentId = state.currentUser.uid;
     chatList.innerHTML = '';
     
+    // Получаем уникальные чаты из messages
     const uniqueChatUsers = new Set();
     for (const key in state.messages) {
       const users = key.split('__');
@@ -2086,7 +2253,9 @@
     recContainer.innerHTML = '';
     users.slice(0, 5).forEach(u => {
       const card = document.createElement('div');
-      card.style.cssText = 'display:flex;align-items:center;gap:12px;padding:12px;background:white;border:1px solid #dbdbdb;border-radius:12px;margin-bottom:8px;cursor:pointer;';
+      card.style.cssText = 'display:flex;align-items:center;gap:12px;padding:12px;background:white;border:1px solid #dbdbdb;border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all 0.2s;';
+      card.onmouseenter = () => card.style.transform = 'translateX(4px)';
+      card.onmouseleave = () => card.style.transform = 'translateX(0)';
       card.innerHTML = `
         <div style="width:40px;height:40px;border-radius:50%;background:#efefef;overflow:hidden;">${u.avatarBase64 ? `<img src="${u.avatarBase64}" style="width:100%;height:100%;object-fit:cover;">` : ''}</div>
         <div><strong>${escapeHtml(u.name || u.email)}</strong><br><small>${u.nick || ''}</small></div>
@@ -2173,7 +2342,8 @@
   }
 
   function listenComments() {
-    db.collection('comments').onSnapshot(snap => {
+    if (unsubscribeComments) unsubscribeComments();
+    unsubscribeComments = db.collection('comments').onSnapshot(snap => {
       const commentsMap = {};
       snap.docs.forEach(doc => {
         const data = doc.data();
@@ -2285,6 +2455,7 @@
     if (unsubscribeMessages) unsubscribeMessages();
     if (unsubscribeUsers) unsubscribeUsers();
     if (unsubscribeNotifications) unsubscribeNotifications();
+    if (unsubscribeComments) unsubscribeComments();
   }
     // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
   
@@ -2554,7 +2725,7 @@
     });
   }
 
-  // Закрытие модалки
+  // Закрытие модалки редактирования
   if (editProfileClose) {
     editProfileClose.addEventListener('click', () => {
       if (editProfileModal) editProfileModal.classList.remove('active');
@@ -2646,7 +2817,7 @@
       state.stiki = [];
       state.messages = {};
       state.comments = {};
-      state.notifications = {};
+      state.notifications = [];
       if (loginWrapper) loginWrapper.style.display = 'flex';
       if (appRoot) appRoot.style.display = 'none';
       unsubscribeAll();
@@ -2663,16 +2834,22 @@
     if (postsScreen) postsScreen.appendChild(recContainer);
   }
 
-  console.log('RENITEA — полностью загружено!');
-  console.log('✅ Лайки, комментарии, поделиться — НАД био');
-  console.log('✅ Навигация чёрно-белая');
-  console.log('✅ Оригинальный логотип RENITEA');
-  console.log('✅ Корзина видна');
-  console.log('✅ Поиск по имени, рекомендации только в поиске');
-  console.log('✅ Уведомления работают');
-  console.log('✅ Подписчики/подписки — кликабельные');
-  console.log('✅ Редактирование сообщений в чатах');
-  console.log('✅ Чаты только с теми, у кого есть сообщения');
+  console.log('═══════════════════════════════════════════════════════════');
+  console.log('✨ RENITEA — ПОЛНОСТЬЮ ЗАГРУЖЕНА ✨');
+  console.log('═══════════════════════════════════════════════════════════');
+  console.log('✅ Лайки, комментарии, поделиться — НАД БИО (под текстом поста)');
+  console.log('✅ Навигация чёрно-белая, плавные анимации');
+  console.log('✅ Оригинальный логотип RENITEA (радужный градиент)');
+  console.log('✅ Корзина видна, комментарии удаляются');
+  console.log('✅ Поиск по имени, рекомендации ТОЛЬКО в поиске');
+  console.log('✅ Уведомления работают (лайки, комменты, подписки)');
+  console.log('✅ Подписчики/подписки — кликабельные, показывают список');
+  console.log('✅ Редактирование сообщений в чатах (кнопка ✏️)');
+  console.log('✅ Чаты только с теми, у кого есть хотя бы одно сообщение');
+  console.log('✅ Счётчик пользователей на логине (Firebase)');
+  console.log('✅ Поля ввода на логине с анимацией фокуса');
+  console.log('✅ Пассивная навигация не меняется, только ховер');
+  console.log('═══════════════════════════════════════════════════════════');
 </script>
 </body>
 </html>
