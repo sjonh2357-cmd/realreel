@@ -9,43 +9,65 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* ========== УНИКАЛЬНАЯ АЙДЕНТИКА RENITEA ========== */
+    :root {
+      --bg-primary: #f5f0eb;
+      --bg-card: #ffffff;
+      --border: #e8e0d5;
+      --text-primary: #2c241e;
+      --text-secondary: #8b7f6e;
+      --accent: #d4a373;
+      --accent-hover: #b88352;
+      --like: #e86a6a;
+      --comment: #6a9e86;
+      --share: #6a85b6;
     }
 
     body {
       min-height: 100vh;
-      background: #faf7f2;
-      background-attachment: fixed;
+      background: var(--bg-primary);
     }
 
-    /* LOGIN */
+    /* ========== LOGIN — ФОН ПРИРОДЫ ========== */
     .login-wrapper {
       position: fixed;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(8px);
+      background: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1950&auto=format') center/cover no-repeat;
       z-index: 2000;
     }
 
+    .login-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+    }
+
     .login-card {
+      position: relative;
+      z-index: 10;
       width: 100%;
       max-width: 400px;
       margin: 16px;
-      background: white;
-      border-radius: 24px;
+      background: rgba(255, 253, 247, 0.96);
+      border-radius: 28px;
       padding: 32px 28px;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     }
 
     .login-logo {
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 800;
-      letter-spacing: 0.16em;
-      background: linear-gradient(135deg, #ff6cab, #ffdd59, #4cd964, #34aadc, #5856d6);
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #d4a373, #b88352, #8b6b42);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -53,44 +75,50 @@
 
     .login-subtitle {
       font-size: 14px;
-      color: #8e8e8e;
+      color: var(--text-secondary);
       margin: 8px 0 24px;
+      font-style: italic;
     }
 
     .login-tabs {
       display: flex;
-      gap: 8px;
-      background: #f0f0f0;
-      padding: 4px;
-      border-radius: 999px;
-      margin-bottom: 20px;
+      gap: 10px;
+      background: #f0e9df;
+      padding: 5px;
+      border-radius: 60px;
+      margin-bottom: 24px;
     }
 
     .login-tab {
       flex: 1;
       border: none;
       padding: 10px;
-      border-radius: 999px;
+      border-radius: 60px;
       background: transparent;
       cursor: pointer;
-      font-weight: 500;
-      color: #666;
+      font-weight: 600;
+      color: var(--text-secondary);
     }
 
     .login-tab.active {
-      background: white;
-      color: #111;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .login-input {
       width: 100%;
-      border: 1px solid #dbdbdb;
-      border-radius: 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
       padding: 12px 16px;
       margin-bottom: 14px;
       background: white;
       font-size: 14px;
+    }
+
+    .login-input:focus {
+      outline: none;
+      border-color: var(--accent);
     }
 
     .login-btn {
@@ -98,31 +126,36 @@
       border: none;
       border-radius: 40px;
       padding: 12px;
-      background: #111;
+      background: var(--accent);
       color: white;
       font-weight: 600;
       cursor: pointer;
-      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .login-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
     }
 
     .login-error {
-      color: #ed4956;
+      color: #e86a6a;
       font-size: 13px;
       margin-top: 10px;
     }
 
-    /* APP — светлая тема RENITEA */
+    /* ========== APP — УНИКАЛЬНАЯ СВЕТЛАЯ ТЕМА RENITEA ========== */
     .app {
       display: none;
       flex-direction: column;
       min-height: 100vh;
-      background: #faf7f2;
+      background: var(--bg-primary);
     }
 
     .topbar {
       height: 60px;
-      background: white;
-      border-bottom: 1px solid #dbdbdb;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -135,8 +168,8 @@
     .brand {
       font-size: 24px;
       font-weight: 800;
-      letter-spacing: 0.12em;
-      background: linear-gradient(135deg, #ff6cab, #ffdd59, #4cd964, #34aadc, #5856d6);
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #d4a373, #b88352);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -144,16 +177,16 @@
 
     .search {
       width: 260px;
-      border-radius: 999px;
-      border: 1px solid #dbdbdb;
+      border-radius: 60px;
+      border: 1px solid var(--border);
       padding: 8px 16px;
-      background: #faf7f2;
+      background: var(--bg-primary);
       font-size: 14px;
     }
 
     .search:focus {
       outline: none;
-      border-color: #bdbdbd;
+      border-color: var(--accent);
     }
 
     .main-row {
@@ -171,8 +204,8 @@
     /* DESKTOP NAV */
     .right-nav {
       width: 80px;
-      background: white;
-      border-left: 1px solid #dbdbdb;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -189,17 +222,17 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.2s;
-      color: #8e8e8e;
+      color: var(--text-secondary);
     }
 
     .nav-item:hover {
-      background: #f0f0f0;
-      color: #111;
+      background: #f0e9df;
+      color: var(--text-primary);
     }
 
     .nav-item.active {
-      background: #f0f0f0;
-      color: #111;
+      background: #f0e9df;
+      color: var(--accent);
     }
 
     .nav-item svg {
@@ -219,7 +252,7 @@
 
     .nav-label {
       font-size: 11px;
-      color: #8e8e8e;
+      color: var(--text-secondary);
       margin-top: 4px;
     }
 
@@ -245,20 +278,20 @@
       display: block;
     }
 
-    /* FEED — как Instagram */
+    /* FEED */
     .feed-composer {
       max-width: 600px;
       margin: 0 auto 20px;
-      background: white;
-      border-radius: 16px;
+      background: var(--bg-card);
+      border-radius: 20px;
       padding: 16px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid var(--border);
     }
 
     .feed-composer textarea {
       width: 100%;
-      border: 1px solid #dbdbdb;
-      border-radius: 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
       padding: 12px;
       resize: vertical;
       min-height: 70px;
@@ -273,9 +306,9 @@
       margin-top: 8px;
       float: right;
       border: none;
-      border-radius: 8px;
-      padding: 8px 20px;
-      background: #0095f6;
+      border-radius: 40px;
+      padding: 8px 24px;
+      background: var(--accent);
       color: white;
       font-weight: 600;
       cursor: pointer;
@@ -290,10 +323,10 @@
     }
 
     .feed-post {
-      background: white;
-      border-radius: 16px;
+      background: var(--bg-card);
+      border-radius: 20px;
       overflow: hidden;
-      border: 1px solid #dbdbdb;
+      border: 1px solid var(--border);
     }
 
     .post-header {
@@ -313,7 +346,7 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: #f0f0f0;
+      background: #f0e9df;
       overflow: hidden;
     }
 
@@ -326,18 +359,18 @@
     .post-author-name {
       font-weight: 600;
       font-size: 14px;
-      color: #111;
+      color: var(--text-primary);
     }
 
     .post-date {
       font-size: 11px;
-      color: #8e8e8e;
+      color: var(--text-secondary);
     }
 
     .feed-post-image {
       width: 100%;
       max-height: 500px;
-      background: #f0f0f0;
+      background: #f0e9df;
       overflow: hidden;
       cursor: zoom-in;
       display: flex;
@@ -364,16 +397,16 @@
     .feed-post-text {
       padding: 12px 16px;
       font-size: 14px;
-      color: #111;
+      color: var(--text-primary);
     }
 
-    /* Instagram-style иконки 🔥 💬 ✉️ */
+    /* СТИЛИЗОВАННЫЕ ИКОНКИ — ЛАЙК, КОММЕНТ, ПОДЕЛИТЬСЯ */
     .post-actions {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
       padding: 8px 16px 12px;
-      border-top: 1px solid #efefef;
+      border-top: 1px solid var(--border);
     }
 
     .action-btn {
@@ -383,36 +416,40 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 24px;
-      transition: transform 0.15s;
-      color: #262626;
-      padding: 6px;
-      border-radius: 999px;
+      font-size: 20px;
+      transition: all 0.2s;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: 40px;
     }
 
     .action-btn:hover {
-      transform: scale(1.08);
-      background: #f0f0f0;
+      background: #f0e9df;
+      transform: scale(1.02);
+    }
+
+    .action-btn.liked {
+      color: var(--like);
     }
 
     .action-count {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
-      color: #262626;
     }
 
     .delete-post-btn {
       background: none;
       border: none;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
-      color: #8e8e8e;
+      color: var(--text-secondary);
       padding: 4px 8px;
       border-radius: 8px;
+      transition: all 0.2s;
     }
 
     .delete-post-btn:hover {
-      color: #ed4956;
+      color: var(--like);
       background: #fef0f0;
     }
 
@@ -420,22 +457,22 @@
     .profile-header {
       max-width: 760px;
       margin: 0 auto 24px;
-      background: white;
-      border-radius: 16px;
+      background: var(--bg-card);
+      border-radius: 24px;
       overflow: hidden;
-      border: 1px solid #dbdbdb;
+      border: 1px solid var(--border);
     }
 
     .profile-cover {
       height: 140px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #d4a373, #b88352);
       transition: background 0.3s;
     }
 
-    .profile-cover.pattern-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-    .profile-cover.pattern-2 { background: repeating-linear-gradient(45deg, #ff6cab, #ff6cab 20px, #ffdd59 20px, #ffdd59 40px); }
-    .profile-cover.pattern-3 { background: radial-gradient(circle at 20% 40%, #4cd964, #34aadc); }
-    .profile-cover.pattern-4 { background: linear-gradient(135deg, #f5f0e6 0%, #e8d5b5 100%); }
+    .profile-cover.pattern-1 { background: linear-gradient(135deg, #d4a373, #b88352); }
+    .profile-cover.pattern-2 { background: repeating-linear-gradient(45deg, #e8d5b5, #e8d5b5 20px, #d4a373 20px, #d4a373 40px); }
+    .profile-cover.pattern-3 { background: radial-gradient(circle at 20% 40%, #c9b896, #a8c9a5); }
+    .profile-cover.pattern-4 { background: linear-gradient(135deg, #f5f0eb 0%, #e8d5b5 100%); }
 
     .profile-avatar-wrap {
       display: flex;
@@ -448,8 +485,8 @@
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      border: 4px solid white;
-      background: #f0f0f0;
+      border: 4px solid var(--bg-card);
+      background: #f0e9df;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
@@ -468,12 +505,12 @@
     .profile-name {
       font-size: 22px;
       font-weight: 700;
-      color: #111;
+      color: var(--text-primary);
     }
 
     .profile-username {
       font-size: 14px;
-      color: #8e8e8e;
+      color: var(--text-secondary);
       margin-bottom: 8px;
     }
 
@@ -481,10 +518,10 @@
       font-size: 14px;
       margin: 12px auto;
       padding: 12px 20px;
-      background: #faf7f2;
+      background: var(--bg-primary);
       border-radius: 20px;
       max-width: 80%;
-      color: #111;
+      color: var(--text-primary);
     }
 
     .profile-stats {
@@ -492,7 +529,7 @@
       justify-content: center;
       gap: 28px;
       margin: 16px 0;
-      color: #111;
+      color: var(--text-primary);
     }
 
     .profile-stats span b {
@@ -507,7 +544,7 @@
     }
 
     .btn-primary, .btn-ghost {
-      border-radius: 8px;
+      border-radius: 40px;
       padding: 8px 20px;
       font-size: 14px;
       font-weight: 600;
@@ -516,13 +553,13 @@
     }
 
     .btn-primary {
-      background: #0095f6;
+      background: var(--accent);
       color: white;
     }
 
     .btn-ghost {
-      background: #efefef;
-      color: #111;
+      background: #f0e9df;
+      color: var(--text-primary);
     }
 
     .profile-grid {
@@ -535,7 +572,7 @@
 
     .profile-grid-item {
       aspect-ratio: 1/1;
-      background: #efefef;
+      background: #f0e9df;
       border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
@@ -547,20 +584,20 @@
       object-fit: cover;
     }
 
-    /* НАСТРОЙКИ — с предпросмотром узоров */
+    /* НАСТРОЙКИ */
     .settings-panel {
       max-width: 600px;
       margin: 0 auto;
-      background: white;
-      border-radius: 20px;
+      background: var(--bg-card);
+      border-radius: 24px;
       padding: 24px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid var(--border);
     }
 
     .settings-title {
       font-size: 20px;
       font-weight: 700;
-      color: #111;
+      color: var(--text-primary);
       margin-bottom: 20px;
     }
 
@@ -587,54 +624,48 @@
     }
 
     .pattern-card.selected .pattern-preview {
-      border-color: #0095f6;
+      border-color: var(--accent);
       transform: scale(1.02);
     }
 
     .pattern-name {
       font-size: 12px;
-      color: #8e8e8e;
-    }
-
-    .pattern-card.selected .pattern-name {
-      color: #0095f6;
-      font-weight: 600;
+      color: var(--text-secondary);
     }
 
     .settings-btn {
       width: 100%;
       padding: 12px;
-      background: #efefef;
+      background: #f0e9df;
       border: none;
-      border-radius: 12px;
-      color: #111;
+      border-radius: 40px;
+      color: var(--text-primary);
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 20px;
     }
 
     .settings-btn:hover {
-      background: #ed4956;
+      background: var(--like);
       color: white;
     }
 
-    /* ЧАТЫ — светлые, приятные */
+    /* ЧАТЫ */
     .chats-layout {
       max-width: 1000px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: 320px 1fr;
       height: 70vh;
-      background: white;
-      border-radius: 20px;
+      background: var(--bg-card);
+      border-radius: 24px;
       overflow: hidden;
-      border: 1px solid #dbdbdb;
+      border: 1px solid var(--border);
     }
 
     .chat-list {
       background: #faf7f2;
-      border-right: 1px solid #dbdbdb;
+      border-right: 1px solid var(--border);
       overflow-y: auto;
     }
 
@@ -644,19 +675,25 @@
       gap: 14px;
       padding: 14px;
       cursor: pointer;
-      border-bottom: 1px solid #efefef;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .chat-item:hover {
+      background: #f0e9df;
     }
 
     .chat-item.active {
-      background: #f0f0f0;
+      background: #f0e9df;
     }
 
     .chat-avatar {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background: #efefef;
+      background: #f0e9df;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
     .chat-avatar img {
@@ -667,31 +704,58 @@
 
     .chat-info {
       flex: 1;
+      min-width: 0;
     }
 
     .chat-name {
       font-weight: 600;
-      color: #111;
+      color: var(--text-primary);
     }
 
     .chat-last-message {
       font-size: 12px;
-      color: #8e8e8e;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .chat-dialog {
       display: flex;
       flex-direction: column;
-      background: white;
     }
 
     .chat-dialog-header {
       padding: 14px;
-      border-bottom: 1px solid #dbdbdb;
+      border-bottom: 1px solid var(--border);
       background: #faf7f2;
       cursor: pointer;
-      color: #111;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-dialog-header-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f0e9df;
+      overflow: hidden;
+    }
+
+    .chat-dialog-header-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .chat-dialog-header-info {
+      flex: 1;
+    }
+
+    .chat-dialog-header-name {
       font-weight: 600;
+      color: var(--text-primary);
     }
 
     .chat-dialog-body {
@@ -713,37 +777,37 @@
 
     .msg.me {
       margin-left: auto;
-      background: #0095f6;
+      background: var(--accent);
       color: white;
     }
 
     .msg.them {
       background: white;
-      color: #111;
-      border: 1px solid #dbdbdb;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
     }
 
     .chat-dialog-input {
       display: flex;
       gap: 12px;
       padding: 14px;
-      border-top: 1px solid #dbdbdb;
+      border-top: 1px solid var(--border);
       background: white;
     }
 
     .chat-dialog-input input {
       flex: 1;
-      border-radius: 999px;
-      border: 1px solid #dbdbdb;
+      border-radius: 40px;
+      border: 1px solid var(--border);
       padding: 12px;
       font-size: 14px;
     }
 
     .chat-dialog-input button {
-      border-radius: 999px;
+      border-radius: 40px;
       border: none;
       padding: 12px 24px;
-      background: #0095f6;
+      background: var(--accent);
       color: white;
       cursor: pointer;
       font-weight: 600;
@@ -753,10 +817,10 @@
     .stiki-composer {
       max-width: 520px;
       margin: 0 auto 16px;
-      background: white;
-      border-radius: 16px;
+      background: var(--bg-card);
+      border-radius: 20px;
       padding: 16px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid var(--border);
     }
 
     .stiki-wrapper {
@@ -791,7 +855,7 @@
       gap: 16px;
       background: rgba(0, 0, 0, 0.5);
       padding: 8px 16px;
-      border-radius: 999px;
+      border-radius: 40px;
     }
 
     .stiki-reaction {
@@ -812,18 +876,17 @@
     }
 
     .passport-card {
-      background: white;
-      border-radius: 20px;
+      background: var(--bg-card);
+      border-radius: 24px;
       padding: 24px;
-      border: 1px solid #dbdbdb;
-      color: #111;
+      border: 1px solid var(--border);
     }
 
     .passport-photo {
       width: 80px;
       height: 80px;
       border-radius: 16px;
-      background: #efefef;
+      background: #f0e9df;
       background-size: cover;
     }
 
@@ -834,11 +897,10 @@
     }
 
     .visa-card {
-      background: white;
+      background: var(--bg-card);
       border-radius: 16px;
       padding: 16px;
-      border: 1px solid #dbdbdb;
-      color: #111;
+      border: 1px solid var(--border);
     }
 
     /* МОБИЛЬНАЯ НАВИГАЦИЯ */
@@ -849,8 +911,8 @@
       left: 0;
       right: 0;
       height: 70px;
-      background: white;
-      border-top: 1px solid #dbdbdb;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
       justify-content: space-around;
       align-items: center;
       z-index: 500;
@@ -862,11 +924,11 @@
       align-items: center;
       width: 60px;
       cursor: pointer;
-      color: #8e8e8e;
+      color: var(--text-secondary);
     }
 
     .mobile-nav-item.active {
-      color: #111;
+      color: var(--accent);
     }
 
     .mobile-nav-item svg {
@@ -894,7 +956,7 @@
     }
 
     .modal {
-      background: white;
+      background: var(--bg-card);
       border-radius: 24px;
       padding: 24px;
       max-width: 420px;
@@ -905,7 +967,7 @@
       width: 100%;
       margin-bottom: 12px;
       border-radius: 12px;
-      border: 1px solid #dbdbdb;
+      border: 1px solid var(--border);
       padding: 12px;
     }
 
@@ -920,7 +982,7 @@
     .empty-feed-text, .recommendations-title {
       text-align: center;
       padding: 40px;
-      color: #8e8e8e;
+      color: var(--text-secondary);
     }
 
     .recommendations-list {
@@ -933,19 +995,18 @@
       align-items: center;
       gap: 14px;
       padding: 12px 16px;
-      background: white;
+      background: var(--bg-card);
       border-radius: 16px;
       margin-bottom: 8px;
       cursor: pointer;
-      border: 1px solid #dbdbdb;
-      color: #111;
+      border: 1px solid var(--border);
     }
 
     .rec-avatar {
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: #efefef;
+      background: #f0e9df;
       overflow: hidden;
     }
   </style>
@@ -1006,7 +1067,13 @@
         <div class="chats-layout">
           <div class="chat-list" id="chatList"></div>
           <div class="chat-dialog">
-            <div class="chat-dialog-header" id="chatHeaderProfile"><strong id="chatDialogName"></strong> <span id="chatDialogNick"></span></div>
+            <div class="chat-dialog-header" id="chatHeaderProfile">
+              <div class="chat-dialog-header-avatar" id="chatDialogAvatar"></div>
+              <div class="chat-dialog-header-info">
+                <div class="chat-dialog-header-name" id="chatDialogName"></div>
+                <div style="font-size:12px;color:var(--text-secondary);" id="chatDialogNick"></div>
+              </div>
+            </div>
             <div class="chat-dialog-body" id="chatDialogBody"></div>
             <div class="chat-dialog-input"><input id="chatInput" placeholder="Сообщение..."><button id="chatSendBtn">→</button></div>
           </div>
@@ -1036,22 +1103,10 @@
         <div class="settings-panel">
           <div class="settings-title">Оформление профиля</div>
           <div class="patterns-grid" id="patternSelector">
-            <div class="pattern-card" data-pattern="1">
-              <div class="pattern-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
-              <div class="pattern-name">Космос</div>
-            </div>
-            <div class="pattern-card" data-pattern="2">
-              <div class="pattern-preview" style="background: repeating-linear-gradient(45deg, #ff6cab, #ff6cab 20px, #ffdd59 20px, #ffdd59 40px);"></div>
-              <div class="pattern-name">Закат</div>
-            </div>
-            <div class="pattern-card" data-pattern="3">
-              <div class="pattern-preview" style="background: radial-gradient(circle at 20% 40%, #4cd964, #34aadc);"></div>
-              <div class="pattern-name">Лето</div>
-            </div>
-            <div class="pattern-card" data-pattern="4">
-              <div class="pattern-preview" style="background: linear-gradient(135deg, #f5f0e6 0%, #e8d5b5 100%);"></div>
-              <div class="pattern-name">Нежность</div>
-            </div>
+            <div class="pattern-card" data-pattern="1"><div class="pattern-preview" style="background: linear-gradient(135deg, #d4a373, #b88352);"></div><div class="pattern-name">Карамель</div></div>
+            <div class="pattern-card" data-pattern="2"><div class="pattern-preview" style="background: repeating-linear-gradient(45deg, #e8d5b5, #e8d5b5 20px, #d4a373 20px, #d4a373 40px);"></div><div class="pattern-name">Зебра</div></div>
+            <div class="pattern-card" data-pattern="3"><div class="pattern-preview" style="background: radial-gradient(circle at 20% 40%, #c9b896, #a8c9a5);"></div><div class="pattern-name">Лес</div></div>
+            <div class="pattern-card" data-pattern="4"><div class="pattern-preview" style="background: linear-gradient(135deg, #f5f0eb 0%, #e8d5b5 100%);"></div><div class="pattern-name">Нежность</div></div>
           </div>
           <button class="settings-btn" id="logoutSettingsBtn">Выйти из аккаунта</button>
         </div>
@@ -1085,7 +1140,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 <script>
   // ========== FIREBASE CONFIG ==========
   const firebaseConfig = {
@@ -1206,6 +1260,7 @@
   const chatDialogName = document.getElementById('chatDialogName');
   const chatDialogNick = document.getElementById('chatDialogNick');
   const chatDialogBody = document.getElementById('chatDialogBody');
+  const chatDialogAvatar = document.getElementById('chatDialogAvatar');
   const chatInput = document.getElementById('chatInput');
   const chatSendBtn = document.getElementById('chatSendBtn');
   const chatHeaderProfile = document.getElementById('chatHeaderProfile');
@@ -1224,9 +1279,6 @@
   const profileFollowingCount = document.getElementById('profileFollowingCount');
   const profileGrid = document.getElementById('profileGrid');
   const profileActions = document.getElementById('profileActions');
-  const editProfileBtn = document.getElementById('editProfileBtn');
-  const profileMessageBtn = document.getElementById('profileMessageBtn');
-  const logoutBtn = document.getElementById('logoutBtn');
   const editProfileModal = document.getElementById('editProfileModal');
   const editProfileClose = document.getElementById('editProfileClose');
   const editProfileCancel = document.getElementById('editProfileCancel');
@@ -1308,10 +1360,10 @@
     localStorage.setItem('renitea_header_pattern', pattern);
     if (profileCover) {
       const patterns = {
-        '1': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        '2': 'repeating-linear-gradient(45deg, #ff6cab, #ff6cab 20px, #ffdd59 20px, #ffdd59 40px)',
-        '3': 'radial-gradient(circle at 20% 40%, #4cd964, #34aadc)',
-        '4': 'linear-gradient(135deg, #f5f0e6 0%, #e8d5b5 100%)'
+        '1': 'linear-gradient(135deg, #d4a373, #b88352)',
+        '2': 'repeating-linear-gradient(45deg, #e8d5b5, #e8d5b5 20px, #d4a373 20px, #d4a373 40px)',
+        '3': 'radial-gradient(circle at 20% 40%, #c9b896, #a8c9a5)',
+        '4': 'linear-gradient(135deg, #f5f0eb 0%, #e8d5b5 100%)'
       };
       profileCover.style.background = patterns[pattern] || patterns['1'];
     }
@@ -1347,21 +1399,21 @@
         <div class="post-header">
           <div class="post-author-info">
             <div class="post-avatar-small">
-              ${author.avatarBase64 ? `<img src="${author.avatarBase64}">` : '<div style="width:36px;height:36px;background:#efefef;border-radius:50%;"></div>'}
+              ${author.avatarBase64 ? `<img src="${author.avatarBase64}">` : '<div style="width:36px;height:36px;background:#f0e9df;border-radius:50%;"></div>'}
             </div>
             <div>
               <div class="post-author-name">${escapeHtml(author.name)}</div>
               <div class="post-date">${post.time || ''}</div>
             </div>
           </div>
-          ${isAuthor ? `<button class="delete-post-btn" data-id="${post.id}">🗑️</button>` : '<span style="color:#8e8e8e;">⋯</span>'}
+          ${isAuthor ? `<button class="delete-post-btn" data-id="${post.id}">🗑️</button>` : '<span style="color:#8b7f6e;">⋯</span>'}
         </div>
         <div class="feed-post-image">
           ${post.imageBase64 ? `<img src="${post.imageBase64}">` : ''}
         </div>
         <div class="feed-post-text">${escapeHtml(post.text || '')}</div>
         <div class="post-actions">
-          <button class="action-btn fire-btn" data-id="${post.id}">
+          <button class="action-btn fire-btn ${reactions.fire > 0 ? 'liked' : ''}" data-id="${post.id}">
             🔥 <span class="action-count">${reactions.fire || 0}</span>
           </button>
           <button class="action-btn comment-btn">
@@ -1419,7 +1471,7 @@
     if (!stikiWrapper) return;
     stikiWrapper.innerHTML = '';
     if (!state.stiki.length) {
-      stikiWrapper.innerHTML = '<div style="text-align:center;padding:40px;color:#8e8e8e;">🎬 Нет стиков</div>';
+      stikiWrapper.innerHTML = '<div style="text-align:center;padding:40px;color:#8b7f6e;">🎬 Нет стиков</div>';
       return;
     }
     state.stiki.forEach(s => {
@@ -1513,13 +1565,13 @@
       if (p.imageBase64) {
         div.innerHTML = `<img src="${p.imageBase64}">`;
       } else {
-        div.style.background = '#efefef';
-        div.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8e8e8e;">📷</div>';
+        div.style.background = '#f0e9df';
+        div.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#8b7f6e;">📷</div>';
       }
       profileGrid.appendChild(div);
     });
     if (userPosts.length === 0) {
-      profileGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#8e8e8e;">Нет постов</div>';
+      profileGrid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:#8b7f6e;">Нет постов</div>';
     }
   }
 
@@ -1543,45 +1595,42 @@
     }
   }
 
+  // ЧАТЫ — уникальный пользователь, не дублируется
   async function renderChatList(filter = '') {
     if (!chatList || !state.currentUser) return;
     const currentId = state.currentUser.uid;
     chatList.innerHTML = '';
     
-    // Получаем все чаты, где есть сообщения
-    const chatsSnapshot = await db.collectionGroup('messages').get();
-    const chatIds = new Set();
-    chatsSnapshot.forEach(doc => {
-      const path = doc.ref.path;
-      const match = path.match(/chats\/(.+)\/messages/);
-      if (match) {
-        const key = match[1];
-        const users = key.split('__');
-        if (users[0] === currentId) chatIds.add(users[1]);
-        if (users[1] === currentId) chatIds.add(users[0]);
-      }
-    });
+    // Получаем уникальных собеседников из сообщений
+    const uniqueChatUsers = new Set();
+    for (const key in state.messages) {
+      const users = key.split('__');
+      if (users[0] === currentId) uniqueChatUsers.add(users[1]);
+      if (users[1] === currentId) uniqueChatUsers.add(users[0]);
+    }
     
     const q = filter.toLowerCase().trim();
-    let users = Object.values(state.usersCache).filter(u => u.id !== currentId && chatIds.has(u.id));
+    let users = Object.values(state.usersCache).filter(u => u.id !== currentId && uniqueChatUsers.has(u.id));
     
     if (q) {
-      users = users.filter(u => (u.name || '').toLowerCase().includes(q) || (u.nick || '').toLowerCase().includes(q));
+      const searchUsers = Object.values(state.usersCache).filter(u => u.id !== currentId && 
+        ((u.name || '').toLowerCase().includes(q) || (u.nick || '').toLowerCase().includes(q)));
+      users = [...new Set([...users, ...searchUsers])];
     }
     
     if (!users.length) {
-      chatList.innerHTML = '<div style="padding:20px;text-align:center;color:#8e8e8e;">Нет активных чатов</div>';
+      chatList.innerHTML = '<div style="padding:20px;text-align:center;color:#8b7f6e;">Нет активных чатов</div>';
       return;
     }
     
-    for (const u of users) {
+    users.forEach(u => {
       const key = chatKey(currentId, u.id);
       const msgs = state.messages[key] || [];
       const last = msgs[msgs.length - 1];
       const item = document.createElement('div');
       item.className = 'chat-item' + (u.id === currentChatUserId ? ' active' : '');
       item.innerHTML = `
-        <div class="chat-avatar">${u.avatarBase64 ? `<img src="${u.avatarBase64}">` : ''}</div>
+        <div class="chat-avatar">${u.avatarBase64 ? `<img src="${u.avatarBase64}">` : '<div style="width:100%;height:100%;background:#f0e9df;border-radius:50%;"></div>'}</div>
         <div class="chat-info">
           <div class="chat-name">${escapeHtml(u.name || u.email)}</div>
           <div class="chat-last-message">${last ? escapeHtml(last.text.substring(0, 35)) : (u.nick || 'Нет сообщений')}</div>
@@ -1593,7 +1642,7 @@
         listenMessagesForChat(currentId, currentChatUserId);
       });
       chatList.appendChild(item);
-    }
+    });
     
     if (!currentChatUserId && users.length) {
       currentChatUserId = users[0].id;
@@ -1609,6 +1658,9 @@
     
     if (chatDialogName) chatDialogName.textContent = other.name || other.email;
     if (chatDialogNick) chatDialogNick.textContent = other.nick || '';
+    if (chatDialogAvatar) {
+      chatDialogAvatar.innerHTML = other.avatarBase64 ? `<img src="${other.avatarBase64}">` : '<div style="width:100%;height:100%;background:#f0e9df;border-radius:50%;"></div>';
+    }
     
     chatDialogBody.innerHTML = '';
     const key = chatKey(currentId, other.id);
@@ -1622,29 +1674,33 @@
     chatDialogBody.scrollTop = chatDialogBody.scrollHeight;
   }
 
-  function renderRecommendations() {
+  function renderRecommendations(searchQuery = '') {
     if (!recommendationsList || !state.currentUser) return;
     const currentId = state.currentUser.uid;
     recommendationsList.innerHTML = '';
     
-    Object.values(state.usersCache)
-      .filter(u => u.id !== currentId)
-      .slice(0, 5)
-      .forEach(u => {
-        const card = document.createElement('div');
-        card.className = 'rec-card';
-        card.innerHTML = `
-          <div class="rec-avatar">${u.avatarBase64 ? `<img src="${u.avatarBase64}">` : ''}</div>
-          <div><strong>${escapeHtml(u.name || u.email)}</strong><br><small>${u.nick || ''}</small></div>
-        `;
-        card.addEventListener('click', () => {
-          state.viewProfileUserId = u.id;
-          renderProfile();
-          renderProfileGrid();
-          showScreen('profile');
-        });
-        recommendationsList.appendChild(card);
+    const q = searchQuery.toLowerCase().trim();
+    let users = Object.values(state.usersCache).filter(u => u.id !== currentId);
+    
+    if (q) {
+      users = users.filter(u => (u.name || '').toLowerCase().includes(q) || (u.nick || '').toLowerCase().includes(q));
+    }
+    
+    users.slice(0, 5).forEach(u => {
+      const card = document.createElement('div');
+      card.className = 'rec-card';
+      card.innerHTML = `
+        <div class="rec-avatar">${u.avatarBase64 ? `<img src="${u.avatarBase64}">` : ''}</div>
+        <div><strong>${escapeHtml(u.name || u.email)}</strong><br><small>${u.nick || ''}</small></div>
+      `;
+      card.addEventListener('click', () => {
+        state.viewProfileUserId = u.id;
+        renderProfile();
+        renderProfileGrid();
+        showScreen('profile');
       });
+      recommendationsList.appendChild(card);
+    });
   }
 
   // ========== FIREBASE LISTENERS ==========
@@ -1660,7 +1716,7 @@
       });
       renderProfile();
       renderChatList(userSearch?.value || '');
-      renderRecommendations();
+      renderRecommendations(userSearch?.value || '');
       renderFeed();
     });
   }
@@ -1723,7 +1779,7 @@
     listenStiki();
     currentChatUserId = null;
     renderChatList('');
-    renderRecommendations();
+    renderRecommendations('');
     showScreen('posts');
     
     if (patternSelector) {
@@ -1955,11 +2011,12 @@
     });
   }
 
-  // Поиск
+  // Поиск — показывает рекомендации
   if (userSearch) {
     userSearch.addEventListener('input', () => {
-      renderChatList(userSearch.value);
-      renderRecommendations();
+      const query = userSearch.value;
+      renderRecommendations(query);
+      renderChatList(query);
     });
   }
 
@@ -2076,7 +2133,9 @@
     }
   });
 
-  console.log('RENITEA — полностью загружено. Светлая тема, 🔥 💬 ✉️, подписки, чаты только с диалогами, настройки хедера с предпросмотром.');
+  console.log('RENITEA — полностью загружено. Уникальная светлая тема, 🔥 💬 ✉️, подписки, чаты с аватарками, рекомендации по поиску.');
 </script>
 </body>
 </html>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
