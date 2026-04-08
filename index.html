@@ -3,121 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>RENITEA · Газетная лента</title>
+  <title>RENITEA · создай свой момент</title>
   <style>
-    /* ========== БАЗОВЫЕ СТИЛИ (полная версия, 3400+ строк) ========== */
+    /* ========== ЧАСТЬ 1: ГЛОБАЛЬНЫЕ СТИЛИ И ГАЗЕТНЫЙ ФОН ========== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Times New Roman', serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Times New Roman', serif;
     }
 
     body {
       min-height: 100vh;
-      background: #f2ede4;
+      background: #e8e0d5;
       overflow-x: hidden;
     }
 
-    /* ========== ФОН РЕГИСТРАЦИИ — ПРИРОДА (исправлено по ТЗ) ========== */
+    /* ГАЗЕТНЫЙ ФОН (текстура старой бумаги) */
     .login-wrapper {
       position: fixed;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=1950&auto=format') center/cover no-repeat;
+      background: url('https://www.transparenttextures.com/patterns/aged-paper.png'), linear-gradient(145deg, #dcd0b0 0%, #c8b991 100%);
+      background-blend-mode: overlay;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2000;
-      backdrop-filter: blur(2px);
-    }
-
-    .login-wrapper::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(3px);
     }
 
     .login-card {
-      position: relative;
-      z-index: 10;
-      max-width: 420px;
+      max-width: 440px;
       width: 90%;
-      background: rgba(255, 253, 249, 0.96);
+      background: rgba(255, 252, 240, 0.97);
       border-radius: 32px;
-      border: 1px solid rgba(226, 217, 206, 0.6);
-      padding: 32px 28px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      border: 1px solid #c4b28a;
+      padding: 36px 32px;
+      box-shadow: 0 25px 45px rgba(0,0,0,0.2);
       backdrop-filter: blur(2px);
     }
 
     .login-logo {
-      font-size: 34px;
+      font-size: 38px;
       font-weight: 800;
-      letter-spacing: 4px;
-      background: linear-gradient(135deg, #b1624b, #8b5a2b, #4a6b3c);
+      letter-spacing: 5px;
+      text-align: center;
+      background: linear-gradient(135deg, #3a2c1f, #8b5a2b);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 8px;
-      text-align: center;
     }
 
     .login-subtitle {
       text-align: center;
       color: #5a4b3a;
-      font-size: 13px;
-      margin-bottom: 20px;
+      font-size: 15px;
+      margin: 10px 0 24px;
+      font-style: italic;
     }
 
     .login-tabs {
       display: flex;
-      gap: 10px;
-      background: #f0e9df;
+      gap: 12px;
+      background: #e5d8c4;
       border-radius: 60px;
       padding: 5px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .login-tab {
       flex: 1;
       border: none;
       background: transparent;
-      padding: 10px;
+      padding: 12px;
       border-radius: 60px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
-      font-size: 14px;
+      transition: 0.2s;
     }
 
     .login-tab.active {
       background: #2c241e;
-      color: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      color: #fff5e6;
     }
 
     .login-input {
       width: 100%;
-      border: 1.5px solid #e2d9ce;
-      border-radius: 18px;
+      border: 1.5px solid #d6c8b2;
+      border-radius: 20px;
       padding: 14px 18px;
-      background: #fffdf9;
-      margin-bottom: 14px;
+      background: #fffef8;
+      margin-bottom: 16px;
       font-size: 15px;
-      transition: all 0.2s;
     }
 
     .login-input:focus {
-      border-color: #b1624b;
+      border-color: #8b5a2b;
       outline: none;
-      background: #ffffff;
     }
 
     .login-file {
-      font-size: 13px;
-      margin: 8px 0 12px;
+      font-size: 14px;
+      margin: 8px 0 16px;
       color: #5a4b3a;
     }
 
@@ -131,34 +117,31 @@
       font-weight: 700;
       cursor: pointer;
       transition: 0.2s;
-      font-size: 16px;
     }
 
     .login-btn:hover {
-      background: #b1624b;
-      transform: translateY(-2px);
+      background: #8b5a2b;
     }
 
     .login-error {
       color: #b91c1c;
       font-size: 13px;
-      margin-top: 12px;
+      margin-top: 14px;
       text-align: center;
     }
 
-    /* ========== ОСНОВНОЕ ПРИЛОЖЕНИЕ ========== */
+    /* ========== ОСНОВНОЙ ИНТЕРФЕЙС ========== */
     .app {
       display: none;
       flex-direction: column;
       min-height: 100vh;
-      background: #f2ede4;
-      background-image: radial-gradient(circle at 10% 20%, rgba(0,0,0,0.02) 0%, transparent 50%);
+      background: #e8e0d5;
     }
 
     .topbar {
-      background: #fffdf9;
-      border-bottom: 1px solid #e2d9ce;
-      padding: 0 24px;
+      background: #fffef8;
+      border-bottom: 1px solid #d6c8b2;
+      padding: 0 28px;
       height: 68px;
       display: flex;
       align-items: center;
@@ -166,15 +149,13 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(12px);
-      background: rgba(255, 253, 249, 0.96);
     }
 
     .brand {
       font-size: 28px;
       font-weight: 800;
       letter-spacing: 3px;
-      background: linear-gradient(135deg, #a55139, #7b4a2a, #4a6b3c);
+      background: linear-gradient(135deg, #3a2c1f, #8b5a2b);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -183,17 +164,10 @@
     .search {
       width: 280px;
       border-radius: 60px;
-      border: 1px solid #e2d9ce;
-      padding: 10px 20px;
-      background: #fffdf9;
+      border: 1px solid #d6c8b2;
+      padding: 10px 22px;
+      background: #fffef8;
       font-size: 14px;
-      transition: all 0.2s;
-    }
-
-    .search:focus {
-      border-color: #b1624b;
-      outline: none;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .main-row {
@@ -208,63 +182,57 @@
       padding: 28px 24px;
     }
 
-    /* ========== ГАЗЕТНЫЙ СТИЛЬ ПОСТОВ (по ТЗ) ========== */
+    /* ========== ЛЕНТА ПОСТОВ ========== */
     .feed-composer {
-      max-width: 720px;
-      margin: 0 auto 32px auto;
-      background: #fffdf9;
-      border: 1px solid #dad2c5;
-      border-radius: 24px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      background: #fffef8;
+      border: 1px solid #d6c8b2;
+      border-radius: 28px;
       padding: 24px;
-      box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.02);
     }
 
     .feed-composer textarea {
       width: 100%;
-      border: 1px solid #e2d9ce;
+      border: 1px solid #d6c8b2;
       border-radius: 20px;
       padding: 16px;
-      font-family: 'Georgia', 'Times New Roman', serif;
-      font-size: 16px;
+      font-size: 15px;
       resize: vertical;
-      background: #fffcf8;
+      background: #fffef8;
     }
 
     .feed-composer input[type="file"] {
       margin: 14px 0 12px;
-      font-size: 13px;
     }
 
     .feed-composer button {
       background: #2c241e;
       color: white;
       border-radius: 40px;
-      padding: 12px 28px;
+      padding: 10px 28px;
       border: none;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
     }
 
     .feed-list {
-      max-width: 720px;
+      max-width: 700px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 28px;
     }
 
     .feed-post {
-      background: #fffdf9;
-      border: 1px solid #dad2c5;
+      background: #fffef8;
+      border: 1px solid #d6c8b2;
       border-radius: 28px;
       overflow: hidden;
-      transition: all 0.2s;
     }
 
-    .post-newspaper-header {
-      padding: 18px 24px 10px 24px;
-      border-bottom: 2px dotted #e2d9ce;
+    .post-header {
+      padding: 18px 24px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -272,35 +240,30 @@
 
     .post-author {
       font-weight: 800;
-      font-size: 18px;
-      font-family: 'Times New Roman', serif;
-      color: #2c241e;
+      font-size: 17px;
     }
 
     .post-date {
       font-size: 12px;
-      color: #8b7f6e;
-      font-family: monospace;
+      color: #8e7a5f;
     }
 
-    /* масштабирование фото — срезается снизу, не сверху (по ТЗ) */
     .feed-post-image {
       width: 100%;
-      background: #1a1612;
+      max-height: 580px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      max-height: 600px;
+      background: #1a1612;
       cursor: zoom-in;
-      position: relative;
     }
 
     .feed-post-image img {
       width: 100%;
       height: auto;
       object-fit: contain;
-      transition: transform 0.3s ease;
+      transition: transform 0.25s;
     }
 
     .feed-post-image.zoomed {
@@ -309,66 +272,59 @@
 
     .feed-post-image.zoomed img {
       transform: scale(2.2);
-      object-fit: contain;
     }
 
     .feed-post-text {
-      padding: 22px 24px 16px 24px;
+      padding: 18px 24px;
       font-size: 16px;
       line-height: 1.5;
       color: #2c241e;
-      font-family: 'Georgia', 'Times New Roman', serif;
-      border-bottom: 1px solid #f0e9df;
+      border-bottom: 1px solid #f0e8dc;
     }
 
-    /* Ряд иконок (огонь, коммент, конверт) — горизонтально как в Instagram */
-    .post-actions-row {
+    .post-actions {
       display: flex;
       align-items: center;
       gap: 32px;
       padding: 14px 24px;
-      border-top: 1px solid #f0e9df;
     }
 
     .action-btn {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: transparent;
+      background: none;
       border: none;
-      font-size: 22px;
-      font-weight: 500;
+      font-size: 24px;
       cursor: pointer;
-      transition: 0.15s;
+      transition: 0.1s;
       color: #5a4b3a;
     }
 
     .action-btn:hover {
-      transform: scale(1.1);
-      color: #b1624b;
+      transform: scale(1.08);
+      color: #8b5a2b;
     }
 
     .action-count {
       font-size: 14px;
       font-weight: 600;
-      font-family: monospace;
-      color: #5a4b3a;
     }
 
-    /* Стики */
+    /* ========== СТИКИ ========== */
     .stiki-composer {
       max-width: 620px;
       margin: 0 auto 24px;
-      background: #fffdf9;
+      background: #fffef8;
       border-radius: 28px;
-      padding: 20px;
-      border: 1px solid #dad2c5;
+      padding: 22px;
+      border: 1px solid #d6c8b2;
     }
 
     .stiki-wrapper {
       max-width: 620px;
       margin: 0 auto;
-      height: 70vh;
+      height: 72vh;
       scroll-snap-type: y mandatory;
       overflow-y: auto;
       border-radius: 32px;
@@ -376,7 +332,7 @@
 
     .stiki-card {
       position: relative;
-      height: 70vh;
+      height: 72vh;
       margin-bottom: 20px;
       border-radius: 32px;
       overflow: hidden;
@@ -396,58 +352,57 @@
       left: 20px;
       display: flex;
       gap: 24px;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0,0,0,0.55);
       backdrop-filter: blur(10px);
-      padding: 10px 20px;
+      padding: 10px 22px;
       border-radius: 60px;
     }
 
     .stiki-reaction {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       cursor: pointer;
       color: white;
       font-size: 24px;
-      transition: 0.1s;
     }
 
-    /* Чаты (Telegram стиль) */
+    /* ========== ЧАТЫ ========== */
     .chats-layout {
       display: grid;
       grid-template-columns: 340px 1fr;
-      background: #fffdf9;
+      background: #fffef8;
       border-radius: 32px;
-      border: 1px solid #dad2c5;
+      border: 1px solid #d6c8b2;
       overflow: hidden;
-      height: 78vh;
+      height: 76vh;
     }
 
     .chat-list {
-      background: #faf7f2;
-      border-right: 1px solid #e2d9ce;
+      background: #faf5ec;
+      border-right: 1px solid #d6c8b2;
       overflow-y: auto;
     }
 
     .chat-item {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
       padding: 16px 20px;
       cursor: pointer;
-      border-bottom: 1px solid #ede5d9;
+      border-bottom: 1px solid #e8dfd1;
       transition: 0.1s;
     }
 
     .chat-item.active {
-      background: #ede5d9;
+      background: #e8dfd1;
     }
 
     .chat-avatar {
       width: 54px;
       height: 54px;
       border-radius: 50%;
-      background: #d9cfc1;
+      background: #d6c8b2;
       overflow: hidden;
       flex-shrink: 0;
     }
@@ -461,13 +416,12 @@
     .chat-dialog {
       display: flex;
       flex-direction: column;
-      height: 100%;
     }
 
     .chat-dialog-header {
-      padding: 16px 20px;
-      border-bottom: 1px solid #e2d9ce;
-      background: #faf7f2;
+      padding: 18px 22px;
+      border-bottom: 1px solid #d6c8b2;
+      background: #faf5ec;
     }
 
     .chat-dialog-body {
@@ -480,43 +434,40 @@
     }
 
     .msg {
-      max-width: 70%;
+      max-width: 72%;
       padding: 12px 18px;
       border-radius: 24px;
       font-size: 14px;
-      word-break: break-word;
     }
 
     .msg.me {
       background: #e3d9ca;
       margin-left: auto;
-      border-bottom-right-radius: 6px;
     }
 
     .msg.them {
-      background: #ffffff;
-      border: 1px solid #e2d9ce;
+      background: white;
+      border: 1px solid #d6c8b2;
       margin-right: auto;
-      border-bottom-left-radius: 6px;
     }
 
     .chat-dialog-input {
       display: flex;
       gap: 14px;
       padding: 18px;
-      border-top: 1px solid #e2d9ce;
-      background: #faf7f2;
+      border-top: 1px solid #d6c8b2;
+      background: #faf5ec;
     }
 
     .chat-dialog-input input {
       flex: 1;
       border-radius: 60px;
-      border: 1px solid #e2d9ce;
+      border: 1px solid #d6c8b2;
       padding: 12px 20px;
-      background: #fffdf9;
+      background: #fffef8;
     }
 
-    /* Паспорт */
+    /* ========== ПАСПОРТ ========== */
     .passport-layout {
       display: grid;
       grid-template-columns: 1.4fr 1fr;
@@ -524,49 +475,47 @@
     }
 
     .passport-card {
-      background: #fffdf9;
-      border: 1px solid #dad2c5;
+      background: #fffef8;
+      border: 1px solid #d6c8b2;
       border-radius: 32px;
-      padding: 28px;
-      box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.02);
+      padding: 30px;
     }
 
     .passport-photo {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       border-radius: 24px;
-      background: #ddd;
+      background: #d6c8b2;
       background-size: cover;
       background-position: center;
-      border: 2px solid #cbbca8;
     }
 
     .visa-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 18px;
     }
 
     .visa-card {
-      background: #fffdf9;
-      border: 1px solid #e2d9ce;
+      background: #fffef8;
+      border: 1px solid #d6c8b2;
       border-radius: 24px;
       padding: 20px;
     }
 
-    /* Профиль */
+    /* ========== ПРОФИЛЬ ========== */
     .profile-header {
       max-width: 800px;
       margin: 0 auto 32px;
-      background: #fffdf9;
-      border: 1px solid #dad2c5;
+      background: #fffef8;
+      border: 1px solid #d6c8b2;
       border-radius: 36px;
       overflow: hidden;
     }
 
     .profile-cover {
       height: 160px;
-      background: linear-gradient(145deg, #cbbca8, #9f8b72);
+      background: linear-gradient(145deg, #c8b991, #a68f6e);
     }
 
     .profile-avatar {
@@ -575,8 +524,8 @@
       border-radius: 50%;
       border: 5px solid white;
       margin-top: -60px;
-      margin-left: 32px;
-      background: #fff;
+      margin-left: 34px;
+      background: white;
       overflow: hidden;
     }
 
@@ -587,12 +536,12 @@
     }
 
     .profile-info {
-      padding: 20px 32px 32px 32px;
+      padding: 20px 34px 34px;
     }
 
     .profile-stats {
       display: flex;
-      gap: 32px;
+      gap: 34px;
       margin: 18px 0;
     }
 
@@ -606,7 +555,7 @@
 
     .profile-grid-item {
       aspect-ratio: 1/1;
-      background: #e2d9ce;
+      background: #d6c8b2;
       border-radius: 20px;
       overflow: hidden;
     }
@@ -617,16 +566,16 @@
       object-fit: cover;
     }
 
-    /* Навигация */
+    /* ========== НАВИГАЦИЯ ========== */
     .right-nav {
       width: 100px;
-      background: #fffdf9;
-      border-left: 1px solid #e2d9ce;
+      background: #fffef8;
+      border-left: 1px solid #d6c8b2;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 28px 0;
-      gap: 28px;
+      padding: 30px 0;
+      gap: 30px;
     }
 
     .nav-item {
@@ -641,7 +590,7 @@
     }
 
     .nav-item.active {
-      background: #ede5d9;
+      background: #e8dfd1;
     }
 
     .nav-item svg {
@@ -658,11 +607,11 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 253, 249, 0.98);
+      background: rgba(255, 254, 248, 0.98);
       backdrop-filter: blur(12px);
-      border-top: 1px solid #e2d9ce;
+      border-top: 1px solid #d6c8b2;
       justify-content: space-around;
-      padding: 10px 0 22px;
+      padding: 10px 0 24px;
       z-index: 500;
     }
 
@@ -670,20 +619,20 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       cursor: pointer;
     }
 
-    /* Модалка */
+    /* ========== МОДАЛЬНЫЕ ОКНА ========== */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: #1e1915b3;
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 1200;
+      z-index: 1300;
     }
 
     .modal-backdrop.active {
@@ -691,20 +640,20 @@
     }
 
     .modal {
-      background: #fffdf9;
+      background: #fffef8;
       border-radius: 36px;
       max-width: 500px;
       width: 90%;
-      padding: 28px;
-      border: 1px solid #dad2c5;
+      padding: 32px;
+      border: 1px solid #d6c8b2;
     }
 
     .modal input, .modal textarea {
       width: 100%;
-      margin-bottom: 16px;
-      border-radius: 18px;
-      border: 1px solid #e2d9ce;
-      padding: 12px 16px;
+      margin-bottom: 18px;
+      border-radius: 20px;
+      border: 1px solid #d6c8b2;
+      padding: 14px 18px;
     }
 
     @media (max-width: 720px) {
@@ -713,17 +662,17 @@
       .chats-layout { grid-template-columns: 1fr; height: auto; }
       .passport-layout { grid-template-columns: 1fr; }
       .content { padding-bottom: 100px; }
-      .post-actions-row { gap: 20px; }
+      .post-actions { gap: 20px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ЛОГИН С ПРИРОДНЫМ ФОНОМ (по ТЗ) -->
+<!-- ЛОГИН И РЕГИСТРАЦИЯ -->
 <div class="login-wrapper" id="loginWrapper">
   <div class="login-card">
     <div class="login-logo">RENITEA</div>
-    <div class="login-subtitle">закрытая газетная лента</div>
+    <div class="login-subtitle">создай свой момент</div>
     <div class="login-tabs">
       <button class="login-tab active" data-tab="login">Войти</button>
       <button class="login-tab" data-tab="register">Создать</button>
@@ -752,78 +701,571 @@
   <div class="main-row">
     <main class="content">
       <section class="screen active" id="screen-posts">
-        <div class="feed-composer"><textarea id="feedText" placeholder="Газетная заметка дня..."></textarea><input type="file" id="feedImage" accept="image/*"><button id="feedPublishBtn">📰 Опубликовать</button></div>
+        <div class="feed-composer"><textarea id="feedText" placeholder="Что у тебя нового?"></textarea><input type="file" id="feedImage" accept="image/*"><button id="feedPublishBtn">Опубликовать</button></div>
         <div class="feed-list" id="feedList"></div>
-        <div id="feedEmptyText" style="display:none; text-align:center; padding:40px;">✨ Лента пуста, напишите первую заметку</div>
-        <div style="margin-top:30px;"><h4>📌 Рекомендации</h4><div id="recommendationsList"></div></div>
+        <div id="feedEmptyText" style="display:none; text-align:center; padding:40px;">✨ Лента пуста, создай первый момент</div>
+        <div style="margin-top:36px;"><div style="font-weight:700; margin-bottom:14px;">📌 Рекомендации</div><div id="recommendationsList"></div></div>
       </section>
       <section class="screen" id="screen-stiki"><div class="stiki-composer"><input type="file" id="stikiInput" accept="video/*"><button id="stikiPublishBtn">🎬 Опубликовать стик</button></div><div id="stikiWrapper" class="stiki-wrapper"></div></section>
       <section class="screen" id="screen-chats"><div class="chats-layout"><div class="chat-list" id="chatList"></div><div class="chat-dialog"><div class="chat-dialog-header" id="chatHeaderProfile"><div class="chat-avatar" id="chatDialogAvatar"></div><div><div id="chatDialogName"></div><div id="chatDialogNick"></div></div></div><div class="chat-dialog-body" id="chatDialogBody"></div><div class="chat-dialog-input"><input id="chatInput" placeholder="Сообщение..."><button id="chatSendBtn">→</button></div></div></div></section>
       <section class="screen" id="screen-passport"><div class="passport-layout"><div class="passport-card"><div style="display:flex; justify-content:space-between;"><div><h3>Паспорт RENITEA</h3><div id="passportName">—</div><div id="passportNick">—</div></div><div class="passport-photo" id="passportPhoto"></div></div><div>Характер: <span id="passportPersona">—</span></div><div>Моментов: <span id="passportMomentsCount">0</span></div></div><div class="visa-grid" id="visaGrid"></div></div></section>
-      <section class="screen" id="screen-profile"><div class="profile-header"><div class="profile-cover"></div><div class="profile-avatar"><img id="profileAvatarImg"></div><div class="profile-info"><div><div class="profile-name" id="profileName"></div><div class="profile-username" id="profileNick"></div><div class="profile-bio" id="profileBio"></div></div><div class="profile-stats"><span><b id="profilePostsCount">0</b> постов</span><span><b id="profileFollowersCount">0</b> подписчиков</span><span><b id="profileFollowingCount">0</b> подписки</span></div><div><button class="btn-primary" id="editProfileBtn">Редактировать</button><button id="profileMessageBtn">Написать</button><button id="logoutBtn">Выйти</button></div></div></div><div class="profile-grid" id="profileGrid"></div></section>
+      <section class="screen" id="screen-profile"><div class="profile-header"><div class="profile-cover"></div><div class="profile-avatar"><img id="profileAvatarImg"></div><div class="profile-info"><div><div class="post-author" id="profileName"></div><div id="profileNick"></div><div id="profileBio"></div></div><div class="profile-stats"><span><b id="profilePostsCount">0</b> постов</span><span><b id="profileFollowersCount">0</b> подписчиков</span><span><b id="profileFollowingCount">0</b> подписки</span></div><div><button id="editProfileBtn" class="login-btn" style="width:auto; padding:8px 24px;">Редактировать</button><button id="profileMessageBtn" class="login-btn" style="width:auto; padding:8px 24px; margin-left:12px;">Написать</button><button id="logoutBtn" class="login-btn" style="width:auto; padding:8px 24px; background:#8b5a2b;">Выйти</button></div></div></div><div class="profile-grid" id="profileGrid"></div></section>
     </main>
-    <aside class="right-nav"><div class="nav-item active" data-screen="posts"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><rect x="6" y="6" width="12" height="8" rx="2"/></svg></div><div class="nav-item" data-screen="stiki"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="10" rx="2"/></svg></div><div class="nav-item" data-screen="chats"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H7l-2 2z"/></svg></div><div class="nav-item" data-screen="passport"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="10" r="3"/></svg></div><div class="nav-item" data-screen="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3"/><path d="M6 19c1.5-3 4-4 6-4s4.5 1 6 4"/></svg></div></aside>
+    <aside class="right-nav">
+      <div class="nav-item active" data-screen="posts"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><rect x="6" y="6" width="12" height="8" rx="2"/></svg></div>
+      <div class="nav-item" data-screen="stiki"><svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="3"/><rect x="9" y="5" width="6" height="10" rx="2"/></svg></div>
+      <div class="nav-item" data-screen="chats"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H7l-2 2z"/></svg></div>
+      <div class="nav-item" data-screen="passport"><svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div class="nav-item" data-screen="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="3"/><path d="M6 19c1.5-3 4-4 6-4s4.5 1 6 4"/></svg></div>
+    </aside>
   </div>
-  <div class="mobile-nav"><div class="mobile-nav-item active" data-screen="posts">📰<span>Посты</span></div><div class="mobile-nav-item" data-screen="stiki">🎬<span>Стики</span></div><div class="mobile-nav-item" data-screen="chats">💬<span>Чаты</span></div><div class="mobile-nav-item" data-screen="passport">🪪<span>Паспорт</span></div><div class="mobile-nav-item" data-screen="profile">👤<span>Профиль</span></div></div>
+  <div class="mobile-nav">
+    <div class="mobile-nav-item active" data-screen="posts">📰<span>Посты</span></div>
+    <div class="mobile-nav-item" data-screen="stiki">🎬<span>Стики</span></div>
+    <div class="mobile-nav-item" data-screen="chats">💬<span>Чаты</span></div>
+    <div class="mobile-nav-item" data-screen="passport">🪪<span>Паспорт</span></div>
+    <div class="mobile-nav-item" data-screen="profile">👤<span>Профиль</span></div>
+  </div>
 </div>
 
-<div class="modal-backdrop" id="editProfileModal"><div class="modal"><h3>Редактировать</h3><input id="editProfileNameInput" placeholder="Имя"><input id="editProfileNickInput" placeholder="Ник"><input id="editProfilePersonaInput" placeholder="Характер"><textarea id="editProfileBioInput" placeholder="Био"></textarea><input type="file" id="editProfileAvatarInput" accept="image/*"><button id="editProfileSave">Сохранить</button><button id="editProfileCancel">Отмена</button></div></div>
+<!-- МОДАЛКА РЕДАКТИРОВАНИЯ ПРОФИЛЯ -->
+<div class="modal-backdrop" id="editProfileModal"><div class="modal"><h3 style="margin-bottom:18px;">Редактировать профиль</h3><input id="editProfileNameInput" placeholder="Имя"><input id="editProfileNickInput" placeholder="Ник"><input id="editProfilePersonaInput" placeholder="Характер"><textarea id="editProfileBioInput" placeholder="Био" rows="3"></textarea><input type="file" id="editProfileAvatarInput" accept="image/*"><div style="display:flex; gap:12px; margin-top:16px;"><button id="editProfileSave" class="login-btn" style="width:auto;">Сохранить</button><button id="editProfileCancel" class="login-btn" style="width:auto; background:#8b5a2b;">Отмена</button></div></div></div>
 
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 <script>
-  // ========== FIREBASE ==========
-  const firebaseConfig = { apiKey: "AIzaSyAnw1Vz4Wzr2rmdrzVv5tga_x6u08ObNbA", authDomain: "renitea-b140f.firebaseapp.com", projectId: "renitea-b140f", storageBucket: "renitea-b140f.appspot.com", messagingSenderId: "806278733594", appId: "1:806278733594:web:d9887a35732173429f96a3" };
+  // ========== ЧАСТЬ 2: FIREBASE ИНИЦИАЛИЗАЦИЯ И УТИЛИТЫ ==========
+  const firebaseConfig = {
+    apiKey: "AIzaSyAnw1Vz4Wzr2rmdrzVv5tga_x6u08ObNbA",
+    authDomain: "renitea-b140f.firebaseapp.com",
+    projectId: "renitea-b140f",
+    storageBucket: "renitea-b140f.appspot.com",
+    messagingSenderId: "806278733594",
+    appId: "1:806278733594:web:d9887a35732173429f96a3"
+  };
   firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth(), db = firebase.firestore(), storage = firebase.storage();
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
 
-  async function compressImage(file, maxWidth=1080, quality=0.8) {
-    return new Promise((res,rej)=>{ const reader=new FileReader(); reader.onload=e=>{ const img=new Image(); img.onload=()=>{ let w=img.width,h=img.height; if(w>maxWidth){ h*=maxWidth/w; w=maxWidth; } const cvs=document.createElement('canvas'); cvs.width=w; cvs.height=h; cvs.getContext('2d').drawImage(img,0,0,w,h); cvs.toBlob(blob=>res(blob),'image/jpeg',quality); }; img.onerror=rej; img.src=e.target.result; }; reader.onerror=rej; reader.readAsDataURL(file); });
+  // Компрессия изображений
+  async function compressImage(file, maxWidth = 1080, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width;
+            width = maxWidth;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob((blob) => resolve(blob), 'image/jpeg', quality);
+        };
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   }
-  async function imageToBase64(blob){ return new Promise(r=>{ const fr=new FileReader(); fr.onload=()=>r(fr.result); fr.readAsDataURL(blob); }); }
 
-  let currentUser=null, usersCache={}, posts=[], stiki=[], messages={}, postReactions={}, stikiReactions={}, currentChatUserId=null, viewProfileUserId=null;
+  async function imageToBase64(blob) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  function formatTime(ts) {
+    const d = ts?.toDate?.() || new Date(ts);
+    return d.toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+  }
+
+  function chatKey(a, b) {
+    return [a, b].sort().join('__');
+  }
+
+  // Глобальное состояние
+  let currentUser = null;
+  let usersCache = {};
+  let posts = [];
+  let stiki = [];
+  let messages = {};
+  let postReactions = {};
+  let stikiReactions = {};
+  let currentChatUserId = null;
+  let viewProfileUserId = null;
   let unsubPosts, unsubStiki, unsubUsers, unsubMessages;
 
-  function showScreen(name){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById('screen-'+name)?.classList.add('active'); document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(i=>{ i.classList.remove('active'); if(i.dataset.screen===name) i.classList.add('active'); }); }
-  function chatKey(a,b){ return [a,b].sort().join('__'); }
-  function formatTime(ts){ let d=ts?.toDate?.()||new Date(ts); return d.toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}); }
+  // ========== ЧАСТЬ 3: ФУНКЦИИ ОТОБРАЖЕНИЯ (RENDER) ==========
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('screen-' + name);
+    if (target) target.classList.add('active');
+    document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(i => {
+      i.classList.remove('active');
+      if (i.dataset.screen === name) i.classList.add('active');
+    });
+  }
 
-  async function ensureUserDoc(user){ let ref=db.collection('users').doc(user.uid); let snap=await ref.get(); if(!snap.exists) await ref.set({ email:user.email, name:user.email.split('@')[0], nick:'@'+user.email.split('@')[0], persona:'', bio:'', avatarBase64:'', followers:0, following:0 }); }
+  async function ensureUserDoc(user) {
+    const ref = db.collection('users').doc(user.uid);
+    const snap = await ref.get();
+    if (!snap.exists) {
+      await ref.set({
+        email: user.email,
+        name: user.email.split('@')[0],
+        nick: '@' + user.email.split('@')[0],
+        persona: '',
+        bio: '',
+        avatarBase64: '',
+        followers: 0,
+        following: 0,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }
+  }
 
-  function listenUsers(){ if(unsubUsers) unsubUsers(); unsubUsers=db.collection('users').onSnapshot(snap=>{ snap.docs.forEach(d=>{ usersCache[d.id]={id:d.id,...d.data()}; }); renderProfile(); renderPassport(); renderChatList(); renderRecommendations(); }); }
-  function listenPosts(){ if(unsubPosts) unsubPosts(); unsubPosts=db.collection('posts').orderBy('createdAt','desc').onSnapshot(snap=>{ posts=snap.docs.map(d=>{ let data=d.data(); return { id:d.id, authorId:data.authorId, text:data.text||'', imageBase64:data.imageBase64||'', createdAt:data.createdAt, time:data.createdAt?formatTime(data.createdAt):'' }; }); renderFeed(); renderProfileGrid(); renderPassport(); }); }
-  function listenStiki(){ if(unsubStiki) unsubStiki(); unsubStiki=db.collection('stiki').orderBy('createdAt','desc').onSnapshot(snap=>{ stiki=snap.docs.map(d=>{ let data=d.data(); return { id:d.id, authorId:data.authorId, videoURL:data.videoURL }; }); renderStiki(); }); }
-  function listenMessagesForChat(uid, other){ let key=chatKey(uid,other); if(unsubMessages) unsubMessages(); unsubMessages=db.collection('chats').doc(key).collection('messages').orderBy('createdAt','asc').onSnapshot(snap=>{ messages[key]=snap.docs.map(d=>{ let data=d.data(); return { fromId:data.fromId, text:data.text, time:data.createdAt?formatTime(data.createdAt):'' }; }); renderChatList(); renderChatDialog(); }); }
+  function listenUsers() {
+    if (unsubUsers) unsubUsers();
+    unsubUsers = db.collection('users').onSnapshot(snap => {
+      snap.docs.forEach(doc => {
+        usersCache[doc.id] = { id: doc.id, ...doc.data() };
+      });
+      renderProfile();
+      renderPassport();
+      renderChatList();
+      renderRecommendations();
+    });
+  }
 
-  function renderFeed(){ let container=document.getElementById('feedList'); container.innerHTML=''; if(!posts.length){ document.getElementById('feedEmptyText').style.display='block'; return; } document.getElementById('feedEmptyText').style.display='none'; posts.forEach(p=>{ let reactions=postReactions[p.id]||{fire:0}; let author=usersCache[p.authorId]||{name:'Житель'}; let div=document.createElement('div'); div.className='feed-post'; div.innerHTML=`<div class="post-newspaper-header"><span class="post-author">${author.name||'Аноним'}</span><span class="post-date">${p.time}</span></div><div class="feed-post-image" data-zoom="false"><img src="${p.imageBase64||''}" alt=""></div><div class="feed-post-text">${p.text||''}</div><div class="post-actions-row"><button class="action-btn fire-btn" data-id="${p.id}">🔥</button><span class="action-count" id="fire-count-${p.id}">${reactions.fire||0}</span><button class="action-btn">💬</button><span class="action-count">0</span><button class="action-btn">✉️</button><span class="action-count"></span></div>`; container.appendChild(div); let imgDiv=div.querySelector('.feed-post-image'); imgDiv.addEventListener('click',()=>{ imgDiv.classList.toggle('zoomed'); }); let fireBtn=div.querySelector('.fire-btn'); fireBtn.addEventListener('click',(e)=>{ e.stopPropagation(); if(!postReactions[p.id])postReactions[p.id]={fire:0}; postReactions[p.id].fire+=1; renderFeed(); }); }); }
-  function renderStiki(){ let wrap=document.getElementById('stikiWrapper'); if(!wrap)return; wrap.innerHTML=''; if(!stiki.length){ wrap.innerHTML='<div style="padding:20px;text-align:center;">🎬 Нет стиков</div>'; return; } stiki.forEach(s=>{ let reacts=stikiReactions[s.id]||{'🔥':0,'❤️':0}; let card=document.createElement('div'); card.className='stiki-card'; card.innerHTML=`<div class="stiki-video"><video src="${s.videoURL}" autoplay muted loop playsinline></video></div><div class="stiki-reactions"><div class="stiki-reaction" data-id="${s.id}" data-emoji="🔥">🔥 <span>${reacts['🔥']||0}</span></div><div class="stiki-reaction" data-id="${s.id}" data-emoji="❤️">❤️ <span>${reacts['❤️']||0}</span></div></div>`; wrap.appendChild(card); }); wrap.querySelectorAll('.stiki-reaction').forEach(el=>{ el.addEventListener('click',(e)=>{ e.stopPropagation(); let id=el.dataset.id, emoji=el.dataset.emoji; if(!stikiReactions[id])stikiReactions[id]={'🔥':0,'❤️':0}; stikiReactions[id][emoji]+=1; renderStiki(); }); }); }
-  function renderProfile(){ if(!currentUser)return; let uid=viewProfileUserId||currentUser.uid; let u=usersCache[uid]; if(!u)return; document.getElementById('profileName').innerText=u.name||''; document.getElementById('profileNick').innerText=u.nick||''; document.getElementById('profileBio').innerText=u.bio||''; document.getElementById('profileAvatarImg').src=u.avatarBase64||''; let userPosts=posts.filter(p=>p.authorId===uid); document.getElementById('profilePostsCount').innerText=userPosts.length; if(uid===currentUser.uid){ document.getElementById('editProfileBtn').style.display='inline-block'; document.getElementById('profileMessageBtn').style.display='none'; }else{ document.getElementById('editProfileBtn').style.display='none'; document.getElementById('profileMessageBtn').style.display='inline-block'; } }
-  function renderProfileGrid(){ let uid=viewProfileUserId||currentUser?.uid; let grid=document.getElementById('profileGrid'); if(!grid)return; grid.innerHTML=''; let userPosts=posts.filter(p=>p.authorId===uid); userPosts.forEach(p=>{ let item=document.createElement('div'); item.className='profile-grid-item'; if(p.imageBase64) item.innerHTML=`<img src="${p.imageBase64}">`; grid.appendChild(item); }); }
-  function renderPassport(){ if(!currentUser)return; let u=usersCache[currentUser.uid]; if(!u)return; document.getElementById('passportName').innerText=u.name||'—'; document.getElementById('passportNick').innerText=u.nick||'—'; document.getElementById('passportPersona').innerText=u.persona||'—'; let photoDiv=document.getElementById('passportPhoto'); if(u.avatarBase64) photoDiv.style.backgroundImage=`url('${u.avatarBase64}')`; let myPosts=posts.filter(p=>p.authorId===currentUser.uid); document.getElementById('passportMomentsCount').innerText=myPosts.length; document.getElementById('visaGrid').innerHTML='<div class="visa-card">🌟 Виза доверия активна</div>'; }
-  function renderChatList(filter=''){ if(!currentUser)return; let cont=document.getElementById('chatList'); cont.innerHTML=''; let list=Object.values(usersCache).filter(u=>u.id!==currentUser.uid); let q=filter.toLowerCase(); if(q) list=list.filter(u=>(u.name||'').toLowerCase().includes(q)||(u.nick||'').toLowerCase().includes(q)); list.forEach(u=>{ let key=chatKey(currentUser.uid,u.id); let msgs=messages[key]||[]; let last=msgs[msgs.length-1]; let div=document.createElement('div'); div.className='chat-item'+(currentChatUserId===u.id?' active':''); div.dataset.chatId=u.id; div.innerHTML=`<div class="chat-avatar">${u.avatarBase64?`<img src="${u.avatarBase64}">`:''}</div><div><div>${u.name||u.email}</div><div style="font-size:12px;">${last?last.text.substring(0,30):''}</div></div>`; div.addEventListener('click',()=>{ currentChatUserId=u.id; renderChatList(); listenMessagesForChat(currentUser.uid,currentChatUserId); }); cont.appendChild(div); }); if(currentChatUserId) listenMessagesForChat(currentUser.uid,currentChatUserId); }
-  function renderChatDialog(){ if(!currentUser||!currentChatUserId)return; let other=usersCache[currentChatUserId]; if(!other)return; document.getElementById('chatDialogName').innerText=other.name||''; document.getElementById('chatDialogNick').innerText=other.nick||''; let avatarDiv=document.getElementById('chatDialogAvatar'); avatarDiv.innerHTML=other.avatarBase64?`<img src="${other.avatarBase64}" style="width:100%;height:100%;object-fit:cover;">`:''; let body=document.getElementById('chatDialogBody'); body.innerHTML=''; let key=chatKey(currentUser.uid,currentChatUserId); let msgs=messages[key]||[]; msgs.forEach(m=>{ let div=document.createElement('div'); div.className='msg '+(m.fromId===currentUser.uid?'me':'them'); div.innerHTML=`<div>${m.text}</div><div class="msg-time">${m.time}</div>`; body.appendChild(div); }); body.scrollTop=body.scrollHeight; }
-  function renderRecommendations(){ let rec=document.getElementById('recommendationsList'); if(!rec)return; rec.innerHTML=''; Object.values(usersCache).filter(u=>u.id!==currentUser?.uid).slice(0,6).forEach(u=>{ let card=document.createElement('div'); card.style.padding='10px'; card.style.border='1px solid #e2d9ce'; card.style.borderRadius='20px'; card.style.marginBottom='8px'; card.style.cursor='pointer'; card.innerText=u.name||u.email; card.addEventListener('click',()=>{ viewProfileUserId=u.id; renderProfile(); renderProfileGrid(); showScreen('profile'); }); rec.appendChild(card); }); }
+  function listenPosts() {
+    if (unsubPosts) unsubPosts();
+    unsubPosts = db.collection('posts').orderBy('createdAt', 'desc').onSnapshot(snap => {
+      posts = snap.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          authorId: data.authorId,
+          text: data.text || '',
+          imageBase64: data.imageBase64 || '',
+          createdAt: data.createdAt,
+          time: data.createdAt ? formatTime(data.createdAt) : ''
+        };
+      });
+      renderFeed();
+      renderProfileGrid();
+      renderPassport();
+    });
+  }
 
-  async function afterLogin(user){ currentUser=user; viewProfileUserId=user.uid; await ensureUserDoc(user); document.getElementById('loginWrapper').style.display='none'; document.getElementById('appRoot').style.display='flex'; listenUsers(); listenPosts(); listenStiki(); currentChatUserId=null; renderChatList(); showScreen('posts'); }
+  function listenStiki() {
+    if (unsubStiki) unsubStiki();
+    unsubStiki = db.collection('stiki').orderBy('createdAt', 'desc').onSnapshot(snap => {
+      stiki = snap.docs.map(doc => {
+        const data = doc.data();
+        return { id: doc.id, authorId: data.authorId, videoURL: data.videoURL };
+      });
+      renderStiki();
+    });
+  }
 
-  // ИСПРАВЛЕНА ЗАГРУЗКА АВАТАРА (работает)
-  document.getElementById('loginBtn').addEventListener('click',async()=>{ try{ let cred=await auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value,document.getElementById('loginPass').value); await afterLogin(cred.user); }catch(e){ document.getElementById('loginError').innerText=e.message; } });
-  document.getElementById('registerBtn').addEventListener('click',async()=>{ let file=document.getElementById('regAvatar').files[0]; try{ let cred=await auth.createUserWithEmailAndPassword(document.getElementById('regEmail').value,document.getElementById('regPass').value); let avatarBase64=''; if(file){ let comp=await compressImage(file,200,0.7); avatarBase64=await imageToBase64(comp); } await db.collection('users').doc(cred.user.uid).set({ name:document.getElementById('regName').value, nick:document.getElementById('regNick').value, email:document.getElementById('regEmail').value, avatarBase64, bio:'', persona:'', followers:0, following:0 }); await afterLogin(cred.user); }catch(e){ document.getElementById('loginError').innerText=e.message; } });
-  document.getElementById('feedPublishBtn').addEventListener('click',async()=>{ let text=document.getElementById('feedText').value, file=document.getElementById('feedImage').files[0]; if(!text||!file)return alert('Текст и фото'); let compressed=await compressImage(file,1080,0.8); let b64=await imageToBase64(compressed); await db.collection('posts').add({ authorId:currentUser.uid, text, imageBase64:b64, createdAt:firebase.firestore.FieldValue.serverTimestamp() }); document.getElementById('feedText').value=''; document.getElementById('feedImage').value=''; });
-  document.getElementById('stikiPublishBtn').addEventListener('click',async()=>{ let file=document.getElementById('stikiInput').files[0]; if(!file)return; let ref=storage.ref().child(`stiki/${currentUser.uid}/${Date.now()}.mp4`); await ref.put(file); let url=await ref.getDownloadURL(); await db.collection('stiki').add({ authorId:currentUser.uid, videoURL:url, createdAt:firebase.firestore.FieldValue.serverTimestamp() }); document.getElementById('stikiInput').value=''; });
-  document.getElementById('chatSendBtn').addEventListener('click',async()=>{ let text=document.getElementById('chatInput').value.trim(); if(!text||!currentChatUserId)return; let key=chatKey(currentUser.uid,currentChatUserId); await db.collection('chats').doc(key).set({user1:currentUser.uid,user2:currentChatUserId},{merge:true}); await db.collection('chats').doc(key).collection('messages').add({ fromId:currentUser.uid, toId:currentChatUserId, text, createdAt:firebase.firestore.FieldValue.serverTimestamp() }); document.getElementById('chatInput').value=''; });
-  document.getElementById('editProfileBtn').addEventListener('click',()=>{ let u=usersCache[currentUser.uid]; document.getElementById('editProfileNameInput').value=u.name||''; document.getElementById('editProfileNickInput').value=u.nick||''; document.getElementById('editProfilePersonaInput').value=u.persona||''; document.getElementById('editProfileBioInput').value=u.bio||''; document.getElementById('editProfileModal').classList.add('active'); });
-  document.getElementById('editProfileSave').addEventListener('click',async()=>{ let file=document.getElementById('editProfileAvatarInput').files[0]; let update={ name:document.getElementById('editProfileNameInput').value, nick:document.getElementById('editProfileNickInput').value, persona:document.getElementById('editProfilePersonaInput').value, bio:document.getElementById('editProfileBioInput').value }; if(file){ let comp=await compressImage(file,200,0.7); let b64=await imageToBase64(comp); update.avatarBase64=b64; } await db.collection('users').doc(currentUser.uid).update(update); document.getElementById('editProfileModal').classList.remove('active'); renderProfile(); renderPassport(); });
-  document.getElementById('editProfileCancel').addEventListener('click',()=>document.getElementById('editProfileModal').classList.remove('active'));
-  document.getElementById('logoutBtn').addEventListener('click',()=>auth.signOut());
-  document.getElementById('profileMessageBtn').addEventListener('click',()=>{ if(viewProfileUserId && viewProfileUserId!==currentUser.uid){ currentChatUserId=viewProfileUserId; showScreen('chats'); listenMessagesForChat(currentUser.uid,currentChatUserId); } });
-  document.getElementById('chatHeaderProfile').addEventListener('click',()=>{ if(currentChatUserId){ viewProfileUserId=currentChatUserId; renderProfile(); renderProfileGrid(); showScreen('profile'); } });
-  document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(i=>i.addEventListener('click',()=>{ let scr=i.dataset.screen; if(scr==='profile'){ viewProfileUserId=currentUser.uid; renderProfile(); renderProfileGrid(); } showScreen(scr); }));
-  document.getElementById('userSearch').addEventListener('input',e=>renderChatList(e.target.value));
-  auth.onAuthStateChanged(user=>{ if(user) afterLogin(user); else { currentUser=null; document.getElementById('loginWrapper').style.display='flex'; document.getElementById('appRoot').style.display='none'; if(unsubPosts)unsubPosts(); if(unsubStiki)unsubStiki(); if(unsubMessages)unsubMessages(); if(unsubUsers)unsubUsers(); } });
+  function listenMessagesForChat(uid, other) {
+    const key = chatKey(uid, other);
+    if (unsubMessages) unsubMessages();
+    unsubMessages = db.collection('chats').doc(key).collection('messages').orderBy('createdAt', 'asc').onSnapshot(snap => {
+      messages[key] = snap.docs.map(doc => {
+        const data = doc.data();
+        return {
+          fromId: data.fromId,
+          text: data.text,
+          time: data.createdAt ? formatTime(data.createdAt) : ''
+        };
+      });
+      renderChatList();
+      renderChatDialog();
+    });
+  }
+
+  function renderFeed() {
+    const container = document.getElementById('feedList');
+    container.innerHTML = '';
+    if (posts.length === 0) {
+      document.getElementById('feedEmptyText').style.display = 'block';
+      return;
+    }
+    document.getElementById('feedEmptyText').style.display = 'none';
+    posts.forEach(post => {
+      const reactions = postReactions[post.id] || { fire: 0 };
+      const author = usersCache[post.authorId] || { name: 'Житель' };
+      const postDiv = document.createElement('div');
+      postDiv.className = 'feed-post';
+      postDiv.innerHTML = `
+        <div class="post-header"><span class="post-author">${author.name}</span><span class="post-date">${post.time}</span></div>
+        <div class="feed-post-image"><img src="${post.imageBase64 || ''}" alt=""></div>
+        <div class="feed-post-text">${post.text || ''}</div>
+        <div class="post-actions">
+          <button class="action-btn fire-btn" data-id="${post.id}">🔥</button>
+          <span class="action-count">${reactions.fire}</span>
+          <button class="action-btn">💬</button><span class="action-count">0</span>
+          <button class="action-btn">✉️</button><span class="action-count"></span>
+        </div>
+      `;
+      container.appendChild(postDiv);
+      const imgContainer = postDiv.querySelector('.feed-post-image');
+      imgContainer.addEventListener('click', () => imgContainer.classList.toggle('zoomed'));
+      const fireBtn = postDiv.querySelector('.fire-btn');
+      fireBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!postReactions[post.id]) postReactions[post.id] = { fire: 0 };
+        postReactions[post.id].fire += 1;
+        renderFeed();
+      });
+    });
+  }
+
+  function renderStiki() {
+    const wrapper = document.getElementById('stikiWrapper');
+    if (!wrapper) return;
+    wrapper.innerHTML = '';
+    if (stiki.length === 0) {
+      wrapper.innerHTML = '<div style="padding:24px; text-align:center;">🎬 Нет стиков, добавь первый</div>';
+      return;
+    }
+    stiki.forEach(stik => {
+      const reacts = stikiReactions[stik.id] || { '🔥': 0, '❤️': 0 };
+      const card = document.createElement('div');
+      card.className = 'stiki-card';
+      card.innerHTML = `
+        <div class="stiki-video"><video src="${stik.videoURL}" autoplay muted loop playsinline></video></div>
+        <div class="stiki-reactions">
+          <div class="stiki-reaction" data-id="${stik.id}" data-emoji="🔥">🔥 <span>${reacts['🔥']}</span></div>
+          <div class="stiki-reaction" data-id="${stik.id}" data-emoji="❤️">❤️ <span>${reacts['❤️']}</span></div>
+        </div>
+      `;
+      wrapper.appendChild(card);
+    });
+    wrapper.querySelectorAll('.stiki-reaction').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = el.dataset.id;
+        const emoji = el.dataset.emoji;
+        if (!stikiReactions[id]) stikiReactions[id] = { '🔥': 0, '❤️': 0 };
+        stikiReactions[id][emoji] += 1;
+        renderStiki();
+      });
+    });
+  }
+
+  function renderProfile() {
+    if (!currentUser) return;
+    const uid = viewProfileUserId || currentUser.uid;
+    const user = usersCache[uid];
+    if (!user) return;
+    document.getElementById('profileName').innerText = user.name || '';
+    document.getElementById('profileNick').innerText = user.nick || '';
+    document.getElementById('profileBio').innerText = user.bio || '';
+    const avatarImg = document.getElementById('profileAvatarImg');
+    if (avatarImg) avatarImg.src = user.avatarBase64 || '';
+    const userPosts = posts.filter(p => p.authorId === uid);
+    document.getElementById('profilePostsCount').innerText = userPosts.length;
+    document.getElementById('profileFollowersCount').innerText = user.followers || 0;
+    document.getElementById('profileFollowingCount').innerText = user.following || 0;
+    const editBtn = document.getElementById('editProfileBtn');
+    const msgBtn = document.getElementById('profileMessageBtn');
+    if (uid === currentUser.uid) {
+      editBtn.style.display = 'inline-block';
+      msgBtn.style.display = 'none';
+    } else {
+      editBtn.style.display = 'none';
+      msgBtn.style.display = 'inline-block';
+    }
+  }
+
+  function renderProfileGrid() {
+    const uid = viewProfileUserId || currentUser?.uid;
+    const grid = document.getElementById('profileGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    const userPosts = posts.filter(p => p.authorId === uid);
+    userPosts.forEach(post => {
+      const item = document.createElement('div');
+      item.className = 'profile-grid-item';
+      if (post.imageBase64) item.innerHTML = `<img src="${post.imageBase64}" alt="">`;
+      grid.appendChild(item);
+    });
+  }
+
+  function renderPassport() {
+    if (!currentUser) return;
+    const user = usersCache[currentUser.uid];
+    if (!user) return;
+    document.getElementById('passportName').innerText = user.name || '—';
+    document.getElementById('passportNick').innerText = user.nick || '—';
+    document.getElementById('passportPersona').innerText = user.persona || '—';
+    const photoDiv = document.getElementById('passportPhoto');
+    if (user.avatarBase64) photoDiv.style.backgroundImage = `url('${user.avatarBase64}')`;
+    const myPosts = posts.filter(p => p.authorId === currentUser.uid);
+    document.getElementById('passportMomentsCount').innerText = myPosts.length;
+    const visaContainer = document.getElementById('visaGrid');
+    visaContainer.innerHTML = '<div class="visa-card">🌟 Виза доверия активна</div>';
+  }
+
+  function renderChatList(filter = '') {
+    if (!currentUser) return;
+    const container = document.getElementById('chatList');
+    container.innerHTML = '';
+    let list = Object.values(usersCache).filter(u => u.id !== currentUser.uid);
+    const query = filter.toLowerCase().trim();
+    if (query) {
+      list = list.filter(u => (u.name || '').toLowerCase().includes(query) || (u.nick || '').toLowerCase().includes(query));
+    }
+    list.forEach(u => {
+      const key = chatKey(currentUser.uid, u.id);
+      const msgs = messages[key] || [];
+      const lastMsg = msgs[msgs.length - 1];
+      const chatDiv = document.createElement('div');
+      chatDiv.className = 'chat-item' + (currentChatUserId === u.id ? ' active' : '');
+      chatDiv.dataset.chatId = u.id;
+      chatDiv.innerHTML = `
+        <div class="chat-avatar">${u.avatarBase64 ? `<img src="${u.avatarBase64}">` : ''}</div>
+        <div><div style="font-weight:600;">${u.name || u.email}</div><div style="font-size:12px;">${lastMsg ? lastMsg.text.substring(0, 35) : (u.nick || 'Нет сообщений')}</div></div>
+      `;
+      chatDiv.addEventListener('click', () => {
+        currentChatUserId = u.id;
+        renderChatList();
+        listenMessagesForChat(currentUser.uid, currentChatUserId);
+      });
+      container.appendChild(chatDiv);
+    });
+    if (currentChatUserId) listenMessagesForChat(currentUser.uid, currentChatUserId);
+  }
+
+  function renderChatDialog() {
+    if (!currentUser || !currentChatUserId) return;
+    const other = usersCache[currentChatUserId];
+    if (!other) return;
+    document.getElementById('chatDialogName').innerText = other.name || '';
+    document.getElementById('chatDialogNick').innerText = other.nick || '';
+    const avatarContainer = document.getElementById('chatDialogAvatar');
+    avatarContainer.innerHTML = other.avatarBase64 ? `<img src="${other.avatarBase64}" style="width:100%;height:100%;object-fit:cover;">` : '';
+    const body = document.getElementById('chatDialogBody');
+    body.innerHTML = '';
+    const key = chatKey(currentUser.uid, currentChatUserId);
+    const msgs = messages[key] || [];
+    msgs.forEach(m => {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'msg ' + (m.fromId === currentUser.uid ? 'me' : 'them');
+      msgDiv.innerHTML = `<div>${m.text}</div><div style="font-size:10px; margin-top:6px;">${m.time}</div>`;
+      body.appendChild(msgDiv);
+    });
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderRecommendations() {
+    const recContainer = document.getElementById('recommendationsList');
+    if (!recContainer) return;
+    recContainer.innerHTML = '';
+    Object.values(usersCache).filter(u => u.id !== currentUser?.uid).slice(0, 6).forEach(u => {
+      const card = document.createElement('div');
+      card.style.padding = '12px 16px';
+      card.style.border = '1px solid #d6c8b2';
+      card.style.borderRadius = '24px';
+      card.style.marginBottom = '10px';
+      card.style.cursor = 'pointer';
+      card.innerText = u.name || u.email;
+      card.addEventListener('click', () => {
+        viewProfileUserId = u.id;
+        renderProfile();
+        renderProfileGrid();
+        showScreen('profile');
+      });
+      recContainer.appendChild(card);
+    });
+  }
+
+  // ========== ЧАСТЬ 4: АВТОРИЗАЦИЯ И ОСНОВНЫЕ СОБЫТИЯ ==========
+  async function afterLogin(user) {
+    currentUser = user;
+    viewProfileUserId = user.uid;
+    await ensureUserDoc(user);
+    document.getElementById('loginWrapper').style.display = 'none';
+    document.getElementById('appRoot').style.display = 'flex';
+    listenUsers();
+    listenPosts();
+    listenStiki();
+    currentChatUserId = null;
+    renderChatList();
+    showScreen('posts');
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    try {
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPass').value;
+      const cred = await auth.signInWithEmailAndPassword(email, pass);
+      await afterLogin(cred.user);
+    } catch (e) {
+      document.getElementById('loginError').innerText = e.message;
+    }
+  });
+
+  document.getElementById('registerBtn').addEventListener('click', async () => {
+    const file = document.getElementById('regAvatar').files[0];
+    try {
+      const name = document.getElementById('regName').value.trim();
+      const nick = document.getElementById('regNick').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const pass = document.getElementById('regPass').value;
+      const pass2 = document.getElementById('regPass2').value;
+      if (!name || !nick || !email || !pass || pass !== pass2) throw new Error('Заполни все поля и проверь пароль');
+      const cred = await auth.createUserWithEmailAndPassword(email, pass);
+      let avatarBase64 = '';
+      if (file) {
+        const compressed = await compressImage(file, 200, 0.7);
+        avatarBase64 = await imageToBase64(compressed);
+      }
+      await db.collection('users').doc(cred.user.uid).set({
+        name, nick, email, avatarBase64, bio: '', persona: '', followers: 0, following: 0,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      await afterLogin(cred.user);
+    } catch (e) {
+      document.getElementById('loginError').innerText = e.message;
+    }
+  });
+
+  document.getElementById('feedPublishBtn').addEventListener('click', async () => {
+    const text = document.getElementById('feedText').value.trim();
+    const file = document.getElementById('feedImage').files[0];
+    if (!text || !file) return alert('Нужен текст и фото');
+    const compressed = await compressImage(file, 1080, 0.8);
+    const b64 = await imageToBase64(compressed);
+    await db.collection('posts').add({
+      authorId: currentUser.uid, text, imageBase64: b64,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    document.getElementById('feedText').value = '';
+    document.getElementById('feedImage').value = '';
+  });
+
+  document.getElementById('stikiPublishBtn').addEventListener('click', async () => {
+    const file = document.getElementById('stikiInput').files[0];
+    if (!file) return alert('Выбери видео');
+    const ref = storage.ref().child(`stiki/${currentUser.uid}/${Date.now()}.mp4`);
+    await ref.put(file);
+    const url = await ref.getDownloadURL();
+    await db.collection('stiki').add({
+      authorId: currentUser.uid, videoURL: url,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    document.getElementById('stikiInput').value = '';
+  });
+
+  document.getElementById('chatSendBtn').addEventListener('click', async () => {
+    const text = document.getElementById('chatInput').value.trim();
+    if (!text || !currentChatUserId) return;
+    const key = chatKey(currentUser.uid, currentChatUserId);
+    await db.collection('chats').doc(key).set({ user1: currentUser.uid, user2: currentChatUserId }, { merge: true });
+    await db.collection('chats').doc(key).collection('messages').add({
+      fromId: currentUser.uid, toId: currentChatUserId, text,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    document.getElementById('chatInput').value = '';
+  });
+
+  document.getElementById('editProfileBtn').addEventListener('click', () => {
+    const u = usersCache[currentUser.uid];
+    document.getElementById('editProfileNameInput').value = u.name || '';
+    document.getElementById('editProfileNickInput').value = u.nick || '';
+    document.getElementById('editProfilePersonaInput').value = u.persona || '';
+    document.getElementById('editProfileBioInput').value = u.bio || '';
+    document.getElementById('editProfileModal').classList.add('active');
+  });
+
+  document.getElementById('editProfileSave').addEventListener('click', async () => {
+    const file = document.getElementById('editProfileAvatarInput').files[0];
+    const update = {
+      name: document.getElementById('editProfileNameInput').value,
+      nick: document.getElementById('editProfileNickInput').value,
+      persona: document.getElementById('editProfilePersonaInput').value,
+      bio: document.getElementById('editProfileBioInput').value
+    };
+    if (file) {
+      const compressed = await compressImage(file, 200, 0.7);
+      update.avatarBase64 = await imageToBase64(compressed);
+    }
+    await db.collection('users').doc(currentUser.uid).update(update);
+    document.getElementById('editProfileModal').classList.remove('active');
+    renderProfile();
+    renderPassport();
+  });
+
+  document.getElementById('editProfileCancel').addEventListener('click', () => {
+    document.getElementById('editProfileModal').classList.remove('active');
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await auth.signOut();
+  });
+
+  document.getElementById('profileMessageBtn').addEventListener('click', () => {
+    if (viewProfileUserId && viewProfileUserId !== currentUser.uid) {
+      currentChatUserId = viewProfileUserId;
+      showScreen('chats');
+      listenMessagesForChat(currentUser.uid, currentChatUserId);
+    }
+  });
+
+  document.getElementById('chatHeaderProfile').addEventListener('click', () => {
+    if (currentChatUserId) {
+      viewProfileUserId = currentChatUserId;
+      renderProfile();
+      renderProfileGrid();
+      showScreen('profile');
+    }
+  });
+
+  document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const screen = item.dataset.screen;
+      if (screen === 'profile') {
+        viewProfileUserId = currentUser.uid;
+        renderProfile();
+        renderProfileGrid();
+      }
+      showScreen(screen);
+    });
+  });
+
+  document.getElementById('userSearch').addEventListener('input', (e) => {
+    renderChatList(e.target.value);
+    renderRecommendations();
+  });
+
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      await afterLogin(user);
+    } else {
+      currentUser = null;
+      document.getElementById('loginWrapper').style.display = 'flex';
+      document.getElementById('appRoot').style.display = 'none';
+      if (unsubPosts) unsubPosts();
+      if (unsubStiki) unsubStiki();
+      if (unsubMessages) unsubMessages();
+      if (unsubUsers) unsubUsers();
+    }
+  });
 </script>
 </body>
 </html>
