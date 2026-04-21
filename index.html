@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>MindX</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
     <style>
@@ -15,14 +15,42 @@
             overflow: hidden;
         }
         
+        /* Боковая панель */
         .sidebar {
-            width: 260px;
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
             background: #f5f5f5;
             border-right: 1px solid #e5e5e5;
             display: flex;
             flex-direction: column;
-            flex-shrink: 0;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
+        
+        .sidebar.open {
+            left: 0;
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+            display: none;
+            backdrop-filter: blur(2px);
+        }
+        
+        .sidebar-overlay.active {
+            display: block;
+        }
+        
         .sidebar-header { padding: 16px; border-bottom: 1px solid #e5e5e5; }
         .new-chat-btn {
             width: 100%;
@@ -77,27 +105,58 @@
         .session-item:hover .session-delete { opacity: 1; }
         .session-delete:hover { color: #e5484d; }
         
+        /* Основная область */
         .main-area {
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            width: 100%;
         }
         .chat-header {
             background: #fff;
             border-bottom: 1px solid #e5e5e5;
-            padding: 12px 20px;
+            padding: 12px 16px;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
-        /* Эффект переливания как у Siri */
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+            padding: 0;
+        }
+        .menu-btn span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: #1a1a1a;
+            border-radius: 2px;
+            transition: 0.2s;
+        }
+        
+        .logo-area h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        /* Эффект переливания */
         .siri-gradient {
             height: 3px;
             background: linear-gradient(90deg, 
                 #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff, #ff0000);
             background-size: 200% 100%;
             animation: siriWave 3s ease infinite;
-            margin-top: 4px;
             border-radius: 2px;
         }
         
@@ -107,38 +166,32 @@
             100% { background-position: 0% 50%; }
         }
         
-        .logo-area h1 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
-        
         .chat-container {
             flex: 1;
             overflow-y: auto;
             background: #f7f7f8;
+            -webkit-overflow-scrolling: touch;
         }
         .messages-area {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px 16px;
+            max-width: 100%;
+            padding: 16px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 20px;
         }
         .message-wrapper { display: flex; flex-direction: column; }
         .user-message { align-items: flex-end; }
         .bot-message { align-items: flex-start; }
-        .message-row { display: flex; gap: 20px; max-width: 100%; }
+        .message-row { display: flex; gap: 12px; max-width: 100%; }
         .avatar-message {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 4px;
             background: #1a1a1a;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: white;
             flex-shrink: 0;
@@ -146,15 +199,15 @@
         .content {
             flex: 1;
             color: #1a1a1a;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.5;
             white-space: pre-wrap;
         }
         .message-time {
-            font-size: 11px;
+            font-size: 10px;
             color: #8e8ea0;
             margin-top: 4px;
-            margin-left: 52px;
+            margin-left: 40px;
         }
         .typing-indicator { display: flex; gap: 4px; padding: 8px 0; }
         .typing-indicator span {
@@ -166,12 +219,10 @@
         .input-area {
             background: #fff;
             border-top: 1px solid #e5e5e5;
-            padding: 12px 20px;
+            padding: 12px 16px;
             flex-shrink: 0;
         }
         .input-container {
-            max-width: 800px;
-            margin: 0 auto;
             position: relative;
         }
         .input-container input {
@@ -179,7 +230,7 @@
             background: #f5f5f5;
             border: none;
             border-radius: 24px;
-            padding: 12px 52px 12px 18px;
+            padding: 12px 48px 12px 16px;
             font-size: 15px;
             font-family: 'Inter', sans-serif;
             color: #1a1a1a;
@@ -205,63 +256,79 @@
             height: 20px;
             color: #1a1a1a;
             opacity: 0.6;
-            transition: 0.2s;
         }
         .input-container button:hover .send-icon { opacity: 1; }
         
         .greeting-area {
-            max-width: 800px;
-            margin: 0 auto;
             padding: 40px 16px;
             text-align: center;
         }
         .greeting-title {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 600;
             color: #1a1a1a;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
         }
         .greeting-buttons {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
         }
         .greeting-btn {
             background: #fff;
             border: 1px solid #d0d0d0;
             border-radius: 28px;
-            padding: 8px 20px;
-            font-size: 14px;
+            padding: 8px 16px;
+            font-size: 13px;
             cursor: pointer;
             transition: 0.2s;
         }
         .greeting-btn:hover { background: #e8e8e8; }
         
-        /* Уникальный стиль ответов MindX */
-        .mindx-response {
-            font-size: 15px;
-            line-height: 1.6;
+        /* Планшеты и выше */
+        @media (min-width: 768px) {
+            .sidebar {
+                position: relative;
+                left: 0;
+                width: 260px;
+                box-shadow: none;
+            }
+            .sidebar-overlay {
+                display: none !important;
+            }
+            .menu-btn {
+                display: none;
+            }
+            .logo-area h1 {
+                font-size: 20px;
+            }
+            .messages-area {
+                max-width: 800px;
+                margin: 0 auto;
+            }
         }
-        .mindx-response strong {
-            color: #10a37f;
-            font-weight: 600;
-        }
-        .mindx-response .quote {
-            border-left: 3px solid #10a37f;
-            padding-left: 12px;
-            margin: 8px 0;
-            color: #4a4a4a;
-        }
-        .mindx-response .highlight {
-            background: #f0fdf4;
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-weight: 500;
+        
+        /* Мобильные */
+        @media (max-width: 767px) {
+            .chat-header {
+                padding: 10px 16px;
+            }
+            .greeting-title {
+                font-size: 24px;
+            }
+            .greeting-buttons {
+                gap: 8px;
+            }
+            .greeting-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <button class="new-chat-btn" id="newChatBtn"><span>+</span> Новый чат</button>
@@ -271,11 +338,16 @@
 
     <div class="main-area">
         <div class="chat-header">
+            <button class="menu-btn" id="menuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="logo-area">
                 <h1>MindX</h1>
             </div>
-            <div class="siri-gradient"></div>
         </div>
+        <div class="siri-gradient"></div>
         <div class="chat-container" id="chatContainer">
             <div class="greeting-area" id="greetingArea">
                 <div class="greeting-title">Я-MindX</div>
@@ -302,10 +374,35 @@
 
     <script>
         // ===============================================================
-        // MINDX — Groq API + Напоминания (предупреждение + финал)
-        // Уникальный стиль ответов
+        // MINDX — Мобильная версия с гамбургер-меню
         // ===============================================================
         
+        // Мобильное меню
+        const menuBtn = document.getElementById('menuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+        
+        function openSidebar() {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+        }
+        
+        menuBtn.addEventListener('click', openSidebar);
+        overlay.addEventListener('click', closeSidebar);
+        
+        // Закрываем при клике на ссылку внутри
+        document.querySelectorAll('.session-item, .new-chat-btn').forEach(el => {
+            el.addEventListener('click', () => {
+                if (window.innerWidth < 768) closeSidebar();
+            });
+        });
+        
+        // ========== ОСТАЛЬНАЯ ЛОГИКА ==========
         const GROQ_API_KEY = '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';
         const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
         
@@ -313,7 +410,7 @@
         let currentSessionId = null;
         let waitingForTestTopic = false;
         
-        // ========== НАПОМИНАНИЯ ==========
+        // Напоминания
         let reminders = [];
         
         function loadReminders() {
@@ -332,7 +429,7 @@
                 text: text,
                 dateTime: dateTime.toISOString(),
                 createdAt: new Date().toISOString(),
-                warned: false  // предупреждение отправлено?
+                warned: false
             };
             reminders.push(reminder);
             saveReminders();
@@ -346,12 +443,10 @@
         
         function checkReminders() {
             const now = new Date();
-            
             for (let r of reminders) {
                 const remindTime = new Date(r.dateTime);
                 const diffSeconds = (remindTime - now) / 1000;
                 
-                // Предупреждение за 1 минуту (60 секунд)
                 if (diffSeconds <= 65 && diffSeconds > 55 && !r.warned) {
                     r.warned = true;
                     const session = getCurrentSession();
@@ -368,7 +463,6 @@
                     saveReminders();
                 }
                 
-                // Финальное оповещение в точное время
                 if (diffSeconds <= 2 && diffSeconds > -5 && !r.notified) {
                     r.notified = true;
                     const session = getCurrentSession();
@@ -391,7 +485,6 @@
             setInterval(checkReminders, 3000);
         }
         
-        // ========== ПАРСИНГ ДАТ ==========
         function parseDateTime(text) {
             const lower = text.toLowerCase();
             const now = new Date();
@@ -442,35 +535,26 @@
             return null;
         }
         
-        // ========== УНИКАЛЬНЫЙ СТИЛЬ ОТВЕТОВ ==========
         function formatMindXResponse(text) {
-            // Уже отформатированный текст от Groq не трогаем, просто оборачиваем в стиль
-            if (text.startsWith('**') || text.includes('```')) {
-                return text;
-            }
-            // Простой текст — добавляем лёгкое форматирование
+            if (text.startsWith('**') || text.includes('```')) return text;
             let formatted = text;
-            // Выделяем ключевые моменты
             formatted = formatted.replace(/(\d+)\/(\d+)/g, '<strong>$1/$2</strong>');
             formatted = formatted.replace(/важно:?\s*/i, '<strong>⚠️ Важно:</strong> ');
             formatted = formatted.replace(/совет:?\s*/i, '<strong>💡 Совет:</strong> ');
             return formatted;
         }
         
-        // ========== GROQ AI ==========
         async function askGroq(question, history = []) {
             try {
                 const messages = [
-                    { role: 'system', content: 'Ты MindX. Отвечай кратко, по делу, дружелюбно. Используй жирный шрифт для важного. Не используй эмодзи в каждом сообщении, только по делу.' }
+                    { role: 'system', content: 'Ты MindX. Отвечай кратко, по делу, дружелюбно. Используй жирный шрифт для важного.' }
                 ];
-                
                 const lastMessages = history.slice(-10);
                 for (let msg of lastMessages) {
                     if (msg.role === 'user' || msg.role === 'bot') {
                         messages.push({ role: msg.role === 'user' ? 'user' : 'assistant', content: msg.text });
                     }
                 }
-                
                 messages.push({ role: 'user', content: question });
                 
                 const response = await fetch(GROQ_URL, {
@@ -495,7 +579,6 @@
             }
         }
         
-        // ========== НОВОСТИ ==========
         async function searchNews(query) {
             try {
                 let searchQuery = query.trim().toLowerCase();
@@ -505,7 +588,6 @@
                 
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
                 const gdeltUrl = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(searchQuery)}&mode=artlist&format=json&maxrecords=5&timespan=30d`;
-                
                 const response = await fetch(proxyUrl + gdeltUrl, {
                     headers: { 'Origin': window.location.origin }
                 });
@@ -526,12 +608,9 @@
                     }
                 }
                 return null;
-            } catch(e) { 
-                return null; 
-            }
+            } catch(e) { return null; }
         }
         
-        // ========== ОЦЕНКИ ==========
         function getRating(topic) {
             const positive = ["умный", "интересный", "полезный", "креативный", "глубокий"];
             const negative = ["тупой", "скучный", "бесполезный", "поверхностный"];
@@ -544,14 +623,14 @@
             return `${topic} — штука ${randomPos}, но иногда бывает ${randomNeg}. ${randomOutcome}. **Оценка:** ${score}/10 — ${verdict}.`;
         }
         
-        // ========== СЕССИИ ==========
+        // Сессии
         function formatDate(timestamp) {
             const d = new Date(timestamp);
             return d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) + ' · ' + d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
         }
         
         function loadSessions() {
-            const saved = localStorage.getItem('mindx_sessions_final_style');
+            const saved = localStorage.getItem('mindx_sessions_mobile');
             if (saved) sessions = JSON.parse(saved);
             if (!sessions.length) {
                 sessions.push({ id: Date.now(), name: 'Новый чат', messages: [], createdAt: Date.now() });
@@ -561,7 +640,7 @@
             renderCurrentChat();
         }
         
-        function saveSessions() { localStorage.setItem('mindx_sessions_final_style', JSON.stringify(sessions)); }
+        function saveSessions() { localStorage.setItem('mindx_sessions_mobile', JSON.stringify(sessions)); }
         
         function renderSessionsList() {
             const container = document.getElementById('sessionsList');
@@ -581,6 +660,7 @@
                     currentSessionId = session.id;
                     renderSessionsList();
                     renderCurrentChat();
+                    if (window.innerWidth < 768) closeSidebar();
                 });
                 const delBtn = div.querySelector('.session-delete');
                 delBtn.addEventListener('click', (e) => {
@@ -651,7 +731,6 @@
             return now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) + ' · ' + now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
         }
         
-        // ========== ТЕСТЫ ==========
         const testQuestions = {
             логика: [
                 { text: "Что тяжелее: 1 кг ваты или 1 кг железа?", options: ["Вата", "Железо", "Одинаково"] },
@@ -686,7 +765,6 @@
             return patterns.some(p => lower.includes(p));
         }
         
-        // ========== ООН ==========
         function getPoliticalAnswer(question) {
             const lower = question.toLowerCase();
             if (lower.includes("крым") && (lower.includes("чей") || lower.includes("оон"))) {
@@ -695,7 +773,6 @@
             return null;
         }
         
-        // ========== ОСНОВНОЙ ОТВЕТ ==========
         async function generateAnswer(question, sessionId) {
             const q = question.toLowerCase().trim();
             
@@ -706,8 +783,7 @@
                 return "Меня создал **Давид Доманський Дмитрович**. Он вложил в меня душу и разум.";
             }
             
-            // ПЛАНИРОВАНИЕ И НАПОМИНАНИЯ
-            if (q.includes("запланируй") || q.includes("напомни") || q.includes("добавь событие") || q.includes("запланируй")) {
+            if (q.includes("запланируй") || q.includes("напомни") || q.includes("добавь событие")) {
                 const dateTime = parseDateTime(question);
                 if (dateTime) {
                     let eventText = question.replace(/запланируй|напомни|добавь событие/gi, '').trim();
@@ -716,7 +792,7 @@
                     const timeStr = dateTime.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
                     return `✅ **Запланировано!**\n\n📌 Событие: "${eventText}"\n⏰ Время: ${timeStr}\n\n_Я напомню тебе за 1 минуту и в точное время._`;
                 } else {
-                    return "❓ **Не понял дату и время.**\n\nПримеры:\n• «запланируй встречу на завтра в 15:00»\n• «напомни выключить чайник через 30 минут»\n• «добавь событие сегодня в 19:00»\n• «напомни через минуту»";
+                    return "❓ **Не понял дату и время.**\n\nПримеры:\n• «запланируй встречу на завтра в 15:00»\n• «напомни выключить чайник через 30 минут»\n• «напомни через минуту»";
                 }
             }
             
@@ -730,25 +806,21 @@
                 return result;
             }
             
-            // Оценки
             if (q.includes("оцени")) {
                 let topic = question.replace(/оцени/gi, '').trim();
                 if (topic.length < 2) topic = "это";
                 return getRating(topic);
             }
             
-            // Политика
             const political = getPoliticalAnswer(question);
             if (political) return political;
             
-            // Новости
             if (q.includes("новости") || q.includes("свежие") || q.includes("последние")) {
                 const newsResult = await searchNews(question);
                 if (newsResult) return newsResult;
-                return "📭 **Не удалось найти свежие новости.** Попробуй переформулировать запрос.";
+                return "📭 **Не удалось найти свежие новости.**";
             }
             
-            // Тесты
             if (isTestRequest(question)) {
                 waitingForTestTopic = true;
                 return "**Какой тест тебя интересует?**\n\nДоступные темы:\n• логика\n• характер";
@@ -759,14 +831,12 @@
                 return generateTest(question);
             }
             
-            // Математика
             try {
                 let clean = q.replace(/[^0-9+\-*/().%^ ]/g, '').replace(/\^/g, '**');
                 const result = eval(clean);
                 if (typeof result === 'number' && isFinite(result)) return `**Результат:** ${q} = **${result}**`;
             } catch(e) {}
             
-            // GROQ API
             const session = getCurrentSession();
             const history = session ? session.messages : [];
             const aiResponse = await askGroq(question, history);
@@ -835,6 +905,7 @@
             saveSessions();
             renderSessionsList();
             renderCurrentChat();
+            if (window.innerWidth < 768) closeSidebar();
         }
         
         document.getElementById('sendBtn').addEventListener('click', sendMessage);
