@@ -490,7 +490,7 @@
 
     <script>
         // ============================================================
-        // MINDX — МЫСЛИ ВЛИЯЮТ ТОЛЬКО НА УВЕРЕННОСТЬ
+        // MINDX — НОВЫЙ ЧАТ ПРИ ЗАГРУЗКЕ, ЧИСТОЕ ПРИВЕТСТВИЕ
         // ============================================================
         
         // ---------- СОСТОЯНИЕ ----------
@@ -513,7 +513,7 @@
         let thoughtTimeout = null;
         let blinkInterval = null;
         
-        // ---------- ВОПРОСЫ (влияют ТОЛЬКО на уверенность) ----------
+        // ---------- ВОПРОСЫ ----------
         const humanQuestions = [
             { text: "Что мне делать сейчас?", effect: { confidence: 1 } },
             { text: "Что делать дальше?", effect: { confidence: 1 } },
@@ -545,7 +545,6 @@
             }
         }
         
-        // Применение эффекта вопроса (только на уверенность)
         function applyQuestionEffect(effect) {
             if (effect.confidence) {
                 mindxState.confidence = Math.min(100, Math.max(0, mindxState.confidence + effect.confidence));
@@ -607,11 +606,9 @@
             questionsToday++;
             updateQuestionStats();
             
-            // Применяем эффект вопроса на уверенность
             applyQuestionEffect(randomQ.effect);
             addThought(`📊 Уверенность: ${mindxState.confidence}`);
             
-            // Поиск ответа
             let answer = null;
             
             if (userFactsList.length > 0 && Math.random() > 0.5) {
@@ -730,8 +727,6 @@
         
         function getSimpleResponse(userText) {
             const lower = userText.toLowerCase().trim();
-            
-            // Простое повторение слова (без анализа)
             const words = userText.trim().split(/\s+/);
             const lastWord = words[words.length - 1];
             const cleanWord = lastWord.replace(/[!?.,;:]/g, '');
@@ -747,7 +742,6 @@
         async function getResponse(userText) {
             const lower = userText.toLowerCase();
             
-            // Проверяем на простой ответ (повтор слова)
             const simpleResponse = getSimpleResponse(userText);
             if (simpleResponse) {
                 addFact(userText);
@@ -755,7 +749,6 @@
                 return { answer: simpleResponse, source: "повтор" };
             }
             
-            // Анализ утверждений
             const analysis = analyzeUserStatement(userText);
             
             if (lower.includes('молодец') || lower.includes('умный')) updateState(8, 5, 10, 8, -3);
@@ -876,16 +869,22 @@
             if (saved) userFactsList = JSON.parse(saved);
         }
         
-        // ---------- СЕССИИ ----------
+        // ---------- СЕССИИ (НОВЫЙ ЧАТ ПРИ ЗАГРУЗКЕ) ----------
         function loadSessions() {
             const saved = localStorage.getItem('mindx_sessions');
             if (saved) sessions = JSON.parse(saved);
-            if (!sessions.length) {
-                sessions.push({ id: Date.now(), name: 'Новый чат', messages: [], createdAt: Date.now() });
-            }
-            currentSessionId = sessions[0].id;
+            
+            // ВСЕГДА СОЗДАЁМ НОВЫЙ ЧАТ ПРИ ЗАГРУЗКЕ
+            const newSession = { id: Date.now(), name: 'Новый чат', messages: [], createdAt: Date.now() };
+            sessions.unshift(newSession);
+            currentSessionId = newSession.id;
+            
+            // Ограничиваем количество сессий (оставляем последние 20)
+            if (sessions.length > 20) sessions = sessions.slice(0, 20);
+            
+            saveSessions();
             renderSessions();
-            renderChat();
+            renderChat(); // покажет приветствие "Я — MindX", так как messages пустые
         }
         
         function saveSessions() {
@@ -1130,14 +1129,7 @@
         startBackgroundThreads();
         startBlinking();
         
-        setTimeout(() => {
-            const session = getCurrentSession();
-            if (session && !session.messages.length) {
-                session.messages.push({ role: 'bot', text: "Я — MindX. Я постоянно думаю — мои мысли в панели разработчика.", time: getCurrentTime(), source: 'система' });
-                renderChat();
-                saveSessions();
-            }
-        }, 100);
+        // НЕ ДОБАВЛЯЕМ СООБЩЕНИЕ В СЕССИЮ — ЧИСТОЕ ПРИВЕТСТВИЕ
     </script>
 </body>
 </html>
