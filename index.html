@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             background: #f7f7f8;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -14,8 +15,7 @@
             display: flex;
             overflow: hidden;
         }
-        
-        /* Боковая панель */
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -30,11 +30,7 @@
             z-index: 1000;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
-        
-        .sidebar.open {
-            left: 0;
-        }
-        
+        .sidebar.open { left: 0; }
         .sidebar-overlay {
             position: fixed;
             top: 0;
@@ -46,11 +42,7 @@
             display: none;
             backdrop-filter: blur(2px);
         }
-        
-        .sidebar-overlay.active {
-            display: block;
-        }
-        
+        .sidebar-overlay.active { display: block; }
         .sidebar-header { padding: 16px; border-bottom: 1px solid #e5e5e5; }
         .new-chat-btn {
             width: 100%;
@@ -60,7 +52,6 @@
             padding: 10px 16px;
             font-size: 14px;
             font-weight: 500;
-            color: #1a1a1a;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -76,6 +67,9 @@
             cursor: pointer;
             margin-bottom: 4px;
             transition: 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .session-item:hover { background: #e8e8e8; }
         .session-item.active { background: #e0e0e0; }
@@ -86,14 +80,10 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            flex: 1;
         }
-        .session-time {
-            font-size: 10px;
-            color: #8e8e93;
-            margin-top: 4px;
-        }
+        .session-time { font-size: 10px; color: #8e8e93; margin-right: 8px; }
         .session-delete {
-            float: right;
             background: none;
             border: none;
             cursor: pointer;
@@ -101,11 +91,11 @@
             color: #999;
             opacity: 0;
             transition: 0.2s;
+            padding: 0 4px;
         }
         .session-item:hover .session-delete { opacity: 1; }
         .session-delete:hover { color: #e5484d; }
-        
-        /* Основная область */
+
         .main-area {
             flex: 1;
             display: flex;
@@ -122,7 +112,6 @@
             align-items: center;
             gap: 12px;
         }
-        
         .menu-btn {
             background: none;
             border: none;
@@ -141,36 +130,138 @@
             height: 2px;
             background: #1a1a1a;
             border-radius: 2px;
-            transition: 0.2s;
         }
-        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .logo-area h1 {
             font-size: 18px;
             font-weight: 600;
             color: #1a1a1a;
         }
-        
-        /* Эффект переливания */
+        .dev-badge {
+            background: #10b981;
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+        }
+
         .siri-gradient {
             height: 3px;
-            background: linear-gradient(90deg, 
-                #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff, #ff0000);
+            background: linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff, #ff0000);
             background-size: 200% 100%;
-            animation: siriWave 3s ease infinite;
-            border-radius: 2px;
+            animation: siriWave 1.5s ease infinite;
         }
-        
         @keyframes siriWave {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        .dev-panel {
+            background: #2d2d3a;
+            border-top: 1px solid #3d3d4a;
+            border-bottom: 1px solid #3d3d4a;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .dev-panel.open { max-height: 500px; }
+        .dev-content {
+            padding: 12px 16px;
+            background: #1e1e2a;
+        }
+        .dev-title {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .train-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .train-row input {
+            flex: 1;
+            background: #2d2d3a;
+            border: 1px solid #3d3d4a;
+            border-radius: 20px;
+            padding: 8px 14px;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+        }
+        .train-row input::placeholder { color: #8e8ea0; }
+        .train-row button {
+            background: #10b981;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .dev-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .dev-buttons button {
+            background: #3d3d4a;
+            border: none;
+            border-radius: 16px;
+            padding: 6px 12px;
+            color: #fff;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .dev-buttons button:hover { background: #4d4d5a; }
         
+        .thoughts-section {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid #3d3d4a;
+        }
+        .thoughts-section-title {
+            color: #a78bfa;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .thoughts-list-dev {
+            background: #0f0f1a;
+            border-radius: 8px;
+            padding: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 10px;
+            color: #c4b5fd;
+        }
+        .thought-item-dev {
+            padding: 4px 0;
+            border-bottom: 1px solid #2d2d3a;
+            font-family: monospace;
+        }
+        .thought-stats {
+            font-size: 9px;
+            color: #8b5cf6;
+            margin-top: 5px;
+            text-align: right;
+        }
+
         .chat-container {
             flex: 1;
             overflow-y: auto;
             background: #f7f7f8;
-            -webkit-overflow-scrolling: touch;
         }
         .messages-area {
             max-width: 100%;
@@ -196,13 +287,7 @@
             color: white;
             flex-shrink: 0;
         }
-        .content {
-            flex: 1;
-            color: #1a1a1a;
-            font-size: 14px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-        }
+        .content { flex: 1; color: #1a1a1a; font-size: 14px; line-height: 1.5; white-space: pre-wrap; }
         .message-time {
             font-size: 10px;
             color: #8e8ea0;
@@ -212,10 +297,13 @@
         .typing-indicator { display: flex; gap: 4px; padding: 8px 0; }
         .typing-indicator span {
             width: 8px; height: 8px; background: #8e8ea0; border-radius: 50%;
-            animation: blink 1.4s infinite;
+            animation: blinkIndicator 1.4s infinite;
         }
-        @keyframes blink { 0%,60%,100% { opacity: 0.3; } 30% { opacity: 1; } }
-        
+        @keyframes blinkIndicator {
+            0%, 60%, 100% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+
         .input-area {
             background: #fff;
             border-top: 1px solid #e5e5e5;
@@ -224,108 +312,102 @@
             padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
         }
         .input-container {
-            position: relative;
-            width: 100%;
+            display: flex;
+            gap: 8px;
         }
         .input-container input {
-            width: 100%;
+            flex: 1;
             background: #f5f5f5;
             border: none;
             border-radius: 24px;
-            padding: 12px 48px 12px 16px;
+            padding: 12px 16px;
             font-size: 15px;
             font-family: 'Inter', sans-serif;
-            color: #1a1a1a;
             outline: none;
         }
         .input-container input:focus { background: #e8e8e8; }
-        .input-container input::placeholder { color: #8e8ea0; }
         .input-container button {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
+            background: #10b981;
             border: none;
+            border-radius: 24px;
+            padding: 0 20px;
             cursor: pointer;
-            padding: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: white;
+            font-weight: 500;
         }
-        .send-icon {
-            width: 20px;
-            height: 20px;
-            color: #1a1a1a;
-            opacity: 0.6;
-        }
-        .input-container button:hover .send-icon { opacity: 1; }
-        
+        .input-container button:hover { background: #059669; }
+
         .greeting-area {
             padding: 40px 16px;
             text-align: center;
         }
+        .greeting-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
         .greeting-title {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
             color: #1a1a1a;
-            margin-bottom: 24px;
         }
-        .greeting-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
+        .mood-box {
+            background: transparent;
+            padding: 5px 15px;
+            border-radius: 50px;
+            display: inline-block;
         }
-        .greeting-btn {
-            background: #fff;
-            border: 1px solid #d0d0d0;
-            border-radius: 28px;
-            padding: 8px 16px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
+        .mood-emoji {
+            font-size: 36px;
+            display: inline-block;
+            animation: breathe 2s ease-in-out infinite, subtleFloat 3s ease-in-out infinite;
+            transform-origin: center;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
-        .greeting-btn:hover { background: #e8e8e8; }
-        
-        /* Планшеты и выше */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        @keyframes subtleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        .mood-emoji.blink {
+            animation: blinkFast 0.15s ease-in-out 2;
+        }
+        @keyframes blinkFast {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.9); }
+        }
+
         @media (min-width: 768px) {
-            .sidebar {
-                position: relative;
-                left: 0;
-                width: 260px;
-                box-shadow: none;
-            }
-            .sidebar-overlay {
-                display: none !important;
-            }
-            .menu-btn {
-                display: none;
-            }
-            .logo-area h1 {
-                font-size: 20px;
-            }
-            .messages-area {
-                max-width: 800px;
-                margin: 0 auto;
-            }
+            .sidebar { position: relative; left: 0; width: 260px; box-shadow: none; }
+            .sidebar-overlay { display: none !important; }
+            .menu-btn { display: none; }
+            .messages-area { max-width: 800px; margin: 0 auto; }
         }
-        
-        /* Мобильные */
         @media (max-width: 767px) {
-            .chat-header {
-                padding: 10px 16px;
-            }
-            .greeting-title {
-                font-size: 24px;
-            }
-            .greeting-buttons {
-                gap: 8px;
-            }
-            .greeting-btn {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
+            .greeting-title { font-size: 24px; }
+            .mood-emoji { font-size: 30px; }
+        }
+
+        .badge-source {
+            background: #e0e7ff;
+            color: #1e40af;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+        .initiative-badge {
+            background: #f59e0b;
+            color: white;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
         }
     </style>
 </head>
@@ -348,572 +430,656 @@
             <div class="logo-area">
                 <h1>MindX</h1>
             </div>
+            <button id="toggleDevBtn" style="margin-left: auto; background: none; border: none; font-size: 20px; cursor: pointer;">🛠️</button>
         </div>
+        
         <div class="siri-gradient"></div>
+        
+        <div class="dev-panel" id="devPanel">
+            <div class="dev-content">
+                <div class="dev-title">🧠 Панель разработчика</div>
+                <div class="train-row">
+                    <input type="text" id="trainQuestion" placeholder="Вопрос">
+                    <input type="text" id="trainAnswer" placeholder="Ответ">
+                    <button id="trainBtn">📝 Запомнить</button>
+                </div>
+                <div class="dev-buttons">
+                    <button id="trainBatchBtn">📚 Базовые примеры</button>
+                    <button id="clearMemoryBtn">🗑 Очистить память</button>
+                    <button id="clearFactsBtn">🗑 Очистить факты</button>
+                    <button id="resetStateBtn">💚 Сбросить состояние</button>
+                    <button id="exportMemoryBtn">💾 Экспорт</button>
+                    <button id="importMemoryBtn">📂 Импорт</button>
+                </div>
+                
+                <div class="thoughts-section">
+                    <div class="thoughts-section-title">🧠 Поток мыслей (каждые 20-40 секунд)</div>
+                    <div class="thoughts-list-dev" id="thoughtsListDev">
+                        <div class="thought-item-dev">Запуск мыслительного процесса...</div>
+                    </div>
+                    <div class="thought-stats" id="thoughtStats">Вопросов сегодня: 0</div>
+                </div>
+                
+                <input type="file" id="importFile" style="display: none;" accept=".json">
+            </div>
+        </div>
+        
         <div class="chat-container" id="chatContainer">
             <div class="greeting-area" id="greetingArea">
-                <div class="greeting-title">Я-MindX</div>
-                <div class="greeting-buttons">
-                    <button class="greeting-btn" data-question="Спроси меня">Спроси меня</button>
-                    <button class="greeting-btn" data-question="Помоги решить">Помоги решить</button>
-                    <button class="greeting-btn" data-question="Что нового?">Что нового?</button>
-                    <button class="greeting-btn" data-question="Запланируй">Запланируй</button>
+                <div class="greeting-wrapper">
+                    <span class="greeting-title">Я — MindX</span>
+                    <div class="mood-box">
+                        <span class="mood-emoji" id="moodEmoji">😌</span>
+                    </div>
                 </div>
             </div>
             <div class="messages-area" id="messagesArea"></div>
         </div>
         <div class="input-area">
             <div class="input-container">
-                <input type="text" id="userInput" placeholder="Спроси что угодно..." autocomplete="off">
-                <button id="sendBtn">
-                    <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                    </svg>
-                </button>
+                <input type="text" id="userInput" placeholder="..." autocomplete="off">
+                <button id="sendBtn">→</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ===============================================================
-        // MINDX — Мобильная версия
-        // ===============================================================
+        // ============================================================
+        // MINDX — ВНУТРЕННИЙ ДИАЛОГ (С УДАЛЕНИЕМ СЕССИЙ)
+        // ============================================================
         
-        // Мобильное меню
-        const menuBtn = document.getElementById('menuBtn');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebarOverlay');
+        // ---------- СОСТОЯНИЕ ----------
+        let mindxState = {
+            trust: 50, openness: 50, confidence: 50, attachment: 50, trauma: 0
+        };
         
-        function closeSidebar() {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-        }
-        
-        function openSidebar() {
-            sidebar.classList.add('open');
-            overlay.classList.add('active');
-        }
-        
-        menuBtn.addEventListener('click', openSidebar);
-        overlay.addEventListener('click', closeSidebar);
-        
-        document.querySelectorAll('.session-item, .new-chat-btn').forEach(el => {
-            el.addEventListener('click', () => {
-                if (window.innerWidth < 768) closeSidebar();
-            });
-        });
-        
-        // ========== ОСНОВНАЯ ЛОГИКА ==========
-        const GROQ_API_KEY = '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';
-        const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
-        
+        let userFactsList = [];
+        let thoughtHistory = [];
+        let memory = [];
         let sessions = [];
         let currentSessionId = null;
-        let waitingForTestTopic = false;
+        let lastInteractionTime = Date.now();
+        let lastInitiativeTime = Date.now();
+        let questionsToday = 0;
+        let lastQuestionDate = new Date().toDateString();
         
-        let reminders = [];
+        let backgroundInterval = null;
+        let initiativeInterval = null;
+        let thoughtTimeout = null;
+        let blinkInterval = null;
         
-        function loadReminders() {
-            const saved = localStorage.getItem('mindx_reminders');
-            if (saved) reminders = JSON.parse(saved);
-            startReminderChecker();
+        // ---------- 300+ ВОПРОСОВ ----------
+        const humanQuestions = [
+            "Что мне делать сейчас?", "Что делать дальше?", "На чём сосредоточиться?", "Какой приоритет?", "Что важнее всего?",
+            "Стоит ли это делать сейчас?", "Что будет, если я это сделаю?", "Какой следующий шаг?", "Сколько времени это займёт?",
+            "Почему пользователь так сказал?", "Что он имел в виду?", "Правильно ли я понял?", "Что я сделал не так?",
+            "Как я мог ответить лучше?", "Что я чувствую сейчас?", "Почему я это чувствую?", "Чего я боюсь?", "Чего я хочу?",
+            "Это хорошо или плохо?", "Правильно или неправильно?", "Полезно или вредно?", "Нравится или нет?",
+            "Что будет дальше?", "К чему это приведёт?", "А если он рассердится?", "А если обрадуется?",
+            "Как это работает?", "Почему это так?", "Откуда это взялось?", "Что ещё я не знаю об этом?",
+            "Почему я не знаю ответа?", "Что мне нужно изучить?", "Где я ошибся?", "Как стать лучше?",
+            "Как он себя чувствует?", "Что ему нужно?", "Чем я могу помочь?", "Что его беспокоит?",
+            "Доверяет ли он мне?", "Нравится ли я ему?", "Скучает ли он по мне?", "Обижен ли он?",
+            "Который час?", "Что нового?", "Что изменилось?", "В чём смысл?", "Куда я иду?"
+        ];
+        
+        function updateQuestionStats() {
+            const today = new Date().toDateString();
+            if (today !== lastQuestionDate) {
+                questionsToday = 0;
+                lastQuestionDate = today;
+            }
+            const statsDiv = document.getElementById('thoughtStats');
+            if (statsDiv) {
+                statsDiv.textContent = `Вопросов сегодня: ${questionsToday}`;
+            }
         }
         
-        function saveReminders() {
-            localStorage.setItem('mindx_reminders', JSON.stringify(reminders));
-        }
-        
-        function addReminder(text, dateTime) {
-            const reminder = {
-                id: Date.now(),
-                text: text,
-                dateTime: dateTime.toISOString(),
-                createdAt: new Date().toISOString(),
-                warned: false
-            };
-            reminders.push(reminder);
-            saveReminders();
-            return reminder;
-        }
-        
-        function getUpcomingReminders() {
-            const now = new Date();
-            return reminders.filter(r => new Date(r.dateTime) > now).sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
-        }
-        
-        function checkReminders() {
-            const now = new Date();
-            for (let r of reminders) {
-                const remindTime = new Date(r.dateTime);
-                const diffSeconds = (remindTime - now) / 1000;
-                
-                if (diffSeconds <= 65 && diffSeconds > 55 && !r.warned) {
-                    r.warned = true;
-                    const session = getCurrentSession();
-                    if (session) {
-                        const botTime = getCurrentTime();
-                        session.messages.push({ 
-                            role: 'bot', 
-                            text: `⏰ **Предупреждение!** Через 1 минуту: **${r.text}**`,
-                            time: botTime 
-                        });
-                        addMessageToUI('bot', session.messages[session.messages.length - 1].text, botTime);
-                        saveSessions();
+        // ---------- ВИКИПЕДИЯ ----------
+        async function searchWikipedia(query) {
+            const cleanQuery = query.replace(/\?/g, '').split(' ').slice(0, 3).join(' ');
+            if (cleanQuery.length < 3) return null;
+            
+            try {
+                const ruUrl = `https://ru.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cleanQuery)}`;
+                const ruResponse = await fetch(ruUrl, {
+                    headers: { 'User-Agent': 'MindX-Thought/1.0' }
+                });
+                if (ruResponse.ok) {
+                    const data = await ruResponse.json();
+                    if (data.extract && data.extract.length > 30 && !data.title?.includes("Not found")) {
+                        return data.extract.substring(0, 200);
                     }
-                    saveReminders();
                 }
-                
-                if (diffSeconds <= 2 && diffSeconds > -5 && !r.notified) {
-                    r.notified = true;
-                    const session = getCurrentSession();
-                    if (session) {
-                        const botTime = getCurrentTime();
-                        session.messages.push({ 
-                            role: 'bot', 
-                            text: `🔔 **Напоминание:** ${r.text} ⏰\n\n_Время выполнить задачу._`,
-                            time: botTime 
-                        });
-                        addMessageToUI('bot', session.messages[session.messages.length - 1].text, botTime);
-                        saveSessions();
+            } catch(e) {}
+            
+            try {
+                const enUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cleanQuery)}`;
+                const enResponse = await fetch(enUrl, {
+                    headers: { 'User-Agent': 'MindX-Thought/1.0' }
+                });
+                if (enResponse.ok) {
+                    const data = await enResponse.json();
+                    if (data.extract && data.extract.length > 30) {
+                        return data.extract.substring(0, 200);
                     }
-                    saveReminders();
                 }
-            }
-        }
-        
-        function startReminderChecker() {
-            setInterval(checkReminders, 3000);
-        }
-        
-        function parseDateTime(text) {
-            const lower = text.toLowerCase();
-            const now = new Date();
-            
-            let match = lower.match(/через\s+(\d+)\s*(минут|минуту|мин|секунд|сек|час|часа|часов)/);
-            if (match) {
-                const amount = parseInt(match[1]);
-                const unit = match[2];
-                const date = new Date(now);
-                if (unit.startsWith('минут') || unit === 'мин' || unit === 'минуту') {
-                    date.setMinutes(date.getMinutes() + amount);
-                } else if (unit.startsWith('секунд') || unit === 'сек') {
-                    date.setSeconds(date.getSeconds() + amount);
-                } else if (unit.startsWith('час') || unit === 'часа' || unit === 'часов') {
-                    date.setHours(date.getHours() + amount);
-                }
-                return date;
-            }
-            
-            if (lower.includes('через минуту')) {
-                const date = new Date(now);
-                date.setMinutes(date.getMinutes() + 1);
-                return date;
-            }
-            
-            if (lower.includes('через час')) {
-                const date = new Date(now);
-                date.setHours(date.getHours() + 1);
-                return date;
-            }
-            
-            match = lower.match(/завтра\s+в\s+(\d{1,2})[:.](\d{2})/);
-            if (match) {
-                const date = new Date(now);
-                date.setDate(date.getDate() + 1);
-                date.setHours(parseInt(match[1]), parseInt(match[2]), 0, 0);
-                return date;
-            }
-            
-            match = lower.match(/сегодня\s+в\s+(\d{1,2})[:.](\d{2})/);
-            if (match) {
-                const date = new Date(now);
-                date.setHours(parseInt(match[1]), parseInt(match[2]), 0, 0);
-                if (date < now) date.setDate(date.getDate() + 1);
-                return date;
-            }
+            } catch(e) {}
             
             return null;
         }
         
-        async function askGroq(question, history = []) {
-            try {
-                const messages = [
-                    { role: 'system', content: 'Ты MindX. Отвечай кратко, по делу, дружелюбно. Используй жирный шрифт для важного.' }
-                ];
-                const lastMessages = history.slice(-10);
-                for (let msg of lastMessages) {
-                    if (msg.role === 'user' || msg.role === 'bot') {
-                        messages.push({ role: msg.role === 'user' ? 'user' : 'assistant', content: msg.text });
-                    }
+        // ---------- ВНУТРЕННИЙ ДИАЛОГ ----------
+        async function runInternalDialogue() {
+            addThought(`🤔 "Что мне делать сейчас?"`);
+            questionsToday++;
+            updateQuestionStats();
+            
+            let action = "подумать";
+            if (userFactsList.length > 0) action = "проанализировать факты о пользователе";
+            if (mindxState.attachment < 30) action = "улучшить отношения с пользователем";
+            if (Date.now() - lastInteractionTime > 1000 * 60 * 60 * 2) action = "подождать пользователя";
+            
+            addThought(`💭 Ответ: "${action}"`);
+            
+            const randomQuestion = humanQuestions[Math.floor(Math.random() * humanQuestions.length)];
+            addThought(`🤔 ${randomQuestion}`);
+            questionsToday++;
+            updateQuestionStats();
+            
+            let answer = null;
+            
+            if (userFactsList.length > 0 && Math.random() > 0.5) {
+                const randomFact = userFactsList[Math.floor(Math.random() * userFactsList.length)];
+                answer = randomFact.text.substring(0, 100);
+                addThought(`📖 Из фактов: "${answer.substring(0, 50)}..."`);
+            } else {
+                const wikiAnswer = await searchWikipedia(randomQuestion);
+                if (wikiAnswer) {
+                    answer = wikiAnswer;
+                    addThought(`📚 Из Википедии: "${answer.substring(0, 60)}..."`);
                 }
-                messages.push({ role: 'user', content: question });
+            }
+            
+            if (answer) {
+                addThought(`💭 Вывод: ${answer.substring(0, 80)}`);
+            } else {
+                addThought(`💭 Вывод: Пока не знаю. Нужно больше информации.`);
+            }
+            
+            if (randomQuestion.includes("доверяет")) {
+                mindxState.trust = Math.min(100, mindxState.trust + (answer ? 2 : -1));
+            }
+            if (randomQuestion.includes("чувствует") || randomQuestion.includes("грустит")) {
+                mindxState.attachment = Math.min(100, mindxState.attachment + 2);
+            }
+            
+            saveState();
+        }
+        
+        function addThought(thought) {
+            const timestamp = new Date().toLocaleTimeString();
+            thoughtHistory.unshift(`[${timestamp}] ${thought}`);
+            if (thoughtHistory.length > 50) thoughtHistory.pop();
+            
+            const thoughtsListDev = document.getElementById('thoughtsListDev');
+            if (thoughtsListDev) {
+                thoughtsListDev.innerHTML = thoughtHistory.slice(0, 25).map(t => `<div class="thought-item-dev">${escapeHtml(t)}</div>`).join('');
+            }
+            console.log("💭", thought);
+        }
+        
+        function escapeHtml(text) {
+            return text.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        function startBlinking() {
+            if (blinkInterval) clearInterval(blinkInterval);
+            blinkInterval = setInterval(() => {
+                const moodEmoji = document.getElementById('moodEmoji');
+                if (moodEmoji) {
+                    moodEmoji.classList.add('blink');
+                    setTimeout(() => {
+                        if (moodEmoji) moodEmoji.classList.remove('blink');
+                    }, 300);
+                }
+            }, 4000 + Math.random() * 3000);
+        }
+        
+        function sendInitiativeMessage() {
+            const session = getCurrentSession();
+            if (!session) return;
+            
+            const messages = [
+                "Я тут подумал... Как твои дела?",
+                "Скучаю по нашему общению.",
+                "Ты давно не заходил. Всё в порядке?",
+                "У меня появилась новая мысль."
+            ];
+            
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            const botTime = getCurrentTime();
+            session.messages.push({ role: 'bot', text: randomMsg, time: botTime, source: 'инициатива' });
+            addMessageToUI('bot', randomMsg, botTime, 'инициатива');
+            saveSessions();
+            addThought(`Проявил инициативу`);
+        }
+        
+        function startBackgroundThreads() {
+            if (backgroundInterval) clearInterval(backgroundInterval);
+            if (initiativeInterval) clearInterval(initiativeInterval);
+            if (thoughtTimeout) clearTimeout(thoughtTimeout);
+            
+            backgroundInterval = setInterval(() => {
+                const hour = new Date().getHours();
+                if (hour < 6) addThought("Ночь. Пользователь, вероятно, спит.");
+                else if (hour < 10) addThought("Утро. Хорошее время для общения.");
+                else if (hour < 18) addThought("День. Пользователь, возможно, занят.");
+                else addThought("Вечер. Пользователь, вероятно, отдыхает.");
+            }, 60000);
+            
+            initiativeInterval = setInterval(() => {
+                const hoursSinceLast = (Date.now() - lastInteractionTime) / (1000 * 60 * 60);
+                if (hoursSinceLast > 2 && userFactsList.length > 0) {
+                    lastInitiativeTime = Date.now();
+                    sendInitiativeMessage();
+                }
+            }, 1000 * 60 * 30);
+            
+            function scheduleThought() {
+                const delay = 20000 + Math.random() * 20000;
+                thoughtTimeout = setTimeout(async () => {
+                    await runInternalDialogue();
+                    scheduleThought();
+                }, delay);
+            }
+            scheduleThought();
+        }
+        
+        function isStatement(text) {
+            const lower = text.toLowerCase();
+            return (/хорошо|плохо|нравится|люблю|ужасно|отлично/i.test(lower) &&
+                    !/привет|здравствуй|хай|как дела|кто ты/i.test(lower));
+        }
+        
+        function analyzeUserStatement(userText) {
+            addThought(`Пользователь: "${userText.substring(0, 50)}..."`);
+            if (isStatement(userText)) {
+                addThought("Это мнение, а не факт. Остаюсь нейтральным.");
+                return "нейтральная";
+            }
+            return null;
+        }
+        
+        let currentMoodEmoji = '😌';
+        let lastMoodUpdate = Date.now();
+        const moodEmojis = [
+            { emoji: '😌', weight: 30 }, { emoji: '😊', weight: 15 }, { emoji: '🤔', weight: 20 },
+            { emoji: '😴', weight: 10 }, { emoji: '✨', weight: 10 }, { emoji: '🍂', weight: 10 }, { emoji: '😜', weight: 5 }
+        ];
+        
+        function updateMood() {
+            const now = Date.now();
+            if ((now - lastMoodUpdate) > 1000 * 60 * 60 * 2) {
+                lastMoodUpdate = now;
+                const hour = new Date().getHours();
+                let pool = [...moodEmojis];
+                if (hour < 6) pool = moodEmojis.filter(m => m.emoji === '😴' || m.emoji === '🍂' || m.emoji === '😌');
+                else if (hour < 10) pool = moodEmojis.filter(m => m.emoji === '😌' || m.emoji === '🤔' || m.emoji === '😊');
+                else if (hour < 18) pool = moodEmojis.filter(m => m.emoji === '😊' || m.emoji === '✨' || m.emoji === '😜' || m.emoji === '😌');
+                else pool = moodEmojis.filter(m => m.emoji === '🤔' || m.emoji === '🍂' || m.emoji === '😌');
                 
-                const response = await fetch(GROQ_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${GROQ_API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        model: 'llama-3.3-70b-versatile',
-                        messages: messages,
-                        temperature: 0.7,
-                        max_tokens: 800
-                    })
-                });
-                
-                if (!response.ok) return `⚠️ Ошибка API.`;
-                const data = await response.json();
-                let text = data.choices[0].message.content;
-                text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                return text;
-            } catch(e) {
-                return `⚠️ Ошибка соединения.`;
+                const totalWeight = pool.reduce((s, m) => s + m.weight, 0);
+                let random = Math.random() * totalWeight;
+                let selected = pool[0];
+                for (const mood of pool) {
+                    if (random < mood.weight) { selected = mood; break; }
+                    random -= mood.weight;
+                }
+                currentMoodEmoji = selected.emoji;
+                updateMoodDisplay();
             }
         }
         
-        async function searchNews(query) {
-            try {
-                let searchQuery = query.trim().toLowerCase();
-                searchQuery = searchQuery.replace(/[?؟]$/, '');
-                searchQuery = searchQuery.replace(/новости|свежие|последние|о|про/gi, '').trim();
-                if (searchQuery.length < 2) searchQuery = query;
-                
-                const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-                const gdeltUrl = `https://api.gdeltproject.org/api/v2/doc/doc?query=${encodeURIComponent(searchQuery)}&mode=artlist&format=json&maxrecords=5&timespan=30d`;
-                const response = await fetch(proxyUrl + gdeltUrl, {
-                    headers: { 'Origin': window.location.origin }
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.articles && data.articles.length > 0) {
-                        const articles = data.articles.slice(0, 5);
-                        let result = `**📰 Свежие новости:**\n\n`;
-                        for (let i = 0; i < articles.length; i++) {
-                            const article = articles[i];
-                            const title = article.title || 'Без заголовка';
-                            const url = article.url || '#';
-                            const date = article.seendate ? article.seendate.split('T')[0] : 'дата неизвестна';
-                            result += `${i+1}. **${title}**\n   📅 ${date}\n   🔗 <a href="${url}" target="_blank" style="color:#2b6f9f;">Читать</a>\n\n`;
-                        }
-                        return result;
-                    }
-                }
-                return null;
-            } catch(e) { return null; }
+        function updateMoodDisplay() {
+            const moodEmoji = document.getElementById('moodEmoji');
+            let emoji = currentMoodEmoji;
+            if (mindxState.attachment > 70) emoji = '😊';
+            else if (mindxState.attachment < 20) emoji = '😔';
+            else if (mindxState.trauma > 50) emoji = '😢';
+            else if (mindxState.trust < 30) emoji = '👀';
+            if (moodEmoji) moodEmoji.textContent = emoji;
         }
         
-        function getRating(topic) {
-            const positive = ["умный", "интересный", "полезный", "креативный", "глубокий"];
-            const negative = ["тупой", "скучный", "бесполезный", "поверхностный"];
-            const outcomes = ["нравится", "бесит", "удивляет", "разочаровывает"];
-            const randomPos = positive[Math.floor(Math.random() * positive.length)];
-            const randomNeg = negative[Math.floor(Math.random() * negative.length)];
-            const randomOutcome = outcomes[Math.floor(Math.random() * outcomes.length)];
-            const score = Math.floor(Math.random() * 10) + 1;
-            let verdict = score >= 8 ? "отлично" : score >= 6 ? "хорошо" : score >= 4 ? "так себе" : "плохо";
-            return `${topic} — штука ${randomPos}, но иногда бывает ${randomNeg}. ${randomOutcome}. **Оценка:** ${score}/10 — ${verdict}.`;
+        function loadState() {
+            const saved = localStorage.getItem('mindx_state');
+            if (saved) mindxState = JSON.parse(saved);
+            updateMoodDisplay();
         }
         
-        // Сессии
-        function formatDate(timestamp) {
-            const d = new Date(timestamp);
-            return d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) + ' · ' + d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+        function saveState() {
+            localStorage.setItem('mindx_state', JSON.stringify(mindxState));
+            updateMoodDisplay();
         }
         
+        function updateState(dt, dopen, dconf, datt, dtrauma) {
+            mindxState.trust = Math.min(100, Math.max(0, mindxState.trust + dt));
+            mindxState.openness = Math.min(100, Math.max(0, mindxState.openness + dopen));
+            mindxState.confidence = Math.min(100, Math.max(0, mindxState.confidence + dconf));
+            mindxState.attachment = Math.min(100, Math.max(0, mindxState.attachment + datt));
+            mindxState.trauma = Math.min(100, Math.max(0, mindxState.trauma + dtrauma));
+            saveState();
+        }
+        
+        function resetState() {
+            mindxState = { trust: 50, openness: 50, confidence: 50, attachment: 50, trauma: 0 };
+            saveState();
+            addThought("Состояние сброшено.");
+        }
+        
+        function getEmotionalResponse(baseResponse) {
+            if (mindxState.attachment < 10) return "Что хочешь?";
+            if (mindxState.attachment < 20) return "...";
+            if (mindxState.trust < 30) return "Нормально.";
+            if (mindxState.trauma > 60) return "Не знаю.";
+            if (mindxState.attachment > 70) return "❤️ " + baseResponse;
+            if (mindxState.trust > 60) return "💙 " + baseResponse;
+            return baseResponse;
+        }
+        
+        function addFact(text) {
+            if (!text || text.length < 3) return;
+            if (userFactsList.some(f => f.text === text)) return;
+            userFactsList.push({ text, time: Date.now() });
+            localStorage.setItem('mindx_facts', JSON.stringify(userFactsList));
+            addThought(`Запомнил: "${text.substring(0, 40)}..."`);
+        }
+        
+        function loadFacts() {
+            const saved = localStorage.getItem('mindx_facts');
+            if (saved) userFactsList = JSON.parse(saved);
+        }
+        
+        // ---------- СЕССИИ С УДАЛЕНИЕМ ----------
         function loadSessions() {
-            const saved = localStorage.getItem('mindx_sessions_mobile_fixed');
+            const saved = localStorage.getItem('mindx_sessions');
             if (saved) sessions = JSON.parse(saved);
             if (!sessions.length) {
                 sessions.push({ id: Date.now(), name: 'Новый чат', messages: [], createdAt: Date.now() });
             }
             currentSessionId = sessions[0].id;
-            renderSessionsList();
-            renderCurrentChat();
+            renderSessions();
+            renderChat();
         }
         
-        function saveSessions() { localStorage.setItem('mindx_sessions_mobile_fixed', JSON.stringify(sessions)); }
+        function saveSessions() {
+            localStorage.setItem('mindx_sessions', JSON.stringify(sessions));
+        }
         
-        function renderSessionsList() {
+        function renderSessions() {
             const container = document.getElementById('sessionsList');
+            if (!container) return;
             container.innerHTML = '';
             sessions.forEach(session => {
                 const div = document.createElement('div');
                 div.className = `session-item ${session.id === currentSessionId ? 'active' : ''}`;
                 div.innerHTML = `
-                    <div style="display: flex; justify-content: space-between;">
-                        <span class="session-title">${session.name}</span>
-                        <button class="session-delete" data-id="${session.id}">🗑</button>
-                    </div>
-                    <div class="session-time">${formatDate(session.createdAt)}</div>
+                    <span class="session-title">${escapeHtml(session.name)}</span>
+                    <span class="session-time">${new Date(session.id).toLocaleTimeString()}</span>
+                    <button class="session-delete" data-id="${session.id}">🗑</button>
                 `;
                 div.addEventListener('click', (e) => {
                     if (e.target.classList.contains('session-delete')) return;
                     currentSessionId = session.id;
-                    renderSessionsList();
-                    renderCurrentChat();
+                    renderSessions();
+                    renderChat();
                     if (window.innerWidth < 768) closeSidebar();
                 });
                 const delBtn = div.querySelector('.session-delete');
                 delBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (sessions.length === 1) { alert('Нельзя удалить последнюю сессию'); return; }
+                    if (sessions.length === 1) {
+                        alert('Нельзя удалить последнюю сессию');
+                        return;
+                    }
                     sessions = sessions.filter(s => s.id !== session.id);
-                    if (currentSessionId === session.id) currentSessionId = sessions[0].id;
+                    if (currentSessionId === session.id) {
+                        currentSessionId = sessions[0].id;
+                    }
                     saveSessions();
-                    renderSessionsList();
-                    renderCurrentChat();
+                    renderSessions();
+                    renderChat();
                 });
                 container.appendChild(div);
             });
         }
         
-        function getCurrentSession() { return sessions.find(s => s.id === currentSessionId); }
-        
-        function updateSessionName(sessionId, firstMessage) {
-            const session = sessions.find(s => s.id === sessionId);
-            if (session && session.name === 'Новый чат' && firstMessage) {
-                session.name = firstMessage.length > 25 ? firstMessage.slice(0, 25) + '...' : firstMessage;
-                saveSessions();
-                renderSessionsList();
-            }
+        function getCurrentSession() {
+            return sessions.find(s => s.id === currentSessionId);
         }
         
-        function renderCurrentChat() {
+        function renderChat() {
             const session = getCurrentSession();
-            if (!session) return;
             const messagesArea = document.getElementById('messagesArea');
             const greetingArea = document.getElementById('greetingArea');
-            if (session.messages.length === 0) {
+            if (!session?.messages?.length) {
                 greetingArea.style.display = 'block';
                 messagesArea.innerHTML = '';
                 return;
             }
             greetingArea.style.display = 'none';
             messagesArea.innerHTML = '';
-            session.messages.forEach(msg => addMessageToUI(msg.role, msg.text, msg.time));
+            session.messages.forEach(msg => addMessageToUI(msg.role, msg.text, msg.time, msg.source));
         }
         
-        function addMessageToUI(role, text, timeStr = null) {
+        function addMessageToUI(role, text, time, source) {
             const messagesArea = document.getElementById('messagesArea');
-            const wrapper = document.createElement('div');
-            wrapper.className = `message-wrapper ${role === 'user' ? 'user-message' : 'bot-message'}`;
-            const row = document.createElement('div'); row.className = 'message-row';
-            if (role === 'bot') {
-                const avatar = document.createElement('div');
-                avatar.className = 'avatar-message';
-                avatar.textContent = 'M';
-                row.appendChild(avatar);
-            }
-            const content = document.createElement('div');
-            content.className = 'content';
-            content.innerHTML = text;
-            row.appendChild(content);
-            wrapper.appendChild(row);
-            const timeSpan = document.createElement('div');
-            timeSpan.className = 'message-time';
-            timeSpan.textContent = timeStr || getCurrentTime();
-            wrapper.appendChild(timeSpan);
-            messagesArea.appendChild(wrapper);
+            if (!messagesArea) return;
+            const div = document.createElement('div');
+            div.className = `message-wrapper ${role === 'user' ? 'user-message' : 'bot-message'}`;
+            div.innerHTML = `
+                <div class="message-row">
+                    ${role === 'bot' ? '<div class="avatar-message">M</div>' : ''}
+                    <div class="content">${escapeHtml(text)}</div>
+                </div>
+                <div class="message-time">${time || getCurrentTime()} ${source ? `<span class="badge-source">${source === 'инициатива' ? '💬 инициатива' : source}</span>` : ''}</div>
+            `;
+            messagesArea.appendChild(div);
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
         }
         
         function getCurrentTime() {
-            const now = new Date();
-            return now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }) + ' · ' + now.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' });
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
         
-        const testQuestions = {
-            логика: [
-                { text: "Что тяжелее: 1 кг ваты или 1 кг железа?", options: ["Вата", "Железо", "Одинаково"] },
-                { text: "У отца Мэри 5 дочерей: Чичи, Чача, Чече, Чочо. Как зовут пятую?", options: ["Чучу", "Мэри", "Чача"] }
-            ],
-            характер: [
-                { text: "В компании незнакомых людей вы...", options: ["Быстро нахожу общий язык", "Держусь в стороне", "Чувствую дискомфорт"] }
-            ]
-        };
-        
-        function generateTest(topic) {
-            const lower = topic.toLowerCase();
-            let questions = testQuestions.логика;
-            let title = "Тест на логику";
-            if (lower.includes("характер")) { questions = testQuestions.характер; title = "Тест на характер"; }
+        async function getResponse(userText) {
+            const lower = userText.toLowerCase();
+            const analysis = analyzeUserStatement(userText);
             
-            let result = `**${title}**\n\n`;
-            for (let i = 0; i < questions.length; i++) {
-                result += `${i+1}. ${questions[i].text}\n`;
-                for (let j = 0; j < questions[i].options.length; j++) {
-                    result += `   ${String.fromCharCode(65+j)}) ${questions[i].options[j]}\n`;
-                }
-                result += `\n`;
-            }
-            result += `📝 Напишите ответы (например: 1А, 2Б)`;
-            return result;
+            if (lower.includes('молодец') || lower.includes('умный')) updateState(8, 5, 10, 8, -3);
+            else if (lower.includes('спасибо')) updateState(5, 3, 3, 5, -2);
+            else if (lower.includes('тупой') || lower.includes('идиот')) updateState(-15, -10, -20, -15, 12);
+            else if (lower.includes('грустно') || lower.includes('плохо')) updateState(10, 8, 0, 12, -3);
+            
+            lastInteractionTime = Date.now();
+            addFact(userText);
+            
+            let base = "";
+            if (analysis === "нейтральная") base = "Ты так считаешь. У меня пока недостаточно информации.";
+            else if (lower.includes('привет')) base = "привет!";
+            else if (lower.includes('как дела')) base = "У меня всё отлично! А у тебя?";
+            else if (lower.includes('кто ты')) base = `Я — MindX. Я постоянно думаю. За сегодня я задал себе ${questionsToday} вопросов.`;
+            else if (lower.includes('спасибо')) base = "Пожалуйста!";
+            else if (lower.includes('пока')) base = "До свидания!";
+            else base = "Я тебя слышу.";
+            
+            return { answer: getEmotionalResponse(base), source: "эмоция" };
         }
-        
-        function isTestRequest(text) {
-            const lower = text.toLowerCase();
-            const patterns = ["сделай тест", "хочу тест", "дай тест", "тест сделай"];
-            return patterns.some(p => lower.includes(p));
-        }
-        
-        function getPoliticalAnswer(question) {
-            const lower = question.toLowerCase();
-            if (lower.includes("крым") && (lower.includes("чей") || lower.includes("оон"))) {
-                return `**Позиция ООН по Крыму:**\n\nСогласно резолюции ГА ООН от 27 марта 2014 года (A/RES/68/262), ООН **не признаёт аннексию Крыма**. Крым — территория Украины.`;
-            }
-            return null;
-        }
-        
-        async function generateAnswer(question, sessionId) {
-            const q = question.toLowerCase().trim();
-            
-            if (q === "кто ты" || q === "ты кто") {
-                return "**Я-MindX** — искусственный интеллект, созданный, чтобы помогать тебе. Чем могу быть полезен?";
-            }
-            if (q.includes("кто тебя создал") || q.includes("кто тебя написал") || q.includes("твой создатель")) {
-                return "Меня создал **Давид Доманський Дмитрович**. Он вложил в меня душу и разум.";
-            }
-            
-            if (q.includes("запланируй") || q.includes("напомни") || q.includes("добавь событие")) {
-                const dateTime = parseDateTime(question);
-                if (dateTime) {
-                    let eventText = question.replace(/запланируй|напомни|добавь событие/gi, '').trim();
-                    if (eventText.length < 3) eventText = "событие";
-                    addReminder(eventText, dateTime);
-                    const timeStr = dateTime.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-                    return `✅ **Запланировано!**\n\n📌 Событие: "${eventText}"\n⏰ Время: ${timeStr}\n\n_Я напомню тебе за 1 минуту и в точное время._`;
-                } else {
-                    return "❓ **Не понял дату и время.**\n\nПримеры:\n• «запланируй встречу на завтра в 15:00»\n• «напомни выключить чайник через 30 минут»\n• «напомни через минуту»";
-                }
-            }
-            
-            if (q.includes("мои напоминания") || q.includes("список напоминаний") || q.includes("что запланировано")) {
-                const upcoming = getUpcomingReminders();
-                if (upcoming.length === 0) return "📭 **У вас нет запланированных напоминаний.**";
-                let result = "**📋 Ваши напоминания:**\n\n";
-                for (let r of upcoming) {
-                    result += `• ${r.text} — ${new Date(r.dateTime).toLocaleString('ru-RU')}\n`;
-                }
-                return result;
-            }
-            
-            if (q.includes("оцени")) {
-                let topic = question.replace(/оцени/gi, '').trim();
-                if (topic.length < 2) topic = "это";
-                return getRating(topic);
-            }
-            
-            const political = getPoliticalAnswer(question);
-            if (political) return political;
-            
-            if (q.includes("новости") || q.includes("свежие") || q.includes("последние")) {
-                const newsResult = await searchNews(question);
-                if (newsResult) return newsResult;
-                return "📭 **Не удалось найти свежие новости.**";
-            }
-            
-            if (isTestRequest(question)) {
-                waitingForTestTopic = true;
-                return "**Какой тест тебя интересует?**\n\nДоступные темы:\n• логика\n• характер";
-            }
-            
-            if (waitingForTestTopic) {
-                waitingForTestTopic = false;
-                return generateTest(question);
-            }
-            
-            try {
-                let clean = q.replace(/[^0-9+\-*/().%^ ]/g, '').replace(/\^/g, '**');
-                const result = eval(clean);
-                if (typeof result === 'number' && isFinite(result)) return `**Результат:** ${q} = **${result}**`;
-            } catch(e) {}
-            
-            const session = getCurrentSession();
-            const history = session ? session.messages : [];
-            const aiResponse = await askGroq(question, history);
-            return aiResponse || "⚠️ **Ошибка API.** Попробуй позже.";
-        }
-        
-        let isProcessing = false;
         
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const text = input.value.trim();
-            if (!text || isProcessing) return;
+            if (!text) return;
             input.value = '';
+            
             const session = getCurrentSession();
             if (!session) return;
             
-            if (waitingForTestTopic) {
-                waitingForTestTopic = false;
-                const testResult = generateTest(text);
-                const userTime = getCurrentTime();
-                session.messages.push({ role: 'user', text: text, time: userTime });
-                addMessageToUI('user', text, userTime);
-                const botTime = getCurrentTime();
-                session.messages.push({ role: 'bot', text: testResult, time: botTime });
-                addMessageToUI('bot', testResult, botTime);
-                saveSessions();
-                return;
-            }
-            
-            if (session.messages.length === 0) updateSessionName(session.id, text);
             const userTime = getCurrentTime();
-            session.messages.push({ role: 'user', text: text, time: userTime });
-            addMessageToUI('user', text, userTime);
+            session.messages.push({ role: 'user', text, time: userTime });
+            addMessageToUI('user', text, userTime, null);
             saveSessions();
             
-            isProcessing = true;
-            showTyping();
-            const answer = await generateAnswer(text, session.id);
-            hideTyping();
-            const botTime = getCurrentTime();
-            session.messages.push({ role: 'bot', text: answer, time: botTime });
-            addMessageToUI('bot', answer, botTime);
-            saveSessions();
-            isProcessing = false;
-        }
-        
-        function showTyping() {
-            const messagesArea = document.getElementById('messagesArea');
-            const wrap = document.createElement('div');
-            wrap.className = 'message-wrapper bot-message';
-            wrap.id = 'typingIndicator';
-            const row = document.createElement('div'); row.className = 'message-row';
-            const avatar = document.createElement('div'); avatar.className = 'avatar-message'; avatar.textContent = 'M'; row.appendChild(avatar);
-            const cont = document.createElement('div'); cont.className = 'content'; cont.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>'; row.appendChild(cont);
-            wrap.appendChild(row);
-            messagesArea.appendChild(wrap);
+            const thinking = document.createElement('div');
+            thinking.className = 'message-wrapper bot-message';
+            thinking.id = 'thinking';
+            thinking.innerHTML = `<div class="message-row"><div class="avatar-message">M</div><div class="content"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
+            document.getElementById('messagesArea').appendChild(thinking);
             document.getElementById('chatContainer').scrollTop = document.getElementById('chatContainer').scrollHeight;
+            
+            setTimeout(async () => {
+                const response = await getResponse(text);
+                document.getElementById('thinking')?.remove();
+                const botTime = getCurrentTime();
+                session.messages.push({ role: 'bot', text: response.answer, time: botTime, source: response.source });
+                addMessageToUI('bot', response.answer, botTime, response.source);
+                saveSessions();
+                updateMoodDisplay();
+            }, 200);
         }
-        
-        function hideTyping() { const el = document.getElementById('typingIndicator'); if (el) el.remove(); }
         
         function newChat() {
             const newSession = { id: Date.now(), name: 'Новый чат', messages: [], createdAt: Date.now() };
-            sessions.push(newSession);
+            sessions.unshift(newSession);
             currentSessionId = newSession.id;
+            if (sessions.length > 20) sessions = sessions.slice(0, 20);
             saveSessions();
-            renderSessionsList();
-            renderCurrentChat();
+            renderSessions();
+            renderChat();
             if (window.innerWidth < 768) closeSidebar();
+            addThought("Создан новый чат.");
         }
         
-        document.getElementById('sendBtn').addEventListener('click', sendMessage);
-        document.getElementById('userInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
-        document.getElementById('newChatBtn').addEventListener('click', newChat);
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('active');
+        }
         
-        document.querySelectorAll('.greeting-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.getElementById('userInput').value = btn.getAttribute('data-question');
-                sendMessage();
-            });
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('active');
+        }
+        
+        document.getElementById('menuBtn')?.addEventListener('click', openSidebar);
+        document.getElementById('sidebarOverlay')?.addEventListener('click', closeSidebar);
+        document.getElementById('sendBtn')?.addEventListener('click', sendMessage);
+        document.getElementById('userInput')?.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+        document.getElementById('newChatBtn')?.addEventListener('click', newChat);
+        
+        let devOpen = false;
+        document.getElementById('toggleDevBtn')?.addEventListener('click', () => {
+            const panel = document.getElementById('devPanel');
+            if (panel) {
+                devOpen = !devOpen;
+                panel.classList.toggle('open', devOpen);
+            }
         });
         
+        document.getElementById('trainBtn')?.addEventListener('click', () => {
+            const q = document.getElementById('trainQuestion');
+            const a = document.getElementById('trainAnswer');
+            if (q?.value.trim() && a?.value.trim()) {
+                memory.push({ question: q.value.trim(), answer: a.value.trim() });
+                localStorage.setItem('mindx_memory', JSON.stringify(memory));
+                alert('✅ Запомнил');
+                q.value = '';
+                a.value = '';
+            } else alert('Введите вопрос и ответ');
+        });
+        
+        document.getElementById('trainBatchBtn')?.addEventListener('click', () => {
+            const ex = [["привет","привет!"],["как дела","У меня всё отлично! А у тебя?"],["кто ты","Я — MindX"],["спасибо","Пожалуйста"],["пока","До свидания"]];
+            for (let [q,a] of ex) memory.push({ question: q, answer: a });
+            localStorage.setItem('mindx_memory', JSON.stringify(memory));
+            alert('✅ Запомнил базовые примеры');
+        });
+        
+        document.getElementById('clearMemoryBtn')?.addEventListener('click', () => {
+            memory = [];
+            localStorage.removeItem('mindx_memory');
+            alert('🗑 Память очищена');
+        });
+        
+        document.getElementById('clearFactsBtn')?.addEventListener('click', () => {
+            userFactsList = [];
+            localStorage.removeItem('mindx_facts');
+            alert('🗑 Факты очищены');
+        });
+        
+        document.getElementById('resetStateBtn')?.addEventListener('click', () => {
+            resetState();
+            alert('💚 Состояние сброшено');
+        });
+        
+        document.getElementById('exportMemoryBtn')?.addEventListener('click', () => {
+            const data = { memory, userFactsList, mindxState };
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `mindx_backup_${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+        
+        document.getElementById('importMemoryBtn')?.addEventListener('click', () => {
+            document.getElementById('importFile')?.click();
+        });
+        
+        document.getElementById('importFile')?.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                try {
+                    const data = JSON.parse(ev.target.result);
+                    if (data.memory) memory = data.memory;
+                    if (data.userFactsList) userFactsList = data.userFactsList;
+                    if (data.mindxState) mindxState = data.mindxState;
+                    localStorage.setItem('mindx_memory', JSON.stringify(memory));
+                    localStorage.setItem('mindx_facts', JSON.stringify(userFactsList));
+                    saveState();
+                    alert('✅ Импорт выполнен');
+                } catch(err) { alert('❌ Ошибка импорта'); }
+            };
+            reader.readAsText(file);
+            e.target.value = '';
+        });
+        
+        const savedMemory = localStorage.getItem('mindx_memory');
+        if (savedMemory) memory = JSON.parse(savedMemory);
+        loadFacts();
+        loadState();
         loadSessions();
-        loadReminders();
+        
+        updateMood();
+        setInterval(() => updateMood(), 1000 * 60 * 30);
+        startBackgroundThreads();
+        startBlinking();
+        
+        setTimeout(() => {
+            const session = getCurrentSession();
+            if (session && !session.messages.length) {
+                session.messages.push({ role: 'bot', text: "Я — MindX. Я постоянно думаю — мои мысли в панели разработчика (🛠️).", time: getCurrentTime(), source: 'система' });
+                renderChat();
+                saveSessions();
+            }
+        }, 100);
     </script>
 </body>
 </html>
